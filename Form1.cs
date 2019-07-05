@@ -19,40 +19,45 @@ namespace FaceDetection
 {
     public partial class Form1 : Form
     {
-       
-        private VideoCapture _capture;
+
+        //private VideoCapture _capture;
+
         private CascadeClassifier _cascadeClassifier;
         static Timer myTimer = new Timer();
-        
+        private Image<Bgr, Byte> img;
+        private Image<Gray, Byte> gray;
         public Form1()
         {
             InitializeComponent();
-            _capture = new VideoCapture();
-            myTimer.Tick += new EventHandler(timer1_Tick);
+            //_capture = new VideoCapture();
+            
+            
+
+            myTimer.Tick += (object sender, EventArgs eventArgs) => {
+                timer1_Tick();
+            };
 
             // Sets the timer interval to 5 seconds.
             myTimer.Interval = 1000;
             myTimer.Start();
         }
-        private void timer1_Tick(object sender, EventArgs eventArgs)
+        private void timer1_Tick()
         {
-            _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_alt2.xml");
+            img = new Image<Bgr, byte>(Application.StartupPath + "/input.jpeg");
+            gray = img.Convert<Gray, Byte>();
+            _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_default.xml");
 
-            using (var imageFrame = _capture.QueryFrame().ToImage<Bgr, byte>())
+            var faces = _cascadeClassifier.DetectMultiScale(gray, 1.1, 10, Size.Empty); //the actual face detection happens here
+            foreach (var face in faces)
             {
-                if (imageFrame != null)
-                {
-                    var grayframe = imageFrame.Convert<Gray,byte>();
-                    var faces = _cascadeClassifier.DetectMultiScale(grayframe, 1.1, 10, Size.Empty); //the actual face detection happens here
-                    foreach (var face in faces)
-                    {
-                        imageFrame.Draw(face, new Bgr(Color.BurlyWood), 3); //the detected face(s) is highlighted here using a box that is drawn around it/them
+                img.Draw(face, new Bgr(Color.YellowGreen), 3); //the detected face(s) is highlighted here using a box that is drawn around it/them
 
-                    }
-                }
-                imgCamUser.Image = imageFrame;
-                Debug.WriteLine(imageFrame);
             }
-        }
+
+            imgCamUser.Image = img;
+            
+                Debug.WriteLine(img.Data.Length);
+            }
+            
     }
 }
