@@ -13,6 +13,7 @@ using Emgu.Util;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 using System.Diagnostics;
+using System.Configuration;
 
 
 namespace FaceDetection
@@ -23,30 +24,23 @@ namespace FaceDetection
         //private VideoCapture _capture;
 
         private CascadeClassifier _cascadeClassifier;
-        static Timer myTimer = new Timer();
+        
         private Image<Bgr, Byte> img;
         private Image<Gray, Byte> gray;
         public Form1()
         {
             InitializeComponent();
             //_capture = new VideoCapture();
-            
-            
-
-            myTimer.Tick += (object sender, EventArgs eventArgs) => {
-                timer1_Tick();
-            };
-
-            // Sets the timer interval to 5 seconds.
-            myTimer.Interval = 1000;
-            myTimer.Start();
-        }
-        private void timer1_Tick()
-        {
-            img = new Image<Bgr, byte>(Application.StartupPath + "/input.jpeg");
+            img = new Image<Bgr, byte>(Application.StartupPath + "/faces.jpg");
             gray = img.Convert<Gray, Byte>();
-            _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_default.xml");
+            _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_alt2.xml");
 
+            Application.Idle += ProcessFrame;
+
+        }
+        private void ProcessFrame(object sender, EventArgs eventArgs)
+        {
+                                 
             var faces = _cascadeClassifier.DetectMultiScale(gray, 1.1, 10, Size.Empty); //the actual face detection happens here
             foreach (var face in faces)
             {
