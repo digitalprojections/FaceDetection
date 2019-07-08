@@ -20,38 +20,106 @@ namespace FaceDetection
 {
     public partial class Form1 : Form
     {
+        //User actions
+        private Timer timer = new Timer();
+        
+        //User actions end
 
-        //private VideoCapture _capture;
+
+        private VideoCapture _capture;
 
         private CascadeClassifier _cascadeClassifier;
         
-        private Image<Bgr, Byte> img;
-        private Image<Gray, Byte> gray;
+        
         public Form1()
         {
             InitializeComponent();
-            //_capture = new VideoCapture();
-            img = new Image<Bgr, byte>(Application.StartupPath + "/faces.jpg");
-            gray = img.Convert<Gray, Byte>();
+            _capture = new VideoCapture();
+            //img = new Image<Bgr, byte>(Application.StartupPath + "/faces.jpg");
             _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_alt2.xml");
+            imgCamUser.SendToBack();
+            timer.Tick += new EventHandler(ShowButtons);
 
             Application.Idle += ProcessFrame;
+            pbRecording.BackColor = Color.Transparent;
+            dateTimeLabel.BackColor = Color.Transparent;
 
         }
         private void ProcessFrame(object sender, EventArgs eventArgs)
         {
-                                 
-            var faces = _cascadeClassifier.DetectMultiScale(gray, 1.1, 10, Size.Empty); //the actual face detection happens here
-            foreach (var face in faces)
+            using (var imageFrame = _capture.QueryFrame().ToImage<Bgr, Byte>())
             {
-                img.Draw(face, new Bgr(Color.YellowGreen), 3); //the detected face(s) is highlighted here using a box that is drawn around it/them
+                if (imageFrame != null)
+                {
+                    var grayframe = imageFrame.Convert<Gray,Byte>();
+                    var faces = _cascadeClassifier.DetectMultiScale(grayframe, 1.1, 10, Size.Empty); //the actual face detection happens here
+                    foreach (var face in faces)
+                    {
+                        imageFrame.Draw(face, new Bgr(Color.Red), 3); //the detected face(s) is highlighted here using a box that is drawn around it/them
+
+                    }
+                }
+                imgCamUser.Image = imageFrame;
+                dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            }
+
+
+
+        }
+        public void ShowButtons(object sender, EventArgs eventArgs)
+        {
+            if(timer.Enabled == true)
+            {
+                timer.Stop();
+            }
+            Debug.WriteLine(timer.ToString());
+            if(folderButton.Visible==false)
+            {
+                folderButton.Visible = true;
+                settingsButton.Visible = true;
+                snapshotButton.Visible = true;
+                cameraButton.Visible = true;
+                closeButton.Visible = true;
+            }
+            else
+            {
+                folderButton.Visible = false;
+                settingsButton.Visible = false;
+                snapshotButton.Visible = false;
+                cameraButton.Visible = false;
+                closeButton.Visible = false;
 
             }
 
-            imgCamUser.Image = img;
+        }
+        public void holdButton(object sender, MouseEventArgs eventArgs)
+        {
+            timer.Enabled = true;
             
-                Debug.WriteLine(img.Data.Length);
+            timer.Interval = 3000;
+            timer.Start();
+        }
+
+        private void releaseButton(object sender, MouseEventArgs e)
+        {
+            if (timer.Enabled == true)
+            {
+                timer.Stop();
             }
-            
+        }
+
+        private void CameraButton_Click(object sender, EventArgs e)
+        {
+            if (pbRecording.Visible == true)
+            {
+                pbRecording.Image = Properties.Resources.Pause_Normal_Red_icon;
+                pbRecording.Visible = false;
+            }else
+            {
+                pbRecording.Image = Properties.Resources.Record_Pressed_icon;
+                pbRecording.Visible = true;
+            }
+ 
+        }
     }
 }
