@@ -31,8 +31,9 @@ namespace FaceDetection
         private CascadeClassifier _cascadeClassifier;
         
         
-        public mainForm()
+        public mainForm(string[] vs)
         {
+            Debug.WriteLine(vs + " run parameters");
             InitializeComponent();
             _capture = new VideoCapture();
             //img = new Image<Bgr, byte>(Application.StartupPath + "/faces.jpg");
@@ -44,6 +45,11 @@ namespace FaceDetection
             pbRecording.BackColor = Color.Transparent;
             dateTimeLabel.BackColor = Color.Transparent;
 
+            if (vs.Length > 0)
+            {
+                label1.Text =vs[1];
+            }
+   
         }
         private void ProcessFrame(object sender, EventArgs eventArgs)
         {

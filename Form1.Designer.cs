@@ -39,6 +39,7 @@
             this.folderButton = new System.Windows.Forms.Button();
             this.imgCamUser = new Emgu.CV.UI.ImageBox();
             this.dateTimeLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCamUser)).BeginInit();
             this.SuspendLayout();
@@ -172,11 +173,22 @@
             this.dateTimeLabel.Text = "Date and time";
             this.dateTimeLabel.UseCompatibleTextRendering = true;
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(505, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(145, 12);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "currently used paramenters";
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(662, 504);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimeLabel);
             this.Controls.Add(this.pbRecording);
             this.Controls.Add(this.closeButton);
@@ -186,7 +198,7 @@
             this.Controls.Add(this.folderButton);
             this.Controls.Add(this.imgCamUser);
             this.Name = "mainForm";
-            this.Text = "Form1";
+            this.Text = "UVC Camera Viewer";
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCamUser)).EndInit();
             this.ResumeLayout(false);
@@ -205,6 +217,7 @@
         private System.Windows.Forms.Button folderButton;
         private System.Windows.Forms.PictureBox pbRecording;
         private System.Windows.Forms.Label dateTimeLabel;
+        private System.Windows.Forms.Label label1;
     }
 }
 
