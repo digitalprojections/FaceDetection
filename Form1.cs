@@ -18,7 +18,7 @@ using System.Configuration;
 
 namespace FaceDetection
 {
-    public partial class Form1 : Form
+    public partial class mainForm : Form
     {
         //User actions
         private Timer timer = new Timer();
@@ -31,7 +31,7 @@ namespace FaceDetection
         private CascadeClassifier _cascadeClassifier;
         
         
-        public Form1()
+        public mainForm()
         {
             InitializeComponent();
             _capture = new VideoCapture();
@@ -61,6 +61,8 @@ namespace FaceDetection
                 }
                 imgCamUser.Image = imageFrame;
                 dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                dateTimeLabel.Parent = imgCamUser;
+                pbRecording.Parent = imgCamUser;
             }
 
 
@@ -121,5 +123,27 @@ namespace FaceDetection
             }
  
         }
+
+        private void fullScreen(object sender, EventArgs eventArgs)
+        {
+            
+                if (this.WindowState == FormWindowState.Normal)
+                {
+                    this.TopMost = true;
+                    this.FormBorderStyle = FormBorderStyle.None;
+                    this.WindowState = FormWindowState.Maximized;
+                    imgCamUser.SizeMode = PictureBoxSizeMode.Zoom;
+                }
+                else
+                {
+                    this.TopMost = false;
+                    this.FormBorderStyle = FormBorderStyle.Sizable;
+                    this.WindowState = FormWindowState.Normal;
+                }
+            
+            Debug.WriteLine(sender);
+        }
+
+        
     }
 }
