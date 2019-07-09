@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="language" Type="System.String" Scope="User">
-      <Value Profile="(Default)">ja</Value>
+      <Value Profile="(Default)">English</Value>
     </Setting>
     <Setting Name="Setting" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -15,7 +15,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="video_file_location" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">C:\UVCCAMERA</Value>
     </Setting>
     <Setting Name="erase_old" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

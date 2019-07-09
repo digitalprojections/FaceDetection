@@ -130,6 +130,7 @@
             this.settingsButton.TabIndex = 3;
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Visible = false;
+            this.settingsButton.Click += new System.EventHandler(this.showSettings);
             // 
             // folderButton
             // 

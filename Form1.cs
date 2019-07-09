@@ -22,9 +22,9 @@ namespace FaceDetection
     {
         //User actions
         private Timer timer = new Timer();
-        
-        //User actions end
 
+        //User actions end
+        settingsUI settingUI;
 
         private VideoCapture _capture;
 
@@ -33,11 +33,12 @@ namespace FaceDetection
         
         public mainForm(string[] vs)
         {
+            settingUI = new settingsUI();
             Debug.WriteLine(vs + " run parameters");
             InitializeComponent();
             _capture = new VideoCapture();
             //img = new Image<Bgr, byte>(Application.StartupPath + "/faces.jpg");
-            _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_alt2.xml");
+            _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_alt.xml");
             imgCamUser.SendToBack();
             timer.Tick += new EventHandler(ShowButtons);
 
@@ -150,6 +151,16 @@ namespace FaceDetection
             Debug.WriteLine(sender);
         }
 
-        
+        private void showSettings(object sender, EventArgs e)
+        {
+            if(settingUI.Visible==false)
+            {
+                
+                settingUI.Show();
+            }
+            else
+            {
+            }
+        }
     }
 }
