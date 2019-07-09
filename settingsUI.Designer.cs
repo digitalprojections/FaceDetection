@@ -528,7 +528,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(27, 24);
+            this.label10.Location = new System.Drawing.Point(0, 24);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(107, 12);
             this.label10.TabIndex = 2;
@@ -795,6 +795,7 @@
             this.groupBox11.TabIndex = 3;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Camera Number";
+            this.groupBox11.Enter += new System.EventHandler(this.GroupBox11_Enter);
             // 
             // button_settings_cancel
             // 
@@ -817,6 +818,11 @@
             // cm_camera_number
             // 
             this.cm_camera_number.FormattingEnabled = true;
+            this.cm_camera_number.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4"});
             this.cm_camera_number.Location = new System.Drawing.Point(105, 0);
             this.cm_camera_number.Name = "cm_camera_number";
             this.cm_camera_number.Size = new System.Drawing.Size(91, 20);

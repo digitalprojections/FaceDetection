@@ -16,7 +16,12 @@ namespace FaceDetection
         public settingsUI()
         {
             InitializeComponent();
-            cm_language.SelectedIndex = 1;
+            cm_language.SelectedIndex = 0;
+            tb_camera_count.Text = Properties.Settings.Default.camera_count.ToString();
+            cb_all_cameras.Checked = Properties.Settings.Default.show_all_cams_simulteneously;
+            cb_delete_old.Checked = Properties.Settings.Default.show_all_cams_simulteneously;
+            tb_days_old.Text = Properties.Settings.Default.erase_after.ToString();
+            cm_camera_number.SelectedIndex = Properties.Settings.Default.current_camera_index;
         }
 
         private void GroupBox6_Enter(object sender, EventArgs e)
@@ -25,6 +30,11 @@ namespace FaceDetection
         }
 
         private void Label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GroupBox11_Enter(object sender, EventArgs e)
         {
 
         }

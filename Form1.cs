@@ -49,8 +49,7 @@ namespace FaceDetection
             if (vs.Length > 0)
             {
                 label1.Text =vs[1];
-            }
-   
+            }   
         }
         private void ProcessFrame(object sender, EventArgs eventArgs)
         {

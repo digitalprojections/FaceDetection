@@ -394,5 +394,29 @@ namespace FaceDetection.Properties {
                 this["interval_between_reinitiating_recording"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool show_all_cams_simulteneously {
+            get {
+                return ((bool)(this["show_all_cams_simulteneously"]));
+            }
+            set {
+                this["show_all_cams_simulteneously"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int current_camera_index {
+            get {
+                return ((int)(this["current_camera_index"]));
+            }
+            set {
+                this["current_camera_index"] = value;
+            }
+        }
     }
 }
