@@ -337,7 +337,7 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Video")]
         public string capture_type {
             get {
                 return ((string)(this["capture_type"]));
@@ -409,7 +409,7 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public string current_camera_index {
             get {
                 return ((string)(this["current_camera_index"]));
@@ -433,7 +433,7 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("16, 16")]
         public global::System.Drawing.Point Location {
             get {
                 return ((global::System.Drawing.Point)(this["Location"]));

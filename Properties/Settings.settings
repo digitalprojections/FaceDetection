@@ -81,7 +81,7 @@
       <Value Profile="(Default)">60</Value>
     </Setting>
     <Setting Name="capture_type" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">Video</Value>
     </Setting>
     <Setting Name="recording_length_seconds" Type="System.String" Scope="User">
       <Value Profile="(Default)">10</Value>
@@ -99,13 +99,13 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="current_camera_index" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="capture_operator" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="Location" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+      <Value Profile="(Default)">16, 16</Value>
     </Setting>
   </Settings>
 </SettingsFile>

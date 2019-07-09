@@ -151,10 +151,12 @@
             // 
             // tb_camera_count
             // 
+            this.tb_camera_count.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "camera_count", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_camera_count.Location = new System.Drawing.Point(130, 53);
             this.tb_camera_count.Name = "tb_camera_count";
             this.tb_camera_count.Size = new System.Drawing.Size(35, 19);
             this.tb_camera_count.TabIndex = 3;
+            this.tb_camera_count.Text = global::FaceDetection.Properties.Settings.Default.camera_count;
             // 
             // groupBox2
             // 
@@ -231,10 +233,12 @@
             // 
             // textBox2
             // 
+            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "video_file_location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox2.Location = new System.Drawing.Point(6, 35);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(147, 19);
             this.textBox2.TabIndex = 3;
+            this.textBox2.Text = global::FaceDetection.Properties.Settings.Default.video_file_location;
             // 
             // groupBox1
             // 
@@ -273,6 +277,9 @@
             // cb_always_on_top
             // 
             this.cb_always_on_top.AutoSize = true;
+            this.cb_always_on_top.Checked = global::FaceDetection.Properties.Settings.Default.window_on_top;
+            this.cb_always_on_top.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_always_on_top.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "window_on_top", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_always_on_top.Location = new System.Drawing.Point(259, 18);
             this.cb_always_on_top.Name = "cb_always_on_top";
             this.cb_always_on_top.Size = new System.Drawing.Size(97, 16);
@@ -283,6 +290,9 @@
             // cb_window_pane
             // 
             this.cb_window_pane.AutoSize = true;
+            this.cb_window_pane.Checked = global::FaceDetection.Properties.Settings.Default.show_window_pane;
+            this.cb_window_pane.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_window_pane.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "show_window_pane", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_window_pane.Location = new System.Drawing.Point(259, 39);
             this.cb_window_pane.Name = "cb_window_pane";
             this.cb_window_pane.Size = new System.Drawing.Size(120, 16);
@@ -293,6 +303,9 @@
             // cb_dateandtime
             // 
             this.cb_dateandtime.AutoSize = true;
+            this.cb_dateandtime.Checked = global::FaceDetection.Properties.Settings.Default.show_current_datetime;
+            this.cb_dateandtime.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_dateandtime.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "show_current_datetime", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_dateandtime.Location = new System.Drawing.Point(259, 61);
             this.cb_dateandtime.Name = "cb_dateandtime";
             this.cb_dateandtime.Size = new System.Drawing.Size(165, 16);
@@ -303,6 +316,9 @@
             // cb_show_camera_number
             // 
             this.cb_show_camera_number.AutoSize = true;
+            this.cb_show_camera_number.Checked = global::FaceDetection.Properties.Settings.Default.show_camera_no;
+            this.cb_show_camera_number.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_show_camera_number.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "show_camera_no", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_show_camera_number.Location = new System.Drawing.Point(259, 83);
             this.cb_show_camera_number.Name = "cb_show_camera_number";
             this.cb_show_camera_number.Size = new System.Drawing.Size(133, 16);
@@ -313,6 +329,9 @@
             // cb_show_rec_icon
             // 
             this.cb_show_rec_icon.AutoSize = true;
+            this.cb_show_rec_icon.Checked = global::FaceDetection.Properties.Settings.Default.show_recording_icon;
+            this.cb_show_rec_icon.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_show_rec_icon.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "show_recording_icon", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_show_rec_icon.Location = new System.Drawing.Point(259, 103);
             this.cb_show_rec_icon.Name = "cb_show_rec_icon";
             this.cb_show_rec_icon.Size = new System.Drawing.Size(131, 16);
@@ -354,10 +373,12 @@
             // 
             // tb_y
             // 
+            this.tb_y.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "display_pos_y", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_y.Location = new System.Drawing.Point(63, 40);
             this.tb_y.Name = "tb_y";
             this.tb_y.Size = new System.Drawing.Size(35, 19);
             this.tb_y.TabIndex = 3;
+            this.tb_y.Text = global::FaceDetection.Properties.Settings.Default.display_pos_y;
             // 
             // label5
             // 
@@ -390,10 +411,12 @@
             // 
             // tb_frame_rate
             // 
+            this.tb_frame_rate.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "frame_rate_fps", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_frame_rate.Location = new System.Drawing.Point(69, 89);
             this.tb_frame_rate.Name = "tb_frame_rate";
             this.tb_frame_rate.Size = new System.Drawing.Size(35, 19);
             this.tb_frame_rate.TabIndex = 3;
+            this.tb_frame_rate.Text = global::FaceDetection.Properties.Settings.Default.frame_rate_fps;
             // 
             // groupBox5
             // 
@@ -410,10 +433,12 @@
             // 
             // tb_cam_view_height
             // 
+            this.tb_cam_view_height.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "view_height", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_cam_view_height.Location = new System.Drawing.Point(63, 40);
             this.tb_cam_view_height.Name = "tb_cam_view_height";
             this.tb_cam_view_height.Size = new System.Drawing.Size(35, 19);
             this.tb_cam_view_height.TabIndex = 3;
+            this.tb_cam_view_height.Text = global::FaceDetection.Properties.Settings.Default.view_height;
             // 
             // label6
             // 
@@ -427,10 +452,12 @@
             // 
             // tb_cam_view_width
             // 
+            this.tb_cam_view_width.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "view_width", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_cam_view_width.Location = new System.Drawing.Point(63, 11);
             this.tb_cam_view_width.Name = "tb_cam_view_width";
             this.tb_cam_view_width.Size = new System.Drawing.Size(35, 19);
             this.tb_cam_view_width.TabIndex = 3;
+            this.tb_cam_view_width.Text = global::FaceDetection.Properties.Settings.Default.view_width;
             // 
             // label7
             // 
@@ -464,6 +491,9 @@
             // cb_backlight_on_recognition
             // 
             this.cb_backlight_on_recognition.AutoSize = true;
+            this.cb_backlight_on_recognition.Checked = global::FaceDetection.Properties.Settings.Default.backlight_on_upon_face_rec;
+            this.cb_backlight_on_recognition.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_backlight_on_recognition.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "backlight_on_upon_face_rec", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_backlight_on_recognition.Location = new System.Drawing.Point(259, 43);
             this.cb_backlight_on_recognition.Name = "cb_backlight_on_recognition";
             this.cb_backlight_on_recognition.Size = new System.Drawing.Size(148, 16);
@@ -492,10 +522,12 @@
             // 
             // tb_manual_recording_time
             // 
+            this.tb_manual_recording_time.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "manual_record_maxtime", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_manual_recording_time.Location = new System.Drawing.Point(407, 18);
             this.tb_manual_recording_time.Name = "tb_manual_recording_time";
             this.tb_manual_recording_time.Size = new System.Drawing.Size(32, 19);
             this.tb_manual_recording_time.TabIndex = 3;
+            this.tb_manual_recording_time.Text = global::FaceDetection.Properties.Settings.Default.manual_record_maxtime;
             // 
             // groupBox7
             // 
@@ -512,6 +544,9 @@
             // cb_face_recognition
             // 
             this.cb_face_recognition.AutoSize = true;
+            this.cb_face_recognition.Checked = global::FaceDetection.Properties.Settings.Default.enable_face_recognition;
+            this.cb_face_recognition.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_face_recognition.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "enable_face_recognition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_face_recognition.Location = new System.Drawing.Point(8, -1);
             this.cb_face_recognition.Name = "cb_face_recognition";
             this.cb_face_recognition.Size = new System.Drawing.Size(151, 16);
@@ -521,10 +556,12 @@
             // 
             // tb_recognition_interval
             // 
+            this.tb_recognition_interval.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "face_rec_interval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_recognition_interval.Location = new System.Drawing.Point(123, 21);
             this.tb_recognition_interval.Name = "tb_recognition_interval";
             this.tb_recognition_interval.Size = new System.Drawing.Size(52, 19);
             this.tb_recognition_interval.TabIndex = 3;
+            this.tb_recognition_interval.Text = global::FaceDetection.Properties.Settings.Default.face_rec_interval;
             // 
             // lb_milliseconds1
             // 
@@ -585,6 +622,9 @@
             // cb_record_upon_start
             // 
             this.cb_record_upon_start.AutoSize = true;
+            this.cb_record_upon_start.Checked = global::FaceDetection.Properties.Settings.Default.recording_on_start;
+            this.cb_record_upon_start.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_record_upon_start.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "recording_on_start", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_record_upon_start.Location = new System.Drawing.Point(8, 100);
             this.cb_record_upon_start.Name = "cb_record_upon_start";
             this.cb_record_upon_start.Size = new System.Drawing.Size(116, 16);
@@ -594,14 +634,19 @@
             // 
             // tb_record_reinitiation_interval_seconds
             // 
+            this.tb_record_reinitiation_interval_seconds.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "recording_length_seconds", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_record_reinitiation_interval_seconds.Location = new System.Drawing.Point(142, 120);
             this.tb_record_reinitiation_interval_seconds.Name = "tb_record_reinitiation_interval_seconds";
             this.tb_record_reinitiation_interval_seconds.Size = new System.Drawing.Size(52, 19);
             this.tb_record_reinitiation_interval_seconds.TabIndex = 3;
+            this.tb_record_reinitiation_interval_seconds.Text = global::FaceDetection.Properties.Settings.Default.recording_length_seconds;
             // 
             // cb_operator_capture
             // 
             this.cb_operator_capture.AutoSize = true;
+            this.cb_operator_capture.Checked = global::FaceDetection.Properties.Settings.Default.capture_operator;
+            this.cb_operator_capture.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_operator_capture.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "capture_operator", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_operator_capture.Location = new System.Drawing.Point(7, -1);
             this.cb_operator_capture.Name = "cb_operator_capture";
             this.cb_operator_capture.Size = new System.Drawing.Size(112, 16);
@@ -612,6 +657,9 @@
             // cb_recording_during_facerec
             // 
             this.cb_recording_during_facerec.AutoSize = true;
+            this.cb_recording_during_facerec.Checked = global::FaceDetection.Properties.Settings.Default.keeprecording_while_facerecognition;
+            this.cb_recording_during_facerec.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_recording_during_facerec.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "keeprecording_while_facerecognition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_recording_during_facerec.Location = new System.Drawing.Point(8, 78);
             this.cb_recording_during_facerec.Name = "cb_recording_during_facerec";
             this.cb_recording_during_facerec.Size = new System.Drawing.Size(196, 16);
@@ -638,6 +686,7 @@
             // 
             // cm_capture_mode
             // 
+            this.cm_capture_mode.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "capture_type", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cm_capture_mode.FormattingEnabled = true;
             this.cm_capture_mode.Items.AddRange(new object[] {
             "Video",
@@ -646,13 +695,16 @@
             this.cm_capture_mode.Name = "cm_capture_mode";
             this.cm_capture_mode.Size = new System.Drawing.Size(80, 20);
             this.cm_capture_mode.TabIndex = 1;
+            this.cm_capture_mode.Text = global::FaceDetection.Properties.Settings.Default.capture_type;
             // 
             // tb_capture_seconds
             // 
+            this.tb_capture_seconds.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "recording_length_seconds", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_capture_seconds.Location = new System.Drawing.Point(82, 47);
             this.tb_capture_seconds.Name = "tb_capture_seconds";
             this.tb_capture_seconds.Size = new System.Drawing.Size(52, 19);
             this.tb_capture_seconds.TabIndex = 3;
+            this.tb_capture_seconds.Text = global::FaceDetection.Properties.Settings.Default.recording_length_seconds;
             // 
             // lb_seconds2
             // 
@@ -699,6 +751,9 @@
             // cb_event_recorder
             // 
             this.cb_event_recorder.AutoSize = true;
+            this.cb_event_recorder.Checked = global::FaceDetection.Properties.Settings.Default.event_recorder_on;
+            this.cb_event_recorder.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_event_recorder.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "event_recorder_on", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_event_recorder.Location = new System.Drawing.Point(12, 0);
             this.cb_event_recorder.Name = "cb_event_recorder";
             this.cb_event_recorder.Size = new System.Drawing.Size(103, 16);
@@ -708,17 +763,21 @@
             // 
             // tb_post_event_seconds
             // 
+            this.tb_post_event_seconds.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "seconds_after_event", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_post_event_seconds.Location = new System.Drawing.Point(148, 52);
             this.tb_post_event_seconds.Name = "tb_post_event_seconds";
             this.tb_post_event_seconds.Size = new System.Drawing.Size(52, 19);
             this.tb_post_event_seconds.TabIndex = 3;
+            this.tb_post_event_seconds.Text = global::FaceDetection.Properties.Settings.Default.seconds_after_event;
             // 
             // tb_pre_event_seconds
             // 
+            this.tb_pre_event_seconds.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "seconds_before_event", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_pre_event_seconds.Location = new System.Drawing.Point(148, 18);
             this.tb_pre_event_seconds.Name = "tb_pre_event_seconds";
             this.tb_pre_event_seconds.Size = new System.Drawing.Size(52, 19);
             this.tb_pre_event_seconds.TabIndex = 3;
+            this.tb_pre_event_seconds.Text = global::FaceDetection.Properties.Settings.Default.seconds_before_event;
             // 
             // lb_post_event
             // 
@@ -782,10 +841,12 @@
             // 
             // tb_backlight_off_idling_delay_seconds
             // 
+            this.tb_backlight_off_idling_delay_seconds.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "backlight_offset_mins", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_backlight_off_idling_delay_seconds.Location = new System.Drawing.Point(148, 22);
             this.tb_backlight_off_idling_delay_seconds.Name = "tb_backlight_off_idling_delay_seconds";
             this.tb_backlight_off_idling_delay_seconds.Size = new System.Drawing.Size(52, 19);
             this.tb_backlight_off_idling_delay_seconds.TabIndex = 3;
+            this.tb_backlight_off_idling_delay_seconds.Text = global::FaceDetection.Properties.Settings.Default.backlight_offset_mins;
             // 
             // lb_backlight_off_idling_delay
             // 
@@ -837,12 +898,13 @@
             this.button_settings_save.Name = "button_settings_save";
             this.button_settings_save.Size = new System.Drawing.Size(75, 23);
             this.button_settings_save.TabIndex = 3;
-            this.button_settings_save.Text = "English";
+            this.button_settings_save.Text = "OK";
             this.button_settings_save.UseVisualStyleBackColor = true;
             this.button_settings_save.Click += new System.EventHandler(this.save_and_close);
             // 
             // cm_camera_number
             // 
+            this.cm_camera_number.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "current_camera_index", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cm_camera_number.FormattingEnabled = true;
             this.cm_camera_number.Items.AddRange(new object[] {
             "1",
@@ -853,6 +915,7 @@
             this.cm_camera_number.Name = "cm_camera_number";
             this.cm_camera_number.Size = new System.Drawing.Size(91, 20);
             this.cm_camera_number.TabIndex = 1;
+            this.cm_camera_number.Text = global::FaceDetection.Properties.Settings.Default.current_camera_index;
             // 
             // settingsUI
             // 

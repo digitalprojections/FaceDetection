@@ -70,7 +70,8 @@ namespace FaceDetection
 
         private void save_and_close(object sender, EventArgs e)
         {
-            
+
+            Properties.Settings.Default.Save();
             this.Close();
         }
     }
