@@ -75,6 +75,7 @@
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.cb_record_upon_start = new System.Windows.Forms.CheckBox();
             this.tb_record_reinitiation_interval_seconds = new System.Windows.Forms.TextBox();
+            this.cb_operator_capture = new System.Windows.Forms.CheckBox();
             this.cb_recording_during_facerec = new System.Windows.Forms.CheckBox();
             this.label18_seconds = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -100,7 +101,6 @@
             this.button_settings_cancel = new System.Windows.Forms.Button();
             this.button_settings_save = new System.Windows.Forms.Button();
             this.cm_camera_number = new System.Windows.Forms.ComboBox();
-            this.cb_operator_capture = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -118,6 +118,8 @@
             // cb_all_cameras
             // 
             this.cb_all_cameras.AutoSize = true;
+            this.cb_all_cameras.Checked = global::FaceDetection.Properties.Settings.Default.show_all_cams_simulteneously;
+            this.cb_all_cameras.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "show_all_cams_simulteneously", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_all_cameras.Location = new System.Drawing.Point(36, 107);
             this.cb_all_cameras.Name = "cb_all_cameras";
             this.cb_all_cameras.Size = new System.Drawing.Size(205, 16);
@@ -127,6 +129,7 @@
             // 
             // cm_language
             // 
+            this.cm_language.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cm_language.FormattingEnabled = true;
             this.cm_language.Items.AddRange(new object[] {
             "English",
@@ -135,6 +138,7 @@
             this.cm_language.Name = "cm_language";
             this.cm_language.Size = new System.Drawing.Size(91, 20);
             this.cm_language.TabIndex = 1;
+            this.cm_language.Text = global::FaceDetection.Properties.Settings.Default.language;
             // 
             // label1
             // 
@@ -178,10 +182,12 @@
             // 
             // tb_days_old
             // 
+            this.tb_days_old.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "erase_after", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_days_old.Location = new System.Drawing.Point(15, 28);
             this.tb_days_old.Name = "tb_days_old";
             this.tb_days_old.Size = new System.Drawing.Size(35, 19);
             this.tb_days_old.TabIndex = 3;
+            this.tb_days_old.Text = global::FaceDetection.Properties.Settings.Default.erase_after;
             // 
             // label3
             // 
@@ -195,6 +201,9 @@
             // cb_delete_old
             // 
             this.cb_delete_old.AutoSize = true;
+            this.cb_delete_old.Checked = global::FaceDetection.Properties.Settings.Default.erase_old;
+            this.cb_delete_old.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_delete_old.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "erase_old", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_delete_old.Location = new System.Drawing.Point(15, 0);
             this.cb_delete_old.Name = "cb_delete_old";
             this.cb_delete_old.Size = new System.Drawing.Size(102, 16);
@@ -362,10 +371,12 @@
             // 
             // tb_x
             // 
+            this.tb_x.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "display_pos_x", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tb_x.Location = new System.Drawing.Point(63, 11);
             this.tb_x.Name = "tb_x";
             this.tb_x.Size = new System.Drawing.Size(35, 19);
             this.tb_x.TabIndex = 3;
+            this.tb_x.Text = global::FaceDetection.Properties.Settings.Default.display_pos_x;
             // 
             // label4
             // 
@@ -588,6 +599,16 @@
             this.tb_record_reinitiation_interval_seconds.Size = new System.Drawing.Size(52, 19);
             this.tb_record_reinitiation_interval_seconds.TabIndex = 3;
             // 
+            // cb_operator_capture
+            // 
+            this.cb_operator_capture.AutoSize = true;
+            this.cb_operator_capture.Location = new System.Drawing.Point(7, -1);
+            this.cb_operator_capture.Name = "cb_operator_capture";
+            this.cb_operator_capture.Size = new System.Drawing.Size(112, 16);
+            this.cb_operator_capture.TabIndex = 0;
+            this.cb_operator_capture.Text = "Operator Capture";
+            this.cb_operator_capture.UseVisualStyleBackColor = true;
+            // 
             // cb_recording_during_facerec
             // 
             this.cb_recording_during_facerec.AutoSize = true;
@@ -618,6 +639,9 @@
             // cm_capture_mode
             // 
             this.cm_capture_mode.FormattingEnabled = true;
+            this.cm_capture_mode.Items.AddRange(new object[] {
+            "Video",
+            "Snapshot"});
             this.cm_capture_mode.Location = new System.Drawing.Point(123, 18);
             this.cm_capture_mode.Name = "cm_capture_mode";
             this.cm_capture_mode.Size = new System.Drawing.Size(80, 20);
@@ -805,6 +829,7 @@
             this.button_settings_cancel.TabIndex = 3;
             this.button_settings_cancel.Text = "Cancel";
             this.button_settings_cancel.UseVisualStyleBackColor = true;
+            this.button_settings_cancel.Click += new System.EventHandler(this.closeSettings);
             // 
             // button_settings_save
             // 
@@ -812,8 +837,9 @@
             this.button_settings_save.Name = "button_settings_save";
             this.button_settings_save.Size = new System.Drawing.Size(75, 23);
             this.button_settings_save.TabIndex = 3;
-            this.button_settings_save.Text = "OK";
+            this.button_settings_save.Text = "English";
             this.button_settings_save.UseVisualStyleBackColor = true;
+            this.button_settings_save.Click += new System.EventHandler(this.save_and_close);
             // 
             // cm_camera_number
             // 
@@ -828,16 +854,6 @@
             this.cm_camera_number.Size = new System.Drawing.Size(91, 20);
             this.cm_camera_number.TabIndex = 1;
             // 
-            // cb_operator_capture
-            // 
-            this.cb_operator_capture.AutoSize = true;
-            this.cb_operator_capture.Location = new System.Drawing.Point(7, -1);
-            this.cb_operator_capture.Name = "cb_operator_capture";
-            this.cb_operator_capture.Size = new System.Drawing.Size(112, 16);
-            this.cb_operator_capture.TabIndex = 0;
-            this.cb_operator_capture.Text = "Operator Capture";
-            this.cb_operator_capture.UseVisualStyleBackColor = true;
-            // 
             // settingsUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -846,6 +862,8 @@
             this.ClientSize = new System.Drawing.Size(516, 631);
             this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.groupBox1);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::FaceDetection.Properties.Settings.Default, "Location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Location = global::FaceDetection.Properties.Settings.Default.Location;
             this.Name = "settingsUI";
             this.Text = "Settings";
             this.groupBox2.ResumeLayout(false);
