@@ -14,6 +14,7 @@ using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 using System.Diagnostics;
 using System.Configuration;
+using System.IO;
 
 
 namespace FaceDetection
@@ -22,6 +23,8 @@ namespace FaceDetection
     {
         //User actions
         private Timer timer = new Timer();
+        private static Timer capTimer = new Timer();
+        private static Timer frameTimer = new Timer();
 
         //User actions end
         settingsUI settingUI;
@@ -29,20 +32,30 @@ namespace FaceDetection
         private VideoCapture _capture;
 
         private CascadeClassifier _cascadeClassifier;
-        
-        
+        private Image<Bgr, Byte> imageFrame;
+
         public mainForm(string[] vs)
         {
+            this.Location = new Point(int.Parse(Properties.Settings.Default.display_pos_x), int.Parse(Properties.Settings.Default.display_pos_y));
+            this.Width = int.Parse(Properties.Settings.Default.view_width);
+            this.Height = int.Parse(Properties.Settings.Default.display_pos_y);
+
             settingUI = new settingsUI();
             Debug.WriteLine(vs + " run parameters");
             InitializeComponent();
             _capture = new VideoCapture();
+            
             //img = new Image<Bgr, byte>(Application.StartupPath + "/faces.jpg");
             _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_alt.xml");
             imgCamUser.SendToBack();
             timer.Tick += new EventHandler(ShowButtons);
-
-            Application.Idle += ProcessFrame;
+            capTimer.Tick += new EventHandler(CaptureFace);
+            capTimer.Interval = int.Parse(Properties.Settings.Default.face_rec_interval);//milliseconds
+            capTimer.Start();
+            frameTimer.Interval = 1000/int.Parse(Properties.Settings.Default.frame_rate_fps);
+            frameTimer.Start();
+            frameTimer.Tick += new EventHandler(ProcessFrame);
+            //Application.Idle += ProcessFrame;
             pbRecording.BackColor = Color.Transparent;
             dateTimeLabel.BackColor = Color.Transparent;
 
@@ -53,26 +66,31 @@ namespace FaceDetection
         }
         private void ProcessFrame(object sender, EventArgs eventArgs)
         {
-            using (var imageFrame = _capture.QueryFrame().ToImage<Bgr, Byte>())
-            {
-                if (imageFrame != null)
-                {
-                    var grayframe = imageFrame.Convert<Gray,Byte>();
-                    var faces = _cascadeClassifier.DetectMultiScale(grayframe, 1.1, 10, Size.Empty); //the actual face detection happens here
-                    foreach (var face in faces)
-                    {
-                        imageFrame.Draw(face, new Bgr(Color.Red), 3); //the detected face(s) is highlighted here using a box that is drawn around it/them
-
-                    }
-                }
+            imageFrame = _capture.QueryFrame().ToImage<Bgr, Byte>();
+            
+                
                 imgCamUser.Image = imageFrame;
                 dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 dateTimeLabel.Parent = imgCamUser;
                 pbRecording.Parent = imgCamUser;
+            
+
+
+
+        }
+
+        private void CaptureFace(object sender, EventArgs eventArgs)
+        {
+            if (imageFrame != null && Properties.Settings.Default.enable_face_recognition == true)
+            {
+                var grayframe = imageFrame.Convert<Gray, Byte>();
+                var faces = _cascadeClassifier.DetectMultiScale(grayframe, 1.1, 10, Size.Empty); //the actual face detection happens here
+                foreach (var face in faces)
+                {
+                    imageFrame.Draw(face, new Bgr(Color.Red), 3); //the detected face(s) is highlighted here using a box that is drawn around it/them
+
+                }
             }
-
-
-
         }
         public void ShowButtons(object sender, EventArgs eventArgs)
         {
@@ -102,9 +120,8 @@ namespace FaceDetection
         }
         public void holdButton(object sender, MouseEventArgs eventArgs)
         {
-            timer.Enabled = true;
-            
-            timer.Interval = 3000;
+            timer.Enabled = true;            
+            timer.Interval = 500;//Set it to 3000 for production
             timer.Start();
         }
 
@@ -155,11 +172,32 @@ namespace FaceDetection
             if(settingUI.Visible==false)
             {
                 
-                settingUI.Show();
+                settingUI.ShowDialog();
             }
             else
             {
             }
+        }
+
+        private void openStoreLocation(object sender, EventArgs e)
+        {
+            try
+            {
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
+                Process.Start(Properties.Settings.Default.video_file_location);
+
+            }catch(IOException ioe)
+            {
+                MessageBox.Show(ioe.Message);
+            }
+        }
+        public static void captureIntervalChange()
+        {
+            capTimer.Interval = int.Parse(Properties.Settings.Default.face_rec_interval);//milliseconds
+        }
+        public static void frameRateChange()
+        {
+            frameTimer.Interval = 1000/int.Parse(Properties.Settings.Default.frame_rate_fps);
         }
     }
 }

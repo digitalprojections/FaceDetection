@@ -145,6 +145,7 @@
             this.folderButton.TabIndex = 3;
             this.folderButton.UseVisualStyleBackColor = true;
             this.folderButton.Visible = false;
+            this.folderButton.Click += new System.EventHandler(this.openStoreLocation);
             // 
             // imgCamUser
             // 

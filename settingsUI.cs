@@ -48,21 +48,8 @@ namespace FaceDetection
             */
         }
 
-        private void GroupBox6_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void GroupBox11_Enter(object sender, EventArgs e)
-        {
-
-        }
-
+       
+        
         private void closeSettings(object sender, EventArgs e)
         {
             this.Close();
@@ -70,9 +57,17 @@ namespace FaceDetection
 
         private void save_and_close(object sender, EventArgs e)
         {
-
             Properties.Settings.Default.Save();
             this.Close();
+        }
+
+        private void captureIntervalChanged(object sender, EventArgs e)
+        {
+            mainForm.captureIntervalChange();
+        }
+        private void frameRateChanged(object sender, EventArgs e)
+        {
+            mainForm.frameRateChange();
         }
     }
 }

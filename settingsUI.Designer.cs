@@ -123,7 +123,7 @@
             this.cb_all_cameras.Location = new System.Drawing.Point(36, 107);
             this.cb_all_cameras.Name = "cb_all_cameras";
             this.cb_all_cameras.Size = new System.Drawing.Size(205, 16);
-            this.cb_all_cameras.TabIndex = 0;
+            this.cb_all_cameras.TabIndex = 5;
             this.cb_all_cameras.Text = "Display all cameras simulteneously";
             this.cb_all_cameras.UseVisualStyleBackColor = true;
             // 
@@ -137,7 +137,7 @@
             this.cm_language.Location = new System.Drawing.Point(130, 27);
             this.cm_language.Name = "cm_language";
             this.cm_language.Size = new System.Drawing.Size(91, 20);
-            this.cm_language.TabIndex = 1;
+            this.cm_language.TabIndex = 2;
             this.cm_language.Text = global::FaceDetection.Properties.Settings.Default.language;
             // 
             // label1
@@ -146,7 +146,7 @@
             this.label1.Location = new System.Drawing.Point(18, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 12);
-            this.label1.TabIndex = 2;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Display language";
             // 
             // tb_camera_count
@@ -167,7 +167,7 @@
             this.groupBox2.Location = new System.Drawing.Point(245, 18);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(240, 131);
-            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Select save path";
             // 
@@ -179,7 +179,7 @@
             this.groupBox12.Location = new System.Drawing.Point(6, 62);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(228, 62);
-            this.groupBox12.TabIndex = 5;
+            this.groupBox12.TabIndex = 3;
             this.groupBox12.TabStop = false;
             // 
             // tb_days_old
@@ -188,7 +188,7 @@
             this.tb_days_old.Location = new System.Drawing.Point(15, 28);
             this.tb_days_old.Name = "tb_days_old";
             this.tb_days_old.Size = new System.Drawing.Size(35, 19);
-            this.tb_days_old.TabIndex = 3;
+            this.tb_days_old.TabIndex = 1;
             this.tb_days_old.Text = global::FaceDetection.Properties.Settings.Default.erase_after;
             // 
             // label3
@@ -218,7 +218,7 @@
             this.button1.Location = new System.Drawing.Point(159, 33);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
+            this.button1.TabIndex = 2;
             this.button1.Text = "Browse";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -228,7 +228,7 @@
             this.label2.Location = new System.Drawing.Point(6, 20);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 12);
-            this.label2.TabIndex = 2;
+            this.label2.TabIndex = 0;
             this.label2.Text = "Save file path";
             // 
             // textBox2
@@ -237,7 +237,7 @@
             this.textBox2.Location = new System.Drawing.Point(6, 35);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(147, 19);
-            this.textBox2.TabIndex = 3;
+            this.textBox2.TabIndex = 1;
             this.textBox2.Text = global::FaceDetection.Properties.Settings.Default.video_file_location;
             // 
             // groupBox1
@@ -262,7 +262,7 @@
             this.label25_pcs.Location = new System.Drawing.Point(171, 56);
             this.label25_pcs.Name = "label25_pcs";
             this.label25_pcs.Size = new System.Drawing.Size(23, 12);
-            this.label25_pcs.TabIndex = 2;
+            this.label25_pcs.TabIndex = 4;
             this.label25_pcs.Text = "pcs";
             // 
             // label26
@@ -271,7 +271,7 @@
             this.label26.Location = new System.Drawing.Point(18, 56);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(106, 12);
-            this.label26.TabIndex = 2;
+            this.label26.TabIndex = 1;
             this.label26.Text = "Connected cameras";
             // 
             // cb_always_on_top
@@ -283,7 +283,7 @@
             this.cb_always_on_top.Location = new System.Drawing.Point(259, 18);
             this.cb_always_on_top.Name = "cb_always_on_top";
             this.cb_always_on_top.Size = new System.Drawing.Size(97, 16);
-            this.cb_always_on_top.TabIndex = 0;
+            this.cb_always_on_top.TabIndex = 5;
             this.cb_always_on_top.Text = "Always on top";
             this.cb_always_on_top.UseVisualStyleBackColor = true;
             // 
@@ -296,7 +296,7 @@
             this.cb_window_pane.Location = new System.Drawing.Point(259, 39);
             this.cb_window_pane.Name = "cb_window_pane";
             this.cb_window_pane.Size = new System.Drawing.Size(120, 16);
-            this.cb_window_pane.TabIndex = 0;
+            this.cb_window_pane.TabIndex = 6;
             this.cb_window_pane.Text = "Show window pane";
             this.cb_window_pane.UseVisualStyleBackColor = true;
             // 
@@ -309,7 +309,7 @@
             this.cb_dateandtime.Location = new System.Drawing.Point(259, 61);
             this.cb_dateandtime.Name = "cb_dateandtime";
             this.cb_dateandtime.Size = new System.Drawing.Size(165, 16);
-            this.cb_dateandtime.TabIndex = 0;
+            this.cb_dateandtime.TabIndex = 7;
             this.cb_dateandtime.Text = "Show current date and time";
             this.cb_dateandtime.UseVisualStyleBackColor = true;
             // 
@@ -322,7 +322,7 @@
             this.cb_show_camera_number.Location = new System.Drawing.Point(259, 83);
             this.cb_show_camera_number.Name = "cb_show_camera_number";
             this.cb_show_camera_number.Size = new System.Drawing.Size(133, 16);
-            this.cb_show_camera_number.TabIndex = 0;
+            this.cb_show_camera_number.TabIndex = 8;
             this.cb_show_camera_number.Text = "Show camera number";
             this.cb_show_camera_number.UseVisualStyleBackColor = true;
             // 
@@ -335,7 +335,7 @@
             this.cb_show_rec_icon.Location = new System.Drawing.Point(259, 103);
             this.cb_show_rec_icon.Name = "cb_show_rec_icon";
             this.cb_show_rec_icon.Size = new System.Drawing.Size(131, 16);
-            this.cb_show_rec_icon.TabIndex = 0;
+            this.cb_show_rec_icon.TabIndex = 9;
             this.cb_show_rec_icon.Text = "Show \'recording\' icon";
             this.cb_show_rec_icon.UseVisualStyleBackColor = true;
             // 
@@ -347,7 +347,6 @@
             this.label8.Size = new System.Drawing.Size(65, 12);
             this.label8.TabIndex = 2;
             this.label8.Text = "Frame Rate";
-            this.label8.Click += new System.EventHandler(this.Label8_Click);
             // 
             // label9_fps
             // 
@@ -355,7 +354,7 @@
             this.label9_fps.Location = new System.Drawing.Point(110, 92);
             this.label9_fps.Name = "label9_fps";
             this.label9_fps.Size = new System.Drawing.Size(21, 12);
-            this.label9_fps.TabIndex = 2;
+            this.label9_fps.TabIndex = 4;
             this.label9_fps.Text = "fps";
             // 
             // groupBox4
@@ -367,7 +366,7 @@
             this.groupBox4.Location = new System.Drawing.Point(6, 18);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(104, 65);
-            this.groupBox4.TabIndex = 4;
+            this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Position";
             // 
@@ -396,7 +395,7 @@
             this.tb_x.Location = new System.Drawing.Point(63, 11);
             this.tb_x.Name = "tb_x";
             this.tb_x.Size = new System.Drawing.Size(35, 19);
-            this.tb_x.TabIndex = 3;
+            this.tb_x.TabIndex = 1;
             this.tb_x.Text = global::FaceDetection.Properties.Settings.Default.display_pos_x;
             // 
             // label4
@@ -406,7 +405,7 @@
             this.label4.Location = new System.Drawing.Point(45, 15);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(12, 12);
-            this.label4.TabIndex = 2;
+            this.label4.TabIndex = 0;
             this.label4.Text = "X";
             // 
             // tb_frame_rate
@@ -417,6 +416,7 @@
             this.tb_frame_rate.Size = new System.Drawing.Size(35, 19);
             this.tb_frame_rate.TabIndex = 3;
             this.tb_frame_rate.Text = global::FaceDetection.Properties.Settings.Default.frame_rate_fps;
+            this.tb_frame_rate.Leave += new System.EventHandler(this.frameRateChanged);
             // 
             // groupBox5
             // 
@@ -427,7 +427,7 @@
             this.groupBox5.Location = new System.Drawing.Point(116, 18);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(104, 65);
-            this.groupBox5.TabIndex = 4;
+            this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Size";
             // 
@@ -456,7 +456,7 @@
             this.tb_cam_view_width.Location = new System.Drawing.Point(63, 11);
             this.tb_cam_view_width.Name = "tb_cam_view_width";
             this.tb_cam_view_width.Size = new System.Drawing.Size(35, 19);
-            this.tb_cam_view_width.TabIndex = 3;
+            this.tb_cam_view_width.TabIndex = 1;
             this.tb_cam_view_width.Text = global::FaceDetection.Properties.Settings.Default.view_width;
             // 
             // label7
@@ -466,7 +466,7 @@
             this.label7.Location = new System.Drawing.Point(22, 14);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(33, 12);
-            this.label7.TabIndex = 2;
+            this.label7.TabIndex = 0;
             this.label7.Text = "Width";
             // 
             // groupBox3
@@ -497,7 +497,7 @@
             this.cb_backlight_on_recognition.Location = new System.Drawing.Point(259, 43);
             this.cb_backlight_on_recognition.Name = "cb_backlight_on_recognition";
             this.cb_backlight_on_recognition.Size = new System.Drawing.Size(148, 16);
-            this.cb_backlight_on_recognition.TabIndex = 0;
+            this.cb_backlight_on_recognition.TabIndex = 5;
             this.cb_backlight_on_recognition.Text = "Backlight on recognition";
             this.cb_backlight_on_recognition.UseVisualStyleBackColor = true;
             // 
@@ -517,7 +517,7 @@
             this.lb_seconds.Location = new System.Drawing.Point(445, 21);
             this.lb_seconds.Name = "lb_seconds";
             this.lb_seconds.Size = new System.Drawing.Size(23, 12);
-            this.lb_seconds.TabIndex = 2;
+            this.lb_seconds.TabIndex = 4;
             this.lb_seconds.Text = "sec";
             // 
             // tb_manual_recording_time
@@ -538,7 +538,7 @@
             this.groupBox7.Location = new System.Drawing.Point(7, 18);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(226, 47);
-            this.groupBox7.TabIndex = 1;
+            this.groupBox7.TabIndex = 0;
             this.groupBox7.TabStop = false;
             // 
             // cb_face_recognition
@@ -560,8 +560,9 @@
             this.tb_recognition_interval.Location = new System.Drawing.Point(123, 21);
             this.tb_recognition_interval.Name = "tb_recognition_interval";
             this.tb_recognition_interval.Size = new System.Drawing.Size(52, 19);
-            this.tb_recognition_interval.TabIndex = 3;
+            this.tb_recognition_interval.TabIndex = 2;
             this.tb_recognition_interval.Text = global::FaceDetection.Properties.Settings.Default.face_rec_interval;
+            this.tb_recognition_interval.Leave += new System.EventHandler(this.captureIntervalChanged);
             // 
             // lb_milliseconds1
             // 
@@ -569,7 +570,7 @@
             this.lb_milliseconds1.Location = new System.Drawing.Point(181, 24);
             this.lb_milliseconds1.Name = "lb_milliseconds1";
             this.lb_milliseconds1.Size = new System.Drawing.Size(20, 12);
-            this.lb_milliseconds1.TabIndex = 2;
+            this.lb_milliseconds1.TabIndex = 3;
             this.lb_milliseconds1.Text = "ms";
             // 
             // label10
@@ -579,7 +580,7 @@
             this.label10.Location = new System.Drawing.Point(0, 24);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(107, 12);
-            this.label10.TabIndex = 2;
+            this.label10.TabIndex = 1;
             this.label10.Text = "Recognition interval";
             // 
             // groupBox6
@@ -598,7 +599,6 @@
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Functionality Settings";
-            this.groupBox6.Enter += new System.EventHandler(this.GroupBox6_Enter);
             // 
             // groupBox9
             // 
@@ -616,7 +616,7 @@
             this.groupBox9.Location = new System.Drawing.Point(7, 72);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(226, 184);
-            this.groupBox9.TabIndex = 5;
+            this.groupBox9.TabIndex = 1;
             this.groupBox9.TabStop = false;
             // 
             // cb_record_upon_start
@@ -628,7 +628,7 @@
             this.cb_record_upon_start.Location = new System.Drawing.Point(8, 100);
             this.cb_record_upon_start.Name = "cb_record_upon_start";
             this.cb_record_upon_start.Size = new System.Drawing.Size(116, 16);
-            this.cb_record_upon_start.TabIndex = 0;
+            this.cb_record_upon_start.TabIndex = 7;
             this.cb_record_upon_start.Text = "Record upon start";
             this.cb_record_upon_start.UseVisualStyleBackColor = true;
             // 
@@ -638,7 +638,7 @@
             this.tb_record_reinitiation_interval_seconds.Location = new System.Drawing.Point(142, 120);
             this.tb_record_reinitiation_interval_seconds.Name = "tb_record_reinitiation_interval_seconds";
             this.tb_record_reinitiation_interval_seconds.Size = new System.Drawing.Size(52, 19);
-            this.tb_record_reinitiation_interval_seconds.TabIndex = 3;
+            this.tb_record_reinitiation_interval_seconds.TabIndex = 9;
             this.tb_record_reinitiation_interval_seconds.Text = global::FaceDetection.Properties.Settings.Default.recording_length_seconds;
             // 
             // cb_operator_capture
@@ -663,7 +663,7 @@
             this.cb_recording_during_facerec.Location = new System.Drawing.Point(8, 78);
             this.cb_recording_during_facerec.Name = "cb_recording_during_facerec";
             this.cb_recording_during_facerec.Size = new System.Drawing.Size(196, 16);
-            this.cb_recording_during_facerec.TabIndex = 0;
+            this.cb_recording_during_facerec.TabIndex = 6;
             this.cb_recording_during_facerec.Text = "Recording during face recognition";
             this.cb_recording_during_facerec.UseVisualStyleBackColor = true;
             // 
@@ -673,7 +673,7 @@
             this.label18_seconds.Location = new System.Drawing.Point(200, 123);
             this.label18_seconds.Name = "label18_seconds";
             this.label18_seconds.Size = new System.Drawing.Size(20, 12);
-            this.label18_seconds.TabIndex = 2;
+            this.label18_seconds.TabIndex = 10;
             this.label18_seconds.Text = "ms";
             // 
             // label17
@@ -681,7 +681,7 @@
             this.label17.Location = new System.Drawing.Point(7, 123);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(129, 29);
-            this.label17.TabIndex = 2;
+            this.label17.TabIndex = 8;
             this.label17.Text = "Recording re-initiation interval";
             // 
             // cm_capture_mode
@@ -694,7 +694,7 @@
             this.cm_capture_mode.Location = new System.Drawing.Point(123, 18);
             this.cm_capture_mode.Name = "cm_capture_mode";
             this.cm_capture_mode.Size = new System.Drawing.Size(80, 20);
-            this.cm_capture_mode.TabIndex = 1;
+            this.cm_capture_mode.TabIndex = 2;
             this.cm_capture_mode.Text = global::FaceDetection.Properties.Settings.Default.capture_type;
             // 
             // tb_capture_seconds
@@ -703,7 +703,7 @@
             this.tb_capture_seconds.Location = new System.Drawing.Point(82, 47);
             this.tb_capture_seconds.Name = "tb_capture_seconds";
             this.tb_capture_seconds.Size = new System.Drawing.Size(52, 19);
-            this.tb_capture_seconds.TabIndex = 3;
+            this.tb_capture_seconds.TabIndex = 4;
             this.tb_capture_seconds.Text = global::FaceDetection.Properties.Settings.Default.recording_length_seconds;
             // 
             // lb_seconds2
@@ -712,7 +712,7 @@
             this.lb_seconds2.Location = new System.Drawing.Point(140, 50);
             this.lb_seconds2.Name = "lb_seconds2";
             this.lb_seconds2.Size = new System.Drawing.Size(23, 12);
-            this.lb_seconds2.TabIndex = 2;
+            this.lb_seconds2.TabIndex = 5;
             this.lb_seconds2.Text = "sec";
             // 
             // lb_capture_seconds
@@ -721,7 +721,7 @@
             this.lb_capture_seconds.Location = new System.Drawing.Point(6, 50);
             this.lb_capture_seconds.Name = "lb_capture_seconds";
             this.lb_capture_seconds.Size = new System.Drawing.Size(71, 12);
-            this.lb_capture_seconds.TabIndex = 2;
+            this.lb_capture_seconds.TabIndex = 3;
             this.lb_capture_seconds.Text = "Capture time";
             // 
             // lb_capture_mode
@@ -730,7 +730,7 @@
             this.lb_capture_mode.Location = new System.Drawing.Point(5, 21);
             this.lb_capture_mode.Name = "lb_capture_mode";
             this.lb_capture_mode.Size = new System.Drawing.Size(76, 12);
-            this.lb_capture_mode.TabIndex = 2;
+            this.lb_capture_mode.TabIndex = 1;
             this.lb_capture_mode.Text = "Capture mode";
             // 
             // groupBox10
@@ -745,7 +745,7 @@
             this.groupBox10.Location = new System.Drawing.Point(239, 140);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(234, 86);
-            this.groupBox10.TabIndex = 4;
+            this.groupBox10.TabIndex = 7;
             this.groupBox10.TabStop = false;
             // 
             // cb_event_recorder
@@ -767,7 +767,7 @@
             this.tb_post_event_seconds.Location = new System.Drawing.Point(148, 52);
             this.tb_post_event_seconds.Name = "tb_post_event_seconds";
             this.tb_post_event_seconds.Size = new System.Drawing.Size(52, 19);
-            this.tb_post_event_seconds.TabIndex = 3;
+            this.tb_post_event_seconds.TabIndex = 5;
             this.tb_post_event_seconds.Text = global::FaceDetection.Properties.Settings.Default.seconds_after_event;
             // 
             // tb_pre_event_seconds
@@ -776,7 +776,7 @@
             this.tb_pre_event_seconds.Location = new System.Drawing.Point(148, 18);
             this.tb_pre_event_seconds.Name = "tb_pre_event_seconds";
             this.tb_pre_event_seconds.Size = new System.Drawing.Size(52, 19);
-            this.tb_pre_event_seconds.TabIndex = 3;
+            this.tb_pre_event_seconds.TabIndex = 2;
             this.tb_pre_event_seconds.Text = global::FaceDetection.Properties.Settings.Default.seconds_before_event;
             // 
             // lb_post_event
@@ -785,7 +785,7 @@
             this.lb_post_event.Location = new System.Drawing.Point(33, 55);
             this.lb_post_event.Name = "lb_post_event";
             this.lb_post_event.Size = new System.Drawing.Size(109, 12);
-            this.lb_post_event.TabIndex = 2;
+            this.lb_post_event.TabIndex = 4;
             this.lb_post_event.Text = "Record (after event)";
             // 
             // lb_pre_event
@@ -794,7 +794,7 @@
             this.lb_pre_event.Location = new System.Drawing.Point(23, 21);
             this.lb_pre_event.Name = "lb_pre_event";
             this.lb_pre_event.Size = new System.Drawing.Size(117, 12);
-            this.lb_pre_event.TabIndex = 2;
+            this.lb_pre_event.TabIndex = 1;
             this.lb_pre_event.Text = "Record (before event)";
             // 
             // label23_seconds
@@ -803,7 +803,7 @@
             this.label23_seconds.Location = new System.Drawing.Point(204, 55);
             this.label23_seconds.Name = "label23_seconds";
             this.label23_seconds.Size = new System.Drawing.Size(20, 12);
-            this.label23_seconds.TabIndex = 2;
+            this.label23_seconds.TabIndex = 6;
             this.label23_seconds.Text = "ms";
             // 
             // label22_seconds
@@ -812,7 +812,7 @@
             this.label22_seconds.Location = new System.Drawing.Point(204, 21);
             this.label22_seconds.Name = "label22_seconds";
             this.label22_seconds.Size = new System.Drawing.Size(20, 12);
-            this.label22_seconds.TabIndex = 2;
+            this.label22_seconds.TabIndex = 3;
             this.label22_seconds.Text = "ms";
             // 
             // groupBox8
@@ -824,7 +824,7 @@
             this.groupBox8.Location = new System.Drawing.Point(239, 71);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(234, 63);
-            this.groupBox8.TabIndex = 4;
+            this.groupBox8.TabIndex = 6;
             this.groupBox8.TabStop = false;
             // 
             // cb_backlight_off_idling
@@ -845,7 +845,7 @@
             this.tb_backlight_off_idling_delay_seconds.Location = new System.Drawing.Point(148, 22);
             this.tb_backlight_off_idling_delay_seconds.Name = "tb_backlight_off_idling_delay_seconds";
             this.tb_backlight_off_idling_delay_seconds.Size = new System.Drawing.Size(52, 19);
-            this.tb_backlight_off_idling_delay_seconds.TabIndex = 3;
+            this.tb_backlight_off_idling_delay_seconds.TabIndex = 2;
             this.tb_backlight_off_idling_delay_seconds.Text = global::FaceDetection.Properties.Settings.Default.backlight_offset_mins;
             // 
             // lb_backlight_off_idling_delay
@@ -855,7 +855,7 @@
             this.lb_backlight_off_idling_delay.Location = new System.Drawing.Point(80, 25);
             this.lb_backlight_off_idling_delay.Name = "lb_backlight_off_idling_delay";
             this.lb_backlight_off_idling_delay.Size = new System.Drawing.Size(62, 12);
-            this.lb_backlight_off_idling_delay.TabIndex = 2;
+            this.lb_backlight_off_idling_delay.TabIndex = 1;
             this.lb_backlight_off_idling_delay.Text = "After idling";
             // 
             // label20_minutes
@@ -864,7 +864,7 @@
             this.label20_minutes.Location = new System.Drawing.Point(206, 25);
             this.label20_minutes.Name = "label20_minutes";
             this.label20_minutes.Size = new System.Drawing.Size(20, 12);
-            this.label20_minutes.TabIndex = 2;
+            this.label20_minutes.TabIndex = 3;
             this.label20_minutes.Text = "ms";
             // 
             // groupBox11
@@ -877,10 +877,9 @@
             this.groupBox11.Location = new System.Drawing.Point(5, 169);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(502, 459);
-            this.groupBox11.TabIndex = 3;
+            this.groupBox11.TabIndex = 1;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Camera Number";
-            this.groupBox11.Enter += new System.EventHandler(this.GroupBox11_Enter);
             // 
             // button_settings_cancel
             // 
@@ -914,7 +913,7 @@
             this.cm_camera_number.Location = new System.Drawing.Point(105, 0);
             this.cm_camera_number.Name = "cm_camera_number";
             this.cm_camera_number.Size = new System.Drawing.Size(91, 20);
-            this.cm_camera_number.TabIndex = 1;
+            this.cm_camera_number.TabIndex = 0;
             this.cm_camera_number.Text = global::FaceDetection.Properties.Settings.Default.current_camera_index;
             // 
             // settingsUI
