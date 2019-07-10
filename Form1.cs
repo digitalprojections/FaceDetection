@@ -88,7 +88,8 @@ namespace FaceDetection
                 foreach (var face in faces)
                 {
                     imageFrame.Draw(face, new Bgr(Color.Red), 3); //the detected face(s) is highlighted here using a box that is drawn around it/them
-
+                    Debug.WriteLine(imageFrame);
+                    imgCamUser.Image = imageFrame;
                 }
             }
         }
