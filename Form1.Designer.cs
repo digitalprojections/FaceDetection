@@ -1,6 +1,6 @@
 ﻿namespace FaceDetection
 {
-    partial class mainForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.pbRecording = new System.Windows.Forms.PictureBox();
             this.closeButton = new System.Windows.Forms.Button();
@@ -39,9 +39,11 @@
             this.folderButton = new System.Windows.Forms.Button();
             this.imgCamUser = new Emgu.CV.UI.ImageBox();
             this.dateTimeLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.testing_params = new System.Windows.Forms.Label();
+            this.controlButtons = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCamUser)).BeginInit();
+            this.controlButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -75,76 +77,71 @@
             // 
             // closeButton
             // 
-            this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.closeButton.BackColor = System.Drawing.SystemColors.Control;
             this.closeButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closeButton.ImageIndex = 6;
             this.closeButton.ImageList = this.imageList1;
-            this.closeButton.Location = new System.Drawing.Point(598, 440);
+            this.closeButton.Location = new System.Drawing.Point(235, 3);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(52, 52);
             this.closeButton.TabIndex = 3;
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Visible = false;
+            this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.ShowButtons);
             // 
             // cameraButton
             // 
-            this.cameraButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cameraButton.BackColor = System.Drawing.SystemColors.Control;
             this.cameraButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.cameraButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cameraButton.ImageIndex = 10;
             this.cameraButton.ImageList = this.imageList1;
-            this.cameraButton.Location = new System.Drawing.Point(540, 440);
+            this.cameraButton.Location = new System.Drawing.Point(177, 3);
             this.cameraButton.Name = "cameraButton";
             this.cameraButton.Size = new System.Drawing.Size(52, 52);
             this.cameraButton.TabIndex = 3;
-            this.cameraButton.UseVisualStyleBackColor = true;
-            this.cameraButton.Visible = false;
+            this.cameraButton.UseVisualStyleBackColor = false;
             this.cameraButton.Click += new System.EventHandler(this.CameraButton_Click);
             // 
             // snapshotButton
             // 
-            this.snapshotButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.snapshotButton.BackColor = System.Drawing.SystemColors.Control;
             this.snapshotButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.snapshotButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.snapshotButton.ImageIndex = 5;
             this.snapshotButton.ImageList = this.imageList1;
-            this.snapshotButton.Location = new System.Drawing.Point(482, 440);
+            this.snapshotButton.Location = new System.Drawing.Point(119, 3);
             this.snapshotButton.Name = "snapshotButton";
             this.snapshotButton.Size = new System.Drawing.Size(52, 52);
             this.snapshotButton.TabIndex = 3;
-            this.snapshotButton.UseVisualStyleBackColor = true;
-            this.snapshotButton.Visible = false;
+            this.snapshotButton.UseVisualStyleBackColor = false;
             // 
             // settingsButton
             // 
-            this.settingsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.settingsButton.BackColor = System.Drawing.SystemColors.Control;
             this.settingsButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.settingsButton.ImageIndex = 9;
             this.settingsButton.ImageList = this.imageList1;
-            this.settingsButton.Location = new System.Drawing.Point(424, 440);
+            this.settingsButton.Location = new System.Drawing.Point(61, 3);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(52, 52);
             this.settingsButton.TabIndex = 3;
-            this.settingsButton.UseVisualStyleBackColor = true;
-            this.settingsButton.Visible = false;
+            this.settingsButton.UseVisualStyleBackColor = false;
             this.settingsButton.Click += new System.EventHandler(this.showSettings);
             // 
             // folderButton
             // 
-            this.folderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.folderButton.BackColor = System.Drawing.SystemColors.Control;
             this.folderButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.folderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.folderButton.ImageIndex = 7;
             this.folderButton.ImageList = this.imageList1;
-            this.folderButton.Location = new System.Drawing.Point(366, 440);
+            this.folderButton.Location = new System.Drawing.Point(3, 3);
             this.folderButton.Name = "folderButton";
             this.folderButton.Size = new System.Drawing.Size(52, 52);
             this.folderButton.TabIndex = 3;
-            this.folderButton.UseVisualStyleBackColor = true;
-            this.folderButton.Visible = false;
+            this.folderButton.UseVisualStyleBackColor = false;
             this.folderButton.Click += new System.EventHandler(this.openStoreLocation);
             // 
             // imgCamUser
@@ -153,7 +150,7 @@
             this.imgCamUser.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
             this.imgCamUser.Location = new System.Drawing.Point(0, 0);
             this.imgCamUser.Name = "imgCamUser";
-            this.imgCamUser.Size = new System.Drawing.Size(662, 504);
+            this.imgCamUser.Size = new System.Drawing.Size(624, 441);
             this.imgCamUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgCamUser.TabIndex = 2;
             this.imgCamUser.TabStop = false;
@@ -168,41 +165,59 @@
             this.dateTimeLabel.BackColor = System.Drawing.Color.Transparent;
             this.dateTimeLabel.Enabled = false;
             this.dateTimeLabel.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dateTimeLabel.Location = new System.Drawing.Point(12, 471);
+            this.dateTimeLabel.Location = new System.Drawing.Point(12, 408);
             this.dateTimeLabel.Name = "dateTimeLabel";
             this.dateTimeLabel.Size = new System.Drawing.Size(119, 24);
             this.dateTimeLabel.TabIndex = 5;
             this.dateTimeLabel.Text = "Date and time";
             this.dateTimeLabel.UseCompatibleTextRendering = true;
             // 
-            // label1
+            // testing_params
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(505, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(145, 12);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "currently used paramenters";
+            this.testing_params.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.testing_params.AutoSize = true;
+            this.testing_params.Location = new System.Drawing.Point(473, 9);
+            this.testing_params.Name = "testing_params";
+            this.testing_params.Size = new System.Drawing.Size(139, 12);
+            this.testing_params.TabIndex = 6;
+            this.testing_params.Text = "currently used parameters";
             // 
-            // mainForm
+            // controlButtons
+            // 
+            this.controlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.controlButtons.BackColor = System.Drawing.Color.Transparent;
+            this.controlButtons.Controls.Add(this.folderButton);
+            this.controlButtons.Controls.Add(this.settingsButton);
+            this.controlButtons.Controls.Add(this.snapshotButton);
+            this.controlButtons.Controls.Add(this.cameraButton);
+            this.controlButtons.Controls.Add(this.closeButton);
+            this.controlButtons.Location = new System.Drawing.Point(321, 370);
+            this.controlButtons.Name = "controlButtons";
+            this.controlButtons.Size = new System.Drawing.Size(291, 59);
+            this.controlButtons.TabIndex = 8;
+            this.controlButtons.Visible = false;
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(662, 504);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.controlButtons);
+            this.Controls.Add(this.testing_params);
             this.Controls.Add(this.dateTimeLabel);
             this.Controls.Add(this.pbRecording);
-            this.Controls.Add(this.closeButton);
-            this.Controls.Add(this.cameraButton);
-            this.Controls.Add(this.snapshotButton);
-            this.Controls.Add(this.settingsButton);
-            this.Controls.Add(this.folderButton);
             this.Controls.Add(this.imgCamUser);
-            this.Name = "mainForm";
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::FaceDetection.Properties.Settings.Default, "Location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Location = global::FaceDetection.Properties.Settings.Default.Location;
+            this.MinimumSize = new System.Drawing.Size(512, 412);
+            this.Name = "MainForm";
             this.Text = "UVC Camera Viewer";
+            this.LocationChanged += new System.EventHandler(this.lastPositionUpdate);
+            this.SizeChanged += new System.EventHandler(this.windowSizeUpdate);
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCamUser)).EndInit();
+            this.controlButtons.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,7 +234,8 @@
         private System.Windows.Forms.Button folderButton;
         private System.Windows.Forms.PictureBox pbRecording;
         private System.Windows.Forms.Label dateTimeLabel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label testing_params;
+        private System.Windows.Forms.FlowLayoutPanel controlButtons;
     }
 }
 

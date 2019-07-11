@@ -7,7 +7,7 @@
     <ProjectGuid>{B3AFA826-C1C2-4017-8BC7-CF7F62494F60}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>FaceDetection</RootNamespace>
-    <AssemblyName>FaceDetection</AssemblyName>
+    <AssemblyName>UVCCameraViewer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -56,6 +56,7 @@
     <Reference Include="Emgu.CV.World, Version=4.1.0.3420, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>packages\EMGU.CV.4.1.0.3420\lib\net35\Emgu.CV.World.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

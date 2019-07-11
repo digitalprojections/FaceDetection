@@ -19,13 +19,14 @@ using System.IO;
 
 namespace FaceDetection
 {
-    public partial class mainForm : Form
+    public partial class MainForm : Form
     {
         //User actions
         private Timer timer = new Timer();
         private static Timer capTimer = new Timer();
         private static Timer frameTimer = new Timer();
-
+        private static Label testparam;
+ 
         //User actions end
         settingsUI settingUI;
 
@@ -33,50 +34,54 @@ namespace FaceDetection
 
         private CascadeClassifier _cascadeClassifier;
         private Image<Bgr, Byte> imageFrame;
-
-        public mainForm(string[] vs)
+        private static MainForm mainForm;
+        public MainForm()
         {
-            this.Location = new Point(int.Parse(Properties.Settings.Default.display_pos_x), int.Parse(Properties.Settings.Default.display_pos_y));
-            this.Width = int.Parse(Properties.Settings.Default.view_width);
-            this.Height = int.Parse(Properties.Settings.Default.display_pos_y);
-
+            Debug.WriteLine(this.WindowState);
             settingUI = new settingsUI();
-            Debug.WriteLine(vs + " run parameters");
+            Debug.WriteLine(this.Location);
             InitializeComponent();
             _capture = new VideoCapture();
             
-            //img = new Image<Bgr, byte>(Application.StartupPath + "/faces.jpg");
+            /*
+             * img = new Image<Bgr, byte>(Application.StartupPath + "/faces.jpg");
+             */
             _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_alt.xml");
             imgCamUser.SendToBack();
+
             timer.Tick += new EventHandler(ShowButtons);
             capTimer.Tick += new EventHandler(CaptureFace);
-            capTimer.Interval = int.Parse(Properties.Settings.Default.face_rec_interval);//milliseconds
+            capTimer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
             capTimer.Start();
-            frameTimer.Interval = 1000/int.Parse(Properties.Settings.Default.frame_rate_fps);
+
+            frameTimer.Interval = 1000/ Decimal.ToInt32(Properties.Settings.Default.frame_rate_fps);
             frameTimer.Start();
             frameTimer.Tick += new EventHandler(ProcessFrame);
-            //Application.Idle += ProcessFrame;
+            
+            /*
+             * Application.Idle += ProcessFrame;
+             */
             pbRecording.BackColor = Color.Transparent;
             dateTimeLabel.BackColor = Color.Transparent;
+            controlButtons.Parent = imgCamUser;
+            testparam = testing_params;
+            
+            this.Location = new Point(Decimal.ToInt32(Properties.Settings.Default.display_pos_x), Decimal.ToInt32(Properties.Settings.Default.display_pos_y));
 
-            if (vs.Length > 0)
-            {
-                label1.Text =vs[1];
-            }   
+            this.Size = new Size(Decimal.ToInt32(Properties.Settings.Default.view_width), Decimal.ToInt32(Properties.Settings.Default.view_height));
+            this.TopMost = Properties.Settings.Default.window_on_top;
+            mainForm = this;
+            windowBorderStyle();
+
         }
         private void ProcessFrame(object sender, EventArgs eventArgs)
         {
-            imageFrame = _capture.QueryFrame().ToImage<Bgr, Byte>();
-            
-                
+                imageFrame = _capture.QueryFrame().ToImage<Bgr, Byte>();
                 imgCamUser.Image = imageFrame;
                 dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 dateTimeLabel.Parent = imgCamUser;
                 pbRecording.Parent = imgCamUser;
-            
-
-
-
+                //Debug.WriteLine(this.Size);            
         }
 
         private void CaptureFace(object sender, EventArgs eventArgs)
@@ -84,14 +89,27 @@ namespace FaceDetection
             if (imageFrame != null && Properties.Settings.Default.enable_face_recognition == true)
             {
                 var grayframe = imageFrame.Convert<Gray, Byte>();
-                var faces = _cascadeClassifier.DetectMultiScale(grayframe, 1.1, 10, Size.Empty); //the actual face detection happens here
+                var faces = _cascadeClassifier.DetectMultiScale(grayframe, 1.1, 10, Size.Empty); 
+                //the actual face detection happens here
                 foreach (var face in faces)
                 {
-                    imageFrame.Draw(face, new Bgr(Color.Red), 3); //the detected face(s) is highlighted here using a box that is drawn around it/them
-                    Debug.WriteLine(imageFrame);
+                    imageFrame.Draw(face, new Bgr(Color.Red), 3); 
+                    //the detected face(s) is highlighted here using a box that is drawn around it/them
+                    //Debug.WriteLine(imageFrame);
                     imgCamUser.Image = imageFrame;
                 }
             }
+        }
+        public static void handleParameters(IReadOnlyCollection<string> parameters)
+        {
+            Debug.WriteLine(parameters);
+            testparam.Text = String.Concat(parameters);
+
+        }
+        public static void handleParameters(String[] parameters)
+        {
+            //Debug.WriteLine(parameters);
+            testparam.Text = String.Concat(parameters);
         }
         public void ShowButtons(object sender, EventArgs eventArgs)
         {
@@ -102,22 +120,25 @@ namespace FaceDetection
             Debug.WriteLine(timer.ToString());
             if(folderButton.Visible==false)
             {
+                controlButtons.Visible = true;
+                /*
                 folderButton.Visible = true;
                 settingsButton.Visible = true;
                 snapshotButton.Visible = true;
                 cameraButton.Visible = true;
                 closeButton.Visible = true;
+    */
             }
             else
             {
-                folderButton.Visible = false;
+                controlButtons.Visible = false;
+      /*          folderButton.Visible = false;
                 settingsButton.Visible = false;
                 snapshotButton.Visible = false;
                 cameraButton.Visible = false;
                 closeButton.Visible = false;
-
+                */
             }
-
         }
         public void holdButton(object sender, MouseEventArgs eventArgs)
         {
@@ -125,7 +146,6 @@ namespace FaceDetection
             timer.Interval = 500;//Set it to 3000 for production
             timer.Start();
         }
-
         private void releaseButton(object sender, MouseEventArgs e)
         {
             if (timer.Enabled == true)
@@ -133,7 +153,6 @@ namespace FaceDetection
                 timer.Stop();
             }
         }
-
         private void CameraButton_Click(object sender, EventArgs e)
         {
             if (pbRecording.Visible == true)
@@ -147,7 +166,6 @@ namespace FaceDetection
             }
  
         }
-
         private void fullScreen(object sender, EventArgs eventArgs)
         {
             
@@ -161,8 +179,16 @@ namespace FaceDetection
                 else
                 {
                     this.TopMost = false;
-                    this.FormBorderStyle = FormBorderStyle.Sizable;
+
                     this.WindowState = FormWindowState.Normal;
+                if (Properties.Settings.Default.show_window_pane==true)
+                {
+                    this.FormBorderStyle = FormBorderStyle.Sizable;
+                }
+                else
+                {
+                    this.FormBorderStyle = FormBorderStyle.None;
+                }
                 }
             
             Debug.WriteLine(sender);
@@ -171,8 +197,7 @@ namespace FaceDetection
         private void showSettings(object sender, EventArgs e)
         {
             if(settingUI.Visible==false)
-            {
-                
+            {                
                 settingUI.ShowDialog();
             }
             else
@@ -194,11 +219,43 @@ namespace FaceDetection
         }
         public static void captureIntervalChange()
         {
-            capTimer.Interval = int.Parse(Properties.Settings.Default.face_rec_interval);//milliseconds
+            capTimer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
         }
         public static void frameRateChange()
         {
-            frameTimer.Interval = 1000/int.Parse(Properties.Settings.Default.frame_rate_fps);
+            frameTimer.Interval = 1000/ Decimal.ToInt32(Properties.Settings.Default.frame_rate_fps);
         }
+        public static void alwaysOnTop()
+        {
+            mainForm.TopMost = Properties.Settings.Default.window_on_top;
+        }
+        public static void windowBorderStyle()
+        {
+            if (Properties.Settings.Default.show_window_pane == true)
+            {
+                mainForm.FormBorderStyle = FormBorderStyle.Sizable;
+                mainForm.ControlBox = true;
+            }
+            else
+            {
+                mainForm.FormBorderStyle = FormBorderStyle.None;
+            }
+        }
+        private void lastPositionUpdate(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.display_pos_x = Convert.ToDecimal(this.Location.X);
+            Properties.Settings.Default.display_pos_y = Convert.ToDecimal(this.Location.Y);
+            Properties.Settings.Default.Save();
+            Debug.WriteLine(Properties.Settings.Default.display_pos_x);
+        }
+
+        private void windowSizeUpdate(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.view_width = Convert.ToDecimal(this.Width);
+            Properties.Settings.Default.view_height = Convert.ToDecimal(this.Height);
+            Properties.Settings.Default.Save();
+            Debug.WriteLine(Properties.Settings.Default.view_width);
+        }
+
     }
 }

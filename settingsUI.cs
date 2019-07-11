@@ -7,15 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.IO;
 
 
 namespace FaceDetection
 {
     public partial class settingsUI : Form
     {
+       
         public settingsUI()
         {
             InitializeComponent();
+            
+            
+
             /*cm_language.SelectedIndex = 0;
             tb_camera_count.Text = Properties.Settings.Default.camera_count.ToString();
             cb_all_cameras.Checked = Properties.Settings.Default.show_all_cams_simulteneously;
@@ -58,16 +64,43 @@ namespace FaceDetection
         private void save_and_close(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save();
+            
             this.Close();
         }
 
         private void captureIntervalChanged(object sender, EventArgs e)
         {
-            mainForm.captureIntervalChange();
+            MainForm.captureIntervalChange();
         }
         private void frameRateChanged(object sender, EventArgs e)
         {
-            mainForm.frameRateChange();
+            MainForm.frameRateChange();
+        }
+
+
+        private void changeStoreLocation(object sender, EventArgs e)
+        {
+            folderBrowserDialogStoreFolder.ShowNewFolderButton = true;
+            // Show the FolderBrowserDialog.  
+            DialogResult result = folderBrowserDialogStoreFolder.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                storePath.Text = folderBrowserDialogStoreFolder.SelectedPath;
+                Environment.SpecialFolder root = folderBrowserDialogStoreFolder.RootFolder;
+            }
+        }
+
+        private void alwaysOnTop(object sender, EventArgs e)
+        {
+            
+            Properties.Settings.Default.Save();
+            MainForm.alwaysOnTop();
+        }
+
+        private void windowBorderStyle(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Save();
+            MainForm.windowBorderStyle();
         }
     }
 }
