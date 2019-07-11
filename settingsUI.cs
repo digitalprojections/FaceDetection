@@ -114,5 +114,11 @@ namespace FaceDetection
             Properties.Settings.Default.Save();
             MainForm.currentDate();
         }
+
+        private void cameraNo(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Save();
+            MainForm.cameraNoShow();
+        }
     }
 }

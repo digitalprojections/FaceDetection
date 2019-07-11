@@ -41,6 +41,7 @@
             this.dateTimeLabel = new System.Windows.Forms.Label();
             this.testing_params = new System.Windows.Forms.Label();
             this.controlButtons = new System.Windows.Forms.FlowLayoutPanel();
+            this.camera_number = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCamUser)).BeginInit();
             this.controlButtons.SuspendLayout();
@@ -176,7 +177,7 @@
             // 
             this.testing_params.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.testing_params.AutoSize = true;
-            this.testing_params.Location = new System.Drawing.Point(473, 9);
+            this.testing_params.Location = new System.Drawing.Point(404, 9);
             this.testing_params.Name = "testing_params";
             this.testing_params.Size = new System.Drawing.Size(139, 12);
             this.testing_params.TabIndex = 6;
@@ -197,11 +198,24 @@
             this.controlButtons.TabIndex = 8;
             this.controlButtons.Visible = false;
             // 
+            // camera_number
+            // 
+            this.camera_number.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.camera_number.AutoSize = true;
+            this.camera_number.BackColor = System.Drawing.Color.Transparent;
+            this.camera_number.Font = new System.Drawing.Font("MS UI Gothic", 50F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.camera_number.Location = new System.Drawing.Point(549, 9);
+            this.camera_number.Name = "camera_number";
+            this.camera_number.Size = new System.Drawing.Size(63, 67);
+            this.camera_number.TabIndex = 9;
+            this.camera_number.Text = "4";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.camera_number);
             this.Controls.Add(this.controlButtons);
             this.Controls.Add(this.testing_params);
             this.Controls.Add(this.dateTimeLabel);
@@ -236,6 +250,7 @@
         private System.Windows.Forms.Label dateTimeLabel;
         private System.Windows.Forms.Label testing_params;
         private System.Windows.Forms.FlowLayoutPanel controlButtons;
+        private System.Windows.Forms.Label camera_number;
     }
 }
 

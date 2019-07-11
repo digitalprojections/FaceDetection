@@ -29,6 +29,7 @@ namespace FaceDetection
         private static PictureBox pb_recording;
         private static bool recording_on;
         private static Label current_date_text;
+        private static Label camera_num;
 
         //User actions end
         settingsUI settingUI;
@@ -78,6 +79,9 @@ namespace FaceDetection
             windowBorderStyle();
             current_date_text = dateTimeLabel;
             currentDate();
+            camera_num = camera_number;
+            camera_num.Parent = imgCamUser;
+            cameraNoShow();
 
         }
         private void ProcessFrame(object sender, EventArgs eventArgs)
@@ -201,6 +205,10 @@ namespace FaceDetection
         public static void currentDate()
         {
             current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
+        }
+        public static void cameraNoShow()
+        {
+            camera_num.Visible = Properties.Settings.Default.show_camera_no;
         }
         private void fullScreen(object sender, EventArgs eventArgs)
         {

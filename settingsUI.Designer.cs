@@ -512,6 +512,7 @@
             this.cb_show_camera_number.TabIndex = 8;
             this.cb_show_camera_number.Text = "Show camera number";
             this.cb_show_camera_number.UseVisualStyleBackColor = true;
+            this.cb_show_camera_number.CheckStateChanged += new System.EventHandler(this.cameraNo);
             // 
             // cb_dateandtime
             // 
