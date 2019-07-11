@@ -498,6 +498,7 @@
             this.cb_show_rec_icon.TabIndex = 9;
             this.cb_show_rec_icon.Text = "Show \'recording\' icon";
             this.cb_show_rec_icon.UseVisualStyleBackColor = true;
+            this.cb_show_rec_icon.CheckStateChanged += new System.EventHandler(this.recordingIcon);
             // 
             // cb_show_camera_number
             // 
@@ -524,6 +525,7 @@
             this.cb_dateandtime.TabIndex = 7;
             this.cb_dateandtime.Text = "Show current date and time";
             this.cb_dateandtime.UseVisualStyleBackColor = true;
+            this.cb_dateandtime.CheckStateChanged += new System.EventHandler(this.currentDate);
             // 
             // cb_window_pane
             // 

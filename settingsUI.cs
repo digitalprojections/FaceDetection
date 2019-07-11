@@ -102,5 +102,17 @@ namespace FaceDetection
             Properties.Settings.Default.Save();
             MainForm.windowBorderStyle();
         }
+
+        private void recordingIcon(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Save();
+            MainForm.CameraButton_Click();
+        }
+
+        private void currentDate(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Save();
+            MainForm.currentDate();
+        }
     }
 }

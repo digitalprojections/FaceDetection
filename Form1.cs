@@ -16,7 +16,6 @@ using System.Diagnostics;
 using System.Configuration;
 using System.IO;
 
-
 namespace FaceDetection
 {
     public partial class MainForm : Form
@@ -26,7 +25,11 @@ namespace FaceDetection
         private static Timer capTimer = new Timer();
         private static Timer frameTimer = new Timer();
         private static Label testparam;
- 
+        private static MainForm mainForm;
+        private static PictureBox pb_recording;
+        private static bool recording_on;
+        private static Label current_date_text;
+
         //User actions end
         settingsUI settingUI;
 
@@ -34,7 +37,7 @@ namespace FaceDetection
 
         private CascadeClassifier _cascadeClassifier;
         private Image<Bgr, Byte> imageFrame;
-        private static MainForm mainForm;
+        
         public MainForm()
         {
             Debug.WriteLine(this.WindowState);
@@ -57,10 +60,11 @@ namespace FaceDetection
             frameTimer.Interval = 1000/ Decimal.ToInt32(Properties.Settings.Default.frame_rate_fps);
             frameTimer.Start();
             frameTimer.Tick += new EventHandler(ProcessFrame);
-            
+
             /*
              * Application.Idle += ProcessFrame;
              */
+            pb_recording = pbRecording;
             pbRecording.BackColor = Color.Transparent;
             dateTimeLabel.BackColor = Color.Transparent;
             controlButtons.Parent = imgCamUser;
@@ -72,6 +76,8 @@ namespace FaceDetection
             this.TopMost = Properties.Settings.Default.window_on_top;
             mainForm = this;
             windowBorderStyle();
+            current_date_text = dateTimeLabel;
+            currentDate();
 
         }
         private void ProcessFrame(object sender, EventArgs eventArgs)
@@ -159,12 +165,42 @@ namespace FaceDetection
             {
                 pbRecording.Image = Properties.Resources.Pause_Normal_Red_icon;
                 pbRecording.Visible = false;
+                recording_on = false;
             }else
             {
-                pbRecording.Image = Properties.Resources.Record_Pressed_icon;
-                pbRecording.Visible = true;
+                if(Properties.Settings.Default.show_recording_icon == true) {
+                    pbRecording.Image = Properties.Resources.Record_Pressed_icon;
+                    pbRecording.Visible = true;
+                    recording_on = true;
+                }
+                
             }
  
+        }
+        public static void CameraButton_Click()
+        {
+            
+            if (pb_recording.Visible == true)
+            {
+                pb_recording.Image = Properties.Resources.Pause_Normal_Red_icon;
+                pb_recording.Visible = false;
+            }
+            else
+            {
+                //設定ウィンドウからの変更なので、recording_on かどうかによる表示する
+                //recording_onがfalseの場合は表示する必要はない
+                if (Properties.Settings.Default.show_recording_icon == true && recording_on == true)
+                {
+                    pb_recording.Image = Properties.Resources.Record_Pressed_icon;
+                    pb_recording.Visible = true;
+                }
+
+            }
+            Debug.WriteLine(pb_recording.Visible);
+        }
+        public static void currentDate()
+        {
+            current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
         }
         private void fullScreen(object sender, EventArgs eventArgs)
         {
