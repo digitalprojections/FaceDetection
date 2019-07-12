@@ -75,6 +75,7 @@ namespace FaceDetection
 
             this.Size = new Size(Decimal.ToInt32(Properties.Settings.Default.view_width), Decimal.ToInt32(Properties.Settings.Default.view_height));
             this.TopMost = Properties.Settings.Default.window_on_top;
+            Debug.WriteLine("TOPMOST 78");
             mainForm = this;
             windowBorderStyle();
             current_date_text = dateTimeLabel;
@@ -219,7 +220,8 @@ namespace FaceDetection
                     this.FormBorderStyle = FormBorderStyle.None;
                     this.WindowState = FormWindowState.Maximized;
                     imgCamUser.SizeMode = PictureBoxSizeMode.Zoom;
-                }
+                Debug.WriteLine("topmost 223");
+            }
                 else
                 {
                     this.TopMost = false;
@@ -241,8 +243,13 @@ namespace FaceDetection
         private void showSettings(object sender, EventArgs e)
         {
             if(settingUI.Visible==false)
-            {                
+            {
+                settingUI.TopMost = true;
+                this.TopMost = false;
+                Debug.WriteLine("topmost 251");
                 settingUI.ShowDialog();
+                
+                
             }
             else
             {
@@ -272,6 +279,7 @@ namespace FaceDetection
         public static void alwaysOnTop()
         {
             mainForm.TopMost = Properties.Settings.Default.window_on_top;
+            Debug.WriteLine("topmost 279");
         }
         public static void windowBorderStyle()
         {

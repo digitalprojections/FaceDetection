@@ -120,5 +120,13 @@ namespace FaceDetection
             Properties.Settings.Default.Save();
             MainForm.cameraNoShow();
         }
+
+        private void cameraSelected(object sender, EventArgs e)
+        {
+            /*
+             * Selected camera is set as the current in settings section. 
+             * The relevanty settings are only applied to the active camera
+             */
+        }
     }
 }

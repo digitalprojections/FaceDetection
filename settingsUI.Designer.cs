@@ -485,6 +485,7 @@
             this.numericUpDown1.Size = new System.Drawing.Size(35, 19);
             this.numericUpDown1.TabIndex = 10;
             this.numericUpDown1.Value = global::FaceDetection.Properties.Settings.Default.frame_rate_fps;
+            this.numericUpDown1.Leave += new System.EventHandler(this.frameRateChanged);
             // 
             // cb_show_rec_icon
             // 
@@ -600,6 +601,7 @@
             this.numericUpDown2.Size = new System.Drawing.Size(80, 19);
             this.numericUpDown2.TabIndex = 4;
             this.numericUpDown2.Value = global::FaceDetection.Properties.Settings.Default.face_rec_interval;
+            this.numericUpDown2.Leave += new System.EventHandler(this.captureIntervalChanged);
             // 
             // cb_face_recognition
             // 
@@ -1026,6 +1028,7 @@
             this.cm_camera_number.Name = "cm_camera_number";
             this.cm_camera_number.Size = new System.Drawing.Size(51, 20);
             this.cm_camera_number.TabIndex = 0;
+            this.cm_camera_number.SelectedValueChanged += new System.EventHandler(this.cameraSelected);
             // 
             // settingsUI
             // 

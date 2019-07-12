@@ -186,15 +186,15 @@
             // controlButtons
             // 
             this.controlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.controlButtons.BackColor = System.Drawing.Color.Transparent;
+            this.controlButtons.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.controlButtons.Controls.Add(this.folderButton);
             this.controlButtons.Controls.Add(this.settingsButton);
             this.controlButtons.Controls.Add(this.snapshotButton);
             this.controlButtons.Controls.Add(this.cameraButton);
             this.controlButtons.Controls.Add(this.closeButton);
-            this.controlButtons.Location = new System.Drawing.Point(321, 370);
+            this.controlButtons.Location = new System.Drawing.Point(320, 370);
             this.controlButtons.Name = "controlButtons";
-            this.controlButtons.Size = new System.Drawing.Size(291, 59);
+            this.controlButtons.Size = new System.Drawing.Size(292, 59);
             this.controlButtons.TabIndex = 8;
             this.controlButtons.Visible = false;
             // 
@@ -203,6 +203,7 @@
             this.camera_number.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.camera_number.AutoSize = true;
             this.camera_number.BackColor = System.Drawing.Color.Transparent;
+            this.camera_number.Enabled = false;
             this.camera_number.Font = new System.Drawing.Font("MS UI Gothic", 50F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.camera_number.Location = new System.Drawing.Point(549, 9);
             this.camera_number.Name = "camera_number";
