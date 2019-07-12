@@ -22,6 +22,9 @@ namespace FaceDetection
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new mainForm(vs));
+            IReadOnlyCollection<string> vs1 = (IReadOnlyCollection<string>) vs;
+
+            MainForm.handleParameters(vs1);
 
             SingleInstanceApplication.Run(new MainForm(), NewInstanceHandler);
         }
@@ -31,6 +34,7 @@ namespace FaceDetection
             //MessageBox.Show(uvc_param);
             e.BringToForeground = false;
             MainForm.handleParameters(uvc_param);
+            
         }
         public class SingleInstanceApplication : WindowsFormsApplicationBase
         {

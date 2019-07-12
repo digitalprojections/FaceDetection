@@ -20,36 +20,6 @@
     <Setting Name="erase_after" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">30</Value>
     </Setting>
-    <Setting Name="display_pos_x" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">16</Value>
-    </Setting>
-    <Setting Name="display_pos_y" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">16</Value>
-    </Setting>
-    <Setting Name="view_width" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">640</Value>
-    </Setting>
-    <Setting Name="view_height" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">480</Value>
-    </Setting>
-    <Setting Name="frame_rate_fps" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">8</Value>
-    </Setting>
-    <Setting Name="window_on_top" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="show_window_pane" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="show_current_datetime" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="show_camera_no" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="show_recording_icon" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="enable_face_recognition" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
@@ -103,6 +73,21 @@
     </Setting>
     <Setting Name="Location" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">10, 10</Value>
+    </Setting>
+    <Setting Name="window_on_top" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="show_window_pane" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="show_current_datetime" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="show_camera_no" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="show_recording_icon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

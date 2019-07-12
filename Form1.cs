@@ -30,9 +30,12 @@ namespace FaceDetection
         private static bool recording_on;
         private static Label current_date_text;
         private static Label camera_num;
+        private static FlowLayoutPanel controlBut;
 
         //User actions end
-        settingsUI settingUI;
+        
+
+        static settingsUI settingUI;
 
         private VideoCapture _capture;
 
@@ -58,7 +61,7 @@ namespace FaceDetection
             capTimer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
             capTimer.Start();
 
-            frameTimer.Interval = 1000/ Decimal.ToInt32(Properties.Settings.Default.frame_rate_fps);
+            frameTimer.Interval = 1000/ Decimal.ToInt32(Properties.Camera1.Default.frame_rate);
             frameTimer.Start();
             frameTimer.Tick += new EventHandler(ProcessFrame);
 
@@ -71,19 +74,18 @@ namespace FaceDetection
             controlButtons.Parent = imgCamUser;
             testparam = testing_params;
             
-            this.Location = new Point(Decimal.ToInt32(Properties.Settings.Default.display_pos_x), Decimal.ToInt32(Properties.Settings.Default.display_pos_y));
+            this.Location = new Point(Decimal.ToInt32(Properties.Camera1.Default.pos_x), Decimal.ToInt32(Properties.Camera1.Default.pos_y));
 
-            this.Size = new Size(Decimal.ToInt32(Properties.Settings.Default.view_width), Decimal.ToInt32(Properties.Settings.Default.view_height));
+            this.Size = new Size(Decimal.ToInt32(Properties.Camera1.Default.view_width), Decimal.ToInt32(Properties.Camera1.Default.view_height));
             this.TopMost = Properties.Settings.Default.window_on_top;
             Debug.WriteLine("TOPMOST 78");
             mainForm = this;
-            windowBorderStyle();
+            
             current_date_text = dateTimeLabel;
-            currentDate();
             camera_num = camera_number;
             camera_num.Parent = imgCamUser;
-            cameraNoShow();
-
+            controlBut = controlButtons;
+            formChangesApply();
         }
         private void ProcessFrame(object sender, EventArgs eventArgs)
         {
@@ -111,10 +113,162 @@ namespace FaceDetection
                 }
             }
         }
+        
         public static void handleParameters(IReadOnlyCollection<string> parameters)
         {
-            Debug.WriteLine(parameters);
-            testparam.Text = String.Concat(parameters);
+            //Debug.WriteLine(parameters);
+            
+            if (parameters.Count > 0)
+            {
+                //REMOVE THIS PIECE ON PRODUCTION
+                //||||||||||||||||||||||||||
+                try
+                {
+                    testparam.Text = String.Concat(parameters);
+                }
+                catch (Exception e)
+                {
+
+                }
+                //|||||||||||||||||||||||||||
+                    switch (parameters.ElementAt(1))
+                {
+                    case "-c":
+                        try
+                        {
+                            if (parameters.ElementAt(2) == "1")
+                            {
+                                if (settingUI.Visible == false)
+                                {
+                                    settingUI.TopMost = true; mainForm.TopMost = false; settingUI.ShowDialog();
+                                }                                
+                            }
+                            else
+                            {
+                                settingUI.Close();
+                                formChangesApply();
+                            }
+                        }catch(ArgumentOutOfRangeException e)
+                        {
+                            //MessageBox.Show("Incorrect or missing parameters");
+                        }
+                        break;
+                    case "-s":
+                        try
+                        {
+                            if (parameters.ElementAt(2) == "1")
+                            {
+                                /*
+                             SNAPSHOT CODE HERE    
+                             */
+                            }
+                        }
+                        catch (ArgumentOutOfRangeException e)
+                        {
+                            //MessageBox.Show("Incorrect or missing parameters");
+                        }
+                        break;
+                    case "-b":
+                        try
+                        {
+                            if (parameters.ElementAt(2) == "1")
+                            {
+                                /*
+                             SHOW CONTROL BUTTONS    
+                             */
+                                controlBut.Visible = true;
+                            }
+                            else if (parameters.ElementAt(2) == "0")
+                            {
+                                /*
+                             HIDE CONTROL BUTTONS    
+                             */
+                                controlBut.Visible = false;
+                            }
+                        }
+                        catch (ArgumentOutOfRangeException e)
+                        {
+                            //MessageBox.Show("Incorrect or missing parameters");
+                        }
+                        break;
+                    case "-d":
+                        try
+                        {
+                            if (parameters.ElementAt(2) == "1")
+                            {
+                                //FACE DETECTION
+                                if (parameters.Count>2)
+                                {
+                                    if (parameters.Count == 3)
+                                    {
+                                        //last one is interval
+                                        Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
+                                        //all cameras whose status is ON must start FACE RECOGNITION
+                                        formChangesApply();
+                                    }
+                                    else
+                                    {
+                                        switch (parameters.ElementAt(3))
+                                        {
+                                            //CAMERA NUMBER
+                                            case "1":
+                                                try
+                                                {
+                                                    Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
+                                                    Properties.Settings.Default.enable_face_recognition = true;
+                                                    formChangesApply();
+                                                }
+                                                catch (Exception e)
+                                                {
+                                                    System.Console.WriteLine(e.Message);
+                                                }
+                                                break;
+                                            case "2":
+                                                break;
+                                            case "3":
+                                                break;
+                                            case "4":
+
+                                                break;
+
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            else
+                            {
+                                //FACE OFF FOR CAMERA
+                                if (parameters.Count > 2)
+                                {
+                                    switch (parameters.ElementAt(3))
+                                    {
+                                        case "1":
+                                            Properties.Settings.Default.enable_face_recognition = false;
+                                            //STOP FACE RECOGNITION IF ON
+                                            formChangesApply();
+                                            break;
+                                        case "2":
+                                            break;
+                                        case "3":
+                                            break;
+                                        case "4":
+
+                                            break;
+                                        default:
+                                            Debug.WriteLine(parameters.ElementAt(3) + " Camera number");
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+                        catch (ArgumentOutOfRangeException e)
+                        {
+                            //MessageBox.Show("Incorrect or missing parameters");
+                        }
+                        break;
+                }
+            }
 
         }
         public static void handleParameters(String[] parameters)
@@ -182,35 +336,8 @@ namespace FaceDetection
             }
  
         }
-        public static void CameraButton_Click()
-        {
-            
-            if (pb_recording.Visible == true)
-            {
-                pb_recording.Image = Properties.Resources.Pause_Normal_Red_icon;
-                pb_recording.Visible = false;
-            }
-            else
-            {
-                //設定ウィンドウからの変更なので、recording_on かどうかによる表示する
-                //recording_onがfalseの場合は表示する必要はない
-                if (Properties.Settings.Default.show_recording_icon == true && recording_on == true)
-                {
-                    pb_recording.Image = Properties.Resources.Record_Pressed_icon;
-                    pb_recording.Visible = true;
-                }
-
-            }
-            Debug.WriteLine(pb_recording.Visible);
-        }
-        public static void currentDate()
-        {
-            current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
-        }
-        public static void cameraNoShow()
-        {
-            camera_num.Visible = Properties.Settings.Default.show_camera_no;
-        }
+        
+        
         private void fullScreen(object sender, EventArgs eventArgs)
         {
             
@@ -255,6 +382,9 @@ namespace FaceDetection
             {
             }
         }
+        
+
+
 
         private void openStoreLocation(object sender, EventArgs e)
         {
@@ -268,21 +398,14 @@ namespace FaceDetection
                 MessageBox.Show(ioe.Message);
             }
         }
-        public static void captureIntervalChange()
+        
+        public static void formChangesApply()
         {
+            camera_num.Visible = Properties.Settings.Default.show_camera_no;
+            current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
             capTimer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
-        }
-        public static void frameRateChange()
-        {
-            frameTimer.Interval = 1000/ Decimal.ToInt32(Properties.Settings.Default.frame_rate_fps);
-        }
-        public static void alwaysOnTop()
-        {
             mainForm.TopMost = Properties.Settings.Default.window_on_top;
-            Debug.WriteLine("topmost 279");
-        }
-        public static void windowBorderStyle()
-        {
+            frameTimer.Interval = 1000/ Decimal.ToInt32(Properties.Camera1.Default.frame_rate);
             if (Properties.Settings.Default.show_window_pane == true)
             {
                 mainForm.FormBorderStyle = FormBorderStyle.Sizable;
@@ -292,21 +415,39 @@ namespace FaceDetection
             {
                 mainForm.FormBorderStyle = FormBorderStyle.None;
             }
+            if (pb_recording.Visible == true)
+            {
+                pb_recording.Image = Properties.Resources.Pause_Normal_Red_icon;
+                pb_recording.Visible = false;
+            }
+            else
+            {
+                //設定ウィンドウからの変更なので、recording_on かどうかによる表示する
+                //recording_onがfalseの場合は表示する必要はない
+                if (Properties.Settings.Default.show_recording_icon == true && recording_on == true)
+                {
+                    pb_recording.Image = Properties.Resources.Record_Pressed_icon;
+                    pb_recording.Visible = true;
+                }
+
+            }
+            Debug.WriteLine(pb_recording.Visible);
         }
+        
         private void lastPositionUpdate(object sender, EventArgs e)
         {
-            Properties.Settings.Default.display_pos_x = Convert.ToDecimal(this.Location.X);
-            Properties.Settings.Default.display_pos_y = Convert.ToDecimal(this.Location.Y);
-            Properties.Settings.Default.Save();
-            Debug.WriteLine(Properties.Settings.Default.display_pos_x);
+            Properties.Camera1.Default.pos_x = Convert.ToDecimal(this.Location.X);
+            Properties.Camera1.Default.pos_y = Convert.ToDecimal(this.Location.Y);
+            Properties.Camera1.Default.Save();
+            Debug.WriteLine(Properties.Camera1.Default.pos_x);
         }
 
         private void windowSizeUpdate(object sender, EventArgs e)
         {
-            Properties.Settings.Default.view_width = Convert.ToDecimal(this.Width);
-            Properties.Settings.Default.view_height = Convert.ToDecimal(this.Height);
-            Properties.Settings.Default.Save();
-            Debug.WriteLine(Properties.Settings.Default.view_width);
+            Properties.Camera1.Default.view_width = Convert.ToDecimal(this.Width);
+            Properties.Camera1.Default.view_height = Convert.ToDecimal(this.Height);
+            Properties.Camera1.Default.Save();
+            Debug.WriteLine(Properties.Camera1.Default.view_width);
         }
 
     }

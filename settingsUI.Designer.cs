@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
@@ -46,17 +47,17 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9_fps = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownY = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownX = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown12 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownH = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownW = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownF = new System.Windows.Forms.NumericUpDown();
             this.cb_show_rec_icon = new System.Windows.Forms.CheckBox();
             this.cb_show_camera_number = new System.Windows.Forms.CheckBox();
             this.cb_dateandtime = new System.Windows.Forms.CheckBox();
@@ -99,6 +100,7 @@
             this.cb_backlight_on_recognition = new System.Windows.Forms.CheckBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.button_settings_cancel = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.button_settings_save = new System.Windows.Forms.Button();
             this.cm_camera_number = new System.Windows.Forms.ComboBox();
             this.folderBrowserDialogStoreFolder = new System.Windows.Forms.FolderBrowserDialog();
@@ -108,13 +110,13 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCamCount)).BeginInit();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownX)).BeginInit();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownW)).BeginInit();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownF)).BeginInit();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.groupBox6.SuspendLayout();
@@ -328,50 +330,49 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.numericUpDown10);
-            this.groupBox4.Controls.Add(this.numericUpDown9);
+            this.groupBox4.Controls.Add(this.numericUpDownY);
+            this.groupBox4.Controls.Add(this.numericUpDownX);
             this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Location = new System.Drawing.Point(6, 18);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(104, 65);
+            this.groupBox4.Size = new System.Drawing.Size(111, 65);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Position";
             // 
-            // numericUpDown10
+            // numericUpDownY
             // 
-            this.numericUpDown10.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "display_pos_y", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown10.Location = new System.Drawing.Point(63, 38);
-            this.numericUpDown10.Maximum = new decimal(new int[] {
+            
+           this.numericUpDownY.Location = new System.Drawing.Point(64, 38);
+            this.numericUpDownY.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.numericUpDown10.Name = "numericUpDown10";
-            this.numericUpDown10.Size = new System.Drawing.Size(42, 19);
-            this.numericUpDown10.TabIndex = 7;
-            this.numericUpDown10.Value = global::FaceDetection.Properties.Settings.Default.display_pos_y;
+            this.numericUpDownY.Name = "numericUpDownY";
+            this.numericUpDownY.Size = new System.Drawing.Size(42, 19);
+            this.numericUpDownY.TabIndex = 7;
+            this.numericUpDownY.Value = global::FaceDetection.Properties.Camera1.Default.pos_y;
             // 
-            // numericUpDown9
+            // numericUpDownX
             // 
-            this.numericUpDown9.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "display_pos_x", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown9.Location = new System.Drawing.Point(62, 12);
-            this.numericUpDown9.Maximum = new decimal(new int[] {
+            this.numericUpDownX.Location = new System.Drawing.Point(63, 12);
+            this.numericUpDownX.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.numericUpDown9.Name = "numericUpDown9";
-            this.numericUpDown9.Size = new System.Drawing.Size(42, 19);
-            this.numericUpDown9.TabIndex = 7;
-            this.numericUpDown9.Value = global::FaceDetection.Properties.Settings.Default.display_pos_x;
+            this.numericUpDownX.Name = "numericUpDownX";
+            this.numericUpDownX.Size = new System.Drawing.Size(42, 19);
+            this.numericUpDownX.TabIndex = 7;
+            this.numericUpDownX.Value = global::FaceDetection.Properties.Camera1.Default.pos_x;
             // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(45, 40);
+            this.label5.Location = new System.Drawing.Point(46, 41);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(12, 12);
             this.label5.TabIndex = 2;
@@ -381,7 +382,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(45, 15);
+            this.label4.Location = new System.Drawing.Point(45, 14);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(12, 12);
             this.label4.TabIndex = 0;
@@ -389,44 +390,42 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.numericUpDown12);
-            this.groupBox5.Controls.Add(this.numericUpDown11);
+            this.groupBox5.Controls.Add(this.numericUpDownH);
+            this.groupBox5.Controls.Add(this.numericUpDownW);
             this.groupBox5.Controls.Add(this.label6);
             this.groupBox5.Controls.Add(this.label7);
-            this.groupBox5.Location = new System.Drawing.Point(116, 18);
+            this.groupBox5.Location = new System.Drawing.Point(128, 18);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(104, 65);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Size";
             // 
-            // numericUpDown12
+            // numericUpDownH
             // 
-            this.numericUpDown12.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "view_height", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown12.Location = new System.Drawing.Point(61, 41);
-            this.numericUpDown12.Maximum = new decimal(new int[] {
+            this.numericUpDownH.Location = new System.Drawing.Point(61, 41);
+            this.numericUpDownH.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.numericUpDown12.Name = "numericUpDown12";
-            this.numericUpDown12.Size = new System.Drawing.Size(42, 19);
-            this.numericUpDown12.TabIndex = 7;
-            this.numericUpDown12.Value = global::FaceDetection.Properties.Settings.Default.view_height;
+            this.numericUpDownH.Name = "numericUpDownH";
+            this.numericUpDownH.Size = new System.Drawing.Size(42, 19);
+            this.numericUpDownH.TabIndex = 7;
+            this.numericUpDownH.Value = global::FaceDetection.Properties.Camera1.Default.view_height;
             // 
-            // numericUpDown11
+            // numericUpDownW
             // 
-            this.numericUpDown11.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "view_width", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown11.Location = new System.Drawing.Point(61, 12);
-            this.numericUpDown11.Maximum = new decimal(new int[] {
+            this.numericUpDownW.Location = new System.Drawing.Point(61, 12);
+            this.numericUpDownW.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.numericUpDown11.Name = "numericUpDown11";
-            this.numericUpDown11.Size = new System.Drawing.Size(42, 19);
-            this.numericUpDown11.TabIndex = 7;
-            this.numericUpDown11.Value = global::FaceDetection.Properties.Settings.Default.view_width;
+            this.numericUpDownW.Name = "numericUpDownW";
+            this.numericUpDownW.Size = new System.Drawing.Size(42, 19);
+            this.numericUpDownW.TabIndex = 7;
+            this.numericUpDownW.Value = global::FaceDetection.Properties.Camera1.Default.view_width;
             // 
             // label6
             // 
@@ -450,7 +449,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.numericUpDown1);
+            this.groupBox3.Controls.Add(this.numericUpDownF);
             this.groupBox3.Controls.Add(this.groupBox5);
             this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Controls.Add(this.label9_fps);
@@ -467,95 +466,83 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "View Settings";
             // 
-            // numericUpDown1
+            // numericUpDownF
             // 
-            this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "frame_rate_fps", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown1.Location = new System.Drawing.Point(78, 90);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.numericUpDownF.Location = new System.Drawing.Point(78, 90);
+            this.numericUpDownF.Maximum = new decimal(new int[] {
             60,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.numericUpDownF.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(35, 19);
-            this.numericUpDown1.TabIndex = 10;
-            this.numericUpDown1.Value = global::FaceDetection.Properties.Settings.Default.frame_rate_fps;
-            this.numericUpDown1.Leave += new System.EventHandler(this.frameRateChanged);
+            this.numericUpDownF.Name = "numericUpDownF";
+            this.numericUpDownF.Size = new System.Drawing.Size(35, 19);
+            this.numericUpDownF.TabIndex = 10;
+            this.numericUpDownF.Value = global::FaceDetection.Properties.Camera1.Default.frame_rate;
             // 
             // cb_show_rec_icon
             // 
             this.cb_show_rec_icon.AutoSize = true;
             this.cb_show_rec_icon.Checked = global::FaceDetection.Properties.Settings.Default.show_recording_icon;
             this.cb_show_rec_icon.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_show_rec_icon.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "show_recording_icon", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_show_rec_icon.Location = new System.Drawing.Point(259, 103);
             this.cb_show_rec_icon.Name = "cb_show_rec_icon";
             this.cb_show_rec_icon.Size = new System.Drawing.Size(131, 16);
             this.cb_show_rec_icon.TabIndex = 9;
             this.cb_show_rec_icon.Text = "Show \'recording\' icon";
             this.cb_show_rec_icon.UseVisualStyleBackColor = true;
-            this.cb_show_rec_icon.CheckStateChanged += new System.EventHandler(this.recordingIcon);
             // 
             // cb_show_camera_number
             // 
             this.cb_show_camera_number.AutoSize = true;
             this.cb_show_camera_number.Checked = global::FaceDetection.Properties.Settings.Default.show_camera_no;
             this.cb_show_camera_number.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_show_camera_number.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "show_camera_no", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_show_camera_number.Location = new System.Drawing.Point(259, 83);
             this.cb_show_camera_number.Name = "cb_show_camera_number";
             this.cb_show_camera_number.Size = new System.Drawing.Size(133, 16);
             this.cb_show_camera_number.TabIndex = 8;
             this.cb_show_camera_number.Text = "Show camera number";
             this.cb_show_camera_number.UseVisualStyleBackColor = true;
-            this.cb_show_camera_number.CheckStateChanged += new System.EventHandler(this.cameraNo);
             // 
             // cb_dateandtime
             // 
             this.cb_dateandtime.AutoSize = true;
             this.cb_dateandtime.Checked = global::FaceDetection.Properties.Settings.Default.show_current_datetime;
             this.cb_dateandtime.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_dateandtime.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "show_current_datetime", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_dateandtime.Location = new System.Drawing.Point(259, 61);
             this.cb_dateandtime.Name = "cb_dateandtime";
             this.cb_dateandtime.Size = new System.Drawing.Size(165, 16);
             this.cb_dateandtime.TabIndex = 7;
             this.cb_dateandtime.Text = "Show current date and time";
             this.cb_dateandtime.UseVisualStyleBackColor = true;
-            this.cb_dateandtime.CheckStateChanged += new System.EventHandler(this.currentDate);
             // 
             // cb_window_pane
             // 
             this.cb_window_pane.AutoSize = true;
             this.cb_window_pane.Checked = global::FaceDetection.Properties.Settings.Default.show_window_pane;
             this.cb_window_pane.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_window_pane.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "show_window_pane", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_window_pane.Location = new System.Drawing.Point(259, 39);
             this.cb_window_pane.Name = "cb_window_pane";
             this.cb_window_pane.Size = new System.Drawing.Size(120, 16);
             this.cb_window_pane.TabIndex = 6;
             this.cb_window_pane.Text = "Show window pane";
             this.cb_window_pane.UseVisualStyleBackColor = true;
-            this.cb_window_pane.CheckStateChanged += new System.EventHandler(this.windowBorderStyle);
             // 
             // cb_always_on_top
             // 
             this.cb_always_on_top.AutoSize = true;
             this.cb_always_on_top.Checked = global::FaceDetection.Properties.Settings.Default.window_on_top;
             this.cb_always_on_top.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_always_on_top.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "window_on_top", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_always_on_top.Location = new System.Drawing.Point(259, 18);
             this.cb_always_on_top.Name = "cb_always_on_top";
             this.cb_always_on_top.Size = new System.Drawing.Size(97, 16);
             this.cb_always_on_top.TabIndex = 5;
             this.cb_always_on_top.Text = "Always on top";
             this.cb_always_on_top.UseVisualStyleBackColor = true;
-            this.cb_always_on_top.CheckStateChanged += new System.EventHandler(this.alwaysOnTop);
             // 
             // lb_manual_recording_time
             // 
@@ -601,7 +588,6 @@
             this.numericUpDown2.Size = new System.Drawing.Size(80, 19);
             this.numericUpDown2.TabIndex = 4;
             this.numericUpDown2.Value = global::FaceDetection.Properties.Settings.Default.face_rec_interval;
-            this.numericUpDown2.Leave += new System.EventHandler(this.captureIntervalChanged);
             // 
             // cb_face_recognition
             // 
@@ -984,6 +970,7 @@
             // groupBox11
             // 
             this.groupBox11.Controls.Add(this.button_settings_cancel);
+            this.groupBox11.Controls.Add(this.button2);
             this.groupBox11.Controls.Add(this.button_settings_save);
             this.groupBox11.Controls.Add(this.groupBox3);
             this.groupBox11.Controls.Add(this.groupBox6);
@@ -1004,6 +991,16 @@
             this.button_settings_cancel.Text = "Cancel";
             this.button_settings_cancel.UseVisualStyleBackColor = true;
             this.button_settings_cancel.Click += new System.EventHandler(this.closeSettings);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(255, 427);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Apply";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.applyChanges);
             // 
             // button_settings_save
             // 
@@ -1028,7 +1025,7 @@
             this.cm_camera_number.Name = "cm_camera_number";
             this.cm_camera_number.Size = new System.Drawing.Size(51, 20);
             this.cm_camera_number.TabIndex = 0;
-            this.cm_camera_number.SelectedValueChanged += new System.EventHandler(this.cameraSelected);
+            this.cm_camera_number.SelectedIndexChanged += new System.EventHandler(this.cameraSelected);
             // 
             // settingsUI
             // 
@@ -1051,15 +1048,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCamCount)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownX)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownW)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownF)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
@@ -1145,18 +1142,19 @@
         private System.Windows.Forms.CheckBox cb_operator_capture;
         private System.Windows.Forms.NumericUpDown numericUpDownCamCount;
         private System.Windows.Forms.NumericUpDown nud_erase_old;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDownF;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.NumericUpDown numericUpDown4;
         private System.Windows.Forms.NumericUpDown numericUpDown5;
-        private System.Windows.Forms.NumericUpDown numericUpDown10;
-        private System.Windows.Forms.NumericUpDown numericUpDown9;
-        private System.Windows.Forms.NumericUpDown numericUpDown12;
-        private System.Windows.Forms.NumericUpDown numericUpDown11;
+        private System.Windows.Forms.NumericUpDown numericUpDownY;
+        private System.Windows.Forms.NumericUpDown numericUpDownX;
+        private System.Windows.Forms.NumericUpDown numericUpDownH;
+        private System.Windows.Forms.NumericUpDown numericUpDownW;
         private System.Windows.Forms.NumericUpDown numericUpDown6;
         private System.Windows.Forms.NumericUpDown numericUpDown8;
         private System.Windows.Forms.NumericUpDown numericUpDown7;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialogStoreFolder;
+        private System.Windows.Forms.Button button2;
     }
 }

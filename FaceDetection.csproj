@@ -73,6 +73,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Camera1.Designer.cs">
+      <DependentUpon>Camera1.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\Camera4.Designer.cs">
+      <DependentUpon>Camera4.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\Camera3.Designer.cs">
+      <DependentUpon>Camera3.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\Camera2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Camera2.settings</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -113,6 +133,22 @@
     <EmbeddedResource Include="settingsUI.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\Camera1.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Camera1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Camera4.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Camera4.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Camera3.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Camera3.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Camera2.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Camera2.Designer.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

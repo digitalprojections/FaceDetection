@@ -97,126 +97,6 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("16")]
-        public decimal display_pos_x {
-            get {
-                return ((decimal)(this["display_pos_x"]));
-            }
-            set {
-                this["display_pos_x"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("16")]
-        public decimal display_pos_y {
-            get {
-                return ((decimal)(this["display_pos_y"]));
-            }
-            set {
-                this["display_pos_y"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("640")]
-        public decimal view_width {
-            get {
-                return ((decimal)(this["view_width"]));
-            }
-            set {
-                this["view_width"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("480")]
-        public decimal view_height {
-            get {
-                return ((decimal)(this["view_height"]));
-            }
-            set {
-                this["view_height"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8")]
-        public decimal frame_rate_fps {
-            get {
-                return ((decimal)(this["frame_rate_fps"]));
-            }
-            set {
-                this["frame_rate_fps"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool window_on_top {
-            get {
-                return ((bool)(this["window_on_top"]));
-            }
-            set {
-                this["window_on_top"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool show_window_pane {
-            get {
-                return ((bool)(this["show_window_pane"]));
-            }
-            set {
-                this["show_window_pane"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool show_current_datetime {
-            get {
-                return ((bool)(this["show_current_datetime"]));
-            }
-            set {
-                this["show_current_datetime"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool show_camera_no {
-            get {
-                return ((bool)(this["show_camera_no"]));
-            }
-            set {
-                this["show_camera_no"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool show_recording_icon {
-            get {
-                return ((bool)(this["show_recording_icon"]));
-            }
-            set {
-                this["show_recording_icon"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool enable_face_recognition {
             get {
@@ -428,6 +308,66 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["Location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool window_on_top {
+            get {
+                return ((bool)(this["window_on_top"]));
+            }
+            set {
+                this["window_on_top"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool show_window_pane {
+            get {
+                return ((bool)(this["show_window_pane"]));
+            }
+            set {
+                this["show_window_pane"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool show_current_datetime {
+            get {
+                return ((bool)(this["show_current_datetime"]));
+            }
+            set {
+                this["show_current_datetime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool show_camera_no {
+            get {
+                return ((bool)(this["show_camera_no"]));
+            }
+            set {
+                this["show_camera_no"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool show_recording_icon {
+            get {
+                return ((bool)(this["show_recording_icon"]));
+            }
+            set {
+                this["show_recording_icon"] = value;
             }
         }
     }
