@@ -33,13 +33,9 @@ namespace FaceDetection
         private static FlowLayoutPanel controlBut;
 
         //User actions end
-        
-
         static settingsUI settingUI;
-
         private VideoCapture _capture;
         private VideoWriter videoWriter;
-
         private CascadeClassifier _cascadeClassifier;
         private CascadeClassifier _cascadeClassifierEyes;
         private CascadeClassifier _cascadeClassifierBody;
@@ -48,6 +44,9 @@ namespace FaceDetection
         Backend[] backends = CvInvoke.WriterBackends;
         int backend_idx = 0;
         int fourcc;
+
+        private OpenH264Lib.Encoder encoder;
+
         String fileName = String.Format("c:\video_out.mp4");
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
@@ -60,7 +59,7 @@ namespace FaceDetection
                 settingUI = new settingsUI();
                 _capture = new VideoCapture();
                 fourcc = VideoWriter.Fourcc('H', '2', '6', '4');
-                  _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_alt2.xml");
+                _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_alt2.xml");
                 _cascadeClassifierEyes = new CascadeClassifier(Application.StartupPath + "/haarcascade_righteye_2splits.xml");
                 _cascadeClassifierBody = new CascadeClassifier(Application.StartupPath + "/haarcascade_fullbody.xml");
                 timer.Tick += new EventHandler(ShowButtons);
@@ -77,8 +76,6 @@ namespace FaceDetection
              * img = new Image<Bgr, byte>(Application.StartupPath + "/faces.jpg");
              */
             imgCamUser.SendToBack();
-
-
 
             /*
              * Application.Idle += ProcessFrame;
@@ -115,6 +112,10 @@ namespace FaceDetection
                     break;
                 }
             }
+
+            encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win64.dll");
+            encoder.Setup(640, 480, 5000000, 10, 2.0f, (data,length,frameType));
+
             //videoWriter = new VideoWriter(fileName, backend_idx, fourcc, 30, new Size(480, 640), true);
             Debug.WriteLine(Convert.ToInt32(Properties.Camera1.Default.view_width) + " WIDTH");   
         }
@@ -202,7 +203,7 @@ namespace FaceDetection
                     }
                     catch (Exception e)
                     {
-
+                        Debug.WriteLine(e.Message);
                     }
                     //|||||||||||||||||||||||||||
                     switch (parameters.ElementAt(1))
@@ -230,6 +231,7 @@ namespace FaceDetection
                             catch (ArgumentOutOfRangeException e)
                             {
                                 //MessageBox.Show("Incorrect or missing parameters");
+                                Debug.WriteLine(e.Message);
                             }
                             break;
                         case "-s":
@@ -244,6 +246,7 @@ namespace FaceDetection
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
+                                Debug.WriteLine(e.Message);
                                 //MessageBox.Show("Incorrect or missing parameters");
                             }
                             break;
@@ -267,6 +270,7 @@ namespace FaceDetection
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
+                                Debug.WriteLine(e.Message);
                                 //MessageBox.Show("Incorrect or missing parameters");
                             }
                             break;
@@ -343,6 +347,7 @@ namespace FaceDetection
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
+                                Debug.WriteLine(e.Message);
                                 //MessageBox.Show("Incorrect or missing parameters");
                             }
                             break;
@@ -375,6 +380,7 @@ namespace FaceDetection
                         }
                         catch (ArgumentOutOfRangeException e)
                         {
+                            Debug.WriteLine(e.Message);
                             //MessageBox.Show("Incorrect or missing parameters");
                         }
                         break;
@@ -501,6 +507,8 @@ namespace FaceDetection
             try
             {
                 Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
+
                 Process.Start(Properties.Settings.Default.video_file_location);
 
             }catch(IOException ioe)
@@ -562,9 +570,10 @@ namespace FaceDetection
 
         private void SnapShot(object sender, EventArgs e)
         {
+            Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot");
             var timage = imaMat.ToImage<Bgr, Byte>();
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
-            timage.Save(Properties.Settings.Default.video_file_location + "/Camera/"+imgdate+".jpeg");
+            timage.Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate+".jpeg");
             timage.Dispose();
         }
     }

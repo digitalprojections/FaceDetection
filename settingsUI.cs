@@ -68,6 +68,7 @@ namespace FaceDetection
             {
                 storePath.Text = folderBrowserDialogStoreFolder.SelectedPath;
                 Environment.SpecialFolder root = folderBrowserDialogStoreFolder.RootFolder;
+                Debug.WriteLine(storePath);
             }
         }
                 
