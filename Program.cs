@@ -24,9 +24,17 @@ namespace FaceDetection
             //Application.Run(new mainForm(vs));
             IReadOnlyCollection<string> vs1 = (IReadOnlyCollection<string>) vs;
 
-            MainForm.handleParameters(vs1);
-
-            SingleInstanceApplication.Run(new MainForm(), NewInstanceHandler);
+            //
+            FormCollection forms = Application.OpenForms;
+            if (forms["MainForm"]!=null)
+            {
+                MainForm.handleParameters(vs1);
+            }
+            else
+            {
+                SingleInstanceApplication.Run(new MainForm(vs1), NewInstanceHandler);
+                MainForm.handleParameters(vs1);
+            }
         }
         public static void NewInstanceHandler(object sender, StartupNextInstanceEventArgs e)
         {

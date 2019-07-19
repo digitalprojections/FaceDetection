@@ -116,6 +116,7 @@
             this.snapshotButton.Size = new System.Drawing.Size(52, 52);
             this.snapshotButton.TabIndex = 3;
             this.snapshotButton.UseVisualStyleBackColor = false;
+            this.snapshotButton.Click += new System.EventHandler(this.SnapShot);
             // 
             // settingsButton
             // 

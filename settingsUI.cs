@@ -27,7 +27,7 @@ namespace FaceDetection
             /*CANCEL
              * 変更は捨てられる
             */
-            this.Close();
+            this.Hide();
         }
 
         private void save_and_close(object sender, EventArgs e)
@@ -40,7 +40,7 @@ namespace FaceDetection
 
             
             MainForm.formChangesApply();
-            this.Close();
+            this.Hide();
         }
 
         private void applyChanges(object sender, EventArgs e)
