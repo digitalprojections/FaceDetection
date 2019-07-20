@@ -15,6 +15,7 @@ using Emgu.CV.CvEnum;
 using System.Diagnostics;
 using System.Configuration;
 using System.IO;
+using System.Threading;
 
 namespace FaceDetection
 {    
@@ -41,9 +42,11 @@ namespace FaceDetection
         private CascadeClassifier _cascadeClassifierBody;
         private Image<Bgr, Byte> imageFrame;
         private Mat imaMat;
-        Backend[] backends = CvInvoke.WriterBackends;
-        int backend_idx = 0;
-        int fourcc;
+        
+        int index = 0;
+        static GitHub.secile.Video.UsbCamera camera;
+        Thread t;
+        static Form camform;
 
         private OpenH264Lib.Encoder encoder;
 
@@ -58,7 +61,7 @@ namespace FaceDetection
             {
                 settingUI = new settingsUI();
                 _capture = new VideoCapture();
-                fourcc = VideoWriter.Fourcc('H', '2', '6', '4');
+                
                 _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_alt2.xml");
                 _cascadeClassifierEyes = new CascadeClassifier(Application.StartupPath + "/haarcascade_righteye_2splits.xml");
                 _cascadeClassifierBody = new CascadeClassifier(Application.StartupPath + "/haarcascade_fullbody.xml");
@@ -117,7 +120,12 @@ namespace FaceDetection
             encoder.Setup(640, 480, 5000000, 10, 2.0f, (data,length,frameType));
 
             //videoWriter = new VideoWriter(fileName, backend_idx, fourcc, 30, new Size(480, 640), true);
-            Debug.WriteLine(Convert.ToInt32(Properties.Camera1.Default.view_width) + " WIDTH");   
+            Debug.WriteLine(Convert.ToInt32(Properties.Camera1.Default.view_width) + " WIDTH");
+            camform = this;
+            camera = new GitHub.secile.Video.UsbCamera(0, new Size(640, 480));
+            camera.Start();
+            t = new Thread(new ThreadStart(VideoRecording));
+            t.Start();
         }
         private void ProcessFrame(object sender, EventArgs eventArgs)
         {
@@ -452,8 +460,42 @@ namespace FaceDetection
             }
  
         }
-        
-        
+        private static void VideoRecording()
+        {
+
+
+
+            var path = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"/test.mp4";
+            var encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win32.dll");
+            var fps = 10.0f;
+            var writer = new GitHub.secile.Avi.AviWriter(System.IO.File.OpenWrite(path), "H264", camera.Size.Width, camera.Size.Height, fps);
+
+            OpenH264Lib.Encoder.OnEncodeCallback onEncode = (data, length, frameType) =>
+            {
+                var keyFrame = (frameType == OpenH264Lib.Encoder.FrameType.IDR) || (frameType == OpenH264Lib.Encoder.FrameType.I);
+                writer.AddImage(data);
+            };
+            int bps = 1000000;
+            encoder.Setup(camera.Size.Width, camera.Size.Height, bps, fps, 2.0f, onEncode);
+
+            var timer = new System.Timers.Timer(1000 / fps) { SynchronizingObject = camform };
+
+            timer.Elapsed += (s, ev) => {
+                var bmp = camera.GetBitmap();
+                
+                encoder.Encode(bmp);
+            };
+
+            timer.Start();
+
+            camform.FormClosing += (s, ev) => {
+                camera.Release();
+                timer.Stop();
+                writer.Close();
+                encoder.Dispose();
+            };
+        }
+
         private void fullScreen(object sender, EventArgs eventArgs)
         {
             
