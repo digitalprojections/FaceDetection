@@ -370,5 +370,41 @@ namespace FaceDetection.Properties {
                 this["show_recording_icon"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int selectedCaptureMethod {
+            get {
+                return ((int)(this["selectedCaptureMethod"]));
+            }
+            set {
+                this["selectedCaptureMethod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("en-US")]
+        public string culture {
+            get {
+                return ((string)(this["culture"]));
+            }
+            set {
+                this["culture"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ggg {
+            get {
+                return ((string)(this["ggg"]));
+            }
+            set {
+                this["ggg"] = value;
+            }
+        }
     }
 }

@@ -22,9 +22,9 @@ namespace FaceDetection
     public partial class MainForm : Form
     {
         //User actions
-        private Timer timer = new Timer();
-        private static Timer capTimer = new Timer();
-        private static Timer frameTimer = new Timer();
+        private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+        private static System.Windows.Forms.Timer capTimer = new System.Windows.Forms.Timer();
+        private static System.Windows.Forms.Timer frameTimer = new System.Windows.Forms.Timer();
         private static Label testparam;
         private static MainForm mainForm;
         private static PictureBox pb_recording;
@@ -40,7 +40,7 @@ namespace FaceDetection
         private CascadeClassifier _cascadeClassifier;
         private CascadeClassifier _cascadeClassifierEyes;
         private CascadeClassifier _cascadeClassifierBody;
-        private Image<Bgr, Byte> imageFrame;
+        private static Image<Bgr, Byte> imageFrame;
         private Mat imaMat;
         
         int index = 0;
@@ -106,46 +106,70 @@ namespace FaceDetection
                 handleParameters(vs);
             }
 
-            foreach(Backend be in backends)
-            {
-                if (be.Name.Equals("MSMF"))
-                {
-                    backend_idx = be.ID;
-                    Debug.WriteLine("BACK END" + backend_idx + ", BE: "+ be.Name);
-                    break;
-                }
-            }
+            
 
-            encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win64.dll");
-            encoder.Setup(640, 480, 5000000, 10, 2.0f, (data,length,frameType));
-
+           
+            
             //videoWriter = new VideoWriter(fileName, backend_idx, fourcc, 30, new Size(480, 640), true);
             Debug.WriteLine(Convert.ToInt32(Properties.Camera1.Default.view_width) + " WIDTH");
             camform = this;
             camera = new GitHub.secile.Video.UsbCamera(0, new Size(640, 480));
             camera.Start();
-            t = new Thread(new ThreadStart(VideoRecording));
-            t.Start();
+            //t = new Thread(new ThreadStart(VideoRecording));
+            //t.Start();
+         
+            var path = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"/test.mp4";
+            var encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win32.dll");
+            var fps = 10.0f;
+            var writer = new GitHub.secile.Avi.AviWriter(System.IO.File.OpenWrite(path), "H264", camera.Size.Width, camera.Size.Height, fps);
+
+            OpenH264Lib.Encoder.OnEncodeCallback onEncode = (data, length, frameType) =>
+            {
+                
+                var keyFrame = (frameType == OpenH264Lib.Encoder.FrameType.IDR) || (frameType == OpenH264Lib.Encoder.FrameType.I);
+                writer.AddImage(data);
+            };
+            int bps = 1000000;
+            encoder.Setup(camera.Size.Width, camera.Size.Height, bps, fps, 2.0f, onEncode);
+
+            camform.FormClosing += (s, ev) => {
+                Debug.WriteLine("recording ended");
+                camera.Release();
+                frameTimer.Stop();
+                writer.Close();
+                encoder.Dispose();
+            };
         }
         private void ProcessFrame(object sender, EventArgs eventArgs)
         {
+
             try
             {
-                imaMat = _capture.QueryFrame();
-                
-                imageFrame = imaMat.ToImage<Bgr, Byte>();
+                //imaMat = _capture.QueryFrame();                
+                //imageFrame = imaMat.ToImage<Bgr, Byte>();
+                var bmp = camera.GetBitmap();
+                imageFrame = new Image<Bgr, Byte>(bmp);
                 imgCamUser.Image = imageFrame;
                 dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 dateTimeLabel.Parent = imgCamUser;
                 pbRecording.Parent = imgCamUser;
-                
+
                 //videoWriter.Write(imaMat);
+                //var bmp = camera.GetBitmap();
+                
+                //encoder.Encode(bmp);
+
             }
             catch(NullReferenceException e)
             {
-                Debug.WriteLine(e.Message);
+                ////Debug.WriteLine(e.Message);
             }
             //Debug.WriteLine(this.Size);     
+            
+        }
+        private static void VideoRecording()
+        {
+
             
         }
 
@@ -211,7 +235,7 @@ namespace FaceDetection
                     }
                     catch (Exception e)
                     {
-                        Debug.WriteLine(e.Message);
+                        ////Debug.WriteLine(e.Message);
                     }
                     //|||||||||||||||||||||||||||
                     switch (parameters.ElementAt(1))
@@ -239,7 +263,7 @@ namespace FaceDetection
                             catch (ArgumentOutOfRangeException e)
                             {
                                 //MessageBox.Show("Incorrect or missing parameters");
-                                Debug.WriteLine(e.Message);
+                                //Debug.WriteLine(e.Message);
                             }
                             break;
                         case "-s":
@@ -254,7 +278,7 @@ namespace FaceDetection
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
-                                Debug.WriteLine(e.Message);
+                                //Debug.WriteLine(e.Message);
                                 //MessageBox.Show("Incorrect or missing parameters");
                             }
                             break;
@@ -278,7 +302,7 @@ namespace FaceDetection
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
-                                Debug.WriteLine(e.Message);
+                                //Debug.WriteLine(e.Message);
                                 //MessageBox.Show("Incorrect or missing parameters");
                             }
                             break;
@@ -355,7 +379,7 @@ namespace FaceDetection
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
-                                Debug.WriteLine(e.Message);
+                                //Debug.WriteLine(e.Message);
                                 //MessageBox.Show("Incorrect or missing parameters");
                             }
                             break;
@@ -382,13 +406,13 @@ namespace FaceDetection
                             }
                             else
                             {
-                                settingUI.Close();
+                                settingUI.Hide();
                                 formChangesApply();
                             }
                         }
                         catch (ArgumentOutOfRangeException e)
                         {
-                            Debug.WriteLine(e.Message);
+                            //Debug.WriteLine(e.Message);
                             //MessageBox.Show("Incorrect or missing parameters");
                         }
                         break;
@@ -460,42 +484,7 @@ namespace FaceDetection
             }
  
         }
-        private static void VideoRecording()
-        {
-
-
-
-            var path = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"/test.mp4";
-            var encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win32.dll");
-            var fps = 10.0f;
-            var writer = new GitHub.secile.Avi.AviWriter(System.IO.File.OpenWrite(path), "H264", camera.Size.Width, camera.Size.Height, fps);
-
-            OpenH264Lib.Encoder.OnEncodeCallback onEncode = (data, length, frameType) =>
-            {
-                var keyFrame = (frameType == OpenH264Lib.Encoder.FrameType.IDR) || (frameType == OpenH264Lib.Encoder.FrameType.I);
-                writer.AddImage(data);
-            };
-            int bps = 1000000;
-            encoder.Setup(camera.Size.Width, camera.Size.Height, bps, fps, 2.0f, onEncode);
-
-            var timer = new System.Timers.Timer(1000 / fps) { SynchronizingObject = camform };
-
-            timer.Elapsed += (s, ev) => {
-                var bmp = camera.GetBitmap();
-                
-                encoder.Encode(bmp);
-            };
-
-            timer.Start();
-
-            camform.FormClosing += (s, ev) => {
-                camera.Release();
-                timer.Stop();
-                writer.Close();
-                encoder.Dispose();
-            };
-        }
-
+        
         private void fullScreen(object sender, EventArgs eventArgs)
         {
             
@@ -532,7 +521,7 @@ namespace FaceDetection
                 settingUI.TopMost = true;
                 this.TopMost = false;
                 Debug.WriteLine("topmost 251");
-                settingUI.ShowDialog();
+                settingUI.Show();
                 
                 
             }

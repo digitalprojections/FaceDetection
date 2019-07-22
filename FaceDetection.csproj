@@ -122,6 +122,18 @@
     <Compile Include="UserControl1.Designer.cs">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="settingsUI.en-US.resx">
+      <DependentUpon>settingsUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="settingsUI.ja-JP.resx">
+      <DependentUpon>settingsUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCAMVUE.en-US.resx">
+      <DependentUpon>UCAMVUE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCAMVUE.ja-JP.resx">
+      <DependentUpon>UCAMVUE.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UCAMVUE.resx">
       <DependentUpon>UCAMVUE.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
