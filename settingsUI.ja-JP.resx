@@ -124,9 +124,6 @@
   <data name="label1.Text" xml:space="preserve">
     <value>表示言語</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>保存先設定</value>
-  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 12</value>
   </data>
@@ -145,8 +142,8 @@
   <data name="label2.Text" xml:space="preserve">
     <value>保存先フォルダ</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>撮影設定</value>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>保存先設定</value>
   </data>
   <data name="label25_pcs.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 12</value>
@@ -166,6 +163,9 @@
   <data name="cb_all_cameras.Text" xml:space="preserve">
     <value>全てのカメラ映像を同時に表示する</value>
   </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>撮影設定</value>
+  </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>-2, 92</value>
   </data>
@@ -174,9 +174,6 @@
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>フレームレート</value>
-  </data>
-  <data name="groupBox4.Text" xml:space="preserve">
-    <value>表示位置</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>21, 40</value>
@@ -196,8 +193,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>X座標</value>
   </data>
-  <data name="groupBox5.Text" xml:space="preserve">
-    <value>表示サイズ</value>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>表示位置</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 12</value>
@@ -211,8 +208,8 @@
   <data name="label7.Text" xml:space="preserve">
     <value>幅</value>
   </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>表示設定</value>
+  <data name="groupBox5.Text" xml:space="preserve">
+    <value>表示サイズ</value>
   </data>
   <data name="cb_show_rec_icon.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 16</value>
@@ -243,6 +240,9 @@
   </data>
   <data name="cb_always_on_top.Text" xml:space="preserve">
     <value>最前面表示</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>表示設定</value>
   </data>
   <data name="lb_manual_recording_time.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 12</value>
@@ -276,9 +276,6 @@
   </data>
   <data name="label10.Text" xml:space="preserve">
     <value>顔認識の実施周期</value>
-  </data>
-  <data name="groupBox6.Text" xml:space="preserve">
-    <value>機能設定</value>
   </data>
   <data name="cb_record_upon_start.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 16</value>
@@ -391,14 +388,17 @@
   <data name="cb_backlight_on_recognition.Text" xml:space="preserve">
     <value>顔認識時にバックライトを ON する</value>
   </data>
-  <data name="groupBox11.Text" xml:space="preserve">
-    <value>カメラ番号</value>
+  <data name="groupBox6.Text" xml:space="preserve">
+    <value>機能設定</value>
   </data>
   <data name="button_settings_cancel.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
   <data name="button2.Text" xml:space="preserve">
     <value>実施</value>
+  </data>
+  <data name="groupBox11.Text" xml:space="preserve">
+    <value>カメラ番号</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>設定</value>
