@@ -14,6 +14,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,7 +27,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -98,12 +98,12 @@
       <DependentUpon>Camera2.settings</DependentUpon>
     </Compile>
     <Compile Include="RiffFile.cs" />
-    <Compile Include="UCAMVUE.cs">
+    <Compile Include="uvcMain.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="UCAMVUE.Designer.cs">
-      <DependentUpon>UCAMVUE.cs</DependentUpon>
+    <Compile Include="uvcMain.Designer.cs">
+      <DependentUpon>uvcMain.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Program.cs" />
@@ -128,14 +128,14 @@
     <EmbeddedResource Include="settingsUI.ja-JP.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UCAMVUE.en-US.resx">
-      <DependentUpon>UCAMVUE.cs</DependentUpon>
+    <EmbeddedResource Include="uvcMain.en-US.resx">
+      <DependentUpon>uvcMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UCAMVUE.ja-JP.resx">
-      <DependentUpon>UCAMVUE.cs</DependentUpon>
+    <EmbeddedResource Include="uvcMain.ja-JP.resx">
+      <DependentUpon>uvcMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UCAMVUE.resx">
-      <DependentUpon>UCAMVUE.cs</DependentUpon>
+    <EmbeddedResource Include="uvcMain.resx">
+      <DependentUpon>uvcMain.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
