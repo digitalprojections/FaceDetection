@@ -1,6 +1,4 @@
-﻿#define DEBUG
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,13 +17,10 @@ using System.Configuration;
 using System.IO;
 using System.Threading;
 
-
-
 namespace FaceDetection
-{
+{    
     public partial class MainForm : Form
     {
-        
         //User actions
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private static System.Windows.Forms.Timer capTimer = new System.Windows.Forms.Timer();
@@ -111,16 +106,14 @@ namespace FaceDetection
                 handleParameters(vs);
             }
 
+            
 
-
-
-
+           
+            
             //videoWriter = new VideoWriter(fileName, backend_idx, fourcc, 30, new Size(480, 640), true);
-#if DEBUG
             Debug.WriteLine(Convert.ToInt32(Properties.Camera1.Default.view_width) + " WIDTH");
-#endif
             camform = this;
-            camera = new GitHub.secile.Video.UsbCamera(0, new Size(1024, 768));//XGA
+            camera = new GitHub.secile.Video.UsbCamera(0, new Size(640, 480));
             camera.Start();
             //t = new Thread(new ThreadStart(VideoRecording));
             //t.Start();
@@ -140,10 +133,7 @@ namespace FaceDetection
             encoder.Setup(camera.Size.Width, camera.Size.Height, bps, fps, 2.0f, onEncode);
 
             camform.FormClosing += (s, ev) => {
-#if DEBUG
                 Debug.WriteLine("recording ended");
-#endif
-
                 camera.Release();
                 frameTimer.Stop();
                 writer.Close();
@@ -592,22 +582,15 @@ namespace FaceDetection
             }
             Debug.WriteLine(pb_recording.Visible);
         }
-        /*
-         ウィンドウの位置が変更しました
-         
-             */
+        
         private void lastPositionUpdate(object sender, EventArgs e)
         {
             Properties.Camera1.Default.pos_x = Convert.ToDecimal(this.Location.X);
             Properties.Camera1.Default.pos_y = Convert.ToDecimal(this.Location.Y);
             Properties.Camera1.Default.Save();
-#if DEBUG
             Debug.WriteLine(Properties.Camera1.Default.pos_x);
-#endif
         }
-        /*
-         ウィンドウのサイズ変更イベント
-             */
+
         private void windowSizeUpdate(object sender, EventArgs e)
         {
             Properties.Camera1.Default.view_width = Convert.ToDecimal(this.Width);
@@ -616,9 +599,6 @@ namespace FaceDetection
             Debug.WriteLine(Properties.Camera1.Default.view_width);
         }
 
-        /*
-         写真撮影
-             */
         private void SnapShot(object sender, EventArgs e)
         {
             Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot");
