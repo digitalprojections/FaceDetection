@@ -37,6 +37,8 @@ namespace FaceDetection
         static settingsUI settingUI;
         private VideoCapture _capture;
         private VideoWriter videoWriter;
+        private CameraCaptureUI captureUI = new CameraCaptureUI();
+
         private CascadeClassifier _cascadeClassifier;
         private CascadeClassifier _cascadeClassifierEyes;
         private CascadeClassifier _cascadeClassifierBody;
@@ -48,7 +50,7 @@ namespace FaceDetection
         Thread t;
         static Form camform;
 
-        private OpenH264Lib.Encoder encoder;
+        //private OpenH264Lib.Encoder encoder;
 
         String fileName = String.Format("c:\video_out.mp4");
         public MainForm(IReadOnlyCollection<string> vs = null)
@@ -66,7 +68,7 @@ namespace FaceDetection
                 _cascadeClassifierEyes = new CascadeClassifier(Application.StartupPath + "/haarcascade_righteye_2splits.xml");
                 _cascadeClassifierBody = new CascadeClassifier(Application.StartupPath + "/haarcascade_fullbody.xml");
                 timer.Tick += new EventHandler(ShowButtons);
-                capTimer.Tick += new EventHandler(CaptureFace);
+                //capTimer.Tick += new EventHandler(CaptureFace);
                 capTimer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
                 capTimer.Start();
 
@@ -113,31 +115,32 @@ namespace FaceDetection
             //videoWriter = new VideoWriter(fileName, backend_idx, fourcc, 30, new Size(480, 640), true);
             Debug.WriteLine(Convert.ToInt32(Properties.Camera1.Default.view_width) + " WIDTH");
             camform = this;
-            camera = new GitHub.secile.Video.UsbCamera(0, new Size(640, 480));
-            camera.Start();
+            //camera = new GitHub.secile.Video.UsbCamera(0, new Size(640, 480));
+            //camera.Start();
             //t = new Thread(new ThreadStart(VideoRecording));
             //t.Start();
          
             var path = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"/test.mp4";
-            var encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win32.dll");
+            //var encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win32.dll");
             var fps = 10.0f;
-            var writer = new GitHub.secile.Avi.AviWriter(System.IO.File.OpenWrite(path), "H264", camera.Size.Width, camera.Size.Height, fps);
+            //var writer = new GitHub.secile.Avi.AviWriter(System.IO.File.OpenWrite(path), "H264", camera.Size.Width, camera.Size.Height, fps);
 
-            OpenH264Lib.Encoder.OnEncodeCallback onEncode = (data, length, frameType) =>
+            /*OpenH264Lib.Encoder.OnEncodeCallback onEncode = (data, length, frameType) =>
             {
                 
                 var keyFrame = (frameType == OpenH264Lib.Encoder.FrameType.IDR) || (frameType == OpenH264Lib.Encoder.FrameType.I);
                 writer.AddImage(data);
             };
+            */
             int bps = 1000000;
-            encoder.Setup(camera.Size.Width, camera.Size.Height, bps, fps, 2.0f, onEncode);
+            //encoder.Setup(camera.Size.Width, camera.Size.Height, bps, fps, 2.0f, onEncode);
 
             camform.FormClosing += (s, ev) => {
                 Debug.WriteLine("recording ended");
-                camera.Release();
+                //camera.Release();
                 frameTimer.Stop();
-                writer.Close();
-                encoder.Dispose();
+                //writer.Close();
+                //encoder.Dispose();
             };
         }
         private void ProcessFrame(object sender, EventArgs eventArgs)
@@ -386,38 +389,40 @@ namespace FaceDetection
                     }
                 }
             }
-            else 
+            else if(parameters.Count>=0)//!!!!!!!!!!!! temporary error check, fix it to Count > 0
             {
-                switch (parameters.ElementAt(0))
-                {
-                    case "-c":
-                        try
-                        {
-                            if (parameters.ElementAt(1) == "1")
+                
+                    switch (parameters.ElementAt(0))
+                    {
+                        case "-c":
+                            try
                             {
-                                if (settingUI!=null && settingUI.Visible == false)
+                                if (parameters.ElementAt(1) == "1")
                                 {
-                                    settingUI.TopMost = true;
-                                    mainForm.TopMost = false;
-                                    settingUI.Show();
-                                    Debug.WriteLine(settingUI);
-                                    Debug.WriteLine(mainForm);
+                                    if (settingUI != null && settingUI.Visible == false)
+                                    {
+                                        settingUI.TopMost = true;
+                                        mainForm.TopMost = false;
+                                        settingUI.Show();
+                                        Debug.WriteLine(settingUI);
+                                        Debug.WriteLine(mainForm);
+                                    }
+                                }
+                                else
+                                {
+                                    settingUI.Hide();
+                                    formChangesApply();
                                 }
                             }
-                            else
+                            catch (ArgumentOutOfRangeException e)
                             {
-                                settingUI.Hide();
-                                formChangesApply();
+                                //Debug.WriteLine(e.Message);
+                                //MessageBox.Show("Incorrect or missing parameters");
                             }
-                        }
-                        catch (ArgumentOutOfRangeException e)
-                        {
-                            //Debug.WriteLine(e.Message);
-                            //MessageBox.Show("Incorrect or missing parameters");
-                        }
-                        break;
-                }
-                }
+                            break;
+                    }
+                
+            }
         }
         public static void handleParameters(String[] parameters)
         {

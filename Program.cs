@@ -20,7 +20,7 @@ namespace FaceDetection
 
         static void Main(string[] vs)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("en");
+            //System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("en");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -50,6 +50,9 @@ namespace FaceDetection
 
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
+            /*
+             Atomにインストールすると、OpenH264Lib.dllが見つからない問題を改善出来るか確認の為に
+             */
             using (var str = Assembly.GetExecutingAssembly().GetManifestResourceStream("FaceDetection.OpenH264Lib.dll"))
             {
                 byte[] assemblyData = new byte[str.Length];
