@@ -57,6 +57,9 @@
       <HintPath>packages\EMGU.CV.4.1.0.3420\lib\net35\Emgu.CV.World.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="OpenH264Lib">
+      <HintPath>.\OpenH264Lib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
@@ -205,6 +208,7 @@
     <None Include="Resources\Record-Pressed-icon.png" />
     <None Include="Resources\Pause-Normal-Red-icon.png" />
     <None Include="Resources\Record-Pressed-icon1.png" />
+    <Content Include="OpenH264Lib.dll" />
     <Content Include="vcruntime140.dll" />
   </ItemGroup>
   <ItemGroup>

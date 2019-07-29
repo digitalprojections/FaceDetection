@@ -37,7 +37,6 @@ namespace FaceDetection
         static settingsUI settingUI;
         private VideoCapture _capture;
         private VideoWriter videoWriter;
-        private CameraCaptureUI captureUI = new CameraCaptureUI();
 
         private CascadeClassifier _cascadeClassifier;
         private CascadeClassifier _cascadeClassifierEyes;
