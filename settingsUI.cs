@@ -39,7 +39,7 @@ namespace FaceDetection
             Properties.Camera3.Default.Save();
             Properties.Camera4.Default.Save();
 
-            
+
             MainForm.FormChangesApply();
             this.Hide();
         }
@@ -56,7 +56,7 @@ namespace FaceDetection
             Properties.Camera3.Default.Save();
             Properties.Camera4.Default.Save();
 
-            
+
             MainForm.FormChangesApply();
         }
 

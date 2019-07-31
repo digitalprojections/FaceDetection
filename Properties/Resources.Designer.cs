@@ -63,6 +63,26 @@ namespace FaceDetection.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap camera_icon {
+            get {
+                object obj = ResourceManager.GetObject("camera-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap delete_1_icon {
+            get {
+                object obj = ResourceManager.GetObject("delete-1-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Pause_Normal_Red_icon {
             get {
                 object obj = ResourceManager.GetObject("Pause-Normal-Red-icon", resourceCulture);
@@ -86,6 +106,36 @@ namespace FaceDetection.Properties {
         internal static System.Drawing.Bitmap Record_Pressed_icon1 {
             get {
                 object obj = ResourceManager.GetObject("Record-Pressed-icon1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Settings_2_icon {
+            get {
+                object obj = ResourceManager.GetObject("Settings-2-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap video_camera_icon {
+            get {
+                object obj = ResourceManager.GetObject("video-camera-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Windows_icon {
+            get {
+                object obj = ResourceManager.GetObject("Windows-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

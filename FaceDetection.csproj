@@ -60,7 +60,8 @@
       <HintPath>packages\EMGU.CV.4.1.0.3420\lib\net35\Emgu.CV.World.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="OpenH264Lib">
+    <Reference Include="OpenH264Lib, Version=1.0.7146.25373, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>.\OpenH264Lib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -79,6 +80,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainForm.cs" />
+    <Compile Include="MAINFORM2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MAINFORM2.Designer.cs">
+      <DependentUpon>MAINFORM2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Camera1.Designer.cs">
       <DependentUpon>Camera1.settings</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -99,14 +107,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Camera2.settings</DependentUpon>
     </Compile>
-    <Compile Include="UCAMVUE.cs">
-      <SubType>Form</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="UCAMVUE.Designer.cs">
-      <DependentUpon>UCAMVUE.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenControls.cs" />
@@ -122,21 +122,14 @@
     <Compile Include="UserControl1.Designer.cs">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="MAINFORM2.resx">
+      <DependentUpon>MAINFORM2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="settingsUI.en-US.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="settingsUI.ja-JP.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCAMVUE.en-US.resx">
-      <DependentUpon>UCAMVUE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCAMVUE.ja-JP.resx">
-      <DependentUpon>UCAMVUE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCAMVUE.resx">
-      <DependentUpon>UCAMVUE.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -209,6 +202,11 @@
     <None Include="Resources\Pause-Normal-Red-icon.png" />
     <None Include="Resources\Record-Pressed-icon1.png" />
     <Content Include="OpenH264Lib.dll" />
+    <None Include="Resources\Settings-2-icon.png" />
+    <None Include="Resources\camera-icon.png" />
+    <None Include="Resources\video-camera-icon.png" />
+    <None Include="Resources\delete-1-icon.png" />
+    <None Include="Resources\Windows-icon.png" />
     <Content Include="vcruntime140.dll" />
   </ItemGroup>
   <ItemGroup>
@@ -222,17 +220,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="WIA">
-      <Guid>{94A0E92D-43C0-494E-AC29-FD45948A5221}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\EMGU.CV.4.1.0.3420\build\EMGU.CV.targets" Condition="Exists('packages\EMGU.CV.4.1.0.3420\build\EMGU.CV.targets')" />
