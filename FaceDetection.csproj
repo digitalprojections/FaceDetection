@@ -49,6 +49,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Remote|AnyCPU'">
+    <OutputPath>bin\Remote\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Emgu.CV.UI, Version=4.1.0.3420, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>packages\EMGU.CV.4.1.0.3420\lib\net35\Emgu.CV.UI.dll</HintPath>
@@ -76,7 +79,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AviWriter.cs" />
     <Compile Include="Properties\Camera1.Designer.cs">
       <DependentUpon>Camera1.settings</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -97,7 +99,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Camera2.settings</DependentUpon>
     </Compile>
-    <Compile Include="RiffFile.cs" />
     <Compile Include="UCAMVUE.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -115,7 +116,6 @@
     <Compile Include="settingsUI.Designer.cs">
       <DependentUpon>settingsUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="UsbCamera.cs" />
     <Compile Include="UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -222,6 +222,17 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WIA">
+      <Guid>{94A0E92D-43C0-494E-AC29-FD45948A5221}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\EMGU.CV.4.1.0.3420\build\EMGU.CV.targets" Condition="Exists('packages\EMGU.CV.4.1.0.3420\build\EMGU.CV.targets')" />

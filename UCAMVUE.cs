@@ -22,9 +22,9 @@ namespace FaceDetection
     public partial class MainForm : Form
     {
         //User actions
-        private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-        private static System.Windows.Forms.Timer capTimer = new System.Windows.Forms.Timer();
-        private static System.Windows.Forms.Timer frameTimer = new System.Windows.Forms.Timer();
+        private readonly System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+        private readonly System.Windows.Forms.Timer capTimer = new System.Windows.Forms.Timer();
+        private readonly System.Windows.Forms.Timer frameTimer = new System.Windows.Forms.Timer();
         private static Label testparam;
         private static MainForm mainForm;
         private static PictureBox pb_recording;
@@ -35,23 +35,24 @@ namespace FaceDetection
 
         //User actions end
         static settingsUI settingUI;
-        private VideoCapture _capture;
-        private VideoWriter videoWriter;
+        private readonly VideoCapture _capture;
+        //private readonly VideoWriter videoWriter;
 
-        private CascadeClassifier _cascadeClassifier;
-        private CascadeClassifier _cascadeClassifierEyes;
-        private CascadeClassifier _cascadeClassifierBody;
+        private readonly CascadeClassifier _cascadeClassifier;
+        private readonly CascadeClassifier _cascadeClassifierEyes;
+        private readonly CascadeClassifier _cascadeClassifierBody;
         private static Image<Bgr, Byte> imageFrame;
         private Mat imaMat;
+        private Bitmap bitmap;
         
-        int index = 0;
-        static GitHub.secile.Video.UsbCamera camera;
-        Thread t;
+        //private readonly int index = 0;
+        //static GitHub.secile.Video.UsbCamera camera;
+        //readonly Thread t;
         static Form camform;
 
         //private OpenH264Lib.Encoder encoder;
 
-        String fileName = String.Format("c:\video_out.mp4");
+        //readonly String fileName = String.Format("c:\video_out.mp4");
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             //Debug.WriteLine(this.WindowState);
@@ -60,6 +61,7 @@ namespace FaceDetection
             
             if (settingUI == null)
             {
+                
                 settingUI = new settingsUI();
                 _capture = new VideoCapture();
                 
@@ -67,7 +69,7 @@ namespace FaceDetection
                 _cascadeClassifierEyes = new CascadeClassifier(Application.StartupPath + "/haarcascade_righteye_2splits.xml");
                 _cascadeClassifierBody = new CascadeClassifier(Application.StartupPath + "/haarcascade_fullbody.xml");
                 timer.Tick += new EventHandler(ShowButtons);
-                //capTimer.Tick += new EventHandler(CaptureFace);
+                capTimer.Tick += new EventHandler(CaptureFace);
                 capTimer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
                 capTimer.Start();
 
@@ -101,10 +103,10 @@ namespace FaceDetection
             camera_num = camera_number;
             camera_num.Parent = imgCamUser;
             controlBut = controlButtons;
-            formChangesApply();
+            FormChangesApply();
             if(vs !=null && vs.Count()>0)
             {
-                handleParameters(vs);
+                HandleParameters(vs);
             }
 
             
@@ -120,8 +122,8 @@ namespace FaceDetection
             //t.Start();
          
             var path = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"/test.mp4";
-            //var encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win32.dll");
-            var fps = 10.0f;
+            var encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win32.dll");
+            //var fps = 10.0f;
             //var writer = new GitHub.secile.Avi.AviWriter(System.IO.File.OpenWrite(path), "H264", camera.Size.Width, camera.Size.Height, fps);
 
             /*OpenH264Lib.Encoder.OnEncodeCallback onEncode = (data, length, frameType) =>
@@ -131,7 +133,7 @@ namespace FaceDetection
                 writer.AddImage(data);
             };
             */
-            int bps = 1000000;
+            //int bps = 1000000;
             //encoder.Setup(camera.Size.Width, camera.Size.Height, bps, fps, 2.0f, onEncode);
 
             camform.FormClosing += (s, ev) => {
@@ -147,10 +149,12 @@ namespace FaceDetection
 
             try
             {
-                //imaMat = _capture.QueryFrame();                
-                //imageFrame = imaMat.ToImage<Bgr, Byte>();
-                var bmp = camera.GetBitmap();
-                imageFrame = new Image<Bgr, Byte>(bmp);
+                imaMat = _capture.QueryFrame();                
+                imageFrame = imaMat.ToImage<Bgr, Byte>();
+                //var bmp = camera.GetBitmap();
+                bitmap = imaMat.Bitmap;
+                //imageFrame = new Image<Bgr, Byte>(bmp);
+                pictureBox1.Image = bitmap;
                 imgCamUser.Image = imageFrame;
                 dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 dateTimeLabel.Parent = imgCamUser;
@@ -164,17 +168,12 @@ namespace FaceDetection
             }
             catch(NullReferenceException e)
             {
-                ////Debug.WriteLine(e.Message);
+                Debug.WriteLine(e.Message);
             }
             //Debug.WriteLine(this.Size);     
             
         }
-        private static void VideoRecording()
-        {
-
-            
-        }
-
+        
         private void CaptureFace(object sender, EventArgs eventArgs)
         {
             if (imageFrame != null && Properties.Settings.Default.enable_face_recognition == true)
@@ -214,7 +213,7 @@ namespace FaceDetection
 
         }
 
-        public static void handleParameters(IReadOnlyCollection<string> parameters)
+        public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
             /*
              Handle the initial start up CL parameters, if exist
@@ -237,7 +236,7 @@ namespace FaceDetection
                     }
                     catch (Exception e)
                     {
-                        ////Debug.WriteLine(e.Message);
+                        Debug.WriteLine(e.ToString() + " 243rd line");
                     }
                     //|||||||||||||||||||||||||||
                     switch (parameters.ElementAt(1))
@@ -258,14 +257,14 @@ namespace FaceDetection
                                 else
                                 {
                                     settingUI.Hide();
-                                    formChangesApply();
+                                    FormChangesApply();
                                     
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
                                 //MessageBox.Show("Incorrect or missing parameters");
-                                //Debug.WriteLine(e.Message);
+                                Debug.WriteLine(e.ToString() + " in line 271");
                             }
                             break;
                         case "-s":
@@ -280,7 +279,7 @@ namespace FaceDetection
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
-                                //Debug.WriteLine(e.Message);
+                                Debug.WriteLine(e.Message + " in line 286");
                                 //MessageBox.Show("Incorrect or missing parameters");
                             }
                             break;
@@ -304,7 +303,7 @@ namespace FaceDetection
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
-                                //Debug.WriteLine(e.Message);
+                                Debug.WriteLine(e.ToString() + " in line 310");
                                 //MessageBox.Show("Incorrect or missing parameters");
                             }
                             break;
@@ -321,7 +320,7 @@ namespace FaceDetection
                                             //last one is interval
                                             Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
                                             //all cameras whose status is ON must start FACE RECOGNITION
-                                            formChangesApply();
+                                            FormChangesApply();
                                         }
                                         else
                                         {
@@ -333,7 +332,7 @@ namespace FaceDetection
                                                     {
                                                         Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
                                                         Properties.Settings.Default.enable_face_recognition = true;
-                                                        formChangesApply();
+                                                        FormChangesApply();
                                                     }
                                                     catch (Exception e)
                                                     {
@@ -363,7 +362,7 @@ namespace FaceDetection
                                             case "1":
                                                 Properties.Settings.Default.enable_face_recognition = false;
                                                 //STOP FACE RECOGNITION IF ON
-                                                formChangesApply();
+                                                FormChangesApply();
                                                 break;
                                             case "2":
                                                 break;
@@ -381,7 +380,7 @@ namespace FaceDetection
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
-                                //Debug.WriteLine(e.Message);
+                                Debug.WriteLine(e.ToString() + " in line 387");
                                 //MessageBox.Show("Incorrect or missing parameters");
                             }
                             break;
@@ -410,12 +409,12 @@ namespace FaceDetection
                                 else
                                 {
                                     settingUI.Hide();
-                                    formChangesApply();
+                                    FormChangesApply();
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
-                                //Debug.WriteLine(e.Message);
+                                Debug.WriteLine(e.ToString() + " 421st line");
                                 //MessageBox.Show("Incorrect or missing parameters");
                             }
                             break;
@@ -423,7 +422,7 @@ namespace FaceDetection
                 
             }
         }
-        public static void handleParameters(String[] parameters)
+        public static void HandleParameters(String[] parameters)
         {
             //Debug.WriteLine(parameters);
             testparam.Text = String.Concat(parameters);
@@ -457,13 +456,13 @@ namespace FaceDetection
                 */
             }
         }
-        public void holdButton(object sender, MouseEventArgs eventArgs)
+        public void HoldButton(object sender, MouseEventArgs eventArgs)
         {
             timer.Enabled = true;            
             timer.Interval = 500;//Set it to 3000 for production
             timer.Start();
         }
-        private void releaseButton(object sender, MouseEventArgs e)
+        private void ReleaseButton(object sender, MouseEventArgs e)
         {
             if (timer.Enabled == true)
             {
@@ -489,7 +488,7 @@ namespace FaceDetection
  
         }
         
-        private void fullScreen(object sender, EventArgs eventArgs)
+        private void FullScreen(object sender, EventArgs eventArgs)
         {
             
                 if (this.WindowState == FormWindowState.Normal)
@@ -518,7 +517,7 @@ namespace FaceDetection
             Debug.WriteLine(sender);
         }
 
-        private void showSettings(object sender, EventArgs e)
+        private void ShowSettings(object sender, EventArgs e)
         {
             if(settingUI.Visible==false)
             {
@@ -537,7 +536,7 @@ namespace FaceDetection
 
 
 
-        private void openStoreLocation(object sender, EventArgs e)
+        private void OpenStoreLocation(object sender, EventArgs e)
         {
             try
             {
@@ -552,7 +551,7 @@ namespace FaceDetection
             }
         }
         
-        public static void formChangesApply()
+        public static void FormChangesApply()
         {
             camera_num.Visible = Properties.Settings.Default.show_camera_no;
             current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
@@ -587,7 +586,7 @@ namespace FaceDetection
             Debug.WriteLine(pb_recording.Visible);
         }
         
-        private void lastPositionUpdate(object sender, EventArgs e)
+        private void LastPositionUpdate(object sender, EventArgs e)
         {
             Properties.Camera1.Default.pos_x = Convert.ToDecimal(this.Location.X);
             Properties.Camera1.Default.pos_y = Convert.ToDecimal(this.Location.Y);
@@ -595,7 +594,7 @@ namespace FaceDetection
             Debug.WriteLine(Properties.Camera1.Default.pos_x);
         }
 
-        private void windowSizeUpdate(object sender, EventArgs e)
+        private void WindowSizeUpdate(object sender, EventArgs e)
         {
             Properties.Camera1.Default.view_width = Convert.ToDecimal(this.Width);
             Properties.Camera1.Default.view_height = Convert.ToDecimal(this.Height);

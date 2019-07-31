@@ -32,14 +32,14 @@ namespace FaceDetection
             FormCollection forms = Application.OpenForms;
             if (forms["MainForm"]!=null)
             {
-                MainForm.handleParameters(vs1);
+                MainForm.HandleParameters(vs1);
             }
             else
             {
                 try
                 {
                     SingleInstanceApplication.Run(new MainForm(vs1), NewInstanceHandler);
-                    MainForm.handleParameters(vs1);
+                    MainForm.HandleParameters(vs1);
                 }
                 catch (Exception e)
                 {
@@ -66,7 +66,7 @@ namespace FaceDetection
             var uvc_param = e.CommandLine;
             //MessageBox.Show(uvc_param);
             e.BringToForeground = false;
-            MainForm.handleParameters(uvc_param);
+            MainForm.HandleParameters(uvc_param);
             
         }
         public class SingleInstanceApplication : WindowsFormsApplicationBase

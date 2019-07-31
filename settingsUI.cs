@@ -40,7 +40,7 @@ namespace FaceDetection
             Properties.Camera4.Default.Save();
 
             
-            MainForm.formChangesApply();
+            MainForm.FormChangesApply();
             this.Hide();
         }
 
@@ -57,7 +57,7 @@ namespace FaceDetection
             Properties.Camera4.Default.Save();
 
             
-            MainForm.formChangesApply();
+            MainForm.FormChangesApply();
         }
 
         private void changeStoreLocation(object sender, EventArgs e)
