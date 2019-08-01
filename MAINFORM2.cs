@@ -53,7 +53,7 @@ namespace FaceDetection
         bool initrec = false;
         private OpenH264Lib.Encoder encoder;
         VideoWriter vw;
-        String fileName = String.Format("video_out.mp4");
+        string fileName = string.Format("video_out.mp4");
         int fourcc = VideoWriter.Fourcc('H', '2', '6', '4');
         Backend[] backends;
         int backend_idx = 0; //any backend;
@@ -67,10 +67,11 @@ namespace FaceDetection
 
                 settingUI = new settingsUI();
                 _capture = new VideoCapture(index);
-                //_capture.SetCaptureProperty(CapProp.FrameWidth, 640);
-                //_capture.SetCaptureProperty(CapProp.FrameHeight, 480);
-                vw = new VideoWriter(fileName, backend_idx, fourcc, 15, new Size(640, 480), true);
-                //Debug.WriteLine(_capture.GetCaptureProperty(0));
+                _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameWidth, 1920);
+                _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameHeight, 1080);
+
+                vw = new VideoWriter(fileName, backend_idx, fourcc, Convert.ToDouble(Properties.Camera1.Default.frame_rate), new Size(1920, 1080), true);
+                //Debug.WriteLine(_capture.GetCaptureProperty(CapProp.Fps) + " FRAMES PER SEC");
 
                 _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_alt2.xml");
                 _cascadeClassifierEyes = new CascadeClassifier(Application.StartupPath + "/haarcascade_righteye_2splits.xml");
@@ -99,7 +100,8 @@ namespace FaceDetection
             testparam = testing_params;
 
             this.Location = new Point(Decimal.ToInt32(Properties.Camera1.Default.pos_x), Decimal.ToInt32(Properties.Camera1.Default.pos_y));
-
+            //しばらく　画面サイズをキャプチャーサイズに合わせましょう
+            //後で設定サイスに戻す！！！
             //this.Size = new Size(Decimal.ToInt32(Properties.Camera1.Default.view_width), Decimal.ToInt32(Properties.Camera1.Default.view_height));
             this.Size = new Size(_capture.Width, _capture.Height);
 
@@ -129,6 +131,7 @@ namespace FaceDetection
                 frameTimer.Stop();
             };
         }
+
         private void ProcessFrame(object sender, EventArgs eventArgs)
         {
 
@@ -152,7 +155,7 @@ namespace FaceDetection
                 if(initrec == true)
                 {
                    
-                        //vw.Write(imaMat);
+                        vw.Write(imaMat);
                    
                 }
 
@@ -594,6 +597,16 @@ namespace FaceDetection
                 initrec = true;
             }
 
-        }        
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Camera_number_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

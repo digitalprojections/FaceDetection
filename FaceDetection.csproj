@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AviWriter.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="MAINFORM2.cs">
       <SubType>Form</SubType>
@@ -109,6 +110,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RiffFile.cs" />
     <Compile Include="ScreenControls.cs" />
     <Compile Include="settingsUI.cs">
       <SubType>Form</SubType>
@@ -116,6 +118,7 @@
     <Compile Include="settingsUI.Designer.cs">
       <DependentUpon>settingsUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UsbCamera.cs" />
     <Compile Include="UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>

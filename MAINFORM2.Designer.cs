@@ -33,13 +33,13 @@
             this.camera_number = new System.Windows.Forms.Label();
             this.testing_params = new System.Windows.Forms.Label();
             this.controlButtons = new System.Windows.Forms.FlowLayoutPanel();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.dateTimeLabel = new System.Windows.Forms.Label();
             this.folderButton = new System.Windows.Forms.Button();
             this.settingsButton = new System.Windows.Forms.Button();
             this.snapshotButton = new System.Windows.Forms.Button();
             this.cameraButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.dateTimeLabel = new System.Windows.Forms.Label();
             this.pbRecording = new System.Windows.Forms.PictureBox();
             this.imgCamUser = new Emgu.CV.UI.ImageBox();
             this.controlButtons.SuspendLayout();
@@ -59,7 +59,8 @@
             this.camera_number.Name = "camera_number";
             this.camera_number.Size = new System.Drawing.Size(63, 67);
             this.camera_number.TabIndex = 10;
-            this.camera_number.Text = "4";
+            this.camera_number.Text = "1";
+            this.camera_number.Click += new System.EventHandler(this.Camera_number_Click);
             // 
             // testing_params
             // 
@@ -86,39 +87,6 @@
             this.controlButtons.Size = new System.Drawing.Size(292, 59);
             this.controlButtons.TabIndex = 12;
             this.controlButtons.Visible = false;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "camera-icon.png");
-            this.imageList1.Images.SetKeyName(1, "Configuration-icon.png");
-            this.imageList1.Images.SetKeyName(2, "video-camera-icon.png");
-            this.imageList1.Images.SetKeyName(3, "Windows-icon.png");
-            this.imageList1.Images.SetKeyName(4, "Actions-window-close-icon.png");
-            this.imageList1.Images.SetKeyName(5, "Camera-Front-icon.png");
-            this.imageList1.Images.SetKeyName(6, "delete-1-icon.png");
-            this.imageList1.Images.SetKeyName(7, "Folder-icon.png");
-            this.imageList1.Images.SetKeyName(8, "Settings-2-icon.png");
-            this.imageList1.Images.SetKeyName(9, "Tools-icon.png");
-            this.imageList1.Images.SetKeyName(10, "Video-Camera-2-icon.png");
-            this.imageList1.Images.SetKeyName(11, "Pause-Normal-Red-icon.png");
-            this.imageList1.Images.SetKeyName(12, "Record-Pressed-icon.png");
-            // 
-            // dateTimeLabel
-            // 
-            this.dateTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dateTimeLabel.AutoSize = true;
-            this.dateTimeLabel.BackColor = System.Drawing.Color.Transparent;
-            this.dateTimeLabel.Enabled = false;
-            this.dateTimeLabel.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.dateTimeLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dateTimeLabel.Location = new System.Drawing.Point(12, 417);
-            this.dateTimeLabel.Name = "dateTimeLabel";
-            this.dateTimeLabel.Size = new System.Drawing.Size(119, 24);
-            this.dateTimeLabel.TabIndex = 13;
-            this.dateTimeLabel.Text = "Date and time";
-            this.dateTimeLabel.UseCompatibleTextRendering = true;
             // 
             // folderButton
             // 
@@ -190,6 +158,39 @@
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.ShowButtons);
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "camera-icon.png");
+            this.imageList1.Images.SetKeyName(1, "Configuration-icon.png");
+            this.imageList1.Images.SetKeyName(2, "video-camera-icon.png");
+            this.imageList1.Images.SetKeyName(3, "Windows-icon.png");
+            this.imageList1.Images.SetKeyName(4, "Actions-window-close-icon.png");
+            this.imageList1.Images.SetKeyName(5, "Camera-Front-icon.png");
+            this.imageList1.Images.SetKeyName(6, "delete-1-icon.png");
+            this.imageList1.Images.SetKeyName(7, "Folder-icon.png");
+            this.imageList1.Images.SetKeyName(8, "Settings-2-icon.png");
+            this.imageList1.Images.SetKeyName(9, "Tools-icon.png");
+            this.imageList1.Images.SetKeyName(10, "Video-Camera-2-icon.png");
+            this.imageList1.Images.SetKeyName(11, "Pause-Normal-Red-icon.png");
+            this.imageList1.Images.SetKeyName(12, "Record-Pressed-icon.png");
+            // 
+            // dateTimeLabel
+            // 
+            this.dateTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dateTimeLabel.AutoSize = true;
+            this.dateTimeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.dateTimeLabel.Enabled = false;
+            this.dateTimeLabel.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.dateTimeLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dateTimeLabel.Location = new System.Drawing.Point(12, 417);
+            this.dateTimeLabel.Name = "dateTimeLabel";
+            this.dateTimeLabel.Size = new System.Drawing.Size(119, 24);
+            this.dateTimeLabel.TabIndex = 13;
+            this.dateTimeLabel.Text = "Date and time";
+            this.dateTimeLabel.UseCompatibleTextRendering = true;
+            // 
             // pbRecording
             // 
             this.pbRecording.BackColor = System.Drawing.Color.Transparent;
@@ -214,6 +215,7 @@
             this.imgCamUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgCamUser.TabIndex = 3;
             this.imgCamUser.TabStop = false;
+            this.imgCamUser.DoubleClick += new System.EventHandler(this.FullScreen);
             this.imgCamUser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HoldButton);
             this.imgCamUser.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ReleaseButton);
             // 
@@ -230,6 +232,7 @@
             this.Controls.Add(this.imgCamUser);
             this.Name = "MainForm";
             this.Text = "MAINFORM2";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.controlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCamUser)).EndInit();
