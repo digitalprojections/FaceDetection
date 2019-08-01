@@ -174,7 +174,7 @@
             this.cameraButton.Size = new System.Drawing.Size(52, 52);
             this.cameraButton.TabIndex = 3;
             this.cameraButton.UseVisualStyleBackColor = false;
-            this.cameraButton.Click += new System.EventHandler(this.CameraButton_Click);
+            this.cameraButton.Click += new System.EventHandler(this.StartVideoRecording);
             // 
             // closeButton
             // 

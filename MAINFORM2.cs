@@ -25,6 +25,7 @@ namespace FaceDetection
         private readonly System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private readonly static System.Windows.Forms.Timer capTimer = new System.Windows.Forms.Timer();
         private readonly static System.Windows.Forms.Timer frameTimer = new System.Windows.Forms.Timer();
+
         private static Label testparam;
         private static MainForm mainForm;
         private static PictureBox pb_recording;
@@ -49,9 +50,13 @@ namespace FaceDetection
         
         //readonly Thread t;
         static Form camform;
-
+        bool initrec = false;
         private OpenH264Lib.Encoder encoder;
-
+        VideoWriter vw;
+        String fileName = String.Format("video_out.mp4");
+        int fourcc = VideoWriter.Fourcc('H', '2', '6', '4');
+        Backend[] backends;
+        int backend_idx = 0; //any backend;
         //readonly String fileName = String.Format("c:\video_out.mp4");
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
@@ -62,9 +67,9 @@ namespace FaceDetection
 
                 settingUI = new settingsUI();
                 _capture = new VideoCapture(index);
-                _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameWidth, 320);
-                _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameHeight, 240);
-
+                //_capture.SetCaptureProperty(CapProp.FrameWidth, 640);
+                //_capture.SetCaptureProperty(CapProp.FrameHeight, 480);
+                vw = new VideoWriter(fileName, backend_idx, fourcc, 15, new Size(640, 480), true);
                 //Debug.WriteLine(_capture.GetCaptureProperty(0));
 
                 _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_alt2.xml");
@@ -78,6 +83,7 @@ namespace FaceDetection
                 frameTimer.Interval = 1000 / Decimal.ToInt32(Properties.Camera1.Default.frame_rate);
                 frameTimer.Start();
                 frameTimer.Tick += new EventHandler(ProcessFrame);
+
             }
 
 
@@ -115,8 +121,8 @@ namespace FaceDetection
             Debug.WriteLine(Convert.ToInt32(Properties.Camera1.Default.view_width) + " WIDTH");
             camform = this;
 
-            var path = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"/test.mp4";
-            var encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win32.dll");
+            //var path = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"/test.mp4";
+            //var encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win32.dll");
 
             camform.FormClosing += (s, ev) => {
                 Debug.WriteLine("recording ended");
@@ -129,17 +135,26 @@ namespace FaceDetection
             try
             {
                 imaMat = _capture.QueryFrame();
-                imageFrame = imaMat.ToImage<Bgr, Byte>();
+                
+                    imageFrame = imaMat.ToImage<Bgr, Byte>();
 
-                bitmap = imaMat.Bitmap;
-                //##########################
-                //
-                //pictureBox1.Image = bitmap;
-                //##########################
-                imgCamUser.Image = imageFrame;
+                    bitmap = imaMat.Bitmap;
+                    //##########################
+                    //
+                    //pictureBox1.Image = bitmap;
+                    //##########################
+                    imgCamUser.Image = imageFrame;
+
                 dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 dateTimeLabel.Parent = imgCamUser;
                 pbRecording.Parent = imgCamUser;
+
+                if(initrec == true)
+                {
+                   
+                        //vw.Write(imaMat);
+                   
+                }
 
             }
             catch (NullReferenceException e)
@@ -431,26 +446,6 @@ namespace FaceDetection
                 timer.Stop();
             }
         }
-        private void CameraButton_Click(object sender, EventArgs e)
-        {
-            if (pbRecording.Visible == true)
-            {
-                pbRecording.Image = Properties.Resources.Pause_Normal_Red_icon;
-                pbRecording.Visible = false;
-                recording_on = false;
-            }
-            else
-            {
-                if (Properties.Settings.Default.show_recording_icon == true)
-                {
-                    pbRecording.Image = Properties.Resources.Record_Pressed_icon;
-                    pbRecording.Visible = true;
-                    recording_on = true;
-                }
-
-            }
-
-        }
 
         private void FullScreen(object sender, EventArgs eventArgs)
         {
@@ -569,5 +564,36 @@ namespace FaceDetection
             timage.Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
             timage.Dispose();
         }
+        private void StartVideoRecording(object sender, EventArgs e)
+        {
+            if (pbRecording.Visible == true)
+            {
+                pbRecording.Image = Properties.Resources.Pause_Normal_Red_icon;
+                pbRecording.Visible = false;
+                recording_on = false;
+                initrec = false;
+            }
+            else
+            {                
+                if (Properties.Settings.Default.show_recording_icon == true)
+                {
+                    pbRecording.Image = Properties.Resources.Record_Pressed_icon;
+                    pbRecording.Visible = true;
+                    recording_on = true;
+                }
+                backends = CvInvoke.WriterBackends;
+                
+                foreach (Backend be in backends)
+                {
+                    if (be.Name.Equals("MSMF"))
+                    {
+                        backend_idx = be.ID;
+                        break;
+                    }
+                }
+                initrec = true;
+            }
+
+        }        
     }
 }
