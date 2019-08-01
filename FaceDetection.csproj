@@ -201,6 +201,9 @@
     <None Include="Resources\Record-Pressed-icon.png" />
     <None Include="Resources\Pause-Normal-Red-icon.png" />
     <None Include="Resources\Record-Pressed-icon1.png" />
+    <EmbeddedResource Include="openh264-2.0.0-win32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="OpenH264Lib.dll" />
     <None Include="Resources\Settings-2-icon.png" />
     <None Include="Resources\camera-icon.png" />
