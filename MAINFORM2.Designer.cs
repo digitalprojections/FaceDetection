@@ -41,10 +41,9 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.dateTimeLabel = new System.Windows.Forms.Label();
             this.pbRecording = new System.Windows.Forms.PictureBox();
-            this.imgCamUser = new Emgu.CV.UI.ImageBox();
+            this.cameraControl = new Camera_NET.CameraControl();
             this.controlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgCamUser)).BeginInit();
             this.SuspendLayout();
             // 
             // camera_number
@@ -203,39 +202,35 @@
             this.pbRecording.TabStop = false;
             this.pbRecording.Visible = false;
             // 
-            // imgCamUser
+            // cameraControl
             // 
-            this.imgCamUser.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.imgCamUser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imgCamUser.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
-            this.imgCamUser.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.imgCamUser.Location = new System.Drawing.Point(0, 0);
-            this.imgCamUser.Name = "imgCamUser";
-            this.imgCamUser.Size = new System.Drawing.Size(800, 450);
-            this.imgCamUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.imgCamUser.TabIndex = 3;
-            this.imgCamUser.TabStop = false;
-            this.imgCamUser.DoubleClick += new System.EventHandler(this.FullScreen);
-            this.imgCamUser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HoldButton);
-            this.imgCamUser.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ReleaseButton);
+            this.cameraControl.DirectShowLogFilepath = "";
+            this.cameraControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cameraControl.Location = new System.Drawing.Point(0, 0);
+            this.cameraControl.MinimumSize = new System.Drawing.Size(1, 1);
+            this.cameraControl.Name = "cameraControl";
+            this.cameraControl.Size = new System.Drawing.Size(800, 450);
+            this.cameraControl.TabIndex = 14;
+            this.cameraControl.Click += new System.EventHandler(this.ShowButtons);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pbRecording);
             this.Controls.Add(this.dateTimeLabel);
             this.Controls.Add(this.controlButtons);
             this.Controls.Add(this.testing_params);
             this.Controls.Add(this.camera_number);
-            this.Controls.Add(this.pbRecording);
-            this.Controls.Add(this.imgCamUser);
+            this.Controls.Add(this.cameraControl);
             this.Name = "MainForm";
             this.Text = "MAINFORM2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Click += new System.EventHandler(this.ShowButtons);
             this.controlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgCamUser)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,7 +238,7 @@
 
         #endregion
 
-        private Emgu.CV.UI.ImageBox imgCamUser;
+        
         private System.Windows.Forms.PictureBox pbRecording;
         private System.Windows.Forms.Label camera_number;
         private System.Windows.Forms.Label testing_params;
@@ -255,5 +250,7 @@
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label dateTimeLabel;
+        private Camera_NET.CameraControl cameraControl;
+
     }
 }

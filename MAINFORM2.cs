@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Emgu.CV;
-using Emgu.CV.UI;
-using Emgu.Util;
-using Emgu.CV.Structure;
-using Emgu.CV.CvEnum;
 using System.Diagnostics;
-using System.Configuration;
 using System.IO;
-using System.Threading;
+using DirectShowLib;
+using Camera_NET;
+using System.Runtime.InteropServices.ComTypes;
+using System.Runtime.InteropServices;
 
 namespace FaceDetection
 {
@@ -25,6 +18,9 @@ namespace FaceDetection
         private readonly System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private readonly static System.Windows.Forms.Timer capTimer = new System.Windows.Forms.Timer();
         private readonly static System.Windows.Forms.Timer frameTimer = new System.Windows.Forms.Timer();
+        
+        // Camera choice
+        private CameraChoice _CameraChoice = new CameraChoice();
 
         private static Label testparam;
         private static MainForm mainForm;
@@ -36,14 +32,8 @@ namespace FaceDetection
 
         //User actions end
         static settingsUI settingUI;
-        private VideoCapture _capture;
         //private readonly VideoWriter videoWriter;
 
-        private readonly CascadeClassifier _cascadeClassifier;//顔検出
-        private readonly CascadeClassifier _cascadeClassifierEyes;//目検出
-        private readonly CascadeClassifier _cascadeClassifierBody;//体検出
-        private static Image<Bgr, Byte> imageFrame;
-        private Mat imaMat;
         private Bitmap bitmap;
 
         private readonly int index = 0;
@@ -51,31 +41,18 @@ namespace FaceDetection
         //readonly Thread t;
         static Form camform;
         bool initrec = false;
-        private OpenH264Lib.Encoder encoder;
-        VideoWriter vw;
+        
         string fileName = string.Format("video_out.mp4");
-        int fourcc = VideoWriter.Fourcc('H', '2', '6', '4');
-        Backend[] backends;
         int backend_idx = 0; //any backend;
         //readonly String fileName = String.Format("c:\video_out.mp4");
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             InitializeComponent();
-
+            this.cameraControl = new Camera_NET.CameraControl();
             if (settingUI == null)
             {
 
                 settingUI = new settingsUI();
-                _capture = new VideoCapture(index);
-                _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameWidth, 1920);
-                _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameHeight, 1080);
-
-                vw = new VideoWriter(fileName, backend_idx, fourcc, Convert.ToDouble(Properties.Camera1.Default.frame_rate), new Size(1920, 1080), true);
-                //Debug.WriteLine(_capture.GetCaptureProperty(CapProp.Fps) + " FRAMES PER SEC");
-
-                _cascadeClassifier = new CascadeClassifier(Application.StartupPath + "/haarcascade_frontalface_alt2.xml");
-                _cascadeClassifierEyes = new CascadeClassifier(Application.StartupPath + "/haarcascade_righteye_2splits.xml");
-                _cascadeClassifierBody = new CascadeClassifier(Application.StartupPath + "/haarcascade_fullbody.xml");
                 timer.Tick += new EventHandler(ShowButtons);//制御ボタンの非/表示用クリックタイマー
                 capTimer.Tick += new EventHandler(CaptureFace);
                 capTimer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
@@ -88,7 +65,7 @@ namespace FaceDetection
             }
 
 
-            imgCamUser.SendToBack();
+            
 
             /*
              * Application.Idle += ProcessFrame;
@@ -96,14 +73,13 @@ namespace FaceDetection
             pb_recording = pbRecording;
             pbRecording.BackColor = Color.Transparent;
             dateTimeLabel.BackColor = Color.Transparent;
-            controlButtons.Parent = imgCamUser;
             testparam = testing_params;
 
             this.Location = new Point(Decimal.ToInt32(Properties.Camera1.Default.pos_x), Decimal.ToInt32(Properties.Camera1.Default.pos_y));
             //しばらく　画面サイズをキャプチャーサイズに合わせましょう
             //後で設定サイスに戻す！！！
-            //this.Size = new Size(Decimal.ToInt32(Properties.Camera1.Default.view_width), Decimal.ToInt32(Properties.Camera1.Default.view_height));
-            this.Size = new Size(_capture.Width, _capture.Height);
+            this.Size = new Size(Decimal.ToInt32(Properties.Camera1.Default.view_width), Decimal.ToInt32(Properties.Camera1.Default.view_height));
+            //this.Size = new Size(), Properties.Camera1.Default.view_height);
 
             this.TopMost = Properties.Settings.Default.window_on_top;
             Debug.WriteLine("TOPMOST 78");
@@ -111,7 +87,6 @@ namespace FaceDetection
 
             current_date_text = dateTimeLabel;
             camera_num = camera_number;
-            camera_num.Parent = imgCamUser;
             controlBut = controlButtons;
             FormChangesApply();
 
@@ -137,28 +112,13 @@ namespace FaceDetection
 
             try
             {
-                imaMat = _capture.QueryFrame();
-                
-                    imageFrame = imaMat.ToImage<Bgr, Byte>();
-
-                    bitmap = imaMat.Bitmap;
-                    //##########################
-                    //
-                    //pictureBox1.Image = bitmap;
-                    //##########################
-                    imgCamUser.Image = imageFrame;
-
                 dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                dateTimeLabel.Parent = imgCamUser;
-                pbRecording.Parent = imgCamUser;
+                
 
                 if(initrec == true)
                 {
                    
-                        vw.Write(imaMat);
-                   
                 }
-
             }
             catch (NullReferenceException e)
             {
@@ -170,42 +130,7 @@ namespace FaceDetection
 
         private void CaptureFace(object sender, EventArgs eventArgs)
         {
-            if (imageFrame != null && Properties.Settings.Default.enable_face_recognition == true)
-            {
-                var grayframe = imageFrame.Convert<Gray, Byte>();
-                var faces = _cascadeClassifier.DetectMultiScale(grayframe, 1.1, 10, Size.Empty);
-                //the actual face detection happens here
-                foreach (var face in faces)
-                {
-                    imageFrame.Draw(face, new Bgr(Color.Red), 3);
-
-                    //検出した顔は四角の形でマークされる
-                    //Debug.WriteLine(imageFrame);
-
-                }
-                var eyes = _cascadeClassifierEyes.DetectMultiScale(grayframe, 1.1, 10, Size.Empty);
-                //the actual face detection happens here
-                foreach (var eye in eyes)
-                {
-                    imageFrame.Draw(eye, new Bgr(Color.Blue), 3);
-                    //検出した目は四角の形でマークされる
-                    //Debug.WriteLine(imageFrame);
-
-                }
-                var people = _cascadeClassifierBody.DetectMultiScale(grayframe, 1.1, 10, Size.Empty);
-                //the actual face detection happens here
-                foreach (var person in people)
-                {
-                    imageFrame.Draw(person, new Bgr(Color.Green), 3);
-                    //検出した人は四角の形でマークされる
-                    //Debug.WriteLine(imageFrame);
-
-                }
-            }
-            imgCamUser.Image = imageFrame;
-
-
-
+            
         }
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
@@ -434,6 +359,7 @@ namespace FaceDetection
             {
                 controlButtons.Visible = false;
             }
+            ImgCamUser_Click();
         }
         public void HoldButton(object sender, MouseEventArgs eventArgs)
         {
@@ -458,7 +384,7 @@ namespace FaceDetection
                 this.TopMost = true;
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
-                imgCamUser.SizeMode = PictureBoxSizeMode.Zoom;
+                
                 Debug.WriteLine("topmost 223");
             }
             else
@@ -562,10 +488,10 @@ namespace FaceDetection
         private void SnapShot(object sender, EventArgs e)
         {
             Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot");
-            var timage = imaMat.ToImage<Bgr, Byte>();
+            //var timage = imaMat.ToImage<Bgr, Byte>();
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
-            timage.Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
-            timage.Dispose();
+            //timage.Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
+            //timage.Dispose();
         }
         private void StartVideoRecording(object sender, EventArgs e)
         {
@@ -584,16 +510,7 @@ namespace FaceDetection
                     pbRecording.Visible = true;
                     recording_on = true;
                 }
-                backends = CvInvoke.WriterBackends;
                 
-                foreach (Backend be in backends)
-                {
-                    if (be.Name.Equals("MSMF"))
-                    {
-                        backend_idx = be.ID;
-                        break;
-                    }
-                }
                 initrec = true;
             }
 
@@ -607,6 +524,142 @@ namespace FaceDetection
         private void Camera_number_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ImgCamUser_Click()
+        {
+            CameraChoice _CameraChoice = new CameraChoice();
+            _CameraChoice.UpdateDeviceList();
+            IMoniker moniker = _CameraChoice.Devices[0].Mon;
+            //Debug.WriteLine(cameraControl.Moniker);
+            object source = null;
+            Guid iid = typeof(IBaseFilter).GUID;
+            moniker.BindToObject(null, null, ref iid, out source);
+            IBaseFilter theDevice = (IBaseFilter)source;
+            SetCamera(_CameraChoice.Devices[0].Mon, null);
+            if (cameraControl.CameraCreated)
+            {
+                Camera.DisplayPropertyPage_Device(cameraControl.Moniker, this.Handle);
+                
+            }
+        }
+     
+        
+        private void SetCamera(IMoniker camera_moniker, Resolution resolution)
+        {
+            try
+            {
+                // NOTE: You can debug with DirectShow logging:
+                //cameraControl.DirectShowLogFilepath = @"C:\YOUR\LOG\PATH.txt";
+
+                // Makes all magic with camera and DirectShow graph
+                cameraControl.SetCamera(camera_moniker, resolution);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, @"Error while running camera");
+            }
+
+            if (!cameraControl.CameraCreated)
+                return;
+
+            // If you are using Direct3D surface overlay
+            // (see documentation about rebuild of library for it)
+            //cameraControl.UseGDI = false;
+
+            cameraControl.MixerEnabled = true;
+
+            cameraControl.OutputVideoSizeChanged += Camera_OutputVideoSizeChanged;
+
+            UpdateCameraBitmap();
+
+
+            // gui update
+            UpdateGUIButtons();
+        }
+        private void Camera_OutputVideoSizeChanged(object sender, EventArgs e)
+        {
+            // Update camera's bitmap (new size needed)
+            UpdateCameraBitmap();
+
+            // Place Zoom button in correct place on form
+            UpdateUnzoomButton();
+        }
+        private void UpdateCameraBitmap()
+        {
+            if (!cameraControl.MixerEnabled)
+                return;
+
+            
+
+            #region D3D bitmap mixer
+            //if (cameraControl.UseGDI)
+            //{
+            //    cameraControl.OverlayBitmap = GenerateColorKeyBitmap(false);
+            //}
+            //else
+            //{
+            //    cameraControl.OverlayBitmap = GenerateAlphaBitmap();
+            //}
+            #endregion
+        }
+        private void UpdateUnzoomButton()
+        {
+           
+        }
+        private void UpdateGUIButtons()
+        {
+           
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            // Fill camera list combobox with available cameras
+            FillCameraList();
+
+            
+            // Fill camera list combobox with available resolutions
+            FillResolutionList();
+        }
+        private void FillCameraList()
+        {
+            
+
+            _CameraChoice.UpdateDeviceList();
+
+            Debug.WriteLine(_CameraChoice.Devices.Count);
+        }
+        private void FillResolutionList()
+        {
+            
+
+            if (!cameraControl.CameraCreated)
+                return;
+
+            ResolutionList resolutions = Camera.GetResolutionList(cameraControl.Moniker);
+
+            if (resolutions == null)
+                return;
+
+            resolutions.Reverse();
+
+            int index_to_select = -1;
+
+            for (int index = 0; index < resolutions.Count; index++)
+            {
+            
+                Debug.WriteLine(cameraControl.Resolution);
+                if (resolutions[index].CompareTo(cameraControl.Resolution) == 0)
+                {
+                    index_to_select = index;
+                }
+            }
+
+            // select current resolution
+            if (index_to_select >= 0)
+            {
+                
+            }
         }
     }
 }

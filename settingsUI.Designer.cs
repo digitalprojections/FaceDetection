@@ -405,7 +405,7 @@
             0});
             this.numericUpDownF.Name = "numericUpDownF";
             this.numericUpDownF.Value = new decimal(new int[] {
-            8,
+            1,
             0,
             0,
             0});
