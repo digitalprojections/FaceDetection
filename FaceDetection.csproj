@@ -58,12 +58,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DefineConstants>DEBUG</DefineConstants>
     <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\Debug\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Camera_NET, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Camera_Net\Camera_Net\bin\Debug\Camera_NET.dll</HintPath>
-    </Reference>
     <Reference Include="DirectShowLib-2010">
       <HintPath>..\Camera_Net\DirectShowLib\bin\Debug\DirectShowLib-2010.dll</HintPath>
     </Reference>
@@ -81,6 +78,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CameraManager.cs" />
+    <Compile Include="CustomMessage.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="MAINFORM2.cs">
       <SubType>Form</SubType>
@@ -116,12 +115,6 @@
     </Compile>
     <Compile Include="settingsUI.Designer.cs">
       <DependentUpon>settingsUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControl1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControl1.Designer.cs">
-      <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="MAINFORM2.resx">
       <DependentUpon>MAINFORM2.cs</DependentUpon>

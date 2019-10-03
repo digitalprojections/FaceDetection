@@ -42,10 +42,8 @@
             this.dateTimeLabel = new System.Windows.Forms.Label();
             this.pbRecording = new System.Windows.Forms.PictureBox();
             this.panelCamera = new System.Windows.Forms.Panel();
-            this.cameraControl = new Camera_NET.CameraControl();
             this.controlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).BeginInit();
-            this.panelCamera.SuspendLayout();
             this.SuspendLayout();
             // 
             // camera_number
@@ -207,25 +205,11 @@
             // panelCamera
             // 
             this.panelCamera.BackColor = System.Drawing.SystemColors.Info;
-            this.panelCamera.Controls.Add(this.cameraControl);
             this.panelCamera.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCamera.Location = new System.Drawing.Point(0, 0);
             this.panelCamera.Name = "panelCamera";
             this.panelCamera.Size = new System.Drawing.Size(800, 450);
             this.panelCamera.TabIndex = 0;
-            // 
-            // cameraControl
-            // 
-            this.cameraControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.cameraControl.DirectShowLogFilepath = "";
-            this.cameraControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cameraControl.Location = new System.Drawing.Point(0, 0);
-            this.cameraControl.MinimumSize = new System.Drawing.Size(1, 1);
-            this.cameraControl.Name = "cameraControl";
-            this.cameraControl.Size = new System.Drawing.Size(800, 450);
-            this.cameraControl.TabIndex = 2;
-            this.cameraControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HoldButton);
-            this.cameraControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ReleaseButton);
             // 
             // MainForm
             // 
@@ -242,10 +226,11 @@
             this.Text = "UVC_CAMERA";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.SizeChanged += new System.EventHandler(this.WindowSizeUpdate);
             this.Click += new System.EventHandler(this.ShowButtons);
+            this.DragLeave += new System.EventHandler(this.LastPositionUpdate);
             this.controlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).EndInit();
-            this.panelCamera.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,7 +250,6 @@
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label dateTimeLabel;
-        private Camera_NET.CameraControl cameraControl;
         private System.Windows.Forms.Panel panelCamera;
     }
 }

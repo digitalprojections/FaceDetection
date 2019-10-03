@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using DirectShowLib;
-using Camera_NET;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.InteropServices;
 
@@ -15,12 +14,12 @@ namespace FaceDetection
     public partial class MainForm : Form
     {
         //User actions
-        private readonly System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-        private readonly static System.Windows.Forms.Timer capTimer = new System.Windows.Forms.Timer();
-        private readonly static System.Windows.Forms.Timer frameTimer = new System.Windows.Forms.Timer();
+        private readonly Timer timer = new Timer();
+        private readonly static Timer capTimer = new Timer();
+        private readonly static Timer frameTimer = new Timer();
         
         // Camera choice
-        private CameraChoice _CameraChoice = new CameraChoice();
+        private Camera_NET.CameraChoice _CameraChoice = new Camera_NET.CameraChoice();
 
         private static Label testparam;
         private static MainForm mainForm;
@@ -32,12 +31,7 @@ namespace FaceDetection
 
         //User actions end
         static settingsUI settingUI;
-        //private readonly VideoWriter videoWriter;
-
-        private Bitmap bitmap;
-
-        private readonly int index = 0;
-        
+                
         //readonly Thread t;
         static Form camform;
         bool initrec = false;
@@ -82,7 +76,7 @@ namespace FaceDetection
             //this.Size = new Size(), Properties.Camera1.Default.view_height);
 
             this.TopMost = Properties.Settings.Default.window_on_top;
-            Debug.WriteLine("TOPMOST 78");
+            Debug.WriteLine("TOPMOST 80");
             mainForm = this;
 
             current_date_text = dateTimeLabel;
@@ -411,7 +405,7 @@ namespace FaceDetection
             {
                 settingUI.TopMost = true;
                 this.TopMost = false;
-                Debug.WriteLine("topmost 251");
+                Debug.WriteLine("topmost 414");
                 settingUI.Show();
             }
             else
@@ -536,43 +530,30 @@ namespace FaceDetection
             Guid iid = typeof(IBaseFilter).GUID;
             moniker.BindToObject(null, null, ref iid, out source);
             IBaseFilter theDevice = (IBaseFilter)source;
-            SetCamera(_CameraChoice.Devices[0].Mon, null);
+            SetCamera(moniker, null, null);
+
+            //TEMP code to demo camera properties window
+            /*
             if (cameraControl.CameraCreated)
             {
-                Camera.DisplayPropertyPage_Device(cameraControl.Moniker, this.Handle);
-                
+                Camera.DisplayPropertyPage_Device(cameraControl.Moniker, this.Handle);                
             }
+            */
         }
      
         
-        private void SetCamera(IMoniker camera_moniker, Resolution resolution)
+        private void SetCamera(IMoniker camera_moniker, Resolution resolution, FPS fps)
         {
             try
             {
-                // NOTE: You can debug with DirectShow logging:
-                //cameraControl.DirectShowLogFilepath = @"C:\YOUR\LOG\PATH.txt";
-
-                // Makes all magic with camera and DirectShow graph
-                cameraControl.SetCamera(camera_moniker, resolution);
+                
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, @"Error while running camera");
-            }
-
-            if (!cameraControl.CameraCreated)
-                return;
-
-            // If you are using Direct3D surface overlay
-            // (see documentation about rebuild of library for it)
-            //cameraControl.UseGDI = false;
-
-            cameraControl.MixerEnabled = true;
-
-            cameraControl.OutputVideoSizeChanged += Camera_OutputVideoSizeChanged;
+            }            
 
             UpdateCameraBitmap();
-
 
             // gui update
             UpdateGUIButtons();
@@ -581,27 +562,11 @@ namespace FaceDetection
         {
             // Update camera's bitmap (new size needed)
             UpdateCameraBitmap();
-
-            // Place Zoom button in correct place on form
-            UpdateUnzoomButton();
+            
         }
         private void UpdateCameraBitmap()
         {
-            if (!cameraControl.MixerEnabled)
-                return;
-
             
-
-            #region D3D bitmap mixer
-            //if (cameraControl.UseGDI)
-            //{
-            //    cameraControl.OverlayBitmap = GenerateColorKeyBitmap(false);
-            //}
-            //else
-            //{
-            //    cameraControl.OverlayBitmap = GenerateAlphaBitmap();
-            //}
-            #endregion
         }
         private void UpdateUnzoomButton()
         {
@@ -630,36 +595,9 @@ namespace FaceDetection
             Debug.WriteLine(_CameraChoice.Devices.Count);
         }
         private void FillResolutionList()
-        {
+        {            
+
             
-
-            if (!cameraControl.CameraCreated)
-                return;
-
-            ResolutionList resolutions = Camera.GetResolutionList(cameraControl.Moniker);
-
-            if (resolutions == null)
-                return;
-
-            resolutions.Reverse();
-
-            int index_to_select = -1;
-
-            for (int index = 0; index < resolutions.Count; index++)
-            {
-            
-                Debug.WriteLine(cameraControl.Resolution);
-                if (resolutions[index].CompareTo(cameraControl.Resolution) == 0)
-                {
-                    index_to_select = index;
-                }
-            }
-
-            // select current resolution
-            if (index_to_select >= 0)
-            {
-                
-            }
         }
 
         private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
