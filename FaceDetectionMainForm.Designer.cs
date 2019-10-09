@@ -92,7 +92,8 @@
             this.folderButton.BackColor = System.Drawing.SystemColors.Control;
             this.folderButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.folderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.folderButton.Image = global::FaceDetection.Properties.Resources.Windows_icon;
+            this.folderButton.ImageIndex = 16;
+            this.folderButton.ImageList = this.imageList1;
             this.folderButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.folderButton.Location = new System.Drawing.Point(3, 3);
             this.folderButton.Name = "folderButton";
@@ -106,7 +107,8 @@
             this.settingsButton.BackColor = System.Drawing.SystemColors.Control;
             this.settingsButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.settingsButton.Image = global::FaceDetection.Properties.Resources.Settings_2_icon;
+            this.settingsButton.ImageIndex = 17;
+            this.settingsButton.ImageList = this.imageList1;
             this.settingsButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.settingsButton.Location = new System.Drawing.Point(61, 3);
             this.settingsButton.Name = "settingsButton";
@@ -120,7 +122,8 @@
             this.snapshotButton.BackColor = System.Drawing.SystemColors.Control;
             this.snapshotButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.snapshotButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.snapshotButton.Image = global::FaceDetection.Properties.Resources.camera_icon;
+            this.snapshotButton.ImageIndex = 18;
+            this.snapshotButton.ImageList = this.imageList1;
             this.snapshotButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.snapshotButton.Location = new System.Drawing.Point(119, 3);
             this.snapshotButton.Name = "snapshotButton";
@@ -134,10 +137,12 @@
             this.cameraButton.BackColor = System.Drawing.SystemColors.Control;
             this.cameraButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.cameraButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cameraButton.Image = global::FaceDetection.Properties.Resources.video_camera_icon;
+            this.cameraButton.ImageIndex = 14;
+            this.cameraButton.ImageList = this.imageList1;
             this.cameraButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cameraButton.Location = new System.Drawing.Point(177, 3);
             this.cameraButton.Name = "cameraButton";
+            this.cameraButton.Padding = new System.Windows.Forms.Padding(10);
             this.cameraButton.Size = new System.Drawing.Size(52, 52);
             this.cameraButton.TabIndex = 3;
             this.cameraButton.UseVisualStyleBackColor = false;
@@ -148,7 +153,8 @@
             this.closeButton.BackColor = System.Drawing.SystemColors.Control;
             this.closeButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeButton.Image = global::FaceDetection.Properties.Resources.delete_1_icon;
+            this.closeButton.ImageIndex = 15;
+            this.closeButton.ImageList = this.imageList1;
             this.closeButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.closeButton.Location = new System.Drawing.Point(235, 3);
             this.closeButton.Name = "closeButton";
@@ -174,6 +180,14 @@
             this.imageList1.Images.SetKeyName(10, "Video-Camera-2-icon.png");
             this.imageList1.Images.SetKeyName(11, "Pause-Normal-Red-icon.png");
             this.imageList1.Images.SetKeyName(12, "Record-Pressed-icon.png");
+            this.imageList1.Images.SetKeyName(13, "189-1894906_photography-camera-outline-comments-camera-icon-outline-hd.png");
+            this.imageList1.Images.SetKeyName(14, "405-4054031_png-file-svg-transparent-video-camera-icon-clipart.png");
+            this.imageList1.Images.SetKeyName(15, "26894-200.png");
+            this.imageList1.Images.SetKeyName(16, "Blank_Folder-512.png");
+            this.imageList1.Images.SetKeyName(17, "settings__184833.png");
+            this.imageList1.Images.SetKeyName(18, "584abf212912007028bd9334.png");
+            this.imageList1.Images.SetKeyName(19, "5879208-video-camera-png-vector-psd-and-clipart-with-transparent-video-camera-log" +
+        "o-png-360_360_preview.png");
             // 
             // dateTimeLabel
             // 
@@ -206,6 +220,7 @@
             // 
             this.panelCamera.BackColor = System.Drawing.SystemColors.Info;
             this.panelCamera.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCamera.Enabled = false;
             this.panelCamera.Location = new System.Drawing.Point(0, 0);
             this.panelCamera.Name = "panelCamera";
             this.panelCamera.Size = new System.Drawing.Size(800, 450);

@@ -215,7 +215,7 @@ namespace WebCamPerfTestProject
 
             //set the video window to be a child of the main window
             //putowner : Sets the owning parent window for the video playback window. 
-            hr = videoWindow.put_Owner(Cftp_Form1.pictureBox.Handle);
+            hr = videoWindow.put_Owner(FaceDetection.MainForm.CameraPanel.Handle);
             DsError.ThrowExceptionForHR(hr);
 
             hr = videoWindow.put_WindowStyle(WindowStyle.Child | WindowStyle.ClipChildren);

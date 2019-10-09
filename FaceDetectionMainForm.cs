@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using DirectShowLib;
 using System.Runtime.InteropServices.ComTypes;
-using System.Runtime.InteropServices;
+
 
 namespace FaceDetection
 {
@@ -19,7 +19,7 @@ namespace FaceDetection
         private readonly static Timer frameTimer = new Timer();
         
         // Camera choice
-        private Camera_NET.CameraChoice _CameraChoice = new Camera_NET.CameraChoice();
+        //private CameraChoice _CameraChoice = new CameraChoice();
 
         private static Label testparam;
         private static MainForm mainForm;
@@ -28,6 +28,7 @@ namespace FaceDetection
         private static Label current_date_text;
         private static Label camera_num;
         private static FlowLayoutPanel controlBut;
+        private static Panel cameraPanel;
 
         //User actions end
         static settingsUI settingUI;
@@ -38,11 +39,15 @@ namespace FaceDetection
         
         string fileName = string.Format("video_out.mp4");
         int backend_idx = 0; //any backend;
+
+        public static Panel CameraPanel { get => cameraPanel;}
+        public static MainForm GetMainForm { get => mainForm;}
+
         //readonly String fileName = String.Format("c:\video_out.mp4");
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             InitializeComponent();
-            this.cameraControl = new Camera_NET.CameraControl();
+            //this.cameraControl = new Camera_NET.CameraControl();
             if (settingUI == null)
             {
 
@@ -58,7 +63,7 @@ namespace FaceDetection
 
             }
 
-
+            cameraPanel = panelCamera;
             
 
             /*
@@ -78,7 +83,7 @@ namespace FaceDetection
             this.TopMost = Properties.Settings.Default.window_on_top;
             Debug.WriteLine("TOPMOST 80");
             mainForm = this;
-
+            
             current_date_text = dateTimeLabel;
             camera_num = camera_number;
             controlBut = controlButtons;
@@ -522,15 +527,15 @@ namespace FaceDetection
 
         private void ImgCamUser_Click()
         {
-            CameraChoice _CameraChoice = new CameraChoice();
-            _CameraChoice.UpdateDeviceList();
-            IMoniker moniker = _CameraChoice.Devices[0].Mon;
+            //CameraChoice _CameraChoice = new CameraChoice();
+            //_CameraChoice.UpdateDeviceList();
+            //IMoniker moniker = _CameraChoice.Devices[0].Mon;
             //Debug.WriteLine(cameraControl.Moniker);
             object source = null;
             Guid iid = typeof(IBaseFilter).GUID;
-            moniker.BindToObject(null, null, ref iid, out source);
+            //moniker.BindToObject(null, null, ref iid, out source);
             IBaseFilter theDevice = (IBaseFilter)source;
-            SetCamera(moniker, null, null);
+            //SetCamera(moniker, null, null);
 
             //TEMP code to demo camera properties window
             /*
@@ -542,7 +547,7 @@ namespace FaceDetection
         }
      
         
-        private void SetCamera(IMoniker camera_moniker, Resolution resolution, FPS fps)
+        private void SetCamera(IMoniker camera_moniker)
         {
             try
             {
@@ -590,9 +595,9 @@ namespace FaceDetection
         {
             
 
-            _CameraChoice.UpdateDeviceList();
+            //_CameraChoice.UpdateDeviceList();
 
-            Debug.WriteLine(_CameraChoice.Devices.Count);
+            //Debug.WriteLine(_CameraChoice.Devices.Count);
         }
         private void FillResolutionList()
         {            

@@ -850,6 +850,7 @@
             resources.GetString("cm_language.Items1")});
             this.cm_language.Name = "cm_language";
             this.cm_language.Text = global::FaceDetection.Properties.Settings.Default.language;
+            this.cm_language.SelectedIndexChanged += new System.EventHandler(this.Cm_language_SelectedIndexChanged);
             // 
             // settingsUI
             // 

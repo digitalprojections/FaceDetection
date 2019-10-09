@@ -16,11 +16,14 @@ namespace FaceDetection
 {
     public partial class settingsUI : Form
     {
+        CameraSettingsForm cameraSettingsForm;
+
        
         public settingsUI()
         {
             InitializeComponent();
-                       
+
+            cameraSettingsForm = new CameraSettingsForm();
         }       
         
         private void closeSettings(object sender, EventArgs e)
@@ -197,7 +200,13 @@ namespace FaceDetection
         private void Button_capture_settings_Click(object sender, EventArgs e)
         {
             //Call the general settings window
-
+            if (cameraSettingsForm.Visible == false)
+            {
+                cameraSettingsForm.TopMost = true;
+                this.TopMost = false;
+                Debug.WriteLine("topmost 414");
+                cameraSettingsForm.Show();
+            }
         }
     }
 }

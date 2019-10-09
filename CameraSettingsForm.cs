@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,22 @@ namespace FaceDetection
             //Save settings
             Properties.Settings.Default.Save();
             MainForm.FormChangesApply();
+        }
+                
+        private void OpenStoreLocation(object sender, EventArgs e)
+        {
+            try
+            {
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
+
+                Process.Start(Properties.Settings.Default.video_file_location);
+
+            }
+            catch (IOException ioe)
+            {
+                MessageBox.Show(ioe.Message);
+            }
         }
     }
 }
