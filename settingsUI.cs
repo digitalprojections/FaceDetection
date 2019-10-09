@@ -60,18 +60,7 @@ namespace FaceDetection
             MainForm.FormChangesApply();
         }
 
-        private void changeStoreLocation(object sender, EventArgs e)
-        {
-            folderBrowserDialogStoreFolder.ShowNewFolderButton = true;
-            // Show the FolderBrowserDialog.  
-            DialogResult result = folderBrowserDialogStoreFolder.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                storePath.Text = folderBrowserDialogStoreFolder.SelectedPath;
-                Environment.SpecialFolder root = folderBrowserDialogStoreFolder.RootFolder;
-                Debug.WriteLine(storePath);
-            }
-        }
+        
                 
         private void cameraSelected(object sender, EventArgs e)
         {

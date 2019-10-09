@@ -79,6 +79,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CameraManager.cs" />
+    <Compile Include="CameraSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CameraSettingsForm.Designer.cs">
+      <DependentUpon>CameraSettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomMessage.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="MAINFORM2.cs">
@@ -116,6 +122,9 @@
     <Compile Include="settingsUI.Designer.cs">
       <DependentUpon>settingsUI.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CameraSettingsForm.resx">
+      <DependentUpon>CameraSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MAINFORM2.resx">
       <DependentUpon>MAINFORM2.cs</DependentUpon>
     </EmbeddedResource>
@@ -169,6 +178,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\check-mark260.jpg" />
+    <None Include="Resources\checkered.png" />
+    <None Include="Resources\check.png" />
     <EmbeddedResource Include="haarcascade_frontalface_alt2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
