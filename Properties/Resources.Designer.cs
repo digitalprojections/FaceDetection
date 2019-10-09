@@ -143,6 +143,16 @@ namespace FaceDetection.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap setting_512 {
+            get {
+                object obj = ResourceManager.GetObject("setting-512", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Settings_2_icon {
             get {
                 object obj = ResourceManager.GetObject("Settings-2-icon", resourceCulture);

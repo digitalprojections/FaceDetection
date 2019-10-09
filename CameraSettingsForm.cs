@@ -34,5 +34,12 @@ namespace FaceDetection
                 Debug.WriteLine(storePath);
             }
         }
+
+        private void CameraSettingsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Save settings
+            Properties.Settings.Default.Save();
+            MainForm.FormChangesApply();
+        }
     }
 }

@@ -39,8 +39,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.storePath = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cm_language = new System.Windows.Forms.ComboBox();
             this.cb_all_cameras = new System.Windows.Forms.CheckBox();
             this.folderBrowserDialogStoreFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
@@ -55,20 +53,18 @@
             this.groupBox1.Controls.Add(this.numericUpDownCamCount);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.label26);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.cm_language);
             this.groupBox1.Controls.Add(this.cb_all_cameras);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(489, 398);
+            this.groupBox1.Size = new System.Drawing.Size(489, 297);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Capture Settings";
+            this.groupBox1.Text = "Capture settings";
             // 
             // numericUpDownCamCount
             // 
             this.numericUpDownCamCount.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.numericUpDownCamCount.Location = new System.Drawing.Point(157, 104);
+            this.numericUpDownCamCount.Location = new System.Drawing.Point(120, 21);
             this.numericUpDownCamCount.Maximum = new decimal(new int[] {
             4,
             0,
@@ -80,7 +76,7 @@
             0,
             0});
             this.numericUpDownCamCount.Name = "numericUpDownCamCount";
-            this.numericUpDownCamCount.Size = new System.Drawing.Size(67, 55);
+            this.numericUpDownCamCount.Size = new System.Drawing.Size(104, 55);
             this.numericUpDownCamCount.TabIndex = 7;
             this.numericUpDownCamCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDownCamCount.Value = global::FaceDetection.Properties.Settings.Default.camera_count;
@@ -93,7 +89,7 @@
             this.groupBox2.Controls.Add(this.storePath);
             this.groupBox2.Location = new System.Drawing.Point(230, 18);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(253, 374);
+            this.groupBox2.Size = new System.Drawing.Size(253, 275);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Select save path";
@@ -105,14 +101,14 @@
             this.groupBox12.Controls.Add(this.cb_delete_old);
             this.groupBox12.Location = new System.Drawing.Point(6, 171);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(241, 197);
+            this.groupBox12.Size = new System.Drawing.Size(241, 99);
             this.groupBox12.TabIndex = 3;
             this.groupBox12.TabStop = false;
             // 
             // nud_erase_old
             // 
             this.nud_erase_old.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "erase_after", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nud_erase_old.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.nud_erase_old.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.nud_erase_old.Location = new System.Drawing.Point(92, 22);
             this.nud_erase_old.Maximum = new decimal(new int[] {
             365,
@@ -125,7 +121,7 @@
             0,
             0});
             this.nud_erase_old.Name = "nud_erase_old";
-            this.nud_erase_old.Size = new System.Drawing.Size(143, 71);
+            this.nud_erase_old.Size = new System.Drawing.Size(143, 55);
             this.nud_erase_old.TabIndex = 3;
             this.nud_erase_old.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nud_erase_old.Value = global::FaceDetection.Properties.Settings.Default.erase_after;
@@ -134,7 +130,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label3.Location = new System.Drawing.Point(90, 96);
+            this.label3.Location = new System.Drawing.Point(90, 80);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(145, 12);
             this.label3.TabIndex = 2;
@@ -187,36 +183,11 @@
             // 
             this.label26.AutoSize = true;
             this.label26.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label26.Location = new System.Drawing.Point(118, 162);
+            this.label26.Location = new System.Drawing.Point(118, 79);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(106, 12);
             this.label26.TabIndex = 1;
             this.label26.Text = "Connected cameras";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(6, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Display language";
-            // 
-            // cm_language
-            // 
-            this.cm_language.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cm_language.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cm_language.FormattingEnabled = true;
-            this.cm_language.Items.AddRange(new object[] {
-            "English",
-            "日本語"});
-            this.cm_language.Location = new System.Drawing.Point(8, 51);
-            this.cm_language.Name = "cm_language";
-            this.cm_language.Size = new System.Drawing.Size(216, 35);
-            this.cm_language.TabIndex = 2;
-            this.cm_language.Text = global::FaceDetection.Properties.Settings.Default.language;
-            this.cm_language.SelectedIndexChanged += new System.EventHandler(this.Cm_language_SelectedIndexChanged);
             // 
             // cb_all_cameras
             // 
@@ -225,7 +196,7 @@
             this.cb_all_cameras.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "show_all_cams_simulteneously", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_all_cameras.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cb_all_cameras.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cb_all_cameras.Location = new System.Drawing.Point(6, 370);
+            this.cb_all_cameras.Location = new System.Drawing.Point(19, 111);
             this.cb_all_cameras.Name = "cb_all_cameras";
             this.cb_all_cameras.Size = new System.Drawing.Size(205, 16);
             this.cb_all_cameras.TabIndex = 5;
@@ -236,10 +207,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(512, 420);
+            this.ClientSize = new System.Drawing.Size(512, 319);
             this.Controls.Add(this.groupBox1);
             this.Name = "CameraSettingsForm";
-            this.Text = "CameraSettingsForm";
+            this.Text = "Capture settings";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CameraSettingsForm_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCamCount)).EndInit();
@@ -264,8 +236,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox storePath;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cm_language;
         private System.Windows.Forms.CheckBox cb_all_cameras;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialogStoreFolder;
     }

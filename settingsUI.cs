@@ -187,5 +187,17 @@ namespace FaceDetection
             Properties.Settings.Default.selectedCaptureMethod = cm_capture_mode.SelectedIndex;
             Properties.Settings.Default.Save();
         }
+
+        private void Button_cameraProperties_MouseClick(object sender, MouseEventArgs e)
+        {
+            //Show the property window for the selected camera
+
+        }
+
+        private void Button_capture_settings_Click(object sender, EventArgs e)
+        {
+            //Call the general settings window
+
+        }
     }
 }
