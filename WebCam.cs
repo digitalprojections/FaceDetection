@@ -11,8 +11,7 @@ using System.Windows.Forms;
 namespace FaceDetection
 {
     class WebCam
-    {
-        
+    {        
         private Panel cpanel;
 
         Guid CLSID_VideoCaptureSources = new Guid("{860BB310-5D01-11D0-BD3B-00A0C911CE86}"); //

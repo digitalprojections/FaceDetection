@@ -1,0 +1,9 @@
+C:\Users\HP0B\source\repos\FaceDetection\obj\x86\Release\FaceDetection.csprojAssemblyReference.cache
+C:\Users\HP0B\source\repos\FaceDetection\obj\x86\Release\FaceDetection.CameraSettingsForm.resources
+C:\Users\HP0B\source\repos\FaceDetection\obj\x86\Release\FaceDetection.MainForm.resources
+C:\Users\HP0B\source\repos\FaceDetection\obj\x86\Release\FaceDetection.Properties.Resources.resources
+C:\Users\HP0B\source\repos\FaceDetection\obj\x86\Release\FaceDetection.settingsUI.resources
+C:\Users\HP0B\source\repos\FaceDetection\obj\x86\Release\FaceDetection.settingsUI.en-US.resources
+C:\Users\HP0B\source\repos\FaceDetection\obj\x86\Release\FaceDetection.settingsUI.ja-JP.resources
+C:\Users\HP0B\source\repos\FaceDetection\obj\x86\Release\FaceDetection.csproj.GenerateResource.cache
+C:\Users\HP0B\source\repos\FaceDetection\obj\x86\Release\FaceDetection.csproj.CoreCompileInputs.cache
