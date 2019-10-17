@@ -22,13 +22,13 @@ namespace FaceDetection
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+            //AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
             //Application.Run(new mainForm(vs));
             IReadOnlyCollection<string> vs1 = (IReadOnlyCollection<string>) vs;
 
             //
             FormCollection forms = Application.OpenForms;
-            if (forms["MainForm"]!=null)
+            if (forms["MainForm"] !=null)
             {
                 MainForm.HandleParameters(vs1);
             }
@@ -37,27 +37,14 @@ namespace FaceDetection
                 try
                 {
                     SingleInstanceApplication.Run(new MainForm(vs1), NewInstanceHandler);
-                    MainForm.HandleParameters(vs1);
+                    //MainForm.HandleParameters(vs1);
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.ToString());
                 }
             }
-        }
-
-        private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
-        {
-            /*
-             Atomにインストールすると、OpenH264Lib.dllが見つからない問題を改善出来るか確認の為に
-             */
-            using (var str = Assembly.GetExecutingAssembly().GetManifestResourceStream("FaceDetection.OpenH264Lib.dll"))
-            {
-                byte[] assemblyData = new byte[str.Length];
-                str.Read(assemblyData, 0, assemblyData.Length);
-                return Assembly.Load(assemblyData);
-            }
-        }
+        }                
 
         public static void NewInstanceHandler(object sender, StartupNextInstanceEventArgs e)
         {

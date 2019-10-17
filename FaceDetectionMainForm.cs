@@ -9,14 +9,16 @@ using DirectShowLib;
 using System.Runtime.InteropServices.ComTypes;
 
 
+
+
 namespace FaceDetection
 {
     public partial class MainForm : Form
     {
         //User actions
         private readonly Timer timer = new Timer();
-        private readonly static Timer capTimer = new Timer();
-        private readonly static Timer frameTimer = new Timer();
+        private readonly Timer face_timer = new Timer();
+        private readonly Timer datetime_ui_updater = new Timer();
         
         // Camera choice
         //private CameraChoice _CameraChoice = new CameraChoice();
@@ -29,6 +31,9 @@ namespace FaceDetection
         private static Label camera_num;
         private static FlowLayoutPanel controlBut;
         private static Panel cameraPanel;
+        WebCam camera;
+
+
 
         //User actions end
         static settingsUI settingUI;
@@ -37,73 +42,21 @@ namespace FaceDetection
         static Form camform;
         bool initrec = false;
         
-        string fileName = string.Format("video_out.mp4");
-        int backend_idx = 0; //any backend;
-
         public static Panel CameraPanel { get => cameraPanel;}
         public static MainForm GetMainForm { get => mainForm;}
-
-        //readonly String fileName = String.Format("c:\video_out.mp4");
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             InitializeComponent();
-            //this.cameraControl = new Camera_NET.CameraControl();
-            if (settingUI == null)
-            {
-
-                settingUI = new settingsUI();
-                timer.Tick += new EventHandler(ShowButtons);//制御ボタンの非/表示用クリックタイマー
-                capTimer.Tick += new EventHandler(CaptureFace);
-                capTimer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
-                capTimer.Start();
-
-                frameTimer.Interval = 1000 / Decimal.ToInt32(Properties.Camera1.Default.frame_rate);
-                frameTimer.Start();
-                frameTimer.Tick += new EventHandler(ProcessFrame);
-
-            }
-
-            cameraPanel = panelCamera;
-            
-
-            /*
-             * Application.Idle += ProcessFrame;
-             */
-            pb_recording = pbRecording;
-            pbRecording.BackColor = Color.Transparent;
-            dateTimeLabel.BackColor = Color.Transparent;
-            testparam = testing_params;
-
-            this.Location = new Point(Decimal.ToInt32(Properties.Camera1.Default.pos_x), Decimal.ToInt32(Properties.Camera1.Default.pos_y));
-            //しばらく　画面サイズをキャプチャーサイズに合わせましょう
-            //後で設定サイスに戻す！！！
-            this.Size = new Size(Decimal.ToInt32(Properties.Camera1.Default.view_width), Decimal.ToInt32(Properties.Camera1.Default.view_height));
-            //this.Size = new Size(), Properties.Camera1.Default.view_height);
-
-            this.TopMost = Properties.Settings.Default.window_on_top;
-            Debug.WriteLine("TOPMOST 80");
-            mainForm = this;
-            
-            current_date_text = dateTimeLabel;
-            camera_num = camera_number;
-            controlBut = controlButtons;
-            FormChangesApply();
 
             if (vs != null && vs.Count() > 0)
             {
                 HandleParameters(vs);
             }
 
-            Debug.WriteLine(Convert.ToInt32(Properties.Camera1.Default.view_width) + " WIDTH");
-            camform = this;
-
-            //var path = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"/test.mp4";
-            //var encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win32.dll");
-
-            camform.FormClosing += (s, ev) => {
-                Debug.WriteLine("recording ended");
-                frameTimer.Stop();
-            };
+             
+            
+            
+            
         }
 
         private void ProcessFrame(object sender, EventArgs eventArgs)
@@ -302,41 +255,7 @@ namespace FaceDetection
                             break;
                     }
                 }
-            }
-            else if (parameters.Count >= 0)//!!!!!!!!!!!! temporary error check, fix it to Count > 0
-            {
-
-                switch (parameters.ElementAt(0))
-                {
-                    case "-c":
-                        try
-                        {
-                            if (parameters.ElementAt(1) == "1")
-                            {
-                                if (settingUI != null && settingUI.Visible == false)
-                                {
-                                    settingUI.TopMost = true;
-                                    mainForm.TopMost = false;
-                                    settingUI.Show();
-                                    Debug.WriteLine(settingUI);
-                                    Debug.WriteLine(mainForm);
-                                }
-                            }
-                            else
-                            {
-                                settingUI.Hide();
-                                FormChangesApply();
-                            }
-                        }
-                        catch (ArgumentOutOfRangeException e)
-                        {
-                            Debug.WriteLine(e.ToString() + " 421st line");
-                            //MessageBox.Show("Incorrect or missing parameters");
-                        }
-                        break;
-                }
-
-            }
+            }            
         }
         public static void HandleParameters(String[] parameters)
         {
@@ -345,6 +264,8 @@ namespace FaceDetection
         }
         public void ShowButtons(object sender, EventArgs eventArgs)
         {
+            camera = new WebCam(panelCamera, Decimal.ToInt32(Properties.Camera1.Default.view_width), Decimal.ToInt32(Properties.Camera1.Default.view_height));
+
             if (timer.Enabled == true)
             {
                 timer.Stop();
@@ -362,7 +283,7 @@ namespace FaceDetection
         }
         public void HoldButton(object sender, MouseEventArgs eventArgs)
         {
-            Debug.WriteLine("mouse down");
+            Console.WriteLine("mouse down");
             timer.Enabled = true;
             timer.Interval = 500;//Set it to 3000 for production
             timer.Start();
@@ -406,6 +327,7 @@ namespace FaceDetection
 
         private void ShowSettings(object sender, EventArgs e)
         {
+            
             if (settingUI.Visible == false)
             {
                 settingUI.TopMost = true;
@@ -437,9 +359,9 @@ namespace FaceDetection
         {
             camera_num.Visible = Properties.Settings.Default.show_camera_no;
             current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
-            capTimer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
+            //capTimer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
             mainForm.TopMost = Properties.Settings.Default.window_on_top;
-            frameTimer.Interval = 1000 / Decimal.ToInt32(Properties.Camera1.Default.frame_rate);
+            //frameTimer.Interval = 1000 / Decimal.ToInt32(Properties.Camera1.Default.frame_rate);
             if (Properties.Settings.Default.show_window_pane == true)
             {
                 mainForm.FormBorderStyle = FormBorderStyle.Sizable;
@@ -482,15 +404,18 @@ namespace FaceDetection
             Properties.Camera1.Default.view_height = Convert.ToDecimal(this.Height);
             Properties.Camera1.Default.Save();
             Debug.WriteLine(Properties.Camera1.Default.view_width);
+            //camera.videoWindow.SetWindowPosition(0, 0, this.Width, this.Height);            
         }
 
         private void SnapShot(object sender, EventArgs e)
         {
             Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot");
-            //var timage = imaMat.ToImage<Bgr, Byte>();
+
+            //Bitmap bitmap = camera.GetBitmapImage;
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
-            //timage.Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
+            //bitmap.Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
             //timage.Dispose();
+
         }
         private void StartVideoRecording(object sender, EventArgs e)
         {
@@ -584,6 +509,62 @@ namespace FaceDetection
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            if (settingUI == null)
+            {
+
+                settingUI = new settingsUI();
+                timer.Tick += new EventHandler(ShowButtons);//制御ボタンの非/表示用クリックタイマー
+                face_timer.Tick += new EventHandler(CaptureFace);
+                face_timer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
+                face_timer.Start();
+
+                datetime_ui_updater.Interval = 1000 / Decimal.ToInt32(Properties.Camera1.Default.frame_rate);
+                datetime_ui_updater.Start();
+                datetime_ui_updater.Tick += new EventHandler(ProcessFrame);
+
+            }
+
+            cameraPanel = panelCamera;
+
+
+            /*
+             * Application.Idle += ProcessFrame;
+             */
+            pb_recording = pbRecording;
+            pbRecording.BackColor = Color.Transparent;
+            dateTimeLabel.BackColor = Color.Transparent;
+            testparam = testing_params;
+
+            //Set this CAMERA Dynamically to the relevant one
+            this.Location = new Point(Decimal.ToInt32(Properties.Camera1.Default.pos_x), Decimal.ToInt32(Properties.Camera1.Default.pos_y));
+            //しばらく　画面サイズをキャプチャーサイズに合わせましょう
+            //後で設定サイスに戻す！！！
+            //
+            this.Size = new Size(Decimal.ToInt32(Properties.Camera1.Default.view_width), Decimal.ToInt32(Properties.Camera1.Default.view_height));
+            //this.Size = new Size(), Properties.Camera1.Default.view_height);
+
+            this.TopMost = Properties.Settings.Default.window_on_top;
+            mainForm = this;
+            current_date_text = dateTimeLabel;
+            camera_num = camera_number;
+            controlBut = controlButtons;
+
+
+            //FormChangesApply();
+
+            
+
+            Debug.WriteLine(Convert.ToInt32(Properties.Camera1.Default.view_width) + " WIDTH");
+            camform = this;
+
+            //var path = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"/test.mp4";
+            //var encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win32.dll");
+
+            camform.FormClosing += (s, ev) => {
+                Debug.WriteLine("recording ended");
+                //frameTimer.Stop();
+            };
+
             // Fill camera list combobox with available cameras
             FillCameraList();
 
@@ -608,6 +589,11 @@ namespace FaceDetection
         private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -11,6 +11,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Globalization;
 using System.Threading;
+using DirectShowLib;
+
 
 namespace FaceDetection
 {
@@ -18,18 +20,37 @@ namespace FaceDetection
     {
         CameraSettingsForm cameraSettingsForm;
 
+        DsDevice[] capDevices;
+        string[] camera_names;
+        
        
         public settingsUI()
         {
             InitializeComponent();
 
+            this.Width = 550;
+
+            this.ControlBox = false;
+
             cameraSettingsForm = new CameraSettingsForm();
+            
+            // Get the collection of video devices
+            capDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
+            camera_names = new string[capDevices.Length];
+            for (int i = 0; i < capDevices.Length; i++)
+            {
+                camera_names[i] = capDevices[i].Name;
+            }
+            
+            cm_camera_number.Items.AddRange(camera_names);
+            
+
         }       
         
         private void closeSettings(object sender, EventArgs e)
         {
-            /*CANCEL
-             * 変更は捨てられる
+            /*CANCEL BUTTON
+             * 変更内容は捨てられる
             */
             this.Hide();
         }

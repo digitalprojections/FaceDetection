@@ -123,6 +123,16 @@ namespace FaceDetection.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap player_record {
+            get {
+                object obj = ResourceManager.GetObject("player_record", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Record_Pressed_icon {
             get {
                 object obj = ResourceManager.GetObject("Record-Pressed-icon", resourceCulture);

@@ -30,36 +30,21 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.camera_number = new System.Windows.Forms.Label();
             this.testing_params = new System.Windows.Forms.Label();
             this.controlButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.folderButton = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.settingsButton = new System.Windows.Forms.Button();
             this.snapshotButton = new System.Windows.Forms.Button();
             this.cameraButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.dateTimeLabel = new System.Windows.Forms.Label();
-            this.pbRecording = new System.Windows.Forms.PictureBox();
             this.panelCamera = new System.Windows.Forms.Panel();
+            this.camera_number = new System.Windows.Forms.Label();
+            this.pbRecording = new System.Windows.Forms.PictureBox();
             this.controlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).BeginInit();
             this.SuspendLayout();
-            // 
-            // camera_number
-            // 
-            this.camera_number.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.camera_number.AutoSize = true;
-            this.camera_number.BackColor = System.Drawing.Color.Transparent;
-            this.camera_number.Enabled = false;
-            this.camera_number.Font = new System.Drawing.Font("MS UI Gothic", 50F);
-            this.camera_number.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.camera_number.Location = new System.Drawing.Point(725, 9);
-            this.camera_number.Name = "camera_number";
-            this.camera_number.Size = new System.Drawing.Size(63, 67);
-            this.camera_number.TabIndex = 10;
-            this.camera_number.Text = "1";
-            this.camera_number.Click += new System.EventHandler(this.Camera_number_Click);
             // 
             // testing_params
             // 
@@ -101,6 +86,33 @@
             this.folderButton.TabIndex = 3;
             this.folderButton.UseVisualStyleBackColor = false;
             this.folderButton.Click += new System.EventHandler(this.OpenStoreLocation);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "camera-icon.png");
+            this.imageList1.Images.SetKeyName(1, "Configuration-icon.png");
+            this.imageList1.Images.SetKeyName(2, "video-camera-icon.png");
+            this.imageList1.Images.SetKeyName(3, "Windows-icon.png");
+            this.imageList1.Images.SetKeyName(4, "Actions-window-close-icon.png");
+            this.imageList1.Images.SetKeyName(5, "Camera-Front-icon.png");
+            this.imageList1.Images.SetKeyName(6, "delete-1-icon.png");
+            this.imageList1.Images.SetKeyName(7, "Folder-icon.png");
+            this.imageList1.Images.SetKeyName(8, "Settings-2-icon.png");
+            this.imageList1.Images.SetKeyName(9, "Tools-icon.png");
+            this.imageList1.Images.SetKeyName(10, "Video-Camera-2-icon.png");
+            this.imageList1.Images.SetKeyName(11, "Pause-Normal-Red-icon.png");
+            this.imageList1.Images.SetKeyName(12, "Record-Pressed-icon.png");
+            this.imageList1.Images.SetKeyName(13, "189-1894906_photography-camera-outline-comments-camera-icon-outline-hd.png");
+            this.imageList1.Images.SetKeyName(14, "405-4054031_png-file-svg-transparent-video-camera-icon-clipart.png");
+            this.imageList1.Images.SetKeyName(15, "26894-200.png");
+            this.imageList1.Images.SetKeyName(16, "Blank_Folder-512.png");
+            this.imageList1.Images.SetKeyName(17, "settings__184833.png");
+            this.imageList1.Images.SetKeyName(18, "584abf212912007028bd9334.png");
+            this.imageList1.Images.SetKeyName(19, "5879208-video-camera-png-vector-psd-and-clipart-with-transparent-video-camera-log" +
+        "o-png-360_360_preview.png");
+            this.imageList1.Images.SetKeyName(20, "player_record.png");
             // 
             // settingsButton
             // 
@@ -163,39 +175,14 @@
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.ShowButtons);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "camera-icon.png");
-            this.imageList1.Images.SetKeyName(1, "Configuration-icon.png");
-            this.imageList1.Images.SetKeyName(2, "video-camera-icon.png");
-            this.imageList1.Images.SetKeyName(3, "Windows-icon.png");
-            this.imageList1.Images.SetKeyName(4, "Actions-window-close-icon.png");
-            this.imageList1.Images.SetKeyName(5, "Camera-Front-icon.png");
-            this.imageList1.Images.SetKeyName(6, "delete-1-icon.png");
-            this.imageList1.Images.SetKeyName(7, "Folder-icon.png");
-            this.imageList1.Images.SetKeyName(8, "Settings-2-icon.png");
-            this.imageList1.Images.SetKeyName(9, "Tools-icon.png");
-            this.imageList1.Images.SetKeyName(10, "Video-Camera-2-icon.png");
-            this.imageList1.Images.SetKeyName(11, "Pause-Normal-Red-icon.png");
-            this.imageList1.Images.SetKeyName(12, "Record-Pressed-icon.png");
-            this.imageList1.Images.SetKeyName(13, "189-1894906_photography-camera-outline-comments-camera-icon-outline-hd.png");
-            this.imageList1.Images.SetKeyName(14, "405-4054031_png-file-svg-transparent-video-camera-icon-clipart.png");
-            this.imageList1.Images.SetKeyName(15, "26894-200.png");
-            this.imageList1.Images.SetKeyName(16, "Blank_Folder-512.png");
-            this.imageList1.Images.SetKeyName(17, "settings__184833.png");
-            this.imageList1.Images.SetKeyName(18, "584abf212912007028bd9334.png");
-            this.imageList1.Images.SetKeyName(19, "5879208-video-camera-png-vector-psd-and-clipart-with-transparent-video-camera-log" +
-        "o-png-360_360_preview.png");
-            // 
             // dateTimeLabel
             // 
             this.dateTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dateTimeLabel.AutoSize = true;
-            this.dateTimeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.dateTimeLabel.BackColor = System.Drawing.Color.Black;
             this.dateTimeLabel.Enabled = false;
             this.dateTimeLabel.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.dateTimeLabel.ForeColor = System.Drawing.Color.White;
             this.dateTimeLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dateTimeLabel.Location = new System.Drawing.Point(12, 417);
             this.dateTimeLabel.Name = "dateTimeLabel";
@@ -203,18 +190,6 @@
             this.dateTimeLabel.TabIndex = 13;
             this.dateTimeLabel.Text = "Date and time";
             this.dateTimeLabel.UseCompatibleTextRendering = true;
-            // 
-            // pbRecording
-            // 
-            this.pbRecording.BackColor = System.Drawing.Color.Transparent;
-            this.pbRecording.Image = global::FaceDetection.Properties.Resources.Record_Pressed_icon1;
-            this.pbRecording.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pbRecording.Location = new System.Drawing.Point(12, 12);
-            this.pbRecording.Name = "pbRecording";
-            this.pbRecording.Size = new System.Drawing.Size(52, 52);
-            this.pbRecording.TabIndex = 5;
-            this.pbRecording.TabStop = false;
-            this.pbRecording.Visible = false;
             // 
             // panelCamera
             // 
@@ -225,6 +200,38 @@
             this.panelCamera.Name = "panelCamera";
             this.panelCamera.Size = new System.Drawing.Size(800, 450);
             this.panelCamera.TabIndex = 0;
+            this.panelCamera.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // camera_number
+            // 
+            this.camera_number.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.camera_number.AutoSize = true;
+            this.camera_number.BackColor = System.Drawing.Color.Black;
+            this.camera_number.Enabled = false;
+            this.camera_number.Font = new System.Drawing.Font("MS UI Gothic", 50F);
+            this.camera_number.ForeColor = System.Drawing.SystemColors.Control;
+            this.camera_number.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.camera_number.Location = new System.Drawing.Point(725, 9);
+            this.camera_number.Name = "camera_number";
+            this.camera_number.Size = new System.Drawing.Size(63, 67);
+            this.camera_number.TabIndex = 10;
+            this.camera_number.Text = "1";
+            this.camera_number.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.camera_number.Click += new System.EventHandler(this.Camera_number_Click);
+            // 
+            // pbRecording
+            // 
+            this.pbRecording.BackColor = System.Drawing.Color.Transparent;
+            this.pbRecording.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pbRecording.Image = global::FaceDetection.Properties.Resources.player_record;
+            this.pbRecording.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pbRecording.Location = new System.Drawing.Point(12, 12);
+            this.pbRecording.Name = "pbRecording";
+            this.pbRecording.Size = new System.Drawing.Size(52, 52);
+            this.pbRecording.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbRecording.TabIndex = 5;
+            this.pbRecording.TabStop = false;
+            this.pbRecording.Visible = false;
             // 
             // MainForm
             // 
@@ -255,7 +262,6 @@
 
         
         private System.Windows.Forms.PictureBox pbRecording;
-        private System.Windows.Forms.Label camera_number;
         private System.Windows.Forms.Label testing_params;
         private System.Windows.Forms.FlowLayoutPanel controlButtons;
         private System.Windows.Forms.Button folderButton;
@@ -266,5 +272,6 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label dateTimeLabel;
         private System.Windows.Forms.Panel panelCamera;
+        private System.Windows.Forms.Label camera_number;
     }
 }

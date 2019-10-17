@@ -43,6 +43,8 @@
             this.label26 = new System.Windows.Forms.Label();
             this.cb_all_cameras = new System.Windows.Forms.CheckBox();
             this.folderBrowserDialogStoreFolder = new System.Windows.Forms.FolderBrowserDialog();
+            this.button_apply = new System.Windows.Forms.Button();
+            this.button_cancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox12.SuspendLayout();
@@ -54,6 +56,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button_cancel);
+            this.groupBox1.Controls.Add(this.button_apply);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.groupBox12);
             this.groupBox1.Controls.Add(this.numericUpDownCamCount);
@@ -183,7 +187,7 @@
             this.groupBox2.Controls.Add(this.storePath);
             this.groupBox2.Location = new System.Drawing.Point(240, 18);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(243, 238);
+            this.groupBox2.Size = new System.Drawing.Size(243, 171);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Select save path";
@@ -249,11 +253,35 @@
             this.cb_all_cameras.Text = "Display all cameras simulteneously";
             this.cb_all_cameras.UseVisualStyleBackColor = true;
             // 
+            // button_apply
+            // 
+            this.button_apply.Location = new System.Drawing.Point(240, 196);
+            this.button_apply.Name = "button_apply";
+            this.button_apply.Size = new System.Drawing.Size(106, 60);
+            this.button_apply.TabIndex = 11;
+            this.button_apply.Text = "OK";
+            this.button_apply.UseVisualStyleBackColor = true;
+            this.button_apply.Click += new System.EventHandler(this.Button_apply_Click);
+            // 
+            // button_cancel
+            // 
+            this.button_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button_cancel.Location = new System.Drawing.Point(377, 195);
+            this.button_cancel.Name = "button_cancel";
+            this.button_cancel.Size = new System.Drawing.Size(106, 60);
+            this.button_cancel.TabIndex = 11;
+            this.button_cancel.Text = "Cancel";
+            this.button_cancel.UseVisualStyleBackColor = true;
+            this.button_cancel.Click += new System.EventHandler(this.Button_cancel_Click);
+            // 
             // CameraSettingsForm
             // 
+            this.AcceptButton = this.button_apply;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.button_cancel;
             this.ClientSize = new System.Drawing.Size(509, 286);
+            this.ControlBox = false;
             this.Controls.Add(this.groupBox1);
             this.Name = "CameraSettingsForm";
             this.Text = "Capture settings";
@@ -288,5 +316,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialogStoreFolder;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox_recordUponStart;
+        private System.Windows.Forms.Button button_cancel;
+        private System.Windows.Forms.Button button_apply;
     }
 }

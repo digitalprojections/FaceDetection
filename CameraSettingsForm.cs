@@ -58,5 +58,17 @@ namespace FaceDetection
                 MessageBox.Show(ioe.Message);
             }
         }
+
+        private void Button_apply_Click(object sender, EventArgs e)
+        {
+            //Save settings
+            Properties.Settings.Default.Save();
+            this.Hide();
+        }
+
+        private void Button_cancel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

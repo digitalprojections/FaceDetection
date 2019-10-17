@@ -8,14 +8,22 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
+using FaceDetection;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Drawing.Imaging;
 
-namespace WebCamPerfTestProject
+namespace WebCameraX
 {
-    class CameraManager
+    class CameraManager : IDisposable
     {
-        public CameraManager()
+        public CameraManager(Panel panel, int w, int h)
         {
-            
+            GetInterfaces();
+
+            this.panel = panel;
+            _width = w;
+            _height = h;
         }
 
         public enum PlayState : int
@@ -30,20 +38,25 @@ namespace WebCamPerfTestProject
         private PlayState CurrentState = PlayState.Stopped;
         private int WM_GRAPHNOTIFY = Convert.ToInt32("0X8000", 16) + 1;
         public IVideoWindow videoWindow = null;
-        private IMediaControl mediaControl = null;        
+        private IMediaControl mediaControl = null;
         private IMediaEventEx mediaEventEx = null;
         private IGraphBuilder graph = null;
         private ICaptureGraphBuilder2 pGraphBuilder = null;
         private IBaseFilter pUSB = null;
         private IBaseFilter renderFilter = null;
-        private IAMStreamConfig streamConfig = null;        
+        private IAMStreamConfig streamConfig = null;
+        ISampleGrabber i_grabber = null;
 
         private VideoInfoHeader format = null;
         private AMMediaType pmt = null;
+        private int _width;
+        private int _height;
 
         IBaseFilter pSmartTee = null;
         IBaseFilter pAVIMux = null;
-
+        private int selected_camera_index = 0;//defaults to 0 index camera
+        private Panel panel;
+       
         public void GetInterfaces()
         {
             graph = (IGraphBuilder)(new FilterGraph());
@@ -53,50 +66,13 @@ namespace WebCamPerfTestProject
             mediaEventEx = (IMediaEventEx)graph;
             renderFilter = (IBaseFilter)new VideoMixingRenderer9();
 
-            
+
 
             //send notification messages to the control window
             int hr = mediaEventEx.SetNotifyWindow(IntPtr.Zero, WM_GRAPHNOTIFY, IntPtr.Zero);
             DsError.ThrowExceptionForHR(hr);
         }
-        void SetFormat()
-        {
-            int hr = 0;
-            pmt = new AMMediaType();
-            pmt.majorType = MediaType.Video;
-            pmt.subType = MediaSubType.MJPG;
-            pmt.formatType = FormatType.VideoInfo;
-            pmt.fixedSizeSamples = false; //true for 640x480
-            pmt.formatSize = 88;
-            pmt.sampleSize = 2764800; //2764800 614400
-            pmt.temporalCompression = false;
-            //////////////////////////////////
-            format = new VideoInfoHeader();
-            format.SrcRect = new DsRect();
-            format.TargetRect = new DsRect();
-            format.BitRate = 5000000;
-            format.AvgTimePerFrame = 666666;
-            //////////////////////////////////            
-            format.BmiHeader = new BitmapInfoHeader();
-            format.BmiHeader.Size = 40;
-            format.BmiHeader.Width = 1280;
-            format.BmiHeader.Height = 720;
-            format.BmiHeader.Planes = 1;
-            format.BmiHeader.BitCount = 24;
-            format.BmiHeader.Compression = 1196444237; //1196444237 //844715353
-            format.BmiHeader.ImageSize = 2764800; //2764800 614400
-            pmt.formatPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(format));
-            Marshal.StructureToPtr(format, pmt.formatPtr, false);
-            Debug.WriteLine(getCatName(pUSB) + " at line 130");
-            streamConfig = (IAMStreamConfig)GetPin(pUSB, getCatName(pUSB));
-            hr = streamConfig.SetFormat(pmt);
-            DsUtils.FreeAMMediaType(pmt);
-            if (hr < 0)
-            {
-                CapTest.CustomMessage.ShowMessage("Can`t set format");
-                DsError.ThrowExceptionForHR(hr);
-            }
-        }
+        
         public void CaptureVideo(string dstFile)
         {
             IGraphBuilder pGraph = graph;
@@ -147,16 +123,18 @@ namespace WebCamPerfTestProject
             IBaseFilter pSampleGrabber = (IBaseFilter)Activator.CreateInstance(Type.GetTypeFromCLSID(CLSID_SampleGrabber));
             hr = pGraph.AddFilter(pSampleGrabber, "SampleGrabber");
             checkHR(hr, "Can't add SampleGrabber to graph");
+            //i_grabber = (ISampleGrabber)pSampleGrabber;
+            //i_grabber.SetBufferSamples(true);
 
             //connect Smart Tee and SampleGrabber
-            hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Preview"), GetPin(pSampleGrabber, "Input"), null);
-            //hr = pGraphBuilder.RenderStream(PinCategory.Preview, MediaType.Video, pSmartTee, null, pSampleGrabber);
+            //hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Preview"), GetPin(pSampleGrabber, "Input"), null);
+            hr = pGraphBuilder.RenderStream(PinCategory.Preview, MediaType.Video, pSmartTee, null, pSampleGrabber);
             checkHR(hr, "Can't connect Smart Tee and SampleGrabber");
 
             //フォーマットの設定
             //暫くは一時的な値を使用してます
 
-            SetFormat();
+            
 
             //connect Smart Tee and AVI Mux
             hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, pAVIMux);
@@ -169,7 +147,7 @@ namespace WebCamPerfTestProject
             hr = pGraph.AddFilter(renderFilter, "My Render Filter");
             DsError.ThrowExceptionForHR(hr);
 
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSampleGrabber, null, renderFilter);
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, null, pSampleGrabber, renderFilter);
             DsError.ThrowExceptionForHR(hr);
             Debug.WriteLine(DsError.GetErrorText(hr) + " is error in rendering");
 
@@ -215,13 +193,13 @@ namespace WebCamPerfTestProject
 
             //set the video window to be a child of the main window
             //putowner : Sets the owning parent window for the video playback window. 
-            hr = videoWindow.put_Owner(FaceDetection.MainForm.CameraPanel.Handle);
+            hr = videoWindow.put_Owner(panel.Handle);
             DsError.ThrowExceptionForHR(hr);
 
             hr = videoWindow.put_WindowStyle(WindowStyle.Child | WindowStyle.ClipChildren);
             DsError.ThrowExceptionForHR(hr);
 
-            
+
             //Make the video window visible, now that it is properly positioned
             //put_visible : This method changes the visibility of the video window. 
             hr = videoWindow.put_Visible(OABool.True);
@@ -233,11 +211,88 @@ namespace WebCamPerfTestProject
             HandleGraphEvent();
 
             CurrentState = PlayState.Running;
-            
 
-
+            videoWindow.SetWindowPosition(0, 0, _width, _height);
             //videoControl.GetMaxAvailableFrameRate(pUSB.FindPin(""));
         }
+        public static void DeleteMediaType(ref AMMediaType mt)
+        {
+            if (mt.sampleSize != 0) Marshal.FreeCoTaskMem(mt.formatPtr);
+            if (mt.unkPtr != IntPtr.Zero) Marshal.FreeCoTaskMem(mt.unkPtr);
+            mt = null;
+        }
+        public Bitmap GetBitmapImage
+        {
+            get
+            {
+                var mt = new AMMediaType();
+                i_grabber.GetConnectedMediaType(mt);
+                var header = (VideoInfoHeader)Marshal.PtrToStructure(mt.formatPtr, typeof(VideoInfoHeader));
+                var width = header.BmiHeader.Width;
+                var height = header.BmiHeader.Height;
+                var stride = width * (header.BmiHeader.BitCount / 8);
+                DeleteMediaType(ref mt);
+
+                Bitmap result = GetBitmap(i_grabber, width, height, stride);
+
+                //result.Save("testImage.jpeg");
+
+                Debug.WriteLine(width + " " + height + " " + stride + " Must be the IMAGE");
+                return result;
+            }
+        }
+        private Bitmap GetBitmap(ISampleGrabber i_grabber, int width, int height, int stride)
+        {
+            // サンプルグラバから画像を取得するためには
+            // まずサイズ0でGetCurrentBufferを呼び出しバッファサイズを取得し
+            // バッファ確保して再度GetCurrentBufferを呼び出す。
+            // 取得した画像は逆になっているので反転させる必要がある。
+            int sz = 0;
+            i_grabber.GetCurrentBuffer(ref sz, IntPtr.Zero); // IntPtr.Zeroで呼び出してバッファサイズ取得
+            if (sz == 0) return null;
+
+            // メモリ確保し画像データ取得
+            var ptr = Marshal.AllocCoTaskMem(sz);
+            i_grabber.GetCurrentBuffer(ref sz, ptr);
+
+            // 画像データをbyte配列に入れなおす
+            var data = new byte[sz];
+            Marshal.Copy(ptr, data, 0, sz);
+
+            Bitmap result = null;
+
+            try
+            {
+                // 画像を作成
+                result = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+                var bmp_data = result.LockBits(new Rectangle(Point.Empty, result.Size), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+
+
+                //cambytes.AddRange(data);
+                //Console.WriteLine(cambytes.Count);
+                // 上下反転させながら1行ごとコピー
+                for (int y = 0; y < height; y++)
+                {
+                    var src_idx = sz - (stride * (y + 1)); // 最終行から
+                    //Console.WriteLine(src_idx);
+                    var dst = new IntPtr(bmp_data.Scan0.ToInt32() + (stride * y));
+                    Marshal.Copy(data, src_idx, dst, stride);
+                    //
+                    //Console.WriteLine(src_idx.ToString() + " data length");
+                }
+
+                result.UnlockBits(bmp_data);
+                Marshal.FreeCoTaskMem(ptr);
+            }
+            catch (ArgumentException ax)
+            {
+                //System.Windows.Forms.MessageBox.Show(ax.Message);
+                Console.WriteLine(ax.Message);
+            }
+
+            return result;
+        }
+
         public void ReleaseInterfaces()
         {
             if (mediaControl != null)
@@ -322,13 +377,13 @@ namespace WebCamPerfTestProject
                 devs.Add(source);
             }
 
-            Debug.WriteLine(devs.Count + " ==== cameras found");
+            Debug.WriteLine(devs.Count + " === cameras found");
 
             Marshal.ReleaseComObject(devEnum);
             Marshal.ReleaseComObject(classEnum);
 
             //we can now select cameras
-            return (IBaseFilter)devs[0];
+            return (IBaseFilter)devs[selected_camera_index];
         }
         //カメラのPINにアクセス
         static IPin GetPin(IBaseFilter filter, string pinname)
@@ -337,7 +392,7 @@ namespace WebCamPerfTestProject
             int hr = filter.EnumPins(out epins);
             if (hr < 0)
             {
-                CapTest.CustomMessage.ShowMessage("Can't enumerate pins");
+                CustomMessage.ShowMessage("Can't enumerate pins");
                 DsError.ThrowExceptionForHR(hr);
             }
 
@@ -348,13 +403,13 @@ namespace WebCamPerfTestProject
                 PinInfo pinfo;
                 pins[0].QueryPinInfo(out pinfo);
                 bool found = (pinfo.name == pinname);
-                CapTest.CustomMessage.ShowMessage(pinfo.name + " is PIN NAME");
+                CustomMessage.ShowMessage(pinfo.name + " is PIN NAME");
                 DsUtils.FreePinInfo(pinfo);
                 if (found)
                     return pins[0];
             }
 
-            CapTest.CustomMessage.ShowMessage("Pin not found");
+            CustomMessage.ShowMessage("Pin not found");
             DsError.ThrowExceptionForHR(hr);
 
             return null;
@@ -367,7 +422,7 @@ namespace WebCamPerfTestProject
             int hr = filter.EnumPins(out epins);
             if (hr < 0)
             {
-                CapTest.CustomMessage.ShowMessage("Can't enumerate pins");
+                CustomMessage.ShowMessage("Can't enumerate pins");
                 DsError.ThrowExceptionForHR(hr);
             }
 
@@ -377,13 +432,15 @@ namespace WebCamPerfTestProject
             {
                 PinInfo pinfo;
                 pins[0].QueryPinInfo(out pinfo);
-                bool found = (pinfo.name == "Capture" || pinfo.name == "キャプチャ");
-                CapTest.CustomMessage.ShowMessage(pinfo.name + " is pinname on getCatName");
+
+                //bool found = (pinfo.name == "Capture" || pinfo.name == "キャプチャ");
+                bool found = (pinfo.dir == PinDirection.Output);                
+                CustomMessage.ShowMessage(pinfo.name + " is pinname on getCatName");
                 DsUtils.FreePinInfo(pinfo);
                 if (found)
                     retval = pinfo.name;
             }
-            CapTest.CustomMessage.ShowMessage("Pin found " + retval);
+            CustomMessage.ShowMessage("Pin found " + retval);
             return retval;
         }
 
@@ -407,6 +464,11 @@ namespace WebCamPerfTestProject
                 Console.WriteLine(evCode + " -evCode " + evParam1 + " " + evParam2);
                 // Insert event processing code here, if desired (see http://msdn2.microsoft.com/en-us/library/ms783649.aspx)
             }
+        }
+
+        public void Dispose()
+        {
+            ReleaseInterfaces();
         }
     }
 }
