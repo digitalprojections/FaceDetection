@@ -42,7 +42,7 @@ namespace FaceDetection
             //add YOUR Camera
 
 
-            pFHDCamera = CreateFilterByName(@"FHD Camera", CLSID_VideoCaptureSources);            
+            pFHDCamera = CreateFilterByName(dsDevices[0].Name, CLSID_VideoCaptureSources);            
             hr = pGraph.AddFilter(pFHDCamera, "FHD Camera");
             checkHR(hr, "Can't add FHD Camera to graph");
 
