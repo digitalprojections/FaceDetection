@@ -8,9 +8,7 @@ using System.IO;
 using DirectShowLib;
 using System.Runtime.InteropServices.ComTypes;
 using GitHub.secile.Video;
-
-
-
+using System.Configuration;
 
 namespace FaceDetection
 {
@@ -20,10 +18,10 @@ namespace FaceDetection
         private readonly Timer timer = new Timer();
         private readonly Timer face_timer = new Timer();
         private readonly Timer datetime_ui_updater = new Timer();
-        
+
         // Camera choice
         //private CameraChoice _CameraChoice = new CameraChoice();
-
+        
         private static Label testparam;
         private static MainForm mainForm;
         private static PictureBox pb_recording;
@@ -34,6 +32,10 @@ namespace FaceDetection
         private static Panel cameraPanel;
         //WebCam camera;
         UsbCamera usbCamera;
+
+        //PROPERTY
+
+        //private FormSettings settingsBase = Properties.Camera1.Default;
 
 
         //User actions end
@@ -49,6 +51,8 @@ namespace FaceDetection
         {
             InitializeComponent();
 
+            
+
             GitHub.secile.Video.UsbCamera.VideoFormat[] videoFormat = GitHub.secile.Video.UsbCamera.GetVideoFormat(0);
 
             //Showing video formats
@@ -63,18 +67,14 @@ namespace FaceDetection
             }
         }
 
+        /// <summary>
+        /// One second timer to update UI datetime
+        /// </summary>        
         private void ProcessFrame(object sender, EventArgs eventArgs)
         {
-
             try
             {
                 dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                
-
-                if(initrec == true)
-                {
-                   
-                }
             }
             catch (NullReferenceException e)
             {
@@ -83,7 +83,11 @@ namespace FaceDetection
             //Debug.WriteLine(this.Size);     
 
         }
-
+        /// <summary>
+        /// Capture face only works on a PC mode
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="eventArgs"></param>
         private void CaptureFace(object sender, EventArgs eventArgs)
         {
             
@@ -352,9 +356,7 @@ namespace FaceDetection
             {
                 Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
                 Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
-
                 Process.Start(Properties.Settings.Default.video_file_location);
-
             }
             catch (IOException ioe)
             {
@@ -392,25 +394,31 @@ namespace FaceDetection
                     pb_recording.Image = Properties.Resources.Record_Pressed_icon;
                     pb_recording.Visible = true;
                 }
-
             }
             Debug.WriteLine(pb_recording.Visible);
         }
 
         private void LastPositionUpdate(object sender, EventArgs e)
         {
-            Properties.Camera1.Default.pos_x = Convert.ToDecimal(this.Location.X);
-            Properties.Camera1.Default.pos_y = Convert.ToDecimal(this.Location.Y);
-            Properties.Camera1.Default.Save();
-            Debug.WriteLine(Properties.Camera1.Default.pos_x);
+            Properties.Settings.Default["C"+settingUI.Camera_number + "x" ] = Convert.ToDecimal(this.Location.X);
+            Properties.Settings.Default["C" + settingUI.Camera_number + "y"] = Convert.ToDecimal(this.Location.Y);
+            Properties.Settings.Default.Save();
+                        
+            
         }
 
         private void WindowSizeUpdate(object sender, EventArgs e)
         {
-            Properties.Camera1.Default.view_width = Convert.ToDecimal(this.Width);
-            Properties.Camera1.Default.view_height = Convert.ToDecimal(this.Height);
-            Properties.Camera1.Default.Save();
-            Debug.WriteLine(Properties.Camera1.Default.view_width);
+            Console.WriteLine(settingUI.Camera_number);
+            if(settingUI.Camera_number != 0)
+            {
+                Console.WriteLine(Properties.Settings.Default["C" + settingUI.Camera_number + "w"]);
+                Properties.Settings.Default["C" + settingUI.Camera_number + "w"] = Convert.ToDecimal(this.Width);
+                Properties.Settings.Default["C" + settingUI.Camera_number + "h"] = Convert.ToDecimal(this.Height);
+                Properties.Settings.Default.Save();
+            }
+            
+            //Debug.WriteLine(Properties.Camera1.Default.view_width);
             if (usbCamera!=null)
             {
                 usbCamera.SetWindowPosition(new Size(this.Width, this.Height));
@@ -421,7 +429,6 @@ namespace FaceDetection
         private void SnapShot(object sender, EventArgs e)
         {
             Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot");
-
             //Bitmap bitmap = camera.GetBitmapImage;
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
             usbCamera.GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
@@ -464,23 +471,7 @@ namespace FaceDetection
 
         private void ImgCamUser_Click()
         {
-            //CameraChoice _CameraChoice = new CameraChoice();
-            //_CameraChoice.UpdateDeviceList();
-            //IMoniker moniker = _CameraChoice.Devices[0].Mon;
-            //Debug.WriteLine(cameraControl.Moniker);
-            object source = null;
-            Guid iid = typeof(IBaseFilter).GUID;
-            //moniker.BindToObject(null, null, ref iid, out source);
-            IBaseFilter theDevice = (IBaseFilter)source;
-            //SetCamera(moniker, null, null);
-
-            //TEMP code to demo camera properties window
-            /*
-            if (cameraControl.CameraCreated)
-            {
-                Camera.DisplayPropertyPage_Device(cameraControl.Moniker, this.Handle);                
-            }
-            */
+            
         }
      
         
@@ -530,7 +521,7 @@ namespace FaceDetection
                 face_timer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
                 face_timer.Start();
 
-                datetime_ui_updater.Interval = 1000 / Decimal.ToInt32(Properties.Camera1.Default.frame_rate);
+                datetime_ui_updater.Interval = 1000;
                 datetime_ui_updater.Start();
                 datetime_ui_updater.Tick += new EventHandler(ProcessFrame);
 
@@ -538,6 +529,7 @@ namespace FaceDetection
 
             cameraPanel = panelCamera;
 
+            
 
             /*
              * Application.Idle += ProcessFrame;
@@ -548,12 +540,19 @@ namespace FaceDetection
             testparam = testing_params;
 
             //Set this CAMERA Dynamically to the relevant one
-            this.Location = new Point(Decimal.ToInt32(Properties.Camera1.Default.pos_x), Decimal.ToInt32(Properties.Camera1.Default.pos_y));
-            //しばらく　画面サイズをキャプチャーサイズに合わせましょう
-            //後で設定サイスに戻す！！！
-            //
-            this.Size = new Size(Decimal.ToInt32(Properties.Camera1.Default.view_width), Decimal.ToInt32(Properties.Camera1.Default.view_height));
-            //this.Size = new Size(), Properties.Camera1.Default.view_height);
+            if (settingUI.Camera_number!=0)
+            {
+                var camx = Properties.Settings.Default["C" + settingUI.Camera_number + "x"].ToString();
+                var camy = Properties.Settings.Default["C" + settingUI.Camera_number + "y"].ToString();
+                var camw = Properties.Settings.Default["C" + settingUI.Camera_number + "w"].ToString();
+                var camh = Properties.Settings.Default["C" + settingUI.Camera_number + "h"].ToString();
+                this.Location = new Point(Int32.Parse(camx), Int32.Parse(camy));
+                //しばらく　画面サイズをキャプチャーサイズに合わせましょう
+                //後で設定サイスに戻す！！！
+                //
+                this.Size = new Size(Int32.Parse(camw), Int32.Parse(camh));
+                //this.Size = new Size(), Properties.Camera1.Default.view_height);
+            }
 
             this.TopMost = Properties.Settings.Default.window_on_top;
             mainForm = this;
@@ -561,12 +560,9 @@ namespace FaceDetection
             camera_num = camera_number;
             controlBut = controlButtons;
 
-
             //FormChangesApply();
 
-            
-
-            Debug.WriteLine(Convert.ToInt32(Properties.Camera1.Default.view_width) + " WIDTH");
+            Debug.WriteLine(Convert.ToInt32(Properties.Settings.Default.backlight_offset_mins) + " WIDTH");
             camform = this;
 
             //var path = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"/test.mp4";
@@ -608,4 +604,5 @@ namespace FaceDetection
             
         }
     }
+
 }

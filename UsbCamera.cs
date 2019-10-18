@@ -547,6 +547,7 @@ namespace GitHub.secile.Video
             {
                 case FILTER_STATE.Paused: mediaControl.Pause(); break;
                 case FILTER_STATE.Stopped: mediaControl.Stop(); break;
+                case FILTER_STATE.Running: 
                 default: mediaControl.Run(); break;
             }
         }

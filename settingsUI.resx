@@ -121,316 +121,13 @@
   <data name="flowLayoutPanel1.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cm_language.Name" xml:space="preserve">
-    <value>cm_language</value>
-  </data>
-  <data name="&gt;&gt;cm_language.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cm_language.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;cm_language.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;button_cameraProperties.Name" xml:space="preserve">
-    <value>button_cameraProperties</value>
-  </data>
-  <data name="&gt;&gt;button_cameraProperties.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button_cameraProperties.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;button_cameraProperties.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;button_capture_settings.Name" xml:space="preserve">
-    <value>button_capture_settings</value>
-  </data>
-  <data name="&gt;&gt;button_capture_settings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button_capture_settings.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;button_capture_settings.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;button_settings_cancel.Name" xml:space="preserve">
-    <value>button_settings_cancel</value>
-  </data>
-  <data name="&gt;&gt;button_settings_cancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button_settings_cancel.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;button_settings_cancel.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;button_apply.Name" xml:space="preserve">
-    <value>button_apply</value>
-  </data>
-  <data name="&gt;&gt;button_apply.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button_apply.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;button_apply.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;button_settings_save.Name" xml:space="preserve">
-    <value>button_settings_save</value>
-  </data>
-  <data name="&gt;&gt;button_settings_save.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button_settings_save.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;button_settings_save.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;groupBox_viewSettings.Name" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;groupBox_viewSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox_viewSettings.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;groupBox_viewSettings.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;groupBox_functionalitySettings.Name" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
-  </data>
-  <data name="&gt;&gt;groupBox_functionalitySettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox_functionalitySettings.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;groupBox_functionalitySettings.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;cm_camera_number.Name" xml:space="preserve">
-    <value>cm_camera_number</value>
-  </data>
-  <data name="&gt;&gt;cm_camera_number.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cm_camera_number.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;cm_camera_number.ZOrder" xml:space="preserve">
-    <value>10</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="button_cancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="groupBox_cameraNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="groupBox_cameraNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>511, 1482</value>
-  </data>
-  <data name="groupBox_cameraNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="groupBox_cameraNumber.Text" xml:space="preserve">
-    <value>Camera number</value>
-  </data>
-  <data name="&gt;&gt;groupBox_cameraNumber.Name" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;groupBox_cameraNumber.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox_cameraNumber.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;groupBox_cameraNumber.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="flowLayoutPanel1.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
-    <value>TopDown</value>
-  </data>
-  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>540, 607</value>
-  </data>
-  <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="flowLayoutPanel1.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;button_cancel.Name" xml:space="preserve">
-    <value>button_cancel</value>
-  </data>
-  <data name="&gt;&gt;button_cancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button_cancel.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;button_cancel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
-  </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
-    <value>pictureBox1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;groupBox12.Name" xml:space="preserve">
-    <value>groupBox12</value>
-  </data>
-  <data name="&gt;&gt;groupBox12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox12.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox12.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownCamCount.Name" xml:space="preserve">
-    <value>numericUpDownCamCount</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownCamCount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownCamCount.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownCamCount.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;label26.Name" xml:space="preserve">
-    <value>label26</value>
-  </data>
-  <data name="&gt;&gt;label26.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label26.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;label26.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;cb_all_cameras.Name" xml:space="preserve">
-    <value>cb_all_cameras</value>
-  </data>
-  <data name="&gt;&gt;cb_all_cameras.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_all_cameras.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;cb_all_cameras.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 71</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>495, 262</value>
-  </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Capture settings</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="button_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>377, 195</value>
+    <value>383, 165</value>
   </data>
   <data name="button_cancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 60</value>
@@ -453,8 +150,11 @@
   <data name="&gt;&gt;button_cancel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 196</value>
+    <value>246, 165</value>
   </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 60</value>
@@ -507,75 +207,6 @@
   <data name="groupBox12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
-    <value>pictureBox2</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
-    <value>groupBox12</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;nud_erase_old.Name" xml:space="preserve">
-    <value>nud_erase_old</value>
-  </data>
-  <data name="&gt;&gt;nud_erase_old.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nud_erase_old.Parent" xml:space="preserve">
-    <value>groupBox12</value>
-  </data>
-  <data name="&gt;&gt;nud_erase_old.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>groupBox12</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;cb_delete_old.Name" xml:space="preserve">
-    <value>cb_delete_old</value>
-  </data>
-  <data name="&gt;&gt;cb_delete_old.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_delete_old.Parent" xml:space="preserve">
-    <value>groupBox12</value>
-  </data>
-  <data name="&gt;&gt;cb_delete_old.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="groupBox12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 155</value>
-  </data>
-  <data name="groupBox12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 101</value>
-  </data>
-  <data name="groupBox12.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;groupBox12.Name" xml:space="preserve">
-    <value>groupBox12</value>
-  </data>
-  <data name="&gt;&gt;groupBox12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox12.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox12.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="pictureBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -610,7 +241,7 @@
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="nud_erase_old.Location" type="System.Drawing.Point, System.Drawing">
-    <value>69, 22</value>
+    <value>69, 18</value>
   </data>
   <data name="nud_erase_old.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 55</value>
@@ -643,7 +274,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 80</value>
+    <value>73, 76</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 12</value>
@@ -696,6 +327,27 @@
   <data name="&gt;&gt;cb_delete_old.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="groupBox12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 124</value>
+  </data>
+  <data name="groupBox12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 101</value>
+  </data>
+  <data name="groupBox12.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;groupBox12.Name" xml:space="preserve">
+    <value>groupBox12</value>
+  </data>
+  <data name="&gt;&gt;groupBox12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox12.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox12.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="numericUpDownCamCount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -729,66 +381,6 @@
   <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;button_Browse.Name" xml:space="preserve">
-    <value>button_Browse</value>
-  </data>
-  <data name="&gt;&gt;button_Browse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button_Browse.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;button_Browse.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label9.Name" xml:space="preserve">
-    <value>label9</value>
-  </data>
-  <data name="&gt;&gt;label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;storePath.Name" xml:space="preserve">
-    <value>storePath</value>
-  </data>
-  <data name="&gt;&gt;storePath.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;storePath.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;storePath.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 18</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 171</value>
-  </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Select save path</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="button_Browse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -802,7 +394,7 @@
     <value>113, 58</value>
   </data>
   <data name="button_Browse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 107</value>
+    <value>124, 58</value>
   </data>
   <data name="button_Browse.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -879,6 +471,30 @@
   <data name="&gt;&gt;storePath.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>246, 18</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 122</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Select save path</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="label26.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -944,6 +560,30 @@
   </data>
   <data name="&gt;&gt;cb_all_cameras.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 71</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>495, 230</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Capture settings</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>groupBox_cameraNumber</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1015,142 +655,142 @@
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACc
-        HwAAAk1TRnQBSQFMAgEBAwEAATABAAEwAQABGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
-        AwABGAMAAQEBAAEgBgABJC4AAw8BFAFYAWEBZAHLATcBvAH6Af8BPAGvAe0B/gE3AbwB+gH/ATcBvAH6
-        Af8BPAGvAe0B/gE3AbwB+gH/AUABtgHoAf0DQAFxHAADAQQCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACI
+        HwAAAk1TRnQBSQFMAgEBAwEAAcABAAHAAQABGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
+        AwABGAMAAQEBAAEgBgABJC4AAw8BFAFYAlsBywElAbwB+gH/ATwBiwHJAf4BJQG8AfoB/wElAbwB+gH/
+        ATwBiwHJAf4BJQG8AfoB/wFAAagBugH9A0ABcRwAAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgED
+        AwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgED
+        AwIBAwMBBAIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMWAR8DQAFxAxQBGwMCAQMDAgEDAxABFgNA
+        AXADFwEgAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQN0AAMEAQYBUgFlAXAB9AE8AYsByQH+
+        ASUBvAH6Af8BJQG8AfoB/wE8AYsByQH+ASUBvAH6Af8BJQG8AfoB/wE8AYsByQH+ASUBvAH6Af8BJQG8
+        AfoB/wElAbwB+gH/ASUBvAH6Af8DRAF7FAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDBQEH
+        AyYBOAMNAREDAwEEAwMBBAMKAQ4DJwE6AwUBBwMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgED
+        AwIEAwEEAwMBBAMDAQQDAwQEAQYDMAFLA1UBsQMhAfsDAAH/A1kBzAMLAQ8DCQEMA1kBxAMAAf8DIQH7
+        A1UBsQMvAUoDBAEGAwMBBAMDAQQDAwEEAwMBBAMCAQNwAAMzAVIBPAGLAckB/gE8AYsByQH+ATwBiwHJ
+        Af4BPAGLAckB/gE8AYsByQH+ATwBiwHJAf4BPAGLAckB/gE8AYsByQH+ATwBiwHJAf4BPAGLAckB/gE8
+        AYsByQH+ATwBiwHJAf4BPAGLAckB/gE8AYsByQH+AVkBZwFqAfIQAAMCBAMBBAMDAQQDAwEEAwMBBAMD
+        AQQDDQERA0UBfwNeAeUDAAH/A1ABpAMDAQQDAwEEA08BnAMAAf8DXAHnA0gBhAMOARMDAwEEAwMBBAMD
+        AQQDAwEEAwMBBAMCAQMDAgQDAQQDAwEEAwMBBAMDAQQDRQF/AwAB/wNXAegDSAGHAzsBZAMZAfwDWQHD
+        A1cBvwMZAf0DPgFrA0gBhwNXAegDAAH/A0gBhgMDAQQDAwEEAwMBBAMDAQQDAgEDbAADPgFrATwBiwHJ
+        Af4BJQG8AfoB/wE8AYsByQH+ATwBiwHJAf4BJQG8AfoB/wElAbwB+gH/ATwBiwHJAf4BJQG8AfoB/wEl
+        AbwB+gH/ATwBiwHJAf4BJQG8AfoB/wElAbwB+gH/ASUBvAH6Af8BJQG8AfoB/wE8AYsByQH+ASUBvAH6
+        Af8BPQGMAcoB/gwAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBANXAcUDAAH/AwAB/wMAAf8DAAH/A0YBgANE
+        AXsDAAH/AwAB/wMAAf8DAAH/A1oBzQMDAQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMDAQQDAwEE
+        AwMBBANIAYUDGQH8AwgBCwMDAQQDAwEEAz8BbQNTAfEDTgHwA0IBdQMDAQQDAwEEAwcBCgNBAfYDSwGO
+        AwMBBAMDAQQDAwEEAwMBBAMCAQNoAAMdASoBJQG8AfoB/wE8AYsByQH+ASUBvAH6Af8BPAGLAckB/gE8
+        AYsByQH+ASUBvAH6Af8BJQG8AfoB/wE8AYsByQH+ASUBvAH6Af8BJQG8AfoB/wE8AYsByQH+ASUBvAH6
+        Af8BJQG8AfoB/wElAbwB+gH/ASUBvAH6Af8BPAGLAckB/gElAbwB+gH/ASUBvAH6Af8BWQFnAWoB8ggA
+        AwIEAwEEAwMBBAMDAQQDAwEEAwMBBANUAa8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMA
+        Af8DAAH/A1YBuAMDAQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMDAQQDAwEEAwMBBANCAXYDAAH/
+        Aw0BEQMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwgBCwMBAf4DRQF9AwMBBAMDAQQDAwEE
+        AwMBBAMCAQNoAAElAbwB+gH/ASUBvAH6Af8BPAGLAckB/gFfAdAB+wH/AsEBwAH+AsABvwH+AvEB8AH/
+        AvEB8AH/AsABvwH+AvEB8AH/AvEB8AH/AsABvwH+AvEB8AH/AvEB8AH/AvEB8AH/AvEB8AH/Ab8CwAH+
+        ASUBvAH6Af8BJQG8AfoB/wE8AYsByQH+A0QBewQAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBANMAZIDAAH/
+        AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/A08BmwMDAQQDAwEEAwMBBAMDAQQDAwEE
+        AwIBAwMCAQMDBAEGA0gBhgNLAY4DRQF9A10B4gNUAe4DDAEQAwMBBAMGAQgDKwFCAz4BbAM+AWwDKwFC
+        AwYBCAMDAQQDCQEMA1sB7QNYAeMDQgF2A0gBhQNGAYADBAEGAwIBA2QAA0wBkwElAbwB+gH/ASUBvAH6
+        Af8BPAGLAckB/gH3AfwB/gH/A84B/gLBAcAB/gLxAfAB/wLxAfAB/wLAAb8B/gLxAfAB/wLxAfAB/wLA
+        Ab8B/gLxAfAB/wLxAfAB/wLxAfAB/wLxAfAB/wLAAb8B/gElAbwB+gH/ASUBvAH6Af8BPAGLAckB/gEl
+        AbwB+gH/BAADAgQDAQQDCwEPA1oBygNVAboDUAGaA0AB9wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMA
+        Af8DAAH/AwAB/wMAAf8DKQH6A08BmwNWAbgDWgHNAw4BEwMDAQQDAgEDAwIBAwMvAUkDAAH/A0EB9gMB
+        Af4DVAHuAyIBMgMDAQQDNwFaA10B4gMAAf8DAAH/AwAB/wMAAf8DXQHiAzcBWgMDAQQDIQEwA1sB7QMA
+        Af8DGQH8AwAB/wMwAUsDAgEDZAABPAGLAckB/gElAbwB+gH/ASUBvAH6Af8BPAGLAckB/gH4AfwB/gH/
+        A84B/gOPAf4BJwImAf8C8QHwAf8CwAG/Af4CnAGbAf8BJwImAf8CwAG/Af4C8QHwAf8CggGBAf8BJwIm
+        Af8C8QHwAf8CwAG/Af4BJQG8AfoB/wElAbwB+gH/ATwBiwHJAf4BJQG8AfoB/wNAAXEDAgQDAQQDRAF6
+        AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wNXAcUDSgGLA0oBiwNXAcUDAAH/AwAB/wMAAf8DAAH/
+        AwAB/wMAAf8DAAH/A0gBhAMDAQQDAgEDAwIBAwNVAbEDVwHoAwcBCgMIAQsDCgENAwMBBANIAYYDAAH/
+        A1UBtAMvAUoDEwEaAxMBGgMvAUoDVgGzAwAB/wNIAYUDAwEEAwwBEAMNARIDCAELA1cB6ANVAbIDAgED
+        YAADFAEbATwBiwHJAf4BPAGLAckB/gE8AYsByQH+ATwBiwHJAf4ByAHMAc4B/gPOAf4DfwH+AT4CPQH+
+        AsEBwAH+AsABvwH+AWwCawH+AT4CPQH+AsABvwH+AsABvwH+AVICUQH+AT4CPQH+AsABvwH+AsABvwH+
+        ATwBiwHJAf4BPAGLAckB/gE8AYsByQH+ATwBiwHJAf4BQAGoAboB/QMCAQMDBAEFA18B4AMAAf8DAAH/
+        AwAB/wMAAf8DAAH/A1cB7wMvAUoDAwEEAwMBBAMDAQQDAwEEAzABSwNXAe8DAAH/AwAB/wMAAf8DAAH/
+        AwAB/wNcAecDBQEHAwIBAwMWAR8DIQH7A0gBhwMDAQQDAwEEAwMBBAM3AVsDAAH/A0MBeAMDAQQDAwEE
+        AwMBBAMDAQQDAwEEAwMBBANEAXkDAAH/AzcBWgMDAQQDAwEEAwMBBANIAYcDIQH7AxYBH2AAA0wBkgE8
+        AYsByQH+ASUBvAH6Af8BJQG8AfoB/wE8AYsByQH+AfgB/AH+Af8DzgH+A38B/gEnAiYF/wLBAcAB/gJL
+        AZ4B/wIuAYIB/wKfAcIB/gLxAfAB/wE6AjkB/wEnAiYB/wLxAfAB/wLAAb8B/gElAbwB+gH/ASUBvAH6
+        Af8BPAGLAckB/gElAbwB+gH/ASUBvAH6Af8DAgEDAyEBMQMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMv
+        AUoDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDMAFLAwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AycBOgMC
+        AQMDPwFvAwAB/wM+AWsDAwEEAwMBBAMGAQgDXQHiA1UBtAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMD
+        AQQDAwEEA1UBtANdAeIDBgEIAwMBBAMDAQQDOwFkAwAB/wNAAXFgAAFcAmEB3AE8AYsByQH+ASUBvAH6
+        Af8BJQG8AfoB/wE8AYsByQH+AfgB/AH+Af8DzgH+A38B/gEnAiYF/wLFAc4B/gE9AT4B+gH/AT0BPgH6
+        Af8BVAFVAckB/gLxAfAB/wE6AjkB/wEnAiYB/wLxAfAB/wLAAb8B/gElAbwB+gH/ASUBvAH6Af8BPAGL
+        AckB/gElAbwB+gH/ASUBvAH6Af8DAgEDAwkBDANNAZUDAQH+AwAB/wMAAf8DAAH/A1cBxQMDAQQDAwEE
+        AwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEA1cBxQMAAf8DAAH/AwAB/wMAAf8DTwGcAwoBDgMCAQMDEAEW
+        A1kBwwMZAf0DQgF0AwMBBAMrAUIDAAH/Ay8BSgMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEE
+        Ay8BSgMAAf8DKgFBAwMBBAM+AWwDGQH8A1kBzAMUARtgAAEyAYoBmQH7ATwBiwHJAf4BPAGLAckB/gE8
+        AYsByQH+ATwBiwHJAf4ByAHMAc4B/gPOAf4DfwH+AT4CPQH+A84B/gPOAf4BbAFrAX8B/gFBAUABVQH+
+        ArkBwAH+AsABvwH+AVICUQH+AT4CPQH+AsABvwH+AsABvwH+ATwBiwHJAf4BPAGLAckB/gE8AYsByQH+
+        ATwBiwHJAf4BPAGLAckB/gMCBAMBBAMDAQQDQQFyAwAB/wMAAf8DAAH/A0oBiwMDAQQDAwEEAwMBBAMD
+        AQQDAwEEAwMBBAMDAQQDAwEEA0oBiwMAAf8DAAH/AwAB/wNEAXsDAwEEAwMBBAMCAQMDAgEDAwkBDANW
+        Ab4DVQHyAwMBBAM+AWwDAAH/AxMBGgMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAxMBGgMA
+        Af8DPgFsAwMBBANTAfEDWQHDAwsBDwMCAQNgAAFTAWQBbQHxATwBiwHJAf4BJQG8AfoB/wElAbwB+gH/
+        ATwBiwHJAf4B+AH8Af4B/wPOAf4BfwGAARYB/gGYAbEBAAH/AZsBswEHAf8DzgH+AVcCVgH/AScCJgH/
+        AsEBwAH+AeYB6QHWAf8BmAGxAQAB/wGYAbEBAAH/AaoBvgEsAf8CwAG/Af4BJQG8AfoB/wElAbwB+gH/
+        ATwBiwHJAf4BJQG8AfoB/wElAbwB+gH/AwIEAwEEAwMBBANDAXgDAAH/AwAB/wMAAf8DSgGLAwMBBAMD
+        AQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDSgGLAwAB/wMAAf8DAAH/A0YBgAMDAQQDAwEEAwIBAwMC
+        AQMDCwEPA1kBwwNVAfIDAwEEAz4BbAMAAf8DEwEaAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMD
+        AQQDEwEaAwAB/wM+AWwDAwEEA1MB8QNXAb8DCQEMAwIBA2AAAVcCWgG9ATwBiwHJAf4BJQG8AfoB/wEl
+        AbwB+gH/ATwBiwHJAf4B+AH8Af4B/wPOAf4BfwGAARYB/gGYAbEBAAH/AZgBsQEAAf8DzgH+AVcCVgH/
+        AScCJgH/A84B/gHiAeYBzAH/AZgBsQEAAf8BmAGxAQAB/wGjAbkBGwH/AsABvwH+ASUBvAH6Af8BJQG8
+        AfoB/wE8AYsByQH+ASUBvAH6Af8BJQG8AfoB/wMCAQMDCwEPA1ABngMAAf8DAAH/AwAB/wMAAf8DVwHF
+        AwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDVwHFAwAB/wMAAf8DAAH/AwAB/wNQAaQDDQER
+        AwIBAwMTARoDWQHMAxkB/AM+AWwDAwEEAysBQgMAAf8DLwFKAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEE
+        AwMBBAMDAQQDLwFKAwAB/wMqAUEDAwEEA0IBdgMZAf0DWQHEAxABFmAAAzcBWwE8AYsByQH+ATwBiwHJ
+        Af4BPAGLAckB/gE8AYsByQH+AcgBzAHOAf4DzgH+A38B/gE+Aj0B/gPOAf4DzgH+AW8CbgH+AT4CPQH+
+        A84B/gPOAf4BUgJRAf4BPgI9Af4CwAG/Af4CwAG/Af4BPAGLAckB/gE8AYsByQH+ATwBiwHJAf4BPAGL
+        AckB/gE8AYsByQH+AwIBAwMgAS8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DLwFKAwMBBAMDAQQDAwEE
+        AwMBBAMDAQQDAwEEAy8BSgMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMmATgDAgEDA0ABcQMAAf8DOwFj
+        AwMBBAMDAQQDBgEIA10B4gNWAbMDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBANVAbQDXQHi
+        AwYBCAMDAQQDAwEEAz4BbAMAAf8DPwFvZAABPAGLAckB/gElAbwB+gH/ASUBvAH6Af8BPAGLAckB/gH4
+        AfwB/gH/A84B/gN/Af4BJwImBf8DzgH+AVcCVgH/AScCJgH/A84B/gT/ATsCOgH/AScCJgH/AvEB8AH/
+        AsABvwH+ASUBvAH6Af8BJQG8AfoB/wE8AYsByQH+ASUBvAH6Af8BWAJbAcsDAgEDAwQBBQNaAd4DAAH/
+        AwAB/wMAAf8DAAH/AwAB/wNOAfADLwFKAwMBBAMDAQQDAwEEAwMBBAMvAUoDVwHvAwAB/wMAAf8DAAH/
+        AwAB/wMAAf8DXgHlAwUBBwMCAQMDFgEfAyEB+wNIAYcDAwEEAwMBBAMDAQQDNwFbAwAB/wNDAXcDAwEE
+        AwMBBAMDAQQDAwEEAwMBBAMDAQQDQwF4AwAB/wM3AVoDAwEEAwMBBAMDAQQDSAGHAyEB+wMWAR9kAAFS
+        AWUBcAH0ATwBiwHJAf4BPAGLAckB/gE8AYsByQH+AcgBzAHOAf4DzgH+A8EB/gFvAm4B/gPOAf4DzgH+
+        A7UB/gF2AnUB/gPOAf4DzgH+AaYCpQH+A38B/gLBAcAB/gLAAb8B/gE8AYsByQH+ATwBiwHJAf4BPAGL
+        AckB/gE8AYsByQH+Aw4BEwMCBAMBBANCAXUDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/A1cBxQNK
+        AYsDSgGLA1cBxQMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DRQF/AwMBBAMCAQMDAgEDA1UBsgNX
+        AegDCAELAw0BEQMMARADAwEEA0gBhgMAAf8DVgGzAy8BSgMTARoDEwEaAy8BSgNVAbQDAAH/A0gBhQMD
+        AQQDCgENAwgBCwMHAQoDWAHpA1UBsQMCAQNkAAMTARoBJQG8AfoB/wElAbwB+gH/ATwBiwHJAf4B2AHx
+        Af0B/wPOAf4DzgH+CP8DzgH+CP8DzgH+EP8CwQHAAf4BJQG8AfoB/wElAbwB+gH/ATwBiwHJAf4BUgFl
+        AXAB9AQAAwIEAwEEAwoBDQNXAcIDVQGxA0wBkQNCAfUDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
+        AwAB/wMAAf8DAAH/A0AB9wNMAZIDVAGvA1cBxQMNAREDAwEEAwIBAwMCAQMDMAFLAwAB/wMZAfwDAAH/
+        A1QB7gMiATIDAwEEAzcEWwHhAwAB/wMAAf8DAAH/AwAB/wNdAeIDNwFaAwMBBAMiATIDVAHuAwEB/gNB
+        AfYDAAH/Ay8BSQMCAQNoAAFZAlwBzwElAbwB+gH/ATwBiwHJAf4BJQG8AfoB/wGoAcEBzQH+AcgBzAHO
+        Af4B+AH8Af4B/wH4AfwB/gH/AcgBzAHOAf4B+AH8Af4B/wH4AfwB/gH/AcgBzAHOAf4B+AH8Af4B/wH4
+        AfwB/gH/AfgB/AH+Af8B9wH8Af4B/wF3AZ8BywH+ASUBvAH6Af8BJQG8AfoB/wE8AYsByQH+AwQBBgQA
+        AwIEAwEEAwMBBAMDAQQDAwEEAwMBBANMAZEDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMA
+        Af8DAAH/A1ABmgMDAQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCAQMDBAEGA0YBgANIAYYDQwF3A10B4gNU
+        Ae4DCgENAwMBBAMGAQgDKwFCAz4BbAM+AWwDKwFCAwYBCAMDAQQDDAEQA1QB7gNbAeEDRQF9A0sBjgNI
+        AYYDBAEGAwIBA2wAASsBfgGrAfwBPAGLAckB/gE8AYsByQH+ATwBiwHJAf4BPAGLAckB/gE8AYsByQH+
+        ATwBiwHJAf4BPAGLAckB/gE8AYsByQH+ATwBiwHJAf4BPAGLAckB/gE8AYsByQH+ATwBiwHJAf4BPAGL
+        AckB/gE8AYsByQH+ATwBiwHJAf4BPAGLAckB/gE8AYsByQH+AzIBUQgAAwIEAwEEAwMBBAMDAQQDAwEE
+        AwMBBANVAbEDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/A1UBugMDAQQDAwEE
+        AwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMDAQQDAwEEAwMBBANFAX0DAQH+AwgBCwMDAQQDAwEEAwMBBAMD
+        AQQDAwEEAwMBBAMDAQQDAwEEAw0BEQMAAf8DQgF2AwMBBAMDAQQDAwEEAwMBBAMCAQNwAAErAX4BqwH8
+        ASUBvAH6Af8BPAGLAckB/gE8AYsByQH+ASUBvAH6Af8BJQG8AfoB/wE8AYsByQH+ASUBvAH6Af8BJQG8
+        AfoB/wE8AYsByQH+ASUBvAH6Af8BJQG8AfoB/wElAbwB+gH/ASUBvAH6Af8BPAGLAckB/gElAbwB+gH/
+        Az4BawwAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBANXAcIDAAH/AwAB/wMAAf8DAAH/A0MBeANBAXIDAQH+
+        AwAB/wMAAf8DAAH/A1oBygMDAQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMDAQQDAwEEAwMBBANL
+        AY4DQAH3AwcBCgMDAQQDAwEEA0IBdQNVAfIDVQHyAz4BbAMDAQQDAwEEAwgBCwMZAfwDSAGFAwMBBAMD
+        AQQDAwEEAwMBBAMCAQN0AAFZAlwBzwE8AYsByQH+ATwBiwHJAf4BJQG8AfoB/wElAbwB+gH/ATwBiwHJ
+        Af4BJQG8AfoB/wElAbwB+gH/ATwBiwHJAf4BJQG8AfoB/wElAbwB+gH/ASUBvAH6Af8BJQG8AfoB/wE8
+        AYsByQH+Ax0BKhAAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBAMKAQ4DQgF1A1oB3gMAAf8DUAGeAwMBBAMD
+        AQQDTQGVAwAB/wNfAeADRAF6AwwBEAMDAQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMDAQQDAwEE
+        AwMBBANIAYYDAAH/A1cB6ANIAYcDPgFrAxkB/QNXAb8DVwHCAxkB/AM7AWQDSAGIA1cB6AMAAf8DRQF/
+        AwMBBAMDAQQDAwEEAwMBBAMCAQN4AAMTARoBUgFlAXAB9AE8AYsByQH+ATwBiwHJAf4BPAGLAckB/gE8
+        AYsByQH+ATwBiwHJAf4BPAGLAckB/gE8AYsByQH+ATwBiwHJAf4BPAGLAckB/gNMAZMYAAMCBAMBBAMD
+        AQQDAwEEAwMBBAMDAQQDAwEEAwMEBAEFAyABLwMLAQ8DAwEEAwMBBAMJAQwDIQExAwQBBQMDAQQDAwEE
+        AwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEEAwMBBAMDAQQDAwQEAQYDLwFJA1UBsgMhAfsDAAH/
+        A1kBxAMJAQwDCwEPA1gBywMAAf8DIQH7A1UBsQMwAUsDBAEGAwMBBAMDAQQDAwEEAwMBBAMCAQOEAAM3
+        AVsBVgJYAbwBUwFkAW0B8QEyAYoBmQH7AVwCYQHcA0wBkgMUARsgAAMBBAIBAwMCAQMDAgEDAwIBAwMC
         AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
-        AQMDAgEDAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAxYBHwNAAXEDFAEbAwIBAwMCAQMDEAEW
-        A0ABcAMXASADAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBA3QAAwQBBgFCAZUBuAH0ATwBrwHt
-        Af4BNwG8AfoB/wE3AbwB+gH/ATwBrwHtAf4BNwG8AfoB/wE3AbwB+gH/ATwBrwHtAf4BNwG8AfoB/wE3
-        AbwB+gH/ATcBvAH6Af8BNwG8AfoB/wNEAXsUAAMCBAMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMF
-        AQcDJgE4Aw0BEQMDAQQDAwEEAwoBDgMnAToDBQEHAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMC
-        AQMDAgQDAQQDAwEEAwMBBAMDBAQBBgMwAUsDVQGxAw0B+wMAAf8DVQHMAwsBDwMJAQwDVwHEAwAB/wMN
-        AfsDVQGxAy8BSgMEAQYDAwEEAwMBBAMDAQQDAwEEAwIBA3AAAzMBUgE8Aa8B7QH+ATwBrwHtAf4BPAGv
-        Ae0B/gE8Aa8B7QH+ATwBrwHtAf4BPAGvAe0B/gE8Aa8B7QH+ATwBrwHtAf4BPAGvAe0B/gE8Aa8B7QH+
-        ATwBrwHtAf4BPAGvAe0B/gE8Aa8B7QH+ATwBrwHtAf4BSgGSAbEB8hAAAwIEAwEEAwMBBAMDAQQDAwEE
-        AwMBBAMNAREDRQF/A0YB5QMAAf8DUAGkAwMBBAMDAQQDTwGcAwAB/wNBAecDSAGEAw4BEwMDAQQDAwEE
-        AwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMDAQQDAwEEAwMBBANFAX8DAAH/A0AB6ANIAYcDOwFkAwcB/ANW
-        AcMDVgG/AwcB/QM+AWsDSAGHA0AB6AMAAf8DSAGGAwMBBAMDAQQDAwEEAwMBBAMCAQNsAAM+AWsBPAGv
-        Ae0B/gE3AbwB+gH/ATwBrwHtAf4BPAGvAe0B/gE3AbwB+gH/ATcBvAH6Af8BPAGvAe0B/gE3AbwB+gH/
-        ATcBvAH6Af8BPAGvAe0B/gE3AbwB+gH/ATcBvAH6Af8BNwG8AfoB/wE3AbwB+gH/ATwBrwHtAf4BNwG8
-        AfoB/wE9AbAB7gH+DAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA1YBxQMAAf8DAAH/AwAB/wMAAf8DRgGA
-        A0QBewMAAf8DAAH/AwAB/wMAAf8DVAHNAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEEAwMBBAMD
-        AQQDAwEEA0gBhQMHAfwDCAELAwMBBAMDAQQDPwFtAzAB8QMwAfADQgF1AwMBBAMDAQQDBwEKAx0B9gNL
-        AY4DAwEEAwMBBAMDAQQDAwEEAwIBA2gAAx0BKgE3AbwB+gH/ATwBrwHtAf4BNwG8AfoB/wE8Aa8B7QH+
-        ATwBrwHtAf4BNwG8AfoB/wE3AbwB+gH/ATwBrwHtAf4BNwG8AfoB/wE3AbwB+gH/ATwBrwHtAf4BNwG8
-        AfoB/wE3AbwB+gH/ATcBvAH6Af8BNwG8AfoB/wE8Aa8B7QH+ATcBvAH6Af8BNwG8AfoB/wFKAZIBsQHy
-        CAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA1MBrwMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
-        AwAB/wMAAf8DVgG4AwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEEAwMBBAMDAQQDAwEEA0IBdgMA
-        Af8DDQERAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDCAELAwEB/gNFAX0DAwEEAwMBBAMD
-        AQQDAwEEAwIBA2gAATcBvAH6Af8BNwG8AfoB/wE8Aa8B7QH+AXEB0AH7Af8C5QHkAf4C5AHjAf4C8QHw
-        Af8C8QHwAf8C5AHjAf4C8QHwAf8C8QHwAf8C5AHjAf4C8QHwAf8C8QHwAf8C8QHwAf8C8QHwAf8B4wLk
-        Af4BNwG8AfoB/wE3AbwB+gH/ATwBrwHtAf4DRAF7BAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA0wBkgMA
-        Af8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DTwGbAwMBBAMDAQQDAwEEAwMBBAMD
-        AQQDAgEDAwIBAwMEAQYDSAGGA0sBjgNFAX0DSAHiAzQB7gMMARADAwEEAwYBCAMrAUIDPgFsAz4BbAMr
-        AUIDBgEIAwMBBAMJAQwDOAHtA0kB4wNCAXYDSAGFA0YBgAMEAQYDAgEDZAACTAFNAZMBNwG8AfoB/wE3
-        AbwB+gH/ATwBrwHtAf4B9wH8Af4B/wPyAf4C5QHkAf4C8QHwAf8C8QHwAf8C5AHjAf4C8QHwAf8C8QHw
-        Af8C5AHjAf4C8QHwAf8C8QHwAf8C8QHwAf8C8QHwAf8C5AHjAf4BNwG8AfoB/wE3AbwB+gH/ATwBrwHt
-        Af4BNwG8AfoB/wQAAwIEAwEEAwsBDwNWAcoDVQG6A1ABmgMeAfcDAAH/AwAB/wMAAf8DAAH/AwAB/wMA
-        Af8DAAH/AwAB/wMAAf8DAAH/AxMB+gNPAZsDVgG4A1QBzQMOARMDAwEEAwIBAwMCAQMDLwFJAwAB/wMd
-        AfYDAQH+AzQB7gMiATIDAwEEAzcBWgNIAeIDAAH/AwAB/wMAAf8DAAH/A0gB4gM3AVoDAwEEAyEBMAM4
-        Ae0DAAH/AwcB/AMAAf8DMAFLAwIBA2QAATwBrwHtAf4BNwG8AfoB/wE3AbwB+gH/ATwBrwHtAf4B+AH8
-        Af4B/wPyAf4DswH+ATkCOAH/AvEB8AH/AuQB4wH+ApwBmwH/ATkCOAH/AuQB4wH+AvEB8AH/AoIBgQH/
-        ATkCOAH/AvEB8AH/AuQB4wH+ATcBvAH6Af8BNwG8AfoB/wE8Aa8B7QH+ATcBvAH6Af8DQAFxAwIEAwEE
-        A0QBegMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DVgHFA0oBiwNKAYsDVgHFAwAB/wMAAf8DAAH/
-        AwAB/wMAAf8DAAH/AwAB/wNIAYQDAwEEAwIBAwMCAQMDVQGxA0AB6AMHAQoDCAELAwoBDQMDAQQDSAGG
-        AwAB/wNUAbQDLwFKAxMBGgMTARoDLwFKA1QBswMAAf8DSAGFAwMBBAMMARADDQESAwgBCwNAAegDVAGy
-        AwIBA2AAAxQBGwE8Aa8B7QH+ATwBrwHtAf4BPAGvAe0B/gE8Aa8B7QH+AewB8AHyAf4D8gH+A38B/gE+
-        Aj0B/gLlAeQB/gLkAeMB/gFsAmsB/gE+Aj0B/gLkAeMB/gLkAeMB/gFSAlEB/gE+Aj0B/gLkAeMB/gLk
-        AeMB/gE8Aa8B7QH+ATwBrwHtAf4BPAGvAe0B/gE8Aa8B7QH+AUABtQHnAf0DAgEDAwQBBQNMAeADAAH/
-        AwAB/wMAAf8DAAH/AwAB/wMyAe8DLwFKAwMBBAMDAQQDAwEEAwMBBAMwAUsDMgHvAwAB/wMAAf8DAAH/
-        AwAB/wMAAf8DQQHnAwUBBwMCAQMDFgEfAw0B+wNIAYcDAwEEAwMBBAMDAQQDNwFbAwAB/wNDAXgDAwEE
-        AwMBBAMDAQQDAwEEAwMBBAMDAQQDRAF5AwAB/wM3AVoDAwEEAwMBBAMDAQQDSAGHAw0B+wMWAR9gAANM
-        AZIBPAGvAe0B/gE3AbwB+gH/ATcBvAH6Af8BPAGvAe0B/gH4AfwB/gH/A/IB/gN/Af4BOQI4Bf8C5QHk
-        Af4CXQGeAf8CQAGCAf8CwwHmAf4C8QHwAf8BTAJLAf8BOQI4Af8C8QHwAf8C5AHjAf4BNwG8AfoB/wE3
-        AbwB+gH/ATwBrwHtAf4BNwG8AfoB/wE3AbwB+gH/AwIBAwMhATEDAAH/AwAB/wMAAf8DAAH/AwAB/wMA
-        Af8DLwFKAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAzABSwMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMn
-        AToDAgEDAz8BbwMAAf8DPgFrAwMBBAMDAQQDBgEIA0gB4gNUAbQDAwEEAwMBBAMDAQQDAwEEAwMBBAMD
-        AQQDAwEEAwMBBANUAbQDSAHiAwYBCAMDAQQDAwEEAzsBZAMAAf8DQAFxYAABVwFxAXkB3AE8Aa8B7QH+
-        ATcBvAH6Af8BNwG8AfoB/wE8Aa8B7QH+AfgB/AH+Af8D8gH+A38B/gE5AjgF/wLpAfIB/gFPAVAB+gH/
-        AU8BUAH6Af8BVAFVAe0B/gLxAfAB/wFMAksB/wE5AjgB/wLxAfAB/wLkAeMB/gE3AbwB+gH/ATcBvAH6
-        Af8BPAGvAe0B/gE3AbwB+gH/ATcBvAH6Af8DAgEDAwkBDANNAZUDAQH+AwAB/wMAAf8DAAH/A1YBxQMD
-        AQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEA1YBxQMAAf8DAAH/AwAB/wMAAf8DTwGcAwoBDgMC
-        AQMDEAEWA1YBwwMHAf0DQgF0AwMBBAMrAUIDAAH/Ay8BSgMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMD
-        AQQDAwEEAy8BSgMAAf8DKgFBAwMBBAM+AWwDBwH8A1UBzAMUARtgAAE2AaMB1wH7ATwBrwHtAf4BPAGv
-        Ae0B/gE8Aa8B7QH+ATwBrwHtAf4B7AHwAfIB/gPyAf4DfwH+AT4CPQH+A/IB/gPyAf4BbAFrAX8B/gFB
-        AUABVQH+At0B5AH+AuQB4wH+AVICUQH+AT4CPQH+AuQB4wH+AuQB4wH+ATwBrwHtAf4BPAGvAe0B/gE8
-        Aa8B7QH+ATwBrwHtAf4BPAGvAe0B/gMCBAMBBAMDAQQDQQFyAwAB/wMAAf8DAAH/A0oBiwMDAQQDAwEE
-        AwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEA0oBiwMAAf8DAAH/AwAB/wNEAXsDAwEEAwMBBAMCAQMDAgED
-        AwkBDANWAb4DKwHyAwMBBAM+AWwDAAH/AxMBGgMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEE
-        AxMBGgMAAf8DPgFsAwMBBAMwAfEDVgHDAwsBDwMCAQNgAAFMAZABrwHxATwBrwHtAf4BNwG8AfoB/wE3
-        AbwB+gH/ATwBrwHtAf4B+AH8Af4B/wPyAf4BiwGkARYB/gGYAbEBEQH/AZsBswEZAf8D8gH+AWkCaAH/
-        ATkCOAH/AuUB5AH+AeYB6QHWAf8BmAGxAREB/wGYAbEBEQH/AaoBvgE+Af8C5AHjAf4BNwG8AfoB/wE3
-        AbwB+gH/ATwBrwHtAf4BNwG8AfoB/wE3AbwB+gH/AwIEAwEEAwMBBANDAXgDAAH/AwAB/wMAAf8DSgGL
-        AwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDSgGLAwAB/wMAAf8DAAH/A0YBgAMDAQQDAwEE
-        AwIBAwMCAQMDCwEPA1YBwwMrAfIDAwEEAz4BbAMAAf8DEwEaAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEE
-        AwMBBAMDAQQDEwEaAwAB/wM+AWwDAwEEAzAB8QNWAb8DCQEMAwIBA2AAAVcBXAFdAb0BPAGvAe0B/gE3
-        AbwB+gH/ATcBvAH6Af8BPAGvAe0B/gH4AfwB/gH/A/IB/gGLAaQBFgH+AZgBsQERAf8BmAGxAREB/wPy
-        Af4BaQJoAf8BOQI4Af8D8gH+AeIB5gHMAf8BmAGxAREB/wGYAbEBEQH/AaMBuQEtAf8C5AHjAf4BNwG8
-        AfoB/wE3AbwB+gH/ATwBrwHtAf4BNwG8AfoB/wE3AbwB+gH/AwIBAwMLAQ8DUAGeAwAB/wMAAf8DAAH/
-        AwAB/wNWAcUDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBANWAcUDAAH/AwAB/wMAAf8DAAH/
-        A1ABpAMNAREDAgEDAxMBGgNVAcwDBwH8Az4BbAMDAQQDKwFCAwAB/wMvAUoDAwEEAwMBBAMDAQQDAwEE
-        AwMBBAMDAQQDAwEEAwMBBAMvAUoDAAH/AyoBQQMDAQQDQgF2AwcB/QNXAcQDEAEWYAADNwFbATwBrwHt
-        Af4BPAGvAe0B/gE8Aa8B7QH+ATwBrwHtAf4B7AHwAfIB/gPyAf4DfwH+AT4CPQH+A/IB/gPyAf4BbwJu
-        Af4BPgI9Af4D8gH+A/IB/gFSAlEB/gE+Aj0B/gLkAeMB/gLkAeMB/gE8Aa8B7QH+ATwBrwHtAf4BPAGv
-        Ae0B/gE8Aa8B7QH+ATwBrwHtAf4DAgEDAyABLwMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMvAUoDAwEE
-        AwMBBAMDAQQDAwEEAwMBBAMDAQQDLwFKAwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AyYBOAMCAQMDQAFx
-        AwAB/wM7AWMDAwEEAwMBBAMGAQgDSAHiA1QBswMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEE
-        A1QBtANIAeIDBgEIAwMBBAMDAQQDPgFsAwAB/wM/AW9kAAE8Aa8B7QH+ATcBvAH6Af8BNwG8AfoB/wE8
-        Aa8B7QH+AfgB/AH+Af8D8gH+A38B/gE5AjgF/wPyAf4BaQJoAf8BOQI4Af8D8gH+BP8BTQJMAf8BOQI4
-        Af8C8QHwAf8C5AHjAf4BNwG8AfoB/wE3AbwB+gH/ATwBrwHtAf4BNwG8AfoB/wFYAWEBZAHLAwIBAwME
-        AQUDTQHeAwAB/wMAAf8DAAH/AwAB/wMAAf8DMAHwAy8BSgMDAQQDAwEEAwMBBAMDAQQDLwFKAzIB7wMA
-        Af8DAAH/AwAB/wMAAf8DAAH/A0YB5QMFAQcDAgEDAxYBHwMNAfsDSAGHAwMBBAMDAQQDAwEEAzcBWwMA
-        Af8DQwF3AwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEA0MBeAMAAf8DNwFaAwMBBAMDAQQDAwEEA0gBhwMN
-        AfsDFgEfZAABQgGVAbgB9AE8Aa8B7QH+ATwBrwHtAf4BPAGvAe0B/gHsAfAB8gH+A/IB/gPlAf4BbwJu
-        Af4D8gH+A/IB/gPZAf4BdgJ1Af4D8gH+A/IB/gHKAskB/gN/Af4C5QHkAf4C5AHjAf4BPAGvAe0B/gE8
-        Aa8B7QH+ATwBrwHtAf4BPAGvAe0B/gMOARMDAgQDAQQDQgF1AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
-        AwAB/wNWAcUDSgGLA0oBiwNWAcUDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/A0UBfwMDAQQDAgED
-        AwIBAwNUAbIDQAHoAwgBCwMNAREDDAEQAwMBBANIAYYDAAH/A1QBswMvAUoDEwEaAxMBGgMvAUoDVAG0
-        AwAB/wNIAYUDAwEEAwoBDQMIAQsDBwEKA0AB6QNVAbEDAgEDZAADEwEaATcBvAH6Af8BNwG8AfoB/wE8
-        Aa8B7QH+AdgB8QH9Af8D8gH+A/IB/gj/A/IB/gj/A/IB/hD/AuUB5AH+ATcBvAH6Af8BNwG8AfoB/wE8
-        Aa8B7QH+AUMBlgG5AfQEAAMCBAMBBAMKAQ0DVAHCA1UBsQNMAZEDIQH1AwAB/wMAAf8DAAH/AwAB/wMA
-        Af8DAAH/AwAB/wMAAf8DAAH/AwAB/wMeAfcDTAGSA1MBrwNWAcUDDQERAwMBBAMCAQMDAgEDAzABSwMA
-        Af8DBwH8AwAB/wM0Ae4DIgEyAwMBBAM3AVsDSQHhAwAB/wMAAf8DAAH/AwAB/wNIAeIDNwFaAwMBBAMi
-        ATIDNAHuAwEB/gMdAfYDAAH/Ay8BSQMCAQNoAAFZAWUBbAHPATcBvAH6Af8BPAGvAe0B/gE3AbwB+gH/
-        AcwB5QHxAf4B7AHwAfIB/gH4AfwB/gH/AfgB/AH+Af8B7AHwAfIB/gH4AfwB/gH/AfgB/AH+Af8B7AHw
-        AfIB/gH4AfwB/gH/AfgB/AH+Af8B+AH8Af4B/wH3AfwB/gH/AXcBwwHvAf4BNwG8AfoB/wE3AbwB+gH/
-        ATwBrwHtAf4DBAEGBAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA0wBkQMAAf8DAAH/AwAB/wMAAf8DAAH/
-        AwAB/wMAAf8DAAH/AwAB/wMAAf8DUAGaAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIBAwMEAQYDRgGA
-        A0gBhgNDAXcDSAHiAzQB7gMKAQ0DAwEEAwYBCAMrAUIDPgFsAz4BbAMrAUIDBgEIAwMBBAMMARADNAHu
-        A0kB4QNFAX0DSwGOA0gBhgMEAQYDAgEDbAABNgGvAdsB/AE8Aa8B7QH+ATwBrwHtAf4BPAGvAe0B/gE8
-        Aa8B7QH+ATwBrwHtAf4BPAGvAe0B/gE8Aa8B7QH+ATwBrwHtAf4BPAGvAe0B/gE8Aa8B7QH+ATwBrwHt
-        Af4BPAGvAe0B/gE8Aa8B7QH+ATwBrwHtAf4BPAGvAe0B/gE8Aa8B7QH+ATwBrwHtAf4DMgFRCAADAgQD
-        AQQDAwEEAwMBBAMDAQQDAwEEA1UBsQMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMA
-        Af8DVQG6AwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEEAwMBBAMDAQQDAwEEA0UBfQMBAf4DCAEL
-        AwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDDQERAwAB/wNCAXYDAwEEAwMBBAMDAQQDAwEE
-        AwIBA3AAATYBrwHbAfwBNwG8AfoB/wE8Aa8B7QH+ATwBrwHtAf4BNwG8AfoB/wE3AbwB+gH/ATwBrwHt
-        Af4BNwG8AfoB/wE3AbwB+gH/ATwBrwHtAf4BNwG8AfoB/wE3AbwB+gH/ATcBvAH6Af8BNwG8AfoB/wE8
-        Aa8B7QH+ATcBvAH6Af8DPgFrDAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA1QBwgMAAf8DAAH/AwAB/wMA
-        Af8DQwF4A0EBcgMBAf4DAAH/AwAB/wMAAf8DVgHKAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEE
-        AwMBBAMDAQQDAwEEA0sBjgMeAfcDBwEKAwMBBAMDAQQDQgF1AysB8gMrAfIDPgFsAwMBBAMDAQQDCAEL
-        AwcB/ANIAYUDAwEEAwMBBAMDAQQDAwEEAwIBA3QAAVkBZQFsAc8BPAGvAe0B/gE8Aa8B7QH+ATcBvAH6
-        Af8BNwG8AfoB/wE8Aa8B7QH+ATcBvAH6Af8BNwG8AfoB/wE8Aa8B7QH+ATcBvAH6Af8BNwG8AfoB/wE3
-        AbwB+gH/ATcBvAH6Af8BPAGvAe0B/gMdASoQAAMCBAMBBAMDAQQDAwEEAwMBBAMDAQQDCgEOA0IBdQNN
-        Ad4DAAH/A1ABngMDAQQDAwEEA00BlQMAAf8DTAHgA0QBegMMARADAwEEAwMBBAMDAQQDAwEEAwMBBAMC
-        AQMDAgQDAQQDAwEEAwMBBAMDAQQDSAGGAwAB/wNAAegDSAGHAz4BawMHAf0DVgG/A1QBwgMHAfwDOwFk
-        A0gBiANAAegDAAH/A0UBfwMDAQQDAwEEAwMBBAMDAQQDAgEDeAADEwEaAUIBlQG4AfQBPAGvAe0B/gE8
-        Aa8B7QH+ATwBrwHtAf4BPAGvAe0B/gE8Aa8B7QH+ATwBrwHtAf4BPAGvAe0B/gE8Aa8B7QH+ATwBrwHt
-        Af4CTAFNAZMYAAMCBAMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMEBAEFAyABLwMLAQ8DAwEEAwMBBAMJ
-        AQwDIQExAwQBBQMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEEAwMBBAMDAQQDAwQE
-        AQYDLwFJA1QBsgMNAfsDAAH/A1cBxAMJAQwDCwEPA1QBywMAAf8DDQH7A1UBsQMwAUsDBAEGAwMBBAMD
-        AQQDAwEEAwMBBAMCAQOEAAM3AVsBVgJbAbwBTAGQAa0B8QE2AaMB1wH7AVcBcQF5AdwDTAGSAxQBGyAA
-        AwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
-        AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwEBAgMBBAIBAwMCAQMDAgEDAwIBAwMCAQMDAgED
-        AwIBAwMXASADQAFwAxABFgMCAQMDAgEDAxMBGgNAAXEDFgEfAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgED
-        AwIBAwMBAQJgAAFCAU0BPgcAAT4DAAEoAwABYAMAARgDAAEBAQABAQUAASABARYAA/8BAAH+AQABfwkA
-        AfgBAAEfCQAB8AEAAQ8JAAHgAQABBwkAAcABAAEDCQABwAEAAQEJAAGAAQABAQkAAYBfAAGACwABgAsA
-        AYABAAEBCQABwAEAAQEJAAHgAQABAwkAAfABAAEHCQAB+AEAAQ8JAAH8AQABPwkAAf8BgAH/CQAL
+        AQMDAgEDAwIBAwMBAQIDAQQCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDFwEgA0ABcAMQARYDAgED
+        AwIBAwMTARoDQAFxAxYBHwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAQECYAABQgFNAT4HAAE+
+        AwABKAMAAWADAAEYAwABAQEAAQEFAAEgAQEWAAP/AQAB/gEAAX8JAAH4AQABHwkAAfABAAEPCQAB4AEA
+        AQcJAAHAAQABAwkAAcABAAEBCQABgAEAAQEJAAGAXwABgAsAAYALAAGAAQABAQkAAcABAAEBCQAB4AEA
+        AQMJAAHwAQABBwkAAfgBAAEPCQAB/AEAAT8JAAH/AYAB/wkACw==
 </value>
   </data>
   <data name="button_cameraProperties.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -1184,10 +824,10 @@
     <value>NoControl</value>
   </data>
   <data name="button_capture_settings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 1367</value>
+    <value>12, 635</value>
   </data>
   <data name="button_capture_settings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 100</value>
+    <value>100, 63</value>
   </data>
   <data name="button_capture_settings.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1211,10 +851,10 @@
     <value>NoControl</value>
   </data>
   <data name="button_settings_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>405, 1367</value>
+    <value>405, 635</value>
   </data>
   <data name="button_settings_cancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 100</value>
+    <value>100, 63</value>
   </data>
   <data name="button_settings_cancel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1238,10 +878,10 @@
     <value>NoControl</value>
   </data>
   <data name="button_apply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 1367</value>
+    <value>143, 635</value>
   </data>
   <data name="button_apply.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 100</value>
+    <value>100, 63</value>
   </data>
   <data name="button_apply.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1265,10 +905,10 @@
     <value>NoControl</value>
   </data>
   <data name="button_settings_save.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 1367</value>
+    <value>274, 635</value>
   </data>
   <data name="button_settings_save.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 100</value>
+    <value>100, 63</value>
   </data>
   <data name="button_settings_save.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1287,234 +927,6 @@
   </data>
   <data name="&gt;&gt;button_settings_save.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showRecordingIcon.Name" xml:space="preserve">
-    <value>pictureBox_showRecordingIcon</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showRecordingIcon.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showRecordingIcon.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showRecordingIcon.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCameraNo.Name" xml:space="preserve">
-    <value>pictureBox_showCameraNo</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCameraNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCameraNo.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCameraNo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCurrentDate.Name" xml:space="preserve">
-    <value>pictureBox_showCurrentDate</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCurrentDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCurrentDate.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCurrentDate.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showWindowPane.Name" xml:space="preserve">
-    <value>pictureBox_showWindowPane</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showWindowPane.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showWindowPane.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showWindowPane.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_alwaysOnTop.Name" xml:space="preserve">
-    <value>pictureBox_alwaysOnTop</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_alwaysOnTop.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_alwaysOnTop.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_alwaysOnTop.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;groupBox5.Name" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;groupBox5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox5.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;label9_fps.Name" xml:space="preserve">
-    <value>label9_fps</value>
-  </data>
-  <data name="&gt;&gt;label9_fps.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label9_fps.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;label9_fps.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
-    <value>label8</value>
-  </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;comboBoxResolutions.Name" xml:space="preserve">
-    <value>comboBoxResolutions</value>
-  </data>
-  <data name="&gt;&gt;comboBoxResolutions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBoxResolutions.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;comboBoxResolutions.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;comboBoxFPS.Name" xml:space="preserve">
-    <value>comboBoxFPS</value>
-  </data>
-  <data name="&gt;&gt;comboBoxFPS.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBoxFPS.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;comboBoxFPS.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;cb_show_rec_icon.Name" xml:space="preserve">
-    <value>cb_show_rec_icon</value>
-  </data>
-  <data name="&gt;&gt;cb_show_rec_icon.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_show_rec_icon.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;cb_show_rec_icon.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;cb_show_camera_number.Name" xml:space="preserve">
-    <value>cb_show_camera_number</value>
-  </data>
-  <data name="&gt;&gt;cb_show_camera_number.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_show_camera_number.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;cb_show_camera_number.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;cb_dateandtime.Name" xml:space="preserve">
-    <value>cb_dateandtime</value>
-  </data>
-  <data name="&gt;&gt;cb_dateandtime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_dateandtime.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;cb_dateandtime.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;cb_window_pane.Name" xml:space="preserve">
-    <value>cb_window_pane</value>
-  </data>
-  <data name="&gt;&gt;cb_window_pane.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_window_pane.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;cb_window_pane.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;cb_always_on_top.Name" xml:space="preserve">
-    <value>cb_always_on_top</value>
-  </data>
-  <data name="&gt;&gt;cb_always_on_top.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_always_on_top.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;cb_always_on_top.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="groupBox_viewSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 339</value>
-  </data>
-  <data name="groupBox_viewSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>495, 322</value>
-  </data>
-  <data name="groupBox_viewSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="groupBox_viewSettings.Text" xml:space="preserve">
-    <value>View settings</value>
-  </data>
-  <data name="&gt;&gt;groupBox_viewSettings.Name" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;groupBox_viewSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox_viewSettings.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;groupBox_viewSettings.ZOrder" xml:space="preserve">
-    <value>8</value>
   </data>
   <data name="pictureBox_showRecordingIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1651,78 +1063,6 @@
   <data name="&gt;&gt;pictureBox_alwaysOnTop.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;numericUpDownH.Name" xml:space="preserve">
-    <value>numericUpDownH</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownH.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownH.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownH.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownW.Name" xml:space="preserve">
-    <value>numericUpDownW</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownW.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownW.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownW.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
-    <value>label6</value>
-  </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
-    <value>label7</value>
-  </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 165</value>
-  </data>
-  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 141</value>
-  </data>
-  <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="groupBox5.Text" xml:space="preserve">
-    <value>Size</value>
-  </data>
-  <data name="&gt;&gt;groupBox5.Name" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;groupBox5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox5.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="numericUpDownH.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 36pt</value>
   </data>
@@ -1843,77 +1183,29 @@
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;numericUpDownY.Name" xml:space="preserve">
-    <value>numericUpDownY</value>
+  <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 165</value>
   </data>
-  <data name="&gt;&gt;numericUpDownY.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownY.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownY.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownX.Name" xml:space="preserve">
-    <value>numericUpDownX</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownX.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownX.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownX.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
-  </data>
-  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 141</value>
   </data>
-  <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="groupBox4.Text" xml:space="preserve">
-    <value>Position</value>
+  <data name="groupBox5.Text" xml:space="preserve">
+    <value>Size</value>
   </data>
-  <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
-    <value>groupBox4</value>
+  <data name="&gt;&gt;groupBox5.Name" xml:space="preserve">
+    <value>groupBox5</value>
   </data>
-  <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBox5.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBox5.Parent" xml:space="preserve">
     <value>groupBox_viewSettings</value>
   </data>
-  <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="numericUpDownY.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 36pt</value>
@@ -2034,6 +1326,30 @@
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 18</value>
+  </data>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 141</value>
+  </data>
+  <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
+    <value>groupBox_viewSettings</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="label9_fps.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2323,137 +1639,29 @@
   <data name="&gt;&gt;cb_always_on_top.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;pictureBox_BacklightOnRecognition.Name" xml:space="preserve">
-    <value>pictureBox_BacklightOnRecognition</value>
+  <data name="groupBox_viewSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 307</value>
   </data>
-  <data name="&gt;&gt;pictureBox_BacklightOnRecognition.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="groupBox_viewSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>495, 322</value>
   </data>
-  <data name="&gt;&gt;pictureBox_BacklightOnRecognition.Parent" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_BacklightOnRecognition.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown3.Name" xml:space="preserve">
-    <value>numericUpDown3</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown3.Parent" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown3.ZOrder" xml:space="preserve">
+  <data name="groupBox_viewSettings.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;groupBox9.Name" xml:space="preserve">
-    <value>groupBox9</value>
+  <data name="groupBox_viewSettings.Text" xml:space="preserve">
+    <value>View settings</value>
   </data>
-  <data name="&gt;&gt;groupBox9.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBox_viewSettings.Name" xml:space="preserve">
+    <value>groupBox_viewSettings</value>
+  </data>
+  <data name="&gt;&gt;groupBox_viewSettings.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox9.Parent" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
-  </data>
-  <data name="&gt;&gt;groupBox9.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Name" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Parent" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;groupBox8.Name" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;groupBox8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox8.Parent" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
-  </data>
-  <data name="&gt;&gt;groupBox8.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;groupBox7.Name" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;groupBox7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox7.Parent" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
-  </data>
-  <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;lb_seconds.Name" xml:space="preserve">
-    <value>lb_seconds</value>
-  </data>
-  <data name="&gt;&gt;lb_seconds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_seconds.Parent" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
-  </data>
-  <data name="&gt;&gt;lb_seconds.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lb_manual_recording_time.Name" xml:space="preserve">
-    <value>lb_manual_recording_time</value>
-  </data>
-  <data name="&gt;&gt;lb_manual_recording_time.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_manual_recording_time.Parent" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
-  </data>
-  <data name="&gt;&gt;lb_manual_recording_time.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;cb_backlight_on_recognition.Name" xml:space="preserve">
-    <value>cb_backlight_on_recognition</value>
-  </data>
-  <data name="&gt;&gt;cb_backlight_on_recognition.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_backlight_on_recognition.Parent" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
-  </data>
-  <data name="&gt;&gt;cb_backlight_on_recognition.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="groupBox_functionalitySettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 667</value>
-  </data>
-  <data name="groupBox_functionalitySettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>495, 689</value>
-  </data>
-  <data name="groupBox_functionalitySettings.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="groupBox_functionalitySettings.Text" xml:space="preserve">
-    <value>Functionality settings</value>
-  </data>
-  <data name="&gt;&gt;groupBox_functionalitySettings.Name" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
-  </data>
-  <data name="&gt;&gt;groupBox_functionalitySettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox_functionalitySettings.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBox_viewSettings.Parent" xml:space="preserve">
     <value>groupBox_cameraNumber</value>
   </data>
-  <data name="&gt;&gt;groupBox_functionalitySettings.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="&gt;&gt;groupBox_viewSettings.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="pictureBox_BacklightOnRecognition.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2508,195 +1716,6 @@
   </data>
   <data name="&gt;&gt;numericUpDown3.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_recordUponStart.Name" xml:space="preserve">
-    <value>pictureBox_recordUponStart</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_recordUponStart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_recordUponStart.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_recordUponStart.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_recordingDuringFaceRecognition.Name" xml:space="preserve">
-    <value>pictureBox_recordingDuringFaceRecognition</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_recordingDuringFaceRecognition.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_recordingDuringFaceRecognition.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_recordingDuringFaceRecognition.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_operatorCapture.Name" xml:space="preserve">
-    <value>pictureBox_operatorCapture</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_operatorCapture.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_operatorCapture.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_operatorCapture.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown6.Name" xml:space="preserve">
-    <value>numericUpDown6</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown6.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown6.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown4.Name" xml:space="preserve">
-    <value>numericUpDown4</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown4.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown4.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;cb_record_upon_start.Name" xml:space="preserve">
-    <value>cb_record_upon_start</value>
-  </data>
-  <data name="&gt;&gt;cb_record_upon_start.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_record_upon_start.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cb_record_upon_start.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;cb_operator_capture.Name" xml:space="preserve">
-    <value>cb_operator_capture</value>
-  </data>
-  <data name="&gt;&gt;cb_operator_capture.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_operator_capture.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cb_operator_capture.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;cb_recording_during_facerec.Name" xml:space="preserve">
-    <value>cb_recording_during_facerec</value>
-  </data>
-  <data name="&gt;&gt;cb_recording_during_facerec.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_recording_during_facerec.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cb_recording_during_facerec.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;label18_seconds.Name" xml:space="preserve">
-    <value>label18_seconds</value>
-  </data>
-  <data name="&gt;&gt;label18_seconds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label18_seconds.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label18_seconds.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;label17.Name" xml:space="preserve">
-    <value>label17</value>
-  </data>
-  <data name="&gt;&gt;label17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label17.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;cm_capture_mode.Name" xml:space="preserve">
-    <value>cm_capture_mode</value>
-  </data>
-  <data name="&gt;&gt;cm_capture_mode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cm_capture_mode.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cm_capture_mode.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;lb_seconds2.Name" xml:space="preserve">
-    <value>lb_seconds2</value>
-  </data>
-  <data name="&gt;&gt;lb_seconds2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_seconds2.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;lb_seconds2.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;lb_capture_seconds.Name" xml:space="preserve">
-    <value>lb_capture_seconds</value>
-  </data>
-  <data name="&gt;&gt;lb_capture_seconds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_capture_seconds.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;lb_capture_seconds.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;lb_capture_mode.Name" xml:space="preserve">
-    <value>lb_capture_mode</value>
-  </data>
-  <data name="&gt;&gt;lb_capture_mode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_capture_mode.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;lb_capture_mode.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="groupBox9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 200</value>
-  </data>
-  <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>482, 252</value>
-  </data>
-  <data name="groupBox9.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;groupBox9.Name" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;groupBox9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox9.Parent" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
-  </data>
-  <data name="&gt;&gt;groupBox9.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="pictureBox_recordUponStart.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3103,122 +2122,26 @@
   <data name="&gt;&gt;lb_capture_mode.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;numericUpDown8.Name" xml:space="preserve">
-    <value>numericUpDown8</value>
+  <data name="groupBox9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 200</value>
   </data>
-  <data name="&gt;&gt;numericUpDown8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>482, 252</value>
   </data>
-  <data name="&gt;&gt;numericUpDown8.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown8.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_EventRecorder.Name" xml:space="preserve">
-    <value>pictureBox_EventRecorder</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_EventRecorder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_EventRecorder.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_EventRecorder.ZOrder" xml:space="preserve">
+  <data name="groupBox9.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;numericUpDown7.Name" xml:space="preserve">
-    <value>numericUpDown7</value>
+  <data name="&gt;&gt;groupBox9.Name" xml:space="preserve">
+    <value>groupBox9</value>
   </data>
-  <data name="&gt;&gt;numericUpDown7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown7.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown7.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;cb_event_recorder.Name" xml:space="preserve">
-    <value>cb_event_recorder</value>
-  </data>
-  <data name="&gt;&gt;cb_event_recorder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_event_recorder.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;cb_event_recorder.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lb_post_event.Name" xml:space="preserve">
-    <value>lb_post_event</value>
-  </data>
-  <data name="&gt;&gt;lb_post_event.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_post_event.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;lb_post_event.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lb_pre_event.Name" xml:space="preserve">
-    <value>lb_pre_event</value>
-  </data>
-  <data name="&gt;&gt;lb_pre_event.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_pre_event.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;lb_pre_event.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;label23_seconds.Name" xml:space="preserve">
-    <value>label23_seconds</value>
-  </data>
-  <data name="&gt;&gt;label23_seconds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label23_seconds.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;label23_seconds.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;label22_seconds.Name" xml:space="preserve">
-    <value>label22_seconds</value>
-  </data>
-  <data name="&gt;&gt;label22_seconds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label22_seconds.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;label22_seconds.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="groupBox10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 458</value>
-  </data>
-  <data name="groupBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 224</value>
-  </data>
-  <data name="groupBox10.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Name" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBox9.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox10.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBox9.Parent" xml:space="preserve">
     <value>groupBox_functionalitySettings</value>
   </data>
-  <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;groupBox9.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="numericUpDown8.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 36pt</value>
@@ -3451,86 +2374,26 @@
   <data name="&gt;&gt;label22_seconds.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;numericUpDown5.Name" xml:space="preserve">
-    <value>numericUpDown5</value>
+  <data name="groupBox10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 458</value>
   </data>
-  <data name="&gt;&gt;numericUpDown5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="groupBox10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 224</value>
   </data>
-  <data name="&gt;&gt;numericUpDown5.Parent" xml:space="preserve">
-    <value>groupBox8</value>
+  <data name="groupBox10.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="&gt;&gt;numericUpDown5.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;groupBox10.Name" xml:space="preserve">
+    <value>groupBox10</value>
   </data>
-  <data name="&gt;&gt;pictureBox_backlightOffWhenIdle.Name" xml:space="preserve">
-    <value>pictureBox_backlightOffWhenIdle</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_backlightOffWhenIdle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_backlightOffWhenIdle.Parent" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_backlightOffWhenIdle.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cb_backlight_off_idling.Name" xml:space="preserve">
-    <value>cb_backlight_off_idling</value>
-  </data>
-  <data name="&gt;&gt;cb_backlight_off_idling.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_backlight_off_idling.Parent" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;cb_backlight_off_idling.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lb_backlight_off_idling_delay.Name" xml:space="preserve">
-    <value>lb_backlight_off_idling_delay</value>
-  </data>
-  <data name="&gt;&gt;lb_backlight_off_idling_delay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_backlight_off_idling_delay.Parent" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;lb_backlight_off_idling_delay.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;label20_minutes.Name" xml:space="preserve">
-    <value>label20_minutes</value>
-  </data>
-  <data name="&gt;&gt;label20_minutes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label20_minutes.Parent" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;label20_minutes.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="groupBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 458</value>
-  </data>
-  <data name="groupBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 148</value>
-  </data>
-  <data name="groupBox8.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;groupBox8.Name" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;groupBox8.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBox10.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox8.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBox10.Parent" xml:space="preserve">
     <value>groupBox_functionalitySettings</value>
   </data>
-  <data name="&gt;&gt;groupBox8.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="numericUpDown5.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 36pt</value>
@@ -3679,86 +2542,26 @@
   <data name="&gt;&gt;label20_minutes.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;pictureBox_faceRecognition.Name" xml:space="preserve">
-    <value>pictureBox_faceRecognition</value>
+  <data name="groupBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 458</value>
   </data>
-  <data name="&gt;&gt;pictureBox_faceRecognition.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="groupBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 148</value>
   </data>
-  <data name="&gt;&gt;pictureBox_faceRecognition.Parent" xml:space="preserve">
-    <value>groupBox7</value>
+  <data name="groupBox8.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="&gt;&gt;pictureBox_faceRecognition.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;groupBox8.Name" xml:space="preserve">
+    <value>groupBox8</value>
   </data>
-  <data name="&gt;&gt;numericUpDown2.Name" xml:space="preserve">
-    <value>numericUpDown2</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.Parent" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cb_face_recognition.Name" xml:space="preserve">
-    <value>cb_face_recognition</value>
-  </data>
-  <data name="&gt;&gt;cb_face_recognition.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_face_recognition.Parent" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;cb_face_recognition.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lb_milliseconds1.Name" xml:space="preserve">
-    <value>lb_milliseconds1</value>
-  </data>
-  <data name="&gt;&gt;lb_milliseconds1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_milliseconds1.Parent" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;lb_milliseconds1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;label10.Name" xml:space="preserve">
-    <value>label10</value>
-  </data>
-  <data name="&gt;&gt;label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 18</value>
-  </data>
-  <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 120</value>
-  </data>
-  <data name="groupBox7.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;groupBox7.Name" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;groupBox7.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBox8.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox7.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBox8.Parent" xml:space="preserve">
     <value>groupBox_functionalitySettings</value>
   </data>
-  <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;groupBox8.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="pictureBox_faceRecognition.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3907,6 +2710,27 @@
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 18</value>
+  </data>
+  <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 120</value>
+  </data>
+  <data name="groupBox7.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.Name" xml:space="preserve">
+    <value>groupBox7</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.Parent" xml:space="preserve">
+    <value>groupBox_functionalitySettings</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="lb_seconds.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -4003,6 +2827,30 @@
   <data name="&gt;&gt;cb_backlight_on_recognition.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="groupBox_functionalitySettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>538, 9</value>
+  </data>
+  <data name="groupBox_functionalitySettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>495, 689</value>
+  </data>
+  <data name="groupBox_functionalitySettings.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="groupBox_functionalitySettings.Text" xml:space="preserve">
+    <value>Functionality settings</value>
+  </data>
+  <data name="&gt;&gt;groupBox_functionalitySettings.Name" xml:space="preserve">
+    <value>groupBox_functionalitySettings</value>
+  </data>
+  <data name="&gt;&gt;groupBox_functionalitySettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox_functionalitySettings.Parent" xml:space="preserve">
+    <value>groupBox_cameraNumber</value>
+  </data>
+  <data name="&gt;&gt;groupBox_functionalitySettings.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="cm_camera_number.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 18pt</value>
   </data>
@@ -4027,6 +2875,60 @@
   <data name="&gt;&gt;cm_camera_number.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="groupBox_cameraNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="groupBox_cameraNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1039, 702</value>
+  </data>
+  <data name="groupBox_cameraNumber.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="groupBox_cameraNumber.Text" xml:space="preserve">
+    <value>Camera number</value>
+  </data>
+  <data name="&gt;&gt;groupBox_cameraNumber.Name" xml:space="preserve">
+    <value>groupBox_cameraNumber</value>
+  </data>
+  <data name="&gt;&gt;groupBox_cameraNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox_cameraNumber.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;groupBox_cameraNumber.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="flowLayoutPanel1.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
+    <value>TopDown</value>
+  </data>
+  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1064, 607</value>
+  </data>
+  <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="flowLayoutPanel1.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="folderBrowserDialogStoreFolder.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>136, 21</value>
   </metadata>
@@ -4040,7 +2942,7 @@
     <value>6, 12</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>540, 607</value>
+    <value>1064, 607</value>
   </data>
   <data name="$this.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 16</value>

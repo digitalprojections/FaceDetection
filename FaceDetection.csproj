@@ -103,26 +103,7 @@
     <Compile Include="FaceDetectionMainForm.Designer.cs">
       <DependentUpon>FaceDetectionMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Camera1.Designer.cs">
-      <DependentUpon>Camera1.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Properties\Camera4.Designer.cs">
-      <DependentUpon>Camera4.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Properties\Camera3.Designer.cs">
-      <DependentUpon>Camera3.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Properties\Camera2.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Camera2.settings</DependentUpon>
-    </Compile>
+    <Compile Include="Properties\Camera1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="settingsUI.cs">
@@ -158,22 +139,6 @@
     <EmbeddedResource Include="settingsUI.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Properties\Camera1.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Camera1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\Camera4.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Camera4.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\Camera3.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Camera3.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\Camera2.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Camera2.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Properties\DataSources\FaceDetection.Properties.Settings.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
