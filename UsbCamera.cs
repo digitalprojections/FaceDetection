@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security;
 using System.Diagnostics;
+using DirectShowLib;
 
 namespace GitHub.secile.Video
 {
@@ -32,7 +33,7 @@ namespace GitHub.secile.Video
     {
 
         
-        public DirectShow.IVideoWindow videoWindow = null;
+        //public DirectShow.IVideoWindow videoWindow = null;
 
         /// <summary>Usb camera image size.</summary>
         public Size Size { get; private set; }
@@ -50,7 +51,8 @@ namespace GitHub.secile.Video
         /// <remarks>Immediately after starting, images may not be acquired.</remarks>
         public Func<Bitmap> GetBitmap { get; private set; }
 
-        
+        private DirectShow.IBaseFilter renderer;
+
 
         /// <summary>
         /// Get available USB camera list.
@@ -79,11 +81,11 @@ namespace GitHub.secile.Video
         /// Size you want to create. If camera does not support the size, created with default size.
         /// Check Size property to know actual created size.
         /// </param>
-        public UsbCamera(int cameraIndex, Size size, IntPtr pbx)
+        public UsbCamera(int cameraIndex, Size size, double fps, IntPtr pbx)
         {
             var camera_list = FindDevices();
             if (cameraIndex >= camera_list.Length) throw new ArgumentException("USB camera is not available.", "index");
-            Init(cameraIndex, size, pbx);
+            Init(cameraIndex, size, fps, pbx);
         }
         static void checkHR(int hr, string msg)
         {
@@ -93,13 +95,13 @@ namespace GitHub.secile.Video
                 DirectShow.DsError.ThrowExceptionForHR(hr);
             }
         }
-        private void Init(int index, Size size, IntPtr pbx)
+        private void Init(int index, Size size, double fps, IntPtr pbx)
         {
             //----------------------------------
             // Create Filter Graph
             //----------------------------------
             // +--------------------+  +----------------+  +---------------+
-            // |Video Capture Source|→| Sample Grabber |→| Null Renderer |
+            // |Video Capture Source|→| Sample Grabber |→| VMR9 Renderer attached to your form Control.Handle |
             // +--------------------+  +----------------+  +---------------+
             //                                 ↓GetBitmap()
 
@@ -108,7 +110,7 @@ namespace GitHub.secile.Video
             //----------------------------------
             // VideoCaptureSource
             //----------------------------------
-            var vcap_source = CreateVideoCaptureSource(index, size);
+            var vcap_source = CreateVideoCaptureSource(index, size, fps);
             graph.AddFilter(vcap_source, "VideoCapture");
 
             //------------------------------
@@ -128,7 +130,7 @@ namespace GitHub.secile.Video
             //---------------------------------------------------
             // Null Renderer
             //---------------------------------------------------
-            var renderer = DirectShow.CoCreateInstance(DirectShow.DsGuid.CLSID_VideoMixingRenderer9) as DirectShow.IBaseFilter;
+            renderer = DirectShow.CoCreateInstance(DirectShow.DsGuid.CLSID_VideoMixingRenderer9) as DirectShow.IBaseFilter;
             graph.AddFilter(renderer, "VMR9");
 
             //---------------------------------------------------
@@ -138,6 +140,17 @@ namespace GitHub.secile.Video
             DirectShow.IVMRAspectRatioControl9 ratioControl9 = (DirectShow.IVMRAspectRatioControl9)renderer;
             int hr = ratioControl9.SetAspectRatioMode(DirectShow.VMRAspectRatioMode.LetterBox);
             checkHR(hr, "can not set aspect ratio");
+
+            IVMRFilterConfig9 config9 = (IVMRFilterConfig9)renderer;
+            hr = config9.SetRenderingMode(VMR9Mode.Windowless);
+            checkHR(hr, "Can't set windowless mode");
+
+            IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
+            hr = control9.SetVideoClippingWindow(pbx);
+            checkHR(hr, "Can't set video clipping window");
+
+            hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+            checkHR(hr, "Can't set rectangles of the video position");
 
             var builder = DirectShow.CoCreateInstance(DirectShow.DsGuid.CLSID_CaptureGraphBuilder2) as DirectShow.ICaptureGraphBuilder2;
             builder.SetFiltergraph(graph);
@@ -170,17 +183,26 @@ namespace GitHub.secile.Video
                 DirectShow.ReleaseInstance(ref builder);
                 DirectShow.ReleaseInstance(ref graph);
             };
-
+            /*
             videoWindow = (DirectShow.IVideoWindow)graph;
             //need to pass the handle for the picture box
             videoWindow.put_Owner(pbx);
             videoWindow.put_WindowState(DirectShow.WindowState.Normal);
             /*This method is a thin wrapper over the SetWindowLong function 
              * and must be treated with care. In particular, you should retrieve 
-             * the current styles and then add or remove flags*/
+             * the current styles and then add or remove flags
             videoWindow.put_WindowStyle(DirectShow.WindowStyle.Child | DirectShow.WindowStyle.ClipChildren);
             //videoWindow.put_FullScreenMode(DirectShow.OABool.True);
             videoWindow.SetWindowPosition(0, 0, 1280, 720);
+            */
+        }
+
+        public void SetWindowPosition(Size size)
+        {
+            int hr = 0;
+            IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
+            hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+            checkHR(hr, "Can't set rectangles of the video position");
         }
 
         /// <summary>Get Bitmap from Sample Grabber</summary>
@@ -285,11 +307,11 @@ namespace GitHub.secile.Video
         /// <summary>
         /// Video Capture Sourceフィルタを作成する
         /// </summary>
-        private DirectShow.IBaseFilter CreateVideoCaptureSource(int index, Size size)
+        private DirectShow.IBaseFilter CreateVideoCaptureSource(int index, Size size, double fps)
         {
             var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, index);
             var pin = DirectShow.FindPin(filter, 0, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
-            SetVideoOutputFormat(pin, size, 0);
+            SetVideoOutputFormat(pin, size, fps);
             return filter;
         }
 
@@ -320,7 +342,7 @@ namespace GitHub.secile.Video
 
                     if (vformat[i].Caps.Guid == DirectShow.DsGuid.FORMAT_VideoInfo)
                     {
-                        if (vformat[i].Size.Width == size.Width && vformat[i].Size.Height == size.Height)
+                        if (vformat[i].Size.Width == size.Width && vformat[i].Size.Height == size.Height && vformat[i].TimePerFrame==10000000/fps)
                         {
                             SetVideoOutputFormat(pin, i, size, fps);
                             return true;

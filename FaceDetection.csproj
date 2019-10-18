@@ -95,12 +95,6 @@
       <DependentUpon>CameraControl.cs</DependentUpon>
     </Compile>
     <Compile Include="CameraManager.cs" />
-    <Compile Include="CameraSettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CameraSettingsForm.Designer.cs">
-      <DependentUpon>CameraSettingsForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="CustomMessage.cs" />
     <Compile Include="DirectXInterfaces.cs" />
     <Compile Include="FaceDetectionMainForm.cs">
@@ -141,9 +135,6 @@
     <Compile Include="WebCam.cs" />
     <EmbeddedResource Include="CameraControl.resx">
       <DependentUpon>CameraControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CameraSettingsForm.resx">
-      <DependentUpon>CameraSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FaceDetectionMainForm.resx">
       <DependentUpon>FaceDetectionMainForm.cs</DependentUpon>

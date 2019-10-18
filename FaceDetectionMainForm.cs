@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using DirectShowLib;
 using System.Runtime.InteropServices.ComTypes;
+using GitHub.secile.Video;
 
 
 
@@ -31,8 +32,8 @@ namespace FaceDetection
         private static Label camera_num;
         private static FlowLayoutPanel controlBut;
         private static Panel cameraPanel;
-        WebCam camera;
-
+        //WebCam camera;
+        UsbCamera usbCamera;
 
 
         //User actions end
@@ -48,15 +49,18 @@ namespace FaceDetection
         {
             InitializeComponent();
 
+            GitHub.secile.Video.UsbCamera.VideoFormat[] videoFormat = GitHub.secile.Video.UsbCamera.GetVideoFormat(0);
+
+            //Showing video formats
+            for (int k=0; k<videoFormat.Length; k++)
+            {
+                Console.WriteLine(videoFormat[k].Caps.Guid);
+            }
+
             if (vs != null && vs.Count() > 0)
             {
                 HandleParameters(vs);
             }
-
-             
-            
-            
-            
         }
 
         private void ProcessFrame(object sender, EventArgs eventArgs)
@@ -264,8 +268,11 @@ namespace FaceDetection
         }
         public void ShowButtons(object sender, EventArgs eventArgs)
         {
-            camera = new WebCam(panelCamera, Decimal.ToInt32(Properties.Camera1.Default.view_width), Decimal.ToInt32(Properties.Camera1.Default.view_height));
+            //camera = new WebCam(panelCamera, Decimal.ToInt32(Properties.Camera1.Default.view_width), Decimal.ToInt32(Properties.Camera1.Default.view_height));
 
+            usbCamera = new UsbCamera(0, new Size(1280, 720), 15, cameraPanel.Handle);
+            usbCamera.Start();
+            
             if (timer.Enabled == true)
             {
                 timer.Stop();
@@ -404,7 +411,11 @@ namespace FaceDetection
             Properties.Camera1.Default.view_height = Convert.ToDecimal(this.Height);
             Properties.Camera1.Default.Save();
             Debug.WriteLine(Properties.Camera1.Default.view_width);
-            //camera.videoWindow.SetWindowPosition(0, 0, this.Width, this.Height);            
+            if (usbCamera!=null)
+            {
+                usbCamera.SetWindowPosition(new Size(this.Width, this.Height));
+            }
+            
         }
 
         private void SnapShot(object sender, EventArgs e)
@@ -413,8 +424,9 @@ namespace FaceDetection
 
             //Bitmap bitmap = camera.GetBitmapImage;
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
-            //bitmap.Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
+            usbCamera.GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
             //timage.Dispose();
+            
 
         }
         private void StartVideoRecording(object sender, EventArgs e)
