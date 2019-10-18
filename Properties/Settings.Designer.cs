@@ -64,7 +64,7 @@ namespace FaceDetection.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute("C:\\UVCCAMERA")]
         public string video_file_location {
             get {
-                return ((string)(this["video_file_location"]));
+                return ((string)(this["video_file_location"])); //ビデオファイルの場所
             }
             set {
                 this["video_file_location"] = value;
@@ -76,7 +76,7 @@ namespace FaceDetection.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool erase_old {
             get {
-                return ((bool)(this["erase_old"]));
+                return ((bool)(this["erase_old"]));//古いの消す
             }
             set {
                 this["erase_old"] = value;
@@ -91,7 +91,7 @@ namespace FaceDetection.Properties {
                 return ((decimal)(this["erase_after"]));
             }
             set {
-                this["erase_after"] = value;
+                this["erase_after"] = value; //のちに消去する
             }
         }
         
