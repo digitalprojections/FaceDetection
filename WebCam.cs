@@ -11,8 +11,11 @@ using System.Windows.Forms;
 namespace FaceDetection
 {
     class WebCam
-    {        
-        private Panel cpanel;
+    {
+        public static STATE CameraState { get { return CURRENT_STATE; } set { CURRENT_STATE = value; } }
+
+        private static STATE CURRENT_STATE = 0;
+        private Panel cpanel; //camera panel
 
         Guid CLSID_VideoCaptureSources = new Guid("{860BB310-5D01-11D0-BD3B-00A0C911CE86}"); //
         Guid CLSID_SampleGrabber = new Guid("{C1F400A0-3F08-11D3-9F0B-006008039E37}"); //qedit.dll
@@ -20,6 +23,15 @@ namespace FaceDetection
 
         DsDevice[] dsDevices;
         IBaseFilter pFHDCamera;
+
+        public enum STATE:int
+        {
+            NONE,
+            STOPPED,
+            PAUSED,
+            PLAYING,
+            INITIATED
+        }
 
         private IMoniker GetDeviceMoniker(int index)
         {
@@ -40,7 +52,8 @@ namespace FaceDetection
             Console.WriteLine(dsDevices[0].Name);
             //add YOUR Camera
 
-
+            //dsDevice[index] is the selected camera index
+            //most likely the index and the name match for each camera
             pFHDCamera = CreateFilterByName(dsDevices[0].Name, CLSID_VideoCaptureSources);            
             hr = pGraph.AddFilter(pFHDCamera, "FHD Camera");
             checkHR(hr, "Can't add FHD Camera to graph");
@@ -136,7 +149,7 @@ namespace FaceDetection
             hr = control9.SetVideoClippingWindow(cpanel.Handle);
             checkHR(hr, "Can't set video clipping window");
 
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, 1980, 1080));
+            hr = control9.SetVideoPosition(null, new DsRect(0, 0, 1280, 720));
             checkHR(hr, "Can't set rectangles of the video position");
             //must 
             ///////////////////////////////////////////////////////////////////
@@ -197,18 +210,20 @@ namespace FaceDetection
         }
         public WebCam(Panel panel, int w, int h)
         {
+            CameraState = STATE.NONE;
 
             cpanel = panel;
             try
             {
                 IGraphBuilder graph = (IGraphBuilder)new FilterGraph();
                 Console.WriteLine("Building graph...");
-                BuildGraph(graph, @"test.avi");                
-
+                BuildGraph(graph, @"test.avi");
                 IMediaControl mediaControl = (IMediaControl)graph;
                 IMediaEvent mediaEvent = (IMediaEvent)graph;
+                
                 int hr = mediaControl.Run();
                 checkHR(hr, "Can't run the graph");
+                CameraState = STATE.PLAYING;
                 bool stop = false;
                 while (!stop)
                 {
@@ -222,12 +237,14 @@ namespace FaceDetection
                         if (ev == EventCode.Complete || ev == EventCode.UserAbort)
                         {
                             Console.WriteLine("Done!");
+                            CameraState = STATE.INITIATED;
                             stop = true;
                         }
                         else
                         if (ev == EventCode.ErrorAbort)
                         {
                             Console.WriteLine("An error occured: HRESULT={0:X}", p1);
+                            CameraState = STATE.NONE;
                             mediaControl.Stop();
                             stop = true;
                         }
@@ -237,11 +254,12 @@ namespace FaceDetection
             }
             catch (COMException ex)
             {
-                Console.WriteLine("COM error: " + ex.ToString());
+                CameraState = STATE.INITIATED;
+                Console.WriteLine("COM error: " + ex.ToString() + " in line 259");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.ToString());
+                Console.WriteLine("Error: " + ex.ToString() + " in line 263");
             }
         }
         static void checkHR(int hr, string msg)
@@ -256,7 +274,7 @@ namespace FaceDetection
         {
             IEnumPins epins;
             int hr = filter.EnumPins(out epins);
-            checkHR(hr, "Can't enumerate pins");
+            checkHR(hr, "Can't enumerate pins line 278");
             IntPtr fetched = Marshal.AllocCoTaskMem(4);
             IPin[] pins = new IPin[1];
             while (epins.Next(1, pins, fetched) == 0)
@@ -268,7 +286,7 @@ namespace FaceDetection
                 if (found)
                     return pins[0];
             }
-            checkHR(-1, "Pin not found");
+            checkHR(-1, "Pin not found in 290");
             return null;
         }
 

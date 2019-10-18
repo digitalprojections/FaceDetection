@@ -6,7 +6,7 @@
       <Value Profile="(Default)">English</Value>
     </Setting>
     <Setting Name="camera_count" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="search_all" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -95,8 +95,77 @@
     <Setting Name="culture" Type="System.String" Scope="User">
       <Value Profile="(Default)">en-US</Value>
     </Setting>
-    <Setting Name="ggg" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="C1x" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="C1y" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="C1w" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1280</Value>
+    </Setting>
+    <Setting Name="C1h" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">720</Value>
+    </Setting>
+    <Setting Name="C1f" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
+    <Setting Name="C2x" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="C2y" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="C2w" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1280</Value>
+    </Setting>
+    <Setting Name="C2h" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">720</Value>
+    </Setting>
+    <Setting Name="C2f" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
+    <Setting Name="C3x" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="C3y" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="C3w" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1280</Value>
+    </Setting>
+    <Setting Name="C3h" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">720</Value>
+    </Setting>
+    <Setting Name="C3f" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
+    <Setting Name="C4x" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="C4y" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="C4w" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1280</Value>
+    </Setting>
+    <Setting Name="C4h" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">720</Value>
+    </Setting>
+    <Setting Name="C4f" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
+    <Setting Name="C1res" Type="System.String" Scope="User">
+      <Value Profile="(Default)">640x480</Value>
+    </Setting>
+    <Setting Name="C2res" Type="System.String" Scope="User">
+      <Value Profile="(Default)">640x480</Value>
+    </Setting>
+    <Setting Name="C3res" Type="System.String" Scope="User">
+      <Value Profile="(Default)">640x480</Value>
+    </Setting>
+    <Setting Name="C4res" Type="System.String" Scope="User">
+      <Value Profile="(Default)">640x480</Value>
     </Setting>
   </Settings>
 </SettingsFile>

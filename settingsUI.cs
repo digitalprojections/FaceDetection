@@ -18,35 +18,67 @@ namespace FaceDetection
 {
     public partial class settingsUI : Form
     {
-        CameraSettingsForm cameraSettingsForm;
+        
 
         DsDevice[] capDevices;
         string[] camera_names;
-        
-       
+
+        private int camera_index;
+        private int camera_number;
+        public int Camera_index { get { return camera_index = Properties.Settings.Default.current_camera_index; } private set { Properties.Settings.Default.current_camera_index = value; Properties.Settings.Default.Save(); } }
+        public int Camera_number { get { return camera_number = Properties.Settings.Default.current_camera_index+1;  } }
+
         public settingsUI()
         {
             InitializeComponent();
 
             this.Width = 550;
-
             this.ControlBox = false;
-
-            cameraSettingsForm = new CameraSettingsForm();
             
-            // Get the collection of video devices
-            capDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
-            camera_names = new string[capDevices.Length];
-            for (int i = 0; i < capDevices.Length; i++)
+        }       
+        private void ArrangeCameraNames(int len)
+        {
+            camera_names = new string[len];
+            for (int i = 0; i < len; i++)
             {
                 camera_names[i] = capDevices[i].Name;
+                cm_camera_number.Items.Add(i+1);
             }
             
-            cm_camera_number.Items.AddRange(camera_names);
-            
+        }
+        private void changeStoreLocation(object sender, EventArgs e)
+        {
+            folderBrowserDialogStoreFolder.ShowNewFolderButton = true;
+            // Show the FolderBrowserDialog.  
+            DialogResult result = folderBrowserDialogStoreFolder.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                storePath.Text = folderBrowserDialogStoreFolder.SelectedPath;
+                Environment.SpecialFolder root = folderBrowserDialogStoreFolder.RootFolder;
+                Debug.WriteLine(storePath);
+            }
+        }
 
-        }       
-        
+        private void CameraSettingsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Save settings
+            Properties.Settings.Default.Save();
+            MainForm.FormChangesApply();
+        }
+
+        private void OpenStoreLocation(object sender, EventArgs e)
+        {
+            try
+            {
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
+                Process.Start(Properties.Settings.Default.video_file_location);
+            }
+            catch (IOException ioe)
+            {
+                MessageBox.Show(ioe.Message);
+            }
+        }
         private void closeSettings(object sender, EventArgs e)
         {
             /*CANCEL BUTTON
@@ -57,13 +89,7 @@ namespace FaceDetection
 
         private void save_and_close(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Save();
-            Properties.Camera1.Default.Save();
-            Properties.Camera2.Default.Save();
-            Properties.Camera3.Default.Save();
-            Properties.Camera4.Default.Save();
-
-
+            Properties.Settings.Default.Save();            
             MainForm.FormChangesApply();
             this.Hide();
         }
@@ -73,70 +99,44 @@ namespace FaceDetection
             /*
              Here handle all immediate changes
              */
-
             Properties.Settings.Default.Save();
-            Properties.Camera1.Default.Save();
-            Properties.Camera2.Default.Save();
-            Properties.Camera3.Default.Save();
-            Properties.Camera4.Default.Save();
-
-
+            
             MainForm.FormChangesApply();
         }
 
-        
-                
-        private void cameraSelected(object sender, EventArgs e)
-        {
-            ComboBox comboBox = (ComboBox) sender;
-            Debug.WriteLine(comboBox.SelectedIndex);
+        private void SetCameraPropertiesFromMemory()
+        {   
             numericUpDownX.DataBindings.Clear();
             numericUpDownY.DataBindings.Clear();
             numericUpDownW.DataBindings.Clear();
             numericUpDownH.DataBindings.Clear();
-            numericUpDownF.DataBindings.Clear();
-            switch (comboBox.SelectedIndex)
-            {
-                
-                case 0:
-                    //Debug.WriteLine("Not firing");
-                    
-                    numericUpDownX.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera1.Default, "pos_x", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownY.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera1.Default, "pos_y", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownW.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera1.Default, "view_width", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownH.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera1.Default, "view_height", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownF.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera1.Default, "frame_rate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            comboBoxFPS.DataBindings.Clear();
+            comboBoxResolutions.DataBindings.Clear();
+            string camX = "C" + camera_number + "x";
+            string camY = "C" + camera_number + "y";
+            string camW = "C" + camera_number + "w";
+            string camH = "C" + camera_number + "h";
+            string camF = "C" + camera_number + "f";
+            string camRes = "C" + camera_number + "res";
 
-                    break;
-                case 1:
+            //numericUpDownF.DataBindings.Clear();
 
-                    numericUpDownX.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera2.Default, "pos_x", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownY.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera2.Default, "pos_y", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownW.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera2.Default, "view_width", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownH.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera2.Default, "view_height", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownF.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera2.Default, "frame_rate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownX.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, camX, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownY.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, camY, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownW.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, camW, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownH.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, camH, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            comboBoxFPS.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camF, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            comboBoxResolutions.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camRes, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 
+        }
 
-                    break;
-                case 2:
-                    numericUpDownX.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera3.Default, "pos_x", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownY.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera3.Default, "pos_y", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownW.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera3.Default, "view_width", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownH.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera3.Default, "view_height", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownF.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera3.Default, "frame_rate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-
-
-                    break;
-                case 3:
-                    numericUpDownX.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera4.Default, "pos_x", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownY.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera4.Default, "pos_y", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownW.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera4.Default, "view_width", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownH.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera4.Default, "view_height", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                    numericUpDownF.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Camera4.Default, "frame_rate", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-
-
-                    break;            }
-            //
+        private void cameraSelected(object sender, EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            Debug.WriteLine(comboBox.SelectedIndex);
+            camera_index = comboBox.SelectedIndex;
+            camera_number = Int32.Parse(comboBox.SelectedItem.ToString());
+            SetCameraPropertiesFromMemory();
         }
 
         private void Label10_Click(object sender, EventArgs e)
@@ -146,14 +146,42 @@ namespace FaceDetection
 
         private void SettingsUI_Load(object sender, EventArgs e)
         {
-            cm_camera_number.SelectedIndex = 0;
-            cm_capture_mode.SelectedIndex = 0;
+            if (cm_camera_number.Items.Count>0)
+            {
+                cm_camera_number.SelectedIndex = camera_index;
+                cm_capture_mode.SelectedIndex = camera_index;
+            }
+            SetCameraPropertiesFromMemory();
+
             cm_language.SelectedItem = Properties.Settings.Default.language;
 
             CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture(Properties.Settings.Default.culture);
 
             ChangeLanguage();
             Debug.WriteLine(CultureInfo.CurrentCulture + " current culture");
+
+            // Get the collection of video devices
+            capDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
+
+            numericUpDownCamCount.Value = Properties.Settings.Default.camera_count;
+
+                if (capDevices.Length > numericUpDownCamCount.Value)
+                {
+                    MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
+                    ArrangeCameraNames(Decimal.ToInt32(numericUpDownCamCount.Value));
+                }
+                else
+                {
+                    //settings are missing
+                    if (capDevices.Length > 4)
+                    {
+                        ArrangeCameraNames(4);
+                    }
+                    else
+                    {
+                        ArrangeCameraNames(capDevices.Length);
+                    }
+                }
         }
 
         private void Cm_language_SelectedIndexChanged(object sender, EventArgs e)
@@ -168,8 +196,6 @@ namespace FaceDetection
             {
                 Properties.Settings.Default.culture = "en-US";
                 Properties.Settings.Default.language = "English";
-
-
             }
             else
             {
@@ -190,8 +216,6 @@ namespace FaceDetection
                     checkOnKids(cult, c, resources);
                 }
             }
-
-            
         }
         private void checkOnKids(CultureInfo cult, Control control, ComponentResourceManager crm)
         {
@@ -218,16 +242,10 @@ namespace FaceDetection
 
         }
 
-        private void Button_capture_settings_Click(object sender, EventArgs e)
+        private void NumericUpDownCamCount_ValueChanged(object sender, EventArgs e)
         {
-            //Call the general settings window
-            if (cameraSettingsForm.Visible == false)
-            {
-                cameraSettingsForm.TopMost = true;
-                this.TopMost = false;
-                Debug.WriteLine("topmost 414");
-                cameraSettingsForm.Show();
-            }
+            Properties.Settings.Default.camera_count = numericUpDownCamCount.Value;
+            Properties.Settings.Default.Save();
         }
     }
 }
