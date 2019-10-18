@@ -113,7 +113,7 @@ namespace FaceDetection
                     }
                     catch (Exception e)
                     {
-                        Debug.WriteLine(e.ToString() + " 243rd line");
+                        Debug.WriteLine(e.ToString() + " 117rd line");
                     }
                     //|||||||||||||||||||||||||||
                     switch (parameters.ElementAt(1))
