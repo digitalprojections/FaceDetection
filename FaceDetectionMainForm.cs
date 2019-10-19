@@ -19,19 +19,36 @@ namespace FaceDetection
         private readonly Timer face_timer = new Timer();
         private readonly Timer datetime_ui_updater = new Timer();
 
+        internal enum CAMERA_MODES
+        {
+            PREVIEW_MODE,
+            CAPTURE_MODE
+        }
+
+        internal CAMERA_MODES CURRENT_MODE = 0;
+
+        internal CAMERA_MODES CAMERA_MODE {
+            get
+            {
+                return CURRENT_MODE;
+            }
+            set
+            {
+                CURRENT_MODE = value;
+            }
+            }
+
         // Camera choice
         //private CameraChoice _CameraChoice = new CameraChoice();
         
-        private static Label testparam;
-        private static MainForm mainForm;
-        private static PictureBox pb_recording;
-        private static bool recording_on;
-        private static Label current_date_text;
-        private static Label camera_num;
-        private static FlowLayoutPanel controlBut;
-        private static Panel cameraPanel;
-        //WebCam camera;
-        UsbCamera usbCamera;
+        private static Label or_testparam;
+        private static MainForm or_mainForm;
+        private static PictureBox or_pb_recording;
+        private static bool or_recording_on;
+        private static Label or_current_date_text;
+        private static Label or_camera_num_txt;
+        private static FlowLayoutPanel or_controlBut;
+        private static Panel or_cameraPanel;
 
         //PROPERTY
 
@@ -40,31 +57,95 @@ namespace FaceDetection
 
         //User actions end
         static settingsUI settingUI;
+
+        /// <summary>
+        /// Sets the camera to the Recording mode
+        /// </summary>
+        internal static void RecordMode()
+        {
+            //TODO
+            if(GetCamera()!=null)
+                GetCamera().Release();
+            if(GetRecorder()==null)
+                GetRecorder();
+        }
+
+        //IRSensor
+        IRSensor rSensor = new IRSensor();
                 
         //readonly Thread t;
-        static Form camform;
+        static Form or_mainform;
         bool initrec = false;
-        
-        public static Panel CameraPanel { get => cameraPanel;}
-        public static MainForm GetMainForm { get => mainForm;}
+        UsbCamera.VideoFormat[] videoFormat = UsbCamera.GetVideoFormat(0);
+        List<string> vf_resolutions = new List<string>();
+        List<long> vf_fps = new List<long>();
+        public static Panel CameraPanel
+        {
+            get
+            {
+                return or_cameraPanel;
+            }
+        }
+        public static MainForm GetMainForm
+        {
+            get
+            {
+                return or_mainForm;
+            }
+        }
+        private static UsbCamera camera;
+        private static UsbCamcorder camcorder;
+        public static UsbCamera GetCamera()
+        {
+            return camera;
+        }
+        public static UsbCamcorder GetRecorder()
+        {
+            return camcorder;
+        }
+
+        private static void SetCamera(UsbCamera value)
+        {
+            camera = value;
+        }
+
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             InitializeComponent();
 
             
-
-            GitHub.secile.Video.UsbCamera.VideoFormat[] videoFormat = GitHub.secile.Video.UsbCamera.GetVideoFormat(0);
-
-            //Showing video formats
-            for (int k=0; k<videoFormat.Length; k++)
-            {
-                Console.WriteLine(videoFormat[k].Caps.Guid);
-            }
-
+            
+            
             if (vs != null && vs.Count() > 0)
             {
                 HandleParameters(vs);
             }
+        }
+        private bool UniqueFPS(long fps)
+        {
+            bool retval = false;
+            for(int i=0; i<vf_fps.Count;i++)
+            {
+                if (vf_fps[i]==fps)
+                {
+                    retval = true;
+                }
+            }
+            return retval;
+        }
+        private bool UniqueVideoParameter(List<string> vf, Size s)
+        {
+            bool retval = false;
+            string temp = s.Width + "x" + s.Height;
+            //
+            for (int i=0; i<vf.Count; i++)
+            {
+                if(vf[i]==temp)
+                {
+                    retval = true;
+                }                
+            }
+            return retval;
         }
 
         /// <summary>
@@ -74,7 +155,7 @@ namespace FaceDetection
         {
             try
             {
-                dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                or_dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             }
             catch (NullReferenceException e)
             {
@@ -108,7 +189,7 @@ namespace FaceDetection
                     try
                     {
 
-                        testparam.Text = String.Concat(parameters);
+                        or_testparam.Text = String.Concat(parameters);
 
                     }
                     catch (Exception e)
@@ -126,7 +207,7 @@ namespace FaceDetection
                                     if (settingUI != null && settingUI.Visible == false)
                                     {
                                         settingUI.TopMost = true;
-                                        mainForm.TopMost = false;
+                                        or_mainForm.TopMost = false;
                                         settingUI.Show();
                                     }
 
@@ -168,14 +249,14 @@ namespace FaceDetection
                                     /*
                                  SHOW CONTROL BUTTONS    
                                  */
-                                    controlBut.Visible = true;
+                                    or_controlBut.Visible = true;
                                 }
                                 else if (parameters.ElementAt(2) == "0")
                                 {
                                     /*
                                  HIDE CONTROL BUTTONS    
                                  */
-                                    controlBut.Visible = false;
+                                    or_controlBut.Visible = false;
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -472,7 +553,7 @@ namespace FaceDetection
                                     if (settingUI != null && settingUI.Visible == false)
                                     {
                                         settingUI.TopMost = true;
-                                        mainForm.TopMost = false;
+                                        or_mainForm.TopMost = false;
                                         settingUI.Show();
                                     }
 
@@ -623,7 +704,7 @@ namespace FaceDetection
                                     if (settingUI != null && settingUI.Visible == false)
                                     {
                                         settingUI.TopMost = true;
-                                        mainForm.TopMost = false;
+                                        or_mainForm.TopMost = false;
                                         settingUI.Show();
                                     }
 
@@ -648,17 +729,31 @@ namespace FaceDetection
         
         }
 
-        public static void HandleParameters(String[] parameters)
+        public static void GetCameraInstance()
         {
-            //Debug.WriteLine(parameters);
-            testparam.Text = String.Concat(parameters);
+            if (GetCamera() != null)
+                GetCamera().Release();
+            SetCamera(new UsbCamera(0, new Size(1280, 720), 15, or_cameraPanel.Handle));
+        }
+        public static void GetCamcorderInstance()
+        {
+            if (GetRecorder() != null)
+                GetRecorder().Release();
+            //TODO dynamically generate filename in the right path, for the right camera
+            string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
+            SetCamcorder(new UsbCamcorder(0, new Size(1280, 720), 15, or_cameraPanel.Handle, dstFileName));
+        }
+        private static void SetCamcorder(UsbCamcorder usbCamcorder)
+        {
+            camcorder = usbCamcorder;
         }
         public void ShowButtons(object sender, EventArgs eventArgs)
         {
-            //camera = new WebCam(panelCamera, Decimal.ToInt32(Properties.Camera1.Default.view_width), Decimal.ToInt32(Properties.Camera1.Default.view_height));
-
-            usbCamera = new UsbCamera(0, new Size(1280, 720), 15, cameraPanel.Handle);
-            usbCamera.Start();
+            if (CURRENT_MODE == CAMERA_MODES.PREVIEW_MODE)
+            {
+                GetCameraInstance();
+                GetCamera().Start();
+            }            
             
             if (timer.Enabled == true)
             {
@@ -667,11 +762,11 @@ namespace FaceDetection
             //Debug.WriteLine(timer.ToString());
             if (folderButton.Visible == false)
             {
-                controlButtons.Visible = true;
+                or_controlButtons.Visible = true;
            }
             else
             {
-                controlButtons.Visible = false;
+                or_controlButtons.Visible = false;
             }
             ImgCamUser_Click();
         }
@@ -679,7 +774,7 @@ namespace FaceDetection
         {
             Console.WriteLine("mouse down");
             timer.Enabled = true;
-            timer.Interval = 500;//Set it to 3000 for production
+            timer.Interval = 500;//Set it to 3000 for production            
             timer.Start();
         }
         private void ReleaseButton(object sender, MouseEventArgs e)
@@ -749,36 +844,36 @@ namespace FaceDetection
 
         public static void FormChangesApply()
         {
-            camera_num.Visible = Properties.Settings.Default.show_camera_no;
-            current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
+            or_camera_num_txt.Visible = Properties.Settings.Default.show_camera_no;
+            or_current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
             //capTimer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
-            mainForm.TopMost = Properties.Settings.Default.window_on_top;
+            or_mainForm.TopMost = Properties.Settings.Default.window_on_top;
             //frameTimer.Interval = 1000 / Decimal.ToInt32(Properties.Camera1.Default.frame_rate);
             if (Properties.Settings.Default.show_window_pane == true)
             {
-                mainForm.FormBorderStyle = FormBorderStyle.Sizable;
-                mainForm.ControlBox = true;
+                or_mainForm.FormBorderStyle = FormBorderStyle.Sizable;
+                or_mainForm.ControlBox = true;
             }
             else
             {
-                mainForm.FormBorderStyle = FormBorderStyle.None;
+                or_mainForm.FormBorderStyle = FormBorderStyle.None;
             }
-            if (pb_recording.Visible == true)
+            if (or_pb_recording.Visible == true)
             {
-                pb_recording.Image = Properties.Resources.Pause_Normal_Red_icon;
-                pb_recording.Visible = false;
+                or_pb_recording.Image = Properties.Resources.Pause_Normal_Red_icon;
+                or_pb_recording.Visible = false;
             }
             else
             {
                 //設定ウィンドウからの変更なので、recording_on かどうかによる表示する
                 //recording_onがfalseの場合は表示する必要はない
-                if (Properties.Settings.Default.show_recording_icon == true && recording_on == true)
+                if (Properties.Settings.Default.show_recording_icon == true && or_recording_on == true)
                 {
-                    pb_recording.Image = Properties.Resources.Record_Pressed_icon;
-                    pb_recording.Visible = true;
+                    or_pb_recording.Image = Properties.Resources.Record_Pressed_icon;
+                    or_pb_recording.Visible = true;
                 }
             }
-            Debug.WriteLine(pb_recording.Visible);
+            Debug.WriteLine(or_pb_recording.Visible);
         }
 
         private void LastPositionUpdate(object sender, EventArgs e)
@@ -802,9 +897,9 @@ namespace FaceDetection
             }
             
             //Debug.WriteLine(Properties.Camera1.Default.view_width);
-            if (usbCamera!=null)
+            if (GetCamera() != null)
             {
-                usbCamera.SetWindowPosition(new Size(this.Width, this.Height));
+                GetCamera().SetWindowPosition(new Size(this.Width, this.Height));
             }
             
         }
@@ -814,7 +909,7 @@ namespace FaceDetection
             Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot");
             //Bitmap bitmap = camera.GetBitmapImage;
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
-            usbCamera.GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
+            GetCamera().GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
             //timage.Dispose();
             
 
@@ -825,7 +920,7 @@ namespace FaceDetection
             {
                 pbRecording.Image = Properties.Resources.Pause_Normal_Red_icon;
                 pbRecording.Visible = false;
-                recording_on = false;
+                or_recording_on = false;
                 initrec = false;
             }
             else
@@ -834,7 +929,7 @@ namespace FaceDetection
                 {
                     pbRecording.Image = Properties.Resources.Record_Pressed_icon;
                     pbRecording.Visible = true;
-                    recording_on = true;
+                    or_recording_on = true;
                 }
                 
                 initrec = true;
@@ -844,6 +939,11 @@ namespace FaceDetection
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            StopAllTimers();
+            if(GetCamera()!=null)
+                GetCamera().Release();
+            if (GetRecorder() != null)
+                GetRecorder().Release();
             Application.Exit();
         }
 
@@ -897,30 +997,43 @@ namespace FaceDetection
         {
             if (settingUI == null)
             {
-
                 settingUI = new settingsUI();
                 timer.Tick += new EventHandler(ShowButtons);//制御ボタンの非/表示用クリックタイマー
                 face_timer.Tick += new EventHandler(CaptureFace);
                 face_timer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
                 face_timer.Start();
-
                 datetime_ui_updater.Interval = 1000;
                 datetime_ui_updater.Start();
                 datetime_ui_updater.Tick += new EventHandler(ProcessFrame);
-
             }
 
-            cameraPanel = panelCamera;
+            or_cameraPanel = panelCamera;
 
-            
+            rSensor.StartOM_Timer();
+
+            //Showing video formats
+            for (int k = 0; k < videoFormat.Length; k++)
+            {
+                if (UniqueVideoParameter(vf_resolutions, videoFormat[k].Size) != true)
+                {
+                    vf_resolutions.Add(videoFormat[k].Size.Width + "x" + videoFormat[k].Size.Height);
+                }
+                if (UniqueFPS(videoFormat[k].TimePerFrame) == false)
+                {
+                    vf_fps.Add(videoFormat[k].TimePerFrame);
+                }
+            }
+            //Properties.Settings.Default["C" + settingUI.Camera_number + "res"] = String.Join(",", vf_resolutions.ToArray());
+            //Properties.Settings.Default["C" + settingUI.Camera_number + "f"] = String.Join(",", vf_fps.ToArray());
+            Console.WriteLine(vf_resolutions.Count);
 
             /*
              * Application.Idle += ProcessFrame;
              */
-            pb_recording = pbRecording;
+            or_pb_recording = pbRecording;
             pbRecording.BackColor = Color.Transparent;
-            dateTimeLabel.BackColor = Color.Transparent;
-            testparam = testing_params;
+            //dateTimeLabel.BackColor = Color.Transparent;
+            or_testparam = testing_params;
 
             //Set this CAMERA Dynamically to the relevant one
             if (settingUI.Camera_number!=0)
@@ -938,22 +1051,23 @@ namespace FaceDetection
             }
 
             this.TopMost = Properties.Settings.Default.window_on_top;
-            mainForm = this;
-            current_date_text = dateTimeLabel;
-            camera_num = camera_number;
-            controlBut = controlButtons;
+            //SET Object references
+            or_mainForm = this;
+            or_current_date_text = or_dateTimeLabel;
+            or_camera_num_txt = camera_number_txt;
+            or_controlBut = or_controlButtons;
 
             //FormChangesApply();
 
             Debug.WriteLine(Convert.ToInt32(Properties.Settings.Default.backlight_offset_mins) + " WIDTH");
-            camform = this;
+            or_mainform = this;
 
             //var path = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"/test.mp4";
             //var encoder = new OpenH264Lib.Encoder("openh264-2.0.0-win32.dll");
 
-            camform.FormClosing += (s, ev) => {
+            or_mainform.FormClosing += (s, ev) => {
                 Debug.WriteLine("recording ended");
-                //frameTimer.Stop();
+                StopAllTimers();
             };
 
             // Fill camera list combobox with available cameras
@@ -963,6 +1077,14 @@ namespace FaceDetection
             // Fill camera list combobox with available resolutions
             FillResolutionList();
         }
+
+        private void StopAllTimers()
+        {
+            timer.Stop();
+            face_timer.Stop();
+            datetime_ui_updater.Stop();
+        }
+
         private void FillCameraList()
         {
             

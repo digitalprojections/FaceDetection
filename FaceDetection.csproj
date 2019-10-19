@@ -67,9 +67,6 @@
     <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Camera_NET">
-      <HintPath>..\Camera_NET.dll</HintPath>
-    </Reference>
     <Reference Include="DirectShowLib-2010">
       <HintPath>..\DirectShowLib-2010.dll</HintPath>
     </Reference>
@@ -87,23 +84,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CameraChoice.cs" />
-    <Compile Include="CameraControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CameraControl.Designer.cs">
-      <DependentUpon>CameraControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="CameraManager.cs" />
     <Compile Include="CustomMessage.cs" />
-    <Compile Include="DirectXInterfaces.cs" />
     <Compile Include="FaceDetectionMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FaceDetectionMainForm.Designer.cs">
       <DependentUpon>FaceDetectionMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Camera1.cs" />
+    <Compile Include="IRSensor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="settingsUI.cs">
@@ -112,11 +101,8 @@
     <Compile Include="settingsUI.Designer.cs">
       <DependentUpon>settingsUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UsbCamcorder.cs" />
     <Compile Include="UsbCamera.cs" />
-    <Compile Include="WebCam.cs" />
-    <EmbeddedResource Include="CameraControl.resx">
-      <DependentUpon>CameraControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FaceDetectionMainForm.resx">
       <DependentUpon>FaceDetectionMainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +125,7 @@
     <EmbeddedResource Include="settingsUI.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DispApi.lib" />
     <None Include="Properties\DataSources\FaceDetection.Properties.Settings.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -154,6 +141,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DispApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DispApi.h" />
+    <Content Include="DispApiIO.h" />
     <Content Include="openh264-2.0.0-win32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

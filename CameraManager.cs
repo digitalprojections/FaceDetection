@@ -160,7 +160,7 @@ namespace WebCameraX
             {
                 try
                 {
-                    r = enumFilters.Next(baseFilters.Length, baseFilters, fetched);
+                    hr = enumFilters.Next(baseFilters.Length, baseFilters, fetched);
                     DsError.ThrowExceptionForHR(hr);
                     baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
                     Debug.WriteLine(filterInfo.achName + " -filtername");

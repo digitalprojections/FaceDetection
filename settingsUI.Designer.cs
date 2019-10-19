@@ -46,7 +46,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button_cameraProperties = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.button_capture_settings = new System.Windows.Forms.Button();
             this.button_settings_cancel = new System.Windows.Forms.Button();
             this.button_apply = new System.Windows.Forms.Button();
             this.button_settings_save = new System.Windows.Forms.Button();
@@ -180,7 +179,6 @@
             this.groupBox_cameraNumber.Controls.Add(this.label1);
             this.groupBox_cameraNumber.Controls.Add(this.cm_language);
             this.groupBox_cameraNumber.Controls.Add(this.button_cameraProperties);
-            this.groupBox_cameraNumber.Controls.Add(this.button_capture_settings);
             this.groupBox_cameraNumber.Controls.Add(this.button_settings_cancel);
             this.groupBox_cameraNumber.Controls.Add(this.button_apply);
             this.groupBox_cameraNumber.Controls.Add(this.button_settings_save);
@@ -295,12 +293,7 @@
             this.imageList1.Images.SetKeyName(0, "Settings-2-icon.png");
             this.imageList1.Images.SetKeyName(1, "Settings_black-512.png");
             this.imageList1.Images.SetKeyName(2, "setting-512.png");
-            // 
-            // button_capture_settings
-            // 
-            resources.ApplyResources(this.button_capture_settings, "button_capture_settings");
-            this.button_capture_settings.Name = "button_capture_settings";
-            this.button_capture_settings.UseVisualStyleBackColor = true;
+            this.imageList1.Images.SetKeyName(3, "check.png");
             // 
             // button_settings_cancel
             // 
@@ -1087,7 +1080,6 @@
         #endregion
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBox_cameraNumber;
-        private System.Windows.Forms.Button button_capture_settings;
         private System.Windows.Forms.Button button_settings_cancel;
         private System.Windows.Forms.Button button_apply;
         private System.Windows.Forms.Button button_settings_save;

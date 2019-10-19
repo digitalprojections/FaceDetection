@@ -28,13 +28,21 @@ namespace FaceDetection
         public int Camera_index { get { return camera_index = Properties.Settings.Default.current_camera_index; } private set { Properties.Settings.Default.current_camera_index = value; Properties.Settings.Default.Save(); } }
         public int Camera_number { get { return camera_number = Properties.Settings.Default.current_camera_index+1;  } }
 
+        
+
         public settingsUI()
         {
             InitializeComponent();
-
-            this.Width = 550;
+            //Setup window
+            this.Width = 1080;
+            this.Height = 760;
             this.ControlBox = false;
+
+            //get reference to the mainform
             
+            
+            Console.WriteLine(MainForm.GetCamera());
+
         }       
         private void ArrangeCameraNames(int len)
         {
@@ -44,6 +52,7 @@ namespace FaceDetection
                 camera_names[i] = capDevices[i].Name;
                 cm_camera_number.Items.Add(i+1);
             }
+
             
         }
         private void changeStoreLocation(object sender, EventArgs e)
@@ -99,8 +108,7 @@ namespace FaceDetection
             /*
              Here handle all immediate changes
              */
-            Properties.Settings.Default.Save();
-            
+            Properties.Settings.Default.Save();            
             MainForm.FormChangesApply();
         }
 
@@ -110,24 +118,32 @@ namespace FaceDetection
             numericUpDownY.DataBindings.Clear();
             numericUpDownW.DataBindings.Clear();
             numericUpDownH.DataBindings.Clear();
-            comboBoxFPS.DataBindings.Clear();
-            comboBoxResolutions.DataBindings.Clear();
+            //comboBoxFPS.DataBindings.Clear();
+            //comboBoxResolutions.DataBindings.Clear();
             string camX = "C" + camera_number + "x";
             string camY = "C" + camera_number + "y";
             string camW = "C" + camera_number + "w";
             string camH = "C" + camera_number + "h";
             string camF = "C" + camera_number + "f";
             string camRes = "C" + camera_number + "res";
-
             //numericUpDownF.DataBindings.Clear();
-
             numericUpDownX.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, camX, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             numericUpDownY.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, camY, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             numericUpDownW.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, camW, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             numericUpDownH.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, camH, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            comboBoxFPS.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camF, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            comboBoxResolutions.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camRes, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            //comboBoxFPS.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camF, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            //comboBoxResolutions.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camRes, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 
+
+            comboBoxFrames = comboBoxFPS;
+            
+        }
+
+        static ComboBox comboBoxFrames;
+
+        public static void SetComboBoxValues(List<string> vs)
+        {
+            comboBoxFrames.DataSource = vs;
         }
 
         private void cameraSelected(object sender, EventArgs e)
@@ -185,8 +201,7 @@ namespace FaceDetection
         }
 
         private void Cm_language_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
+        {            
             ChangeLanguage();
         }
 

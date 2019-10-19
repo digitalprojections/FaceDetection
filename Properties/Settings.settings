@@ -107,7 +107,7 @@
     <Setting Name="C1h" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">720</Value>
     </Setting>
-    <Setting Name="C1f" Type="System.Decimal" Scope="User">
+    <Setting Name="C1f" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="C2x" Type="System.Decimal" Scope="User">
@@ -122,7 +122,7 @@
     <Setting Name="C2h" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">720</Value>
     </Setting>
-    <Setting Name="C2f" Type="System.Decimal" Scope="User">
+    <Setting Name="C2f" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="C3x" Type="System.Decimal" Scope="User">
@@ -137,7 +137,7 @@
     <Setting Name="C3h" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">720</Value>
     </Setting>
-    <Setting Name="C3f" Type="System.Decimal" Scope="User">
+    <Setting Name="C3f" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="C4x" Type="System.Decimal" Scope="User">
@@ -152,7 +152,7 @@
     <Setting Name="C4h" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">720</Value>
     </Setting>
-    <Setting Name="C4f" Type="System.Decimal" Scope="User">
+    <Setting Name="C4f" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="C1res" Type="System.String" Scope="User">

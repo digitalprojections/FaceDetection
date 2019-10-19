@@ -29,7 +29,7 @@ namespace GitHub.secile.Video
     // /* get image. */
     // var bmp = camera.GetBitmap();
 
-    class UsbCamera
+     public class UsbCamera
     {
 
         
@@ -157,7 +157,7 @@ namespace GitHub.secile.Video
             var pinCategory = DirectShow.DsGuid.PIN_CATEGORY_PREVIEW;
             var mediaType = DirectShow.DsGuid.MEDIATYPE_Video;
             builder.RenderStream(ref pinCategory, ref mediaType, vcap_source, grabber, renderer);
-
+            
             // SampleGrabber Format.
             {
                 var mt = new DirectShow.AM_MEDIA_TYPE();
@@ -178,7 +178,37 @@ namespace GitHub.secile.Video
             Release = () =>
             {
                 Stop();
+                
+/*                GitHub.secile.Video.DirectShow.IEnumFilters enumFilters = null;
+                GitHub.secile.Video.DirectShow.IBaseFilter baseFilters = { null};
+                IntPtr fetched = IntPtr.Zero;
+                hr = graph.EnumFilters(ref enumFilters);
 
+
+                int r = 0;
+                while (r == 0)
+                {
+                    try
+                    {
+                        hr = enumFilters.Next(1, ref baseFilters, ref fetched);
+                        DsError.ThrowExceptionForHR(hr);
+                        baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
+                        
+                    }
+                    catch
+                    {
+                        r = 1;
+                        continue;
+                    }
+
+                }*/
+
+                DirectShow.ReleaseInstance(ref grabber);
+                DirectShow.ReleaseInstance(ref control9);
+                DirectShow.ReleaseInstance(ref config9);
+                DirectShow.ReleaseInstance(ref ratioControl9);
+                DirectShow.ReleaseInstance(ref builder);
+                DirectShow.ReleaseInstance(ref renderer);
                 DirectShow.ReleaseInstance(ref i_grabber);
                 DirectShow.ReleaseInstance(ref builder);
                 DirectShow.ReleaseInstance(ref graph);
@@ -301,6 +331,7 @@ namespace GitHub.secile.Video
             mt.MajorType = DirectShow.DsGuid.MEDIATYPE_Video;
             mt.SubType = DirectShow.DsGuid.MEDIASUBTYPE_RGB24;
             ismp.SetMediaType(mt);
+            DirectShow.DeleteMediaType(ref mt);
             return filter;
         }
 
@@ -488,18 +519,29 @@ namespace GitHub.secile.Video
 
         public class VideoFormat
         {
+            private DirectShow.VIDEO_STREAM_CONFIG_CAPS caps;
+
             public string MajorType { get; set; }  // [Video]など
             public string SubType { get; set; }    // [YUY2], [MJPG]など
             public Size Size { get; set; }         // ビデオサイズ
             public long TimePerFrame { get; set; } // ビデオフレームの平均表示時間を100ナノ秒単位で。30fpsのとき「333333」
-            public DirectShow.VIDEO_STREAM_CONFIG_CAPS Caps { get; set; }
-
+            public DirectShow.VIDEO_STREAM_CONFIG_CAPS Caps
+            {
+                get
+                {
+                    return caps;
+                }
+                set
+                {
+                    caps = value;
+                }
+            }
             public override string ToString()
             {
                 return string.Format("{0}, {1}, {2}, {3}, {4}", MajorType, SubType, Size, TimePerFrame, CapsString());
             }
 
-            private string CapsString()
+            public string CapsString()
             {
                 var sb = new StringBuilder();
                 foreach (var info in Caps.GetType().GetFields())
@@ -511,7 +553,7 @@ namespace GitHub.secile.Video
         }
     }
 
-    static class DirectShow
+    public static class DirectShow
     {
         #region Function
 
@@ -1431,6 +1473,7 @@ namespace GitHub.secile.Video
 
             public static readonly Guid CLSID_NullRenderer = new Guid("{C1F400A4-3F08-11D3-9F0B-006008039E37}");
             public static readonly Guid CLSID_VideoMixingRenderer9 = new Guid("51b4abf3-748f-4e3b-a276-c828330e926a");    
+            public static readonly Guid CLSID_SmartTee = new Guid("{CC58E280-8AA1-11D1-B3F1-00AA003761C5}");
             public static readonly Guid CLSID_SampleGrabber = new Guid("{C1F400A0-3F08-11D3-9F0B-006008039E37}");
 
             public static readonly Guid CLSID_FilterGraph = new Guid("{E436EBB3-524F-11CE-9F53-0020AF0BA770}");
