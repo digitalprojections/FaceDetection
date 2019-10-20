@@ -69,7 +69,7 @@ namespace FaceDetection
         /// <summary>
         /// Sets the camera to the Recording mode
         /// </summary>
-        internal static void RecordMode()
+        internal void RecordMode()
         {
             
             //TODO
@@ -79,7 +79,7 @@ namespace FaceDetection
             {                
                 GetCamcorderInstance();
                 Console.WriteLine("Camera record mode");
-                GetRecorder().Start();
+                //GetRecorder().Start();
             }
             Console.WriteLine("Camera record mode");
         }
@@ -110,12 +110,12 @@ namespace FaceDetection
             }
         }
         private static UsbCamera camera;
-        private static UsbCamcorder camcorder;
+        private static CameraManager camcorder;
         public static UsbCamera GetCamera()
         {
             return camera;
         }
-        public static UsbCamcorder GetRecorder()
+        internal CameraManager GetRecorder()
         {
             return camcorder;
         }
@@ -246,9 +246,8 @@ namespace FaceDetection
                         case "-s":
                             try
                             {
-                               
 
-                                    TakeSnapShot();
+                                    MainForm.GetMainForm.TakeSnapShot();
                                 
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -503,6 +502,11 @@ namespace FaceDetection
             }
         }
 
+        internal void ResumeSensor()
+        {
+            rSensor.StartOM_Timer();
+        }
+
 
         //kameyama comment 20191019 beginning
 
@@ -511,9 +515,9 @@ namespace FaceDetection
             
         }
 
-        private static void WindowPane()
+        private static void WindowPane(bool value)
         {
-            
+            MainForm.GetMainForm.ControlBox = value;
         }
 
         private static void ManualRecordingOff()
@@ -558,7 +562,7 @@ namespace FaceDetection
                 GetCamera().Release();
             SetCamera(new UsbCamera(0, new Size(1280, 720), 15, CameraPanel.Handle));
         }
-        public static void GetCamcorderInstance()
+        public void GetCamcorderInstance()
         {
             if (GetRecorder() != null)
                 GetRecorder().Release();
@@ -566,8 +570,9 @@ namespace FaceDetection
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
             //
             try
-            {                
-                camcorder = new UsbCamcorder(0, new Size(1280, 720), 15, CameraPanel.Handle, dstFileName);             
+            {
+                //camcorder = new UsbCamcorder(0, new Size(1280, 720), 15, CameraPanel.Handle, dstFileName);             
+                camcorder = new CameraManager(0, new Size(1280, 720), 15, CameraPanel.Handle, dstFileName);
             }
             catch(InvalidOperationException iox)
             {
@@ -746,7 +751,7 @@ namespace FaceDetection
 
         }
 
-        private static void TakeSnapShot()
+        internal void TakeSnapShot()
         {
             string picloc = Path.Combine(Properties.Settings.Default.video_file_location, (Properties.Settings.Default.current_camera_index + 1).ToString());
             Directory.CreateDirectory(picloc);
@@ -754,10 +759,7 @@ namespace FaceDetection
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
             
             //two versions here. Depending on camera mode
-            //GetCamera().GetBitmap().Save(picloc + imgdate + ".jpeg");
-            
-
-
+            GetRecorder().GetBitmap().Save(picloc + imgdate + ".jpeg");
         }
 
        

@@ -175,6 +175,7 @@
             // 
             // groupBox_cameraNumber
             // 
+            resources.ApplyResources(this.groupBox_cameraNumber, "groupBox_cameraNumber");
             this.groupBox_cameraNumber.Controls.Add(this.groupBox1);
             this.groupBox_cameraNumber.Controls.Add(this.label1);
             this.groupBox_cameraNumber.Controls.Add(this.cm_language);
@@ -185,7 +186,6 @@
             this.groupBox_cameraNumber.Controls.Add(this.groupBox_viewSettings);
             this.groupBox_cameraNumber.Controls.Add(this.groupBox_functionalitySettings);
             this.groupBox_cameraNumber.Controls.Add(this.cm_camera_number);
-            resources.ApplyResources(this.groupBox_cameraNumber, "groupBox_cameraNumber");
             this.groupBox_cameraNumber.Name = "groupBox_cameraNumber";
             this.groupBox_cameraNumber.TabStop = false;
             // 
@@ -776,8 +776,8 @@
             // 
             // cm_capture_mode
             // 
-            this.cm_capture_mode.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "capture_type", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             resources.ApplyResources(this.cm_capture_mode, "cm_capture_mode");
+            this.cm_capture_mode.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "capture_type", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cm_capture_mode.FormattingEnabled = true;
             this.cm_capture_mode.Items.AddRange(new object[] {
             resources.GetString("cm_capture_mode.Items"),
@@ -1023,6 +1023,7 @@
             this.Name = "settingsUI";
             this.Load += new System.EventHandler(this.SettingsUI_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.groupBox_cameraNumber.ResumeLayout(false);
             this.groupBox_cameraNumber.PerformLayout();
             this.groupBox1.ResumeLayout(false);
