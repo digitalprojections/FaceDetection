@@ -68,7 +68,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DirectShowLib-2010">
-      <HintPath>..\DirectShowLib-2010.dll</HintPath>
+      <HintPath>.\DirectShowLib-2010.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
@@ -108,9 +108,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="settingsUI.en-US.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="settingsUI.ja-JP.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -124,6 +126,7 @@
     </Compile>
     <EmbeddedResource Include="settingsUI.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="DispApi.lib" />
     <None Include="Properties\DataSources\FaceDetection.Properties.Settings.datasource" />
