@@ -44,4 +44,7 @@
     <RemoteDebugEnabled>true</RemoteDebugEnabled>
     <RemoteDebugMachine>WINDOWS-PEITNV4</RemoteDebugMachine>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <StartAction>Project</StartAction>
+  </PropertyGroup>
 </Project>

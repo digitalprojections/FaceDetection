@@ -35,7 +35,11 @@ namespace FaceDetection
                 //heat signature detected, stop timer
                 StopOM_Timer();
                 //initiate RECORD mode
-                MainForm.GetMainForm.RecordMode();
+                if (MainForm.GetMainForm != null)
+                {
+                    MainForm.GetMainForm.RecordMode();
+                }
+                
             }
         }
 

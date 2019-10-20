@@ -365,15 +365,6 @@ namespace GitHub.secile.Video
             {
                 if (vformat[i].MajorType == DirectShow.DsGuid.GetNickname(DirectShow.DsGuid.MEDIATYPE_Video))
                 {
-                    // MajorTypeがVideoの場合、SubTypeは色空間を表す。
-                    // BuffaloのWebカメラは[YUY2]と[MPEG]だった。
-                    // マイクロビジョンのUSBカメラは[YUY2]と[YUVY]だった。
-                    // 固定できないためコメントアウト。最初に見つかったフォーマットを利用する。
-                    // if (vformat[i].SubType == DSUtility.GetMediaTypeName(DSConst.MediaTypeGUID.MEDIASUBTYPE_YUY2))
-
-                    // FORMAT_VideoInfoのみ対応する。(FORMAT_VideoInfo2はSampleGrabber未対応のためエラー。)
-                    // https://msdn.microsoft.com/ja-jp/library/cc370616.aspx
-
                     if (vformat[i].Caps.Guid == DirectShow.DsGuid.FORMAT_VideoInfo)
                     {
                         if (vformat[i].Size.Width == size.Width && vformat[i].Size.Height == size.Height && vformat[i].TimePerFrame==10000000/fps)

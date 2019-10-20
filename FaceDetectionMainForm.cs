@@ -572,7 +572,7 @@ namespace FaceDetection
             try
             {
                 //camcorder = new UsbCamcorder(0, new Size(1280, 720), 15, CameraPanel.Handle, dstFileName);             
-                camcorder = new CameraManager(0, new Size(1280, 720), 15, CameraPanel.Handle, dstFileName);
+                camcorder = new CameraManager(Properties.Settings.Default.current_camera_index-1, new Size(1280, 720), 15, CameraPanel.Handle, dstFileName);
             }
             catch(InvalidOperationException iox)
             {
@@ -726,8 +726,8 @@ namespace FaceDetection
 
         private void WindowSizeUpdate(object sender, EventArgs e)
         {
-            Console.WriteLine(settingUI.Camera_number);
-            if(settingUI.Camera_number != 0)
+            //Console.WriteLine(settingUI.Camera_number);
+            if(settingUI!=null && settingUI.Camera_number != 0)
             {
                 Console.WriteLine(Properties.Settings.Default["C" + settingUI.Camera_number + "w"]);
                 Properties.Settings.Default["C" + settingUI.Camera_number + "w"] = Convert.ToDecimal(this.Width);
@@ -753,7 +753,7 @@ namespace FaceDetection
 
         internal void TakeSnapShot()
         {
-            string picloc = Path.Combine(Properties.Settings.Default.video_file_location, (Properties.Settings.Default.current_camera_index + 1).ToString());
+            string picloc = Path.Combine(Properties.Settings.Default.video_file_location, (Properties.Settings.Default.current_camera_index).ToString());
             Directory.CreateDirectory(picloc);
             //Bitmap bitmap = camera.GetBitmapImage;
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
