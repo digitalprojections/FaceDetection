@@ -64,7 +64,7 @@ namespace FaceDetection.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute("C:\\UVCCAMERA")]
         public string video_file_location {
             get {
-                return ((string)(this["video_file_location"])); //ビデオファイルの場所
+                return ((string)(this["video_file_location"]));
             }
             set {
                 this["video_file_location"] = value;
@@ -76,7 +76,7 @@ namespace FaceDetection.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool erase_old {
             get {
-                return ((bool)(this["erase_old"]));//古いの消す
+                return ((bool)(this["erase_old"]));
             }
             set {
                 this["erase_old"] = value;
@@ -91,7 +91,7 @@ namespace FaceDetection.Properties {
                 return ((decimal)(this["erase_after"]));
             }
             set {
-                this["erase_after"] = value; //のちに消去する
+                this["erase_after"] = value;
             }
         }
         
@@ -446,9 +446,9 @@ namespace FaceDetection.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("15")]
-        public decimal C1f {
+        public string C1f {
             get {
-                return ((decimal)(this["C1f"]));
+                return ((string)(this["C1f"]));
             }
             set {
                 this["C1f"] = value;
@@ -506,9 +506,9 @@ namespace FaceDetection.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("15")]
-        public decimal C2f {
+        public string C2f {
             get {
-                return ((decimal)(this["C2f"]));
+                return ((string)(this["C2f"]));
             }
             set {
                 this["C2f"] = value;
@@ -566,9 +566,9 @@ namespace FaceDetection.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("15")]
-        public decimal C3f {
+        public string C3f {
             get {
-                return ((decimal)(this["C3f"]));
+                return ((string)(this["C3f"]));
             }
             set {
                 this["C3f"] = value;
@@ -626,9 +626,9 @@ namespace FaceDetection.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("15")]
-        public decimal C4f {
+        public string C4f {
             get {
-                return ((decimal)(this["C4f"]));
+                return ((string)(this["C4f"]));
             }
             set {
                 this["C4f"] = value;

@@ -29,7 +29,7 @@ namespace GitHub.secile.Video
     // /* get image. */
     // var bmp = camera.GetBitmap();
 
-    class UsbCamera
+     public class UsbCamera
     {
 
         
@@ -157,7 +157,7 @@ namespace GitHub.secile.Video
             var pinCategory = DirectShow.DsGuid.PIN_CATEGORY_PREVIEW;
             var mediaType = DirectShow.DsGuid.MEDIATYPE_Video;
             builder.RenderStream(ref pinCategory, ref mediaType, vcap_source, grabber, renderer);
-
+            
             // SampleGrabber Format.
             {
                 var mt = new DirectShow.AM_MEDIA_TYPE();
@@ -173,12 +173,45 @@ namespace GitHub.secile.Video
             }
 
             // Assign Delegates
-            Start = () => DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Running);
+            Start = () =>
+            {
+                DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Running);                
+            };
             Stop = () => DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Stopped);
             Release = () =>
             {
                 Stop();
+                
+/*                GitHub.secile.Video.DirectShow.IEnumFilters enumFilters = null;
+                GitHub.secile.Video.DirectShow.IBaseFilter baseFilters = { null};
+                IntPtr fetched = IntPtr.Zero;
+                hr = graph.EnumFilters(ref enumFilters);
 
+
+                int r = 0;
+                while (r == 0)
+                {
+                    try
+                    {
+                        hr = enumFilters.Next(1, ref baseFilters, ref fetched);
+                        DsError.ThrowExceptionForHR(hr);
+                        baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
+                        
+                    }
+                    catch
+                    {
+                        r = 1;
+                        continue;
+                    }
+
+                }*/
+
+                DirectShow.ReleaseInstance(ref grabber);
+                DirectShow.ReleaseInstance(ref control9);
+                DirectShow.ReleaseInstance(ref config9);
+                DirectShow.ReleaseInstance(ref ratioControl9);
+                DirectShow.ReleaseInstance(ref builder);
+                DirectShow.ReleaseInstance(ref renderer);
                 DirectShow.ReleaseInstance(ref i_grabber);
                 DirectShow.ReleaseInstance(ref builder);
                 DirectShow.ReleaseInstance(ref graph);
@@ -301,6 +334,7 @@ namespace GitHub.secile.Video
             mt.MajorType = DirectShow.DsGuid.MEDIATYPE_Video;
             mt.SubType = DirectShow.DsGuid.MEDIASUBTYPE_RGB24;
             ismp.SetMediaType(mt);
+            DirectShow.DeleteMediaType(ref mt);
             return filter;
         }
 
@@ -488,18 +522,29 @@ namespace GitHub.secile.Video
 
         public class VideoFormat
         {
+            private DirectShow.VIDEO_STREAM_CONFIG_CAPS caps;
+
             public string MajorType { get; set; }  // [Video]など
             public string SubType { get; set; }    // [YUY2], [MJPG]など
             public Size Size { get; set; }         // ビデオサイズ
             public long TimePerFrame { get; set; } // ビデオフレームの平均表示時間を100ナノ秒単位で。30fpsのとき「333333」
-            public DirectShow.VIDEO_STREAM_CONFIG_CAPS Caps { get; set; }
-
+            public DirectShow.VIDEO_STREAM_CONFIG_CAPS Caps
+            {
+                get
+                {
+                    return caps;
+                }
+                set
+                {
+                    caps = value;
+                }
+            }
             public override string ToString()
             {
                 return string.Format("{0}, {1}, {2}, {3}, {4}", MajorType, SubType, Size, TimePerFrame, CapsString());
             }
 
-            private string CapsString()
+            public string CapsString()
             {
                 var sb = new StringBuilder();
                 foreach (var info in Caps.GetType().GetFields())
@@ -511,7 +556,7 @@ namespace GitHub.secile.Video
         }
     }
 
-    static class DirectShow
+    public static class DirectShow
     {
         #region Function
 
@@ -658,17 +703,21 @@ namespace GitHub.secile.Video
         }
 
         /// <summary>ピンを検索する。</summary>
-        public static IPin FindPin(IBaseFilter filter, string name)
+        public static IPin FindPin(IBaseFilter filter, PIN_DIRECTION d)
         {
-            var result = EnumPins(filter, (info) =>
-            {
-                return (info.achName == name);
-            });
+            IPin result = EnumPins(filter, (info) => (info.dir == d));
 
             if (result == null) throw new Exception("can't fild pin.");
             return result;
         }
 
+        public static IPin FindPinByName(IBaseFilter filter, string name)
+        {
+            IPin result = EnumPins(filter, (info) => (info.achName == name));
+
+            if (result == null) throw new Exception("can't fild pin.");
+            return result;
+        }
         /// <summary>ピンを検索する。</summary>
         public static IPin FindPin(IBaseFilter filter, int index, PIN_DIRECTION direction)
         {
@@ -799,6 +848,7 @@ namespace GitHub.secile.Video
         }
         #endregion
 
+        
 
         #region Interface
 
@@ -1431,7 +1481,11 @@ namespace GitHub.secile.Video
 
             public static readonly Guid CLSID_NullRenderer = new Guid("{C1F400A4-3F08-11D3-9F0B-006008039E37}");
             public static readonly Guid CLSID_VideoMixingRenderer9 = new Guid("51b4abf3-748f-4e3b-a276-c828330e926a");    
+            public static readonly Guid CLSID_SmartTee = new Guid("{CC58E280-8AA1-11D1-B3F1-00AA003761C5}");
             public static readonly Guid CLSID_SampleGrabber = new Guid("{C1F400A0-3F08-11D3-9F0B-006008039E37}");
+            public static readonly Guid CLSID_AVI_Mux = new Guid("{E2510970-F137-11CE-8B67-00AA00A3F1A6}");
+            public static readonly Guid CLSID_FileWriter = new Guid("{8596E5F0-0DA5-11D0-BD21-00A0C911CE86}");
+
 
             public static readonly Guid CLSID_FilterGraph = new Guid("{E436EBB3-524F-11CE-9F53-0020AF0BA770}");
             public static readonly Guid CLSID_SystemDeviceEnum = new Guid("{62BE5D10-60EB-11d0-BD3B-00A0C911CE86}");
@@ -1486,6 +1540,8 @@ namespace GitHub.secile.Video
             }
         }
         #endregion
+
     }
+    
 }
 
