@@ -92,10 +92,6 @@ namespace FaceDetection
         static Form or_mainform;
         bool initrec = false;
 
-
-        public static Panel CameraPanel { get => cameraPanel; }
-        public static MainForm GetMainForm { get => mainForm; }
-
         UsbCamera.VideoFormat[] videoFormat = UsbCamera.GetVideoFormat(0);
         List<string> vf_resolutions = new List<string>();
         List<long> vf_fps = new List<long>();
@@ -361,13 +357,13 @@ namespace FaceDetection
                             {
                                 if (parameters.ElementAt(2) == "1")
                                 {
-                                    mainForm.TopMost = true;
+                                    GetMainForm.TopMost = true;
                                     settingUI.TopMost = false;
-                                    mainForm.Show();
+                                    GetMainForm.Show();
                                 }
                                 else if (parameters.ElementAt(2) == "0")
                                 {
-                                    mainForm.Hide();
+                                    GetMainForm.Hide();
                                     FormChangesApply();
                                 }
                             }
@@ -411,7 +407,7 @@ namespace FaceDetection
                                     //kameyama comennt 20191020
                                     //Properties.Settings.Default.show_window_pane = true;
                                     //FormChangesApply();
-                                    mainForm.FormBorderStyle = FormBorderStyle.Sizable;
+                                    GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
                                       
 
                                     if (settingUI != null && settingUI.Visible == false)
@@ -453,7 +449,7 @@ namespace FaceDetection
                             {
                                 if (parameters.ElementAt(2) == "1")
                                 {
-                                    testparam.Text = String.Concat(parameters);
+                                    GetMainForm.testing_params.Text = String.Concat(parameters);
                                     ManualRecordingOn();
                                 }
                                 else if (parameters.ElementAt(2) == "0")
@@ -471,8 +467,8 @@ namespace FaceDetection
                             try
                             {
 
-                                
-                                 
+
+
 
                                 if (parameters.ElementAt(2) == "1")
                                 {
@@ -490,10 +486,8 @@ namespace FaceDetection
                                     FormChangesApply();
 
 
-                                        
+                                }   
                             }
-
-                    
                             catch (ArgumentOutOfRangeException e)
                             {
                                 Debug.WriteLine(e.ToString() + " in line 310");
@@ -553,6 +547,9 @@ namespace FaceDetection
 
 
         public static void HandleParameters(String[] parameters)
+        {
+
+        }
 
         public static void GetCameraInstance()
 
@@ -751,14 +748,13 @@ namespace FaceDetection
 
         private static void TakeSnapShot()
         {
-            Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot");
+            string picloc = Path.Combine(Properties.Settings.Default.video_file_location, (Properties.Settings.Default.current_camera_index + 1).ToString());
+            Directory.CreateDirectory(picloc);
             //Bitmap bitmap = camera.GetBitmapImage;
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
-
-            mainForm.usbCamera.GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
-
-            GetCamera().GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
-            //timage.Dispose();
+            
+            //two versions here. Depending on camera mode
+            //GetCamera().GetBitmap().Save(picloc + imgdate + ".jpeg");
             
 
 
@@ -774,9 +770,9 @@ namespace FaceDetection
                 or_recording_on = false;
                 initrec = false;
                 //kameyama
-                Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/1/movie");
+                //Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/1/movie");
                 var moviedate = DateTime.Now.ToString("yyyyMMddHHmmss");
-                mainForm.usbCamera.GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/movie/" + moviedate + ".mp4");
+                //GetCamera().GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/movie/" + moviedate + ".mp4");
                 //kameyama
             }
             else
@@ -786,11 +782,11 @@ namespace FaceDetection
                     pbRecording.Image = Properties.Resources.Record_Pressed_icon;
                     pbRecording.Visible = true;
 
-                    recording_on = true;
+                    CURRENT_MODE = CAMERA_MODES.CAPTURE_MODE;
                     //kameyama
                     Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/1/movie");
                     var moviedate = DateTime.Now.ToString("YYYYMMDDhhmmss");
-                    mainForm.usbCamera.GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/movie/" + moviedate + ".mp4");
+                    //GetCamera().GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/movie/" + moviedate + ".mp4");
                     //kameyama
 
                     or_recording_on = true;
@@ -803,7 +799,8 @@ namespace FaceDetection
         }
 
         private void TakeStartVideoRecording()
-        { }
+        {
+        }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
