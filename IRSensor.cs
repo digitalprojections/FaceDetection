@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace FaceDetection
 {
     class IRSensor
     {
-        System.Timers.Timer OM_Timer = new System.Timers.Timer();
+        Timer OM_Timer = new Timer();
 
 
-
-        internal IRSensor()
+        
+        public IRSensor()
         {
             //init
             InitOMTimer();
@@ -18,10 +19,24 @@ namespace FaceDetection
         private void InitOMTimer()
         {
             //timer
-            OM_Timer.Elapsed += OM_Timer_Elapsed;
+            OM_Timer.Tick += OM_Timer_Tick; ;
             OM_Timer.Interval = 1000;
-            OM_Timer.AutoReset = true;
+            
             StartOM_Timer();
+        }
+
+        private void OM_Timer_Tick(object sender, EventArgs e)
+        {
+            Console.WriteLine("TIMER tick: " + e.ToString());
+            uint rval = CheckSensor();
+
+            if (rval == 0)
+            {
+                //heat signature detected, stop timer
+                StopOM_Timer();
+                //initiate RECORD mode
+                MainForm.RecordMode();
+            }
         }
 
         public void StartOM_Timer()
@@ -35,26 +50,17 @@ namespace FaceDetection
         /// <param name="e"></param>
         private void OM_Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            Console.WriteLine("TIMER tick: " + e.ToString());
-            uint rval = CheckSensor();
             
-            if (rval == 1)
-            {
-                //heat signature detected, stop timer
-                StopOM_Timer();
-                //initiate RECORD mode
-                MainForm.RecordMode();
-            }
         }
 
-        internal void StopOM_Timer()
+        public void StopOM_Timer()
         {
             OM_Timer.Stop();
-            OM_Timer.AutoReset = false;
-            OM_Timer.SynchronizingObject = MainForm.GetMainForm;
+            //OM_Timer.AutoReset = false;
+            //OM_Timer.SynchronizingObject = MainForm.GetMainForm;
         }
-
-        internal uint CheckSensor()
+        
+        public uint CheckSensor()
         {
             bool ret = false;
             int iError = 0;
@@ -95,7 +101,7 @@ namespace FaceDetection
             //rtb.ScrollToCaret();
             return data[1];
         }
-        internal void SensorClose()
+        public void SensorClose()
         {
             DispDeviceClose();
         }

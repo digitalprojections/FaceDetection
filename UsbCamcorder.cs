@@ -7,10 +7,10 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security;
 using System.Diagnostics;
-using DirectShowLib;
+//using DirectShowLib;
 using System.ComponentModel;
 using System.IO;
-using FaceDetection;
+using static GitHub.secile.Video.DirectShow;
 
 namespace GitHub.secile.Video
 {
@@ -18,7 +18,7 @@ namespace GitHub.secile.Video
     {
         string sourcePath = @"D:\TEMP";
         string targetPath = String.Empty;
-        BackgroundWorker backgroundWorker;
+        //BackgroundWorker backgroundWorker;
         private string dstFile = String.Empty;
         private string movFile = String.Empty;
         private List<string> fileNames = new List<string>();
@@ -74,15 +74,12 @@ namespace GitHub.secile.Video
         /// </param>
         public UsbCamcorder(int cameraIndex, Size size, double fps, IntPtr pbx, string dstFileName)
         {
-            targetPath = Path.Combine(FaceDetection.Properties.Settings.Default.video_file_location, cameraIndex+dstFileName);
-
-            if (backgroundWorker == null)
-            {
-                backgroundWorker = new BackgroundWorker();
-                backgroundWorker.DoWork += BackgroundWorker_DoWork;
-                backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
-                backgroundWorker.Dispose();
-            }
+            string str = Path.Combine(FaceDetection.Properties.Settings.Default.video_file_location, (cameraIndex + 1).ToString());
+            Console.WriteLine(str);
+            Directory.CreateDirectory(str);
+            targetPath = Path.Combine(str, dstFileName);
+            Console.WriteLine(targetPath);
+            
             var camera_list = FindDevices();
             if (cameraIndex >= camera_list.Length) throw new ArgumentException("USB camera is not available.", "index");
             Init(cameraIndex, size, fps, pbx, targetPath);
@@ -148,6 +145,27 @@ namespace GitHub.secile.Video
             //------------------------------
 
             var smartee = CreateSmartee();
+            graph.AddFilter(smartee, "Smart Tee");
+
+            //------------------------------
+            //Avi Mux
+            //------------------------------
+            var avimux = CreateAviMux();
+            graph.AddFilter(avimux, "AVI Mux");
+
+            //------------------------------
+            //File Write
+            //------------------------------
+
+
+            var filewriter = CreateFileWriter();
+            graph.AddFilter(filewriter, "File Writer");
+            //set destination filename
+            IFileSinkFilter pFilewriter_sink = filewriter as IFileSinkFilter;
+            if (pFilewriter_sink == null)
+                checkHR(unchecked((int)0x80004002), "Can't get IFileSinkFilter");
+            int hr = pFilewriter_sink.SetFileName(dstFileName, null);
+            checkHR(hr, "Can't set filename");
 
             //------------------------------
             // SampleGrabber
@@ -168,19 +186,21 @@ namespace GitHub.secile.Video
             //---------------------------------------------------
 
             DirectShow.IVMRAspectRatioControl9 ratioControl9 = (DirectShow.IVMRAspectRatioControl9)renderer;
-            int hr = ratioControl9.SetAspectRatioMode(DirectShow.VMRAspectRatioMode.LetterBox);
+            hr = ratioControl9.SetAspectRatioMode(DirectShow.VMRAspectRatioMode.LetterBox);
             checkHR(hr, "can not set aspect ratio");
 
-            IVMRFilterConfig9 config9 = (IVMRFilterConfig9)renderer;
-            hr = config9.SetRenderingMode(VMR9Mode.Windowless);
+            DirectShowLib.IVMRFilterConfig9 config9 = (DirectShowLib.IVMRFilterConfig9)renderer;
+            hr = config9.SetRenderingMode(DirectShowLib.VMR9Mode.Windowless);
             checkHR(hr, "Can't set windowless mode");
 
-            IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
+            DirectShowLib.IVMRWindowlessControl9 control9 = (DirectShowLib.IVMRWindowlessControl9)renderer;
             hr = control9.SetVideoClippingWindow(pbx);
             checkHR(hr, "Can't set video clipping window");
 
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+            hr = control9.SetVideoPosition(null, new DirectShowLib.DsRect(0, 0, size.Width, size.Height));
             checkHR(hr, "Can't set rectangles of the video position");
+
+            GraphBuilding_ConnectPins();
 
             var builder = DirectShow.CoCreateInstance(DirectShow.DsGuid.CLSID_CaptureGraphBuilder2) as DirectShow.ICaptureGraphBuilder2;
             builder.SetFiltergraph(graph);
@@ -241,6 +261,9 @@ namespace GitHub.secile.Video
                 DirectShow.ReleaseInstance(ref i_grabber);
                 DirectShow.ReleaseInstance(ref builder);
                 DirectShow.ReleaseInstance(ref graph);
+                DirectShow.ReleaseInstance(ref smartee);
+                DirectShow.ReleaseInstance(ref avimux);
+                DirectShow.ReleaseInstance(ref filewriter);
             };
             /*
             videoWindow = (DirectShow.IVideoWindow)graph;
@@ -254,13 +277,113 @@ namespace GitHub.secile.Video
             //videoWindow.put_FullScreenMode(DirectShow.OABool.True);
             videoWindow.SetWindowPosition(0, 0, 1280, 720);
             */
+            void GraphBuilding_ConnectPins()
+            {
+                // Pins used in graph
+                DirectShow.IPin pinSourceCapture = null;
+
+                DirectShow.IPin pinTeeInput = null;
+                DirectShow.IPin pinTeePreview = null;
+                DirectShow.IPin pinTeeCapture = null;
+
+                DirectShow.IPin pinSampleGrabberInput = null;
+                DirectShow.IPin pinSampleGrabberOutput = null;
+
+                DirectShow.IPin pinAviMuxInput = null;
+                DirectShow.IPin pinAviMuxOutput = null;
+                DirectShow.IPin pinFileWriterInput = null;
+
+
+                DirectShow.IPin pinRendererInput = null;
+
+                hr = 0;
+
+                try
+                {
+                    // Collect pins
+                    //pinSourceCapture = DsFindPin.ByCategory(DX.CaptureFilter, PinCategory.Capture, 0);
+                    pinSourceCapture = DirectShow.FindPin(vcap_source, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);                    
+                    pinTeeInput = DirectShow.FindPin(smartee, DirectShow.PIN_DIRECTION.PINDIR_INPUT);
+                    pinTeePreview = DirectShow.FindPinByName(smartee, "Preview");
+                    pinSampleGrabberInput = DirectShow.FindPin(grabber, DirectShow.PIN_DIRECTION.PINDIR_INPUT);
+                    pinSampleGrabberOutput = DirectShow.FindPin(grabber, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
+                    pinRendererInput = DirectShow.FindPin(renderer, DirectShow.PIN_DIRECTION.PINDIR_INPUT);
+
+                    pinTeeCapture = DirectShow.FindPinByName(smartee, "Capture");
+                    pinAviMuxInput = DirectShow.FindPin(avimux, DirectShow.PIN_DIRECTION.PINDIR_INPUT);
+                    pinAviMuxOutput = DirectShow.FindPin(avimux, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
+                    pinFileWriterInput = DirectShow.FindPin(filewriter, DirectShow.PIN_DIRECTION.PINDIR_INPUT);
+                    /*
+                    // Connect source to tee splitter
+                    hr = graph.Connect(pinSourceCapture, pinTeeInput);
+                    DsError.ThrowExceptionForHR(hr);
+
+                    hr = graph.Connect(pinTeePreview, pinSampleGrabberInput);
+                    DsError.ThrowExceptionForHR(hr);
+
+                    hr = graph.Connect(pinSampleGrabberOutput, pinRendererInput);
+                    DsError.ThrowExceptionForHR(hr);
+
+                    // Connect samplegrabber on preview-pin of tee splitter
+                    hr = graph.Connect(pinTeeCapture, pinAviMuxInput);
+                    DsError.ThrowExceptionForHR(hr);
+
+                    hr = graph.Connect(pinAviMuxOutput, pinFileWriterInput);
+                    DsError.ThrowExceptionForHR(hr);                    
+                    */
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    SafeReleaseComObject(pinSourceCapture);
+                    pinSourceCapture = null;
+
+                    SafeReleaseComObject(pinTeeInput);
+                    pinTeeInput = null;
+
+                    SafeReleaseComObject(pinTeePreview);
+                    pinTeePreview = null;
+
+                    SafeReleaseComObject(pinTeeCapture);
+                    pinTeeCapture = null;
+
+                    SafeReleaseComObject(pinSampleGrabberInput);
+                    pinSampleGrabberInput = null;
+
+                    SafeReleaseComObject(pinSampleGrabberOutput);
+                    pinSampleGrabberOutput = null;
+
+                    SafeReleaseComObject(pinAviMuxInput);
+                    pinAviMuxInput = null;
+
+                    SafeReleaseComObject(pinAviMuxOutput);
+                    pinAviMuxOutput = null;
+
+                    SafeReleaseComObject(pinFileWriterInput);
+                    pinFileWriterInput = null;
+
+                    SafeReleaseComObject(pinRendererInput);
+                    pinRendererInput = null;
+                }
+            }
+        }
+
+        private static void SafeReleaseComObject(object obj)
+        {
+            if (obj != null)
+            {
+                Marshal.ReleaseComObject(obj);
+            }
         }
 
         public void SetWindowPosition(Size size)
         {
             int hr = 0;
-            IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+            DirectShowLib.IVMRWindowlessControl9 control9 = (DirectShowLib.IVMRWindowlessControl9)renderer;
+            hr = control9.SetVideoPosition(null, new DirectShowLib.DsRect(0, 0, size.Width, size.Height));
             checkHR(hr, "Can't set rectangles of the video position");
         }
 
@@ -337,6 +460,18 @@ namespace GitHub.secile.Video
         {
             var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_SmartTee);
             var ismp = filter as DirectShowLib.SmartTee;
+            return filter;
+        }
+        private DirectShow.IBaseFilter CreateAviMux()
+        {
+            var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_AVI_Mux);
+            var ismp = filter as DirectShowLib.AviSplitter;
+            return filter;
+        }
+        private DirectShow.IBaseFilter CreateFileWriter()
+        {
+            var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_FileWriter);
+            var ismp = filter as DirectShowLib.FileWriter;
             return filter;
         }
         /// <summary>
@@ -570,6 +705,6 @@ namespace GitHub.secile.Video
                 return sb.ToString();
             }
         }
-    }
+    }    
 }
 

@@ -48,7 +48,6 @@ namespace FaceDetection
         private static Label or_current_date_text;
         private static Label or_camera_num_txt;
         private static FlowLayoutPanel or_controlBut;
-        private static Panel or_cameraPanel;
 
         //PROPERTY
 
@@ -63,11 +62,17 @@ namespace FaceDetection
         /// </summary>
         internal static void RecordMode()
         {
+            
             //TODO
-            if(GetCamera()!=null)
+            if (GetCamera()!=null)
                 GetCamera().Release();
-            if(GetRecorder()==null)
-                GetRecorder();
+            if (GetRecorder() == null)
+            {                
+                GetCamcorderInstance();
+                Console.WriteLine("Camera record mode");
+                GetRecorder().Start();
+            }
+            Console.WriteLine("Camera record mode");
         }
 
         //IRSensor
@@ -83,8 +88,8 @@ namespace FaceDetection
         {
             get
             {
-                return or_cameraPanel;
-            }
+                return GetMainForm.panelCamera;
+            }            
         }
         public static MainForm GetMainForm
         {
@@ -733,7 +738,7 @@ namespace FaceDetection
         {
             if (GetCamera() != null)
                 GetCamera().Release();
-            SetCamera(new UsbCamera(0, new Size(1280, 720), 15, or_cameraPanel.Handle));
+            SetCamera(new UsbCamera(0, new Size(1280, 720), 15, CameraPanel.Handle));
         }
         public static void GetCamcorderInstance()
         {
@@ -741,18 +746,32 @@ namespace FaceDetection
                 GetRecorder().Release();
             //TODO dynamically generate filename in the right path, for the right camera
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
-            SetCamcorder(new UsbCamcorder(0, new Size(1280, 720), 15, or_cameraPanel.Handle, dstFileName));
+            //
+            try
+            {                
+                camcorder = new UsbCamcorder(0, new Size(1280, 720), 15, CameraPanel.Handle, dstFileName);             
+            }
+            catch(InvalidOperationException iox)
+            {
+                Console.WriteLine(dstFileName + " dest file 750" + CameraPanel.Handle);
+                //camcorder = new UsbCamcorder(0, new Size(1280, 720), 15, or_cameraPanel.Handle, dstFileName);
+            }
+            
+            SetCamcorder();
+
         }
-        private static void SetCamcorder(UsbCamcorder usbCamcorder)
+        private static void SetCamcorder()
         {
-            camcorder = usbCamcorder;
+            Console.WriteLine("usb cam");
+            //camcorder = usbCamcorder;            
         }
         public void ShowButtons(object sender, EventArgs eventArgs)
         {
             if (CURRENT_MODE == CAMERA_MODES.PREVIEW_MODE)
             {
-                GetCameraInstance();
-                GetCamera().Start();
+                //GetCameraInstance();
+                //GetCamera().Start();
+                rSensor.StartOM_Timer();
             }            
             
             if (timer.Enabled == true)
@@ -821,7 +840,7 @@ namespace FaceDetection
             {
                 settingUI.TopMost = true;
                 this.TopMost = false;
-                Debug.WriteLine("topmost 414");
+                Debug.WriteLine("topmost 824");
                 settingUI.Show();
             }
             else
@@ -833,7 +852,7 @@ namespace FaceDetection
             try
             {
                 Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
-                Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
+                //Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
                 Process.Start(Properties.Settings.Default.video_file_location);
             }
             catch (IOException ioe)
@@ -1006,9 +1025,9 @@ namespace FaceDetection
                 datetime_ui_updater.Start();
                 datetime_ui_updater.Tick += new EventHandler(ProcessFrame);
             }
+            Console.WriteLine("1029");
 
-            or_cameraPanel = panelCamera;
-
+            //Console.WriteLine(panelCamera.Handle);
             rSensor.StartOM_Timer();
 
             //Showing video formats

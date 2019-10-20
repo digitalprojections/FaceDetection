@@ -33,7 +33,6 @@ namespace WebCameraX
             Running,
             Init
         }
-
         private Guid CLSID_SampleGrabber = new Guid("{C1F400A0-3F08-11D3-9F0B-006008039E37}"); //qedit.dll
         private PlayState CurrentState = PlayState.Stopped;
         private int WM_GRAPHNOTIFY = Convert.ToInt32("0X8000", 16) + 1;
@@ -179,6 +178,7 @@ namespace WebCameraX
 
 
         }
+
         static void checkHR(int hr, string msg)
         {
             if (hr < 0)

@@ -35,15 +35,21 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_cancel = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_allcam = new System.Windows.Forms.PictureBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.nud_erase_old = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.cb_delete_old = new System.Windows.Forms.CheckBox();
+            this.numericUpDownCamCount = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button_Browse = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
+            this.storePath = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
+            this.cb_all_cameras = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cm_language = new System.Windows.Forms.ComboBox();
             this.button_cameraProperties = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.button_settings_cancel = new System.Windows.Forms.Button();
@@ -70,67 +76,63 @@
             this.label8 = new System.Windows.Forms.Label();
             this.comboBoxResolutions = new System.Windows.Forms.ComboBox();
             this.comboBoxFPS = new System.Windows.Forms.ComboBox();
+            this.cb_show_rec_icon = new System.Windows.Forms.CheckBox();
+            this.cb_show_camera_number = new System.Windows.Forms.CheckBox();
+            this.cb_dateandtime = new System.Windows.Forms.CheckBox();
+            this.cb_window_pane = new System.Windows.Forms.CheckBox();
+            this.cb_always_on_top = new System.Windows.Forms.CheckBox();
             this.groupBox_functionalitySettings = new System.Windows.Forms.GroupBox();
             this.pictureBox_BacklightOnRecognition = new System.Windows.Forms.PictureBox();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.pictureBox_recordUponStart = new System.Windows.Forms.PictureBox();
             this.pictureBox_recordingDuringFaceRecognition = new System.Windows.Forms.PictureBox();
             this.pictureBox_operatorCapture = new System.Windows.Forms.PictureBox();
+            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.cb_record_upon_start = new System.Windows.Forms.CheckBox();
+            this.cb_operator_capture = new System.Windows.Forms.CheckBox();
+            this.cb_recording_during_facerec = new System.Windows.Forms.CheckBox();
             this.label18_seconds = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.cm_capture_mode = new System.Windows.Forms.ComboBox();
             this.lb_seconds2 = new System.Windows.Forms.Label();
             this.lb_capture_seconds = new System.Windows.Forms.Label();
             this.lb_capture_mode = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
             this.pictureBox_EventRecorder = new System.Windows.Forms.PictureBox();
+            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
+            this.cb_event_recorder = new System.Windows.Forms.CheckBox();
             this.lb_post_event = new System.Windows.Forms.Label();
             this.lb_pre_event = new System.Windows.Forms.Label();
             this.label23_seconds = new System.Windows.Forms.Label();
             this.label22_seconds = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.pictureBox_backlightOffWhenIdle = new System.Windows.Forms.PictureBox();
             this.cb_backlight_off_idling = new System.Windows.Forms.CheckBox();
             this.lb_backlight_off_idling_delay = new System.Windows.Forms.Label();
             this.label20_minutes = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.pictureBox_faceRecognition = new System.Windows.Forms.PictureBox();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.cb_face_recognition = new System.Windows.Forms.CheckBox();
             this.lb_milliseconds1 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.lb_seconds = new System.Windows.Forms.Label();
             this.lb_manual_recording_time = new System.Windows.Forms.Label();
+            this.cb_backlight_on_recognition = new System.Windows.Forms.CheckBox();
             this.cm_camera_number = new System.Windows.Forms.ComboBox();
             this.folderBrowserDialogStoreFolder = new System.Windows.Forms.FolderBrowserDialog();
-            this.nud_erase_old = new System.Windows.Forms.NumericUpDown();
-            this.cb_delete_old = new System.Windows.Forms.CheckBox();
-            this.numericUpDownCamCount = new System.Windows.Forms.NumericUpDown();
-            this.storePath = new System.Windows.Forms.TextBox();
-            this.cb_all_cameras = new System.Windows.Forms.CheckBox();
-            this.cm_language = new System.Windows.Forms.ComboBox();
-            this.cb_show_rec_icon = new System.Windows.Forms.CheckBox();
-            this.cb_show_camera_number = new System.Windows.Forms.CheckBox();
-            this.cb_dateandtime = new System.Windows.Forms.CheckBox();
-            this.cb_window_pane = new System.Windows.Forms.CheckBox();
-            this.cb_always_on_top = new System.Windows.Forms.CheckBox();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.cb_record_upon_start = new System.Windows.Forms.CheckBox();
-            this.cb_operator_capture = new System.Windows.Forms.CheckBox();
-            this.cb_recording_during_facerec = new System.Windows.Forms.CheckBox();
-            this.cm_capture_mode = new System.Windows.Forms.ComboBox();
-            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
-            this.cb_event_recorder = new System.Windows.Forms.CheckBox();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.cb_face_recognition = new System.Windows.Forms.CheckBox();
-            this.cb_backlight_on_recognition = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox_cameraNumber.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_allcam)).BeginInit();
             this.groupBox12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_erase_old)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCamCount)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox_viewSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_showRecordingIcon)).BeginInit();
@@ -146,24 +148,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownX)).BeginInit();
             this.groupBox_functionalitySettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_BacklightOnRecognition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.groupBox9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_recordUponStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_recordingDuringFaceRecognition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_operatorCapture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.groupBox10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_EventRecorder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
             this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_backlightOffWhenIdle)).BeginInit();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_faceRecognition)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_erase_old)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCamCount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -193,7 +193,7 @@
             // 
             this.groupBox1.Controls.Add(this.button_cancel);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.pictureBox1);
+            this.groupBox1.Controls.Add(this.pictureBox_allcam);
             this.groupBox1.Controls.Add(this.groupBox12);
             this.groupBox1.Controls.Add(this.numericUpDownCamCount);
             this.groupBox1.Controls.Add(this.groupBox2);
@@ -216,13 +216,14 @@
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // pictureBox_allcam
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
+            this.pictureBox_allcam.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox_allcam.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.pictureBox_allcam, "pictureBox_allcam");
+            this.pictureBox_allcam.Name = "pictureBox_allcam";
+            this.pictureBox_allcam.TabStop = false;
+            this.pictureBox_allcam.Click += new System.EventHandler(this.PictureBox_allcam_Click);
             // 
             // groupBox12
             // 
@@ -242,10 +243,52 @@
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 
+            // nud_erase_old
+            // 
+            resources.ApplyResources(this.nud_erase_old, "nud_erase_old");
+            this.nud_erase_old.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "erase_after", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nud_erase_old.Maximum = new decimal(new int[] {
+            365,
+            0,
+            0,
+            0});
+            this.nud_erase_old.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nud_erase_old.Name = "nud_erase_old";
+            this.nud_erase_old.Value = global::FaceDetection.Properties.Settings.Default.erase_after;
+            // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
+            // 
+            // cb_delete_old
+            // 
+            resources.ApplyResources(this.cb_delete_old, "cb_delete_old");
+            this.cb_delete_old.Checked = global::FaceDetection.Properties.Settings.Default.erase_old;
+            this.cb_delete_old.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "erase_old", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cb_delete_old.Name = "cb_delete_old";
+            this.cb_delete_old.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDownCamCount
+            // 
+            resources.ApplyResources(this.numericUpDownCamCount, "numericUpDownCamCount");
+            this.numericUpDownCamCount.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.numericUpDownCamCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownCamCount.Name = "numericUpDownCamCount";
+            this.numericUpDownCamCount.Value = global::FaceDetection.Properties.Settings.Default.camera_count;
+            this.numericUpDownCamCount.ValueChanged += new System.EventHandler(this.NumericUpDownCamCount_ValueChanged);
             // 
             // groupBox2
             // 
@@ -268,15 +311,42 @@
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
             // 
+            // storePath
+            // 
+            resources.ApplyResources(this.storePath, "storePath");
+            this.storePath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "video_file_location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.storePath.Name = "storePath";
+            this.storePath.Text = global::FaceDetection.Properties.Settings.Default.video_file_location;
+            // 
             // label26
             // 
             resources.ApplyResources(this.label26, "label26");
             this.label26.Name = "label26";
             // 
+            // cb_all_cameras
+            // 
+            resources.ApplyResources(this.cb_all_cameras, "cb_all_cameras");
+            this.cb_all_cameras.Checked = global::FaceDetection.Properties.Settings.Default.show_all_cams_simulteneously;
+            this.cb_all_cameras.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "show_all_cams_simulteneously", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cb_all_cameras.Name = "cb_all_cameras";
+            this.cb_all_cameras.UseVisualStyleBackColor = true;
+            // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            // 
+            // cm_language
+            // 
+            this.cm_language.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.cm_language, "cm_language");
+            this.cm_language.FormattingEnabled = true;
+            this.cm_language.Items.AddRange(new object[] {
+            resources.GetString("cm_language.Items"),
+            resources.GetString("cm_language.Items1")});
+            this.cm_language.Name = "cm_language";
+            this.cm_language.Text = global::FaceDetection.Properties.Settings.Default.language;
+            this.cm_language.SelectedIndexChanged += new System.EventHandler(this.Cm_language_SelectedIndexChanged);
             // 
             // button_cameraProperties
             // 
@@ -516,6 +586,46 @@
             this.comboBoxFPS.Name = "comboBoxFPS";
             this.comboBoxFPS.SelectedIndexChanged += new System.EventHandler(this.cameraSelected);
             // 
+            // cb_show_rec_icon
+            // 
+            resources.ApplyResources(this.cb_show_rec_icon, "cb_show_rec_icon");
+            this.cb_show_rec_icon.Checked = global::FaceDetection.Properties.Settings.Default.show_recording_icon;
+            this.cb_show_rec_icon.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_show_rec_icon.Name = "cb_show_rec_icon";
+            this.cb_show_rec_icon.UseVisualStyleBackColor = true;
+            // 
+            // cb_show_camera_number
+            // 
+            resources.ApplyResources(this.cb_show_camera_number, "cb_show_camera_number");
+            this.cb_show_camera_number.Checked = global::FaceDetection.Properties.Settings.Default.show_camera_no;
+            this.cb_show_camera_number.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_show_camera_number.Name = "cb_show_camera_number";
+            this.cb_show_camera_number.UseVisualStyleBackColor = true;
+            // 
+            // cb_dateandtime
+            // 
+            resources.ApplyResources(this.cb_dateandtime, "cb_dateandtime");
+            this.cb_dateandtime.Checked = global::FaceDetection.Properties.Settings.Default.show_current_datetime;
+            this.cb_dateandtime.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_dateandtime.Name = "cb_dateandtime";
+            this.cb_dateandtime.UseVisualStyleBackColor = true;
+            // 
+            // cb_window_pane
+            // 
+            resources.ApplyResources(this.cb_window_pane, "cb_window_pane");
+            this.cb_window_pane.Checked = global::FaceDetection.Properties.Settings.Default.show_window_pane;
+            this.cb_window_pane.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_window_pane.Name = "cb_window_pane";
+            this.cb_window_pane.UseVisualStyleBackColor = true;
+            // 
+            // cb_always_on_top
+            // 
+            resources.ApplyResources(this.cb_always_on_top, "cb_always_on_top");
+            this.cb_always_on_top.Checked = global::FaceDetection.Properties.Settings.Default.window_on_top;
+            this.cb_always_on_top.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_always_on_top.Name = "cb_always_on_top";
+            this.cb_always_on_top.UseVisualStyleBackColor = true;
+            // 
             // groupBox_functionalitySettings
             // 
             this.groupBox_functionalitySettings.Controls.Add(this.pictureBox_BacklightOnRecognition);
@@ -539,6 +649,18 @@
             resources.ApplyResources(this.pictureBox_BacklightOnRecognition, "pictureBox_BacklightOnRecognition");
             this.pictureBox_BacklightOnRecognition.Name = "pictureBox_BacklightOnRecognition";
             this.pictureBox_BacklightOnRecognition.TabStop = false;
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "manual_record_maxtime", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.numericUpDown3, "numericUpDown3");
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            3600,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Value = global::FaceDetection.Properties.Settings.Default.manual_record_maxtime;
             // 
             // groupBox9
             // 
@@ -585,282 +707,6 @@
             resources.ApplyResources(this.pictureBox_operatorCapture, "pictureBox_operatorCapture");
             this.pictureBox_operatorCapture.Name = "pictureBox_operatorCapture";
             this.pictureBox_operatorCapture.TabStop = false;
-            // 
-            // label18_seconds
-            // 
-            resources.ApplyResources(this.label18_seconds, "label18_seconds");
-            this.label18_seconds.Name = "label18_seconds";
-            // 
-            // label17
-            // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.Name = "label17";
-            // 
-            // lb_seconds2
-            // 
-            resources.ApplyResources(this.lb_seconds2, "lb_seconds2");
-            this.lb_seconds2.Name = "lb_seconds2";
-            // 
-            // lb_capture_seconds
-            // 
-            resources.ApplyResources(this.lb_capture_seconds, "lb_capture_seconds");
-            this.lb_capture_seconds.Name = "lb_capture_seconds";
-            // 
-            // lb_capture_mode
-            // 
-            resources.ApplyResources(this.lb_capture_mode, "lb_capture_mode");
-            this.lb_capture_mode.Name = "lb_capture_mode";
-            // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.numericUpDown8);
-            this.groupBox10.Controls.Add(this.pictureBox_EventRecorder);
-            this.groupBox10.Controls.Add(this.numericUpDown7);
-            this.groupBox10.Controls.Add(this.cb_event_recorder);
-            this.groupBox10.Controls.Add(this.lb_post_event);
-            this.groupBox10.Controls.Add(this.lb_pre_event);
-            this.groupBox10.Controls.Add(this.label23_seconds);
-            this.groupBox10.Controls.Add(this.label22_seconds);
-            resources.ApplyResources(this.groupBox10, "groupBox10");
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.TabStop = false;
-            // 
-            // pictureBox_EventRecorder
-            // 
-            this.pictureBox_EventRecorder.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox_EventRecorder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox_EventRecorder.Image = global::FaceDetection.Properties.Resources.check;
-            resources.ApplyResources(this.pictureBox_EventRecorder, "pictureBox_EventRecorder");
-            this.pictureBox_EventRecorder.Name = "pictureBox_EventRecorder";
-            this.pictureBox_EventRecorder.TabStop = false;
-            // 
-            // lb_post_event
-            // 
-            resources.ApplyResources(this.lb_post_event, "lb_post_event");
-            this.lb_post_event.Name = "lb_post_event";
-            // 
-            // lb_pre_event
-            // 
-            resources.ApplyResources(this.lb_pre_event, "lb_pre_event");
-            this.lb_pre_event.Name = "lb_pre_event";
-            // 
-            // label23_seconds
-            // 
-            resources.ApplyResources(this.label23_seconds, "label23_seconds");
-            this.label23_seconds.Name = "label23_seconds";
-            // 
-            // label22_seconds
-            // 
-            resources.ApplyResources(this.label22_seconds, "label22_seconds");
-            this.label22_seconds.Name = "label22_seconds";
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.numericUpDown5);
-            this.groupBox8.Controls.Add(this.pictureBox_backlightOffWhenIdle);
-            this.groupBox8.Controls.Add(this.cb_backlight_off_idling);
-            this.groupBox8.Controls.Add(this.lb_backlight_off_idling_delay);
-            this.groupBox8.Controls.Add(this.label20_minutes);
-            resources.ApplyResources(this.groupBox8, "groupBox8");
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.TabStop = false;
-            // 
-            // pictureBox_backlightOffWhenIdle
-            // 
-            this.pictureBox_backlightOffWhenIdle.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox_backlightOffWhenIdle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox_backlightOffWhenIdle.Image = global::FaceDetection.Properties.Resources.check;
-            resources.ApplyResources(this.pictureBox_backlightOffWhenIdle, "pictureBox_backlightOffWhenIdle");
-            this.pictureBox_backlightOffWhenIdle.Name = "pictureBox_backlightOffWhenIdle";
-            this.pictureBox_backlightOffWhenIdle.TabStop = false;
-            // 
-            // cb_backlight_off_idling
-            // 
-            resources.ApplyResources(this.cb_backlight_off_idling, "cb_backlight_off_idling");
-            this.cb_backlight_off_idling.Checked = true;
-            this.cb_backlight_off_idling.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_backlight_off_idling.Name = "cb_backlight_off_idling";
-            this.cb_backlight_off_idling.UseVisualStyleBackColor = true;
-            // 
-            // lb_backlight_off_idling_delay
-            // 
-            resources.ApplyResources(this.lb_backlight_off_idling_delay, "lb_backlight_off_idling_delay");
-            this.lb_backlight_off_idling_delay.Name = "lb_backlight_off_idling_delay";
-            // 
-            // label20_minutes
-            // 
-            resources.ApplyResources(this.label20_minutes, "label20_minutes");
-            this.label20_minutes.Name = "label20_minutes";
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.pictureBox_faceRecognition);
-            this.groupBox7.Controls.Add(this.numericUpDown2);
-            this.groupBox7.Controls.Add(this.cb_face_recognition);
-            this.groupBox7.Controls.Add(this.lb_milliseconds1);
-            this.groupBox7.Controls.Add(this.label10);
-            resources.ApplyResources(this.groupBox7, "groupBox7");
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.TabStop = false;
-            // 
-            // pictureBox_faceRecognition
-            // 
-            this.pictureBox_faceRecognition.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox_faceRecognition.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox_faceRecognition.Image = global::FaceDetection.Properties.Resources.check;
-            resources.ApplyResources(this.pictureBox_faceRecognition, "pictureBox_faceRecognition");
-            this.pictureBox_faceRecognition.Name = "pictureBox_faceRecognition";
-            this.pictureBox_faceRecognition.TabStop = false;
-            // 
-            // lb_milliseconds1
-            // 
-            resources.ApplyResources(this.lb_milliseconds1, "lb_milliseconds1");
-            this.lb_milliseconds1.Name = "lb_milliseconds1";
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
-            this.label10.Click += new System.EventHandler(this.Label10_Click);
-            // 
-            // lb_seconds
-            // 
-            resources.ApplyResources(this.lb_seconds, "lb_seconds");
-            this.lb_seconds.Name = "lb_seconds";
-            // 
-            // lb_manual_recording_time
-            // 
-            resources.ApplyResources(this.lb_manual_recording_time, "lb_manual_recording_time");
-            this.lb_manual_recording_time.Name = "lb_manual_recording_time";
-            // 
-            // cm_camera_number
-            // 
-            this.cm_camera_number.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "current_camera_index", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, null, "N0"));
-            resources.ApplyResources(this.cm_camera_number, "cm_camera_number");
-            this.cm_camera_number.FormattingEnabled = true;
-            this.cm_camera_number.Name = "cm_camera_number";
-            this.cm_camera_number.SelectedIndexChanged += new System.EventHandler(this.cameraSelected);
-            // 
-            // nud_erase_old
-            // 
-            resources.ApplyResources(this.nud_erase_old, "nud_erase_old");
-            this.nud_erase_old.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "erase_after", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nud_erase_old.Maximum = new decimal(new int[] {
-            365,
-            0,
-            0,
-            0});
-            this.nud_erase_old.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nud_erase_old.Name = "nud_erase_old";
-            this.nud_erase_old.Value = global::FaceDetection.Properties.Settings.Default.erase_after;
-            // 
-            // cb_delete_old
-            // 
-            resources.ApplyResources(this.cb_delete_old, "cb_delete_old");
-            this.cb_delete_old.Checked = global::FaceDetection.Properties.Settings.Default.erase_old;
-            this.cb_delete_old.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "erase_old", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cb_delete_old.Name = "cb_delete_old";
-            this.cb_delete_old.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDownCamCount
-            // 
-            resources.ApplyResources(this.numericUpDownCamCount, "numericUpDownCamCount");
-            this.numericUpDownCamCount.Maximum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.numericUpDownCamCount.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownCamCount.Name = "numericUpDownCamCount";
-            this.numericUpDownCamCount.Value = global::FaceDetection.Properties.Settings.Default.camera_count;
-            this.numericUpDownCamCount.ValueChanged += new System.EventHandler(this.NumericUpDownCamCount_ValueChanged);
-            // 
-            // storePath
-            // 
-            resources.ApplyResources(this.storePath, "storePath");
-            this.storePath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "video_file_location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.storePath.Name = "storePath";
-            this.storePath.Text = global::FaceDetection.Properties.Settings.Default.video_file_location;
-            // 
-            // cb_all_cameras
-            // 
-            resources.ApplyResources(this.cb_all_cameras, "cb_all_cameras");
-            this.cb_all_cameras.Checked = global::FaceDetection.Properties.Settings.Default.show_all_cams_simulteneously;
-            this.cb_all_cameras.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "show_all_cams_simulteneously", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cb_all_cameras.Name = "cb_all_cameras";
-            this.cb_all_cameras.UseVisualStyleBackColor = true;
-            // 
-            // cm_language
-            // 
-            this.cm_language.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            resources.ApplyResources(this.cm_language, "cm_language");
-            this.cm_language.FormattingEnabled = true;
-            this.cm_language.Items.AddRange(new object[] {
-            resources.GetString("cm_language.Items"),
-            resources.GetString("cm_language.Items1")});
-            this.cm_language.Name = "cm_language";
-            this.cm_language.Text = global::FaceDetection.Properties.Settings.Default.language;
-            this.cm_language.SelectedIndexChanged += new System.EventHandler(this.Cm_language_SelectedIndexChanged);
-            // 
-            // cb_show_rec_icon
-            // 
-            resources.ApplyResources(this.cb_show_rec_icon, "cb_show_rec_icon");
-            this.cb_show_rec_icon.Checked = global::FaceDetection.Properties.Settings.Default.show_recording_icon;
-            this.cb_show_rec_icon.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_show_rec_icon.Name = "cb_show_rec_icon";
-            this.cb_show_rec_icon.UseVisualStyleBackColor = true;
-            // 
-            // cb_show_camera_number
-            // 
-            resources.ApplyResources(this.cb_show_camera_number, "cb_show_camera_number");
-            this.cb_show_camera_number.Checked = global::FaceDetection.Properties.Settings.Default.show_camera_no;
-            this.cb_show_camera_number.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_show_camera_number.Name = "cb_show_camera_number";
-            this.cb_show_camera_number.UseVisualStyleBackColor = true;
-            // 
-            // cb_dateandtime
-            // 
-            resources.ApplyResources(this.cb_dateandtime, "cb_dateandtime");
-            this.cb_dateandtime.Checked = global::FaceDetection.Properties.Settings.Default.show_current_datetime;
-            this.cb_dateandtime.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_dateandtime.Name = "cb_dateandtime";
-            this.cb_dateandtime.UseVisualStyleBackColor = true;
-            // 
-            // cb_window_pane
-            // 
-            resources.ApplyResources(this.cb_window_pane, "cb_window_pane");
-            this.cb_window_pane.Checked = global::FaceDetection.Properties.Settings.Default.show_window_pane;
-            this.cb_window_pane.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_window_pane.Name = "cb_window_pane";
-            this.cb_window_pane.UseVisualStyleBackColor = true;
-            // 
-            // cb_always_on_top
-            // 
-            resources.ApplyResources(this.cb_always_on_top, "cb_always_on_top");
-            this.cb_always_on_top.Checked = global::FaceDetection.Properties.Settings.Default.window_on_top;
-            this.cb_always_on_top.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_always_on_top.Name = "cb_always_on_top";
-            this.cb_always_on_top.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "manual_record_maxtime", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            resources.ApplyResources(this.numericUpDown3, "numericUpDown3");
-            this.numericUpDown3.Maximum = new decimal(new int[] {
-            3600,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Value = global::FaceDetection.Properties.Settings.Default.manual_record_maxtime;
             // 
             // numericUpDown6
             // 
@@ -918,6 +764,16 @@
             this.cb_recording_during_facerec.Name = "cb_recording_during_facerec";
             this.cb_recording_during_facerec.UseVisualStyleBackColor = true;
             // 
+            // label18_seconds
+            // 
+            resources.ApplyResources(this.label18_seconds, "label18_seconds");
+            this.label18_seconds.Name = "label18_seconds";
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
+            // 
             // cm_capture_mode
             // 
             this.cm_capture_mode.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "capture_type", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -930,6 +786,35 @@
             this.cm_capture_mode.Text = global::FaceDetection.Properties.Settings.Default.capture_type;
             this.cm_capture_mode.SelectedIndexChanged += new System.EventHandler(this.Cm_capture_mode_SelectedIndexChanged);
             // 
+            // lb_seconds2
+            // 
+            resources.ApplyResources(this.lb_seconds2, "lb_seconds2");
+            this.lb_seconds2.Name = "lb_seconds2";
+            // 
+            // lb_capture_seconds
+            // 
+            resources.ApplyResources(this.lb_capture_seconds, "lb_capture_seconds");
+            this.lb_capture_seconds.Name = "lb_capture_seconds";
+            // 
+            // lb_capture_mode
+            // 
+            resources.ApplyResources(this.lb_capture_mode, "lb_capture_mode");
+            this.lb_capture_mode.Name = "lb_capture_mode";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.numericUpDown8);
+            this.groupBox10.Controls.Add(this.pictureBox_EventRecorder);
+            this.groupBox10.Controls.Add(this.numericUpDown7);
+            this.groupBox10.Controls.Add(this.cb_event_recorder);
+            this.groupBox10.Controls.Add(this.lb_post_event);
+            this.groupBox10.Controls.Add(this.lb_pre_event);
+            this.groupBox10.Controls.Add(this.label23_seconds);
+            this.groupBox10.Controls.Add(this.label22_seconds);
+            resources.ApplyResources(this.groupBox10, "groupBox10");
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.TabStop = false;
+            // 
             // numericUpDown8
             // 
             this.numericUpDown8.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "seconds_after_event", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -941,6 +826,15 @@
             0});
             this.numericUpDown8.Name = "numericUpDown8";
             this.numericUpDown8.Value = global::FaceDetection.Properties.Settings.Default.seconds_after_event;
+            // 
+            // pictureBox_EventRecorder
+            // 
+            this.pictureBox_EventRecorder.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox_EventRecorder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_EventRecorder.Image = global::FaceDetection.Properties.Resources.check;
+            resources.ApplyResources(this.pictureBox_EventRecorder, "pictureBox_EventRecorder");
+            this.pictureBox_EventRecorder.Name = "pictureBox_EventRecorder";
+            this.pictureBox_EventRecorder.TabStop = false;
             // 
             // numericUpDown7
             // 
@@ -963,6 +857,37 @@
             this.cb_event_recorder.Name = "cb_event_recorder";
             this.cb_event_recorder.UseVisualStyleBackColor = true;
             // 
+            // lb_post_event
+            // 
+            resources.ApplyResources(this.lb_post_event, "lb_post_event");
+            this.lb_post_event.Name = "lb_post_event";
+            // 
+            // lb_pre_event
+            // 
+            resources.ApplyResources(this.lb_pre_event, "lb_pre_event");
+            this.lb_pre_event.Name = "lb_pre_event";
+            // 
+            // label23_seconds
+            // 
+            resources.ApplyResources(this.label23_seconds, "label23_seconds");
+            this.label23_seconds.Name = "label23_seconds";
+            // 
+            // label22_seconds
+            // 
+            resources.ApplyResources(this.label22_seconds, "label22_seconds");
+            this.label22_seconds.Name = "label22_seconds";
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.numericUpDown5);
+            this.groupBox8.Controls.Add(this.pictureBox_backlightOffWhenIdle);
+            this.groupBox8.Controls.Add(this.cb_backlight_off_idling);
+            this.groupBox8.Controls.Add(this.lb_backlight_off_idling_delay);
+            this.groupBox8.Controls.Add(this.label20_minutes);
+            resources.ApplyResources(this.groupBox8, "groupBox8");
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.TabStop = false;
+            // 
             // numericUpDown5
             // 
             this.numericUpDown5.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "backlight_offset_mins", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -979,6 +904,53 @@
             0});
             this.numericUpDown5.Name = "numericUpDown5";
             this.numericUpDown5.Value = global::FaceDetection.Properties.Settings.Default.backlight_offset_mins;
+            // 
+            // pictureBox_backlightOffWhenIdle
+            // 
+            this.pictureBox_backlightOffWhenIdle.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox_backlightOffWhenIdle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_backlightOffWhenIdle.Image = global::FaceDetection.Properties.Resources.check;
+            resources.ApplyResources(this.pictureBox_backlightOffWhenIdle, "pictureBox_backlightOffWhenIdle");
+            this.pictureBox_backlightOffWhenIdle.Name = "pictureBox_backlightOffWhenIdle";
+            this.pictureBox_backlightOffWhenIdle.TabStop = false;
+            // 
+            // cb_backlight_off_idling
+            // 
+            resources.ApplyResources(this.cb_backlight_off_idling, "cb_backlight_off_idling");
+            this.cb_backlight_off_idling.Checked = true;
+            this.cb_backlight_off_idling.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_backlight_off_idling.Name = "cb_backlight_off_idling";
+            this.cb_backlight_off_idling.UseVisualStyleBackColor = true;
+            // 
+            // lb_backlight_off_idling_delay
+            // 
+            resources.ApplyResources(this.lb_backlight_off_idling_delay, "lb_backlight_off_idling_delay");
+            this.lb_backlight_off_idling_delay.Name = "lb_backlight_off_idling_delay";
+            // 
+            // label20_minutes
+            // 
+            resources.ApplyResources(this.label20_minutes, "label20_minutes");
+            this.label20_minutes.Name = "label20_minutes";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.pictureBox_faceRecognition);
+            this.groupBox7.Controls.Add(this.numericUpDown2);
+            this.groupBox7.Controls.Add(this.cb_face_recognition);
+            this.groupBox7.Controls.Add(this.lb_milliseconds1);
+            this.groupBox7.Controls.Add(this.label10);
+            resources.ApplyResources(this.groupBox7, "groupBox7");
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.TabStop = false;
+            // 
+            // pictureBox_faceRecognition
+            // 
+            this.pictureBox_faceRecognition.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox_faceRecognition.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_faceRecognition.Image = global::FaceDetection.Properties.Resources.check;
+            resources.ApplyResources(this.pictureBox_faceRecognition, "pictureBox_faceRecognition");
+            this.pictureBox_faceRecognition.Name = "pictureBox_faceRecognition";
+            this.pictureBox_faceRecognition.TabStop = false;
             // 
             // numericUpDown2
             // 
@@ -1001,6 +973,27 @@
             this.cb_face_recognition.Name = "cb_face_recognition";
             this.cb_face_recognition.UseVisualStyleBackColor = true;
             // 
+            // lb_milliseconds1
+            // 
+            resources.ApplyResources(this.lb_milliseconds1, "lb_milliseconds1");
+            this.lb_milliseconds1.Name = "lb_milliseconds1";
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            this.label10.Click += new System.EventHandler(this.Label10_Click);
+            // 
+            // lb_seconds
+            // 
+            resources.ApplyResources(this.lb_seconds, "lb_seconds");
+            this.lb_seconds.Name = "lb_seconds";
+            // 
+            // lb_manual_recording_time
+            // 
+            resources.ApplyResources(this.lb_manual_recording_time, "lb_manual_recording_time");
+            this.lb_manual_recording_time.Name = "lb_manual_recording_time";
+            // 
             // cb_backlight_on_recognition
             // 
             resources.ApplyResources(this.cb_backlight_on_recognition, "cb_backlight_on_recognition");
@@ -1009,6 +1002,14 @@
             this.cb_backlight_on_recognition.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "backlight_on_upon_face_rec", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_backlight_on_recognition.Name = "cb_backlight_on_recognition";
             this.cb_backlight_on_recognition.UseVisualStyleBackColor = true;
+            // 
+            // cm_camera_number
+            // 
+            this.cm_camera_number.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "current_camera_index", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, null, "N0"));
+            resources.ApplyResources(this.cm_camera_number, "cm_camera_number");
+            this.cm_camera_number.FormattingEnabled = true;
+            this.cm_camera_number.Name = "cm_camera_number";
+            this.cm_camera_number.SelectedIndexChanged += new System.EventHandler(this.cameraSelected);
             // 
             // settingsUI
             // 
@@ -1026,10 +1027,12 @@
             this.groupBox_cameraNumber.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_allcam)).EndInit();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_erase_old)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCamCount)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox_viewSettings.ResumeLayout(false);
@@ -1050,28 +1053,26 @@
             this.groupBox_functionalitySettings.ResumeLayout(false);
             this.groupBox_functionalitySettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_BacklightOnRecognition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_recordUponStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_recordingDuringFaceRecognition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_operatorCapture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_EventRecorder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_backlightOffWhenIdle)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_faceRecognition)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_erase_old)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCamCount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
@@ -1159,7 +1160,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button_cancel;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox_allcam;
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.NumericUpDown nud_erase_old;

@@ -262,5 +262,10 @@ namespace FaceDetection
             Properties.Settings.Default.camera_count = numericUpDownCamCount.Value;
             Properties.Settings.Default.Save();
         }
+
+        private void PictureBox_allcam_Click(object sender, EventArgs e)
+        {
+            pictureBox_allcam.Image = Properties.Resources.check;
+        }
     }
 }
