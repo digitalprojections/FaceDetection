@@ -67,11 +67,8 @@
     <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Camera_NET">
-      <HintPath>..\Camera_NET.dll</HintPath>
-    </Reference>
     <Reference Include="DirectShowLib-2010">
-      <HintPath>..\DirectShowLib-2010.dll</HintPath>
+      <HintPath>.\DirectShowLib-2010.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
@@ -88,12 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CameraChoice.cs" />
-    <Compile Include="CameraControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CameraControl.Designer.cs">
-      <DependentUpon>CameraControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="CameraManager.cs" />
     <Compile Include="CustomMessage.cs" />
     <Compile Include="DirectXInterfaces.cs" />
@@ -114,17 +105,16 @@
     </Compile>
     <Compile Include="UsbCamera.cs" />
     <Compile Include="WebCam.cs" />
-    <EmbeddedResource Include="CameraControl.resx">
-      <DependentUpon>CameraControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FaceDetectionMainForm.resx">
       <DependentUpon>FaceDetectionMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="settingsUI.en-US.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="settingsUI.ja-JP.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -138,6 +128,7 @@
     </Compile>
     <EmbeddedResource Include="settingsUI.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\DataSources\FaceDetection.Properties.Settings.datasource" />
     <None Include="Properties\Settings.settings">

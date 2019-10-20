@@ -9,6 +9,7 @@ using DirectShowLib;
 using System.Runtime.InteropServices.ComTypes;
 using GitHub.secile.Video;
 using System.Configuration;
+using System.Runtime.InteropServices;
 
 namespace FaceDetection
 {
@@ -21,7 +22,7 @@ namespace FaceDetection
 
         // Camera choice
         //private CameraChoice _CameraChoice = new CameraChoice();
-        
+
         private static Label testparam;
         private static MainForm mainForm;
         private static PictureBox pb_recording;
@@ -36,27 +37,32 @@ namespace FaceDetection
         //PROPERTY
 
         //private FormSettings settingsBase = Properties.Camera1.Default;
-
+        public enum MonitorState
+        {
+            MonitorStateOn = -1,
+            MonitorStateOff = 2,
+            MonitorStateStandBy = 1
+        }
 
         //User actions end
         static settingsUI settingUI;
-                
+
         //readonly Thread t;
         static Form camform;
         bool initrec = false;
-        
-        public static Panel CameraPanel { get => cameraPanel;}
-        public static MainForm GetMainForm { get => mainForm;}
+
+        public static Panel CameraPanel { get => cameraPanel; }
+        public static MainForm GetMainForm { get => mainForm; }
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             InitializeComponent();
 
-            
+
 
             GitHub.secile.Video.UsbCamera.VideoFormat[] videoFormat = GitHub.secile.Video.UsbCamera.GetVideoFormat(0);
 
             //Showing video formats
-            for (int k=0; k<videoFormat.Length; k++)
+            for (int k = 0; k < videoFormat.Length; k++)
             {
                 Console.WriteLine(videoFormat[k].Caps.Guid);
             }
@@ -90,14 +96,18 @@ namespace FaceDetection
         /// <param name="eventArgs"></param>
         private void CaptureFace(object sender, EventArgs eventArgs)
         {
-            
+
         }
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
+
+           
+                string param = String.Concat(parameters).ToLower();
+            
             /*
              Handle the initial start up CL parameters, if exist
              */
-            if (parameters.Contains("uvccameraviewer"))
+            if (param.Contains("uvccameraviewer"))
             {
 
                 Debug.WriteLine(parameters + " at 135");
@@ -147,12 +157,10 @@ namespace FaceDetection
                         case "-s":
                             try
                             {
-                                if (parameters.ElementAt(2) == "1")
-                                {
-                                    /*
-                                 SNAPSHOT CODE HERE    
-                                 */
-                                }
+                               
+
+                                    TakeSnapShot();
+                                
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
@@ -234,9 +242,6 @@ namespace FaceDetection
                                     switch (parameters.ElementAt(3))
                                     {
                                         case "1":
-                                            Properties.Settings.Default.enable_face_recognition = false;
-                                            //STOP FACE RECOGNITION IF ON
-                                            FormChangesApply();
                                             break;
                                         case "2":
                                             break;
@@ -257,231 +262,41 @@ namespace FaceDetection
                                 //MessageBox.Show("Incorrect or missing parameters");
                             }
                             break;
+                        //kameyama beginning 20191018  
                         case "-v":
                             try
                             {
                                 if (parameters.ElementAt(2) == "1")
                                 {
-                                    //Viewer display
-                                    if (parameters.Count > 2)
-                                    {
-                                        if (parameters.Count == 3)
-                                        {
-                                            //last one is interval
-                                            Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                            //all cameras whose status is ON must start FACE RECOGNITION
-                                            FormChangesApply();
-                                        }
-                                        else
-                                        {
-                                            switch (parameters.ElementAt(3))
-                                            {
-                                                //CAMERA NUMBER
-                                                case "1":
-                                                    try
-                                                    {
-                                                        Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                                        Properties.Settings.Default.enable_face_recognition = true;
-                                                        FormChangesApply();
-                                                    }
-                                                    catch (Exception e)
-                                                    {
-                                                        System.Console.WriteLine(e.Message);
-                                                    }
-                                                    break;
-                                                case "2":
-                                                    break;
-                                                case "3":
-                                                    break;
-                                                case "4":
-
-                                                    break;
-
-                                            }
-                                        }
-
-                                    }
+                                    mainForm.TopMost = true;
+                                    settingUI.TopMost = false;
+                                    mainForm.Show();
                                 }
                                 else if (parameters.ElementAt(2) == "0")
                                 {
-                                    //Viewer OFF FOR CAMERA
-                                    if (parameters.Count > 2)
-                                    {
-                                        switch (parameters.ElementAt(3))
-                                        {
-                                            case "1":
-                                                Properties.Settings.Default.enable_face_recognition = false;
-                                                //STOP Viewer display IF ON
-                                                FormChangesApply();
-                                                break;
-                                            case "2":
-                                                break;
-                                            case "3":
-                                                break;
-                                            case "4":
-
-                                                break;
-                                            default:
-                                                Debug.WriteLine(parameters.ElementAt(3) + " Camera number");
-                                                break;
-                                        }
-                                    }
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in line 387");
-                                //MessageBox.Show("Incorrect or missing parameters");
-                            }
-                            break;
-                        case "-w":
-                            try
-                            {
-                                if (parameters.ElementAt(2) == "1")
-                                {
-                                    //FACE DETECTION
-                                    if (parameters.Count > 2)
-                                    {
-                                        if (parameters.Count == 3)
-                                        {
-                                            //last one is interval
-                                            Properties.Settings.Default.show_window_pane = bool.Parse(parameters.ElementAt(4));
-                                            //all cameras whose status is ON must start FACE RECOGNITION
-                                            FormChangesApply();
-                                        }
-                                        else
-                                        {
-                                            switch (parameters.ElementAt(3))
-                                            {
-                                                //CAMERA NUMBER
-                                                case "1":
-                                                    try
-                                                    {
-                                                        Properties.Settings.Default.show_window_pane = bool.Parse(parameters.ElementAt(4));
-                                                        FormChangesApply();
-                                                    }
-                                                    catch (Exception e)
-                                                    {
-                                                        System.Console.WriteLine(e.Message);
-                                                    }
-                                                    break;
-                                                case "2":
-                                                    break;
-                                                case "3":
-                                                    break;
-                                                case "4":
-
-                                                    break;
-
-                                            }
-                                        }
-
-                                    }
-                                }
-                               
-                                
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in line 387");
-                                //MessageBox.Show("Incorrect or missing parameters");
-                            }
-                            break;
-                        case "-r":
-                            try
-                            {
-                                if (parameters.ElementAt(2) == "1")
-                                {
-                                    //Viewer display
-                                    if (parameters.Count > 2)
-                                    {
-                                        if (parameters.Count == 3)
-                                        {
-                                            //last one is interval
-                                            Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                            //all cameras whose status is ON must start FACE RECOGNITION
-                                            FormChangesApply();
-                                        }
-                                        else
-                                        {
-                                            switch (parameters.ElementAt(3))
-                                            {
-                                                //CAMERA NUMBER
-                                                case "1":
-                                                    try
-                                                    {
-                                                        Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                                        Properties.Settings.Default.enable_face_recognition = true;
-                                                        FormChangesApply();
-                                                    }
-                                                    catch (Exception e)
-                                                    {
-                                                        System.Console.WriteLine(e.Message);
-                                                    }
-                                                    break;
-                                                case "2":
-                                                    break;
-                                                case "3":
-                                                    break;
-                                                case "4":
-
-                                                    break;
-
-                                            }
-                                        }
-
-                                    }
-                                }
-                                else if (parameters.ElementAt(2) == "0")
-                                {
-                                    //Viewer OFF FOR CAMERA
-                                    if (parameters.Count > 2)
-                                    {
-                                        switch (parameters.ElementAt(3))
-                                        {
-                                            case "1":
-                                                Properties.Settings.Default.enable_face_recognition = false;
-                                                //STOP Viewer display IF ON
-                                                FormChangesApply();
-                                                break;
-                                            case "2":
-                                                break;
-                                            case "3":
-                                                break;
-                                            case "4":
-
-                                                break;
-                                            default:
-                                                Debug.WriteLine(parameters.ElementAt(3) + " Camera number");
-                                                break;
-                                        }
-                                    }
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in line 387");
-                                //MessageBox.Show("Incorrect or missing parameters");
-                            }
-                            break;
-                        case "-e":
-                            try
-                            {
-                                if (parameters.ElementAt(2) == "1")
-                                {
-                                    if (settingUI != null && settingUI.Visible == false)
-                                    {
-                                        settingUI.TopMost = true;
-                                        mainForm.TopMost = false;
-                                        settingUI.Show();
-                                    }
-
-                                }
-                                else
-                                {
-                                    settingUI.Hide();
+                                    mainForm.Hide();
                                     FormChangesApply();
+                                }
+                            }
+                            catch (ArgumentOutOfRangeException e)
+                            {
+                                Debug.WriteLine(e.ToString() + " in line 310");
+                                //MessageBox.Show("Incorrect or missing parameters");
+                            }
+                            break;
+                        //kameyama End 20191018
+                        //kameyama beginning 20191019
+                        case "-l":
+                            try
+                            {
+                                if (parameters.ElementAt(2) == "1")
+                                {
+                                    BacklightOn();
 
+                                } else if (parameters.ElementAt(2) == "0")
+                                {
+
+                                    BacklightOff();
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -490,521 +305,127 @@ namespace FaceDetection
                                 Debug.WriteLine(e.ToString() + " in line 271");
                             }
                             break;
-                        case "-l":
-                            try
-                            {
-                                if (parameters.ElementAt(2) == "1")
-                                {
-                                    //BACK LIGHT
-                                    if (parameters.Count > 2)
-                                    {
-                                        if (parameters.Count == 3)
-                                        {
-
-                                            Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                            FormChangesApply();
-                                        }
-                                    }
-                                    else if (parameters.ElementAt(2) == "0")
-                                    {
-                                        //BACK LIGHT OFF FOR CAMERA
-                                        if (parameters.Count > 2)
-                                        {
-                                            switch (parameters.ElementAt(3))
-                                            {
-                                                case "1":
-                                                    Properties.Settings.Default.enable_face_recognition = false;
-                                                    //STOP FACE RECOGNITION IF ON
-                                                    FormChangesApply();
-                                                    break;
-                                                case "2":
-                                                    break;
-                                                case "3":
-                                                    break;
-                                                case "4":
-
-                                                    break;
-                                                default:
-                                                    Debug.WriteLine(parameters.ElementAt(3) + " Camera number");
-                                                    break;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in line 387");
-                                //MessageBox.Show("Incorrect or missing parameters");
-                            }
-                            break;
                         case "-n":
-                            try
-                            {
-                                if (parameters.ElementAt(2) == "1")
-                                {
-                                    //Viewer display
-                                    if (parameters.Count > 2)
-                                    {
-                                        if (parameters.Count == 3)
-                                        {
-                                            //last one is interval
-                                            Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                            //all cameras whose status is ON must start FACE RECOGNITION
-                                            FormChangesApply();
-                                        }
-                                        else
-                                        {
-                                            switch (parameters.ElementAt(3))
-                                            {
-                                                //CAMERA NUMBER
-                                                case "1":
-                                                    try
-                                                    {
-                                                        Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                                        Properties.Settings.Default.enable_face_recognition = true;
-                                                        FormChangesApply();
-                                                    }
-                                                    catch (Exception e)
-                                                    {
-                                                        System.Console.WriteLine(e.Message);
-                                                    }
-                                                    break;
-                                                case "2":
-                                                    break;
-                                                case "3":
-                                                    break;
-                                                case "4":
-
-                                                    break;
-
-                                            }
-                                        }
-
-                                    }
-                                }
-                                else if (parameters.ElementAt(2) == "0")
-                                {
-                                    //Viewer OFF FOR CAMERA
-                                    if (parameters.Count > 2)
-                                    {
-                                        switch (parameters.ElementAt(3))
-                                        {
-                                            case "1":
-                                                Properties.Settings.Default.enable_face_recognition = false;
-                                                //STOP Viewer display IF ON
-                                                FormChangesApply();
-                                                break;
-                                            case "2":
-                                                break;
-                                            case "3":
-                                                break;
-                                            case "4":
-
-                                                break;
-                                            default:
-                                                Debug.WriteLine(parameters.ElementAt(3) + " Camera number");
-                                                break;
-                                        }
-                                    }
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in line 387");
-                                //MessageBox.Show("Incorrect or missing parameters");
-                            }
-                            break;
-                        case "-v":
-                            try
-                            {
-                                if (parameters.ElementAt(2) == "1")
-                                {
-                                    //Viewer display
-                                    if (parameters.Count > 2)
-                                    {
-                                        if (parameters.Count == 3)
-                                        {
-                                            //last one is interval
-                                            Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                            //all cameras whose status is ON must start FACE RECOGNITION
-                                            FormChangesApply();
-                                        }
-                                        else
-                                        {
-                                            switch (parameters.ElementAt(3))
-                                            {
-                                                //CAMERA NUMBER
-                                                case "1":
-                                                    try
-                                                    {
-                                                        Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                                        Properties.Settings.Default.enable_face_recognition = true;
-                                                        FormChangesApply();
-                                                    }
-                                                    catch (Exception e)
-                                                    {
-                                                        System.Console.WriteLine(e.Message);
-                                                    }
-                                                    break;
-                                                case "2":
-                                                    break;
-                                                case "3":
-                                                    break;
-                                                case "4":
-
-                                                    break;
-
-                                            }
-                                        }
-
-                                    }
-                                }
-                                else if (parameters.ElementAt(2) == "0")
-                                {
-                                    //Viewer OFF FOR CAMERA
-                                    if (parameters.Count > 2)
-                                    {
-                                        switch (parameters.ElementAt(3))
-                                        {
-                                            case "1":
-                                                Properties.Settings.Default.enable_face_recognition = false;
-                                                //STOP Viewer display IF ON
-                                                FormChangesApply();
-                                                break;
-                                            case "2":
-                                                break;
-                                            case "3":
-                                                break;
-                                            case "4":
-
-                                                break;
-                                            default:
-                                                Debug.WriteLine(parameters.ElementAt(3) + " Camera number");
-                                                break;
-                                        }
-                                    }
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in line 387");
-                                //MessageBox.Show("Incorrect or missing parameters");
-                            }
+                            try { }
+                            catch { }
                             break;
                         case "-w":
                             try
                             {
                                 if (parameters.ElementAt(2) == "1")
                                 {
-                                    //FACE DETECTION
-                                    if (parameters.Count > 2)
-                                    {
-                                        if (parameters.Count == 3)
-                                        {
-                                            //last one is interval
-                                            Properties.Settings.Default.show_window_pane = bool.Parse(parameters.ElementAt(4));
-                                            //all cameras whose status is ON must start FACE RECOGNITION
-                                            FormChangesApply();
-                                        }
-                                        else
-                                        {
-                                            switch (parameters.ElementAt(3))
-                                            {
-                                                //CAMERA NUMBER
-                                                case "1":
-                                                    try
-                                                    {
-                                                        Properties.Settings.Default.show_window_pane = bool.Parse(parameters.ElementAt(4));
-                                                        FormChangesApply();
-                                                    }
-                                                    catch (Exception e)
-                                                    {
-                                                        System.Console.WriteLine(e.Message);
-                                                    }
-                                                    break;
-                                                case "2":
-                                                    break;
-                                                case "3":
-                                                    break;
-                                                case "4":
-
-                                                    break;
-
-                                            }
-                                        }
-
-                                    }
-                                }
-                               
-                                
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in line 387");
-                                //MessageBox.Show("Incorrect or missing parameters");
-                            }
-                            break;
-                        case "-r":
-                            try
-                            {
-                                if (parameters.ElementAt(2) == "1")
-                                {
-                                    //Viewer display
-                                    if (parameters.Count > 2)
-                                    {
-                                        if (parameters.Count == 3)
-                                        {
-                                            //last one is interval
-                                            Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                            //all cameras whose status is ON must start FACE RECOGNITION
-                                            FormChangesApply();
-                                        }
-                                        else
-                                        {
-                                            switch (parameters.ElementAt(3))
-                                            {
-                                                //CAMERA NUMBER
-                                                case "1":
-                                                    try
-                                                    {
-                                                        Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                                        Properties.Settings.Default.enable_face_recognition = true;
-                                                        FormChangesApply();
-                                                    }
-                                                    catch (Exception e)
-                                                    {
-                                                        System.Console.WriteLine(e.Message);
-                                                    }
-                                                    break;
-                                                case "2":
-                                                    break;
-                                                case "3":
-                                                    break;
-                                                case "4":
-
-                                                    break;
-
-                                            }
-                                        }
-
-                                    }
-                                }
-                                else if (parameters.ElementAt(2) == "0")
-                                {
-                                    //Viewer OFF FOR CAMERA
-                                    if (parameters.Count > 2)
-                                    {
-                                        switch (parameters.ElementAt(3))
-                                        {
-                                            case "1":
-                                                Properties.Settings.Default.enable_face_recognition = false;
-                                                //STOP Viewer display IF ON
-                                                FormChangesApply();
-                                                break;
-                                            case "2":
-                                                break;
-                                            case "3":
-                                                break;
-                                            case "4":
-
-                                                break;
-                                            default:
-                                                Debug.WriteLine(parameters.ElementAt(3) + " Camera number");
-                                                break;
-                                        }
-                                    }
+                                    //kameyama comennt 20191020
+                                    //Properties.Settings.Default.show_window_pane = true;
+                                    //FormChangesApply();
+                                    mainForm.FormBorderStyle = FormBorderStyle.Sizable;
+                                      
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
-                                Debug.WriteLine(e.ToString() + " in line 387");
-                                //MessageBox.Show("Incorrect or missing parameters");
-                            }
-                            break;
-                        case "-e":
-                            try
-                            {
-                                if (parameters.ElementAt(2) == "1")
-                                {
-                                    if (settingUI != null && settingUI.Visible == false)
-                                    {
-                                        settingUI.TopMost = true;
-                                        mainForm.TopMost = false;
-                                        settingUI.Show();
-                                    }
-
-                                }
-                                else
-                                {
-                                    settingUI.Hide();
-                                    FormChangesApply();
-
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                //MessageBox.Show("Incorrect or missing parameters");
-                                Debug.WriteLine(e.ToString() + " in line 271");
-                            }
-                            break;
-                        case "-l":
-                            try
-                            {
-                                if (parameters.ElementAt(2) == "1")
-                                {
-                                    //BACK LIGHT
-                                    if (parameters.Count > 2)
-                                    {
-                                        if (parameters.Count == 3)
-                                        {
-
-                                            Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                            FormChangesApply();
-                                        }
-                                    }
-                                    else if (parameters.ElementAt(2) == "0")
-                                    {
-                                        //BACK LIGHT OFF FOR CAMERA
-                                        if (parameters.Count > 2)
-                                        {
-                                            switch (parameters.ElementAt(3))
-                                            {
-                                                case "1":
-                                                    Properties.Settings.Default.enable_face_recognition = false;
-                                                    //STOP FACE RECOGNITION IF ON
-                                                    FormChangesApply();
-                                                    break;
-                                                case "2":
-                                                    break;
-                                                case "3":
-                                                    break;
-                                                case "4":
-
-                                                    break;
-                                                default:
-                                                    Debug.WriteLine(parameters.ElementAt(3) + " Camera number");
-                                                    break;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in line 387");
-                                //MessageBox.Show("Incorrect or missing parameters");
-                            }
-                            break;
-                        case "-n":
-                            try
-                            {
-                                if (parameters.ElementAt(2) == "1")
-                                {
-                                    //Viewer display
-                                    if (parameters.Count > 2)
-                                    {
-                                        if (parameters.Count == 3)
-                                        {
-                                            //last one is interval
-                                            Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                            //all cameras whose status is ON must start FACE RECOGNITION
-                                            FormChangesApply();
-                                        }
-                                        else
-                                        {
-                                            switch (parameters.ElementAt(3))
-                                            {
-                                                //CAMERA NUMBER
-                                                case "1":
-                                                    try
-                                                    {
-                                                        Properties.Settings.Default.face_rec_interval = int.Parse(parameters.ElementAt(4));
-                                                        Properties.Settings.Default.enable_face_recognition = true;
-                                                        FormChangesApply();
-                                                    }
-                                                    catch (Exception e)
-                                                    {
-                                                        System.Console.WriteLine(e.Message);
-                                                    }
-                                                    break;
-                                                case "2":
-                                                    break;
-                                                case "3":
-                                                    break;
-                                                case "4":
-
-                                                    break;
-
-                                            }
-                                        }
-
-                                    }
-                                }
-                                else if (parameters.ElementAt(2) == "0")
-                                {
-                                    //Viewer OFF FOR CAMERA
-                                    if (parameters.Count > 2)
-                                    {
-                                        switch (parameters.ElementAt(3))
-                                        {
-                                            case "1":
-                                                Properties.Settings.Default.enable_face_recognition = false;
-                                                //STOP Viewer display IF ON
-                                                FormChangesApply();
-                                                break;
-                                            case "2":
-                                                break;
-                                            case "3":
-                                                break;
-                                            case "4":
-
-                                                break;
-                                            default:
-                                                Debug.WriteLine(parameters.ElementAt(3) + " Camera number");
-                                                break;
-                                        }
-                                    }
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in line 387");
-                                //MessageBox.Show("Incorrect or missing parameters");
+                                Debug.WriteLine(e.ToString() + " in line 310");
+                                //MessageBox.Show("Incorrect or missing parameters"); } 
                             }
                             break;
                         case "-q":
+                            try {
+                                Application.Exit();
+                                //ApplicationClose();
+
+                            }
+                            catch (ArgumentOutOfRangeException e)
+                            {
+                                Debug.WriteLine(e.ToString() + " in line 310");
+                                //MessageBox.Show("Incorrect or missing parameters"); } 
+                            }
+                            break;
+                        case "-r":
                             try
                             {
                                 if (parameters.ElementAt(2) == "1")
                                 {
-                                    if (settingUI != null && settingUI.Visible == false)
-                                    {
-                                        settingUI.TopMost = true;
-                                        mainForm.TopMost = false;
-                                        settingUI.Show();
-                                    }
-
+                                    testparam.Text = String.Concat(parameters);
+                                    ManualRecordingOn();
                                 }
                                 else if (parameters.ElementAt(2) == "0")
                                 {
-                                    settingUI.Hide();
-                                    FormChangesApply();
-
+                                    ManualRecordingOff();
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
-                                //MessageBox.Show("Incorrect or missing parameters");
-                                Debug.WriteLine(e.ToString() + " in line 271");
+                                Debug.WriteLine(e.ToString() + " in line 310");
+                                //MessageBox.Show("Incorrect or missing parameters"); } 
                             }
                             break;
+                        case "-e":
+                            try
+                            {
+                                
+                                 
+
+                                        
+                            }
+
+                    
+                            catch (ArgumentOutOfRangeException e)
+                            {
+                                Debug.WriteLine(e.ToString() + " in line 310");
+                                //MessageBox.Show("Incorrect or missing parameters"); } 
+                            }
+                            break;
+                     //kameyama End 20191019
                     }
 
+
                 }
+
             }
-        
         }
+
+
+
+        //kameyama comment 20191019 beginning
+
+        private static void ApplicationClose()
+        {
+            
+        }
+
+        private static void WindowPane()
+        {
+            
+        }
+
+        private static void ManualRecordingOff()
+        {
+            
+        }
+
+        private static void ManualRecordingOn()
+        {
+            
+        }
+
+        private static void EventRecorder()
+        {
+            
+        }
+
+        private static void BacklightOff()
+        {
+           
+            SendMessage(0xFFFF, 0x112, 0xF170, (int)MonitorState.MonitorStateOff);
+
+        }
+
+        private static void BacklightOn()
+        {
+            SendMessage(0xFFFF, 0x112, 0xF170, (int)MonitorState.MonitorStateOn);
+
+        }
+        //kameyama comment 20191019 end
+
 
         public static void HandleParameters(String[] parameters)
         {
@@ -1050,13 +471,12 @@ namespace FaceDetection
 
         private void FullScreen(object sender, EventArgs eventArgs)
         {
-
             if (this.WindowState == FormWindowState.Normal)
             {
                 this.TopMost = true;
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
-                
+
                 Debug.WriteLine("topmost 223");
             }
             else
@@ -1073,8 +493,6 @@ namespace FaceDetection
                     this.FormBorderStyle = FormBorderStyle.None;
                 }
             }
-
-            Debug.WriteLine(sender);
         }
 
         private void ShowSettings(object sender, EventArgs e)
@@ -1169,22 +587,34 @@ namespace FaceDetection
 
         private void SnapShot(object sender, EventArgs e)
         {
+
+            //timage.Dispose();
+            TakeSnapShot();
+
+        }
+
+        private static void TakeSnapShot()
+        {
             Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot");
             //Bitmap bitmap = camera.GetBitmapImage;
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
-            usbCamera.GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
-            //timage.Dispose();
-            
-
+            mainForm.usbCamera.GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/snapshot/" + imgdate + ".jpeg");
         }
+
+       
         private void StartVideoRecording(object sender, EventArgs e)
         {
-            if (pbRecording.Visible == true)
+                if (pbRecording.Visible == true)
             {
                 pbRecording.Image = Properties.Resources.Pause_Normal_Red_icon;
                 pbRecording.Visible = false;
                 recording_on = false;
                 initrec = false;
+                //kameyama
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/1/movie");
+                var moviedate = DateTime.Now.ToString("yyyyMMddHHmmss");
+                mainForm.usbCamera.GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/movie/" + moviedate + ".mp4");
+                //kameyama
             }
             else
             {                
@@ -1193,12 +623,20 @@ namespace FaceDetection
                     pbRecording.Image = Properties.Resources.Record_Pressed_icon;
                     pbRecording.Visible = true;
                     recording_on = true;
+                    //kameyama
+                    Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/1/movie");
+                    var moviedate = DateTime.Now.ToString("YYYYMMDDhhmmss");
+                    mainForm.usbCamera.GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/movie/" + moviedate + ".mp4");
+                    //kameyama
                 }
                 
                 initrec = true;
             }
 
         }
+
+        private void TakeStartVideoRecording()
+        { }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -1344,6 +782,8 @@ namespace FaceDetection
         {
             
         }
+        [DllImport("user32.dll")]
+        private static extern int SendMessage(int hWnd, int hMsg, int wParam, int lParam);
     }
 
 }
