@@ -7,12 +7,11 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security;
 using System.Diagnostics;
-//using DirectShowLib;
+using DirectShowLib;
 using System.ComponentModel;
 using System.IO;
-using static GitHub.secile.Video.DirectShow;
 
-namespace GitHub.secile.Video
+namespace FaceDetection
 {
      public class UsbCamcorder
     {
@@ -23,46 +22,62 @@ namespace GitHub.secile.Video
         private string movFile = String.Empty;
         private List<string> fileNames = new List<string>();
 
-        //public DirectShow.IVideoWindow videoWindow = null;
+        IBaseFilter pVideoMixingRenderer9 = null;
+        IBaseFilter pSmartTee;
+        IBaseFilter pSampleGrabber;
+        IFileSinkFilter pFilewriter_sink;
+        IBaseFilter pFilewriter;
+        IBaseFilter pAVIMux;
+        IBaseFilter pUSB;
+        ICaptureGraphBuilder2 pBuilder;
+        IMediaControl mediaControl;
+        IMediaEvent mediaEvent;
+        IGraphBuilder graph;
 
-        /// <summary>Usb camera image size.</summary>
-        public Size Size { get; private set; }
-
-        /// <summary>Start using.</summary>
-        public Action Start { get; private set; }
-
-        /// <summary>Stop using.</summary>
-        public Action Stop { get; private set; }
-
-        /// <summary>Release resource.</summary>
-        public Action Release { get; private set; }
-
-        /// <summary>Get image.</summary>
-        /// <remarks>Immediately after starting, images may not be acquired.</remarks>
-        public Func<Bitmap> GetBitmap { get; private set; }
-
-        private DirectShow.IBaseFilter renderer;
-
+        private Guid CLSID_VideoCaptureSources = new Guid("{860BB310-5D01-11D0-BD3B-00A0C911CE86}"); //
+        private Guid CLSID_SampleGrabber = new Guid("{C1F400A0-3F08-11D3-9F0B-006008039E37}"); //qedit.dll
+        private Guid CLSID_VideoMixingRenderer9 = new Guid("{51B4ABF3-748F-4E3B-A276-C828330E926A}"); //quartz.dll
 
         /// <summary>
         /// Get available USB camera list.
         /// </summary>
         /// <returns>Array of camera name, or if no device found, zero length array/</returns>
-        public static string[] FindDevices()
+        public static IBaseFilter FindDevices()
         {
-            return DirectShow.GetFilters(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory).ToArray();
-        }
+            List<object> devs = new List<object>();
+            IEnumMoniker classEnum = null;
+            IMoniker[] moniker = { null };
 
-        /// <summary>
-        /// Get video formats.
-        /// </summary>
-        public static VideoFormat[] GetVideoFormat(int cameraIndex)
-        {
-            var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, cameraIndex);
-            var pin = DirectShow.FindPin(filter, 0, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
-            return GetVideoOutputFormat(pin);
-        }
+            object source = null;
+            ICreateDevEnum devEnum = (ICreateDevEnum)(new CreateDevEnum());
 
+            int hr = devEnum.CreateClassEnumerator(FilterCategory.VideoInputDevice, out classEnum, CDef.None);
+            DsError.ThrowExceptionForHR(hr);
+
+            if (classEnum == null)
+            {
+                throw new ApplicationException("No video capture device was detected.\\r\\n\\r\\n" + "This sample requires a video capture device, such as a USB WebCam,\\r\\nto be installed and working properly.  The sample will now close.");
+            }
+
+            IntPtr none = IntPtr.Zero;
+            while (classEnum.Next(1, moniker, none) == 0)
+            {
+
+                Guid iid = typeof(IBaseFilter).GUID;
+                moniker[0].BindToObject(null, null, ref iid, out source);
+                Marshal.ReleaseComObject(moniker[0]);
+                devs.Add(source);
+            }
+
+            Debug.WriteLine(devs.Count + " === cameras found");
+
+            Marshal.ReleaseComObject(devEnum);
+            Marshal.ReleaseComObject(classEnum);
+
+            //we can now select cameras
+            return (IBaseFilter)devs[0];
+        }
+                
         /// <summary>
         /// Create USB Camera with recording functionality.
         /// Everything is the same as the regular camera, but file writing            
@@ -80,297 +95,87 @@ namespace GitHub.secile.Video
             targetPath = Path.Combine(str, dstFileName);
             Console.WriteLine(targetPath);
             
-            var camera_list = FindDevices();
-            if (cameraIndex >= camera_list.Length) throw new ArgumentException("USB camera is not available.", "index");
+            //var camera_list = FindDevices();
+            //if (cameraIndex >= camera_list) throw new ArgumentException("USB camera is not available.", "index");
             Init(cameraIndex, size, fps, pbx, targetPath);
         }
 
-        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            MoveFiles();
-        }
-
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void MoveFiles()
-        {
-            string sourceFile = String.Empty;
-            string destFile = String.Empty;
-
-            Directory.CreateDirectory(sourcePath);
-            Directory.CreateDirectory(targetPath);
-
-            //Think about how to join files here
-
-            foreach (string s in fileNames)
-            {
-                sourceFile = Path.Combine(sourcePath, s);
-                destFile = Path.Combine(targetPath, s);
-                File.Move(sourceFile, destFile);
-            }
-            fileNames.Clear();
-
-        }
-        static void checkHR(int hr, string msg)
-        {
-            if (hr < 0)
-            {
-                Console.WriteLine(msg);
-                DirectShow.DsError.ThrowExceptionForHR(hr);
-            }
-        }
+        
         private void Init(int index, Size size, double fps, IntPtr pbx, string dstFileName)
         {
-            //----------------------------------
-            // Create Filter Graph with FileWriter
-            //----------------------------------
-            // +--------------------+  +----------------+  +---------------+  +-----------------+
-            //                                             SmarTee-Capture |→| FileWriter       |
-            // +--------------------+  +----------------+  +---------------+  +-----------------+
-            // |Video Capture Source|→| Sample Grabber |→| SmarTee-Preview |→| VMR9 Renderer attached to your form Control.Handle |
-            // +--------------------+  +----------------+  +---------------+  +-----------------+
-            //                                 ↓GetBitmap()
 
-            var graph = DirectShow.CreateGraph();
-            //----------------------------------
-            // VideoCaptureSource
-            //----------------------------------
-            var vcap_source = CreateVideoCaptureSource(index, size, fps);
-            graph.AddFilter(vcap_source, "VideoCapture");
+            pVideoMixingRenderer9 = (IBaseFilter)Activator.CreateInstance(Type.GetTypeFromCLSID(CLSID_VideoMixingRenderer9));
+            
+        }
+        void BuildGraph(IGraphBuilder pGraph, string dstFile1)
+        {
+            int hr = 0;
 
-            //------------------------------
-            // Smart Tee
-            //------------------------------
+            //graph builder
+            pBuilder = (ICaptureGraphBuilder2)new CaptureGraphBuilder2();
+            hr = pBuilder.SetFiltergraph(pGraph);
+            checkHR(hr, "Can't SetFiltergraph");
 
-            var smartee = CreateSmartee();
-            graph.AddFilter(smartee, "Smart Tee");
+            //add USB ビデオ デバイス
+            pUSB = CreateFilterByName(@"USB ビデオ デバイス", CLSID_VideoCaptureSources);
+            hr = pGraph.AddFilter(pUSB, "USB ビデオ デバイス");
+            checkHR(hr, "Can't add USB ビデオ デバイス to graph");
 
-            //------------------------------
-            //Avi Mux
-            //------------------------------
-            var avimux = CreateAviMux();
-            graph.AddFilter(avimux, "AVI Mux");
+            //add AVI Mux
+            pAVIMux = (IBaseFilter)new AviDest();
+            hr = pGraph.AddFilter(pAVIMux, "AVI Mux");
+            checkHR(hr, "Can't add AVI Mux to graph");
 
-            //------------------------------
-            //File Write
-            //------------------------------
-
-
-            var filewriter = CreateFileWriter();
-            graph.AddFilter(filewriter, "File Writer");
+            //add File writer
+            pFilewriter = (IBaseFilter)new FileWriter();
+            hr = pGraph.AddFilter(pFilewriter, "File writer");
+            checkHR(hr, "Can't add File writer to graph");
             //set destination filename
-            IFileSinkFilter pFilewriter_sink = filewriter as IFileSinkFilter;
+            pFilewriter_sink = pFilewriter as IFileSinkFilter;
             if (pFilewriter_sink == null)
                 checkHR(unchecked((int)0x80004002), "Can't get IFileSinkFilter");
-            int hr = pFilewriter_sink.SetFileName(dstFileName, null);
+            hr = pFilewriter_sink.SetFileName(dstFile1, null);
             checkHR(hr, "Can't set filename");
 
-            //------------------------------
-            // SampleGrabber
-            //------------------------------
-            var grabber = CreateSampleGrabber();
-            graph.AddFilter(grabber, "SampleGrabber");
-            var i_grabber = (DirectShow.ISampleGrabber)grabber;
-            i_grabber.SetBufferSamples(true); //サンプルグラバでのサンプリングを開始
-
-            //---------------------------------------------------
-            // Null Renderer
-            //---------------------------------------------------
-            renderer = DirectShow.CoCreateInstance(DirectShow.DsGuid.CLSID_VideoMixingRenderer9) as DirectShow.IBaseFilter;
-            graph.AddFilter(renderer, "VMR9");
-
-            //---------------------------------------------------
-            // Create Filter Graph
-            //---------------------------------------------------
-
-            DirectShow.IVMRAspectRatioControl9 ratioControl9 = (DirectShow.IVMRAspectRatioControl9)renderer;
-            hr = ratioControl9.SetAspectRatioMode(DirectShow.VMRAspectRatioMode.LetterBox);
-            checkHR(hr, "can not set aspect ratio");
-
-            DirectShowLib.IVMRFilterConfig9 config9 = (DirectShowLib.IVMRFilterConfig9)renderer;
-            hr = config9.SetRenderingMode(DirectShowLib.VMR9Mode.Windowless);
-            checkHR(hr, "Can't set windowless mode");
-
-            DirectShowLib.IVMRWindowlessControl9 control9 = (DirectShowLib.IVMRWindowlessControl9)renderer;
-            hr = control9.SetVideoClippingWindow(pbx);
-            checkHR(hr, "Can't set video clipping window");
-
-            hr = control9.SetVideoPosition(null, new DirectShowLib.DsRect(0, 0, size.Width, size.Height));
-            checkHR(hr, "Can't set rectangles of the video position");
-
-            GraphBuilding_ConnectPins();
-
-            var builder = DirectShow.CoCreateInstance(DirectShow.DsGuid.CLSID_CaptureGraphBuilder2) as DirectShow.ICaptureGraphBuilder2;
-            builder.SetFiltergraph(graph);
-            var pinCategory = DirectShow.DsGuid.PIN_CATEGORY_PREVIEW;
-            var mediaType = DirectShow.DsGuid.MEDIATYPE_Video;
-            builder.RenderStream(ref pinCategory, ref mediaType, vcap_source, grabber, renderer);
+            //add SampleGrabber
+            pSampleGrabber = (IBaseFilter)Activator.CreateInstance(Type.GetTypeFromCLSID(CLSID_SampleGrabber));
+            hr = pGraph.AddFilter(pSampleGrabber, "SampleGrabber");
+            checkHR(hr, "Can't add SampleGrabber to graph");
             
-            // SampleGrabber Format.
-            {
-                var mt = new DirectShow.AM_MEDIA_TYPE();
-                i_grabber.GetConnectedMediaType(mt);
-                var header = (DirectShow.VIDEOINFOHEADER)Marshal.PtrToStructure(mt.pbFormat, typeof(DirectShow.VIDEOINFOHEADER));
-                var width = header.bmiHeader.biWidth;
-                var height = header.bmiHeader.biHeight;
-                var stride = width * (header.bmiHeader.biBitCount / 8);
-                DirectShow.DeleteMediaType(ref mt);
-
-                Size = new Size(width, height);
-                GetBitmap = () => GetBitmapMain(i_grabber, width, height, stride);
-            }
-
-            // Assign Delegates
-            Start = () => DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Running);
-            Stop = () => DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Stopped);
-            Release = () =>
-            {
-                Stop();
-/*                GitHub.secile.Video.DirectShow.IEnumFilters enumFilters = null;
-                GitHub.secile.Video.DirectShow.IBaseFilter baseFilters = { null};
-                IntPtr fetched = IntPtr.Zero;
-                hr = graph.EnumFilters(ref enumFilters);
 
 
-                int r = 0;
-                while (r == 0)
-                {
-                    try
-                    {
-                        hr = enumFilters.Next(1, ref baseFilters, ref fetched);
-                        DsError.ThrowExceptionForHR(hr);
-                        baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
+            //add Smart Tee
+            pSmartTee = (IBaseFilter)new SmartTee();
+            hr = pGraph.AddFilter(pSmartTee, "Smart Tee");
+            checkHR(hr, "Can't add Smart Tee to graph");
+
+            //add Video Mixing Renderer 9
+            
+            hr = pGraph.AddFilter(pVideoMixingRenderer9, "Video Mixing Renderer 9");
+            checkHR(hr, "Can't add Video Mixing Renderer 9 to graph");
+
+            //connect USB ビデオ デバイス and SampleGrabber
+            hr = pGraph.ConnectDirect(GetPin(pUSB, "キャプチャ"), GetPin(pSampleGrabber, "Input"), null);
+            checkHR(hr, "Can't connect USB ビデオ デバイス and SampleGrabber");
+
+            //connect SampleGrabber and Smart Tee
+            hr = pGraph.ConnectDirect(GetPin(pSampleGrabber, "Output"), GetPin(pSmartTee, "Input"), null);
+            checkHR(hr, "Can't connect SampleGrabber and Smart Tee");
+
+            //connect Smart Tee and AVI Mux
+            hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Capture"), GetPin(pAVIMux, "Input 01"), null);
+            checkHR(hr, "Can't connect Smart Tee and AVI Mux");
+
+            //connect AVI Mux and File writer
+            hr = pGraph.ConnectDirect(GetPin(pAVIMux, "AVI Out"), GetPin(pFilewriter, "in"), null);
+            checkHR(hr, "Can't connect AVI Mux and File writer");
                         
-                    }
-                    catch
-                    {
-                        r = 1;
-                        continue;
-                    }
-
-                }*/
-
-                DirectShow.ReleaseInstance(ref grabber);
-                DirectShow.ReleaseInstance(ref control9);
-                DirectShow.ReleaseInstance(ref config9);
-                DirectShow.ReleaseInstance(ref ratioControl9);
-                DirectShow.ReleaseInstance(ref builder);
-                DirectShow.ReleaseInstance(ref renderer);
-                DirectShow.ReleaseInstance(ref i_grabber);
-                DirectShow.ReleaseInstance(ref builder);
-                DirectShow.ReleaseInstance(ref graph);
-                DirectShow.ReleaseInstance(ref smartee);
-                DirectShow.ReleaseInstance(ref avimux);
-                DirectShow.ReleaseInstance(ref filewriter);
-            };
-            /*
-            videoWindow = (DirectShow.IVideoWindow)graph;
-            //need to pass the handle for the picture box
-            videoWindow.put_Owner(pbx);
-            videoWindow.put_WindowState(DirectShow.WindowState.Normal);
-            /*This method is a thin wrapper over the SetWindowLong function 
-             * and must be treated with care. In particular, you should retrieve 
-             * the current styles and then add or remove flags
-            videoWindow.put_WindowStyle(DirectShow.WindowStyle.Child | DirectShow.WindowStyle.ClipChildren);
-            //videoWindow.put_FullScreenMode(DirectShow.OABool.True);
-            videoWindow.SetWindowPosition(0, 0, 1280, 720);
-            */
-            void GraphBuilding_ConnectPins()
-            {
-                // Pins used in graph
-                DirectShow.IPin pinSourceCapture = null;
-
-                DirectShow.IPin pinTeeInput = null;
-                DirectShow.IPin pinTeePreview = null;
-                DirectShow.IPin pinTeeCapture = null;
-
-                DirectShow.IPin pinSampleGrabberInput = null;
-                DirectShow.IPin pinSampleGrabberOutput = null;
-
-                DirectShow.IPin pinAviMuxInput = null;
-                DirectShow.IPin pinAviMuxOutput = null;
-                DirectShow.IPin pinFileWriterInput = null;
+            //connect Smart Tee and MJPEG Decompressor
+            hr = pBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, pVideoMixingRenderer9);
+            checkHR(hr, "Can't connect Smart Tee and MJPEG Decompressor");
 
 
-                DirectShow.IPin pinRendererInput = null;
-
-                hr = 0;
-
-                try
-                {
-                    // Collect pins
-                    //pinSourceCapture = DsFindPin.ByCategory(DX.CaptureFilter, PinCategory.Capture, 0);
-                    pinSourceCapture = DirectShow.FindPin(vcap_source, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);                    
-                    pinTeeInput = DirectShow.FindPin(smartee, DirectShow.PIN_DIRECTION.PINDIR_INPUT);
-                    pinTeePreview = DirectShow.FindPinByName(smartee, "Preview");
-                    pinSampleGrabberInput = DirectShow.FindPin(grabber, DirectShow.PIN_DIRECTION.PINDIR_INPUT);
-                    pinSampleGrabberOutput = DirectShow.FindPin(grabber, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
-                    pinRendererInput = DirectShow.FindPin(renderer, DirectShow.PIN_DIRECTION.PINDIR_INPUT);
-
-                    pinTeeCapture = DirectShow.FindPinByName(smartee, "Capture");
-                    pinAviMuxInput = DirectShow.FindPin(avimux, DirectShow.PIN_DIRECTION.PINDIR_INPUT);
-                    pinAviMuxOutput = DirectShow.FindPin(avimux, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
-                    pinFileWriterInput = DirectShow.FindPin(filewriter, DirectShow.PIN_DIRECTION.PINDIR_INPUT);
-                    /*
-                    // Connect source to tee splitter
-                    hr = graph.Connect(pinSourceCapture, pinTeeInput);
-                    DsError.ThrowExceptionForHR(hr);
-
-                    hr = graph.Connect(pinTeePreview, pinSampleGrabberInput);
-                    DsError.ThrowExceptionForHR(hr);
-
-                    hr = graph.Connect(pinSampleGrabberOutput, pinRendererInput);
-                    DsError.ThrowExceptionForHR(hr);
-
-                    // Connect samplegrabber on preview-pin of tee splitter
-                    hr = graph.Connect(pinTeeCapture, pinAviMuxInput);
-                    DsError.ThrowExceptionForHR(hr);
-
-                    hr = graph.Connect(pinAviMuxOutput, pinFileWriterInput);
-                    DsError.ThrowExceptionForHR(hr);                    
-                    */
-                }
-                catch
-                {
-                    throw;
-                }
-                finally
-                {
-                    SafeReleaseComObject(pinSourceCapture);
-                    pinSourceCapture = null;
-
-                    SafeReleaseComObject(pinTeeInput);
-                    pinTeeInput = null;
-
-                    SafeReleaseComObject(pinTeePreview);
-                    pinTeePreview = null;
-
-                    SafeReleaseComObject(pinTeeCapture);
-                    pinTeeCapture = null;
-
-                    SafeReleaseComObject(pinSampleGrabberInput);
-                    pinSampleGrabberInput = null;
-
-                    SafeReleaseComObject(pinSampleGrabberOutput);
-                    pinSampleGrabberOutput = null;
-
-                    SafeReleaseComObject(pinAviMuxInput);
-                    pinAviMuxInput = null;
-
-                    SafeReleaseComObject(pinAviMuxOutput);
-                    pinAviMuxOutput = null;
-
-                    SafeReleaseComObject(pinFileWriterInput);
-                    pinFileWriterInput = null;
-
-                    SafeReleaseComObject(pinRendererInput);
-                    pinRendererInput = null;
-                }
-            }
         }
-
         private static void SafeReleaseComObject(object obj)
         {
             if (obj != null)
@@ -382,13 +187,13 @@ namespace GitHub.secile.Video
         public void SetWindowPosition(Size size)
         {
             int hr = 0;
-            DirectShowLib.IVMRWindowlessControl9 control9 = (DirectShowLib.IVMRWindowlessControl9)renderer;
+            DirectShowLib.IVMRWindowlessControl9 control9 = (DirectShowLib.IVMRWindowlessControl9)pVideoMixingRenderer9;
             hr = control9.SetVideoPosition(null, new DirectShowLib.DsRect(0, 0, size.Width, size.Height));
             checkHR(hr, "Can't set rectangles of the video position");
         }
 
         /// <summary>Get Bitmap from Sample Grabber</summary>
-        private Bitmap GetBitmapMain(DirectShow.ISampleGrabber i_grabber, int width, int height, int stride)
+        private Bitmap GetBitmapMain(ISampleGrabber i_grabber, int width, int height, int stride)
         {
             try
             {
@@ -408,7 +213,7 @@ namespace GitHub.secile.Video
         }
 
         /// <summary>Get Bitmap from Sample Grabber</summary>
-        private Bitmap GetBitmapMainMain(DirectShow.ISampleGrabber i_grabber, int width, int height, int stride)
+        private Bitmap GetBitmapMainMain(ISampleGrabber i_grabber, int width, int height, int stride)
         {
             // サンプルグラバから画像を取得するためには
             // まずサイズ0でGetCurrentBufferを呼び出しバッファサイズを取得し
@@ -456,253 +261,170 @@ namespace GitHub.secile.Video
             return result;
         }
 
-        private DirectShow.IBaseFilter CreateSmartee()
+        internal void Release()
         {
-            var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_SmartTee);
-            var ismp = filter as DirectShowLib.SmartTee;
-            return filter;
-        }
-        private DirectShow.IBaseFilter CreateAviMux()
-        {
-            var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_AVI_Mux);
-            var ismp = filter as DirectShowLib.AviSplitter;
-            return filter;
-        }
-        private DirectShow.IBaseFilter CreateFileWriter()
-        {
-            var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_FileWriter);
-            var ismp = filter as DirectShowLib.FileWriter;
-            return filter;
-        }
-        /// <summary>
-        /// サンプルグラバを作成する
-        /// </summary>
-        private DirectShow.IBaseFilter CreateSampleGrabber()
-        {
-            var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_SampleGrabber);
-            var ismp = filter as DirectShow.ISampleGrabber;
-            var mt = new DirectShow.AM_MEDIA_TYPE();
-            mt.MajorType = DirectShow.DsGuid.MEDIATYPE_Video;
-            mt.SubType = DirectShow.DsGuid.MEDIASUBTYPE_RGB24;
-            ismp.SetMediaType(mt);
-            DirectShow.DeleteMediaType(ref mt);
-            return filter;
-        }
+            if (mediaControl != null)
+                mediaControl.StopWhenReady();
 
-        /// <summary>
-        /// Video Capture Sourceフィルタを作成する
-        /// </summary>
-        private DirectShow.IBaseFilter CreateVideoCaptureSource(int index, Size size, double fps)
-        {
-            var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, index);
-            var pin = DirectShow.FindPin(filter, 0, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
-            SetVideoOutputFormat(pin, size, fps);            
-            return filter;
-        }
+            //CurrentState = PlayState.Stopped;
 
-        /// <summary>
-        /// ビデオキャプチャデバイスの出力形式を選択する。
-        /// フォーマットの列挙で同サイズがあれば、そのフォーマットを設定する。
-        /// 存在しなかった場合は出力形式を変更しない。
-        /// </summary>
-        /// <param name="pin">ビデオキャプチャデバイスの出力ピン</param>
-        /// <param name="size">指定のサイズ</param>
-        /// <param name="fps">フレームレートを指定する。0のとき変更しない(デフォルト)。</param>
-        private static bool SetVideoOutputFormat(DirectShow.IPin pin, Size size, double fps)
-        {
-            var vformat = GetVideoOutputFormat(pin);
-
-            for (int i = 0; i < vformat.Length; i++)
+ 
+            // Release DirectShow interfaces
+            if (mediaControl != null)
             {
-                if (vformat[i].MajorType == DirectShow.DsGuid.GetNickname(DirectShow.DsGuid.MEDIATYPE_Video))
+                Marshal.ReleaseComObject(mediaControl);
+                mediaControl = null;
+            }
+
+
+            if (mediaEvent != null)
+            {
+                Marshal.ReleaseComObject(mediaEvent);
+                mediaEvent = null;
+            }
+
+            if (pVideoMixingRenderer9 != null)
+            {
+                Marshal.ReleaseComObject(pVideoMixingRenderer9);
+                pVideoMixingRenderer9 = null;
+            }
+
+            if (graph != null)
+            {
+                Marshal.ReleaseComObject(graph);
+                graph = null;
+            }
+
+            if (pBuilder != null)
+            {
+                Marshal.ReleaseComObject(pBuilder);
+                pBuilder = null;
+            }
+            if (pSampleGrabber != null)
+            {
+                Marshal.ReleaseComObject(pSampleGrabber);
+                pSampleGrabber = null;
+            }
+            if (pSmartTee != null)
+            {
+                Marshal.ReleaseComObject(pSmartTee);
+                pSmartTee = null;
+            }
+            if (pAVIMux != null)
+            {
+                Marshal.ReleaseComObject(pAVIMux);
+                pAVIMux = null;
+            }
+            if (pFilewriter != null)
+            {
+                Marshal.ReleaseComObject(pFilewriter);
+                pFilewriter = null;
+            }
+        }
+
+        internal void Start()
+        {
+            try
+            {
+                graph = (IGraphBuilder)new FilterGraph();
+                Console.WriteLine("Building graph...");
+                BuildGraph(graph, targetPath);
+                Console.WriteLine("Running...");
+                mediaControl = (IMediaControl)graph;
+                mediaEvent = (IMediaEvent)graph;
+                int hr = mediaControl.Run();
+                checkHR(hr, "Can't run the graph");
+                bool stop = false;
+                while (!stop)
                 {
-                    // MajorTypeがVideoの場合、SubTypeは色空間を表す。
-                    // BuffaloのWebカメラは[YUY2]と[MPEG]だった。
-                    // マイクロビジョンのUSBカメラは[YUY2]と[YUVY]だった。
-                    // 固定できないためコメントアウト。最初に見つかったフォーマットを利用する。
-                    // if (vformat[i].SubType == DSUtility.GetMediaTypeName(DSConst.MediaTypeGUID.MEDIASUBTYPE_YUY2))
-
-                    // FORMAT_VideoInfoのみ対応する。(FORMAT_VideoInfo2はSampleGrabber未対応のためエラー。)
-                    // https://msdn.microsoft.com/ja-jp/library/cc370616.aspx
-
-                    if (vformat[i].Caps.Guid == DirectShow.DsGuid.FORMAT_VideoInfo)
+                    System.Threading.Thread.Sleep(500);
+                    Console.Write(".");
+                    EventCode ev;
+                    IntPtr p1, p2;
+                    System.Windows.Forms.Application.DoEvents();
+                    while (mediaEvent.GetEvent(out ev, out p1, out p2, 0) == 0)
                     {
-                        if (vformat[i].Size.Width == size.Width && vformat[i].Size.Height == size.Height && vformat[i].TimePerFrame==10000000/fps)
+                        if (ev == EventCode.Complete || ev == EventCode.UserAbort)
                         {
-                            SetVideoOutputFormat(pin, i, size, fps);
-                            return true;
+                            Console.WriteLine("Done!");
+                            stop = true;
                         }
+                        else
+                        if (ev == EventCode.ErrorAbort)
+                        {
+                            Console.WriteLine("An error occured: HRESULT={0:X}", p1);
+                            mediaControl.Stop();
+                            stop = true;
+                        }
+                        mediaEvent.FreeEventParams(ev, p1, p2);
                     }
                 }
             }
-            return false;
+            catch (COMException ex)
+            {
+                Console.WriteLine("COM error: " + ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.ToString());
+            }
         }
 
-        /// <summary>
-        /// ビデオキャプチャデバイスがサポートするメディアタイプ・サイズを取得する。
-        /// </summary>
-        private static VideoFormat[] GetVideoOutputFormat(DirectShow.IPin pin)
+        public static IBaseFilter CreateFilterByName(string filterName, Guid category)
         {
-            // IAMStreamConfigインタフェース取得
-            var config = pin as DirectShow.IAMStreamConfig;
-            if (config == null)
-            {
-                throw new Exception("IAMStreamConfigインタフェースを取得できません。");
-            }
-
-            // フォーマット個数取得
-            int cap_count = 0, cap_size = 0;
-            config.GetNumberOfCapabilities(ref cap_count, ref cap_size);
-            if (cap_size != Marshal.SizeOf(typeof(DirectShow.VIDEO_STREAM_CONFIG_CAPS)))
-            {
-                throw new Exception("IAMStreamConfigインタフェースを取得できません。");
-            }
-
-            // 返却値の確保
-            var result = new VideoFormat[cap_count];
-
-            // データ用領域確保
-            var cap_data = Marshal.AllocHGlobal(cap_size);
-
-            // 列挙
-            for (int i = 0; i < cap_count; i++)
-            {
-                var entry = new VideoFormat();
-
-                // x番目のフォーマット情報取得
-                DirectShow.AM_MEDIA_TYPE mt = null;
-                config.GetStreamCaps(i, ref mt, cap_data);
-                entry.Caps = PtrToStructure<DirectShow.VIDEO_STREAM_CONFIG_CAPS>(cap_data);
-
-                // フォーマット情報の読み取り
-                entry.MajorType = DirectShow.DsGuid.GetNickname(mt.MajorType);
-                entry.SubType = DirectShow.DsGuid.GetNickname(mt.SubType);
-
-                if (mt.FormatType == DirectShow.DsGuid.FORMAT_VideoInfo)
+            int hr = 0;
+            DsDevice[] devices = DsDevice.GetDevicesOfCat(category);
+            foreach (DsDevice dev in devices)
+                if (dev.Name == filterName)
                 {
-                    var vinfo = PtrToStructure<DirectShow.VIDEOINFOHEADER>(mt.pbFormat);
-                    entry.Size = new Size(vinfo.bmiHeader.biWidth, vinfo.bmiHeader.biHeight);
-                    entry.TimePerFrame = vinfo.AvgTimePerFrame;
+                    IBaseFilter filter = null;
+                    IBindCtx bindCtx = null;
+                    try
+                    {
+                        hr = CreateBindCtx(0, out bindCtx);
+                        DsError.ThrowExceptionForHR(hr);
+                        Guid guid = typeof(IBaseFilter).GUID;
+                        object obj;
+                        dev.Mon.BindToObject(bindCtx, null, ref guid, out obj);
+                        filter = (IBaseFilter)obj;
+                    }
+                    finally
+                    {
+                        if (bindCtx != null) Marshal.ReleaseComObject(bindCtx);
+                    }
+                    return filter;
                 }
-                else if (mt.FormatType == DirectShow.DsGuid.FORMAT_VideoInfo2)
-                {
-                    var vinfo = PtrToStructure<DirectShow.VIDEOINFOHEADER2>(mt.pbFormat);
-                    entry.Size = new Size(vinfo.bmiHeader.biWidth, vinfo.bmiHeader.biHeight);
-                    entry.TimePerFrame = vinfo.AvgTimePerFrame;
-                }
-
-                // 解放
-                DirectShow.DeleteMediaType(ref mt);
-
-                result[i] = entry;
-            }
-
-            // 解放
-            Marshal.FreeHGlobal(cap_data);
-
-            return result;
+            return null;
         }
 
-        /// <summary>
-        /// ビデオキャプチャデバイスの出力形式を選択する。
-        /// 事前にGetVideoOutputFormatでメディアタイプ・サイズを得ておき、その中から希望のindexを指定する。
-        /// 同時に出力サイズとフレームレートを変更することができる。
-        /// </summary>
-        /// <param name="index">希望のindexを指定する</param>
-        /// <param name="size">Empty以外を指定すると出力サイズを変更する。事前にVIDEO_STREAM_CONFIG_CAPSで取得した可能範囲内を指定すること。</param>
-        /// <param name="fps">0以上を指定するとフレームレートを変更する。事前にVIDEO_STREAM_CONFIG_CAPSで取得した可能範囲内を指定すること。</param>
-        private static void SetVideoOutputFormat(DirectShow.IPin pin, int index, Size size, double fps)
+        [DllImport("ole32.dll")]
+        public static extern int CreateBindCtx(int reserved, out IBindCtx ppbc);
+
+        static IPin GetPin(IBaseFilter filter, string pinname)
         {
-            // IAMStreamConfigインタフェース取得
-            var config = pin as DirectShow.IAMStreamConfig;
-            if (config == null)
+            IEnumPins epins;
+            int hr = filter.EnumPins(out epins);
+            checkHR(hr, "Can't enumerate pins");
+            IntPtr fetched = Marshal.AllocCoTaskMem(4);
+            IPin[] pins = new IPin[1];
+            while (epins.Next(1, pins, fetched) == 0)
             {
-                throw new Exception("ピンはIAMStreamConfigインタフェースを公開しません。");
+                PinInfo pinfo;
+                pins[0].QueryPinInfo(out pinfo);
+                bool found = (pinfo.name == pinname);
+                DsUtils.FreePinInfo(pinfo);
+                if (found)
+                    return pins[0];
             }
-
-            // フォーマット個数取得
-            int cap_count = 0, cap_size = 0;
-            config.GetNumberOfCapabilities(ref cap_count, ref cap_size);
-            if (cap_size != Marshal.SizeOf(typeof(DirectShow.VIDEO_STREAM_CONFIG_CAPS)))
-            {
-                throw new Exception("VIDEO_STREAM_CONFIG_CAPSを取得できません。");
-            }
-
-            // データ用領域確保
-            var cap_data = Marshal.AllocHGlobal(cap_size);
-
-            // idx番目のフォーマット情報取得
-            DirectShow.AM_MEDIA_TYPE mt = null;
-            config.GetStreamCaps(index, ref mt, cap_data);
-            var cap = PtrToStructure<DirectShow.VIDEO_STREAM_CONFIG_CAPS>(cap_data);
-            // 仕様ではVideoCaptureDeviceはメディア タイプごとに一定範囲の出力フォーマットをサポートできる。例えば以下のように。
-            // [0]:YUY2 最小:160x120, 最大:320x240, X軸4STEP, Y軸2STEPごと
-            // [1]:RGB8 最小:640x480, 最大:640x480, X軸0STEP, Y軸0STEPごと
-            // SetFormatで出力サイズとフレームレートをこの範囲内で設定可能。
-            // ただし試した限り、ほとんどのUSBカメラはサイズ固定(最大・最小が同じ)で返してきた。
-            // https://msdn.microsoft.com/ja-jp/library/cc353344.aspx
-            // https://msdn.microsoft.com/ja-jp/library/cc371290.aspx
-
-            if (mt.FormatType == DirectShow.DsGuid.FORMAT_VideoInfo)
-            {
-                var vinfo = PtrToStructure<DirectShow.VIDEOINFOHEADER>(mt.pbFormat);
-                if (!size.IsEmpty) { vinfo.bmiHeader.biWidth = size.Width; vinfo.bmiHeader.biHeight = size.Height; }
-                if (fps > 0) { vinfo.AvgTimePerFrame = (long)(10000000 / fps); }
-                Marshal.StructureToPtr(vinfo, mt.pbFormat, true);
-            }
-            else if (mt.FormatType == DirectShow.DsGuid.FORMAT_VideoInfo2)
-            {
-                var vinfo = PtrToStructure<DirectShow.VIDEOINFOHEADER2>(mt.pbFormat);
-                if (!size.IsEmpty) { vinfo.bmiHeader.biWidth = size.Width; vinfo.bmiHeader.biHeight = size.Height; }
-                if (fps > 0) { vinfo.AvgTimePerFrame = (long)(10000000 / fps); }
-                Marshal.StructureToPtr(vinfo, mt.pbFormat, true);
-            }
-
-            // フォーマットを選択
-            config.SetFormat(mt);
-
-            // 解放
-            if (cap_data != System.IntPtr.Zero) Marshal.FreeHGlobal(cap_data);
-            if (mt != null) DirectShow.DeleteMediaType(ref mt);
+            checkHR(-1, "Pin not found");
+            return null;
         }
-
-        private static T PtrToStructure<T>(IntPtr ptr)
+        static void checkHR(int hr, string msg)
         {
-            return (T)Marshal.PtrToStructure(ptr, typeof(T));
-        }
-
-        public class VideoFormat
-        {
-            private DirectShow.VIDEO_STREAM_CONFIG_CAPS caps;
-
-            public string MajorType { get; set; }  // [Video]など
-            public string SubType { get; set; }    // [YUY2], [MJPG]など
-            public Size Size { get; set; }         // ビデオサイズ
-            public long TimePerFrame { get; set; } // ビデオフレームの平均表示時間を100ナノ秒単位で。30fpsのとき「333333」
-            public DirectShow.VIDEO_STREAM_CONFIG_CAPS Caps
+            if (hr < 0)
             {
-                get
-                {
-                    return caps;
-                }
-                set
-                {
-                    caps = value;
-                }
-            }
-            public override string ToString()
-            {
-                return string.Format("{0}, {1}, {2}, {3}, {4}", MajorType, SubType, Size, TimePerFrame, CapsString());
-            }
-
-            public string CapsString()
-            {
-                var sb = new StringBuilder();
-                foreach (var info in Caps.GetType().GetFields())
-                {
-                    sb.AppendFormat("{0}={1}, ", info.Name, info.GetValue(Caps));
-                }
-                return sb.ToString();
+                Console.WriteLine(msg);
+                DsError.ThrowExceptionForHR(hr);
             }
         }
     }    
