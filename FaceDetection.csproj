@@ -108,9 +108,6 @@
     <EmbeddedResource Include="FaceDetectionMainForm.resx">
       <DependentUpon>FaceDetectionMainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="settingsUI.en-US.resx">
-      <DependentUpon>settingsUI.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="settingsUI.ja-JP.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -159,22 +156,22 @@
     <None Include="Resources\setting-512.png" />
     <None Include="Resources\checkered.png" />
     <None Include="Resources\check.png" />
-    <EmbeddedResource Include="haarcascade_frontalface_alt2.xml">
+    <EmbeddedResource Include="HAARCASCADES\haarcascade_frontalface_alt2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="haarcascade_frontalface_alt.xml">
+    <EmbeddedResource Include="HAARCASCADES\haarcascade_frontalface_alt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="haarcascade_frontalface_alt_tree.xml">
+    <EmbeddedResource Include="HAARCASCADES\haarcascade_frontalface_alt_tree.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="haarcascade_frontalface_default.xml">
+    <EmbeddedResource Include="HAARCASCADES\haarcascade_frontalface_default.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="haarcascade_fullbody.xml">
+    <EmbeddedResource Include="HAARCASCADES\haarcascade_fullbody.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="haarcascade_righteye_2splits.xml">
+    <EmbeddedResource Include="HAARCASCADES\haarcascade_righteye_2splits.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="Resources\Record-Pressed-icon.png" />

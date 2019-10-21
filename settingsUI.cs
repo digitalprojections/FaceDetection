@@ -21,8 +21,18 @@ namespace FaceDetection
 
         private int camera_index;
         private int camera_number;
-        public int Camera_index { get { return camera_index = Properties.Settings.Default.current_camera_index; } private set { Properties.Settings.Default.current_camera_index = value; Properties.Settings.Default.Save(); } }
-        public int Camera_number { get { return camera_number = Properties.Settings.Default.current_camera_index + 1; } }
+        public int Camera_index {
+            get {
+                return camera_index = Properties.Settings.Default.current_camera_index;
+            }
+            private set {
+                Properties.Settings.Default.current_camera_index = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+        public int Camera_number { get {
+                return camera_number = Properties.Settings.Default.current_camera_index;
+            } }
 
         private int InitPanelWidth;
         private int InitPanelHeight;
@@ -179,13 +189,13 @@ namespace FaceDetection
 
             numericUpDownCamCount.Value = Properties.Settings.Default.camera_count;
 
-            if (capDevices.Length > numericUpDownCamCount.Value)
-            {
-                MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
-                ArrangeCameraNames(capDevices.Length);
-            }
-            else
-            {
+            //if (capDevices.Length > numericUpDownCamCount.Value)
+            //{
+            //    MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
+            //    ArrangeCameraNames(capDevices.Length);
+            //}
+            //else
+            //{
                 //settings are missing
                 if (capDevices.Length > 4)
                 {
@@ -195,7 +205,7 @@ namespace FaceDetection
                 {
                     ArrangeCameraNames(capDevices.Length);
                 }
-            }
+            //}
             PicBoxInitFunction();
         }
 
@@ -355,8 +365,8 @@ namespace FaceDetection
             ComponentResourceManager resources = new ComponentResourceManager(typeof(settingsUI));
             var cult = new CultureInfo(lan);
 
-            foreach (Control c in this.Controls)
-            //foreach (Control c in this.flowLayoutPanel1.Controls)
+            //foreach (Control c in this.Controls)
+            foreach (Control c in this.flowLayoutPanel1.Controls)
             {
                 resources.ApplyResources(c, c.Name, cult);
                 Debug.WriteLine(c.GetType().ToString());

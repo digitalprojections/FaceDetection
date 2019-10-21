@@ -50,9 +50,10 @@ namespace GitHub.secile.Video
         /// <summary>Get image.</summary>
         /// <remarks>Immediately after starting, images may not be acquired.</remarks>
         public Func<Bitmap> GetBitmap { get; private set; }
+        public DirectShow.IBaseFilter Vcap_source { get { return vcap_source; } set => vcap_source = value; }
 
         private DirectShow.IBaseFilter renderer;
-
+        private DirectShow.IBaseFilter vcap_source;
 
         /// <summary>
         /// Get available USB camera list.
@@ -95,6 +96,69 @@ namespace GitHub.secile.Video
                 DirectShow.DsError.ThrowExceptionForHR(hr);
             }
         }
+
+        [DllImport("olepro32.dll")]
+        public static extern int OleCreatePropertyFrame(
+            IntPtr hwndOwner,
+            int x,
+            int y,
+            [MarshalAs(UnmanagedType.LPWStr)] string lpszCaption,
+            int cObjects,
+            [MarshalAs(UnmanagedType.Interface, ArraySubType=UnmanagedType.IUnknown)]
+           ref object ppUnk,
+            int cPages,
+            IntPtr lpPageClsID,
+            int lcid,
+            int dwReserved,
+            IntPtr lpvReserved);
+
+
+        /// <summary>
+        /// Displays a property page for a filter
+        /// </summary>
+        /// <param name="dev">The filter for which to display a property page</param>
+        public void DisplayPropertyPage(IBaseFilter dev)
+        {
+            //Get the ISpecifyPropertyPages for the filter
+            ISpecifyPropertyPages pProp = dev as ISpecifyPropertyPages;
+            int hr = 0;
+
+            if (pProp == null)
+            {
+                //If the filter doesn't implement ISpecifyPropertyPages, try displaying IAMVfwCompressDialogs instead!
+                IAMVfwCompressDialogs compressDialog = dev as IAMVfwCompressDialogs;
+                if (compressDialog != null)
+                {
+
+                    hr = compressDialog.ShowDialog(VfwCompressDialogs.Config, IntPtr.Zero);
+                    DsError.ThrowExceptionForHR(hr);
+                }
+                return;
+            }
+
+            //Get the name of the filter from the FilterInfo struct
+            FilterInfo filterInfo;
+            hr = dev.QueryFilterInfo(out filterInfo);
+            DsError.ThrowExceptionForHR(hr);
+
+            // Get the propertypages from the property bag
+            DsCAUUID caGUID;
+            hr = pProp.GetPages(out caGUID);
+            DsError.ThrowExceptionForHR(hr);
+
+            //Create and display the OlePropertyFrame
+            object oDevice = (object)dev;
+            hr = OleCreatePropertyFrame(FaceDetection.MainForm.GetMainForm.Handle, 0, 0, filterInfo.achName, 1, ref oDevice, caGUID.cElems, caGUID.pElems, 0, 0, IntPtr.Zero);
+            DsError.ThrowExceptionForHR(hr);
+
+            // Release COM objects
+            Marshal.FreeCoTaskMem(caGUID.pElems);
+            Marshal.ReleaseComObject(pProp);
+            Marshal.ReleaseComObject(filterInfo.pGraph);
+        }
+
+
+
         private void Init(int index, Size size, double fps, IntPtr pbx)
         {
             //----------------------------------
@@ -110,14 +174,15 @@ namespace GitHub.secile.Video
             //----------------------------------
             // VideoCaptureSource
             //----------------------------------
-            var vcap_source = CreateVideoCaptureSource(index, size, fps);
-            graph.AddFilter(vcap_source, "VideoCapture");
+            Vcap_source = CreateVideoCaptureSource(index, size, fps);
+            graph.AddFilter(Vcap_source, "VideoCapture");
 
             //------------------------------
             // Smart Tee
             //------------------------------
 
-
+            
+            
 
             //------------------------------
             // SampleGrabber
@@ -156,7 +221,7 @@ namespace GitHub.secile.Video
             builder.SetFiltergraph(graph);
             var pinCategory = DirectShow.DsGuid.PIN_CATEGORY_PREVIEW;
             var mediaType = DirectShow.DsGuid.MEDIATYPE_Video;
-            builder.RenderStream(ref pinCategory, ref mediaType, vcap_source, grabber, renderer);
+            builder.RenderStream(ref pinCategory, ref mediaType, Vcap_source, grabber, renderer);
             
             // SampleGrabber Format.
             {
@@ -177,7 +242,10 @@ namespace GitHub.secile.Video
             {
                 DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Running);                
             };
-            Stop = () => DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Stopped);
+            Stop = () =>
+            {
+                DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Stopped);
+            };
             Release = () =>
             {
                 Stop();
@@ -232,10 +300,18 @@ namespace GitHub.secile.Video
 
         public void SetWindowPosition(Size size)
         {
-            int hr = 0;
-            IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
-            checkHR(hr, "Can't set rectangles of the video position");
+            try
+            {
+                int hr = 0;
+                IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+                checkHR(hr, "Can't set rectangles of the video position");
+            }
+            catch(NullReferenceException nrx)
+            {
+
+            }
+            
         }
 
         /// <summary>Get Bitmap from Sample Grabber</summary>
@@ -367,7 +443,7 @@ namespace GitHub.secile.Video
                 {
                     if (vformat[i].Caps.Guid == DirectShow.DsGuid.FORMAT_VideoInfo)
                     {
-                        if (vformat[i].Size.Width == size.Width && vformat[i].Size.Height == size.Height && vformat[i].TimePerFrame==10000000/fps)
+                        if (vformat[i].Size.Width == size.Width && vformat[i].Size.Height == size.Height)
                         {
                             SetVideoOutputFormat(pin, i, size, fps);
                             return true;
@@ -583,8 +659,7 @@ namespace GitHub.secile.Video
             {
                 case FILTER_STATE.Paused: mediaControl.Pause(); break;
                 case FILTER_STATE.Stopped: mediaControl.Stop(); break;
-                case FILTER_STATE.Running: 
-                default: mediaControl.Run(); break;
+                case FILTER_STATE.Running: mediaControl.Run(); break;
             }
         }
 

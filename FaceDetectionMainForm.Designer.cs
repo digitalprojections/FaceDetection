@@ -216,7 +216,7 @@
             this.camera_number_txt.TabIndex = 10;
             this.camera_number_txt.Text = "1";
             this.camera_number_txt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.camera_number_txt.Click += new System.EventHandler(this.Camera_number_Click);
+            
             // 
             // pbRecording
             // 
