@@ -104,6 +104,7 @@
     <Compile Include="settingsUI.Designer.cs">
       <DependentUpon>settingsUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaskManager.cs" />
     <Compile Include="UsbCamcorder.cs" />
     <Compile Include="UsbCamera.cs" />
     <EmbeddedResource Include="FaceDetectionMainForm.resx">
@@ -119,6 +120,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="settingsUI.ja-JP.resx">
+      <DependentUpon>settingsUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="settingsUI.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
       <SubType>Designer</SubType>

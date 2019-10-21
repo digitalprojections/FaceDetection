@@ -7,21 +7,16 @@ namespace FaceDetection
     class IRSensor
     {
         Timer OM_Timer = new Timer();
-
-
-        
         public IRSensor()
         {
             //init
             InitOMTimer();
         }
-
         private void InitOMTimer()
         {
             //timer
-            OM_Timer.Tick += OM_Timer_Tick; ;
-            OM_Timer.Interval = 1000;
-            
+            OM_Timer.Tick += OM_Timer_Tick;
+            OM_Timer.Interval = 1000;            
             StartOM_Timer();
         }
 
@@ -29,8 +24,7 @@ namespace FaceDetection
         {
             Console.WriteLine("TIMER tick: " + e.ToString());
             uint rval = CheckSensor();
-
-            if (rval == 0)
+            if (rval == 1)
             {
                 //heat signature detected, stop timer
                 StopOM_Timer();
@@ -38,8 +32,7 @@ namespace FaceDetection
                 if (MainForm.GetMainForm != null)
                 {
                     MainForm.GetMainForm.RecordMode();
-                }
-                
+                }                
             }
         }
 
@@ -47,15 +40,7 @@ namespace FaceDetection
         {
             OM_Timer.Start();
         }
-        /// <summary>
-        /// Check for HEAT SIGNATURE from the IRSensor 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OM_Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            
-        }
+        
 
         public void StopOM_Timer()
         {

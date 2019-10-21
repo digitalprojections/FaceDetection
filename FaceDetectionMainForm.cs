@@ -16,14 +16,17 @@ namespace FaceDetection
     public partial class MainForm : Form
     {
         //User actions
-        private readonly Timer timer = new Timer();
+        private readonly Timer recording_length_timer = new Timer();
+
+        private readonly Timer mouse_down_timer = new Timer();
         private readonly Timer face_timer = new Timer();
         private readonly Timer datetime_ui_updater = new Timer();
 
         internal enum CAMERA_MODES
         {
             PREVIEW_MODE,
-            CAPTURE_MODE
+            CAPTURE_MODE,
+            NONE
         }
 
         internal CAMERA_MODES CURRENT_MODE = 0;
@@ -61,40 +64,37 @@ namespace FaceDetection
             MonitorStateOff = 2,
             MonitorStateStandBy = 1
         }
-
+        //IRSensor
+        IRSensor rSensor = new IRSensor();
+        //readonly Thread t;        
+        bool initrec = false;
+        UsbCamera.VideoFormat[] videoFormat = UsbCamera.GetVideoFormat(0);
+        //SettingsUI resolutions data, generated each time. But set to the memory value
+        List<string> vf_resolutions = new List<string>();
+        List<long> vf_fps = new List<long>();
         //User actions end
         static settingsUI settingUI;
-
+        static Form or_mainform;
 
         /// <summary>
         /// Sets the camera to the Recording mode
         /// </summary>
         internal void RecordMode()
         {
-            
-            //TODO
             if (GetCamera()!=null)
                 GetCamera().Release();
             if (GetRecorder() == null)
             {                
                 GetCamcorderInstance();
-                Console.WriteLine("Camera record mode");
-                //GetRecorder().Start();
+                CURRENT_MODE = CAMERA_MODES.CAPTURE_MODE;
             }
-            Console.WriteLine("Camera record mode");
+            else
+            {
+                Console.WriteLine("Already in record mode: (1 true, 0 false) -> " + CURRENT_MODE);
+            }
         }
 
-        //IRSensor
-        IRSensor rSensor = new IRSensor();
-                
-
-        //readonly Thread t;
-        static Form or_mainform;
-        bool initrec = false;
-
-        UsbCamera.VideoFormat[] videoFormat = UsbCamera.GetVideoFormat(0);
-        List<string> vf_resolutions = new List<string>();
-        List<long> vf_fps = new List<long>();
+        
         public static Panel CameraPanel
         {
             get
@@ -111,8 +111,10 @@ namespace FaceDetection
         }
         private static UsbCamera camera;
         private static CameraManager camcorder;
+        private object taskManager;
+
         public static UsbCamera GetCamera()
-        {
+        {           
             return camera;
         }
         internal CameraManager GetRecorder()
@@ -128,39 +130,14 @@ namespace FaceDetection
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             InitializeComponent();
-
+            taskManager = new TaskManager();
 
             if (vs != null && vs.Count() > 0)
             {
                 HandleParameters(vs);
             }
         }
-        private bool UniqueFPS(long fps)
-        {
-            bool retval = false;
-            for(int i=0; i<vf_fps.Count;i++)
-            {
-                if (vf_fps[i]==fps)
-                {
-                    retval = true;
-                }
-            }
-            return retval;
-        }
-        private bool UniqueVideoParameter(List<string> vf, Size s)
-        {
-            bool retval = false;
-            string temp = s.Width + "x" + s.Height;
-            //
-            for (int i=0; i<vf.Count; i++)
-            {
-                if(vf[i]==temp)
-                {
-                    retval = true;
-                }                
-            }
-            return retval;
-        }
+        
 
         /// <summary>
         /// One second timer to update UI datetime
@@ -174,9 +151,9 @@ namespace FaceDetection
             catch (NullReferenceException e)
             {
                 Debug.WriteLine(e.Message);
+                datetime_ui_updater.Enabled = false;
+                datetime_ui_updater.Stop();
             }
-            //Debug.WriteLine(this.Size);     
-
         }
         /// <summary>
         /// Capture face only works on a PC mode
@@ -185,7 +162,7 @@ namespace FaceDetection
         /// <param name="eventArgs"></param>
         private void CaptureFace(object sender, EventArgs eventArgs)
         {
-
+            Console.WriteLine("Face detection timer tick");
         }
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
@@ -559,7 +536,7 @@ namespace FaceDetection
 
         {
             if (GetCamera() != null)
-                GetCamera().Release();
+                GetCamera().Release();            
             SetCamera(new UsbCamera(0, new Size(1280, 720), 15, CameraPanel.Handle));
         }
         public void GetCamcorderInstance()
@@ -573,33 +550,20 @@ namespace FaceDetection
             {
                 //camcorder = new UsbCamcorder(0, new Size(1280, 720), 15, CameraPanel.Handle, dstFileName);             
                 camcorder = new CameraManager(Properties.Settings.Default.current_camera_index-1, new Size(1280, 720), 15, CameraPanel.Handle, dstFileName);
+                CURRENT_MODE = CAMERA_MODES.CAPTURE_MODE;
             }
             catch(InvalidOperationException iox)
             {
+                CURRENT_MODE = CAMERA_MODES.NONE;
                 Console.WriteLine(dstFileName + " dest file 750" + CameraPanel.Handle);
                 //camcorder = new UsbCamcorder(0, new Size(1280, 720), 15, or_cameraPanel.Handle, dstFileName);
             }
-            
-            SetCamcorder();
-
-        }
-        private static void SetCamcorder()
-        {
-            Console.WriteLine("usb cam");
-            //camcorder = usbCamcorder;            
         }
         public void ShowButtons(object sender, EventArgs eventArgs)
-        {
-            if (CURRENT_MODE == CAMERA_MODES.PREVIEW_MODE)
+        {   
+            if (mouse_down_timer.Enabled == true)
             {
-                //GetCameraInstance();
-                //GetCamera().Start();
-                rSensor.StartOM_Timer();
-            }            
-            
-            if (timer.Enabled == true)
-            {
-                timer.Stop();
+                mouse_down_timer.Stop();
             }
             //Debug.WriteLine(timer.ToString());
             if (folderButton.Visible == false)
@@ -609,21 +573,20 @@ namespace FaceDetection
             else
             {
                 or_controlButtons.Visible = false;
-            }
-            ImgCamUser_Click();
+            }         
         }
         public void HoldButton(object sender, MouseEventArgs eventArgs)
         {
             Console.WriteLine("mouse down");
-            timer.Enabled = true;
-            timer.Interval = 500;//Set it to 3000 for production            
-            timer.Start();
+            mouse_down_timer.Enabled = true;
+            mouse_down_timer.Interval = 500;//Set it to 3000 for production            
+            mouse_down_timer.Start();
         }
         private void ReleaseButton(object sender, MouseEventArgs e)
         {
-            if (timer.Enabled == true)
+            if (mouse_down_timer.Enabled == true)
             {
-                timer.Stop();
+                mouse_down_timer.Stop();
             }
         }
 
@@ -729,7 +692,7 @@ namespace FaceDetection
             //Console.WriteLine(settingUI.Camera_number);
             if(settingUI!=null && settingUI.Camera_number != 0)
             {
-                Console.WriteLine(Properties.Settings.Default["C" + settingUI.Camera_number + "w"]);
+                
                 Properties.Settings.Default["C" + settingUI.Camera_number + "w"] = Convert.ToDecimal(this.Width);
                 Properties.Settings.Default["C" + settingUI.Camera_number + "h"] = Convert.ToDecimal(this.Height);
                 Properties.Settings.Default.Save();
@@ -739,6 +702,9 @@ namespace FaceDetection
             if (GetCamera() != null)
             {
                 GetCamera().SetWindowPosition(new Size(this.Width, this.Height));
+            }else if (camcorder!=null)
+            {
+                camcorder.SetWindowPosition(new Size(this.Width, this.Height));
             }
             
         }
@@ -757,9 +723,16 @@ namespace FaceDetection
             Directory.CreateDirectory(picloc);
             //Bitmap bitmap = camera.GetBitmapImage;
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
-            
+
             //two versions here. Depending on camera mode
-            GetRecorder().GetBitmap().Save(picloc + imgdate + ".jpeg");
+            if (CURRENT_MODE==CAMERA_MODES.CAPTURE_MODE)
+            {
+
+            }else if(CURRENT_MODE == CAMERA_MODES.PREVIEW_MODE)
+            {
+                GetRecorder().GetBitmap().Save(picloc + imgdate + ".jpeg");
+            }
+            
         }
 
        
@@ -802,26 +775,29 @@ namespace FaceDetection
 
         private void TakeStartVideoRecording()
         {
+            GetCamcorderInstance();
+            GetRecorder();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             StopAllTimers();
-            if(GetCamera()!=null)
+            if (GetCamera() != null)
+            {
                 GetCamera().Release();
+            }
+                
             if (GetRecorder() != null)
+            {
                 GetRecorder().Release();
+            }
+                
             Application.Exit();
         }
 
         private void Camera_number_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void ImgCamUser_Click()
-        {
-            
         }
      
         
@@ -835,49 +811,36 @@ namespace FaceDetection
             {
                 MessageBox.Show(e.Message, @"Error while running camera");
             }            
-
-            UpdateCameraBitmap();
-
-            // gui update
-            UpdateGUIButtons();
         }
-        private void Camera_OutputVideoSizeChanged(object sender, EventArgs e)
-        {
-            // Update camera's bitmap (new size needed)
-            UpdateCameraBitmap();
-            
-        }
-        private void UpdateCameraBitmap()
-        {
-            
-        }
-        private void UpdateUnzoomButton()
-        {
-           
-        }
-        private void UpdateGUIButtons()
-        {
-           
-        }
+        
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            CURRENT_MODE = CAMERA_MODES.NONE;
             if (settingUI == null)
             {
                 settingUI = new settingsUI();
-                timer.Tick += new EventHandler(ShowButtons);//制御ボタンの非/表示用クリックタイマー
+                mouse_down_timer.Tick += new EventHandler(ShowButtons);//制御ボタンの非/表示用クリックタイマー
                 face_timer.Tick += new EventHandler(CaptureFace);
                 face_timer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
                 face_timer.Start();
                 datetime_ui_updater.Interval = 1000;
                 datetime_ui_updater.Start();
                 datetime_ui_updater.Tick += new EventHandler(ProcessFrame);
+
+                recording_length_timer.Interval = Decimal.ToInt32(Properties.Settings.Default.seconds_after_event);
+                recording_length_timer.Tick += Recording_length_timer_Tick;
+                
+
             }
-            Console.WriteLine("1029");
+            Console.WriteLine("Line 876");
 
             //Console.WriteLine(panelCamera.Handle);
-            rSensor.StartOM_Timer();
-
+            
+            
+            //////////////////////////////////////////////////////////////////
+            ///VIDEOFORMAT
+            //////////////////////////////////////////////////////////////////
             //Showing video formats
             for (int k = 0; k < videoFormat.Length; k++)
             {
@@ -892,8 +855,11 @@ namespace FaceDetection
             }
             //Properties.Settings.Default["C" + settingUI.Camera_number + "res"] = String.Join(",", vf_resolutions.ToArray());
             //Properties.Settings.Default["C" + settingUI.Camera_number + "f"] = String.Join(",", vf_fps.ToArray());
-            Console.WriteLine(vf_resolutions.Count);
-
+            Console.WriteLine("UniqueVideoParameter " + vf_resolutions.Count);
+            //////////////////////////////////////////////////////////////////
+            ///VIDEOFORMAT
+            //////////////////////////////////////////////////////////////////
+            
             /*
              * Application.Idle += ProcessFrame;
              */
@@ -945,9 +911,23 @@ namespace FaceDetection
             FillResolutionList();
         }
 
+        private void Recording_length_timer_Tick(object sender, EventArgs e)
+        {
+            recording_length_timer.Stop();
+            //STOP RECORDING
+            //IF NO MORE TASKS
+            if (taskManager != null)
+            {
+                
+                CURRENT_MODE = CAMERA_MODES.NONE;
+                GetCameraInstance();
+            }
+            
+        }
+
         private void StopAllTimers()
         {
-            timer.Stop();
+            mouse_down_timer.Stop();
             face_timer.Stop();
             datetime_ui_updater.Stop();
         }
@@ -977,6 +957,33 @@ namespace FaceDetection
         }
         [DllImport("user32.dll")]
         private static extern int SendMessage(int hWnd, int hMsg, int wParam, int lParam);
-    }
 
+        private bool UniqueFPS(long fps)
+        {
+            bool retval = false;
+            for (int i = 0; i < vf_fps.Count; i++)
+            {
+                if (vf_fps[i] == fps)
+                {
+                    retval = true;
+                }
+            }
+            return retval;
+        }
+        private bool UniqueVideoParameter(List<string> vf, Size s)
+        {
+            bool retval = false;
+            string temp = s.Width + "x" + s.Height;
+            //
+            for (int i = 0; i < vf.Count; i++)
+            {
+                if (vf[i] == temp)
+                {
+                    retval = true;
+                }
+            }
+            return retval;
+        }
+    }
+    
 }

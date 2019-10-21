@@ -103,28 +103,15 @@ namespace FaceDetection
 
             hr = pGraph.AddFilter(pUSB, "WebCamControl Video");
             DsError.ThrowExceptionForHR(hr);
-            
-            hr = pGraph.AddFilter(pSampleGrabber as IBaseFilter, "SampleGrabber");
-            checkHR(hr, "Can't add SampleGrabber to graph");
-            //i_grabber = (ISampleGrabber)pSampleGrabber;
-            i_grabber.SetBufferSamples(true); //サンプルグラバでのサンプリングを開始
-
-            //connect grabber to the camera 
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pUSB, null,(IBaseFilter)pSampleGrabber);
-          DsError.ThrowExceptionForHR(hr);
-
-            
 
             //add smartTee
             pSmartTee = (IBaseFilter)new SmartTee();
             hr = pGraph.AddFilter(pSmartTee, "Smart Tee");
             DsError.ThrowExceptionForHR(hr);
 
-
-            //connect AVI Mux and File writer
-            hr = pGraph.ConnectDirect(GetPin((IBaseFilter)pSampleGrabber, "Output"), GetPin(pSmartTee, "Input"), null);
-            checkHR(hr, "Can't connect SampleGrabber and Smartee");
-
+            //connect smart tee to camera 
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pUSB, null, pSmartTee);
+            DsError.ThrowExceptionForHR(hr);
 
             //add File writer
             IBaseFilter pFilewriter = (IBaseFilter)new FileWriter();
@@ -135,7 +122,6 @@ namespace FaceDetection
             IFileSinkFilter pFilewriter_sink = pFilewriter as IFileSinkFilter;
             if (pFilewriter_sink == null)
                 checkHR(unchecked((int)0x80004002), "Can't get IFileSinkFilter");
-
             hr = pFilewriter_sink.SetFileName(targetPath, null);
             checkHR(hr, "Can't set filename");
 
@@ -143,31 +129,42 @@ namespace FaceDetection
             pAVIMux = (IBaseFilter)new AviDest();
             hr = pGraph.AddFilter(pAVIMux, "AVI Mux");
             checkHR(hr, "Can't add AVI Mux to graph");
-            AMMediaType aMMedia = new AMMediaType();
-            aMMedia.majorType = DirectShow.DsGuid.MEDIATYPE_Video;
-            aMMedia.subType = DirectShow.DsGuid.MEDIASUBTYPE_MJPG;
+
             //connect AVI Mux and File writer
             hr = pGraph.ConnectDirect(GetPin(pAVIMux, "AVI Out"), GetPin(pFilewriter, "in"), null);
             checkHR(hr, "Can't connect AVI Mux and File writer");
+
+
+            
+
+            //add SampleGrabber
+            //_pSampleGrabberHelper = new SampleGrabberHelper(pSampleGrabber, false);
+            //_pSampleGrabberHelper.ConfigureMode();
+
+            hr = pGraph.AddFilter(pSampleGrabber as IBaseFilter, "SampleGrabber");
+            checkHR(hr, "Can't add SampleGrabber to graph");
+            i_grabber.SetBufferSamples(true); //サンプルグラバでのサンプリングを開始
+
+         
 
             //フォーマットの設定
             //暫くは一時的な値を使用してます
 
             //SetFormat();
-            
-            
+
             //connect Smart Tee and AVI Mux
             hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, pAVIMux);
             checkHR(hr, "Can't connect Smart Tee and AVI Mux");
 
+            //connect Smart Tee and SampleGrabber
+            //hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Preview"), GetPin(pSampleGrabber as IBaseFilter, "Input"), null);
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, (IBaseFilter)pSampleGrabber);
+            checkHR(hr, "Can't connect Smart Tee and SampleGrabber");
+
+
             IVMRAspectRatioControl9 ratioControl9 = (IVMRAspectRatioControl9)renderFilter;
             hr = ratioControl9.SetAspectRatioMode(VMRAspectRatioMode.LetterBox);
             DsError.ThrowExceptionForHR(hr);
-
-            hr = pGraph.AddFilter(renderFilter, "My Render Filter");
-            DsError.ThrowExceptionForHR(hr);
-
-
 
             IVMRFilterConfig9 config9 = (IVMRFilterConfig9)renderFilter;
             hr = config9.SetRenderingMode(VMR9Mode.Windowless);
@@ -180,11 +177,11 @@ namespace FaceDetection
             hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
             checkHR(hr, "Can't set rectangles of the video position");
 
-            //connect Smart Tee and SampleGrabber
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, renderFilter);
-            checkHR(hr, "Can't connect Smart Tee and render");
 
-            //hr = pGraphBuilder.RenderStream(null, MediaType.Video, null, null, renderFilter);
+            hr = pGraph.AddFilter(renderFilter, "My Render Filter");
+            DsError.ThrowExceptionForHR(hr);
+
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSampleGrabber, null, renderFilter);
             DsError.ThrowExceptionForHR(hr);
             Debug.WriteLine(DsError.GetErrorText(hr) + " is error in rendering");
 
