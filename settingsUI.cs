@@ -216,11 +216,11 @@ namespace FaceDetection
 
             if (cb_delete_old.Checked == true)
             {
-                pictureBox_DeleteOldData.Image = Properties.Resources.check;
+                //pictureBox_DeleteOldData.Image = Properties.Resources.check;
             }
             else
             {
-                pictureBox_DeleteOldData.Image = Properties.Resources.checkered;
+                //pictureBox_DeleteOldData.Image = Properties.Resources.checkered;
             }
 
             if (cb_always_on_top.Checked == true)
@@ -415,7 +415,7 @@ namespace FaceDetection
 
         private void cb_delete_old_CheckedChanged(object sender, EventArgs e)
         {
-            Img_Chenge(cb_delete_old, pictureBox_DeleteOldData);
+            //Img_Chenge(cb_delete_old, pictureBox_DeleteOldData);
         }
 
         private void pictureBox_DeleteOldData_Click(object sender, EventArgs e)
