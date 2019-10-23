@@ -109,7 +109,7 @@ namespace FaceDetection
                 this.TopMost = false;
                 //Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
                 //Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
-                //Process.Start(Properties.Settings.Default.video_file_location);
+                Process.Start(Properties.Settings.Default.video_file_location);
                 changeStoreLocation(sender, e);
             }
             catch (IOException ioe)
@@ -317,11 +317,6 @@ namespace FaceDetection
             Properties.Settings.Default.Save();
         }
 
-        private void Button_cameraProperties_MouseClick(object sender, MouseEventArgs e)
-        {
-            //Show the property window for the selected camera
-
-        }
 
         private void NumericUpDownCamCount_ValueChanged(object sender, EventArgs e)
         {

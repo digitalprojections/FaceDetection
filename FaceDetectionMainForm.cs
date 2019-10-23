@@ -42,8 +42,6 @@ namespace FaceDetection
             }
             }
 
-        private int cAMERA_INDEX = 0;
-
         // Camera choice
         //private CameraChoice _CameraChoice = new CameraChoice();
 
@@ -122,7 +120,7 @@ namespace FaceDetection
 
         private static UsbCamera camera;
 
-        private static UsbCamcorder camcorder;
+        private static CameraManager camcorder;
         private TaskManager taskManager;
        
 
@@ -617,7 +615,7 @@ namespace FaceDetection
             }
         }
         public void ShowButtons(object sender, EventArgs eventArgs)
-        {   
+        {
             if (mouse_down_timer.Enabled == true)
             {
                 mouse_down_timer.Stop();
@@ -630,7 +628,8 @@ namespace FaceDetection
             else
             {
                 or_controlButtons.Visible = false;
-            }         
+            }
+            this.TopMost = true;
         }
         public void HoldButton(object sender, MouseEventArgs eventArgs)
         {
@@ -692,8 +691,12 @@ namespace FaceDetection
             try
             {
                 Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
-                //Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
+                
                 Process.Start(Properties.Settings.Default.video_file_location);
+                this.TopMost = false;
+                //FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+                //folderBrowserDialog.SelectedPath = Properties.Settings.Default.video_file_location;
+                //folderBrowserDialog.ShowDialog(this);
             }
             catch (IOException ioe)
             {
