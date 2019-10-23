@@ -57,7 +57,7 @@
             this.testing_params.TabIndex = 11;
             this.testing_params.Text = "currently used parameters";
             // 
-            // controlButtons
+            // or_controlButtons
             // 
             this.or_controlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.or_controlButtons.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -67,7 +67,7 @@
             this.or_controlButtons.Controls.Add(this.cameraButton);
             this.or_controlButtons.Controls.Add(this.closeButton);
             this.or_controlButtons.Location = new System.Drawing.Point(496, 379);
-            this.or_controlButtons.Name = "controlButtons";
+            this.or_controlButtons.Name = "or_controlButtons";
             this.or_controlButtons.Size = new System.Drawing.Size(292, 59);
             this.or_controlButtons.TabIndex = 12;
             this.or_controlButtons.Visible = false;
@@ -175,7 +175,7 @@
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.ShowButtons);
             // 
-            // dateTimeLabel
+            // or_dateTimeLabel
             // 
             this.or_dateTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.or_dateTimeLabel.AutoSize = true;
@@ -184,7 +184,7 @@
             this.or_dateTimeLabel.ForeColor = System.Drawing.Color.White;
             this.or_dateTimeLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.or_dateTimeLabel.Location = new System.Drawing.Point(12, 417);
-            this.or_dateTimeLabel.Name = "dateTimeLabel";
+            this.or_dateTimeLabel.Name = "or_dateTimeLabel";
             this.or_dateTimeLabel.Padding = new System.Windows.Forms.Padding(3);
             this.or_dateTimeLabel.Size = new System.Drawing.Size(125, 30);
             this.or_dateTimeLabel.TabIndex = 13;
@@ -201,6 +201,7 @@
             this.panelCamera.Size = new System.Drawing.Size(800, 450);
             this.panelCamera.TabIndex = 0;
             this.panelCamera.Click += new System.EventHandler(this.Button1_Click);
+            this.panelCamera.DoubleClick += new System.EventHandler(this.FullScreen);
             // 
             // camera_number_txt
             // 
@@ -216,7 +217,6 @@
             this.camera_number_txt.TabIndex = 10;
             this.camera_number_txt.Text = "1";
             this.camera_number_txt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.camera_number_txt.Click += new System.EventHandler(this.Camera_number_Click);
             // 
             // pbRecording
             // 
@@ -250,6 +250,7 @@
             this.SizeChanged += new System.EventHandler(this.WindowSizeUpdate);
             this.Click += new System.EventHandler(this.ShowButtons);
             this.DragLeave += new System.EventHandler(this.LastPositionUpdate);
+            this.DoubleClick += new System.EventHandler(this.FullScreen);
             this.or_controlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).EndInit();
             this.ResumeLayout(false);

@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>FaceDetection</RootNamespace>
     <AssemblyName>UVCCameraViewer</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -29,6 +29,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -101,14 +102,11 @@
     <Compile Include="settingsUI.Designer.cs">
       <DependentUpon>settingsUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaskManager.cs" />
     <Compile Include="UsbCamcorder.cs" />
     <Compile Include="UsbCamera.cs" />
     <EmbeddedResource Include="FaceDetectionMainForm.resx">
       <DependentUpon>FaceDetectionMainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="settingsUI.en-US.resx">
-      <DependentUpon>settingsUI.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="settingsUI.ja-JP.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
@@ -158,22 +156,22 @@
     <None Include="Resources\setting-512.png" />
     <None Include="Resources\checkered.png" />
     <None Include="Resources\check.png" />
-    <EmbeddedResource Include="haarcascade_frontalface_alt2.xml">
+    <EmbeddedResource Include="HAARCASCADES\haarcascade_frontalface_alt2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="haarcascade_frontalface_alt.xml">
+    <EmbeddedResource Include="HAARCASCADES\haarcascade_frontalface_alt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="haarcascade_frontalface_alt_tree.xml">
+    <EmbeddedResource Include="HAARCASCADES\haarcascade_frontalface_alt_tree.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="haarcascade_frontalface_default.xml">
+    <EmbeddedResource Include="HAARCASCADES\haarcascade_frontalface_default.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="haarcascade_fullbody.xml">
+    <EmbeddedResource Include="HAARCASCADES\haarcascade_fullbody.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="haarcascade_righteye_2splits.xml">
+    <EmbeddedResource Include="HAARCASCADES\haarcascade_righteye_2splits.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="Resources\Record-Pressed-icon.png" />
@@ -196,9 +194,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\Camera_Net\Samples\CameraControlTool\bin\Debug\Camera_NET.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

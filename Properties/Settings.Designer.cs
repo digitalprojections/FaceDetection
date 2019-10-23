@@ -61,7 +61,7 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\UVCCAMERA")]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\UVCCAMERA")]
         public string video_file_location {
             get {
                 return ((string)(this["video_file_location"]));
@@ -277,7 +277,7 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public int current_camera_index {
             get {
                 return ((int)(this["current_camera_index"]));
@@ -680,6 +680,18 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["C4res"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string camera_index {
+            get {
+                return ((string)(this["camera_index"]));
+            }
+            set {
+                this["camera_index"] = value;
             }
         }
     }
