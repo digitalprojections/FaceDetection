@@ -251,6 +251,7 @@
             this.Click += new System.EventHandler(this.ShowButtons);
             this.DragLeave += new System.EventHandler(this.LastPositionUpdate);
             this.DoubleClick += new System.EventHandler(this.FullScreen);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.or_controlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).EndInit();
             this.ResumeLayout(false);

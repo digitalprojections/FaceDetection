@@ -1084,6 +1084,16 @@ namespace FaceDetection
             }
             return retval;
         }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Event KEYBOARD touched
+            if (Properties.Settings.Default.enable_event_recorder)
+            {
+                //turn on the firat camera and capture the user now
+                OperatorCapture.Start();
+            }
+        }
     }
     
 }
