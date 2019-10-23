@@ -217,12 +217,13 @@ namespace FaceDetection
                 }
                 else
                 {
-                Console.WriteLine(capDevices.Length + " capdevices");
+                    Console.WriteLine(capDevices.Length + " capdevices");
                     ArrangeCameraNames(capDevices.Length);
                 }
                 PicBoxInitFunction();
-        }
+            }
 
+        }
         private void PicBoxInitFunction()
         {
             if (cb_all_cameras.Checked == true)

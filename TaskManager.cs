@@ -14,7 +14,9 @@ namespace FaceDetection
         public TaskManager()
         {
             //PROPERTY
+
             list = new List<Task>();
+
 
         }
         internal void SuetTask(string sv)
@@ -42,25 +44,24 @@ namespace FaceDetection
             Console.WriteLine(stoptime);
 
         }
-        //internal void RecTask(string sz)
-        //{
-        //    int reclen = Decimal.ToInt32(Properties.Settings.Default.recording_length_seconds);
 
-        //    TimeSpan ts2 = new TimeSpan(0, 0, 0, reclen);
-        //    Task task = new Task(sz);
+        internal void StatusCheck()
+        {
 
-        //    list.Add(task);
+            if (list.Count>0 && MainForm.GetMainForm.CURRENT_MODE == MainForm.CAMERA_MODES.NONE)
+            {
+                
 
-        //    DateTime iventtime = dt - ts2;
+            }
+            else if (MainForm.GetMainForm.CURRENT_MODE == MainForm.CAMERA_MODES.CAPTURE)
+            {
+                MainForm.GetMainForm.GetRecorder().Release();
 
-        //    Console.WriteLine(dt);
-        //    Console.WriteLine(iventtime);
+            }
+           MainForm.GetCameraInstance();
+           
+        }
 
-        //    settingsUI.Camera
-          
-
-        //    }
-         
     }
 
 }

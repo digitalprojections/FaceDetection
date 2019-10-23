@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(settingsUI));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox_cameraNumber = new System.Windows.Forms.GroupBox();
+            this.cm_camera_number = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox_allcam = new System.Windows.Forms.PictureBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
@@ -122,7 +123,6 @@
             this.lb_manual_recording_time = new System.Windows.Forms.Label();
             this.cb_backlight_on_recognition = new System.Windows.Forms.CheckBox();
             this.folderBrowserDialogStoreFolder = new System.Windows.Forms.FolderBrowserDialog();
-            this.cm_camera_number = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox_cameraNumber.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -187,6 +187,13 @@
             this.groupBox_cameraNumber.Name = "groupBox_cameraNumber";
             this.groupBox_cameraNumber.TabStop = false;
             // 
+            // cm_camera_number
+            // 
+            this.cm_camera_number.FormattingEnabled = true;
+            resources.ApplyResources(this.cm_camera_number, "cm_camera_number");
+            this.cm_camera_number.Name = "cm_camera_number";
+            this.cm_camera_number.SelectedValueChanged += new System.EventHandler(this.cameraSelected);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.pictureBox_allcam);
@@ -206,7 +213,7 @@
             resources.ApplyResources(this.pictureBox_allcam, "pictureBox_allcam");
             this.pictureBox_allcam.Name = "pictureBox_allcam";
             this.pictureBox_allcam.TabStop = false;
-            this.pictureBox_allcam.Click += new System.EventHandler(this.pictureBox_allcam_Click);
+            this.pictureBox_allcam.Click += new System.EventHandler(this.PictureBox_allcam_Click);
             // 
             // groupBox12
             // 
@@ -992,7 +999,6 @@
             // 
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
-            //this.label10.Click += new System.EventHandler(this.Label10_Click);
             // 
             // lb_seconds
             // 
@@ -1013,13 +1019,6 @@
             this.cb_backlight_on_recognition.Name = "cb_backlight_on_recognition";
             this.cb_backlight_on_recognition.UseVisualStyleBackColor = true;
             this.cb_backlight_on_recognition.CheckedChanged += new System.EventHandler(this.cb_backlight_on_recognition_CheckedChanged);
-            // 
-            // cm_camera_number
-            // 
-            this.cm_camera_number.FormattingEnabled = true;
-            resources.ApplyResources(this.cm_camera_number, "cm_camera_number");
-            this.cm_camera_number.Name = "cm_camera_number";
-            this.cm_camera_number.SelectedValueChanged += new System.EventHandler(this.cameraSelected);
             // 
             // settingsUI
             // 
