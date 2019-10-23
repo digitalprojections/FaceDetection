@@ -8,12 +8,75 @@ namespace FaceDetection
 {
     public class TaskManager
     {
-        private static List<string> TAKSLIST = null;
+
+        List<Task> list;
+        
         public TaskManager()
         {
-            TAKSLIST1 = new List<string>();
+            //PROPERTY
+            list = new List<Task>();
+
+        }
+        internal void SuetTask(string sv)
+        {
+            int secafter = Decimal.ToInt32(Properties.Settings.Default.seconds_after_event%60);
+            int secbefore = Decimal.ToInt32(Properties.Settings.Default.seconds_before_event%60);
+            DateTime dt = DateTime.Now;
+
+            TimeSpan ts1 = new TimeSpan(0, 0, 0, secbefore);
+            TimeSpan ts2 = new TimeSpan(0, 0, 0, secafter);
+
+
+            Task task = new Task(sv);
+            list.Add(task);
+
+            Console.WriteLine(list.Count);
+
+            DateTime starttime = dt - ts1;
+            DateTime stoptime = dt + ts2;
+
+
+
+            Console.WriteLine(dt);
+            Console.WriteLine(starttime);
+            Console.WriteLine(stoptime);
+
+        }
+        //internal void RecTask(string sz)
+        //{
+        //    int reclen = Decimal.ToInt32(Properties.Settings.Default.recording_length_seconds);
+
+        //    TimeSpan ts2 = new TimeSpan(0, 0, 0, reclen);
+        //    Task task = new Task(sz);
+
+        //    list.Add(task);
+
+        //    DateTime iventtime = dt - ts2;
+
+        //    Console.WriteLine(dt);
+        //    Console.WriteLine(iventtime);
+
+        //    settingsUI.Camera
+          
+
+        //    }
+         
+    }
+
+}
+    class Task
+    {
+        public Task(string path)
+        {
+            this.path = path;
         }
 
-        public static List<string> TAKSLIST1 { get => TAKSLIST; set => TAKSLIST = value; }
+        string starttime;
+        string stoptime;
+        string iventtime;
+        bool complete;
+        string path;
+
     }
-}
+
+
