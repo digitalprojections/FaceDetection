@@ -992,7 +992,6 @@
             // 
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
-            //this.label10.Click += new System.EventHandler(this.Label10_Click);
             // 
             // lb_seconds
             // 
