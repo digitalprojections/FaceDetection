@@ -8,6 +8,7 @@ namespace FaceDetection
 {
     public class TaskManager
     {
+
         List<Task> list;
         
         public TaskManager()

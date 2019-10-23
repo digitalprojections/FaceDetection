@@ -50,9 +50,10 @@ namespace GitHub.secile.Video
         /// <summary>Get image.</summary>
         /// <remarks>Immediately after starting, images may not be acquired.</remarks>
         public Func<Bitmap> GetBitmap { get; private set; }
+        public DirectShow.IBaseFilter Vcap_source { get { return vcap_source; } set => vcap_source = value; }
 
         private DirectShow.IBaseFilter renderer;
-
+        private DirectShow.IBaseFilter vcap_source;
 
         /// <summary>
         /// Get available USB camera list.
@@ -95,6 +96,11 @@ namespace GitHub.secile.Video
                 DirectShow.DsError.ThrowExceptionForHR(hr);
             }
         }
+
+        
+
+
+
         private void Init(int index, Size size, double fps, IntPtr pbx)
         {
             //----------------------------------
@@ -110,14 +116,15 @@ namespace GitHub.secile.Video
             //----------------------------------
             // VideoCaptureSource
             //----------------------------------
-            var vcap_source = CreateVideoCaptureSource(index, size, fps);
-            graph.AddFilter(vcap_source, "VideoCapture");
+            Vcap_source = CreateVideoCaptureSource(index, size, fps);
+            graph.AddFilter(Vcap_source, "VideoCapture");
 
             //------------------------------
             // Smart Tee
             //------------------------------
 
-
+            //DisplayPropertyPage((IBaseFilter)vcap_source);
+            
 
             //------------------------------
             // SampleGrabber
@@ -156,7 +163,7 @@ namespace GitHub.secile.Video
             builder.SetFiltergraph(graph);
             var pinCategory = DirectShow.DsGuid.PIN_CATEGORY_PREVIEW;
             var mediaType = DirectShow.DsGuid.MEDIATYPE_Video;
-            builder.RenderStream(ref pinCategory, ref mediaType, vcap_source, grabber, renderer);
+            builder.RenderStream(ref pinCategory, ref mediaType, Vcap_source, grabber, renderer);
             
             // SampleGrabber Format.
             {
@@ -177,7 +184,10 @@ namespace GitHub.secile.Video
             {
                 DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Running);                
             };
-            Stop = () => DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Stopped);
+            Stop = () =>
+            {
+                DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Stopped);
+            };
             Release = () =>
             {
                 Stop();
@@ -232,10 +242,18 @@ namespace GitHub.secile.Video
 
         public void SetWindowPosition(Size size)
         {
-            int hr = 0;
-            IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
-            checkHR(hr, "Can't set rectangles of the video position");
+            try
+            {
+                int hr = 0;
+                IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+                checkHR(hr, "Can't set rectangles of the video position");
+            }
+            catch(NullReferenceException nrx)
+            {
+
+            }
+            
         }
 
         /// <summary>Get Bitmap from Sample Grabber</summary>
@@ -365,18 +383,9 @@ namespace GitHub.secile.Video
             {
                 if (vformat[i].MajorType == DirectShow.DsGuid.GetNickname(DirectShow.DsGuid.MEDIATYPE_Video))
                 {
-                    // MajorTypeがVideoの場合、SubTypeは色空間を表す。
-                    // BuffaloのWebカメラは[YUY2]と[MPEG]だった。
-                    // マイクロビジョンのUSBカメラは[YUY2]と[YUVY]だった。
-                    // 固定できないためコメントアウト。最初に見つかったフォーマットを利用する。
-                    // if (vformat[i].SubType == DSUtility.GetMediaTypeName(DSConst.MediaTypeGUID.MEDIASUBTYPE_YUY2))
-
-                    // FORMAT_VideoInfoのみ対応する。(FORMAT_VideoInfo2はSampleGrabber未対応のためエラー。)
-                    // https://msdn.microsoft.com/ja-jp/library/cc370616.aspx
-
                     if (vformat[i].Caps.Guid == DirectShow.DsGuid.FORMAT_VideoInfo)
                     {
-                        if (vformat[i].Size.Width == size.Width && vformat[i].Size.Height == size.Height && vformat[i].TimePerFrame==10000000/fps)
+                        if (vformat[i].Size.Width == size.Width && vformat[i].Size.Height == size.Height)
                         {
                             SetVideoOutputFormat(pin, i, size, fps);
                             return true;
@@ -592,8 +601,7 @@ namespace GitHub.secile.Video
             {
                 case FILTER_STATE.Paused: mediaControl.Pause(); break;
                 case FILTER_STATE.Stopped: mediaControl.Stop(); break;
-                case FILTER_STATE.Running: 
-                default: mediaControl.Run(); break;
+                case FILTER_STATE.Running: mediaControl.Run(); break;
             }
         }
 

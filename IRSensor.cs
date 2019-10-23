@@ -7,51 +7,47 @@ namespace FaceDetection
     class IRSensor
     {
         Timer OM_Timer = new Timer();
-
-
-        
         public IRSensor()
         {
             //init
             InitOMTimer();
         }
-
         private void InitOMTimer()
         {
             //timer
-            OM_Timer.Tick += OM_Timer_Tick; ;
-            OM_Timer.Interval = 1000;
+            OM_Timer.Tick += OM_Timer_Tick;
+            OM_Timer.Interval = 1000;            
             
-            StartOM_Timer();
         }
 
         private void OM_Timer_Tick(object sender, EventArgs e)
         {
             Console.WriteLine("TIMER tick: " + e.ToString());
+            if (MainForm.Or_testparam.Text != "sensor check")
+                MainForm.Or_testparam.Text = "sensor check";
+            else
+                MainForm.Or_testparam.Text = "";
             uint rval = CheckSensor();
-
-            if (rval == 0)
+            if (rval == 1)
             {
                 //heat signature detected, stop timer
                 StopOM_Timer();
+                
                 //initiate RECORD mode
-                MainForm.RecordMode();
+                if (MainForm.GetMainForm != null)
+                {                    
+                    MainForm.GetMainForm.RecordMode();
+                    
+                }  
             }
+
         }
 
         public void StartOM_Timer()
         {
             OM_Timer.Start();
         }
-        /// <summary>
-        /// Check for HEAT SIGNATURE from the IRSensor 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OM_Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            
-        }
+        
 
         public void StopOM_Timer()
         {
@@ -91,12 +87,11 @@ namespace FaceDetection
                 {
                     data[1] = 0;
                 }
-                DispDeviceClose();
+                
             }
             else
             {             
-                data[1] = 0;
-                StopOM_Timer();
+                data[1] = 0;                
             }
             //rtb.ScrollToCaret();
             return data[1];

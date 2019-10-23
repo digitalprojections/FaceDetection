@@ -121,73 +121,43 @@
   <data name="flowLayoutPanel1.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="button_cancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="groupBox_cameraNumber.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="button_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>383, 165</value>
+  <data name="cm_camera_number.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 9</value>
   </data>
-  <data name="button_cancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 60</value>
+  <data name="cm_camera_number.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 20</value>
   </data>
-  <data name="button_cancel.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="cm_camera_number.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
-  <data name="button_cancel.Text" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="&gt;&gt;cm_camera_number.Name" xml:space="preserve">
+    <value>cm_camera_number</value>
   </data>
-  <data name="&gt;&gt;button_cancel.Name" xml:space="preserve">
-    <value>button_cancel</value>
+  <data name="&gt;&gt;cm_camera_number.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button_cancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;cm_camera_number.Parent" xml:space="preserve">
+    <value>groupBox_cameraNumber</value>
   </data>
-  <data name="&gt;&gt;button_cancel.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;button_cancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cm_camera_number.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 165</value>
-  </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 60</value>
-  </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="button1.Text" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
-  </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pictureBox_allcam.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="pictureBox_allcam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 84</value>
+    <value>224, 34</value>
   </data>
   <data name="pictureBox_allcam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+    <value>30, 32</value>
   </data>
   <data name="pictureBox_allcam.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+    <value>StretchImage</value>
   </data>
   <data name="pictureBox_allcam.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -202,36 +172,36 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;pictureBox_allcam.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="groupBox12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="pictureBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="pictureBox_DeleteOldData.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="pictureBox_DeleteOldData.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 0</value>
   </data>
-  <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+  <data name="pictureBox_DeleteOldData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 32</value>
   </data>
-  <data name="pictureBox2.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+  <data name="pictureBox_DeleteOldData.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
   </data>
-  <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
+  <data name="pictureBox_DeleteOldData.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
-    <value>pictureBox2</value>
+  <data name="&gt;&gt;pictureBox_DeleteOldData.Name" xml:space="preserve">
+    <value>pictureBox_DeleteOldData</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox_DeleteOldData.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox_DeleteOldData.Parent" xml:space="preserve">
     <value>groupBox12</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox_DeleteOldData.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="nud_erase_old.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -241,10 +211,10 @@
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="nud_erase_old.Location" type="System.Drawing.Point, System.Drawing">
-    <value>69, 18</value>
+    <value>69, 33</value>
   </data>
   <data name="nud_erase_old.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 55</value>
+    <value>129, 55</value>
   </data>
   <data name="nud_erase_old.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -265,16 +235,19 @@
     <value>1</value>
   </data>
   <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Top, Right</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="label3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 76</value>
+    <value>58, 91</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 12</value>
@@ -304,7 +277,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_delete_old.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 0</value>
+    <value>21, 0</value>
   </data>
   <data name="cb_delete_old.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 16</value>
@@ -328,10 +301,10 @@
     <value>3</value>
   </data>
   <data name="groupBox12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 124</value>
+    <value>6, 104</value>
   </data>
   <data name="groupBox12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 101</value>
+    <value>204, 121</value>
   </data>
   <data name="groupBox12.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -346,7 +319,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;groupBox12.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="numericUpDownCamCount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -355,13 +328,13 @@
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="numericUpDownCamCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 21</value>
+    <value>114, 34</value>
   </data>
   <data name="numericUpDownCamCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 55</value>
+    <value>80, 55</value>
   </data>
   <data name="numericUpDownCamCount.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>3</value>
   </data>
   <data name="numericUpDownCamCount.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
@@ -376,7 +349,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;numericUpDownCamCount.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -385,7 +358,7 @@
     <value>Top, Right</value>
   </data>
   <data name="button_Browse.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 20.25pt</value>
+    <value>MS UI Gothic, 13.8pt</value>
   </data>
   <data name="button_Browse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -420,11 +393,14 @@
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label9.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
   <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 18</value>
+    <value>140, 18</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 12</value>
@@ -472,7 +448,7 @@
     <value>2</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 18</value>
+    <value>216, 104</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 122</value>
@@ -493,7 +469,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="label26.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -505,7 +481,7 @@
     <value>NoControl</value>
   </data>
   <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 79</value>
+    <value>4, 34</value>
   </data>
   <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 12</value>
@@ -526,7 +502,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label26.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="cb_all_cameras.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -538,7 +514,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_all_cameras.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 99</value>
+    <value>239, 44</value>
   </data>
   <data name="cb_all_cameras.Size" type="System.Drawing.Size, System.Drawing">
     <value>205, 16</value>
@@ -559,19 +535,19 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;cb_all_cameras.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 71</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>495, 230</value>
+    <value>465, 230</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
-    <value>Capture settings</value>
+    <value>Environmental settings</value>
   </data>
   <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
@@ -583,7 +559,7 @@
     <value>groupBox_cameraNumber</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -592,7 +568,7 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>413, 15</value>
+    <value>385, 15</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 12</value>
@@ -613,7 +589,7 @@
     <value>groupBox_cameraNumber</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="cm_language.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 20.25pt</value>
@@ -625,13 +601,13 @@
     <value>日本語</value>
   </data>
   <data name="cm_language.Location" type="System.Drawing.Point, System.Drawing">
-    <value>375, 30</value>
+    <value>346, 30</value>
   </data>
   <data name="cm_language.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 35</value>
   </data>
   <data name="cm_language.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;cm_language.Name" xml:space="preserve">
     <value>cm_language</value>
@@ -643,7 +619,7 @@
     <value>groupBox_cameraNumber</value>
   </data>
   <data name="&gt;&gt;cm_language.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="button_cameraProperties.ImageIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -655,181 +631,180 @@
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACq
-        KAAAAk1TRnQBSQFMAgEBBAEAAeABAAHgAQABGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABQ
+        KAAAAk1TRnQBSQFMAgEBBAEAARgBAgEYAQIBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
         AwABMAMAAQEBAAEgBgABSP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A
-        /wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AFIAAw8BFAFYAlsBywEhAbwB+gH/ATwBgwHBAf4BIQG8
-        AfoB/wEhAbwB+gH/ATwBgwHBAf4BIQG8AfoB/wFAAagBtgH9A0ABcRwAAwEEAgEDAwIBAwMCAQMDAgED
-        AwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgED
-        AwIBAwMCAQMDAgEDAwIBAwMBBAIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMWAR8DQAFxAxQBGwMC
-        AQMDAgEDAxABFgNAAXADFwEgAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMD6gH+A+0B/wP+
-        Af8D7gH/A+0B/wP+Af8D8AH/A+0B/wP+Af8D8QH/A+0B/wP+Af8D8gH/A+0B/wP+Af8D8QH/A+0B/wP+
-        Af8D8QH/A+0B/wP+Af8D7wH/A+0B/wP+Af8UAAMEAQYBUgFlAWYB9AE8AYMBwQH+ASEBvAH6Af8BIQG8
-        AfoB/wE8AYMBwQH+ASEBvAH6Af8BIQG8AfoB/wE8AYMBwQH+ASEBvAH6Af8BIQG8AfoB/wEhAbwB+gH/
-        ASEBvAH6Af8DRAF7FAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDBQEHAyYBOAMNAREDAwEE
-        AwMBBAMKAQ4DJwE6AwUBBwMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEEAwMBBAMD
-        AQQDAwQEAQYDMAFLA1UBsQMhAfsDAAH/A1kBzAMLAQ8DCQEMA1kBxAMAAf8DIQH7A1UBsQMvAUoDBAEG
-        AwMBBAMDAQQDAwEEAwMBBAMCAQMD+wT+Af8D7QH/A/4B/wP+Af8D7QH/A/wB/wP+Af8D7QH/A/oB/wP+
-        Af8D7QH/A/sB/wP+Af8D7QH/A/oB/wP+Af8D7QH/A/sB/wP+Af8D7QH/A/0B/wP+Af8D7QH/EAADMwFS
-        ATwBgwHBAf4BPAGDAcEB/gE8AYMBwQH+ATwBgwHBAf4BPAGDAcEB/gE8AYMBwQH+ATwBgwHBAf4BPAGD
-        AcEB/gE8AYMBwQH+ATwBgwHBAf4BPAGDAcEB/gE8AYMBwQH+ATwBgwHBAf4BPAGDAcEB/gFZAmcB8hAA
-        AwIEAwEEAwMBBAMDAQQDAwEEAwMBBAMNAREDRQF/A14B5QMAAf8DUAGkAwMBBAMDAQQDTwGcAwAB/wNc
-        AecDSAGEAw4BEwMDAQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMDAQQDAwEEAwMBBANFAX8DAAH/
-        A1cB6ANIAYcDOwFkAx0B/ANZAcMDVwG/Ax0B/QM+AWsDSAGHA1cB6AMAAf8DSAGGAwMBBAMDAQQDAwEE
-        AwMBBAMCAQMD+QH+A/0B/wPvAf8D/AH/A/0B/wPvAf8D+wH/A/0B/wPvAf8D+gH/A/0B/wPvAf8D+gH/
-        A/0B/wPvAf8D+QH/A/0B/wPvAf8D+gH/A/0B/wPvAf8D+wH/A/0B/wPvAf8MAAM+AWsBPAGDAcEB/gEh
-        AbwB+gH/ATwBgwHBAf4BPAGDAcEB/gEhAbwB+gH/ASEBvAH6Af8BPAGDAcEB/gEhAbwB+gH/ASEBvAH6
-        Af8BPAGDAcEB/gEhAbwB+gH/ASEBvAH6Af8BIQG8AfoB/wEhAbwB+gH/ATwBgwHBAf4BIQG8AfoB/wE9
-        AYQBwgH+DAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA1cBxQMAAf8DAAH/AwAB/wMAAf8DRgGAA0QBewMA
-        Af8DAAH/AwAB/wMAAf8DWgHNAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEEAwMBBAMDAQQDAwEE
-        A0gBhQMdAfwDCAELAwMBBAMDAQQDPwFtA1MB8QNOAfADQgF1AwMBBAMDAQQDBwEKA0gB9gNLAY4DAwEE
-        AwMBBAMDAQQDAwEEAwIBAwPqAf4D7QH/A/4B/wPuAf8D7QH/A/4B/wPwAf8D7QH/AwAB/wMUAf8D7QH/
-        A/4B/wPyAf8D7QH/A/4B/wPxAf8D7QH/A/4B/wPxAf8D7QH/A/4B/wPvAf8D7QH/A/4B/wgAAx0BKgEh
-        AbwB+gH/ATwBgwHBAf4BIQG8AfoB/wE8AYMBwQH+ATwBgwHBAf4BIQG8AfoB/wEhAbwB+gH/ATwBgwHB
-        Af4BIQG8AfoB/wEhAbwB+gH/ATwBgwHBAf4BIQG8AfoB/wEhAbwB+gH/ASEBvAH6Af8BIQG8AfoB/wE8
-        AYMBwQH+ASEBvAH6Af8BIQG8AfoB/wFZAmcB8ggAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBANUAa8DAAH/
-        AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/A1YBuAMDAQQDAwEEAwMBBAMDAQQDAwEE
-        AwIBAwMCBAMBBAMDAQQDAwEEAwMBBANCAXYDAAH/Aw0BEQMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMD
-        AQQDAwEEAwgBCwMBAf4DRQF9AwMBBAMDAQQDAwEEAwMBBAMCAQMD+wT+Af8D7QH/A/4B/wP+Af8D7QH/
-        A/sB/wMAAf8DAAH/AwAB/wMHAf8D7QH/A/sB/wP+Af8D7QH/A/oB/wP+Af8D7QH/A/sB/wP+Af8D7QH/
-        A/0B/wP+Af8D7QH/CAABIQG8AfoB/wEhAbwB+gH/ATwBgwHBAf4BWwHQAfsB/wK5AbgB/gK4AbcB/gLx
-        AfAB/wLxAfAB/wK4AbcB/gLxAfAB/wLxAfAB/wK4AbcB/gLxAfAB/wLxAfAB/wLxAfAB/wLxAfAB/wG3
-        ArgB/gEhAbwB+gH/ASEBvAH6Af8BPAGDAcEB/gNEAXsEAAMCBAMBBAMDAQQDAwEEAwMBBAMDAQQDTAGS
-        AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wNPAZsDAwEEAwMBBAMDAQQDAwEE
-        AwMBBAMCAQMDAgEDAwQBBgNIAYYDSwGOA0UBfQNdAeIDVAHuAwwBEAMDAQQDBgEIAysBQgM+AWwDPgFs
-        AysBQgMGAQgDAwEEAwkBDANdAe0DWAHjA0IBdgNIAYUDRgGAAwQBBgMCAQMD+AH+A/sB/wPxAf8D+wH/
-        A/sB/wPxAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMJAf8D+QH/A/sB/wPxAf8D+AH/A/sB/wPxAf8D+QH/
-        A/sB/wPxAf8D+gH/A/sB/wPxAf8EAANMAZMBIQG8AfoB/wEhAbwB+gH/ATwBgwHBAf4B9wH8Af4B/wPG
-        Af4CuQG4Af4C8QHwAf8C8QHwAf8CuAG3Af4C8QHwAf8C8QHwAf8CuAG3Af4C8QHwAf8C8QHwAf8C8QHw
-        Af8C8QHwAf8CuAG3Af4BIQG8AfoB/wEhAbwB+gH/ATwBgwHBAf4BIQG8AfoB/wQAAwIEAwEEAwsBDwNa
-        AcoDVQG6A1ABmgNIAfcDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AykB+gNP
-        AZsDVgG4A1oBzQMOARMDAwEEAwIBAwMCAQMDLwFJAwAB/wNIAfYDAQH+A1QB7gMiATIDAwEEAzcBWgNd
-        AeIDAAH/AwAB/wMAAf8DAAH/A10B4gM3AVoDAwEEAyEBMANdAe0DAAH/Ax0B/AMAAf8DMAFLAwIBAwPq
-        Af4D7QH/A/4B/wPuAf8D7QH/AwAB/wMAAf8DAAH/A4UB/wMAAf8DAAH/AwAB/wMTAf8D7QH/A/4B/wPx
-        Af8D7QH/A/4B/wPxAf8D7QH/A/4B/wPvAf8D7QH/A/4B/wQAATwBgwHBAf4BIQG8AfoB/wEhAbwB+gH/
-        ATwBgwHBAf4B+AH8Af4B/wPGAf4DhwH+ASMCIgH/AvEB8AH/ArgBtwH+ApwBmwH/ASMCIgH/ArgBtwH+
-        AvEB8AH/AoIBgQH/ASMCIgH/AvEB8AH/ArgBtwH+ASEBvAH6Af8BIQG8AfoB/wE8AYMBwQH+ASEBvAH6
-        Af8DQAFxAwIEAwEEA0QBegMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DVwHFA0oBiwNKAYsDVwHF
-        AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wNIAYQDAwEEAwIBAwMCAQMDVQGxA1cB6AMHAQoDCAEL
-        AwoBDQMDAQQDSAGGAwAB/wNVAbQDLwFKAxMBGgMTARoDLwFKA1YBswMAAf8DSAGFAwMBBAMMARADDQES
-        AwgBCwNXAegDVQGyAwIBAwP7BP4B/wPtAf8D/gH/AwAB/wMAAf8DAAH/A4cB/wPtAf8D+wH/AwAB/wMA
-        Af8DAAH/AwAB/wPtAf8D+gH/A/4B/wPtAf8D+wH/A/4B/wPtAf8D/QH/A/4B/wPtAf8DFAEbATwBgwHB
-        Af4BPAGDAcEB/gE8AYMBwQH+ATwBgwHBAf4BwAHEAcYB/gPGAf4DfwH+AT4CPQH+ArkBuAH+ArgBtwH+
-        AWwCawH+AT4CPQH+ArgBtwH+ArgBtwH+AVICUQH+AT4CPQH+ArgBtwH+ArgBtwH+ATwBgwHBAf4BPAGD
-        AcEB/gE8AYMBwQH+ATwBgwHBAf4BQAGoAbYB/QMCAQMDBAEFA18B4AMAAf8DAAH/AwAB/wMAAf8DAAH/
-        A1gB7wMvAUoDAwEEAwMBBAMDAQQDAwEEAzABSwNYAe8DAAH/AwAB/wMAAf8DAAH/AwAB/wNcAecDBQEH
-        AwIBAwMWAR8DIQH7A0gBhwMDAQQDAwEEAwMBBAM3AVsDAAH/A0MBeAMDAQQDAwEEAwMBBAMDAQQDAwEE
-        AwMBBANEAXkDAAH/AzcBWgMDAQQDAwEEAwMBBANIAYcDIQH7AxYBHwP4Af4D+gH/A/IB/wMAAf8DAAH/
-        AwAB/wN4Af8D+gH/A/EB/wP5Af8D+gH/AwAB/wMAAf8DAAH/AxEB/wP4Af8D+gH/A/EB/wP4Af8D+gH/
-        A/EB/wP6Af8D+gH/A/EB/wNMAZIBPAGDAcEB/gEhAbwB+gH/ASEBvAH6Af8BPAGDAcEB/gH4AfwB/gH/
-        A8YB/gN/Af4BIwIiBf8CuQG4Af4CRwGeAf8CKgGCAf8ClwG6Af4C8QHwAf8BNgI1Af8BIwIiAf8C8QHw
-        Af8CuAG3Af4BIQG8AfoB/wEhAbwB+gH/ATwBgwHBAf4BIQG8AfoB/wEhAbwB+gH/AwIBAwMhATEDAAH/
-        AwAB/wMAAf8DAAH/AwAB/wMAAf8DLwFKAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAzABSwMAAf8DAAH/
-        AwAB/wMAAf8DAAH/AwAB/wMnAToDAgEDAz8BbwMAAf8DPgFrAwMBBAMDAQQDBgEIA10B4gNVAbQDAwEE
-        AwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBANVAbQDXQHiAwYBCAMDAQQDAwEEAzsBZAMAAf8DQAFx
-        A+oB/gPtAf8DAAH/AwAB/wMAAf8DiQH/A/IB/wPtAf8D/gH/A/EB/wPtAf8D/gH/AwAB/wMAAf8DAAH/
-        AxEB/wPtAf8D/gH/A/EB/wPtAf8D/gH/A+8B/wPtAf8D/gH/AVwCYQHcATwBgwHBAf4BIQG8AfoB/wEh
-        AbwB+gH/ATwBgwHBAf4B+AH8Af4B/wPGAf4DfwH+ASMCIgX/Ar0BxgH+ATkBOgH6Af8BOQE6AfoB/wFU
-        AVUBwQH+AvEB8AH/ATYCNQH/ASMCIgH/AvEB8AH/ArgBtwH+ASEBvAH6Af8BIQG8AfoB/wE8AYMBwQH+
-        ASEBvAH6Af8BIQG8AfoB/wMCAQMDCQEMA00BlQMBAf4DAAH/AwAB/wMAAf8DVwHFAwMBBAMDAQQDAwEE
-        AwMBBAMDAQQDAwEEAwMBBAMDAQQDVwHFAwAB/wMAAf8DAAH/AwAB/wNPAZwDCgEOAwIBAwMQARYDWQHD
-        Ax0B/QNCAXQDAwEEAysBQgMAAf8DLwFKAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDLwFK
-        AwAB/wMqAUEDAwEEAz4BbAMdAfwDWQHMAxQBGwP7Af4DAAH/AwAB/wMAAf8DegH/A+0B/wP8Af8D/gH/
-        A+0B/wP6Af8D/gH/A+0B/wP7Af8DAAH/AwAB/wMAAf8DAAH/A+0B/wP7Af8D/gH/A+0B/wP9Af8D/gH/
-        A+0B/wEyAYYBlAH7ATwBgwHBAf4BPAGDAcEB/gE8AYMBwQH+ATwBgwHBAf4BwAHEAcYB/gPGAf4DfwH+
-        AT4CPQH+A8YB/gPGAf4BbAFrAX8B/gFBAUABVQH+ArEBuAH+ArgBtwH+AVICUQH+AT4CPQH+ArgBtwH+
-        ArgBtwH+ATwBgwHBAf4BPAGDAcEB/gE8AYMBwQH+ATwBgwHBAf4BPAGDAcEB/gMCBAMBBAMDAQQDQQFy
-        AwAB/wMAAf8DAAH/A0oBiwMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEA0oBiwMAAf8DAAH/
-        AwAB/wNEAXsDAwEEAwMBBAMCAQMDAgEDAwkBDANWAb4DWQHyAwMBBAM+AWwDAAH/AxMBGgMDAQQDAwEE
-        AwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAxMBGgMAAf8DPgFsAwMBBANTAfEDWQHDAwsBDwMCAQMD9wH+
-        AwAB/wMAAf8DdwH/A/oB/wPyAf8D+QH/A/sB/wPyAf8D+QH/A/sB/wPyAf8D+QH/A/sB/wMAAf8DAAH/
-        AwAB/wMVAf8D+QH/A/sB/wPyAf8D+gH/A/sB/wPyAf8BUwFkAWUB8QE8AYMBwQH+ASEBvAH6Af8BIQG8
-        AfoB/wE8AYMBwQH+AfgB/AH+Af8DxgH+An8BFgH+AZgBsQEAAf8BmwGzAQMB/wPGAf4BUwJSAf8BIwIi
-        Af8CuQG4Af4B5gHpAdYB/wGYAbEBAAH/AZgBsQEAAf8BqgG+ASgB/wK4AbcB/gEhAbwB+gH/ASEBvAH6
-        Af8BPAGDAcEB/gEhAbwB+gH/ASEBvAH6Af8DAgQDAQQDAwEEA0MBeAMAAf8DAAH/AwAB/wNKAYsDAwEE
-        AwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBANKAYsDAAH/AwAB/wMAAf8DRgGAAwMBBAMDAQQDAgED
-        AwIBAwMLAQ8DWQHDA1kB8gMDAQQDPgFsAwAB/wMTARoDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEE
-        AwMBBAMTARoDAAH/Az4BbAMDAQQDUwHxA1cBvwMJAQwDAgEDA+oB/gPsAf8D/AH/A+4B/wPtAf8D/gH/
-        A/AB/wPtAf8D/gH/A/EB/wPtAf8D/gH/A/IB/wPtAf8D/gH/AwAB/wMAAf8DAAH/AwsB/wPtAf8D/gH/
-        A+8B/wPtAf8D/gH/AVcCWgG9ATwBgwHBAf4BIQG8AfoB/wEhAbwB+gH/ATwBgwHBAf4B+AH8Af4B/wPG
-        Af4CfwEWAf4BmAGxAQAB/wGYAbEBAAH/A8YB/gFTAlIB/wEjAiIB/wPGAf4B4gHmAcwB/wGYAbEBAAH/
-        AZgBsQEAAf8BowG5ARcB/wK4AbcB/gEhAbwB+gH/ASEBvAH6Af8BPAGDAcEB/gEhAbwB+gH/ASEBvAH6
-        Af8DAgEDAwsBDwNQAZ4DAAH/AwAB/wMAAf8DAAH/A1cBxQMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMD
-        AQQDAwEEA1cBxQMAAf8DAAH/AwAB/wMAAf8DUAGkAw0BEQMCAQMDEwEaA1kBzAMdAfwDPgFsAwMBBAMr
-        AUIDAAH/Ay8BSgMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAy8BSgMAAf8DKgFBAwMBBANC
-        AXYDHQH9A1kBxAMQARYD+wT+Af8D7QH/A/4B/wP+Af8D7QH/A/wB/wP+Af8D7QH/A/oB/wP+Af8D7QH/
-        A/sB/wP+Af8D7QH/A/oB/wMAAf8DAAH/AwAB/wMLAf8D7QH/A/0B/wP+Af8D7QH/AzcBWwE8AYMBwQH+
-        ATwBgwHBAf4BPAGDAcEB/gE8AYMBwQH+AcABxAHGAf4DxgH+A38B/gE+Aj0B/gPGAf4DxgH+AW8CbgH+
-        AT4CPQH+A8YB/gPGAf4BUgJRAf4BPgI9Af4CuAG3Af4CuAG3Af4BPAGDAcEB/gE8AYMBwQH+ATwBgwHB
-        Af4BPAGDAcEB/gE8AYMBwQH+AwIBAwMgAS8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DLwFKAwMBBAMD
-        AQQDAwEEAwMBBAMDAQQDAwEEAy8BSgMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMmATgDAgEDA0ABcQMA
-        Af8DOwFjAwMBBAMDAQQDBgEIA10B4gNWAbMDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBANV
-        AbQDXQHiAwYBCAMDAQQDAwEEAz4BbAMAAf8DPwFvA/cB/gP6Af8D8QH/A/oB/wP6Af8D8QH/A/kB/wP6
-        Af8D8QH/A/gB/wP6Af8D8QH/A/gB/wP6Af8D8QH/A/kB/wP7Af8DAAH/AwAB/wMAAf8DGwH/A/kB/wP6
-        Af8D8QH/BAABPAGDAcEB/gEhAbwB+gH/ASEBvAH6Af8BPAGDAcEB/gH4AfwB/gH/A8YB/gN/Af4BIwIi
-        Bf8DxgH+AVMCUgH/ASMCIgH/A8YB/gT/ATcCNgH/ASMCIgH/AvEB8AH/ArgBtwH+ASEBvAH6Af8BIQG8
-        AfoB/wE8AYMBwQH+ASEBvAH6Af8BWAJbAcsDAgEDAwQBBQNaAd4DAAH/AwAB/wMAAf8DAAH/AwAB/wNO
-        AfADLwFKAwMBBAMDAQQDAwEEAwMBBAMvAUoDWAHvAwAB/wMAAf8DAAH/AwAB/wMAAf8DXgHlAwUBBwMC
-        AQMDFgEfAyEB+wNIAYcDAwEEAwMBBAMDAQQDNwFbAwAB/wNDAXcDAwEEAwMBBAMDAQQDAwEEAwMBBAMD
-        AQQDQwF4AwAB/wM3AVoDAwEEAwMBBAMDAQQDSAGHAyEB+wMWAR8D6gH+A+0B/wP+Af8D7gH/A+0B/wP+
-        Af8D8AH/A+0B/wP+Af8D8QH/A+0B/wP+Af8D8gH/A+0B/wP+Af8D8QH/A+0B/wP+Af8DAAH/AwAB/wMA
-        Af8DAAH/A+0B/wP+Af8EAAFSAWUBZgH0ATwBgwHBAf4BPAGDAcEB/gE8AYMBwQH+AcABxAHGAf4DxgH+
-        A7kB/gFvAm4B/gPGAf4DxgH+A60B/gF2AnUB/gPGAf4DxgH+AZ4CnQH+A38B/gK5AbgB/gK4AbcB/gE8
-        AYMBwQH+ATwBgwHBAf4BPAGDAcEB/gE8AYMBwQH+Aw4BEwMCBAMBBANCAXUDAAH/AwAB/wMAAf8DAAH/
-        AwAB/wMAAf8DAAH/A1cBxQNKAYsDSgGLA1cBxQMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DRQF/
-        AwMBBAMCAQMDAgEDA1UBsgNXAegDCAELAw0BEQMMARADAwEEA0gBhgMAAf8DVgGzAy8BSgMTARoDEwEa
-        Ay8BSgNVAbQDAAH/A0gBhQMDAQQDCgENAwgBCwMHAQoDWAHpA1UBsQMCAQMD+wT+Af8D7QH/A/4B/wP+
-        Af8D7QH/A/wB/wP+Af8D7QH/A/oB/wP+Af8D7QH/A/sB/wP+Af8D7QH/A/oB/wP+Af8D7QH/A/wB/wMA
-        Af8DAAH/AwAB/wMfAf8D7QH/BAADEwEaASEBvAH6Af8BIQG8AfoB/wE8AYMBwQH+AdgB8QH9Af8DxgH+
-        A8YB/gj/A8YB/gj/A8YB/hD/ArkBuAH+ASEBvAH6Af8BIQG8AfoB/wE8AYMBwQH+AVIBZQFmAfQEAAMC
-        BAMBBAMKAQ0DVwHCA1UBsQNMAZEDQgH1AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
-        AwAB/wNIAfcDTAGSA1QBrwNXAcUDDQERAwMBBAMCAQMDAgEDAzABSwMAAf8DHQH8AwAB/wNUAe4DIgEy
-        AwMBBAM3BFsB4QMAAf8DAAH/AwAB/wMAAf8DXQHiAzcBWgMDAQQDIgEyA1QB7gMBAf4DSAH2AwAB/wMv
-        AUkDAgEDA/gB/gP8Af8D8QH/A/wB/wP8Af8D8gH/A/oB/wP8Af8D8AH/A/kB/wP8Af8D8AH/A/kB/wP8
-        Af8D8AH/A/kB/wP8Af8D8AH/A/kB/wP8Af8DAAH/AwAB/wMAAf8DFgH/CAABWQJcAc8BIQG8AfoB/wE8
-        AYMBwQH+ASEBvAH6Af8BoAG5AcUB/gHAAcQBxgH+AfgB/AH+Af8B+AH8Af4B/wHAAcQBxgH+AfgB/AH+
-        Af8B+AH8Af4B/wHAAcQBxgH+AfgB/AH+Af8B+AH8Af4B/wH4AfwB/gH/AfcB/AH+Af8BdwGXAcMB/gEh
-        AbwB+gH/ASEBvAH6Af8BPAGDAcEB/gMEAQYEAAMCBAMBBAMDAQQDAwEEAwMBBAMDAQQDTAGRAwAB/wMA
-        Af8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wNQAZoDAwEEAwMBBAMDAQQDAwEEAwMBBAMC
-        AQMDAgEDAwQBBgNGAYADSAGGA0MBdwNdAeIDVAHuAwoBDQMDAQQDBgEIAysBQgM+AWwDPgFsAysBQgMG
-        AQgDAwEEAwwBEANUAe4DWwHhA0UBfQNLAY4DSAGGAwQBBgMCAQMD6gH+A+0B/wP+Af8D7gH/A+0B/wP+
-        Af8D8AH/A+0B/wP+Af8D8QH/A+0B/wP+Af8D8gH/A+0B/wP+Af8D8QH/A+0B/wP+Af8D8QH/A+0B/wP+
-        Af8DAAH/AwAB/wMAAf8MAAErAXoBoAH8ATwBgwHBAf4BPAGDAcEB/gE8AYMBwQH+ATwBgwHBAf4BPAGD
-        AcEB/gE8AYMBwQH+ATwBgwHBAf4BPAGDAcEB/gE8AYMBwQH+ATwBgwHBAf4BPAGDAcEB/gE8AYMBwQH+
-        ATwBgwHBAf4BPAGDAcEB/gE8AYMBwQH+ATwBgwHBAf4BPAGDAcEB/gMyAVEIAAMCBAMBBAMDAQQDAwEE
-        AwMBBAMDAQQDVQGxAwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wNVAboDAwEE
-        AwMBBAMDAQQDAwEEAwMBBAMCAQMDAgQDAQQDAwEEAwMBBAMDAQQDRQF9AwEB/gMIAQsDAwEEAwMBBAMD
-        AQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMNAREDAAH/A0IBdgMDAQQDAwEEAwMBBAMDAQQDAgEDA/sE/gH/
-        A+0B/wP+Af8D/gH/A+0B/wP8Af8D/gH/A+0B/wP6Af8D/gH/A+0B/wP7Af8D/gH/A+0B/wP6Af8D/gH/
-        A+0B/wP7Af8D/gH/A+0B/wP9Af8DAAH/AwAB/xAAASsBegGgAfwBIQG8AfoB/wE8AYMBwQH+ATwBgwHB
-        Af4BIQG8AfoB/wEhAbwB+gH/ATwBgwHBAf4BIQG8AfoB/wEhAbwB+gH/ATwBgwHBAf4BIQG8AfoB/wEh
-        AbwB+gH/ASEBvAH6Af8BIQG8AfoB/wE8AYMBwQH+ASEBvAH6Af8DPgFrDAADAgQDAQQDAwEEAwMBBAMD
-        AQQDAwEEA1cBwgMAAf8DAAH/AwAB/wMAAf8DQwF4A0EBcgMBAf4DAAH/AwAB/wMAAf8DWgHKAwMBBAMD
-        AQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEEAwMBBAMDAQQDAwEEA0sBjgNIAfcDBwEKAwMBBAMDAQQDQgF1
-        A1kB8gNZAfIDPgFsAwMBBAMDAQQDCAELAx0B/ANIAYUDAwEEAwMBBAMDAQQDAwEEAwIBAwP6BP4B/wPu
-        Af8D+wH/A/4B/wPuAf8D/AH/A/4B/wPuAf8D+gH/A/4B/wPuAf8D+gH/A/4B/wPuAf8D+wH/A/4B/wPu
-        Af8D+wH/A/4B/wPuAf8D/AH/A/4B/wPuAf8UAAFZAlwBzwE8AYMBwQH+ATwBgwHBAf4BIQG8AfoB/wEh
-        AbwB+gH/ATwBgwHBAf4BIQG8AfoB/wEhAbwB+gH/ATwBgwHBAf4BIQG8AfoB/wEhAbwB+gH/ASEBvAH6
-        Af8BIQG8AfoB/wE8AYMBwQH+Ax0BKhAAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBAMKAQ4DQgF1A1oB3gMA
-        Af8DUAGeAwMBBAMDAQQDTQGVAwAB/wNfAeADRAF6AwwBEAMDAQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMC
-        BAMBBAMDAQQDAwEEAwMBBANIAYYDAAH/A1cB6ANIAYcDPgFrAx0B/QNXAb8DVwHCAx0B/AM7AWQDSAGI
-        A1cB6AMAAf8DRQF/AwMBBAMDAQQDAwEEAwMBBAMCAQMD6gH+A+0B/wP+Af8D7gH/A+0B/wP+Af8D8AH/
-        A+0B/wP+Af8D8QH/A+0B/wP+Af8D8gH/A+0B/wP+Af8D8QH/A+0B/wP+Af8D8QH/A+0B/wP+Af8D7wH/
-        A+0B/wP+Af8YAAMTARoBUgFlAWYB9AE8AYMBwQH+ATwBgwHBAf4BPAGDAcEB/gE8AYMBwQH+ATwBgwHB
-        Af4BPAGDAcEB/gE8AYMBwQH+ATwBgwHBAf4BPAGDAcEB/gNMAZMYAAMCBAMBBAMDAQQDAwEEAwMBBAMD
-        AQQDAwEEAwMEBAEFAyABLwMLAQ8DAwEEAwMBBAMJAQwDIQExAwQBBQMDAQQDAwEEAwMBBAMDAQQDAwEE
-        AwMBBAMDAQQDAgEDAwIEAwEEAwMBBAMDAQQDAwQEAQYDLwFJA1UBsgMhAfsDAAH/A1kBxAMJAQwDCwEP
-        A1gBywMAAf8DIQH7A1UBsQMwAUsDBAEGAwMBBAMDAQQDAwEEAwMBBAMCAQMD+wT+Af8D7QH/A/4B/wP+
-        Af8D7QH/A/wB/wP+Af8D7QH/A/oB/wP+Af8D7QH/A/sB/wP+Af8D7QH/A/oB/wP+Af8D7QH/A/sB/wP+
-        Af8D7QH/A/0B/wP+Af8D7QH/JAADNwFbAVYCWAG8AVMBZAFlAfEBMgGGAZQB+wFcAmEB3ANMAZIDFAEb
-        IAADAQQCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgED
-        AwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAQECAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMC
-        AQMDAgEDAxcBIANAAXADEAEWAwIBAwMCAQMDEwEaA0ABcQMWAR8DAgEDAwIBAwMCAQMDAgEDAwIBAwMC
-        AQMDAgEDAwEBAgP5Af0D+wH+A+oB/gP6Af4D+wH+A+oB/gP4Af4D+wH+A+oB/gP3Af4D+wH+A+oB/gP3
-        Af4D+wH+A+oB/gP4Af4D+wH+A+oB/gP4Af4D+wH+A+oB/gP5Af4D+wH+A+oB/gFCAU0BPgcAAT4DAAEo
-        AwABYAMAATADAAEBAQABAQUAAUABAhYAA///ACIAAf4BAAF/CQAB+AEAAR8JAAHwAQABDwkAAeABAAEH
-        CQABwAEAAQMJAAHAAQABAQkAAYABAAEBCQABgF8AAYALAAGACwABgAEAAQEJAAHAAQABAQkAAeABAAED
-        CQAB8AEAAQcJAAH4AQABDwkAAfwBAAE/CQAB/wGAAf8JAAs=
+        /wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AFIAAw8BFAFYAlsBywEBAbwB+gH/ATwBfwGBAf4BAQG8
+        AfoB/wEBAbwB+gH/ATwBfwGBAf4BAQG8AfoB/wFAAqgB/QNAAXEcAAMBBAIBAwMCAQMDAgEDAwIBAwMC
+        AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
+        AQMDAgEDAwIBAwMCAQMDAQQCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDFgEfA0ABcQMUARsDAgED
+        AwIBAwMQARYDQAFwAxcBIAMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDA6oB/gPtAf8D/gH/
+        A+4B/wPtAf8D/gH/A/AB/wPtAf8D/gH/A/EB/wPtAf8D/gH/A/IB/wPtAf8D/gH/A/EB/wPtAf8D/gH/
+        A/EB/wPtAf8D/gH/A+8B/wPtAf8D/gH/FAADBAEGAVICZQH0ATwBfwGBAf4BAQG8AfoB/wEBAbwB+gH/
+        ATwBfwGBAf4BAQG8AfoB/wEBAbwB+gH/ATwBfwGBAf4BAQG8AfoB/wEBAbwB+gH/AQEBvAH6Af8BAQG8
+        AfoB/wNEAXsUAAMCBAMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMFAQcDJgE4Aw0BEQMDAQQDAwEE
+        AwoBDgMnAToDBQEHAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMCAQMDAgQDAQQDAwEEAwMBBAMD
+        BAQBBgMwAUsDVQGxAyEB+wMAAf8DWQHMAwsBDwMJAQwDWQHEAwAB/wMhAfsDVQGxAy8BSgMEAQYDAwEE
+        AwMBBAMDAQQDAwEEAwIBAwO7BP4B/wPtAf8D/gH/A/4B/wPtAf8D/AH/A/4B/wPtAf8D+gH/A/4B/wPt
+        Af8D+wH/A/4B/wPtAf8D+gH/A/4B/wPtAf8D+wH/A/4B/wPtAf8D/QH/A/4B/wPtAf8QAAMzAVIBPAF/
+        AYEB/gE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gE8AX8BgQH+
+        ATwBfwGBAf4BPAF/AYEB/gE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gE8AX8BgQH+AVkCZwHyEAADAgQD
+        AQQDAwEEAwMBBAMDAQQDAwEEAw0BEQNFAX8DXgHlAwAB/wNQAaQDAwEEAwMBBANPAZwDAAH/A1wB5wNI
+        AYQDDgETAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEEAwMBBAMDAQQDAwEEA0UBfwMAAf8DVwHo
+        A0gBhwM7AWQDKwH8A1kBwwNXAb8DPQH9Az4BawNIAYcDVwHoAwAB/wNIAYYDAwEEAwMBBAMDAQQDAwEE
+        AwIBAwO5Af4D/QH/A+8B/wP8Af8D/QH/A+8B/wP7Af8D/QH/A+8B/wP6Af8D/QH/A+8B/wP6Af8D/QH/
+        A+8B/wP5Af8D/QH/A+8B/wP6Af8D/QH/A+8B/wP7Af8D/QH/A+8B/wwAAz4BawE8AX8BgQH+AQEBvAH6
+        Af8BPAF/AYEB/gE8AX8BgQH+AQEBvAH6Af8BAQG8AfoB/wE8AX8BgQH+AQEBvAH6Af8BAQG8AfoB/wE8
+        AX8BgQH+AQEBvAH6Af8BAQG8AfoB/wEBAbwB+gH/AQEBvAH6Af8BPAF/AYEB/gEBAbwB+gH/AT0BfwGC
+        Af4MAAMCBAMBBAMDAQQDAwEEAwMBBAMDAQQDVwHFAwAB/wMAAf8DAAH/AwAB/wNGAYADRAF7AwAB/wMA
+        Af8DAAH/AwAB/wNaAc0DAwEEAwMBBAMDAQQDAwEEAwMBBAMCAQMDAgQDAQQDAwEEAwMBBAMDAQQDSAGF
+        AysB/AMIAQsDAwEEAwMBBAM/AW0DUwHxA04B8ANCAXUDAwEEAwMBBAMHAQoDSAH2A0sBjgMDAQQDAwEE
+        AwMBBAMDAQQDAgEDA6oB/gPtAf8D/gH/A+4B/wPtAf8D/gH/A/AB/wPtAf8DAAH/AwAB/wPtAf8D/gH/
+        A/IB/wPtAf8D/gH/A/EB/wPtAf8D/gH/A/EB/wPtAf8D/gH/A+8B/wPtAf8D/gH/CAADHQEqAQEBvAH6
+        Af8BPAF/AYEB/gEBAbwB+gH/ATwBfwGBAf4BPAF/AYEB/gEBAbwB+gH/AQEBvAH6Af8BPAF/AYEB/gEB
+        AbwB+gH/AQEBvAH6Af8BPAF/AYEB/gEBAbwB+gH/AQEBvAH6Af8BAQG8AfoB/wEBAbwB+gH/ATwBfwGB
+        Af4BAQG8AfoB/wEBAbwB+gH/AVkCZwHyCAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA1QBrwMAAf8DAAH/
+        AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DVgG4AwMBBAMDAQQDAwEEAwMBBAMDAQQDAgED
+        AwIEAwEEAwMBBAMDAQQDAwEEA0IBdgMAAf8DDQERAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMD
+        AQQDCAELAwEB/gNFAX0DAwEEAwMBBAMDAQQDAwEEAwIBAwO7BP4B/wPtAf8D/gH/A/4B/wPtAf8D+wH/
+        AwAB/wMAAf8DAAH/AwAB/wPtAf8D+wH/A/4B/wPtAf8D+gH/A/4B/wPtAf8D+wH/A/4B/wPtAf8D/QH/
+        A/4B/wPtAf8IAAEBAbwB+gH/AQEBvAH6Af8BPAF/AYEB/gE7AdAB+wH/A38B/gN/Af4C8QHwAf8C8QHw
+        Af8DfwH+AvEB8AH/AvEB8AH/A38B/gLxAfAB/wLxAfAB/wLxAfAB/wLxAfAB/wN/Af4BAQG8AfoB/wEB
+        AbwB+gH/ATwBfwGBAf4DRAF7BAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA0wBkgMAAf8DAAH/AwAB/wMA
+        Af8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DTwGbAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIBAwME
+        AQYDSAGGA0sBjgNFAX0DXQHiA1QB7gMMARADAwEEAwYBCAMrAUIDPgFsAz4BbAMrAUIDBgEIAwMBBAMJ
+        AQwDXQHtA1gB4wNCAXYDSAGFA0YBgAMEAQYDAgEDA7gB/gP7Af8D8QH/A/sB/wP7Af8D8QH/AwAB/wMA
+        Af8DAAH/AwAB/wMAAf8DAAH/A/kB/wP7Af8D8QH/A/gB/wP7Af8D8QH/A/kB/wP7Af8D8QH/A/oB/wP7
+        Af8D8QH/BAADTAGTAQEBvAH6Af8BAQG8AfoB/wE8AX8BgQH+AfcB/AH+Af8DhgH+A38B/gLxAfAB/wLx
+        AfAB/wN/Af4C8QHwAf8C8QHwAf8DfwH+AvEB8AH/AvEB8AH/AvEB8AH/AvEB8AH/A38B/gEBAbwB+gH/
+        AQEBvAH6Af8BPAF/AYEB/gEBAbwB+gH/BAADAgQDAQQDCwEPA1oBygNVAboDUAGaA1EB9wMAAf8DAAH/
+        AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DKQH6A08BmwNWAbgDWgHNAw4BEwMDAQQDAgED
+        AwIBAwMvAUkDAAH/A0gB9gMBAf4DVAHuAyIBMgMDAQQDNwFaA10B4gMAAf8DAAH/AwAB/wMAAf8DXQHi
+        AzcBWgMDAQQDIQEwA10B7QMAAf8DKwH8AwAB/wMwAUsDAgEDA6oB/gPtAf8D/gH/A+4B/wPtAf8DAAH/
+        AwAB/wMAAf8DhQH/AwAB/wMAAf8DAAH/AwAB/wPtAf8D/gH/A/EB/wPtAf8D/gH/A/EB/wPtAf8D/gH/
+        A+8B/wPtAf8D/gH/BAABPAF/AYEB/gEBAbwB+gH/AQEBvAH6Af8BPAF/AYEB/gH4AfwB/gH/A4YB/gN/
+        Af4BAwICAf8C8QHwAf8DfwH+ApwBmwH/AQMCAgH/A38B/gLxAfAB/wKCAYEB/wEDAgIB/wLxAfAB/wN/
+        Af4BAQG8AfoB/wEBAbwB+gH/ATwBfwGBAf4BAQG8AfoB/wNAAXEDAgQDAQQDRAF6AwAB/wMAAf8DAAH/
+        AwAB/wMAAf8DAAH/AwAB/wNXAcUDSgGLA0oBiwNXAcUDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
+        A0gBhAMDAQQDAgEDAwIBAwNVAbEDVwHoAwcBCgMIAQsDCgENAwMBBANIAYYDAAH/A1UBtAMvAUoDEwEa
+        AxMBGgMvAUoDVgGzAwAB/wNIAYUDAwEEAwwBEAMNARIDCAELA1cB6ANVAbIDAgEDA7sE/gH/A+0B/wP+
+        Af8DAAH/AwAB/wMAAf8DhwH/A+0B/wP7Af8DAAH/AwAB/wMAAf8DAAH/A+0B/wP6Af8D/gH/A+0B/wP7
+        Af8D/gH/A+0B/wP9Af8D/gH/A+0B/wMUARsBPAF/AYEB/gE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gGA
+        AYQBhgH+A4YB/gN/Af4BPgI9Af4DfwH+A38B/gFsAmsB/gE+Aj0B/gN/Af4DfwH+AVICUQH+AT4CPQH+
+        A38B/gN/Af4BPAF/AYEB/gE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gFAAqgB/QMCAQMDBAEFA18B4AMA
+        Af8DAAH/AwAB/wMAAf8DAAH/A1gB7wMvAUoDAwEEAwMBBAMDAQQDAwEEAzABSwNYAe8DAAH/AwAB/wMA
+        Af8DAAH/AwAB/wNcAecDBQEHAwIBAwMWAR8DIQH7A0gBhwMDAQQDAwEEAwMBBAM3AVsDAAH/A0MBeAMD
+        AQQDAwEEAwMBBAMDAQQDAwEEAwMBBANEAXkDAAH/AzcBWgMDAQQDAwEEAwMBBANIAYcDIQH7AxYBHwO4
+        Af4D+gH/A/IB/wMAAf8DAAH/AwAB/wNYAf8D+gH/A/EB/wP5Af8D+gH/AwAB/wMAAf8DAAH/AwAB/wP4
+        Af8D+gH/A/EB/wP4Af8D+gH/A/EB/wP6Af8D+gH/A/EB/wNMAZIBPAF/AYEB/gEBAbwB+gH/AQEBvAH6
+        Af8BPAF/AYEB/gH4AfwB/gH/A4YB/gN/Af4BAwICBf8DfwH+AicBngH/AgoBggH/A38B/gLxAfAB/wEW
+        AhUB/wEDAgIB/wLxAfAB/wN/Af4BAQG8AfoB/wEBAbwB+gH/ATwBfwGBAf4BAQG8AfoB/wEBAbwB+gH/
+        AwIBAwMhATEDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DLwFKAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEE
+        AzABSwMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMnAToDAgEDAz8BbwMAAf8DPgFrAwMBBAMDAQQDBgEI
+        A10B4gNVAbQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBANVAbQDXQHiAwYBCAMDAQQDAwEE
+        AzsBZAMAAf8DQAFxA6oB/gPtAf8DAAH/AwAB/wMAAf8DiQH/A/IB/wPtAf8D/gH/A/EB/wPtAf8D/gH/
+        AwAB/wMAAf8DAAH/AwAB/wPtAf8D/gH/A/EB/wPtAf8D/gH/A+8B/wPtAf8D/gH/AVwCYQHcATwBfwGB
+        Af4BAQG8AfoB/wEBAbwB+gH/ATwBfwGBAf4B+AH8Af4B/wOGAf4DfwH+AQMCAgX/An8BhgH+ARkBGgH6
+        Af8BGQEaAfoB/wFUAVUBgQH+AvEB8AH/ARYCFQH/AQMCAgH/AvEB8AH/A38B/gEBAbwB+gH/AQEBvAH6
+        Af8BPAF/AYEB/gEBAbwB+gH/AQEBvAH6Af8DAgEDAwkBDANNAZUDAQH+AwAB/wMAAf8DAAH/A1cBxQMD
+        AQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEA1cBxQMAAf8DAAH/AwAB/wMAAf8DTwGcAwoBDgMC
+        AQMDEAEWA1kBwwM9Af0DQgF0AwMBBAMrAUIDAAH/Ay8BSgMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMD
+        AQQDAwEEAy8BSgMAAf8DKgFBAwMBBAM+AWwDKwH8A1kBzAMUARsDuwH+AwAB/wMAAf8DAAH/A1oB/wPt
+        Af8D/AH/A/4B/wPtAf8D+gH/A/4B/wPtAf8D+wH/AwAB/wMAAf8DAAH/AwAB/wPtAf8D+wH/A/4B/wPt
+        Af8D/QH/A/4B/wPtAf8BMgFfAWAB+wE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gE8AX8BgQH+AYABhAGG
+        Af4DhgH+A38B/gE+Aj0B/gOGAf4DhgH+AWwBawF/Af4BQQFAAVUB/gN/Af4DfwH+AVICUQH+AT4CPQH+
+        A38B/gN/Af4BPAF/AYEB/gE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gE8AX8BgQH+AwIEAwEEAwMBBANB
+        AXIDAAH/AwAB/wMAAf8DSgGLAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDSgGLAwAB/wMA
+        Af8DAAH/A0QBewMDAQQDAwEEAwIBAwMCAQMDCQEMA1YBvgNZAfIDAwEEAz4BbAMAAf8DEwEaAwMBBAMD
+        AQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDEwEaAwAB/wM+AWwDAwEEA1MB8QNZAcMDCwEPAwIBAwO3
+        Af4DAAH/AwAB/wNXAf8D+gH/A/IB/wP5Af8D+wH/A/IB/wP5Af8D+wH/A/IB/wP5Af8D+wH/AwAB/wMA
+        Af8DAAH/AwAB/wP5Af8D+wH/A/IB/wP6Af8D+wH/A/IB/wFTAmQB8QE8AX8BgQH+AQEBvAH6Af8BAQG8
+        AfoB/wE8AX8BgQH+AfgB/AH+Af8DhgH+An8BFgH+AZgBsQEAAf8BmwGzAQAB/wOGAf4BMwIyAf8BAwIC
+        Af8DfwH+AeYB6QHWAf8BmAGxAQAB/wGYAbEBAAH/AaoBvgEIAf8DfwH+AQEBvAH6Af8BAQG8AfoB/wE8
+        AX8BgQH+AQEBvAH6Af8BAQG8AfoB/wMCBAMBBAMDAQQDQwF4AwAB/wMAAf8DAAH/A0oBiwMDAQQDAwEE
+        AwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEA0oBiwMAAf8DAAH/AwAB/wNGAYADAwEEAwMBBAMCAQMDAgED
+        AwsBDwNZAcMDWQHyAwMBBAM+AWwDAAH/AxMBGgMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEE
+        AxMBGgMAAf8DPgFsAwMBBANTAfEDVwG/AwkBDAMCAQMDqgH+A+wB/wP8Af8D7gH/A+0B/wP+Af8D8AH/
+        A+0B/wP+Af8D8QH/A+0B/wP+Af8D8gH/A+0B/wP+Af8DAAH/AwAB/wMAAf8DAAH/A+0B/wP+Af8D7wH/
+        A+0B/wP+Af8BVwJaAb0BPAF/AYEB/gEBAbwB+gH/AQEBvAH6Af8BPAF/AYEB/gH4AfwB/gH/A4YB/gJ/
+        ARYB/gGYAbEBAAH/AZgBsQEAAf8DhgH+ATMCMgH/AQMCAgH/A4YB/gHiAeYBzAH/AZgBsQEAAf8BmAGx
+        AQAB/wGjAbkBAAH/A38B/gEBAbwB+gH/AQEBvAH6Af8BPAF/AYEB/gEBAbwB+gH/AQEBvAH6Af8DAgED
+        AwsBDwNQAZ4DAAH/AwAB/wMAAf8DAAH/A1cBxQMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEE
+        A1cBxQMAAf8DAAH/AwAB/wMAAf8DUAGkAw0BEQMCAQMDEwEaA1kBzAMrAfwDPgFsAwMBBAMrAUIDAAH/
+        Ay8BSgMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAy8BSgMAAf8DKgFBAwMBBANCAXYDPQH9
+        A1kBxAMQARYDuwT+Af8D7QH/A/4B/wP+Af8D7QH/A/wB/wP+Af8D7QH/A/oB/wP+Af8D7QH/A/sB/wP+
+        Af8D7QH/A/oB/wMAAf8DAAH/AwAB/wMAAf8D7QH/A/0B/wP+Af8D7QH/AzcBWwE8AX8BgQH+ATwBfwGB
+        Af4BPAF/AYEB/gE8AX8BgQH+AYABhAGGAf4DhgH+A38B/gE+Aj0B/gOGAf4DhgH+AW8CbgH+AT4CPQH+
+        A4YB/gOGAf4BUgJRAf4BPgI9Af4DfwH+A38B/gE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gE8AX8BgQH+
+        ATwBfwGBAf4DAgEDAyABLwMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMvAUoDAwEEAwMBBAMDAQQDAwEE
+        AwMBBAMDAQQDLwFKAwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AyYBOAMCAQMDQAFxAwAB/wM7AWMDAwEE
+        AwMBBAMGAQgDXQHiA1YBswMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEA1UBtANdAeIDBgEI
+        AwMBBAMDAQQDPgFsAwAB/wM/AW8DtwH+A/oB/wPxAf8D+gH/A/oB/wPxAf8D+QH/A/oB/wPxAf8D+AH/
+        A/oB/wPxAf8D+AH/A/oB/wPxAf8D+QH/A/sB/wMAAf8DAAH/AwAB/wMAAf8D+QH/A/oB/wPxAf8EAAE8
+        AX8BgQH+AQEBvAH6Af8BAQG8AfoB/wE8AX8BgQH+AfgB/AH+Af8DhgH+A38B/gEDAgIF/wOGAf4BMwIy
+        Af8BAwICAf8DhgH+BP8BFwIWAf8BAwICAf8C8QHwAf8DfwH+AQEBvAH6Af8BAQG8AfoB/wE8AX8BgQH+
+        AQEBvAH6Af8BWAJbAcsDAgEDAwQBBQNaAd4DAAH/AwAB/wMAAf8DAAH/AwAB/wNOAfADLwFKAwMBBAMD
+        AQQDAwEEAwMBBAMvAUoDWAHvAwAB/wMAAf8DAAH/AwAB/wMAAf8DXgHlAwUBBwMCAQMDFgEfAyEB+wNI
+        AYcDAwEEAwMBBAMDAQQDNwFbAwAB/wNDAXcDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDQwF4AwAB/wM3
+        AVoDAwEEAwMBBAMDAQQDSAGHAyEB+wMWAR8DqgH+A+0B/wP+Af8D7gH/A+0B/wP+Af8D8AH/A+0B/wP+
+        Af8D8QH/A+0B/wP+Af8D8gH/A+0B/wP+Af8D8QH/A+0B/wP+Af8DAAH/AwAB/wMAAf8DAAH/A+0B/wP+
+        Af8EAAFSAmUB9AE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gGAAYQBhgH+A4YB/gN/Af4BbwJuAf4DhgH+
+        A4YB/gN/Af4BdgJ1Af4DhgH+A4YB/gN/Af4DfwH+A38B/gN/Af4BPAF/AYEB/gE8AX8BgQH+ATwBfwGB
+        Af4BPAF/AYEB/gMOARMDAgQDAQQDQgF1AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wNXAcUDSgGL
+        A0oBiwNXAcUDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/A0UBfwMDAQQDAgEDAwIBAwNVAbIDVwHo
+        AwgBCwMNAREDDAEQAwMBBANIAYYDAAH/A1YBswMvAUoDEwEaAxMBGgMvAUoDVQG0AwAB/wNIAYUDAwEE
+        AwoBDQMIAQsDBwEKA1gB6QNVAbEDAgEDA7sE/gH/A+0B/wP+Af8D/gH/A+0B/wP8Af8D/gH/A+0B/wP6
+        Af8D/gH/A+0B/wP7Af8D/gH/A+0B/wP6Af8D/gH/A+0B/wP8Af8DAAH/AwAB/wMAAf8DAAH/A+0B/wQA
+        AxMBGgEBAbwB+gH/AQEBvAH6Af8BPAF/AYEB/gHYAfEB/QH/A4YB/gOGAf4I/wOGAf4I/wOGAf4Q/wN/
+        Af4BAQG8AfoB/wEBAbwB+gH/ATwBfwGBAf4BUgJlAfQEAAMCBAMBBAMKAQ0DVwHCA1UBsQNMAZEDQgH1
+        AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wNRAfcDTAGSA1QBrwNXAcUDDQER
+        AwMBBAMCAQMDAgEDAzABSwMAAf8DKwH8AwAB/wNUAe4DIgEyAwMBBAM3BFsB4QMAAf8DAAH/AwAB/wMA
+        Af8DXQHiAzcBWgMDAQQDIgEyA1QB7gMBAf4DSAH2AwAB/wMvAUkDAgEDA7gB/gP8Af8D8QH/A/wB/wP8
+        Af8D8gH/A/oB/wP8Af8D8AH/A/kB/wP8Af8D8AH/A/kB/wP8Af8D8AH/A/kB/wP8Af8D8AH/A/kB/wP8
+        Af8DAAH/AwAB/wMAAf8DAAH/CAABWQJcAc8BAQG8AfoB/wE8AX8BgQH+AQEBvAH6Af8CfwGFAf4BgAGE
+        AYYB/gH4AfwB/gH/AfgB/AH+Af8BgAGEAYYB/gH4AfwB/gH/AfgB/AH+Af8BgAGEAYYB/gH4AfwB/gH/
+        AfgB/AH+Af8B+AH8Af4B/wH3AfwB/gH/AXcBfwGDAf4BAQG8AfoB/wEBAbwB+gH/ATwBfwGBAf4DBAEG
+        BAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA0wBkQMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
+        AwAB/wMAAf8DUAGaAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIBAwMEAQYDRgGAA0gBhgNDAXcDXQHi
+        A1QB7gMKAQ0DAwEEAwYBCAMrAUIDPgFsAz4BbAMrAUIDBgEIAwMBBAMMARADVAHuA1sB4QNFAX0DSwGO
+        A0gBhgMEAQYDAgEDA6oB/gPtAf8D/gH/A+4B/wPtAf8D/gH/A/AB/wPtAf8D/gH/A/EB/wPtAf8D/gH/
+        A/IB/wPtAf8D/gH/A/EB/wPtAf8D/gH/A/EB/wPtAf8D/gH/AwAB/wMAAf8DAAH/DAABKwFaAWoB/AE8
+        AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gE8AX8BgQH+ATwBfwGB
+        Af4BPAF/AYEB/gE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gE8
+        AX8BgQH+ATwBfwGBAf4DMgFRCAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA1UBsQMAAf8DAAH/AwAB/wMA
+        Af8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DVQG6AwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEE
+        AwMBBAMDAQQDAwEEA0UBfQMBAf4DCAELAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDDQER
+        AwAB/wNCAXYDAwEEAwMBBAMDAQQDAwEEAwIBAwO7BP4B/wPtAf8D/gH/A/4B/wPtAf8D/AH/A/4B/wPt
+        Af8D+gH/A/4B/wPtAf8D+wH/A/4B/wPtAf8D+gH/A/4B/wPtAf8D+wH/A/4B/wPtAf8D/QH/AwAB/wMA
+        Af8QAAErAVoBagH8AQEBvAH6Af8BPAF/AYEB/gE8AX8BgQH+AQEBvAH6Af8BAQG8AfoB/wE8AX8BgQH+
+        AQEBvAH6Af8BAQG8AfoB/wE8AX8BgQH+AQEBvAH6Af8BAQG8AfoB/wEBAbwB+gH/AQEBvAH6Af8BPAF/
+        AYEB/gEBAbwB+gH/Az4BawwAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBANXAcIDAAH/AwAB/wMAAf8DAAH/
+        A0MBeANBAXIDAQH+AwAB/wMAAf8DAAH/A1oBygMDAQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMD
+        AQQDAwEEAwMBBANLAY4DUQH3AwcBCgMDAQQDAwEEA0IBdQNZAfIDWQHyAz4BbAMDAQQDAwEEAwgBCwMr
+        AfwDSAGFAwMBBAMDAQQDAwEEAwMBBAMCAQMDugT+Af8D7gH/A/sB/wP+Af8D7gH/A/wB/wP+Af8D7gH/
+        A/oB/wP+Af8D7gH/A/oB/wP+Af8D7gH/A/sB/wP+Af8D7gH/A/sB/wP+Af8D7gH/A/wB/wP+Af8D7gH/
+        FAABWQJcAc8BPAF/AYEB/gE8AX8BgQH+AQEBvAH6Af8BAQG8AfoB/wE8AX8BgQH+AQEBvAH6Af8BAQG8
+        AfoB/wE8AX8BgQH+AQEBvAH6Af8BAQG8AfoB/wEBAbwB+gH/AQEBvAH6Af8BPAF/AYEB/gMdASoQAAMC
+        BAMBBAMDAQQDAwEEAwMBBAMDAQQDCgEOA0IBdQNaAd4DAAH/A1ABngMDAQQDAwEEA00BlQMAAf8DXwHg
+        A0QBegMMARADAwEEAwMBBAMDAQQDAwEEAwMBBAMCAQMDAgQDAQQDAwEEAwMBBAMDAQQDSAGGAwAB/wNX
+        AegDSAGHAz4BawM9Af0DVwG/A1cBwgMrAfwDOwFkA0gBiANXAegDAAH/A0UBfwMDAQQDAwEEAwMBBAMD
+        AQQDAgEDA6oB/gPtAf8D/gH/A+4B/wPtAf8D/gH/A/AB/wPtAf8D/gH/A/EB/wPtAf8D/gH/A/IB/wPt
+        Af8D/gH/A/EB/wPtAf8D/gH/A/EB/wPtAf8D/gH/A+8B/wPtAf8D/gH/GAADEwEaAVICZQH0ATwBfwGB
+        Af4BPAF/AYEB/gE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gE8AX8BgQH+ATwBfwGBAf4BPAF/AYEB/gE8
+        AX8BgQH+A0wBkxgAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwQEAQUDIAEvAwsBDwMDAQQDAwEE
+        AwkBDAMhATEDBAEFAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMCAQMDAgQDAQQDAwEEAwMBBAMD
+        BAQBBgMvAUkDVQGyAyEB+wMAAf8DWQHEAwkBDAMLAQ8DWAHLAwAB/wMhAfsDVQGxAzABSwMEAQYDAwEE
+        AwMBBAMDAQQDAwEEAwIBAwO7BP4B/wPtAf8D/gH/A/4B/wPtAf8D/AH/A/4B/wPtAf8D+gH/A/4B/wPt
+        Af8D+wH/A/4B/wPtAf8D+gH/A/4B/wPtAf8D+wH/A/4B/wPtAf8D/QH/A/4B/wPtAf8kAAM3AVsBVgJY
+        AbwBUwJkAfEBMgFfAWAB+wFcAmEB3ANMAZIDFAEbIAADAQQCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
+        AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
+        AQMDAQECAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAxcBIANAAXADEAEWAwIBAwMCAQMDEwEa
+        A0ABcQMWAR8DAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwEBAgOyAf0DuwH+A6oB/gO6Af4DuwH+
+        A6oB/gO4Af4DuwH+A6oB/gO3Af4DuwH+A6oB/gO3Af4DuwH+A6oB/gO4Af4DuwH+A6oB/gO4Af4DuwH+
+        A6oB/gO5Af4DuwH+A6oB/gFCAU0BPgcAAT4DAAEoAwABYAMAATADAAEBAQABAQUAAUABAhYAA///ACIA
+        Af4BAAF/CQAB+AEAAR8JAAHwAQABDwkAAeABAAEHCQABwAEAAQMJAAHAAQABAQkAAYABAAEBCQABgF8A
+        AYALAAGACwABgAEAAQEJAAHAAQABAQkAAeABAAEDCQAB8AEAAQcJAAH4AQABDwkAAfwBAAE/CQAB/wGA
+        Af8JAAs=
 </value>
   </data>
   <data name="button_cameraProperties.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -854,13 +829,16 @@
     <value>groupBox_cameraNumber</value>
   </data>
   <data name="&gt;&gt;button_cameraProperties.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
+  </data>
+  <data name="button_settings_cancel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 13.8pt</value>
   </data>
   <data name="button_settings_cancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="button_settings_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>405, 635</value>
+    <value>375, 629</value>
   </data>
   <data name="button_settings_cancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 63</value>
@@ -881,13 +859,16 @@
     <value>groupBox_cameraNumber</value>
   </data>
   <data name="&gt;&gt;button_settings_cancel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
+  </data>
+  <data name="button_apply.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 13.8pt</value>
   </data>
   <data name="button_apply.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="button_apply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 635</value>
+    <value>113, 629</value>
   </data>
   <data name="button_apply.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 63</value>
@@ -908,13 +889,16 @@
     <value>groupBox_cameraNumber</value>
   </data>
   <data name="&gt;&gt;button_apply.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
+  </data>
+  <data name="button_settings_save.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 13.8pt</value>
   </data>
   <data name="button_settings_save.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="button_settings_save.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 635</value>
+    <value>244, 629</value>
   </data>
   <data name="button_settings_save.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 63</value>
@@ -935,19 +919,19 @@
     <value>groupBox_cameraNumber</value>
   </data>
   <data name="&gt;&gt;button_settings_save.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="pictureBox_showRecordingIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="pictureBox_showRecordingIcon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 277</value>
+    <value>258, 276</value>
   </data>
   <data name="pictureBox_showRecordingIcon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+    <value>30, 32</value>
   </data>
   <data name="pictureBox_showRecordingIcon.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+    <value>StretchImage</value>
   </data>
   <data name="pictureBox_showRecordingIcon.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -968,13 +952,13 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBox_showCameraNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 232</value>
+    <value>258, 231</value>
   </data>
   <data name="pictureBox_showCameraNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+    <value>30, 32</value>
   </data>
   <data name="pictureBox_showCameraNo.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+    <value>StretchImage</value>
   </data>
   <data name="pictureBox_showCameraNo.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -995,13 +979,13 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBox_showCurrentDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 187</value>
+    <value>258, 186</value>
   </data>
   <data name="pictureBox_showCurrentDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+    <value>30, 32</value>
   </data>
   <data name="pictureBox_showCurrentDate.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+    <value>StretchImage</value>
   </data>
   <data name="pictureBox_showCurrentDate.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1022,13 +1006,13 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBox_showWindowPane.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 142</value>
+    <value>258, 142</value>
   </data>
   <data name="pictureBox_showWindowPane.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+    <value>30, 32</value>
   </data>
   <data name="pictureBox_showWindowPane.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+    <value>StretchImage</value>
   </data>
   <data name="pictureBox_showWindowPane.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1049,13 +1033,13 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBox_alwaysOnTop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 97</value>
+    <value>258, 96</value>
   </data>
   <data name="pictureBox_alwaysOnTop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+    <value>30, 32</value>
   </data>
   <data name="pictureBox_alwaysOnTop.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+    <value>StretchImage</value>
   </data>
   <data name="pictureBox_alwaysOnTop.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1072,11 +1056,14 @@
   <data name="&gt;&gt;pictureBox_alwaysOnTop.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="numericUpDownH.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="numericUpDownH.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="numericUpDownH.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 80</value>
+    <value>62, 80</value>
   </data>
   <data name="numericUpDownH.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 55</value>
@@ -1099,11 +1086,14 @@
   <data name="&gt;&gt;numericUpDownH.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="numericUpDownW.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="numericUpDownW.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="numericUpDownW.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 12</value>
+    <value>62, 12</value>
   </data>
   <data name="numericUpDownW.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 55</value>
@@ -1125,9 +1115,6 @@
   </data>
   <data name="&gt;&gt;numericUpDownW.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1158,9 +1145,6 @@
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1196,7 +1180,7 @@
     <value>6, 165</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 141</value>
+    <value>206, 141</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1216,11 +1200,14 @@
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="numericUpDownY.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="numericUpDownY.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="numericUpDownY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 80</value>
+    <value>62, 80</value>
   </data>
   <data name="numericUpDownY.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 55</value>
@@ -1243,11 +1230,14 @@
   <data name="&gt;&gt;numericUpDownY.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="numericUpDownX.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="numericUpDownX.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="numericUpDownX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 15</value>
+    <value>62, 15</value>
   </data>
   <data name="numericUpDownX.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 55</value>
@@ -1269,9 +1259,6 @@
   </data>
   <data name="&gt;&gt;numericUpDownX.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1302,9 +1289,6 @@
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1340,7 +1324,7 @@
     <value>6, 18</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 141</value>
+    <value>206, 141</value>
   </data>
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1367,7 +1351,7 @@
     <value>NoControl</value>
   </data>
   <data name="label9_fps.Location" type="System.Drawing.Point, System.Drawing">
-    <value>468, 88</value>
+    <value>430, 74</value>
   </data>
   <data name="label9_fps.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 12</value>
@@ -1397,7 +1381,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>341, 15</value>
+    <value>303, 14</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 12</value>
@@ -1427,7 +1411,7 @@
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>424, 15</value>
+    <value>386, 14</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 12</value>
@@ -1454,7 +1438,7 @@
     <value>MS UI Gothic, 18pt</value>
   </data>
   <data name="comboBoxResolutions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 33</value>
+    <value>225, 32</value>
   </data>
   <data name="comboBoxResolutions.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 32</value>
@@ -1478,7 +1462,7 @@
     <value>MS UI Gothic, 18pt</value>
   </data>
   <data name="comboBoxFPS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 33</value>
+    <value>388, 32</value>
   </data>
   <data name="comboBoxFPS.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 32</value>
@@ -1505,7 +1489,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_show_rec_icon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>323, 295</value>
+    <value>273, 286</value>
   </data>
   <data name="cb_show_rec_icon.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 16</value>
@@ -1535,7 +1519,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_show_camera_number.Location" type="System.Drawing.Point, System.Drawing">
-    <value>323, 250</value>
+    <value>273, 241</value>
   </data>
   <data name="cb_show_camera_number.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 16</value>
@@ -1565,7 +1549,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_dateandtime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>323, 205</value>
+    <value>273, 196</value>
   </data>
   <data name="cb_dateandtime.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 16</value>
@@ -1595,7 +1579,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_window_pane.Location" type="System.Drawing.Point, System.Drawing">
-    <value>323, 160</value>
+    <value>273, 151</value>
   </data>
   <data name="cb_window_pane.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 16</value>
@@ -1625,7 +1609,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_always_on_top.Location" type="System.Drawing.Point, System.Drawing">
-    <value>323, 115</value>
+    <value>273, 106</value>
   </data>
   <data name="cb_always_on_top.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 16</value>
@@ -1652,7 +1636,7 @@
     <value>12, 307</value>
   </data>
   <data name="groupBox_viewSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>495, 322</value>
+    <value>465, 322</value>
   </data>
   <data name="groupBox_viewSettings.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1670,7 +1654,10 @@
     <value>groupBox_cameraNumber</value>
   </data>
   <data name="&gt;&gt;groupBox_viewSettings.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
+  </data>
+  <data name="groupBox_functionalitySettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="pictureBox_BacklightOnRecognition.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1679,10 +1666,10 @@
     <value>6, 144</value>
   </data>
   <data name="pictureBox_BacklightOnRecognition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+    <value>30, 32</value>
   </data>
   <data name="pictureBox_BacklightOnRecognition.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+    <value>StretchImage</value>
   </data>
   <data name="pictureBox_BacklightOnRecognition.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1699,11 +1686,14 @@
   <data name="&gt;&gt;pictureBox_BacklightOnRecognition.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="numericUpDown3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="numericUpDown3.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="numericUpDown3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>358, 30</value>
+    <value>302, 46</value>
   </data>
   <data name="numericUpDown3.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 55</value>
@@ -1730,13 +1720,13 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBox_recordUponStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 189</value>
+    <value>25, 183</value>
   </data>
   <data name="pictureBox_recordUponStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+    <value>30, 32</value>
   </data>
   <data name="pictureBox_recordUponStart.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+    <value>StretchImage</value>
   </data>
   <data name="pictureBox_recordUponStart.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1757,13 +1747,13 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBox_recordingDuringFaceRecognition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 141</value>
+    <value>230, 183</value>
   </data>
   <data name="pictureBox_recordingDuringFaceRecognition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+    <value>30, 32</value>
   </data>
   <data name="pictureBox_recordingDuringFaceRecognition.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+    <value>StretchImage</value>
   </data>
   <data name="pictureBox_recordingDuringFaceRecognition.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1787,10 +1777,10 @@
     <value>13, 0</value>
   </data>
   <data name="pictureBox_operatorCapture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+    <value>30, 32</value>
   </data>
   <data name="pictureBox_operatorCapture.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+    <value>StretchImage</value>
   </data>
   <data name="pictureBox_operatorCapture.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1811,7 +1801,7 @@
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="numericUpDown6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 173</value>
+    <value>252, 81</value>
   </data>
   <data name="numericUpDown6.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 55</value>
@@ -1838,7 +1828,7 @@
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="numericUpDown4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 60</value>
+    <value>25, 81</value>
   </data>
   <data name="numericUpDown4.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 55</value>
@@ -1868,7 +1858,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_record_upon_start.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 207</value>
+    <value>40, 193</value>
   </data>
   <data name="cb_record_upon_start.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 16</value>
@@ -1895,16 +1885,16 @@
     <value>True</value>
   </data>
   <data name="cb_operator_capture.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 12pt</value>
+    <value>MS UI Gothic, 9pt</value>
   </data>
   <data name="cb_operator_capture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cb_operator_capture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 11</value>
+    <value>28, 2</value>
   </data>
   <data name="cb_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 20</value>
+    <value>110, 16</value>
   </data>
   <data name="cb_operator_capture.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1931,7 +1921,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_recording_during_facerec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 159</value>
+    <value>244, 193</value>
   </data>
   <data name="cb_recording_during_facerec.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 16</value>
@@ -1961,7 +1951,7 @@
     <value>NoControl</value>
   </data>
   <data name="label18_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 231</value>
+    <value>356, 139</value>
   </data>
   <data name="label18_seconds.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 12</value>
@@ -1984,14 +1974,23 @@
   <data name="&gt;&gt;label18_seconds.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="label17.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label17.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label17.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
   <data name="label17.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 141</value>
+    <value>240, 66</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 29</value>
+    <value>162, 12</value>
   </data>
   <data name="label17.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2011,6 +2010,9 @@
   <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="cm_capture_mode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="cm_capture_mode.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 14.25pt</value>
   </data>
@@ -2021,7 +2023,7 @@
     <value>Snapshot</value>
   </data>
   <data name="cm_capture_mode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>336, 13</value>
+    <value>302, 13</value>
   </data>
   <data name="cm_capture_mode.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 27</value>
@@ -2048,7 +2050,7 @@
     <value>NoControl</value>
   </data>
   <data name="lb_seconds2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 118</value>
+    <value>127, 139</value>
   </data>
   <data name="lb_seconds2.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 12</value>
@@ -2071,14 +2073,20 @@
   <data name="&gt;&gt;lb_seconds2.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="lb_capture_seconds.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="lb_capture_seconds.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lb_capture_seconds.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="lb_capture_seconds.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lb_capture_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>68, 45</value>
+    <value>62, 66</value>
   </data>
   <data name="lb_capture_seconds.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 12</value>
@@ -2101,6 +2109,9 @@
   <data name="&gt;&gt;lb_capture_seconds.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="lb_capture_mode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="lb_capture_mode.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2108,7 +2119,7 @@
     <value>NoControl</value>
   </data>
   <data name="lb_capture_mode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 22</value>
+    <value>220, 22</value>
   </data>
   <data name="lb_capture_mode.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 12</value>
@@ -2135,7 +2146,7 @@
     <value>6, 200</value>
   </data>
   <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>482, 252</value>
+    <value>448, 252</value>
   </data>
   <data name="groupBox9.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2156,7 +2167,7 @@
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="numericUpDown8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>133, 143</value>
+    <value>85, 143</value>
   </data>
   <data name="numericUpDown8.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 55</value>
@@ -2186,10 +2197,10 @@
     <value>12, 0</value>
   </data>
   <data name="pictureBox_EventRecorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+    <value>30, 32</value>
   </data>
   <data name="pictureBox_EventRecorder.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+    <value>StretchImage</value>
   </data>
   <data name="pictureBox_EventRecorder.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -2210,7 +2221,7 @@
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="numericUpDown7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>133, 49</value>
+    <value>85, 49</value>
   </data>
   <data name="numericUpDown7.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 55</value>
@@ -2240,7 +2251,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_event_recorder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 18</value>
+    <value>27, 0</value>
   </data>
   <data name="cb_event_recorder.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 16</value>
@@ -2263,14 +2274,20 @@
   <data name="&gt;&gt;cb_event_recorder.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="lb_post_event.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="lb_post_event.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lb_post_event.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="lb_post_event.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lb_post_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 128</value>
+    <value>109, 127</value>
   </data>
   <data name="lb_post_event.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 12</value>
@@ -2293,14 +2310,20 @@
   <data name="&gt;&gt;lb_post_event.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="lb_pre_event.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="lb_pre_event.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lb_pre_event.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="lb_pre_event.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lb_pre_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 34</value>
+    <value>100, 34</value>
   </data>
   <data name="lb_pre_event.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 12</value>
@@ -2330,7 +2353,7 @@
     <value>NoControl</value>
   </data>
   <data name="label23_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 201</value>
+    <value>184, 202</value>
   </data>
   <data name="label23_seconds.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 12</value>
@@ -2360,7 +2383,7 @@
     <value>NoControl</value>
   </data>
   <data name="label22_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 105</value>
+    <value>184, 107</value>
   </data>
   <data name="label22_seconds.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 12</value>
@@ -2384,10 +2407,10 @@
     <value>7</value>
   </data>
   <data name="groupBox10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 458</value>
+    <value>224, 458</value>
   </data>
   <data name="groupBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 224</value>
+    <value>230, 224</value>
   </data>
   <data name="groupBox10.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2408,7 +2431,7 @@
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="numericUpDown5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 72</value>
+    <value>68, 49</value>
   </data>
   <data name="numericUpDown5.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 55</value>
@@ -2438,10 +2461,10 @@
     <value>12, 0</value>
   </data>
   <data name="pictureBox_backlightOffWhenIdle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+    <value>30, 32</value>
   </data>
   <data name="pictureBox_backlightOffWhenIdle.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+    <value>StretchImage</value>
   </data>
   <data name="pictureBox_backlightOffWhenIdle.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -2465,7 +2488,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_backlight_off_idling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 18</value>
+    <value>27, 0</value>
   </data>
   <data name="cb_backlight_off_idling.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 16</value>
@@ -2494,11 +2517,14 @@
   <data name="lb_backlight_off_idling_delay.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lb_backlight_off_idling_delay.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
   <data name="lb_backlight_off_idling_delay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lb_backlight_off_idling_delay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 56</value>
+    <value>138, 34</value>
   </data>
   <data name="lb_backlight_off_idling_delay.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 12</value>
@@ -2528,7 +2554,7 @@
     <value>NoControl</value>
   </data>
   <data name="label20_minutes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 130</value>
+    <value>167, 107</value>
   </data>
   <data name="label20_minutes.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 12</value>
@@ -2555,7 +2581,7 @@
     <value>6, 458</value>
   </data>
   <data name="groupBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 148</value>
+    <value>210, 129</value>
   </data>
   <data name="groupBox8.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2579,10 +2605,10 @@
     <value>11, 0</value>
   </data>
   <data name="pictureBox_faceRecognition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 34</value>
+    <value>30, 32</value>
   </data>
   <data name="pictureBox_faceRecognition.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+    <value>StretchImage</value>
   </data>
   <data name="pictureBox_faceRecognition.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -2599,11 +2625,14 @@
   <data name="&gt;&gt;pictureBox_faceRecognition.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="numericUpDown2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="numericUpDown2.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 36pt</value>
   </data>
   <data name="numericUpDown2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 60</value>
+    <value>84, 43</value>
   </data>
   <data name="numericUpDown2.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 55</value>
@@ -2633,7 +2662,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_face_recognition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>34, 12</value>
+    <value>26, 2</value>
   </data>
   <data name="cb_face_recognition.Size" type="System.Drawing.Size, System.Drawing">
     <value>144, 16</value>
@@ -2663,7 +2692,7 @@
     <value>NoControl</value>
   </data>
   <data name="lb_milliseconds1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 45</value>
+    <value>186, 102</value>
   </data>
   <data name="lb_milliseconds1.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 12</value>
@@ -2692,11 +2721,14 @@
   <data name="label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label10.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
   <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 45</value>
+    <value>122, 28</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 12</value>
@@ -2747,7 +2779,7 @@
     <value>NoControl</value>
   </data>
   <data name="lb_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>465, 88</value>
+    <value>407, 104</value>
   </data>
   <data name="lb_seconds.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 12</value>
@@ -2776,11 +2808,14 @@
   <data name="lb_manual_recording_time.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lb_manual_recording_time.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
   <data name="lb_manual_recording_time.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lb_manual_recording_time.Location" type="System.Drawing.Point, System.Drawing">
-    <value>370, 15</value>
+    <value>289, 30</value>
   </data>
   <data name="lb_manual_recording_time.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 12</value>
@@ -2807,16 +2842,16 @@
     <value>True</value>
   </data>
   <data name="cb_backlight_on_recognition.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 14.25pt</value>
+    <value>MS UI Gothic, 9pt</value>
   </data>
   <data name="cb_backlight_on_recognition.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cb_backlight_on_recognition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 155</value>
+    <value>21, 155</value>
   </data>
   <data name="cb_backlight_on_recognition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 23</value>
+    <value>148, 16</value>
   </data>
   <data name="cb_backlight_on_recognition.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2837,10 +2872,10 @@
     <value>8</value>
   </data>
   <data name="groupBox_functionalitySettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>538, 9</value>
+    <value>485, 9</value>
   </data>
   <data name="groupBox_functionalitySettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>495, 689</value>
+    <value>448, 682</value>
   </data>
   <data name="groupBox_functionalitySettings.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2858,37 +2893,13 @@
     <value>groupBox_cameraNumber</value>
   </data>
   <data name="&gt;&gt;groupBox_functionalitySettings.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="cm_camera_number.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 18pt</value>
-  </data>
-  <data name="cm_camera_number.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 0</value>
-  </data>
-  <data name="cm_camera_number.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 32</value>
-  </data>
-  <data name="cm_camera_number.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cm_camera_number.Name" xml:space="preserve">
-    <value>cm_camera_number</value>
-  </data>
-  <data name="&gt;&gt;cm_camera_number.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cm_camera_number.Parent" xml:space="preserve">
-    <value>groupBox_cameraNumber</value>
-  </data>
-  <data name="&gt;&gt;cm_camera_number.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="groupBox_cameraNumber.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="groupBox_cameraNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1039, 702</value>
+    <value>939, 710</value>
   </data>
   <data name="groupBox_cameraNumber.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
