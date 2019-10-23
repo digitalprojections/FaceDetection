@@ -8,16 +8,13 @@
     <Setting Name="camera_count" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="search_all" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="video_file_location" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\UVCCAMERA</Value>
     </Setting>
-    <Setting Name="erase_old" Type="System.Boolean" Scope="User">
+    <Setting Name="enable_delete_old_files" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="erase_after" Type="System.Decimal" Scope="User">
+    <Setting Name="keep_old_files_days" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="enable_face_recognition" Type="System.Boolean" Scope="User">
@@ -35,14 +32,14 @@
     <Setting Name="backlight_offset_mins" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
-    <Setting Name="backlight_off_timer" Type="System.Boolean" Scope="User">
+    <Setting Name="enable_backlight_off_when_idle" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="event_recorder_on" Type="System.Boolean" Scope="User">
+    <Setting Name="enable_event_recorder" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="seconds_before_event" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">300</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="seconds_after_event" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">300</Value>
@@ -53,13 +50,13 @@
     <Setting Name="recording_length_seconds" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
-    <Setting Name="keeprecording_while_facerecognition" Type="System.Boolean" Scope="User">
+    <Setting Name="recording_while_face_recognition" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="recording_on_start" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="interval_between_reinitiating_recording" Type="System.Decimal" Scope="User">
+    <Setting Name="interval_before_reinitiating_recording" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">60</Value>
     </Setting>
     <Setting Name="show_all_cams_simulteneously" Type="System.Boolean" Scope="User">
@@ -71,7 +68,7 @@
     <Setting Name="capture_operator" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="Location" Type="System.Drawing.Point" Scope="User">
+    <Setting Name="window_location" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">10, 10</Value>
     </Setting>
     <Setting Name="window_on_top" Type="System.Boolean" Scope="User">
@@ -84,12 +81,12 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="show_camera_no" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="show_recording_icon" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="selectedCaptureMethod" Type="System.Int32" Scope="User">
+    <Setting Name="capture_method" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="culture" Type="System.String" Scope="User">
@@ -169,6 +166,15 @@
     </Setting>
     <Setting Name="camera_index" Type="System.String" Scope="User">
       <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="backlight_off_when_idle" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="store_location_description" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Please, select the location to store videos</Value>
+    </Setting>
+    <Setting Name="main_window_full_screen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

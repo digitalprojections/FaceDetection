@@ -207,9 +207,9 @@
             // 
             this.camera_number_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.camera_number_txt.AutoSize = true;
-            this.camera_number_txt.BackColor = System.Drawing.Color.Black;
+            this.camera_number_txt.BackColor = System.Drawing.SystemColors.Control;
             this.camera_number_txt.Font = new System.Drawing.Font("MS UI Gothic", 50F);
-            this.camera_number_txt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.camera_number_txt.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.camera_number_txt.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.camera_number_txt.Location = new System.Drawing.Point(725, 9);
             this.camera_number_txt.Name = "camera_number_txt";

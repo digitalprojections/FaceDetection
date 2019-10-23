@@ -77,8 +77,17 @@ namespace FaceDetection
         //The following is called for building the PREVIEW graph
        
         //This one is for recording
+        /// <summary>
+        /// Initialize Camera in CAPTURE Mode
+        /// </summary>
+        /// <param name="cameraIndex">Camera index</param>
+        /// <param name="size"></param>
+        /// <param name="fps"></param>
+        /// <param name="pbx">Control to display the video</param>
+        /// <param name="dstFileName">destination file name</param>
         public CameraManager(int cameraIndex, Size size, double fps, IntPtr pbx, string dstFileName)
         {
+            Directory.CreateDirectory(sourcePath);
             GetInterfaces();
 
             string str = Path.Combine(FaceDetection.Properties.Settings.Default.video_file_location, (cameraIndex + 1).ToString());
@@ -174,7 +183,7 @@ namespace FaceDetection
             hr = control9.SetVideoClippingWindow(pbx);
             checkHR(hr, "Can't set video clipping window");
 
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+            hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
             checkHR(hr, "Can't set rectangles of the video position");
 
 
@@ -243,6 +252,7 @@ namespace FaceDetection
             var pin = DirectShow.FindPin(filter, 0, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
             //Console.WriteLine(GetVideoOutputFormat(pin).Length + " video format for camera " + cameraIndex);
             VideoFormat[] videoFormats = GetVideoOutputFormat(pin);
+            /*
             for (var i = 0; i<videoFormats.Length; i++)
             {
                 Console.Write(videoFormats[i].MajorType + " ");
@@ -252,10 +262,9 @@ namespace FaceDetection
                 Console.Write(videoFormats[i].TimePerFrame + " /////");                
 
             }
-
+            */
             
         }
-
         private Bitmap GetBitmapMain(ISampleGrabber i_grabber, int width, int height, int stride)
         {
             try
@@ -315,7 +324,7 @@ namespace FaceDetection
         {
             int hr = 0;
             IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+            hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
             checkHR(hr, "Can't set rectangles of the video position");
         }
         

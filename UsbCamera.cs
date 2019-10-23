@@ -156,7 +156,7 @@ namespace GitHub.secile.Video
             hr = control9.SetVideoClippingWindow(pbx);
             checkHR(hr, "Can't set video clipping window");
 
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+            hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
             checkHR(hr, "Can't set rectangles of the video position");
 
             var builder = DirectShow.CoCreateInstance(DirectShow.DsGuid.CLSID_CaptureGraphBuilder2) as DirectShow.ICaptureGraphBuilder2;
@@ -246,7 +246,7 @@ namespace GitHub.secile.Video
             {
                 int hr = 0;
                 IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
-                hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
             }
             catch(NullReferenceException nrx)
