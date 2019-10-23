@@ -17,16 +17,13 @@ namespace FaceDetection
     {
         static ComboBox comboBoxFrames;
         DsDevice[] capDevices;
-        string[] camera_names;                
-        public int Camera_index {
-            get {                
-                return Properties.Settings.Default.current_camera_index;
-            }
-            private set {
-                Properties.Settings.Default.current_camera_index = value;
-                Properties.Settings.Default.Save();
-            }
-        }
+        string[] camera_names;
+
+        private int camera_index;
+        private int camera_number;
+        public int Camera_index { get { return camera_index = Properties.Settings.Default.current_camera_index; } private set { Properties.Settings.Default.current_camera_index = value; Properties.Settings.Default.Save(); } }
+        public int Camera_number { get { return camera_number = Properties.Settings.Default.current_camera_index+1;  } }
+
         private int InitPanelWidth;
         private int InitPanelHeight;
 
@@ -37,19 +34,15 @@ namespace FaceDetection
 
             InitializeComponent();
             //Setup window
-            Size size = new Size(0,0);
-               size = GetWidth(Properties.Settings.Default.current_camera_index);
-
             this.Width = 1024;
             this.Height = 760;
             this.ControlBox = false;
-
+            
             InitPanelWidth = this.flowLayoutPanel1.Width;
             InitPanelHeight = this.flowLayoutPanel1.Height;
 
-
-
-            
+            //get reference to the mainform
+            Console.WriteLine(MainForm.GetCamera());
 
             //get reference to the mainform
             //Console.WriteLine(MainForm.GetCamera());
@@ -227,8 +220,7 @@ namespace FaceDetection
                 Console.WriteLine(capDevices.Length + " capdevices");
                     ArrangeCameraNames(capDevices.Length);
                 }
-            }
-            PicBoxInitFunction();
+                PicBoxInitFunction();
         }
 
         private void PicBoxInitFunction()
@@ -244,11 +236,11 @@ namespace FaceDetection
 
             if (cb_delete_old.Checked == true)
             {
-                pictureBox_DeleteOldData.Image = Properties.Resources.check;
+                //pictureBox_DeleteOldData.Image = Properties.Resources.check;
             }
             else
             {
-                pictureBox_DeleteOldData.Image = Properties.Resources.checkered;
+                //pictureBox_DeleteOldData.Image = Properties.Resources.checkered;
             }
 
             if (cb_always_on_top.Checked == true)
@@ -389,7 +381,7 @@ namespace FaceDetection
 
             //foreach (Control c in this.Controls)
             foreach (Control c in this.flowLayoutPanel1.Controls)
-            {
+            {                
                 resources.ApplyResources(c, c.Name, cult);
                 Debug.WriteLine(c.GetType().ToString());
                 if (c.GetType().ToString() == "System.Windows.Forms.GroupBox")
@@ -435,7 +427,7 @@ namespace FaceDetection
             Img_Chenge(cb_all_cameras, pictureBox_allcam);
         }
 
-        private void pictureBox_allcam_Click(object sender, EventArgs e)
+        private void PictureBox_allcam_Click(object sender, EventArgs e)
         {
             CB_Chenge(cb_all_cameras);
             cb_all_cameras_CheckedChanged(sender, e);
@@ -443,7 +435,7 @@ namespace FaceDetection
 
         private void cb_delete_old_CheckedChanged(object sender, EventArgs e)
         {
-            Img_Chenge(cb_delete_old, pictureBox_DeleteOldData);
+            //Img_Chenge(cb_delete_old, pictureBox_DeleteOldData);
         }
 
         private void pictureBox_DeleteOldData_Click(object sender, EventArgs e)
@@ -613,71 +605,8 @@ namespace FaceDetection
 
         private void button_cameraProperties_Click(object sender, EventArgs e)
         {
-            DisplayPropertyPage();
+
         }
 
-        [DllImport("olepro32.dll")]
-        public static extern int OleCreatePropertyFrame(
-            IntPtr hwndOwner,
-            int x,
-            int y,
-            [MarshalAs(UnmanagedType.LPWStr)] string lpszCaption,
-            int cObjects,
-            [MarshalAs(UnmanagedType.Interface, ArraySubType=UnmanagedType.IUnknown)]
-           ref object ppUnk,
-            int cPages,
-            IntPtr lpPageClsID,
-            int lcid,
-            int dwReserved,
-            IntPtr lpvReserved);
-
-
-        /// <summary>
-        /// Displays a property page for a filter
-        /// </summary>
-        /// <param name="dev">The filter for which to display a property page</param>
-        public void DisplayPropertyPage()
-        {
-            //Camera_index
-            var dev = (IBaseFilter) DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, Camera_index);
-            
-            //Get the ISpecifyPropertyPages for the filter
-            ISpecifyPropertyPages pProp = dev as ISpecifyPropertyPages;
-            int hr = 0;
-
-            if (pProp == null)
-            {
-                //If the filter doesn't implement ISpecifyPropertyPages, try displaying IAMVfwCompressDialogs instead!
-                IAMVfwCompressDialogs compressDialog = dev as IAMVfwCompressDialogs;
-                if (compressDialog != null)
-                {
-
-                    hr = compressDialog.ShowDialog(VfwCompressDialogs.Config, IntPtr.Zero);
-                    DsError.ThrowExceptionForHR(hr);
-                }
-                return;
-            }
-
-            //Get the name of the filter from the FilterInfo struct
-            FilterInfo filterInfo;
-            hr = dev.QueryFilterInfo(out filterInfo);
-            DsError.ThrowExceptionForHR(hr);
-
-            // Get the propertypages from the property bag
-            DsCAUUID caGUID;
-            hr = pProp.GetPages(out caGUID);
-            DsError.ThrowExceptionForHR(hr);
-
-            //Create and display the OlePropertyFrame
-            object oDevice = (object)dev;
-            hr = OleCreatePropertyFrame(FaceDetection.MainForm.GetMainForm.Handle, 0, 0, filterInfo.achName, 1, ref oDevice, caGUID.cElems, caGUID.pElems, 0, 0, IntPtr.Zero);
-            DsError.ThrowExceptionForHR(hr);
-
-            // Release COM objects
-            Marshal.FreeCoTaskMem(caGUID.pElems);
-            Marshal.ReleaseComObject(pProp);
-            //Marshal.ReleaseComObject(filterInfo);
-            Marshal.ReleaseComObject(dev);
-        }
     }
 }
