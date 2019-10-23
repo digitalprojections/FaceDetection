@@ -111,6 +111,8 @@ namespace FaceDetection
         }
         private static UsbCamera camera;
         private static UsbCamcorder camcorder;
+        private TaskManager taskManager;
+
         public static UsbCamera GetCamera()
         {
             return camera;
@@ -128,7 +130,8 @@ namespace FaceDetection
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             InitializeComponent();
-
+            taskManager = new TaskManager();
+            
 
             if (vs != null && vs.Count() > 0)
             {

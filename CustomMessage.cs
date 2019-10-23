@@ -15,6 +15,7 @@ namespace FaceDetection
     [CallerMemberName] string caller = null)
         {
             Debug.WriteLine(message + " at line " + lineNumber + " (" + caller + ")");
+            
         }
     }
 }
