@@ -682,5 +682,17 @@ namespace FaceDetection.Properties {
                 this["C4res"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string camera_index {
+            get {
+                return ((string)(this["camera_index"]));
+            }
+            set {
+                this["camera_index"] = value;
+            }
+        }
     }
 }

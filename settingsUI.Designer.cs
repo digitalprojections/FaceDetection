@@ -121,8 +121,8 @@
             this.lb_seconds = new System.Windows.Forms.Label();
             this.lb_manual_recording_time = new System.Windows.Forms.Label();
             this.cb_backlight_on_recognition = new System.Windows.Forms.CheckBox();
-            this.cm_camera_number = new System.Windows.Forms.ComboBox();
             this.folderBrowserDialogStoreFolder = new System.Windows.Forms.FolderBrowserDialog();
+            this.cm_camera_number = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox_cameraNumber.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -174,6 +174,7 @@
             // groupBox_cameraNumber
             // 
             resources.ApplyResources(this.groupBox_cameraNumber, "groupBox_cameraNumber");
+            this.groupBox_cameraNumber.Controls.Add(this.cm_camera_number);
             this.groupBox_cameraNumber.Controls.Add(this.groupBox1);
             this.groupBox_cameraNumber.Controls.Add(this.label1);
             this.groupBox_cameraNumber.Controls.Add(this.cm_language);
@@ -183,7 +184,6 @@
             this.groupBox_cameraNumber.Controls.Add(this.button_settings_save);
             this.groupBox_cameraNumber.Controls.Add(this.groupBox_viewSettings);
             this.groupBox_cameraNumber.Controls.Add(this.groupBox_functionalitySettings);
-            this.groupBox_cameraNumber.Controls.Add(this.cm_camera_number);
             this.groupBox_cameraNumber.Name = "groupBox_cameraNumber";
             this.groupBox_cameraNumber.TabStop = false;
             // 
@@ -1015,11 +1015,10 @@
             // 
             // cm_camera_number
             // 
-            this.cm_camera_number.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "current_camera_index", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, null, "N0"));
-            resources.ApplyResources(this.cm_camera_number, "cm_camera_number");
             this.cm_camera_number.FormattingEnabled = true;
+            resources.ApplyResources(this.cm_camera_number, "cm_camera_number");
             this.cm_camera_number.Name = "cm_camera_number";
-            this.cm_camera_number.SelectedIndexChanged += new System.EventHandler(this.cameraSelected);
+            this.cm_camera_number.SelectedValueChanged += new System.EventHandler(this.cameraSelected);
             // 
             // settingsUI
             // 
@@ -1160,7 +1159,6 @@
         private System.Windows.Forms.Label lb_seconds;
         private System.Windows.Forms.Label lb_manual_recording_time;
         private System.Windows.Forms.CheckBox cb_backlight_on_recognition;
-        private System.Windows.Forms.ComboBox cm_camera_number;
         private System.Windows.Forms.Button button_cameraProperties;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label label1;
@@ -1183,5 +1181,6 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.CheckBox cb_all_cameras;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialogStoreFolder;
+        private System.Windows.Forms.ComboBox cm_camera_number;
     }
 }

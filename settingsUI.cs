@@ -3,37 +3,30 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
 
 namespace FaceDetection
 {
+
     public partial class settingsUI : Form
     {
-
-
+        static ComboBox comboBoxFrames;
         DsDevice[] capDevices;
-        string[] camera_names;
-
-        private int camera_index;
-        private int camera_number;
+        string[] camera_names;                
         public int Camera_index {
-            get {
-                return camera_index = Properties.Settings.Default.current_camera_index;
+            get {                
+                return Properties.Settings.Default.current_camera_index;
             }
             private set {
                 Properties.Settings.Default.current_camera_index = value;
                 Properties.Settings.Default.Save();
             }
         }
-        public int Camera_number { get {
-                return camera_number = Properties.Settings.Default.current_camera_index;
-            } }
-
         private int InitPanelWidth;
         private int InitPanelHeight;
 
@@ -44,6 +37,9 @@ namespace FaceDetection
 
             InitializeComponent();
             //Setup window
+            Size size = new Size(0,0);
+               size = GetWidth(Properties.Settings.Default.current_camera_index);
+
             this.Width = 1024;
             this.Height = 760;
             this.ControlBox = false;
@@ -51,10 +47,35 @@ namespace FaceDetection
             InitPanelWidth = this.flowLayoutPanel1.Width;
             InitPanelHeight = this.flowLayoutPanel1.Height;
 
-            //get reference to the mainform
-            Console.WriteLine(MainForm.GetCamera());
 
+
+            
+
+            //get reference to the mainform
+            //Console.WriteLine(MainForm.GetCamera());
         }
+
+        private Size GetWidth(int cam_ind)
+        {
+            Size retval;
+            switch (cam_ind)
+            {
+                case 0:
+                    retval = new Size(decimal.ToInt32(Properties.Settings.Default.C1w), decimal.ToInt32(Properties.Settings.Default.C1h));
+                    return retval;                    
+                case 1:
+                    retval = new Size(decimal.ToInt32(Properties.Settings.Default.C2w), decimal.ToInt32(Properties.Settings.Default.C2h));
+                    return retval;                    
+                case 2:
+                    retval = new Size(decimal.ToInt32(Properties.Settings.Default.C3w), decimal.ToInt32(Properties.Settings.Default.C3h));
+                    return retval;                    
+                case 3:
+                    retval = new Size(decimal.ToInt32(Properties.Settings.Default.C4w), decimal.ToInt32(Properties.Settings.Default.C4h));
+                    return retval;
+                default: return new Size(640,480);
+            }            
+        }
+
         private void ArrangeCameraNames(int len)
         {
             camera_names = new string[len];
@@ -63,8 +84,7 @@ namespace FaceDetection
                 camera_names[i] = capDevices[i].Name;
                 cm_camera_number.Items.Add(i + 1);
             }
-
-
+            //cm_camera_number.SelectedIndex = Properties.Settings.Default.current_camera_index;
         }
         private void changeStoreLocation(object sender, EventArgs e)
         {
@@ -133,38 +153,39 @@ namespace FaceDetection
             numericUpDownH.DataBindings.Clear();
             //comboBoxFPS.DataBindings.Clear();
             //comboBoxResolutions.DataBindings.Clear();
-            string camX = "C" + camera_number + "x";
-            string camY = "C" + camera_number + "y";
-            string camW = "C" + camera_number + "w";
-            string camH = "C" + camera_number + "h";
-            string camF = "C" + camera_number + "f";
-            string camRes = "C" + camera_number + "res";
-            //numericUpDownF.DataBindings.Clear();
-            numericUpDownX.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, camX, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            numericUpDownY.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, camY, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            numericUpDownW.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, camW, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            numericUpDownH.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, camH, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            string camX = "C" + (Camera_index + 1) + "x";
+            string camY = "C" + (Camera_index + 1) + "y";
+            string camW = "C" + (Camera_index + 1) + "w";
+            string camH = "C" + (Camera_index + 1) + "h";
+            //string camF = "C" + (Camera_index + 1) + "f";
+            //string camRes = "C" + (Camera_index + 1) + "res";
+            
+            numericUpDownX.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camX, true, DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownY.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camY, true, DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownW.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camW, true, DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownH.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camH, true, DataSourceUpdateMode.OnPropertyChanged));
             //comboBoxFPS.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camF, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             //comboBoxResolutions.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camRes, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-
-
-            comboBoxFrames = comboBoxFPS;
-
+            //comboBoxFrames = comboBoxFPS;
         }
 
-        static ComboBox comboBoxFrames;
+        
 
-        public static void SetComboBoxValues(List<string> vs)
+        public static void SetComboBoxValues(string vs)
         {
-            comboBoxFrames.DataSource = vs;
+            if(comboBoxFrames!=null)
+            {
+                comboBoxFrames.Items.Add(vs);
+                Console.WriteLine(vs + " 177");
+            }            
         }
 
         private void cameraSelected(object sender, EventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
-            Debug.WriteLine(comboBox.SelectedIndex);
-            camera_index = comboBox.SelectedIndex;
-            camera_number = Int32.Parse(comboBox.SelectedItem.ToString());
+            //Debug.WriteLine(comboBox.SelectedIndex);
+            Camera_index = comboBox.SelectedIndex;
+            
             SetCameraPropertiesFromMemory();
         }
 
@@ -172,8 +193,8 @@ namespace FaceDetection
         {
             if (cm_camera_number.Items.Count > 0)
             {
-                cm_camera_number.SelectedIndex = camera_index;
-                cm_capture_mode.SelectedIndex = camera_index;
+                //cm_camera_number.SelectedIndex = Properties.Settings.Default.current_camera_index;
+                cm_capture_mode.SelectedIndex = Properties.Settings.Default.selectedCaptureMethod;
             }
             SetCameraPropertiesFromMemory();
 
@@ -189,13 +210,13 @@ namespace FaceDetection
 
             numericUpDownCamCount.Value = Properties.Settings.Default.camera_count;
 
-            //if (capDevices.Length > numericUpDownCamCount.Value)
-            //{
-            //    MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
-            //    ArrangeCameraNames(capDevices.Length);
-            //}
-            //else
-            //{
+            if (capDevices.Length > numericUpDownCamCount.Value)
+            {
+                //MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
+                ArrangeCameraNames(capDevices.Length);
+            }
+            else
+            {
                 //settings are missing
                 if (capDevices.Length > 4)
                 {
@@ -203,9 +224,10 @@ namespace FaceDetection
                 }
                 else
                 {
+                Console.WriteLine(capDevices.Length + " capdevices");
                     ArrangeCameraNames(capDevices.Length);
                 }
-            //}
+            }
             PicBoxInitFunction();
         }
 
@@ -591,8 +613,71 @@ namespace FaceDetection
 
         private void button_cameraProperties_Click(object sender, EventArgs e)
         {
-
+            DisplayPropertyPage();
         }
 
+        [DllImport("olepro32.dll")]
+        public static extern int OleCreatePropertyFrame(
+            IntPtr hwndOwner,
+            int x,
+            int y,
+            [MarshalAs(UnmanagedType.LPWStr)] string lpszCaption,
+            int cObjects,
+            [MarshalAs(UnmanagedType.Interface, ArraySubType=UnmanagedType.IUnknown)]
+           ref object ppUnk,
+            int cPages,
+            IntPtr lpPageClsID,
+            int lcid,
+            int dwReserved,
+            IntPtr lpvReserved);
+
+
+        /// <summary>
+        /// Displays a property page for a filter
+        /// </summary>
+        /// <param name="dev">The filter for which to display a property page</param>
+        public void DisplayPropertyPage()
+        {
+            //Camera_index
+            var dev = (IBaseFilter) DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, Camera_index);
+            
+            //Get the ISpecifyPropertyPages for the filter
+            ISpecifyPropertyPages pProp = dev as ISpecifyPropertyPages;
+            int hr = 0;
+
+            if (pProp == null)
+            {
+                //If the filter doesn't implement ISpecifyPropertyPages, try displaying IAMVfwCompressDialogs instead!
+                IAMVfwCompressDialogs compressDialog = dev as IAMVfwCompressDialogs;
+                if (compressDialog != null)
+                {
+
+                    hr = compressDialog.ShowDialog(VfwCompressDialogs.Config, IntPtr.Zero);
+                    DsError.ThrowExceptionForHR(hr);
+                }
+                return;
+            }
+
+            //Get the name of the filter from the FilterInfo struct
+            FilterInfo filterInfo;
+            hr = dev.QueryFilterInfo(out filterInfo);
+            DsError.ThrowExceptionForHR(hr);
+
+            // Get the propertypages from the property bag
+            DsCAUUID caGUID;
+            hr = pProp.GetPages(out caGUID);
+            DsError.ThrowExceptionForHR(hr);
+
+            //Create and display the OlePropertyFrame
+            object oDevice = (object)dev;
+            hr = OleCreatePropertyFrame(FaceDetection.MainForm.GetMainForm.Handle, 0, 0, filterInfo.achName, 1, ref oDevice, caGUID.cElems, caGUID.pElems, 0, 0, IntPtr.Zero);
+            DsError.ThrowExceptionForHR(hr);
+
+            // Release COM objects
+            Marshal.FreeCoTaskMem(caGUID.pElems);
+            Marshal.ReleaseComObject(pProp);
+            //Marshal.ReleaseComObject(filterInfo);
+            Marshal.ReleaseComObject(dev);
+        }
     }
 }

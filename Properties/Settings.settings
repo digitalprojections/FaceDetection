@@ -167,5 +167,8 @@
     <Setting Name="C4res" Type="System.String" Scope="User">
       <Value Profile="(Default)">640x480</Value>
     </Setting>
+    <Setting Name="camera_index" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
