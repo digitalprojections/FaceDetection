@@ -3485,10 +3485,13 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBox_EventRecorder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 0</value>
+    <value>16, 0</value>
+  </data>
+  <data name="pictureBox_EventRecorder.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="pictureBox_EventRecorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 32</value>
+    <value>39, 40</value>
   </data>
   <data name="pictureBox_EventRecorder.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
@@ -3542,10 +3545,13 @@
     <value>NoControl</value>
   </data>
   <data name="cb_event_recorder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 0</value>
+    <value>36, 0</value>
+  </data>
+  <data name="cb_event_recorder.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="cb_event_recorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 16</value>
+    <value>124, 19</value>
   </data>
   <data name="cb_event_recorder.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3581,7 +3587,7 @@
     <value>581, 15</value>
   </data>
   <data name="lb_post_event.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 12</value>
+    <value>138, 15</value>
   </data>
   <data name="lb_post_event.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3617,7 +3623,7 @@
     <value>399, 15</value>
   </data>
   <data name="lb_pre_event.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 12</value>
+    <value>149, 15</value>
   </data>
   <data name="lb_pre_event.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3647,7 +3653,7 @@
     <value>667, 56</value>
   </data>
   <data name="label23_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
+    <value>30, 15</value>
   </data>
   <data name="label23_seconds.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -3677,7 +3683,7 @@
     <value>493, 56</value>
   </data>
   <data name="label22_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
+    <value>30, 15</value>
   </data>
   <data name="label22_seconds.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -4232,13 +4238,16 @@
     <value>52</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
+    <value>8, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>710, 368</value>
   </data>
   <data name="$this.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 16</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Settings</value>
