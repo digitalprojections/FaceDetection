@@ -21,6 +21,7 @@ namespace FaceDetection
         private readonly Timer mouse_down_timer = new Timer();
         private readonly Timer face_timer = new Timer();
         private readonly Timer datetime_ui_updater = new Timer();
+        private static readonly object Listx;
 
         internal enum CAMERA_MODES
         {
@@ -184,7 +185,7 @@ namespace FaceDetection
         }
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
-
+            Console.WriteLine(String.Concat(parameters));
            
                 string param = String.Concat(parameters).ToLower();
             
@@ -209,6 +210,8 @@ namespace FaceDetection
                         Debug.WriteLine(e.ToString() + " 117rd line");
                     }
                     //|||||||||||||||||||||||||||
+
+
                     switch (parameters.ElementAt(1))
                     {
                         case "-c":
@@ -216,6 +219,8 @@ namespace FaceDetection
                             {
                                 if (parameters.ElementAt(2) == "1")
                                 {
+                                    
+
                                     if (settingUI != null && settingUI.Visible == false)
                                     {
                                         settingUI.TopMost = true;
@@ -241,8 +246,8 @@ namespace FaceDetection
                             try
                             {
 
-                                    MainForm.GetMainForm.TakeSnapShot();
-                                
+                                MainForm.GetMainForm.TakeSnapShot();
+
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
@@ -253,6 +258,8 @@ namespace FaceDetection
                         case "-b":
                             try
                             {
+                                Console.WriteLine("テスト" + parameters.ElementAt(0) + "×" + parameters.ElementAt(1) + "×" + parameters.ElementAt(2) + "×" + parameters.ElementAt(3));
+
                                 if (parameters.ElementAt(2) == "1")
                                 {
                                     /*
@@ -267,6 +274,16 @@ namespace FaceDetection
                                  */
                                     or_controlBut.Visible = false;
                                 }
+
+
+                                CheckCameraIndex(parameters);
+
+                                
+        
+
+
+
+
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
@@ -496,6 +513,33 @@ namespace FaceDetection
             }
         }
 
+        private static bool CheckCameraIndex(IReadOnlyCollection<string> parameters)
+        {
+            bool Retval = false;
+
+            switch (Int32.Parse(parameters.ElementAt(3)))
+            {
+                case 1:
+                    Retval = true;
+                    break;
+                case 2:
+                    Retval = true;
+                    break;
+                case 3:
+                    Retval = true;
+                    break;
+                case 4:
+                    Retval = true;
+                    break;
+                case 9:
+                    Retval = true;
+                    break;
+
+              
+            }
+            return Retval;
+        }
+        
         internal void ResumeSensor()
         {
             rSensor.StartOM_Timer();
