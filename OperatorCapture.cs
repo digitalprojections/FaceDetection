@@ -26,12 +26,23 @@ namespace FaceDetection
                 if(Properties.Settings.Default.capture_type == "Video")
                 {
                     //Initiate video
-
+                    var status = Camera.CheckCamera(0);
+                    Console.WriteLine(status + " the camera state. Toal number of cameras " + Camera.GetCameraCount()[0].Name);
                 }else
                 {
                     //Snapshot
                 }
             }
+        }
+        /// <summary>
+        /// Call this function to initialize a camera, when the camera to capture the operator is not ON.
+        /// </summary>
+        public static void InitializeCamera()
+        {
+            //First get the camera running
+            
+            //then simply continue as usual
+            Start();
         }
 
         public static void SetupTimer()

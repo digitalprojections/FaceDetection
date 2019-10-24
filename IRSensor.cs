@@ -14,15 +14,25 @@ namespace FaceDetection
         }
         private void InitOMTimer()
         {
-            //timer
-            OM_Timer.Tick += OM_Timer_Tick;
-            OM_Timer.Interval = 1000;            
+                DialogResult dialogResult = MessageBox.Show("Does this PC have an IR Sensor?", "Please, choose operation mode", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    OM_Timer.Tick += OM_Timer_Tick;
+                    OM_Timer.Interval = 1000;
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                //do something else
+                Properties.Settings.Default.use_ir_sensor = false;
+                Properties.Settings.Default.Save();
+                }
+            
             
         }
 
         private void OM_Timer_Tick(object sender, EventArgs e)
         {
-            Console.WriteLine("TIMER tick: " + e.ToString());
+            Console.WriteLine("IR Sensor TIMER tick: " + e.ToString());
             if (MainForm.Or_testparam.Text != "sensor check")
                 MainForm.Or_testparam.Text = "sensor check";
             else

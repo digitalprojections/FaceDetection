@@ -1,6 +1,6 @@
 ﻿namespace FaceDetection
 {
-    partial class settingsUI
+    partial class SettingsUI
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(settingsUI));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsUI));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.folderBrowserDialogStoreFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.check_state_images = new System.Windows.Forms.ImageList(this.components);
@@ -48,11 +48,11 @@
             this.lb_seconds = new System.Windows.Forms.Label();
             this.lb_manual_recording_time = new System.Windows.Forms.Label();
             this.tab_view_settings = new System.Windows.Forms.TabPage();
+            this.groupBox_viewSettings = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.numericUpDownBacklight = new System.Windows.Forms.NumericUpDown();
             this.lb_backlight_off_idling_delay = new System.Windows.Forms.Label();
             this.label20_minutes = new System.Windows.Forms.Label();
-            this.groupBox_viewSettings = new System.Windows.Forms.GroupBox();
             this.pictureBox_irsensor = new System.Windows.Forms.PictureBox();
             this.pictureBox_backlightOffWhenIdle = new System.Windows.Forms.PictureBox();
             this.pictureBox_BacklightOnRecognition = new System.Windows.Forms.PictureBox();
@@ -141,9 +141,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_faceRecognition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.tab_view_settings.SuspendLayout();
+            this.groupBox_viewSettings.SuspendLayout();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBacklight)).BeginInit();
-            this.groupBox_viewSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_irsensor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_backlightOffWhenIdle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_BacklightOnRecognition)).BeginInit();
@@ -322,6 +322,38 @@
             this.tab_view_settings.Name = "tab_view_settings";
             this.tab_view_settings.UseVisualStyleBackColor = true;
             // 
+            // groupBox_viewSettings
+            // 
+            this.groupBox_viewSettings.Controls.Add(this.groupBox8);
+            this.groupBox_viewSettings.Controls.Add(this.pictureBox_irsensor);
+            this.groupBox_viewSettings.Controls.Add(this.pictureBox_backlightOffWhenIdle);
+            this.groupBox_viewSettings.Controls.Add(this.pictureBox_BacklightOnRecognition);
+            this.groupBox_viewSettings.Controls.Add(this.cb_backlight_off_idling);
+            this.groupBox_viewSettings.Controls.Add(this.cb_irsensor);
+            this.groupBox_viewSettings.Controls.Add(this.cb_backlight_on_recognition);
+            this.groupBox_viewSettings.Controls.Add(this.pictureBox_recordUponStart);
+            this.groupBox_viewSettings.Controls.Add(this.pictureBox_recordingDuringFaceRecognition);
+            this.groupBox_viewSettings.Controls.Add(this.cb_record_upon_start);
+            this.groupBox_viewSettings.Controls.Add(this.cb_recording_during_facerec);
+            this.groupBox_viewSettings.Controls.Add(this.pictureBox_allcam);
+            this.groupBox_viewSettings.Controls.Add(this.cb_all_cameras);
+            this.groupBox_viewSettings.Controls.Add(this.pictureBox_showRecordingIcon);
+            this.groupBox_viewSettings.Controls.Add(this.pictureBox_showCameraNo);
+            this.groupBox_viewSettings.Controls.Add(this.pictureBox_showCurrentDate);
+            this.groupBox_viewSettings.Controls.Add(this.pictureBox_showWindowPane);
+            this.groupBox_viewSettings.Controls.Add(this.pictureBox_full_screen);
+            this.groupBox_viewSettings.Controls.Add(this.pictureBox_alwaysOnTop);
+            this.groupBox_viewSettings.Controls.Add(this.cb_show_rec_icon);
+            this.groupBox_viewSettings.Controls.Add(this.cb_show_camera_number);
+            this.groupBox_viewSettings.Controls.Add(this.cb_dateandtime);
+            this.groupBox_viewSettings.Controls.Add(this.cb_window_pane);
+            this.groupBox_viewSettings.Controls.Add(this.checkBox_full_screen);
+            this.groupBox_viewSettings.Controls.Add(this.cb_always_on_top);
+            resources.ApplyResources(this.groupBox_viewSettings, "groupBox_viewSettings");
+            this.groupBox_viewSettings.Name = "groupBox_viewSettings";
+            this.groupBox_viewSettings.TabStop = false;
+            this.groupBox_viewSettings.Enter += new System.EventHandler(this.GroupBox_viewSettings_Enter);
+            // 
             // groupBox8
             // 
             resources.ApplyResources(this.groupBox8, "groupBox8");
@@ -358,38 +390,6 @@
             resources.ApplyResources(this.label20_minutes, "label20_minutes");
             this.label20_minutes.Name = "label20_minutes";
             // 
-            // groupBox_viewSettings
-            // 
-            this.groupBox_viewSettings.Controls.Add(this.groupBox8);
-            this.groupBox_viewSettings.Controls.Add(this.pictureBox_irsensor);
-            this.groupBox_viewSettings.Controls.Add(this.pictureBox_backlightOffWhenIdle);
-            this.groupBox_viewSettings.Controls.Add(this.pictureBox_BacklightOnRecognition);
-            this.groupBox_viewSettings.Controls.Add(this.cb_backlight_off_idling);
-            this.groupBox_viewSettings.Controls.Add(this.cb_irsensor);
-            this.groupBox_viewSettings.Controls.Add(this.cb_backlight_on_recognition);
-            this.groupBox_viewSettings.Controls.Add(this.pictureBox_recordUponStart);
-            this.groupBox_viewSettings.Controls.Add(this.pictureBox_recordingDuringFaceRecognition);
-            this.groupBox_viewSettings.Controls.Add(this.cb_record_upon_start);
-            this.groupBox_viewSettings.Controls.Add(this.cb_recording_during_facerec);
-            this.groupBox_viewSettings.Controls.Add(this.pictureBox_allcam);
-            this.groupBox_viewSettings.Controls.Add(this.cb_all_cameras);
-            this.groupBox_viewSettings.Controls.Add(this.pictureBox_showRecordingIcon);
-            this.groupBox_viewSettings.Controls.Add(this.pictureBox_showCameraNo);
-            this.groupBox_viewSettings.Controls.Add(this.pictureBox_showCurrentDate);
-            this.groupBox_viewSettings.Controls.Add(this.pictureBox_showWindowPane);
-            this.groupBox_viewSettings.Controls.Add(this.pictureBox_full_screen);
-            this.groupBox_viewSettings.Controls.Add(this.pictureBox_alwaysOnTop);
-            this.groupBox_viewSettings.Controls.Add(this.cb_show_rec_icon);
-            this.groupBox_viewSettings.Controls.Add(this.cb_show_camera_number);
-            this.groupBox_viewSettings.Controls.Add(this.cb_dateandtime);
-            this.groupBox_viewSettings.Controls.Add(this.cb_window_pane);
-            this.groupBox_viewSettings.Controls.Add(this.checkBox_full_screen);
-            this.groupBox_viewSettings.Controls.Add(this.cb_always_on_top);
-            resources.ApplyResources(this.groupBox_viewSettings, "groupBox_viewSettings");
-            this.groupBox_viewSettings.Name = "groupBox_viewSettings";
-            this.groupBox_viewSettings.TabStop = false;
-            this.groupBox_viewSettings.Enter += new System.EventHandler(this.GroupBox_viewSettings_Enter);
-            // 
             // pictureBox_irsensor
             // 
             this.pictureBox_irsensor.BackColor = System.Drawing.SystemColors.Control;
@@ -399,6 +399,7 @@
             this.pictureBox_irsensor.Name = "pictureBox_irsensor";
             this.pictureBox_irsensor.TabStop = false;
             this.pictureBox_irsensor.Tag = "16";
+            this.pictureBox_irsensor.Click += new System.EventHandler(this.PicBox_Clicked);
             // 
             // pictureBox_backlightOffWhenIdle
             // 
@@ -409,6 +410,7 @@
             this.pictureBox_backlightOffWhenIdle.Name = "pictureBox_backlightOffWhenIdle";
             this.pictureBox_backlightOffWhenIdle.TabStop = false;
             this.pictureBox_backlightOffWhenIdle.Tag = "9";
+            this.pictureBox_backlightOffWhenIdle.Click += new System.EventHandler(this.PicBox_Clicked);
             // 
             // pictureBox_BacklightOnRecognition
             // 
@@ -418,11 +420,12 @@
             resources.ApplyResources(this.pictureBox_BacklightOnRecognition, "pictureBox_BacklightOnRecognition");
             this.pictureBox_BacklightOnRecognition.Name = "pictureBox_BacklightOnRecognition";
             this.pictureBox_BacklightOnRecognition.TabStop = false;
+            this.pictureBox_BacklightOnRecognition.Click += new System.EventHandler(this.PicBox_Clicked);
             // 
             // cb_backlight_off_idling
             // 
             resources.ApplyResources(this.cb_backlight_off_idling, "cb_backlight_off_idling");
-            this.cb_backlight_off_idling.Checked = global::FaceDetection.Properties.Settings.Default.backlight_off_when_idle;
+            this.cb_backlight_off_idling.Checked = global::FaceDetection.Properties.Settings.Default.enable_backlight_off_when_idle;
             this.cb_backlight_off_idling.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_backlight_off_idling.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "enable_backlight_off_when_idle", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_backlight_off_idling.Name = "cb_backlight_off_idling";
@@ -432,9 +435,8 @@
             // cb_irsensor
             // 
             resources.ApplyResources(this.cb_irsensor, "cb_irsensor");
-            this.cb_irsensor.Checked = global::FaceDetection.Properties.Settings.Default.backlight_on_upon_face_rec;
-            this.cb_irsensor.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_irsensor.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "backlight_on_upon_face_rec", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cb_irsensor.Checked = global::FaceDetection.Properties.Settings.Default.use_ir_sensor;
+            this.cb_irsensor.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "use_ir_sensor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_irsensor.Name = "cb_irsensor";
             this.cb_irsensor.Tag = "16";
             this.cb_irsensor.UseVisualStyleBackColor = true;
@@ -456,6 +458,7 @@
             this.pictureBox_recordUponStart.Name = "pictureBox_recordUponStart";
             this.pictureBox_recordUponStart.TabStop = false;
             this.pictureBox_recordUponStart.Tag = "10";
+            this.pictureBox_recordUponStart.Click += new System.EventHandler(this.PicBox_Clicked);
             // 
             // pictureBox_recordingDuringFaceRecognition
             // 
@@ -466,6 +469,7 @@
             this.pictureBox_recordingDuringFaceRecognition.Name = "pictureBox_recordingDuringFaceRecognition";
             this.pictureBox_recordingDuringFaceRecognition.TabStop = false;
             this.pictureBox_recordingDuringFaceRecognition.Tag = "12";
+            this.pictureBox_recordingDuringFaceRecognition.Click += new System.EventHandler(this.PicBox_Clicked);
             // 
             // cb_record_upon_start
             // 
@@ -495,6 +499,7 @@
             this.pictureBox_allcam.Name = "pictureBox_allcam";
             this.pictureBox_allcam.TabStop = false;
             this.pictureBox_allcam.Tag = "2";
+            this.pictureBox_allcam.Click += new System.EventHandler(this.PicBox_Clicked);
             // 
             // cb_all_cameras
             // 
@@ -617,9 +622,9 @@
             // checkBox_full_screen
             // 
             resources.ApplyResources(this.checkBox_full_screen, "checkBox_full_screen");
-            this.checkBox_full_screen.Checked = global::FaceDetection.Properties.Settings.Default.capture_operator;
+            this.checkBox_full_screen.Checked = global::FaceDetection.Properties.Settings.Default.main_window_full_screen;
             this.checkBox_full_screen.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_full_screen.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "capture_operator", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox_full_screen.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "main_window_full_screen", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox_full_screen.Name = "checkBox_full_screen";
             this.checkBox_full_screen.Tag = "3";
             this.checkBox_full_screen.UseVisualStyleBackColor = true;
@@ -982,6 +987,7 @@
             this.pictureBox_operatorCapture.Name = "pictureBox_operatorCapture";
             this.pictureBox_operatorCapture.TabStop = false;
             this.pictureBox_operatorCapture.Tag = "11";
+            this.pictureBox_operatorCapture.Click += new System.EventHandler(this.PicBox_Clicked);
             // 
             // cb_operator_capture
             // 
@@ -1100,6 +1106,7 @@
             this.pictureBox_EventRecorder.Name = "pictureBox_EventRecorder";
             this.pictureBox_EventRecorder.TabStop = false;
             this.pictureBox_EventRecorder.Tag = "13";
+            this.pictureBox_EventRecorder.Click += new System.EventHandler(this.PicBox_Clicked);
             // 
             // numericUpDown7
             // 
@@ -1165,11 +1172,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_faceRecognition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.tab_view_settings.ResumeLayout(false);
+            this.groupBox_viewSettings.ResumeLayout(false);
+            this.groupBox_viewSettings.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBacklight)).EndInit();
-            this.groupBox_viewSettings.ResumeLayout(false);
-            this.groupBox_viewSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_irsensor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_backlightOffWhenIdle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_BacklightOnRecognition)).EndInit();

@@ -27,7 +27,7 @@
       <Value Profile="(Default)">600</Value>
     </Setting>
     <Setting Name="backlight_on_upon_face_rec" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="backlight_offset_mins" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">5</Value>
@@ -54,7 +54,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="recording_on_start" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="interval_before_reinitiating_recording" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">60</Value>
@@ -167,14 +167,17 @@
     <Setting Name="camera_index" Type="System.String" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="backlight_off_when_idle" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="store_location_description" Type="System.String" Scope="User">
       <Value Profile="(Default)">Please, select the location to store videos</Value>
     </Setting>
     <Setting Name="main_window_full_screen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="use_ir_sensor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="main_camera_index" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

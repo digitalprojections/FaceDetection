@@ -182,7 +182,7 @@ namespace GitHub.secile.Video
             // Assign Delegates
             Start = () =>
             {
-                DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Running);                
+                DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Running); 
             };
             Stop = () =>
             {
@@ -596,12 +596,24 @@ namespace GitHub.secile.Video
         {
             var mediaControl = graph as IMediaControl;
             if (mediaControl == null) return;
-
-            switch (state)
+            try
             {
-                case FILTER_STATE.Paused: mediaControl.Pause(); break;
-                case FILTER_STATE.Stopped: mediaControl.Stop(); break;
-                case FILTER_STATE.Running: mediaControl.Run(); break;
+                switch (state)
+                {
+                    case FILTER_STATE.Paused:
+                        mediaControl.Pause();
+                        break;
+                    case FILTER_STATE.Stopped:
+                        mediaControl.Stop();
+                        break;
+                    case FILTER_STATE.Running:
+                        mediaControl.Run();
+                        break;
+                }
+            }
+            catch(COMException comx)
+            {
+                
             }
         }
 

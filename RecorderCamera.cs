@@ -15,7 +15,7 @@ using System.Threading;
 
 namespace FaceDetection
 {
-    class CameraManager
+    class RecorderCamera
     {
         string sourcePath = @"D:\TEMP";
         string targetPath = String.Empty;
@@ -30,10 +30,11 @@ namespace FaceDetection
         public Action Stop { get; private set; }
         public Action Release { get; private set; }
         public Func<Bitmap> GetBitmap { get; private set; }
+        internal PlayState CurrentState1 { get => CurrentState; set => CurrentState = value; }
 
         private IGraphBuilder pGraph;
         //private Guid CLSID_SampleGrabber = new Guid("{C1F400A0-3F08-11D3-9F0B-006008039E37}"); //qedit.dll
-        private PlayState CurrentState = PlayState.Stopped;
+        PlayState CurrentState = PlayState.Stopped;
         private int WM_GRAPHNOTIFY = Convert.ToInt32("0X8000", 16) + 1;
         public IVideoWindow videoWindow = null;
         private IMediaControl mediaControl = null;
@@ -85,7 +86,7 @@ namespace FaceDetection
         /// <param name="fps"></param>
         /// <param name="pbx">Control to display the video</param>
         /// <param name="dstFileName">destination file name</param>
-        public CameraManager(int cameraIndex, Size size, double fps, IntPtr pbx, string dstFileName)
+        public RecorderCamera(int cameraIndex, Size size, double fps, IntPtr pbx, string dstFileName)
         {
             Directory.CreateDirectory(sourcePath);
             GetInterfaces();
@@ -244,9 +245,16 @@ namespace FaceDetection
                     continue;
                 }
             }
-            mediaControl = (IMediaControl)graph;            
-            hr = mediaControl.Run();
-            checkHR(hr, "Can't run the graph");
+            try
+            {
+                mediaControl = (IMediaControl)graph;
+                hr = mediaControl.Run();
+                //checkHR(hr, "Can't run the graph");
+            }catch(COMException comx)
+            {
+                CustomMessage.ShowMessage("Can not start the camera");
+            }
+            
 
             var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, cameraIndex);
             var pin = DirectShow.FindPin(filter, 0, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);

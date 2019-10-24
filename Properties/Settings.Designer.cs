@@ -121,7 +121,7 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool backlight_on_upon_face_rec {
             get {
                 return ((bool)(this["backlight_on_upon_face_rec"]));
@@ -229,7 +229,7 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool recording_on_start {
             get {
                 return ((bool)(this["recording_on_start"]));
@@ -685,18 +685,6 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool backlight_off_when_idle {
-            get {
-                return ((bool)(this["backlight_off_when_idle"]));
-            }
-            set {
-                this["backlight_off_when_idle"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Please, select the location to store videos")]
         public string store_location_description {
             get {
@@ -716,6 +704,30 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["main_window_full_screen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool use_ir_sensor {
+            get {
+                return ((bool)(this["use_ir_sensor"]));
+            }
+            set {
+                this["use_ir_sensor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int main_camera_index {
+            get {
+                return ((int)(this["main_camera_index"]));
+            }
+            set {
+                this["main_camera_index"] = value;
             }
         }
     }
