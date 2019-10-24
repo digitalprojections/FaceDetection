@@ -15,7 +15,7 @@ using System.Threading;
 
 namespace FaceDetection
 {
-    class CameraManager
+    class RecorderCamera
     {
         string sourcePath = @"D:\TEMP";
         string targetPath = String.Empty;
@@ -30,10 +30,11 @@ namespace FaceDetection
         public Action Stop { get; private set; }
         public Action Release { get; private set; }
         public Func<Bitmap> GetBitmap { get; private set; }
+        internal PlayState CurrentState1 { get => CurrentState; set => CurrentState = value; }
 
         private IGraphBuilder pGraph;
         //private Guid CLSID_SampleGrabber = new Guid("{C1F400A0-3F08-11D3-9F0B-006008039E37}"); //qedit.dll
-        private PlayState CurrentState = PlayState.Stopped;
+        PlayState CurrentState = PlayState.Stopped;
         private int WM_GRAPHNOTIFY = Convert.ToInt32("0X8000", 16) + 1;
         public IVideoWindow videoWindow = null;
         private IMediaControl mediaControl = null;
@@ -77,8 +78,17 @@ namespace FaceDetection
         //The following is called for building the PREVIEW graph
        
         //This one is for recording
-        public CameraManager(int cameraIndex, Size size, double fps, IntPtr pbx, string dstFileName)
+        /// <summary>
+        /// Initialize Camera in CAPTURE Mode
+        /// </summary>
+        /// <param name="cameraIndex">Camera index</param>
+        /// <param name="size"></param>
+        /// <param name="fps"></param>
+        /// <param name="pbx">Control to display the video</param>
+        /// <param name="dstFileName">destination file name</param>
+        public RecorderCamera(int cameraIndex, Size size, double fps, IntPtr pbx, string dstFileName)
         {
+            Directory.CreateDirectory(sourcePath);
             GetInterfaces();
 
             string str = Path.Combine(FaceDetection.Properties.Settings.Default.video_file_location, (cameraIndex + 1).ToString());
@@ -174,7 +184,7 @@ namespace FaceDetection
             hr = control9.SetVideoClippingWindow(pbx);
             checkHR(hr, "Can't set video clipping window");
 
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+            hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
             checkHR(hr, "Can't set rectangles of the video position");
 
 
@@ -235,14 +245,22 @@ namespace FaceDetection
                     continue;
                 }
             }
-            mediaControl = (IMediaControl)graph;            
-            hr = mediaControl.Run();
-            checkHR(hr, "Can't run the graph");
+            try
+            {
+                mediaControl = (IMediaControl)graph;
+                hr = mediaControl.Run();
+                //checkHR(hr, "Can't run the graph");
+            }catch(COMException comx)
+            {
+                CustomMessage.ShowMessage("Can not start the camera");
+            }
+            
 
             var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, cameraIndex);
             var pin = DirectShow.FindPin(filter, 0, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
             //Console.WriteLine(GetVideoOutputFormat(pin).Length + " video format for camera " + cameraIndex);
             VideoFormat[] videoFormats = GetVideoOutputFormat(pin);
+            /*
             for (var i = 0; i<videoFormats.Length; i++)
             {
                 Console.Write(videoFormats[i].MajorType + " ");
@@ -252,10 +270,9 @@ namespace FaceDetection
                 Console.Write(videoFormats[i].TimePerFrame + " /////");                
 
             }
-
+            */
             
         }
-
         private Bitmap GetBitmapMain(ISampleGrabber i_grabber, int width, int height, int stride)
         {
             try
@@ -315,7 +332,7 @@ namespace FaceDetection
         {
             int hr = 0;
             IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+            hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
             checkHR(hr, "Can't set rectangles of the video position");
         }
         

@@ -216,9 +216,9 @@
             // 
             this.camera_number_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.camera_number_txt.AutoSize = true;
-            this.camera_number_txt.BackColor = System.Drawing.Color.Black;
+            this.camera_number_txt.BackColor = System.Drawing.SystemColors.Control;
             this.camera_number_txt.Font = new System.Drawing.Font("MS UI Gothic", 50F);
-            this.camera_number_txt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.camera_number_txt.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.camera_number_txt.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.camera_number_txt.Location = new System.Drawing.Point(967, 11);
             this.camera_number_txt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -263,6 +263,7 @@
             this.Click += new System.EventHandler(this.ShowButtons);
             this.DragLeave += new System.EventHandler(this.LastPositionUpdate);
             this.DoubleClick += new System.EventHandler(this.FullScreen);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.or_controlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).EndInit();
             this.ResumeLayout(false);

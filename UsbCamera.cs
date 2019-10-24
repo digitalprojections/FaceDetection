@@ -85,7 +85,7 @@ namespace GitHub.secile.Video
         public UsbCamera(int cameraIndex, Size size, double fps, IntPtr pbx)
         {
             var camera_list = FindDevices();
-            if (cameraIndex >= camera_list.Length) throw new ArgumentException("USB camera is not available.", "index");
+            //if (cameraIndex >= camera_list.Length) throw new ArgumentException("USB camera is not available.", "index");
             Init(cameraIndex, size, fps, pbx);
         }
         static void checkHR(int hr, string msg)
@@ -156,7 +156,7 @@ namespace GitHub.secile.Video
             hr = control9.SetVideoClippingWindow(pbx);
             checkHR(hr, "Can't set video clipping window");
 
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+            hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
             checkHR(hr, "Can't set rectangles of the video position");
 
             var builder = DirectShow.CoCreateInstance(DirectShow.DsGuid.CLSID_CaptureGraphBuilder2) as DirectShow.ICaptureGraphBuilder2;
@@ -182,7 +182,7 @@ namespace GitHub.secile.Video
             // Assign Delegates
             Start = () =>
             {
-                DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Running);                
+                DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Running); 
             };
             Stop = () =>
             {
@@ -246,7 +246,7 @@ namespace GitHub.secile.Video
             {
                 int hr = 0;
                 IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
-                hr = control9.SetVideoPosition(null, new DsRect(0, 0, size.Width, size.Height));
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
             }
             catch(NullReferenceException nrx)
@@ -596,12 +596,24 @@ namespace GitHub.secile.Video
         {
             var mediaControl = graph as IMediaControl;
             if (mediaControl == null) return;
-
-            switch (state)
+            try
             {
-                case FILTER_STATE.Paused: mediaControl.Pause(); break;
-                case FILTER_STATE.Stopped: mediaControl.Stop(); break;
-                case FILTER_STATE.Running: mediaControl.Run(); break;
+                switch (state)
+                {
+                    case FILTER_STATE.Paused:
+                        mediaControl.Pause();
+                        break;
+                    case FILTER_STATE.Stopped:
+                        mediaControl.Stop();
+                        break;
+                    case FILTER_STATE.Running:
+                        mediaControl.Run();
+                        break;
+                }
+            }
+            catch(COMException comx)
+            {
+                
             }
         }
 

@@ -9,41 +9,58 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using static System.Environment;
 
 namespace FaceDetection
 {
 
-    public partial class settingsUI : Form
+    public partial class SettingsUI : Form
     {
         static ComboBox comboBoxFrames;
         DsDevice[] capDevices;
-        string[] camera_names;
+        static string[] camera_names;
 
-        private int camera_index;
-        private int camera_number;
-        public int Camera_index { get { return camera_index = Properties.Settings.Default.current_camera_index; } private set { Properties.Settings.Default.current_camera_index = value; Properties.Settings.Default.Save(); } }
-        public int Camera_number { get { return camera_number = Properties.Settings.Default.current_camera_index+1;  } }
+        static ComboBox or_selected_camera_number;
 
+        public int Camera_index {
+            get {                
+                return Properties.Settings.Default.main_camera_index;
+            }
+            private set {
+                Properties.Settings.Default.main_camera_index = value;
+                Properties.Settings.Default.Save();
+            }
+        }
         private int InitPanelWidth;
         private int InitPanelHeight;
 
-        public settingsUI()
+        public SettingsUI()
         {
-            Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
-            Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
+            try
+            {
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
+            }
+            catch(IOException iox)
+            {
+                //resetting the default folders to C
+                //hoping it exists
+                Properties.Settings.Default.video_file_location = @"C:\UVCCAMERA";
+                Properties.Settings.Default.Save();
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
+            }
+            
 
             InitializeComponent();
             //Setup window
+            Size size = new Size(0,0);
+               size = GetWidth(Properties.Settings.Default.main_camera_index);
             this.Width = 1024;
             this.Height = 760;
             this.ControlBox = false;
-            
-            InitPanelWidth = this.flowLayoutPanel1.Width;
-            InitPanelHeight = this.flowLayoutPanel1.Height;
 
-            //get reference to the mainform
-            Console.WriteLine(MainForm.GetCamera());
-
+            or_selected_camera_number = cm_camera_number;
             //get reference to the mainform
             //Console.WriteLine(MainForm.GetCamera());
         }
@@ -69,19 +86,32 @@ namespace FaceDetection
             }            
         }
 
-        private void ArrangeCameraNames(int len)
+        public static void ArrangeCameraNames(int len)
         {
+            or_selected_camera_number.Items.Clear();
             camera_names = new string[len];
             for (int i = 0; i < len; i++)
             {
-                camera_names[i] = capDevices[i].Name;
-                cm_camera_number.Items.Add(i + 1);
+                or_selected_camera_number.Items.Add(i + 1);
             }
-            //cm_camera_number.SelectedIndex = Properties.Settings.Default.current_camera_index;
+            if(or_selected_camera_number.Items.Count> Properties.Settings.Default.main_camera_index)
+            {
+
+                or_selected_camera_number.SelectedIndex = Properties.Settings.Default.main_camera_index;
+            }
+            else
+            {
+                Properties.Settings.Default.main_camera_index = 0;
+            }
+            
         }
+
+
         private void changeStoreLocation(object sender, EventArgs e)
         {
             folderBrowserDialogStoreFolder.ShowNewFolderButton = true;
+            folderBrowserDialogStoreFolder.Description = Properties.Settings.Default.store_location_description;
+            folderBrowserDialogStoreFolder.SelectedPath = Properties.Settings.Default.video_file_location;
             // Show the FolderBrowserDialog.  
             DialogResult result = folderBrowserDialogStoreFolder.ShowDialog();
             if (result == DialogResult.OK)
@@ -106,7 +136,7 @@ namespace FaceDetection
                 this.TopMost = false;
                 //Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
                 //Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
-                //Process.Start(Properties.Settings.Default.video_file_location);
+                Process.Start(Properties.Settings.Default.video_file_location);
                 changeStoreLocation(sender, e);
             }
             catch (IOException ioe)
@@ -178,7 +208,7 @@ namespace FaceDetection
             ComboBox comboBox = (ComboBox)sender;
             //Debug.WriteLine(comboBox.SelectedIndex);
             Camera_index = comboBox.SelectedIndex;
-            
+            Properties.Settings.Default.main_camera_index = Camera_index;
             SetCameraPropertiesFromMemory();
         }
 
@@ -186,172 +216,59 @@ namespace FaceDetection
         {
             if (cm_camera_number.Items.Count > 0)
             {
-                //cm_camera_number.SelectedIndex = Properties.Settings.Default.current_camera_index;
-                cm_capture_mode.SelectedIndex = Properties.Settings.Default.selectedCaptureMethod;
+                //cm_camera_number.SelectedIndex = Properties.Settings.Default.main_camera_index;
+                cm_capture_mode.SelectedIndex = Properties.Settings.Default.capture_method;
             }
             SetCameraPropertiesFromMemory();
-
             cm_language.SelectedItem = Properties.Settings.Default.language;
-
             CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture(Properties.Settings.Default.culture);
-
             ChangeLanguage();
             Debug.WriteLine(CultureInfo.CurrentCulture + " current culture");
 
-            // Get the collection of video devices
-            capDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
 
-            numericUpDownCamCount.Value = Properties.Settings.Default.camera_count;
+            Camera.SetNumberOfCameras();
+            
 
-            if (capDevices.Length > numericUpDownCamCount.Value)
-            {
-                //MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
-                ArrangeCameraNames(capDevices.Length);
-            }
-            else
-            {
-                //settings are missing
-                if (capDevices.Length > 4)
-                {
-                    ArrangeCameraNames(4);
-                }
-                else
-                {
-                    Console.WriteLine(capDevices.Length + " capdevices");
-                    ArrangeCameraNames(capDevices.Length);
-                }
-                PicBoxInitFunction();
-            }
-
+            SetCheckBoxValues();            
         }
-        private void PicBoxInitFunction()
+
+        private void SetCheckBoxValues()
         {
-            if (cb_all_cameras.Checked == true)
-            {
-                pictureBox_allcam.Image = Properties.Resources.check;
-            }
-            else
-            {
-                pictureBox_allcam.Image = Properties.Resources.checkered;
-            }
-
-            if (cb_delete_old.Checked == true)
-            {
-                //pictureBox_DeleteOldData.Image = Properties.Resources.check;
-            }
-            else
-            {
-                //pictureBox_DeleteOldData.Image = Properties.Resources.checkered;
-            }
-
-            if (cb_always_on_top.Checked == true)
-            {
-                pictureBox_alwaysOnTop.Image = Properties.Resources.check;
-            }
-            else
-            {
-                pictureBox_alwaysOnTop.Image = Properties.Resources.checkered;
-            }
-
-            if (cb_window_pane.Checked == true)
-            {
-                pictureBox_showWindowPane.Image = Properties.Resources.check;
-            }
-            else
-            {
-                pictureBox_showWindowPane.Image = Properties.Resources.checkered;
-            }
-
-            if (cb_dateandtime.Checked == true)
-            {
-                pictureBox_showCurrentDate.Image = Properties.Resources.check;
-            }
-            else
-            {
-                pictureBox_showCurrentDate.Image = Properties.Resources.checkered;
-            }
-
-            if (cb_show_camera_number.Checked == true)
-            {
-                pictureBox_showCameraNo.Image = Properties.Resources.check;
-            }
-            else
-            {
-                pictureBox_showCameraNo.Image = Properties.Resources.checkered;
-            }
-
-            if (cb_show_rec_icon.Checked == true)
-            {
-                pictureBox_showRecordingIcon.Image = Properties.Resources.check;
-            }
-            else
-            {
-                pictureBox_showRecordingIcon.Image = Properties.Resources.checkered;
-            }
-
-            if (cb_face_recognition.Checked == true)
-            {
-                pictureBox_faceRecognition.Image = Properties.Resources.check;
-            }
-            else
-            {
-                pictureBox_faceRecognition.Image = Properties.Resources.checkered;
-            }
-
-            if (cb_backlight_on_recognition.Checked == true)
-            {
-                pictureBox_BacklightOnRecognition.Image = Properties.Resources.check;
-            }
-            else
-            {
-                pictureBox_BacklightOnRecognition.Image = Properties.Resources.checkered;
-            }
-
-            if (cb_operator_capture.Checked == true)
-            {
-                pictureBox_operatorCapture.Image = Properties.Resources.check;
-            }
-            else
-            {
-                pictureBox_operatorCapture.Image = Properties.Resources.checkered;
-            }
-
-            if (cb_recording_during_facerec.Checked == true)
-            {
-                pictureBox_recordingDuringFaceRecognition.Image = Properties.Resources.check;
-            }
-            else
-            {
-                pictureBox_recordingDuringFaceRecognition.Image = Properties.Resources.checkered;
-            }
-
-            if (cb_record_upon_start.Checked == true)
-            {
-                pictureBox_recordUponStart.Image = Properties.Resources.check;
-            }
-            else
-            {
-                pictureBox_recordUponStart.Image = Properties.Resources.checkered;
-            }
-
-            if (cb_backlight_off_idling.Checked == true)
-            {
-                pictureBox_backlightOffWhenIdle.Image = Properties.Resources.check;
-            }
-            else
-            {
-                pictureBox_backlightOffWhenIdle.Image = Properties.Resources.checkered;
-            }
-
-            if (cb_event_recorder.Checked == true)
-            {
-                pictureBox_EventRecorder.Image = Properties.Resources.check;
-            }
-            else
-            {
-                pictureBox_EventRecorder.Image = Properties.Resources.checkered;
-            }
+            /*
+            checkBox_full_screen.Checked = Properties.Settings.Default.main_window_full_screen;
+            cb_all_cameras.Checked = Properties.Settings.Default.show_all_cams_simulteneously;
+            cb_always_on_top.Checked = Properties.Settings.Default.window_on_top;
+            cb_backlight_off_idling.Checked = Properties.Settings.Default.backlight_off_when_idle;
+            cb_backlight_on_recognition.Checked = Properties.Settings.Default.backlight_on_upon_face_rec;
+            cb_dateandtime.Checked = Properties.Settings.Default.show_current_datetime;
+            cb_delete_old.Checked = Properties.Settings.Default.enable_delete_old_files;
+            cb_event_recorder.Checked = Properties.Settings.Default.enable_event_recorder;
+            cb_face_recognition.Checked = Properties.Settings.Default.enable_face_recognition;
+            cb_operator_capture.Checked = Properties.Settings.Default.capture_operator;
+            cb_recording_during_facerec.Checked = Properties.Settings.Default.recording_while_face_recognition;
+            cb_record_upon_start.Checked = Properties.Settings.Default.recording_on_start;
+            cb_show_camera_number.Checked = Properties.Settings.Default.show_camera_no;
+            cb_show_rec_icon.Checked = Properties.Settings.Default.show_recording_icon;
+            cb_window_pane.Checked = Properties.Settings.Default.show_window_pane;
+            */
+            pictureBox_irsensor.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.use_ir_sensor)];
+            pictureBox_full_screen.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.main_window_full_screen)];
+            pictureBox_allcam.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.show_all_cams_simulteneously)];
+            pictureBox_DeleteOldData.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_delete_old_files)];
+            pictureBox_alwaysOnTop.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.window_on_top)];
+            pictureBox_showWindowPane.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.show_window_pane)];
+            pictureBox_showCurrentDate.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.show_current_datetime)];
+            pictureBox_showCameraNo.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.show_camera_no)];
+            pictureBox_showRecordingIcon.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.show_recording_icon)];
+            pictureBox_faceRecognition.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_face_recognition)];
+            pictureBox_BacklightOnRecognition.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.backlight_on_upon_face_rec)];
+            pictureBox_operatorCapture.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.capture_operator)];
+            pictureBox_recordingDuringFaceRecognition.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.recording_while_face_recognition)];
+            pictureBox_recordUponStart.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.recording_on_start)];
+            pictureBox_backlightOffWhenIdle.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_backlight_off_when_idle)];
+            pictureBox_EventRecorder.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_event_recorder)];
         }
+
 
 
         private void Cm_language_SelectedIndexChanged(object sender, EventArgs e)
@@ -377,12 +294,12 @@ namespace FaceDetection
             }
             Properties.Settings.Default.Save();
             string lan = Properties.Settings.Default.culture;
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(settingsUI));
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(SettingsUI));
             var cult = new CultureInfo(lan);
 
             //foreach (Control c in this.Controls)
-            foreach (Control c in this.flowLayoutPanel1.Controls)
-            {                
+            foreach (Control c in this.tabControl1.Controls)
+            {
                 resources.ApplyResources(c, c.Name, cult);
                 Debug.WriteLine(c.GetType().ToString());
                 if (c.GetType().ToString() == "System.Windows.Forms.GroupBox")
@@ -404,17 +321,10 @@ namespace FaceDetection
                 }
             }
         }
-
         private void Cm_capture_mode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.selectedCaptureMethod = cm_capture_mode.SelectedIndex;
+            Properties.Settings.Default.capture_method = cm_capture_mode.SelectedIndex;
             Properties.Settings.Default.Save();
-        }
-
-        private void Button_cameraProperties_MouseClick(object sender, MouseEventArgs e)
-        {
-            //Show the property window for the selected camera
-
         }
 
         private void NumericUpDownCamCount_ValueChanged(object sender, EventArgs e)
@@ -423,176 +333,55 @@ namespace FaceDetection
             Properties.Settings.Default.Save();
         }
 
-        private void cb_all_cameras_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxStateChanged(object sender, EventArgs e)
         {
-            Img_Chenge(cb_all_cameras, pictureBox_allcam);
+            CheckBox checkBox = (CheckBox)sender;
+            //ImageChangeOnCustomCheckBox();
+            Console.WriteLine(checkBox + " checkbox clicked");
         }
 
-        private void PictureBox_allcam_Click(object sender, EventArgs e)
+        private void PicBox_Clicked(object sender, EventArgs e)
         {
-            CB_Chenge(cb_all_cameras);
-            cb_all_cameras_CheckedChanged(sender, e);
+            PictureBox picbox = (PictureBox)sender;
+            checkOnKids(this.groupBox_viewSettings, "System.Windows.Forms.CheckBox", picbox);
+            //SetCheckBoxState(checkBox);
         }
 
-        private void cb_delete_old_CheckedChanged(object sender, EventArgs e)
+        private void checkOnKids(Control control, string type, PictureBox picbox)
         {
-            //Img_Chenge(cb_delete_old, pictureBox_DeleteOldData);
-        }
-
-        private void pictureBox_DeleteOldData_Click(object sender, EventArgs e)
-        {
-            CB_Chenge(cb_delete_old);
-            cb_delete_old_CheckedChanged(sender, e);
-        }
-
-        private void cb_always_on_top_CheckedChanged(object sender, EventArgs e)
-        {
-            Img_Chenge(cb_always_on_top, pictureBox_alwaysOnTop);
-        }
-
-        private void pictureBox_alwaysOnTop_Click(object sender, EventArgs e)
-        {
-            CB_Chenge(cb_always_on_top);
-            cb_always_on_top_CheckedChanged(sender, e);
-        }
-
-        private void cb_window_pane_CheckedChanged(object sender, EventArgs e)
-        {
-            Img_Chenge(cb_window_pane, pictureBox_showWindowPane);
-        }
-
-        private void pictureBox_showWindowPane_Click(object sender, EventArgs e)
-        {
-            CB_Chenge(cb_window_pane);
-            cb_window_pane_CheckedChanged(sender, e);
-        }
-
-        private void cb_dateandtime_CheckedChanged(object sender, EventArgs e)
-        {
-            Img_Chenge(cb_dateandtime, pictureBox_showCurrentDate);
-        }
-
-        private void pictureBox_showCurrentDate_Click(object sender, EventArgs e)
-        {
-            CB_Chenge(cb_dateandtime);
-            cb_dateandtime_CheckedChanged(sender, e);
-        }
-
-        private void cb_show_camera_number_CheckedChanged(object sender, EventArgs e)
-        {
-            Img_Chenge(cb_show_camera_number, pictureBox_showCameraNo);
-        }
-
-        private void pictureBox_showCameraNo_Click(object sender, EventArgs e)
-        {
-            CB_Chenge(cb_show_camera_number);
-            cb_show_camera_number_CheckedChanged(sender, e);
-        }
-
-        private void cb_show_rec_icon_CheckedChanged(object sender, EventArgs e)
-        {
-            Img_Chenge(cb_show_rec_icon, pictureBox_showRecordingIcon);
-        }
-
-        private void pictureBox_showRecordingIcon_Click(object sender, EventArgs e)
-        {
-            CB_Chenge(cb_show_rec_icon);
-            cb_show_rec_icon_CheckedChanged(sender, e);
-        }
-
-        private void cb_face_recognition_CheckedChanged(object sender, EventArgs e)
-        {
-            Img_Chenge(cb_face_recognition, pictureBox_faceRecognition);
-        }
-
-        private void pictureBox_faceRecognition_Click(object sender, EventArgs e)
-        {
-            CB_Chenge(cb_face_recognition);
-            cb_face_recognition_CheckedChanged(sender, e);
-        }
-
-        private void cb_backlight_on_recognition_CheckedChanged(object sender, EventArgs e)
-        {
-            Img_Chenge(cb_backlight_on_recognition, pictureBox_BacklightOnRecognition);
-        }
-
-        private void pictureBox_BacklightOnRecognition_Click(object sender, EventArgs e)
-        {
-            CB_Chenge(cb_backlight_on_recognition);
-            cb_backlight_on_recognition_CheckedChanged(sender, e);
-        }
-
-        private void cb_operator_capture_CheckedChanged(object sender, EventArgs e)
-        {
-            Img_Chenge(cb_operator_capture, pictureBox_operatorCapture);
-        }
-
-        private void pictureBox_operatorCapture_Click(object sender, EventArgs e)
-        {
-            CB_Chenge(cb_operator_capture);
-            cb_operator_capture_CheckedChanged(sender, e);
-        }
-
-        private void cb_record_upon_start_CheckedChanged(object sender, EventArgs e)
-        {
-            Img_Chenge(cb_record_upon_start, pictureBox_recordUponStart);
-        }
-
-        private void pictureBox_recordUponStart_Click(object sender, EventArgs e)
-        {
-            CB_Chenge(cb_record_upon_start);
-            cb_record_upon_start_CheckedChanged(sender, e);
-        }
-
-        private void cb_recording_during_facerec_CheckedChanged(object sender, EventArgs e)
-        {
-            Img_Chenge(cb_recording_during_facerec, pictureBox_recordingDuringFaceRecognition);
-        }
-
-        private void pictureBox_recordingDuringFaceRecognition_Click(object sender, EventArgs e)
-        {
-            CB_Chenge(cb_recording_during_facerec);
-            cb_recording_during_facerec_CheckedChanged(sender, e);
-        }
-
-        private void cb_backlight_off_idling_CheckedChanged(object sender, EventArgs e)
-        {
-            Img_Chenge(cb_backlight_off_idling, pictureBox_backlightOffWhenIdle);
-        }
-
-        private void pictureBox_backlightOffWhenIdle_Click(object sender, EventArgs e)
-        {
-            CB_Chenge(cb_backlight_off_idling);
-            cb_backlight_off_idling_CheckedChanged(sender, e);
-        }
-
-        private void cb_event_recorder_CheckedChanged(object sender, EventArgs e)
-        {
-            Img_Chenge(cb_event_recorder, pictureBox_EventRecorder);
-        }
-
-        private void pictureBox_EventRecorder_Click(object sender, EventArgs e)
-        {
-            CB_Chenge(cb_event_recorder);
-            cb_event_recorder_CheckedChanged(sender, e);
-        }
-
-
-        //Function ----> PictureBox Chenge Action
-        private void Img_Chenge(CheckBox ChkObj, PictureBox ImgObj)
-        {
-            if (ChkObj.Checked == true)
+            CheckBox checkBox;
+            foreach (Control c in control.Controls)
             {
-                ImgObj.Image = Properties.Resources.check;
-            }
-            else
-            {
-                ImgObj.Image = Properties.Resources.checkered;
+                if (c.GetType().ToString()==type && c.Tag == picbox.Tag)
+                {
+                    //we found the control and the tag we need
+                    //set the values eg: CheckBox checked state                    
+                    checkBox = c as CheckBox;
+                    if(checkBox.Checked)
+                    {
+                        checkBox.Checked = false;
+                        picbox.Image = check_state_images.Images[0];
+                    }
+                    else
+                    {
+                        checkBox.Checked = true;
+                        picbox.Image = check_state_images.Images[1];
+                    }                    
+                    Console.WriteLine(checkBox.Checked + " is +++++ " + checkBox.Text);                   
+                }
+                
+                if (c.GetType().ToString() == "System.Windows.Forms.GroupBox")
+                {
+                    checkOnKids(c, type, picbox);
+                }
             }
         }
 
-        //Function ----> CheckBox Chenge Action
-        private void CB_Chenge(CheckBox ChBox)
+        //Function ----> PictureBox Change Action
+        
+
+        //Function ----> CheckBox Change Action
+        private void SetCheckBoxState(CheckBox ChBox)
         {
             if (ChBox.Checked == true)
             {
@@ -606,8 +395,100 @@ namespace FaceDetection
 
         private void button_cameraProperties_Click(object sender, EventArgs e)
         {
+            DisplayPropertyPage();
+        }
+
+        [DllImport("olepro32.dll")]
+        public static extern int OleCreatePropertyFrame(
+            IntPtr hwndOwner,
+            int x,
+            int y,
+            [MarshalAs(UnmanagedType.LPWStr)] string lpszCaption,
+            int cObjects,
+            [MarshalAs(UnmanagedType.Interface, ArraySubType=UnmanagedType.IUnknown)]
+           ref object ppUnk,
+            int cPages,
+            IntPtr lpPageClsID,
+            int lcid,
+            int dwReserved,
+            IntPtr lpvReserved);
+
+
+        /// <summary>
+        /// Displays a property page for a filter
+        /// </summary>
+        /// <param name="dev">The filter for which to display a property page</param>
+        public void DisplayPropertyPage()
+        {
+            //Camera_index
+            var dev = (IBaseFilter) DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, Camera_index);
+            
+            //Get the ISpecifyPropertyPages for the filter
+            ISpecifyPropertyPages pProp = dev as ISpecifyPropertyPages;
+            int hr = 0;
+
+            if (pProp == null)
+            {
+                //If the filter doesn't implement ISpecifyPropertyPages, try displaying IAMVfwCompressDialogs instead!
+                IAMVfwCompressDialogs compressDialog = dev as IAMVfwCompressDialogs;
+                if (compressDialog != null)
+                {
+
+                    hr = compressDialog.ShowDialog(VfwCompressDialogs.Config, IntPtr.Zero);
+                    DsError.ThrowExceptionForHR(hr);
+                }
+                return;
+            }
+
+            //Get the name of the filter from the FilterInfo struct
+            FilterInfo filterInfo;
+            hr = dev.QueryFilterInfo(out filterInfo);
+            DsError.ThrowExceptionForHR(hr);
+
+            // Get the propertypages from the property bag
+            DsCAUUID caGUID;
+            hr = pProp.GetPages(out caGUID);
+            DsError.ThrowExceptionForHR(hr);
+
+            //Create and display the OlePropertyFrame
+            object oDevice = (object)dev;
+            hr = OleCreatePropertyFrame(FaceDetection.MainForm.GetMainForm.Handle, 0, 0, filterInfo.achName, 1, ref oDevice, caGUID.cElems, caGUID.pElems, 0, 0, IntPtr.Zero);
+            DsError.ThrowExceptionForHR(hr);
+
+            // Release COM objects
+            Marshal.FreeCoTaskMem(caGUID.pElems);
+            Marshal.ReleaseComObject(pProp);
+            //Marshal.ReleaseComObject(filterInfo);
+            Marshal.ReleaseComObject(dev);
+        }
+
+        private void GroupBox_viewSettings_Enter(object sender, EventArgs e)
+        {
 
         }
 
+        private void PictureBox_DeleteOldData_Click(object sender, EventArgs e)
+        {
+            PictureBox picbox = (PictureBox)sender;
+            checkOnKids(this.groupBox_Environment, "System.Windows.Forms.CheckBox", picbox);
+        }
+
+        private void PictureBox_faceRecognition_Click(object sender, EventArgs e)
+        {
+            PictureBox picbox = (PictureBox)sender;
+            checkOnKids(this.groupBox_functionalitySettings, "System.Windows.Forms.CheckBox", picbox);
+        }
+
+        private void PictureBox_operatorCapture_Click(object sender, EventArgs e)
+        {
+            PictureBox picbox = (PictureBox)sender;
+            checkOnKids(this.groupBox_OperatorCapture, "System.Windows.Forms.CheckBox", picbox);
+        }
+
+        private void PictureBox_EventRecorder_Click(object sender, EventArgs e)
+        {
+            PictureBox picbox = (PictureBox)sender;
+            checkOnKids(this.groupBox_EventRecorder, "System.Windows.Forms.CheckBox", picbox);
+        }
     }
 }
