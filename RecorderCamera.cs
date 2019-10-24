@@ -99,8 +99,7 @@ namespace FaceDetection
 
             //var camera_list = FindDevices();
             //if (cameraIndex >= camera_list) throw new ArgumentException("USB camera is not available.", "index");
-            //Init(cameraIndex, size, fps, pbx, targetPath);
-
+            //Init(cameraIndex, size, fps, pbx, targetPath);                        
             graph = (IGraphBuilder)(new FilterGraph());
             pGraph = graph;
             int hr = 0;
@@ -184,8 +183,11 @@ namespace FaceDetection
             hr = control9.SetVideoClippingWindow(pbx);
             checkHR(hr, "Can't set video clipping window");
 
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
-            checkHR(hr, "Can't set rectangles of the video position");
+            if (MainForm.CURRENT_MODE != MainForm.CAMERA_MODES.HIDDEN)
+            {
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
+                checkHR(hr, "Can't set rectangles of the video position");
+            }                
 
 
             hr = pGraph.AddFilter(renderFilter, "My Render Filter");

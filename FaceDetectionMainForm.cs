@@ -44,13 +44,21 @@ namespace FaceDetection
             HIDDEN
         }
 
+        internal static class RECPATH
+        {            
+            public static string MANUAL = "MOVIE";
+            public static string EVENT = "EVENT";
+            public static string SNAPSHOT = "SNAPSHOT";            
+        }
+
+        internal static string ACTIVE_RECPATH = string.Empty;
         /*
          All cameras have the same modes
          But only the Main camera supports operator capture         
          (各カメラには異なるモードがあります メインカメラのみがオペレータキャプチャをサポートしています)
              */
 
-        internal CAMERA_MODES CURRENT_MODE = 0;
+        internal static CAMERA_MODES CURRENT_MODE = 0;
 
         internal CAMERA_MODES CAMERA_MODE {
             get
@@ -668,8 +676,14 @@ namespace FaceDetection
 
             if (GetRecorder() != null)
                 GetRecorder().Release();
+
             //Dynamically generate filename in the right path, for the right camera
-            string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
+            //Checking for the active path that will make sure the path is fitting the recording type
+            string dstFileName;
+            if (ACTIVE_RECPATH!=string.Empty)
+                dstFileName = ACTIVE_RECPATH + "/" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
+            else
+                dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
             //
             //Initialize the CAPTURE camera by index
             try
