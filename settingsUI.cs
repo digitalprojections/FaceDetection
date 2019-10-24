@@ -24,10 +24,10 @@ namespace FaceDetection
 
         public int Camera_index {
             get {                
-                return Properties.Settings.Default.current_camera_index;
+                return Properties.Settings.Default.main_camera_index;
             }
             private set {
-                Properties.Settings.Default.current_camera_index = value;
+                Properties.Settings.Default.main_camera_index = value;
                 Properties.Settings.Default.Save();
             }
         }
@@ -42,7 +42,7 @@ namespace FaceDetection
             InitializeComponent();
             //Setup window
             Size size = new Size(0,0);
-               size = GetWidth(Properties.Settings.Default.current_camera_index);
+               size = GetWidth(Properties.Settings.Default.main_camera_index);
             this.Width = 1024;
             this.Height = 760;
             this.ControlBox = false;
@@ -75,12 +75,22 @@ namespace FaceDetection
 
         public static void ArrangeCameraNames(int len)
         {
+            or_selected_camera_number.Items.Clear();
             camera_names = new string[len];
             for (int i = 0; i < len; i++)
             {
                 or_selected_camera_number.Items.Add(i + 1);
             }
-            or_selected_camera_number.SelectedIndex = Properties.Settings.Default.current_camera_index;
+            if(or_selected_camera_number.Items.Count> Properties.Settings.Default.main_camera_index)
+            {
+
+                or_selected_camera_number.SelectedIndex = Properties.Settings.Default.main_camera_index;
+            }
+            else
+            {
+                Properties.Settings.Default.main_camera_index = 0;
+            }
+            
         }
 
 
@@ -193,7 +203,7 @@ namespace FaceDetection
         {
             if (cm_camera_number.Items.Count > 0)
             {
-                //cm_camera_number.SelectedIndex = Properties.Settings.Default.current_camera_index;
+                //cm_camera_number.SelectedIndex = Properties.Settings.Default.main_camera_index;
                 cm_capture_mode.SelectedIndex = Properties.Settings.Default.capture_method;
             }
             SetCameraPropertiesFromMemory();

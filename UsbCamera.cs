@@ -85,7 +85,7 @@ namespace GitHub.secile.Video
         public UsbCamera(int cameraIndex, Size size, double fps, IntPtr pbx)
         {
             var camera_list = FindDevices();
-            if (cameraIndex >= camera_list.Length) throw new ArgumentException("USB camera is not available.", "index");
+            //if (cameraIndex >= camera_list.Length) throw new ArgumentException("USB camera is not available.", "index");
             Init(cameraIndex, size, fps, pbx);
         }
         static void checkHR(int hr, string msg)

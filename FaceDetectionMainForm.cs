@@ -583,12 +583,15 @@ namespace FaceDetection
         {
             if (GetCamera() != null)
                 GetCamera().Release();
-                      
 
-            SetCamera(new UsbCamera(settingUI.Camera_index, new Size(1280, 720), 15, CameraPanel.Handle));
-            GetCamera().Start();
-            GetMainForm.CURRENT_MODE = CAMERA_MODES.PREVIEW;
-            or_camera_num_txt.Visible = true;
+            if (settingUI.Camera_index<=Camera.GetCameraCount().Length-1)
+            {
+                SetCamera(new UsbCamera(settingUI.Camera_index, new Size(1280, 720), 15, CameraPanel.Handle));
+                GetCamera().Start();
+                GetMainForm.CURRENT_MODE = CAMERA_MODES.PREVIEW;
+                or_camera_num_txt.Visible = true;
+            }
+            
         }
 
         public void GetCamcorderInstance()
@@ -990,12 +993,14 @@ namespace FaceDetection
             FillResolutionList();
             //TODO
             //Also must check if the 
+            
             if (Properties.Settings.Default.recording_on_start)
             {
                 GetCamcorderInstance();
             }
             else
             {
+                
                 GetCameraInstance();
 
                 if (Properties.Settings.Default.use_ir_sensor)
