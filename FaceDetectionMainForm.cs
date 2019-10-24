@@ -21,6 +21,7 @@ namespace FaceDetection
         private readonly Timer mouse_down_timer = new Timer();
         private readonly Timer face_timer = new Timer();
         private readonly Timer datetime_ui_updater = new Timer();
+        private static readonly object Listx;
 
         /// <summary>
         /// Camera modes to assist identify current status 
@@ -170,7 +171,7 @@ namespace FaceDetection
         {
             InitializeComponent();
             taskManager = new TaskManager();
-
+            
             
 
 
@@ -212,7 +213,7 @@ namespace FaceDetection
     #region HANDLEPAMETERS
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
-
+            Console.WriteLine(String.Concat(parameters));
            
                 string param = String.Concat(parameters).ToLower();
             
@@ -237,6 +238,8 @@ namespace FaceDetection
                         Debug.WriteLine(e.ToString() + " 117rd line");
                     }
                     //|||||||||||||||||||||||||||
+
+
                     switch (parameters.ElementAt(1))
                     {
                         case "-c":
@@ -244,6 +247,8 @@ namespace FaceDetection
                             {
                                 if (parameters.ElementAt(2) == "1")
                                 {
+                                    
+
                                     if (settingUI != null && settingUI.Visible == false)
                                     {
                                         settingUI.TopMost = true;
@@ -269,8 +274,8 @@ namespace FaceDetection
                             try
                             {
 
-                                    MainForm.GetMainForm.TakeSnapShot();
-                                
+                                MainForm.GetMainForm.TakeSnapShot();
+
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
@@ -281,6 +286,8 @@ namespace FaceDetection
                         case "-b":
                             try
                             {
+                                Console.WriteLine("テスト" + parameters.ElementAt(0) + "×" + parameters.ElementAt(1) + "×" + parameters.ElementAt(2) + "×" + parameters.ElementAt(3));
+
                                 if (parameters.ElementAt(2) == "1")
                                 {
                                     /*
@@ -295,6 +302,16 @@ namespace FaceDetection
                                  */
                                     or_controlBut.Visible = false;
                                 }
+
+
+                                CheckCameraIndex(parameters);
+
+                                
+        
+
+
+
+
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
@@ -525,6 +542,33 @@ namespace FaceDetection
         }
 #endregion HANDLEPAMETERS
 
+        private static bool CheckCameraIndex(IReadOnlyCollection<string> parameters)
+        {
+            bool Retval = false;
+
+            switch (Int32.Parse(parameters.ElementAt(3)))
+            {
+                case 1:
+                    Retval = true;
+                    break;
+                case 2:
+                    Retval = true;
+                    break;
+                case 3:
+                    Retval = true;
+                    break;
+                case 4:
+                    Retval = true;
+                    break;
+                case 9:
+                    Retval = true;
+                    break;
+
+              
+            }
+            return Retval;
+        }
+        
         /// <summary>
         /// Resumes IRsensor check cycle
         /// </summary>
@@ -591,6 +635,12 @@ namespace FaceDetection
         {
             if (GetCamera() != null)
                 GetCamera().Release();
+
+            
+
+            SetCamera(new UsbCamera(settingUI.Camera_index, new Size(1280, 720), 15, CameraPanel.Handle));
+            GetCamera().Start();
+            GetMainForm.CURRENT_MODE = CAMERA_MODES.PREVIEW;
 
             if (settingUI.Camera_index<=Camera.GetCameraCount().Length-1)
             {
@@ -755,7 +805,6 @@ namespace FaceDetection
             or_camera_num_txt.Visible = Properties.Settings.Default.show_camera_no;
             or_camera_num_txt.Text = (Properties.Settings.Default.current_camera_index+1).ToString();
             
-
             or_current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
             //capTimer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
             //or_mainForm.TopMost = Properties.Settings.Default.window_on_top;
