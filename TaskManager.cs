@@ -48,12 +48,12 @@ namespace FaceDetection
         internal void StatusCheck()
         {
 
-            if (list.Count>0 && MainForm.GetMainForm.CURRENT_MODE == MainForm.CAMERA_MODES.NONE)
+            if (list.Count>0 && MainForm.CURRENT_MODE == MainForm.CAMERA_MODES.NONE)
             {
                 
 
             }
-            else if (MainForm.GetMainForm.CURRENT_MODE == MainForm.CAMERA_MODES.CAPTURE)
+            else if (MainForm.CURRENT_MODE == MainForm.CAMERA_MODES.CAPTURE)
             {
                 MainForm.GetMainForm.GetRecorder().Release();
 

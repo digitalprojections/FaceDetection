@@ -640,13 +640,13 @@ namespace FaceDetection
 
             SetCamera(new UsbCamera(settingUI.Camera_index, new Size(1280, 720), 15, CameraPanel.Handle));
             GetCamera().Start();
-            GetMainForm.CURRENT_MODE = CAMERA_MODES.PREVIEW;
+            CURRENT_MODE = CAMERA_MODES.PREVIEW;
 
             if (settingUI.Camera_index<=Camera.GetCameraCount().Length-1)
             {
                 SetCamera(new UsbCamera(settingUI.Camera_index, new Size(1280, 720), 15, CameraPanel.Handle));
                 GetCamera().Start();
-                GetMainForm.CURRENT_MODE = CAMERA_MODES.PREVIEW;
+                CURRENT_MODE = CAMERA_MODES.PREVIEW;
                 or_camera_num_txt.Visible = true;
             }
             
@@ -835,10 +835,10 @@ namespace FaceDetection
             }
             Debug.WriteLine(or_pb_recording.Visible);
 
-            if (GetMainForm.CURRENT_MODE == CAMERA_MODES.CAPTURE)
+            if (CURRENT_MODE == CAMERA_MODES.CAPTURE)
             {
                 GetMainForm.GetCamcorderInstance();
-            }else if(GetMainForm.CURRENT_MODE == CAMERA_MODES.PREVIEW)
+            }else if(CURRENT_MODE == CAMERA_MODES.PREVIEW)
             {
                 GetCameraInstance();
             }
