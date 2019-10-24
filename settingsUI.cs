@@ -35,9 +35,22 @@ namespace FaceDetection
         private int InitPanelHeight;
 
         public SettingsUI()
-        {            
-            Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
-            Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
+        {
+            try
+            {
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
+            }
+            catch(IOException iox)
+            {
+                //resetting the default folders to C
+                //hoping it exists
+                Properties.Settings.Default.video_file_location = @"C:\UVCCAMERA";
+                Properties.Settings.Default.Save();
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
+                Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
+            }
+            
 
             InitializeComponent();
             //Setup window
@@ -452,6 +465,30 @@ namespace FaceDetection
         private void GroupBox_viewSettings_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void PictureBox_DeleteOldData_Click(object sender, EventArgs e)
+        {
+            PictureBox picbox = (PictureBox)sender;
+            checkOnKids(this.groupBox_Environment, "System.Windows.Forms.CheckBox", picbox);
+        }
+
+        private void PictureBox_faceRecognition_Click(object sender, EventArgs e)
+        {
+            PictureBox picbox = (PictureBox)sender;
+            checkOnKids(this.groupBox_functionalitySettings, "System.Windows.Forms.CheckBox", picbox);
+        }
+
+        private void PictureBox_operatorCapture_Click(object sender, EventArgs e)
+        {
+            PictureBox picbox = (PictureBox)sender;
+            checkOnKids(this.groupBox_OperatorCapture, "System.Windows.Forms.CheckBox", picbox);
+        }
+
+        private void PictureBox_EventRecorder_Click(object sender, EventArgs e)
+        {
+            PictureBox picbox = (PictureBox)sender;
+            checkOnKids(this.groupBox_EventRecorder, "System.Windows.Forms.CheckBox", picbox);
         }
     }
 }

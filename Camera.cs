@@ -126,6 +126,7 @@ namespace FaceDetection
                         Console.WriteLine(capDevices.Length + " capdevices");
                         SettingsUI.ArrangeCameraNames(capDevices.Length);
                         Properties.Settings.Default.camera_count = capDevices.Length;
+                        Properties.Settings.Default.main_camera_index = 0;
                     }
 
                 }

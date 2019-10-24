@@ -616,8 +616,6 @@ namespace FaceDetection
                 backlight_timer.Start();
             }
 
-
-
             if (GetRecorder() != null)
                 GetRecorder().Release();
             //Dynamically generate filename in the right path, for the right camera

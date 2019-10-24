@@ -70,13 +70,11 @@ namespace FaceDetection
         {
             this.path = path;
         }
-
         string starttime;
         string stoptime;
         string iventtime;
         bool complete;
         string path;
-
     }
 
 

@@ -78,7 +78,7 @@
             this.checkBox_full_screen = new System.Windows.Forms.CheckBox();
             this.cb_always_on_top = new System.Windows.Forms.CheckBox();
             this.tab_environment = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox_Environment = new System.Windows.Forms.GroupBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.pictureBox_DeleteOldData = new System.Windows.Forms.PictureBox();
             this.nud_erase_old = new System.Windows.Forms.NumericUpDown();
@@ -113,7 +113,7 @@
             this.cm_camera_number = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tab_operator_capture = new System.Windows.Forms.TabPage();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.groupBox_OperatorCapture = new System.Windows.Forms.GroupBox();
             this.pictureBox_operatorCapture = new System.Windows.Forms.PictureBox();
             this.cb_operator_capture = new System.Windows.Forms.CheckBox();
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
@@ -125,7 +125,7 @@
             this.lb_capture_seconds = new System.Windows.Forms.Label();
             this.lb_capture_mode = new System.Windows.Forms.Label();
             this.tab_event_recorder = new System.Windows.Forms.TabPage();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.groupBox_EventRecorder = new System.Windows.Forms.GroupBox();
             this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
             this.pictureBox_EventRecorder = new System.Windows.Forms.PictureBox();
             this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
@@ -157,7 +157,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_full_screen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_alwaysOnTop)).BeginInit();
             this.tab_environment.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBox_Environment.SuspendLayout();
             this.groupBox12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_DeleteOldData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_erase_old)).BeginInit();
@@ -173,12 +173,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownX)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tab_operator_capture.SuspendLayout();
-            this.groupBox9.SuspendLayout();
+            this.groupBox_OperatorCapture.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_operatorCapture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.tab_event_recorder.SuspendLayout();
-            this.groupBox10.SuspendLayout();
+            this.groupBox_EventRecorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_EventRecorder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
@@ -270,7 +270,7 @@
             this.pictureBox_faceRecognition.Name = "pictureBox_faceRecognition";
             this.pictureBox_faceRecognition.TabStop = false;
             this.pictureBox_faceRecognition.Tag = "14";
-            this.pictureBox_faceRecognition.Click += new System.EventHandler(this.PicBox_Clicked);
+            this.pictureBox_faceRecognition.Click += new System.EventHandler(this.PictureBox_faceRecognition_Click);
             // 
             // numericUpDown2
             // 
@@ -643,18 +643,18 @@
             // 
             // tab_environment
             // 
-            this.tab_environment.Controls.Add(this.groupBox1);
+            this.tab_environment.Controls.Add(this.groupBox_Environment);
             resources.ApplyResources(this.tab_environment, "tab_environment");
             this.tab_environment.Name = "tab_environment";
             this.tab_environment.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // groupBox_Environment
             // 
-            this.groupBox1.Controls.Add(this.groupBox12);
-            this.groupBox1.Controls.Add(this.groupBox2);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
+            this.groupBox_Environment.Controls.Add(this.groupBox12);
+            this.groupBox_Environment.Controls.Add(this.groupBox2);
+            resources.ApplyResources(this.groupBox_Environment, "groupBox_Environment");
+            this.groupBox_Environment.Name = "groupBox_Environment";
+            this.groupBox_Environment.TabStop = false;
             // 
             // groupBox12
             // 
@@ -674,7 +674,7 @@
             this.pictureBox_DeleteOldData.Name = "pictureBox_DeleteOldData";
             this.pictureBox_DeleteOldData.TabStop = false;
             this.pictureBox_DeleteOldData.Tag = "1";
-            this.pictureBox_DeleteOldData.Click += new System.EventHandler(this.PicBox_Clicked);
+            this.pictureBox_DeleteOldData.Click += new System.EventHandler(this.PictureBox_DeleteOldData_Click);
             // 
             // nud_erase_old
             // 
@@ -957,26 +957,26 @@
             // 
             // tab_operator_capture
             // 
-            this.tab_operator_capture.Controls.Add(this.groupBox9);
+            this.tab_operator_capture.Controls.Add(this.groupBox_OperatorCapture);
             resources.ApplyResources(this.tab_operator_capture, "tab_operator_capture");
             this.tab_operator_capture.Name = "tab_operator_capture";
             this.tab_operator_capture.UseVisualStyleBackColor = true;
             // 
-            // groupBox9
+            // groupBox_OperatorCapture
             // 
-            this.groupBox9.Controls.Add(this.pictureBox_operatorCapture);
-            this.groupBox9.Controls.Add(this.cb_operator_capture);
-            this.groupBox9.Controls.Add(this.numericUpDown6);
-            this.groupBox9.Controls.Add(this.numericUpDown4);
-            this.groupBox9.Controls.Add(this.label18_seconds);
-            this.groupBox9.Controls.Add(this.label17);
-            this.groupBox9.Controls.Add(this.cm_capture_mode);
-            this.groupBox9.Controls.Add(this.lb_seconds2);
-            this.groupBox9.Controls.Add(this.lb_capture_seconds);
-            this.groupBox9.Controls.Add(this.lb_capture_mode);
-            resources.ApplyResources(this.groupBox9, "groupBox9");
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.TabStop = false;
+            this.groupBox_OperatorCapture.Controls.Add(this.pictureBox_operatorCapture);
+            this.groupBox_OperatorCapture.Controls.Add(this.cb_operator_capture);
+            this.groupBox_OperatorCapture.Controls.Add(this.numericUpDown6);
+            this.groupBox_OperatorCapture.Controls.Add(this.numericUpDown4);
+            this.groupBox_OperatorCapture.Controls.Add(this.label18_seconds);
+            this.groupBox_OperatorCapture.Controls.Add(this.label17);
+            this.groupBox_OperatorCapture.Controls.Add(this.cm_capture_mode);
+            this.groupBox_OperatorCapture.Controls.Add(this.lb_seconds2);
+            this.groupBox_OperatorCapture.Controls.Add(this.lb_capture_seconds);
+            this.groupBox_OperatorCapture.Controls.Add(this.lb_capture_mode);
+            resources.ApplyResources(this.groupBox_OperatorCapture, "groupBox_OperatorCapture");
+            this.groupBox_OperatorCapture.Name = "groupBox_OperatorCapture";
+            this.groupBox_OperatorCapture.TabStop = false;
             // 
             // pictureBox_operatorCapture
             // 
@@ -987,7 +987,7 @@
             this.pictureBox_operatorCapture.Name = "pictureBox_operatorCapture";
             this.pictureBox_operatorCapture.TabStop = false;
             this.pictureBox_operatorCapture.Tag = "11";
-            this.pictureBox_operatorCapture.Click += new System.EventHandler(this.PicBox_Clicked);
+            this.pictureBox_operatorCapture.Click += new System.EventHandler(this.PictureBox_operatorCapture_Click);
             // 
             // cb_operator_capture
             // 
@@ -1066,24 +1066,24 @@
             // 
             // tab_event_recorder
             // 
-            this.tab_event_recorder.Controls.Add(this.groupBox10);
+            this.tab_event_recorder.Controls.Add(this.groupBox_EventRecorder);
             resources.ApplyResources(this.tab_event_recorder, "tab_event_recorder");
             this.tab_event_recorder.Name = "tab_event_recorder";
             this.tab_event_recorder.UseVisualStyleBackColor = true;
             // 
-            // groupBox10
+            // groupBox_EventRecorder
             // 
-            this.groupBox10.Controls.Add(this.numericUpDown8);
-            this.groupBox10.Controls.Add(this.pictureBox_EventRecorder);
-            this.groupBox10.Controls.Add(this.numericUpDown7);
-            this.groupBox10.Controls.Add(this.cb_event_recorder);
-            this.groupBox10.Controls.Add(this.lb_post_event);
-            this.groupBox10.Controls.Add(this.lb_pre_event);
-            this.groupBox10.Controls.Add(this.label23_seconds);
-            this.groupBox10.Controls.Add(this.label22_seconds);
-            resources.ApplyResources(this.groupBox10, "groupBox10");
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.TabStop = false;
+            this.groupBox_EventRecorder.Controls.Add(this.numericUpDown8);
+            this.groupBox_EventRecorder.Controls.Add(this.pictureBox_EventRecorder);
+            this.groupBox_EventRecorder.Controls.Add(this.numericUpDown7);
+            this.groupBox_EventRecorder.Controls.Add(this.cb_event_recorder);
+            this.groupBox_EventRecorder.Controls.Add(this.lb_post_event);
+            this.groupBox_EventRecorder.Controls.Add(this.lb_pre_event);
+            this.groupBox_EventRecorder.Controls.Add(this.label23_seconds);
+            this.groupBox_EventRecorder.Controls.Add(this.label22_seconds);
+            resources.ApplyResources(this.groupBox_EventRecorder, "groupBox_EventRecorder");
+            this.groupBox_EventRecorder.Name = "groupBox_EventRecorder";
+            this.groupBox_EventRecorder.TabStop = false;
             // 
             // numericUpDown8
             // 
@@ -1106,7 +1106,7 @@
             this.pictureBox_EventRecorder.Name = "pictureBox_EventRecorder";
             this.pictureBox_EventRecorder.TabStop = false;
             this.pictureBox_EventRecorder.Tag = "13";
-            this.pictureBox_EventRecorder.Click += new System.EventHandler(this.PicBox_Clicked);
+            this.pictureBox_EventRecorder.Click += new System.EventHandler(this.PictureBox_EventRecorder_Click);
             // 
             // numericUpDown7
             // 
@@ -1150,7 +1150,7 @@
             resources.ApplyResources(this.label22_seconds, "label22_seconds");
             this.label22_seconds.Name = "label22_seconds";
             // 
-            // settingsUI
+            // SettingsUI
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1160,7 +1160,7 @@
             this.Controls.Add(this.button_settings_save);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "settingsUI";
+            this.Name = "SettingsUI";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CameraSettingsForm_FormClosing);
             this.Load += new System.EventHandler(this.SettingsUI_Load);
             this.tab_face_recognition_settings.ResumeLayout(false);
@@ -1190,7 +1190,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_full_screen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_alwaysOnTop)).EndInit();
             this.tab_environment.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
+            this.groupBox_Environment.ResumeLayout(false);
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_DeleteOldData)).EndInit();
@@ -1211,14 +1211,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownX)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tab_operator_capture.ResumeLayout(false);
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
+            this.groupBox_OperatorCapture.ResumeLayout(false);
+            this.groupBox_OperatorCapture.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_operatorCapture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.tab_event_recorder.ResumeLayout(false);
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
+            this.groupBox_EventRecorder.ResumeLayout(false);
+            this.groupBox_EventRecorder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_EventRecorder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
@@ -1259,7 +1259,7 @@
         private System.Windows.Forms.CheckBox checkBox_full_screen;
         private System.Windows.Forms.CheckBox cb_always_on_top;
         private System.Windows.Forms.TabPage tab_environment;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox_Environment;
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.PictureBox pictureBox_DeleteOldData;
         private System.Windows.Forms.NumericUpDown nud_erase_old;
@@ -1302,7 +1302,7 @@
         private System.Windows.Forms.PictureBox pictureBox_irsensor;
         private System.Windows.Forms.CheckBox cb_irsensor;
         private System.Windows.Forms.TabPage tab_operator_capture;
-        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox groupBox_OperatorCapture;
         private System.Windows.Forms.PictureBox pictureBox_operatorCapture;
         private System.Windows.Forms.CheckBox cb_operator_capture;
         private System.Windows.Forms.NumericUpDown numericUpDown6;
@@ -1314,7 +1314,7 @@
         private System.Windows.Forms.Label lb_capture_seconds;
         private System.Windows.Forms.Label lb_capture_mode;
         private System.Windows.Forms.TabPage tab_event_recorder;
-        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.GroupBox groupBox_EventRecorder;
         private System.Windows.Forms.NumericUpDown numericUpDown8;
         private System.Windows.Forms.PictureBox pictureBox_EventRecorder;
         private System.Windows.Forms.NumericUpDown numericUpDown7;
