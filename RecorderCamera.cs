@@ -232,6 +232,7 @@ namespace FaceDetection
             IntPtr fetched = IntPtr.Zero;
             hr = pGraph.EnumFilters(out enumFilters);
             int r = 0;
+            /*
             while (r == 0)
             {
                 try
@@ -247,6 +248,7 @@ namespace FaceDetection
                     continue;
                 }
             }
+            */
             try
             {
                 mediaControl = (IMediaControl)graph;
