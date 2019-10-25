@@ -32,7 +32,11 @@ namespace FaceDetection
 
         private void OM_Timer_Tick(object sender, EventArgs e)
         {
-            
+            Console.WriteLine("IR Sensor TIMER tick: " + e.ToString());
+            if (MainForm.Or_testparam.Text != "sensor check")
+                MainForm.Or_testparam.Text = "sensor check";
+            else
+                MainForm.Or_testparam.Text = "";
             uint rval = CheckSensor();
             if (rval == 1)
             {

@@ -56,8 +56,8 @@ namespace FaceDetection
             //Setup window
             Size size = new Size(0,0);
                size = GetWidth(Properties.Settings.Default.main_camera_index);
-            //this.Width = 1024;
-            //this.Height = 760;
+            this.Width = 1024;
+            this.Height = 760;
             this.ControlBox = false;
 
             or_selected_camera_number = cm_camera_number;

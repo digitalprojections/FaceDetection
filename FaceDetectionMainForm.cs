@@ -45,11 +45,10 @@ namespace FaceDetection
         }
 
         internal static class RECPATH
-        {
-            public static string NORMAL = "";
-            public static string MANUAL = "MOVIE/";
-            public static string EVENT = "EVENT/";
-            public static string SNAPSHOT = "SNAPSHOT/";
+        {            
+            public static string MANUAL = "MOVIE";
+            public static string EVENT = "EVENT";
+            public static string SNAPSHOT = "SNAPSHOT";            
         }
 
         internal static string ACTIVE_RECPATH = string.Empty;
@@ -483,12 +482,12 @@ namespace FaceDetection
                                 //MessageBox.Show("Incorrect or missing parameters"); } 
                             }
                             break;
-                        case "-e":
+                        case "-r":
                             try
                             {
                                 if (parameters.ElementAt(2) == "1")
                                 {
-                                    
+                                    GetMainForm.testing_params.Text = String.Concat(parameters);
                                     ManualRecordingOn(parameters.ElementAt(1));
                                 }
                                 else if (parameters.ElementAt(2) == "0")
@@ -502,9 +501,13 @@ namespace FaceDetection
                                 //MessageBox.Show("Incorrect or missing parameters"); } 
                             }
                             break;
-                        case "-r":
+                        case "-e":
                             try
                             {
+
+
+
+
                                 if (parameters.ElementAt(2) == "1")
                                 {
                                     if (settingUI != null && settingUI.Visible == false)
@@ -571,11 +574,8 @@ namespace FaceDetection
         /// </summary>
         internal void ResumeSensor()
         {
-            if (Properties.Settings.Default.use_ir_sensor)
-            {
-                rSensor.StartOM_Timer();
-            }
             
+            rSensor.StartOM_Timer();
         }
 
 
@@ -635,20 +635,21 @@ namespace FaceDetection
         {
             if (GetCamera() != null)
                 GetCamera().Release();
-            Console.WriteLine(settingUI.Camera_index + " settingUI.Camera_indexsettingUI.Camera_index");
+
+            
+
             SetCamera(new UsbCamera(settingUI.Camera_index, new Size(1280, 720), 15, CameraPanel.Handle));
             GetCamera().Start();
             CURRENT_MODE = CAMERA_MODES.PREVIEW;
-            /*
+
             if (settingUI.Camera_index<=Camera.GetCameraCount().Length-1)
             {
-                Console.WriteLine("settingUI.Camera_index<=Camera.GetCameraCount().Length-1");
                 SetCamera(new UsbCamera(settingUI.Camera_index, new Size(1280, 720), 15, CameraPanel.Handle));
                 GetCamera().Start();
                 CURRENT_MODE = CAMERA_MODES.PREVIEW;
                 or_camera_num_txt.Visible = true;
             }
-         */   
+            
         }
 
         public void GetCamcorderInstance()
@@ -658,7 +659,9 @@ namespace FaceDetection
             pbRecording.Image = Properties.Resources.Record_Pressed_icon;
             pbRecording.Visible = true;
             
-                        
+
+            //GetCamera().Start();
+            //GetCamera().GetBitmap().Save(Properties.Settings.Default.video_file_location + "/Camera/1/movie/" + moviedate + ".mp4");
             //kameyama
 
             //MANAGE TIMERS            
@@ -861,8 +864,8 @@ namespace FaceDetection
             if (settingUI != null && settingUI.Camera_index != 0)
             {
 
-                Properties.Settings.Default["C" + (settingUI.Camera_index+1) + "w"] = Convert.ToDecimal(this.Width);
-                Properties.Settings.Default["C" + (settingUI.Camera_index+1) + "h"] = Convert.ToDecimal(this.Height);
+                Properties.Settings.Default["C" + settingUI.Camera_index + "w"] = Convert.ToDecimal(this.Width);
+                Properties.Settings.Default["C" + settingUI.Camera_index + "h"] = Convert.ToDecimal(this.Height);
                 Properties.Settings.Default.Save();
             }
 
@@ -896,11 +899,11 @@ namespace FaceDetection
             //two versions here. Depending on camera mode
             if (CURRENT_MODE==CAMERA_MODES.CAPTURE)
             {
-                GetRecorder().GetBitmap().Save(picloc + "/"+ imgdate + ".jpg");
+                GetRecorder().GetBitmap().Save(picloc + "/"+ imgdate + ".jpeg");
             }
             else if(CURRENT_MODE == CAMERA_MODES.PREVIEW)
             {
-                GetCamera().GetBitmap().Save(picloc + "/" + imgdate + ".jpg");
+                GetCamera().GetBitmap().Save(picloc + "/" + imgdate + ".jpeg");
             }
             
         }
@@ -981,12 +984,9 @@ namespace FaceDetection
             {
                 settingUI = new SettingsUI();
                 mouse_down_timer.Tick += new EventHandler(ShowButtons);//制御ボタンの非/表示用クリックタイマー
-                
-                //must check platform type
                 face_timer.Tick += new EventHandler(CaptureFace);
                 face_timer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
                 face_timer.Start();
-
                 datetime_ui_updater.Interval = 1000;
                 datetime_ui_updater.Start();
                 datetime_ui_updater.Tick += new EventHandler(ProcessFrame);
@@ -1013,7 +1013,7 @@ namespace FaceDetection
             or_pb_recording = pbRecording;
             pbRecording.BackColor = Color.Transparent;
             //dateTimeLabel.BackColor = Color.Transparent;
-            
+            or_testparam = testing_params;
 
             //Set this CAMERA Dynamically to the relevant one
             if (settingUI.Camera_index != 0)
@@ -1100,9 +1100,18 @@ namespace FaceDetection
 
         private void Recording_length_timer_Tick(object sender, EventArgs e)
         {
-            recording_length_timer.Stop();            
-            ResumeSensor();
-            pbRecording.Visible = false;
+            recording_length_timer.Stop();
+            //STOP RECORDING, IF NO MORE TASKS            
+            if (taskManager != null && CURRENT_MODE == CAMERA_MODES.NONE)
+            {                
+                                
+                
+            }else if (CURRENT_MODE==CAMERA_MODES.CAPTURE)
+            {
+                GetRecorder().Release();
+                ResumeSensor();
+                pbRecording.Visible = false;
+            }
             GetCameraInstance();
         }
 

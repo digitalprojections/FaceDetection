@@ -242,11 +242,17 @@ namespace GitHub.secile.Video
 
         public void SetWindowPosition(Size size)
         {
-         
+            try
+            {
                 int hr = 0;
                 IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
+            }
+            catch(NullReferenceException nrx)
+            {
+
+            }
             
         }
 
