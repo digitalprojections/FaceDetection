@@ -30,7 +30,13 @@ namespace FaceDetection
         public Action Stop { get; private set; }
         public Action Release { get; private set; }
         public Func<Bitmap> GetBitmap { get; private set; }
-        internal PlayState CurrentState1 { get => CurrentState; set => CurrentState = value; }
+
+        internal PlayState GetCurrentState1() => CurrentState;
+
+        internal void SetCurrentState1(PlayState value)
+        {
+            CurrentState = value;
+        }
 
         private IGraphBuilder pGraph;
         //private Guid CLSID_SampleGrabber = new Guid("{C1F400A0-3F08-11D3-9F0B-006008039E37}"); //qedit.dll
@@ -88,14 +94,21 @@ namespace FaceDetection
         /// <param name="dstFileName">destination file name</param>
         public RecorderCamera(int cameraIndex, Size size, double fps, IntPtr pbx, string dstFileName)
         {
-            Directory.CreateDirectory(sourcePath);
+            try
+            {
+                Directory.CreateDirectory(sourcePath);
+            }catch(IOException iox)
+            {
+                Logger.Add(iox.Message);
+            }
+            
             GetInterfaces();
 
-            string str = Path.Combine(FaceDetection.Properties.Settings.Default.video_file_location, (cameraIndex + 1).ToString());
-            Console.WriteLine(str);
+            string str = Path.Combine(FaceDetection.Properties.Settings.Default.video_file_location, "/"+ (cameraIndex + 1).ToString());
+            
             Directory.CreateDirectory(str);
             targetPath = Path.Combine(str, dstFileName);
-            Console.WriteLine(targetPath);
+            
 
             //var camera_list = FindDevices();
             //if (cameraIndex >= camera_list) throw new ArgumentException("USB camera is not available.", "index");

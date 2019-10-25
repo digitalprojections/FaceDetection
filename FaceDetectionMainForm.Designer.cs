@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.testing_params = new System.Windows.Forms.Label();
             this.or_controlButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.folderButton = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -45,17 +44,6 @@
             this.or_controlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).BeginInit();
             this.SuspendLayout();
-            // 
-            // testing_params
-            // 
-            this.testing_params.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.testing_params.AutoSize = true;
-            this.testing_params.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.testing_params.Location = new System.Drawing.Point(580, 24);
-            this.testing_params.Name = "testing_params";
-            this.testing_params.Size = new System.Drawing.Size(139, 12);
-            this.testing_params.TabIndex = 11;
-            this.testing_params.Text = "currently used parameters";
             // 
             // or_controlButtons
             // 
@@ -154,7 +142,7 @@
             this.cameraButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cameraButton.Location = new System.Drawing.Point(177, 3);
             this.cameraButton.Name = "cameraButton";
-            this.cameraButton.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.cameraButton.Padding = new System.Windows.Forms.Padding(10);
             this.cameraButton.Size = new System.Drawing.Size(52, 52);
             this.cameraButton.TabIndex = 3;
             this.cameraButton.UseVisualStyleBackColor = false;
@@ -185,7 +173,7 @@
             this.or_dateTimeLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.or_dateTimeLabel.Location = new System.Drawing.Point(12, 417);
             this.or_dateTimeLabel.Name = "or_dateTimeLabel";
-            this.or_dateTimeLabel.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.or_dateTimeLabel.Padding = new System.Windows.Forms.Padding(3);
             this.or_dateTimeLabel.Size = new System.Drawing.Size(125, 30);
             this.or_dateTimeLabel.TabIndex = 13;
             this.or_dateTimeLabel.Text = "Date and time";
@@ -240,7 +228,6 @@
             this.Controls.Add(this.pbRecording);
             this.Controls.Add(this.or_dateTimeLabel);
             this.Controls.Add(this.or_controlButtons);
-            this.Controls.Add(this.testing_params);
             this.Controls.Add(this.camera_number_txt);
             this.Controls.Add(this.panelCamera);
             this.Name = "MainForm";
@@ -263,7 +250,6 @@
 
         
         private System.Windows.Forms.PictureBox pbRecording;
-        private System.Windows.Forms.Label testing_params;
         private System.Windows.Forms.FlowLayoutPanel or_controlButtons;
         private System.Windows.Forms.Button folderButton;
         private System.Windows.Forms.Button settingsButton;

@@ -9,7 +9,6 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using static System.Environment;
 
 namespace FaceDetection
 {

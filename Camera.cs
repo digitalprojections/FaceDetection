@@ -111,15 +111,15 @@ namespace FaceDetection
                 if (capDevices.Length > Properties.Settings.Default.camera_count && capDevices.Length < 5)
                 {
                     //MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
-                    SettingsUI.ArrangeCameraNames(capDevices.Length);
+                    //SettingsUI.ArrangeCameraNames(capDevices.Length);
                 }
                 else
                 {
                     //settings are missing
                     if (capDevices.Length > 4)
                     {
-                        SettingsUI.ArrangeCameraNames(4);
-                        Properties.Settings.Default.camera_count = 4;
+                        //SettingsUI.ArrangeCameraNames(4);
+                        Properties.Settings.Default.camera_count = 1;
                     }
                     else
                     {

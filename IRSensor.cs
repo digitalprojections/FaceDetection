@@ -14,35 +14,22 @@ namespace FaceDetection
         }
         private void InitOMTimer()
         {
-                DialogResult dialogResult = MessageBox.Show("Does this PC have an IR Sensor?", "Please, choose operation mode", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                
+                if (Properties.Settings.Default.capture_operator)
                 {
                     OM_Timer.Tick += OM_Timer_Tick;
-                    OM_Timer.Interval = 1000;
+                    OM_Timer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
                 }
-                else if (dialogResult == DialogResult.No)
-                {
-                //do something else
-                Properties.Settings.Default.use_ir_sensor = false;
-                Properties.Settings.Default.Save();
-                }
-            
-            
+
         }
 
         private void OM_Timer_Tick(object sender, EventArgs e)
-        {
-            Console.WriteLine("IR Sensor TIMER tick: " + e.ToString());
-            if (MainForm.Or_testparam.Text != "sensor check")
-                MainForm.Or_testparam.Text = "sensor check";
-            else
-                MainForm.Or_testparam.Text = "";
+        {            
             uint rval = CheckSensor();
             if (rval == 1)
             {
                 //heat signature detected, stop timer
                 StopOM_Timer();
-                
                 //initiate RECORD mode
                 if (MainForm.GetMainForm != null)
                 {                    
@@ -50,6 +37,7 @@ namespace FaceDetection
                     
                 }  
             }
+            SensorClose();
 
         }
 
