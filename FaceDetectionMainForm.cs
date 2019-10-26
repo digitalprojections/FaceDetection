@@ -220,11 +220,10 @@ namespace FaceDetection
                 {
                     //Only 2 parameter elements
                     if (parameters.Count==2)
-                    {                     
+                    {
+                     
                          CURRENT_MODE = CAMERA_MODES.HIDDEN;
-                        //There is only one parameter with 1 element???
-                        //
-                        return;
+                     
                     }
 
 

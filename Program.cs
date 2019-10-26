@@ -6,15 +6,11 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Reflection;
-using System.Runtime.InteropServices;
 
 namespace FaceDetection
 {
     static class Program
-    {
-        [DllImport("kernel32.dll")]
-        static extern bool AttachConsole(int dwProcessId);
-        private const int ATTACH_PARENT_PROCESS = -1;
+    {        
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -23,7 +19,6 @@ namespace FaceDetection
         static void Main(string[] vs)
         {
             //System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("en");
-            AttachConsole(ATTACH_PARENT_PROCESS);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -36,7 +31,6 @@ namespace FaceDetection
             if (forms["MainForm"] !=null)
             {
                 MainForm.HandleParameters(vs1);
-
             }
             else
             {
