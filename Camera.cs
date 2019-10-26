@@ -12,12 +12,12 @@ namespace FaceDetection
 {
     public class Camera
     {
-        
         public static Action Release { get; private set; }       
 
         public static DsDevice[] GetCameraCount()
         {
             var capDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
+           
             return capDevices;
         }
 
@@ -98,6 +98,7 @@ namespace FaceDetection
             {
                 Console.WriteLine("Error: " + ex.ToString());
             }
+            Release();
             return retval;
         }
 
@@ -178,10 +179,12 @@ namespace FaceDetection
 
             Release = () =>
             {
+                
                 SafeReleaseComObject(pBuilder);
                 SafeReleaseComObject(captureSource);
                 SafeReleaseComObject(pNullRenderer);
                 SafeReleaseComObject(pGraph);
+                
 
             };
         }

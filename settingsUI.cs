@@ -225,7 +225,7 @@ namespace FaceDetection
             Debug.WriteLine(CultureInfo.CurrentCulture + " current culture");
 
 
-            Camera.SetNumberOfCameras();
+            //Camera.SetNumberOfCameras();
             
 
             SetCheckBoxValues();            

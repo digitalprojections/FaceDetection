@@ -32,7 +32,8 @@ namespace FaceDetection
                 StopOM_Timer();
                 //initiate RECORD mode
                 if (MainForm.GetMainForm != null)
-                {                    
+                {
+                    MainForm.ACTIVE_RECPATH = MainForm.RECPATH.EVENT;
                     MainForm.GetMainForm.RecordMode();
                     
                 }  

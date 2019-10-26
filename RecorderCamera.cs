@@ -49,7 +49,7 @@ namespace FaceDetection
         private ICaptureGraphBuilder2 pGraphBuilder = null;
         private IBaseFilter pUSB = null;
         private IBaseFilter renderFilter = null;
-        //private NullRenderer nullRender = null;
+        
         private IAMStreamConfig streamConfig = null;
        private SampleGrabber pSampleGrabber = null;
         
@@ -68,7 +68,9 @@ namespace FaceDetection
             videoWindow = (IVideoWindow)graph;
             mediaEventEx = (IMediaEventEx)graph;
             renderFilter = (IBaseFilter)new VideoMixingRenderer9();
-            pSampleGrabber = new SampleGrabber();            
+
+            pSampleGrabber = new SampleGrabber();
+            
             i_grabber = pSampleGrabber as ISampleGrabber;
             var mt = new AMMediaType();
             mt.majorType = MediaType.Video;
@@ -80,9 +82,194 @@ namespace FaceDetection
             DsUtils.FreeAMMediaType(mt);
         }
 
+        public RecorderCamera()
+        {
+
+        }
+
+        public void StartCamera(int cameraIndex, Size size, double fps, IntPtr pbx)
+        {
+            GetInterfaces();
+            //var camera_list = FindDevices();
+            //if (cameraIndex >= camera_list) throw new ArgumentException("USB camera is not available.", "index");
+            //Init(cameraIndex, size, fps, pbx, targetPath);                        
+            graph = (IGraphBuilder)(new FilterGraph());
+            pGraph = graph;
+            int hr = 0;
+
+            hr = pGraphBuilder.SetFiltergraph(pGraph);
+            DsError.ThrowExceptionForHR(hr);
+
+            //pUSB = FindCaptureDevice();
+            pUSB = CreateVideoCaptureSource(cameraIndex, size, fps);
+
+            hr = pGraph.AddFilter(pUSB, "WebCamControl Video");
+            DsError.ThrowExceptionForHR(hr);
+            /*
+            //add smartTee
+            pSmartTee = (IBaseFilter)new SmartTee();
+            hr = pGraph.AddFilter(pSmartTee, "Smart Tee");
+            DsError.ThrowExceptionForHR(hr);
+
+            //connect smart tee to camera 
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pUSB, null, pSmartTee);
+            DsError.ThrowExceptionForHR(hr);
+            */
+
+            //add SampleGrabber
+            //_pSampleGrabberHelper = new SampleGrabberHelper(pSampleGrabber, false);
+            //_pSampleGrabberHelper.ConfigureMode();
+
+            hr = pGraph.AddFilter(pSampleGrabber as IBaseFilter, "SampleGrabber");
+            checkHR(hr, "Can't add SampleGrabber to graph");
+            i_grabber.SetBufferSamples(true); //サンプルグラバでのサンプリングを開始
+
+            //フォーマットの設定
+            //暫くは一時的な値を使用してます
+
+            //SetFormat();
+            /*
+            //connect Smart Tee and AVI Mux
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, null);
+            checkHR(hr, "Can't connect Smart Tee and AVI Mux");
+            */
+            //connect Smart Tee and SampleGrabber
+            //hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Preview"), GetPin(pSampleGrabber as IBaseFilter, "Input"), null);
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pUSB, null, (IBaseFilter)pSampleGrabber);
+            checkHR(hr, "Can't connect Smart Tee and SampleGrabber");
+            
+                    IVMRAspectRatioControl9 ratioControl9 = (IVMRAspectRatioControl9)renderFilter;
+                hr = ratioControl9.SetAspectRatioMode(VMRAspectRatioMode.LetterBox);
+                DsError.ThrowExceptionForHR(hr);
+            
+                IVMRFilterConfig9 config9 = (IVMRFilterConfig9)renderFilter;
+                hr = config9.SetRenderingMode(VMR9Mode.Windowless);
+                checkHR(hr, "Can't set windowless mode");
+
+                IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
+                hr = control9.SetVideoClippingWindow(pbx);
+                checkHR(hr, "Can't set video clipping window");
+
+           if (MainForm.CURRENT_MODE != MainForm.CAMERA_MODES.HIDDEN)
+            {                
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
+                checkHR(hr, "Can't set rectangles of the video position");
+                Console.WriteLine("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
+                Logger.Add("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
+            }else
+            {
+                MainForm.GetMainForm.WindowState = System.Windows.Forms.FormWindowState.Minimized;
+                MainForm.GetMainForm.Width = 10;
+                MainForm.GetMainForm.Height = 10;
+                MainForm.GetMainForm.ShowInTaskbar = false;
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, 1, 1));
+                checkHR(hr, "Can't set rectangles of the video position");
+                Console.WriteLine("HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
+                Logger.Add("HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
+            }
+
+            hr = pGraph.AddFilter(renderFilter, "My Render Filter");
+            DsError.ThrowExceptionForHR(hr);
+
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSampleGrabber, null, renderFilter);
+            DsError.ThrowExceptionForHR(hr);
+
+            {
+                var mt = new AMMediaType();
+                i_grabber.GetConnectedMediaType(mt);
+                var header = (VideoInfoHeader)Marshal.PtrToStructure(mt.formatPtr, typeof(VideoInfoHeader));
+                var width = header.BmiHeader.Width;
+                var height = header.BmiHeader.Height;
+                var stride = width * (header.BmiHeader.BitCount / 8);
+                DsUtils.FreeAMMediaType(mt);
+
+                GetBitmap = () => GetBitmapMain(i_grabber, width, height, stride);
+            }
+            Stop = () => ReleaseInterfaces();
+            Release = () =>
+            {
+                Stop();
+
+                IEnumFilters enumFilters = null;
+                IBaseFilter[] baseFilters = { null };
+                IntPtr fetched = IntPtr.Zero;
+                try
+                {
+                    hr = pGraph.EnumFilters(out enumFilters);
+                    int r = 0;
+                    while (r == 0)
+                    {
+
+                        try
+                        {
+                            r = enumFilters.Next(baseFilters.Length, baseFilters, fetched);
+                            DsError.ThrowExceptionForHR(hr);
+                            baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
+                            Marshal.FreeCoTaskMem(fetched);
+                        }
+                        catch (System.NullReferenceException snrx)
+                        {
+                            Console.WriteLine(snrx.Message + snrx.HResult);
+                            r = 1;
+                            continue;
+                        }
+                    }
+                }
+                catch (InvalidComObjectException icom)
+                {
+                    Console.WriteLine(icom.InnerException);
+                }
+                GC.Collect();
+                //SafeReleaseComObject(pSampleGrabber);
+                //SafeReleaseComObject(control9);
+                //SafeReleaseComObject(config9);
+                //SafeReleaseComObject(ratioControl9);
+                //SafeReleaseComObject(pGraphBuilder);
+                //SafeReleaseComObject(renderFilter);
+                //SafeReleaseComObject(i_grabber);
+                //SafeReleaseComObject(pGraphBuilder);
+                //SafeReleaseComObject(graph);
+                //SafeReleaseComObject(pAVIMux);
+                //SafeReleaseComObject(pSmartTee);
+                //SafeReleaseComObject(pFilewriter);
+                //SafeReleaseComObject(pFilewriter_sink);
+                //SafeReleaseComObject(pUSB);
+            };
+            
+            try
+            {
+                mediaControl = (IMediaControl)graph;
+                hr = mediaControl.Run();
+                //checkHR(hr, "Can't run the graph");
+                Console.WriteLine(" running the preview graph ");
+            }
+            catch (COMException comx)
+            {
+                CustomMessage.ShowMessage("Can not start the camera");
+                Logger.Add("Can not start the camera");
+            }
+
+
+            var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, cameraIndex);
+            var pin = DirectShow.FindPin(filter, 0, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
+            //Console.WriteLine(GetVideoOutputFormat(pin).Length + " video format for camera " + cameraIndex);
+            VideoFormat[] videoFormats = GetVideoOutputFormat(pin);
+            /*
+            for (var i = 0; i<videoFormats.Length; i++)
+            {
+                Console.Write(videoFormats[i].MajorType + " ");
+                Console.Write(videoFormats[i].Size.Width + " ");
+                Console.Write(videoFormats[i].Size.Height + " ");
+                Console.Write(videoFormats[i].SubType + " ");
+                Console.Write(videoFormats[i].TimePerFrame + " /////");                
+
+            }
+            */
+
+        }
 
         //The following is called for building the PREVIEW graph
-       
+
         //This one is for recording
         /// <summary>
         /// Initialize Camera in CAPTURE Mode
@@ -92,24 +279,24 @@ namespace FaceDetection
         /// <param name="fps"></param>
         /// <param name="pbx">Control to display the video</param>
         /// <param name="dstFileName">destination file name</param>
-        public RecorderCamera(int cameraIndex, Size size, double fps, IntPtr pbx, string dstFileName)
+        public void StartRecorderCamera(int cameraIndex, Size size, double fps, IntPtr pbx, string dstFileName)
         {
-            try
+            string str = "";
+            if (MainForm.ACTIVE_RECPATH != string.Empty || MainForm.ACTIVE_RECPATH != MainForm.RECPATH.NORMAL)
             {
-                Directory.CreateDirectory(sourcePath);
-            }catch(IOException iox)
+                str = Path.Combine(Properties.Settings.Default.video_file_location, (cameraIndex + 1).ToString());
+                str = Path.Combine(str, MainForm.ACTIVE_RECPATH);
+            }else
             {
-                Logger.Add(iox.Message);
+                str = Path.Combine(Properties.Settings.Default.video_file_location, (cameraIndex + 1).ToString());
             }
-            
-            GetInterfaces();
-
-            string str = Path.Combine(FaceDetection.Properties.Settings.Default.video_file_location, "/"+ (cameraIndex + 1).ToString());
-            
+                
+            targetPath = str + "/" + dstFileName;
             Directory.CreateDirectory(str);
-            targetPath = Path.Combine(str, dstFileName);
             
+            Console.WriteLine(targetPath + " +++++++++++++++++ dest name 108 in  recorder");
 
+            GetInterfaces();
             //var camera_list = FindDevices();
             //if (cameraIndex >= camera_list) throw new ArgumentException("USB camera is not available.", "index");
             //Init(cameraIndex, size, fps, pbx, targetPath);                        
@@ -198,8 +385,9 @@ namespace FaceDetection
 
             if (MainForm.CURRENT_MODE != MainForm.CAMERA_MODES.HIDDEN)
             {
-                hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
+                Console.WriteLine("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " +MainForm.ACTIVE_RECPATH);
             }                
 
 
@@ -208,7 +396,7 @@ namespace FaceDetection
 
             hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSampleGrabber, null, renderFilter);
             DsError.ThrowExceptionForHR(hr);
-            Debug.WriteLine(DsError.GetErrorText(hr) + " is error in rendering");
+            
 
             {
                 var mt = new AMMediaType();
@@ -226,20 +414,52 @@ namespace FaceDetection
             {
                 Stop();
 
-                SafeReleaseComObject(pSampleGrabber);
-                SafeReleaseComObject(control9);
-                SafeReleaseComObject(config9);
-                SafeReleaseComObject(ratioControl9);
-                SafeReleaseComObject(pGraphBuilder);
-                SafeReleaseComObject(renderFilter);
-                SafeReleaseComObject(i_grabber);
-                SafeReleaseComObject(pGraphBuilder);
-                SafeReleaseComObject(graph);
-                SafeReleaseComObject(pAVIMux);
-                SafeReleaseComObject(pSmartTee);
-                SafeReleaseComObject(pFilewriter);
-                SafeReleaseComObject(pFilewriter_sink);
+                IEnumFilters enumFilters = null;
+                IBaseFilter[] baseFilters = { null };
+                IntPtr fetched = IntPtr.Zero;
+                try
+                {
+                    hr = pGraph.EnumFilters(out enumFilters);
+                    int r = 0;
+                    while (r == 0)
+                    {
+
+                        try
+                        {
+                            r = enumFilters.Next(baseFilters.Length, baseFilters, fetched);
+                            DsError.ThrowExceptionForHR(hr);
+                            baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
+                            Marshal.FreeCoTaskMem(fetched);
+                        }
+                        catch (System.NullReferenceException snrx)
+                        {
+                            Console.WriteLine(snrx.Message + snrx.HResult);
+                            r = 1;
+                            continue;
+                        }
+                    }
+                }
+                catch(InvalidComObjectException icom)
+                {
+                    Console.WriteLine(icom.InnerException);
+                }
+                GC.Collect();
+                //SafeReleaseComObject(pSampleGrabber);
+                //SafeReleaseComObject(control9);
+                //SafeReleaseComObject(config9);
+                //SafeReleaseComObject(ratioControl9);
+                //SafeReleaseComObject(pGraphBuilder);
+                //SafeReleaseComObject(renderFilter);
+                //SafeReleaseComObject(i_grabber);
+                //SafeReleaseComObject(pGraphBuilder);
+                //SafeReleaseComObject(graph);
+                //SafeReleaseComObject(pAVIMux);
+                //SafeReleaseComObject(pSmartTee);
+                //SafeReleaseComObject(pFilewriter);
+                //SafeReleaseComObject(pFilewriter_sink);
+                //SafeReleaseComObject(pUSB);
             };
+           /*
             IEnumFilters enumFilters = null;
             IBaseFilter[] baseFilters = { null };
             IntPtr fetched = IntPtr.Zero;
@@ -247,27 +467,33 @@ namespace FaceDetection
             int r = 0;
             while (r == 0)
             {
+                
                 try
                 {
                     r = enumFilters.Next(baseFilters.Length, baseFilters, fetched);
-                    DsError.ThrowExceptionForHR(hr);
-                    baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
-                    Debug.WriteLine(filterInfo.achName + " -filtername");
+                DsError.ThrowExceptionForHR(hr);
+                baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
+                Debug.WriteLine(filterInfo.achName + " -filtername");
                 }
-                catch
+                catch (System.NullReferenceException snrx)
                 {
+                    Console.WriteLine(snrx.Message + snrx.HResult);
                     r = 1;
                     continue;
                 }
             }
+            */
             try
             {
                 mediaControl = (IMediaControl)graph;
                 hr = mediaControl.Run();
                 //checkHR(hr, "Can't run the graph");
-            }catch(COMException comx)
+                Console.WriteLine(" running the recorder graph ");
+            }
+            catch(COMException comx)
             {
                 CustomMessage.ShowMessage("Can not start the camera");
+                Logger.Add("Can not start the camera");
             }
             
 
@@ -320,8 +546,8 @@ namespace FaceDetection
             try
             {
                 // 画像を作成
-                result = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-                var bmp_data = result.LockBits(new Rectangle(Point.Empty, result.Size), System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                result = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+                var bmp_data = result.LockBits(new Rectangle(Point.Empty, result.Size), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
 
                 //Debug.WriteLine(i_grabber + " igrabber " + ptr + " pointer, " + data.Length + " data  length " + sz);
 
@@ -346,9 +572,13 @@ namespace FaceDetection
         public void SetWindowPosition(Size size)
         {
             int hr = 0;
-            IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
-            checkHR(hr, "Can't set rectangles of the video position");
+            if (MainForm.CURRENT_MODE!=MainForm.CAMERA_MODES.HIDDEN)
+            {
+                IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
+                checkHR(hr, "Can't set rectangles of the video position");
+            }
+            
         }
         
         private volatile ManualResetEvent m_PictureReady = null;
@@ -392,6 +622,8 @@ namespace FaceDetection
         
         public void ReleaseInterfaces()
         {
+            Console.WriteLine("ReleaseInterfaces ");
+            Console.WriteLine("ReleaseInterfaces ");
             if (mediaControl != null)
                 mediaControl.StopWhenReady();
 
@@ -442,7 +674,7 @@ namespace FaceDetection
                 Marshal.ReleaseComObject(pGraphBuilder);
                 pGraphBuilder = null;
             }
-
+            GC.Collect();
         }
         private static void SafeReleaseComObject(object obj)
         {
