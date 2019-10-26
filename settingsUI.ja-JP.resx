@@ -117,12 +117,295 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADQ
+        HQAAAk1TRnQBSQFMAgEBAwEAAcQBAwHIAQMBGAEAARgBAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFg
+        AwABGAMAAQEBAAEgBgABJC4AAw8BFAFYAlsBywEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8
+        An8B/gEAAbwB+gH/AUACqAH9A0ABcRwAAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
+        AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMB
+        BAIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMWAR8DQAFxAxQBGwMCAQMDAgEDAxABFgNAAXADFwEg
+        AwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQN0AAMEAQYBUgJlAfQBPAJ/Af4BAAG8AfoB/wEA
+        AbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8An8B/gEAAbwB+gH/AQABvAH6Af8BAAG8AfoB/wEA
+        AbwB+gH/A0QBexQAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwUBBwMmATgDDQERAwMBBAMD
+        AQQDCgEOAycBOgMFAQcDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMDAQQDAwEE
+        AwMEBAEGAzABSwNVAbEDIQH7AwAB/wNZAcwDCwEPAwkBDANZAcQDAAH/AyEB+wNVAbEDLwFKAwQBBgMD
+        AQQDAwEEAwMBBAMDAQQDAgEDcAADMwFSATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+
+        ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+AVkCZwHyEAADAgQD
+        AQQDAwEEAwMBBAMDAQQDAwEEAw0BEQNFAX8DXgHlAwAB/wNQAaQDAwEEAwMBBANPAZwDAAH/A1wB5wNI
+        AYQDDgETAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEEAwMBBAMDAQQDAwEEA0UBfwMAAf8DVwHo
+        A0gBhwM7AWQDKwH8A1kBwwNXAb8DQAH9Az4BawNIAYcDVwHoAwAB/wNIAYYDAwEEAwMBBAMDAQQDAwEE
+        AwIBA2wAAz4BawE8An8B/gEAAbwB+gH/ATwCfwH+ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8An8B/gEA
+        AbwB+gH/AQABvAH6Af8BPAJ/Af4BAAG8AfoB/wEAAbwB+gH/AQABvAH6Af8BAAG8AfoB/wE8An8B/gEA
+        AbwB+gH/AT0CfwH+DAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA1cBxQMAAf8DAAH/AwAB/wMAAf8DRgGA
+        A0QBewMAAf8DAAH/AwAB/wMAAf8DWgHNAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEEAwMBBAMD
+        AQQDAwEEA0gBhQMrAfwDCAELAwMBBAMDAQQDPwFtA1MB8QNOAfADQgF1AwMBBAMDAQQDBwEKA0gB9gNL
+        AY4DAwEEAwMBBAMDAQQDAwEEAwIBA2gAAx0BKgEAAbwB+gH/ATwCfwH+AQABvAH6Af8BPAJ/Af4BPAJ/
+        Af4BAAG8AfoB/wEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8An8B/gEAAbwB+gH/AQABvAH6
+        Af8BAAG8AfoB/wEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wFZAmcB8ggAAwIEAwEEAwMBBAMD
+        AQQDAwEEAwMBBANUAa8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/A1YBuAMD
+        AQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMDAQQDAwEEAwMBBANCAXYDAAH/Aw0BEQMDAQQDAwEE
+        AwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwgBCwMBAf4DRQF9AwMBBAMDAQQDAwEEAwMBBAMCAQNpAAG8
+        AfoB/wEAAbwB+gH/ATwCfwH+AQcB0AH7Af8DfwH+A38B/gLxAfAB/wLxAfAB/wN/Af4C8QHwAf8C8QHw
+        Af8DfwH+AvEB8AH/AvEB8AH/AvEB8AH/AvEB8AH/A38B/gEAAbwB+gH/AQABvAH6Af8BPAJ/Af4DRAF7
+        BAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA0wBkgMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
+        AwAB/wMAAf8DTwGbAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIBAwMEAQYDSAGGA0sBjgNFAX0DXQHi
+        A1QB7gMMARADAwEEAwYBCAMrAUIDPgFsAz4BbAMrAUIDBgEIAwMBBAMJAQwDXQHtA1gB4wNCAXYDSAGF
+        A0YBgAMEAQYDAgEDZAADTAGTAQABvAH6Af8BAAG8AfoB/wE8An8B/gH3AfwB/gH/A38B/gN/Af4C8QHw
+        Af8C8QHwAf8DfwH+AvEB8AH/AvEB8AH/A38B/gLxAfAB/wLxAfAB/wLxAfAB/wLxAfAB/wN/Af4BAAG8
+        AfoB/wEAAbwB+gH/ATwCfwH+AQABvAH6Af8EAAMCBAMBBAMLAQ8DWgHKA1UBugNQAZoDUQH3AwAB/wMA
+        Af8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMpAfoDTwGbA1YBuANaAc0DDgETAwMBBAMC
+        AQMDAgEDAy8BSQMAAf8DSAH2AwEB/gNUAe4DIgEyAwMBBAM3AVoDXQHiAwAB/wMAAf8DAAH/AwAB/wNd
+        AeIDNwFaAwMBBAMhATADXQHtAwAB/wMrAfwDAAH/AzABSwMCAQNkAAE8An8B/gEAAbwB+gH/AQABvAH6
+        Af8BPAJ/Af4B+AH8Af4B/wN/Af4DfwH+AwAB/wLxAfAB/wN/Af4CnAGbAf8DAAH/A38B/gLxAfAB/wKC
+        AYEB/wMAAf8C8QHwAf8DfwH+AQABvAH6Af8BAAG8AfoB/wE8An8B/gEAAbwB+gH/A0ABcQMCBAMBBANE
+        AXoDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/A1cBxQNKAYsDSgGLA1cBxQMAAf8DAAH/AwAB/wMA
+        Af8DAAH/AwAB/wMAAf8DSAGEAwMBBAMCAQMDAgEDA1UBsQNXAegDBwEKAwgBCwMKAQ0DAwEEA0gBhgMA
+        Af8DVQG0Ay8BSgMTARoDEwEaAy8BSgNWAbMDAAH/A0gBhQMDAQQDDAEQAw0BEgMIAQsDVwHoA1UBsgMC
+        AQNgAAMUARsBPAJ/Af4BPAJ/Af4BPAJ/Af4BPAJ/Af4DfwH+A38B/gN/Af4BPgI9Af4DfwH+A38B/gFs
+        AmsB/gE+Aj0B/gN/Af4DfwH+AVICUQH+AT4CPQH+A38B/gN/Af4BPAJ/Af4BPAJ/Af4BPAJ/Af4BPAJ/
+        Af4BQAKoAf0DAgEDAwQBBQNfAeADAAH/AwAB/wMAAf8DAAH/AwAB/wNYAe8DLwFKAwMBBAMDAQQDAwEE
+        AwMBBAMwAUsDWAHvAwAB/wMAAf8DAAH/AwAB/wMAAf8DXAHnAwUBBwMCAQMDFgEfAyEB+wNIAYcDAwEE
+        AwMBBAMDAQQDNwFbAwAB/wNDAXgDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDRAF5AwAB/wM3AVoDAwEE
+        AwMBBAMDAQQDSAGHAyEB+wMWAR9gAANMAZIBPAJ/Af4BAAG8AfoB/wEAAbwB+gH/ATwCfwH+AfgB/AH+
+        Af8DfwH+A38B/gMABf8DfwH+AgABngH/AgABggH/A38B/gLxAfAB/wMAAf8DAAH/AvEB8AH/A38B/gEA
+        AbwB+gH/AQABvAH6Af8BPAJ/Af4BAAG8AfoB/wEAAbwB+gH/AwIBAwMhATEDAAH/AwAB/wMAAf8DAAH/
+        AwAB/wMAAf8DLwFKAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAzABSwMAAf8DAAH/AwAB/wMAAf8DAAH/
+        AwAB/wMnAToDAgEDAz8BbwMAAf8DPgFrAwMBBAMDAQQDBgEIA10B4gNVAbQDAwEEAwMBBAMDAQQDAwEE
+        AwMBBAMDAQQDAwEEAwMBBANVAbQDXQHiAwYBCAMDAQQDAwEEAzsBZAMAAf8DQAFxYAABXAJhAdwBPAJ/
+        Af4BAAG8AfoB/wEAAbwB+gH/ATwCfwH+AfgB/AH+Af8DfwH+A38B/gMABf8DfwH+AgAB+gH/AgAB+gH/
+        AVQBVQF/Af4C8QHwAf8DAAH/AwAB/wLxAfAB/wN/Af4BAAG8AfoB/wEAAbwB+gH/ATwCfwH+AQABvAH6
+        Af8BAAG8AfoB/wMCAQMDCQEMA00BlQMBAf4DAAH/AwAB/wMAAf8DVwHFAwMBBAMDAQQDAwEEAwMBBAMD
+        AQQDAwEEAwMBBAMDAQQDVwHFAwAB/wMAAf8DAAH/AwAB/wNPAZwDCgEOAwIBAwMQARYDWQHDA0AB/QNC
+        AXQDAwEEAysBQgMAAf8DLwFKAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDLwFKAwAB/wMq
+        AUEDAwEEAz4BbAMrAfwDWQHMAxQBG2AAATICXwH7ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+A38B/gN/
+        Af4DfwH+AT4CPQH+A38B/gN/Af4BbAFrAX8B/gFBAUABVQH+A38B/gN/Af4BUgJRAf4BPgI9Af4DfwH+
+        A38B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gMCBAMBBAMDAQQDQQFyAwAB/wMAAf8DAAH/
+        A0oBiwMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEA0oBiwMAAf8DAAH/AwAB/wNEAXsDAwEE
+        AwMBBAMCAQMDAgEDAwkBDANWAb4DWQHyAwMBBAM+AWwDAAH/AxMBGgMDAQQDAwEEAwMBBAMDAQQDAwEE
+        AwMBBAMDAQQDAwEEAxMBGgMAAf8DPgFsAwMBBANTAfEDWQHDAwsBDwMCAQNgAAFTAmQB8QE8An8B/gEA
+        AbwB+gH/AQABvAH6Af8BPAJ/Af4B+AH8Af4B/wN/Af4CfwEWAf4BmAGxAQAB/wGbAbMBAAH/A38B/gMA
+        Af8DAAH/A38B/gHmAekB1gH/AZgBsQEAAf8BmAGxAQAB/wGqAb4BAAH/A38B/gEAAbwB+gH/AQABvAH6
+        Af8BPAJ/Af4BAAG8AfoB/wEAAbwB+gH/AwIEAwEEAwMBBANDAXgDAAH/AwAB/wMAAf8DSgGLAwMBBAMD
+        AQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDSgGLAwAB/wMAAf8DAAH/A0YBgAMDAQQDAwEEAwIBAwMC
+        AQMDCwEPA1kBwwNZAfIDAwEEAz4BbAMAAf8DEwEaAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMD
+        AQQDEwEaAwAB/wM+AWwDAwEEA1MB8QNXAb8DCQEMAwIBA2AAAVcCWgG9ATwCfwH+AQABvAH6Af8BAAG8
+        AfoB/wE8An8B/gH4AfwB/gH/A38B/gJ/ARYB/gGYAbEBAAH/AZgBsQEAAf8DfwH+AwAB/wMAAf8DfwH+
+        AeIB5gHMAf8BmAGxAQAB/wGYAbEBAAH/AaMBuQEAAf8DfwH+AQABvAH6Af8BAAG8AfoB/wE8An8B/gEA
+        AbwB+gH/AQABvAH6Af8DAgEDAwsBDwNQAZ4DAAH/AwAB/wMAAf8DAAH/A1cBxQMDAQQDAwEEAwMBBAMD
+        AQQDAwEEAwMBBAMDAQQDAwEEA1cBxQMAAf8DAAH/AwAB/wMAAf8DUAGkAw0BEQMCAQMDEwEaA1kBzAMr
+        AfwDPgFsAwMBBAMrAUIDAAH/Ay8BSgMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAy8BSgMA
+        Af8DKgFBAwMBBANCAXYDQAH9A1kBxAMQARZgAAM3AVsBPAJ/Af4BPAJ/Af4BPAJ/Af4BPAJ/Af4DfwH+
+        A38B/gN/Af4BPgI9Af4DfwH+A38B/gFvAm4B/gE+Aj0B/gN/Af4DfwH+AVICUQH+AT4CPQH+A38B/gN/
+        Af4BPAJ/Af4BPAJ/Af4BPAJ/Af4BPAJ/Af4BPAJ/Af4DAgEDAyABLwMAAf8DAAH/AwAB/wMAAf8DAAH/
+        AwAB/wMvAUoDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDLwFKAwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
+        AyYBOAMCAQMDQAFxAwAB/wM7AWMDAwEEAwMBBAMGAQgDXQHiA1YBswMDAQQDAwEEAwMBBAMDAQQDAwEE
+        AwMBBAMDAQQDAwEEA1UBtANdAeIDBgEIAwMBBAMDAQQDPgFsAwAB/wM/AW9kAAE8An8B/gEAAbwB+gH/
+        AQABvAH6Af8BPAJ/Af4B+AH8Af4B/wN/Af4DfwH+AwAF/wN/Af4DAAH/AwAB/wN/Af4E/wMAAf8DAAH/
+        AvEB8AH/A38B/gEAAbwB+gH/AQABvAH6Af8BPAJ/Af4BAAG8AfoB/wFYAlsBywMCAQMDBAEFA1oB3gMA
+        Af8DAAH/AwAB/wMAAf8DAAH/A04B8AMvAUoDAwEEAwMBBAMDAQQDAwEEAy8BSgNYAe8DAAH/AwAB/wMA
+        Af8DAAH/AwAB/wNeAeUDBQEHAwIBAwMWAR8DIQH7A0gBhwMDAQQDAwEEAwMBBAM3AVsDAAH/A0MBdwMD
+        AQQDAwEEAwMBBAMDAQQDAwEEAwMBBANDAXgDAAH/AzcBWgMDAQQDAwEEAwMBBANIAYcDIQH7AxYBH2QA
+        AVICZQH0ATwCfwH+ATwCfwH+ATwCfwH+A38B/gN/Af4DfwH+AW8CbgH+A38B/gN/Af4DfwH+AXYCdQH+
+        A38B/gN/Af4DfwH+A38B/gN/Af4DfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+Aw4BEwMCBAMBBANC
+        AXUDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/A1cBxQNKAYsDSgGLA1cBxQMAAf8DAAH/AwAB/wMA
+        Af8DAAH/AwAB/wMAAf8DRQF/AwMBBAMCAQMDAgEDA1UBsgNXAegDCAELAw0BEQMMARADAwEEA0gBhgMA
+        Af8DVgGzAy8BSgMTARoDEwEaAy8BSgNVAbQDAAH/A0gBhQMDAQQDCgENAwgBCwMHAQoDWAHpA1UBsQMC
+        AQNkAAMTARoBAAG8AfoB/wEAAbwB+gH/ATwCfwH+AdgB8QH9Af8DfwH+A38B/gj/A38B/gj/A38B/hD/
+        A38B/gEAAbwB+gH/AQABvAH6Af8BPAJ/Af4BUgJlAfQEAAMCBAMBBAMKAQ0DVwHCA1UBsQNMAZEDQgH1
+        AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wNRAfcDTAGSA1QBrwNXAcUDDQER
+        AwMBBAMCAQMDAgEDAzABSwMAAf8DKwH8AwAB/wNUAe4DIgEyAwMBBAM3BFsB4QMAAf8DAAH/AwAB/wMA
+        Af8DXQHiAzcBWgMDAQQDIgEyA1QB7gMBAf4DSAH2AwAB/wMvAUkDAgEDaAABWQJcAc8BAAG8AfoB/wE8
+        An8B/gEAAbwB+gH/A38B/gN/Af4B+AH8Af4B/wH4AfwB/gH/A38B/gH4AfwB/gH/AfgB/AH+Af8DfwH+
+        AfgB/AH+Af8B+AH8Af4B/wH4AfwB/gH/AfcB/AH+Af8BdwJ/Af4BAAG8AfoB/wEAAbwB+gH/ATwCfwH+
+        AwQBBgQAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBANMAZEDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
+        AwAB/wMAAf8DAAH/A1ABmgMDAQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCAQMDBAEGA0YBgANIAYYDQwF3
+        A10B4gNUAe4DCgENAwMBBAMGAQgDKwFCAz4BbAM+AWwDKwFCAwYBCAMDAQQDDAEQA1QB7gNbAeEDRQF9
+        A0sBjgNIAYYDBAEGAwIBA2wAAysB/AE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8
+        An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8
+        An8B/gMyAVEIAAMCBAMBBAMDAQQDAwEEAwMBBAMDAQQDVQGxAwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
+        AwAB/wMAAf8DAAH/AwAB/wNVAboDAwEEAwMBBAMDAQQDAwEEAwMBBAMCAQMDAgQDAQQDAwEEAwMBBAMD
+        AQQDRQF9AwEB/gMIAQsDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMNAREDAAH/A0IBdgMD
+        AQQDAwEEAwMBBAMDAQQDAgEDcAADKwH8AQABvAH6Af8BPAJ/Af4BPAJ/Af4BAAG8AfoB/wEAAbwB+gH/
+        ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8An8B/gEAAbwB+gH/AQABvAH6Af8BAAG8AfoB/wEAAbwB+gH/
+        ATwCfwH+AQABvAH6Af8DPgFrDAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA1cBwgMAAf8DAAH/AwAB/wMA
+        Af8DQwF4A0EBcgMBAf4DAAH/AwAB/wMAAf8DWgHKAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIEAwEE
+        AwMBBAMDAQQDAwEEA0sBjgNRAfcDBwEKAwMBBAMDAQQDQgF1A1kB8gNZAfIDPgFsAwMBBAMDAQQDCAEL
+        AysB/ANIAYUDAwEEAwMBBAMDAQQDAwEEAwIBA3QAAVkCXAHPATwCfwH+ATwCfwH+AQABvAH6Af8BAAG8
+        AfoB/wE8An8B/gEAAbwB+gH/AQABvAH6Af8BPAJ/Af4BAAG8AfoB/wEAAbwB+gH/AQABvAH6Af8BAAG8
+        AfoB/wE8An8B/gMdASoQAAMCBAMBBAMDAQQDAwEEAwMBBAMDAQQDCgEOA0IBdQNaAd4DAAH/A1ABngMD
+        AQQDAwEEA00BlQMAAf8DXwHgA0QBegMMARADAwEEAwMBBAMDAQQDAwEEAwMBBAMCAQMDAgQDAQQDAwEE
+        AwMBBAMDAQQDSAGGAwAB/wNXAegDSAGHAz4BawNAAf0DVwG/A1cBwgMrAfwDOwFkA0gBiANXAegDAAH/
+        A0UBfwMDAQQDAwEEAwMBBAMDAQQDAgEDeAADEwEaAVICZQH0ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+
+        ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+A0wBkxgAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBAMD
+        AQQDAwQEAQUDIAEvAwsBDwMDAQQDAwEEAwkBDAMhATEDBAEFAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEE
+        AwMBBAMCAQMDAgQDAQQDAwEEAwMBBAMDBAQBBgMvAUkDVQGyAyEB+wMAAf8DWQHEAwkBDAMLAQ8DWAHL
+        AwAB/wMhAfsDVQGxAzABSwMEAQYDAwEEAwMBBAMDAQQDAwEEAwIBA4QAAzcBWwFWAlgBvAFTAmQB8QEy
+        Al8B+wFcAmEB3ANMAZIDFAEbIAADAQQCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
+        AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAQECAwEEAgED
+        AwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAxcBIANAAXADEAEWAwIBAwMCAQMDEwEaA0ABcQMWAR8DAgED
+        AwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwEBAmAAAUIBTQE+BwABPgMAASgDAAFgAwABGAMAAQEBAAEB
+        BQABIAEBFgAD/wEAAf4BAAF/CQAB+AEAAR8JAAHwAQABDwkAAeABAAEHCQABwAEAAQMJAAHAAQABAQkA
+        AYABAAEBCQABgF8AAYALAAGACwABgAEAAQEJAAHAAQABAQkAAeABAAEDCQAB8AEAAQcJAAH4AQABDwkA
+        AfwBAAE/CQAB/wGAAf8fAAs=
+</value>
+  </data>
+  <data name="check_state_images.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA0
+        AQAAAk1TRnQBSQFMAgEBAgEAAVwBAQFgAQEBEAEAARABAAT/ARkBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        AwABEAMAAQEBAAEYBgABDBUALf8DAC3/YwAt/wMALf9jAC3/AwAt/2MALf8DAC3/YwAt/wMAD/8DHgPy
+        GP9jAC3/AwAM/wMeBgADzxX/YwAt/wMACf8DDAMAA/UDDwMAFf9jAC3/AwAG/wNJAwAD5wb/A0ADAAPP
+        D/9jAC3/AwAY/wMPAwAD8gz/YwAt/wMAG/8DPAMAA9cJ/2MALf8DAB7/AycDAAPeBv9jAC3/AwAh/wMw
+        A9MG/2MALf8DAC3/YwAt/wMALf9jAC3/AwAt//8AIQABQgFNAT4HAAE+AwABKAMAAUADAAEQAwABAQEA
+        AQEFAAGAFwAD/5cACw==
+</value>
+  </data>
+  <data name="button_settings_cancel.Text" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="button_apply.Text" xml:space="preserve">
+    <value>適用</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 12</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>録画時間(イベント発生後)</value>
+  </data>
+  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 12</value>
+  </data>
+  <data name="label16.Text" xml:space="preserve">
+    <value>録画時間 (イベント発生前)</value>
+  </data>
+  <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 12</value>
+  </data>
+  <data name="label18.Text" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 12</value>
+  </data>
+  <data name="label19.Text" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="cb_face_recognition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 16</value>
+  </data>
+  <data name="cb_face_recognition.Text" xml:space="preserve">
+    <value>顔認識をする</value>
+  </data>
+  <data name="lb_milliseconds1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 12</value>
+  </data>
+  <data name="lb_milliseconds1.Text" xml:space="preserve">
+    <value>分</value>
+  </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 12</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>顔認識を実施する周期</value>
+  </data>
+  <data name="lb_seconds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 12</value>
+  </data>
+  <data name="lb_seconds.Text" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="lb_manual_recording_time.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 12</value>
+  </data>
+  <data name="lb_manual_recording_time.Text" xml:space="preserve">
+    <value>手動録画最大時間</value>
+  </data>
+  <data name="groupBox_functionalitySettings.Text" xml:space="preserve">
+    <value>機能設定</value>
+  </data>
+  <data name="lb_backlight_off_idling_delay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 12</value>
+  </data>
+  <data name="lb_backlight_off_idling_delay.Text" xml:space="preserve">
+    <value>未操作時間</value>
+  </data>
+  <data name="label20_minutes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 12</value>
+  </data>
+  <data name="label20_minutes.Text" xml:space="preserve">
+    <value>分</value>
+  </data>
+  <data name="groupBox8.Text" xml:space="preserve">
+    <value>バックライトをオフする</value>
+  </data>
+  <data name="cb_backlight_off_idling.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 16</value>
+  </data>
+  <data name="cb_backlight_off_idling.Text" xml:space="preserve">
+    <value>未操作時にバックライトをオフする</value>
+  </data>
+  <data name="cb_backlight_on_recognition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 16</value>
+  </data>
+  <data name="cb_backlight_on_recognition.Text" xml:space="preserve">
+    <value>顔認識時にバックライトをオンする</value>
+  </data>
+  <data name="cb_all_cameras.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 16</value>
+  </data>
+  <data name="cb_all_cameras.Text" xml:space="preserve">
+    <value>すべてのカメラ映像を同時に表示する</value>
+  </data>
+  <data name="cb_show_rec_icon.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 16</value>
+  </data>
+  <data name="cb_show_rec_icon.Text" xml:space="preserve">
+    <value>録画中アイコンを表示する</value>
+  </data>
+  <data name="cb_show_camera_number.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 16</value>
+  </data>
+  <data name="cb_show_camera_number.Text" xml:space="preserve">
+    <value>カメラ番号を表示する</value>
+  </data>
+  <data name="cb_dateandtime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 16</value>
+  </data>
+  <data name="cb_dateandtime.Text" xml:space="preserve">
+    <value>現在日時を表示する</value>
+  </data>
+  <data name="cb_window_pane.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 16</value>
+  </data>
+  <data name="cb_window_pane.Text" xml:space="preserve">
+    <value>ウィンドウ枠を表示する</value>
+  </data>
+  <data name="checkBox_full_screen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 16</value>
+  </data>
+  <data name="checkBox_full_screen.Text" xml:space="preserve">
+    <value>フルスクリーン</value>
+  </data>
+  <data name="cb_always_on_top.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 16</value>
+  </data>
+  <data name="cb_always_on_top.Text" xml:space="preserve">
+    <value>常に最前面に表示する</value>
+  </data>
+  <data name="groupBox_viewSettings.Text" xml:space="preserve">
+    <value>表示設定</value>
+  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 12</value>
+    <value>118, 12</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>日経過後のファイルを削除</value>
+    <value>日経過のファイルを削除</value>
   </data>
   <data name="cb_delete_old.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 16</value>
@@ -134,214 +417,22 @@
     <value>参照</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 12</value>
+    <value>94, 12</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
-    <value>保存先フォルダパス</value>
+    <value>保存先ファイルパス</value>
   </data>
   <data name="groupBox2.Text" xml:space="preserve">
-    <value>保存先設定</value>
+    <value>保存先設置</value>
+  </data>
+  <data name="groupBox_Environment.Text" xml:space="preserve">
+    <value>環境設定</value>
   </data>
   <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 12</value>
   </data>
   <data name="label26.Text" xml:space="preserve">
-    <value>接続カメラ台数</value>
-  </data>
-  <data name="cb_all_cameras.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 16</value>
-  </data>
-  <data name="cb_all_cameras.Text" xml:space="preserve">
-    <value>全てのカメラ映像を同時に表示する</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>環境設定</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>表示言語</value>
-  </data>
-  <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAE
-        JwAAAk1TRnQBSQFMAgEBBAEAAQgBAwEIAQMBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
-        AwABMAMAAQEBAAEgBgABSP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A
-        /wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AFIAAw8BFAFYAlsBywEAAbwB+gH/ATwCfwH+AQABvAH6
-        Af8BAAG8AfoB/wE8An8B/gEAAbwB+gH/AUACqAH9A0ABcRwAAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMC
-        AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
-        AQMDAgEDAwIBAwMBBAIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMWAR8DQAFxAxQBGwMCAQMDAgED
-        AxABFgNAAXADFwEgAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDfwH+A+0B/wP+Af8D7gH/
-        A+0B/wP+Af8D8AH/A+0B/wP+Af8D8QH/A+0B/wP+Af8D8gH/A+0B/wP+Af8D8QH/A+0B/wP+Af8D8QH/
-        A+0B/wP+Af8D7wH/A+0B/wP+Af8UAAMEAQYBUgJlAfQBPAJ/Af4BAAG8AfoB/wEAAbwB+gH/ATwCfwH+
-        AQABvAH6Af8BAAG8AfoB/wE8An8B/gEAAbwB+gH/AQABvAH6Af8BAAG8AfoB/wEAAbwB+gH/A0QBexQA
-        AwIEAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwUBBwMmATgDDQERAwMBBAMDAQQDCgEOAycBOgMF
-        AQcDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMDAQQDAwEEAwMEBAEGAzABSwNV
-        AbEDIQH7AwAB/wNZAcwDCwEPAwkBDANZAcQDAAH/AyEB+wNVAbEDLwFKAwQBBgMDAQQDAwEEAwMBBAMD
-        AQQDAgEDA38E/gH/A+0B/wP+Af8D/gH/A+0B/wP8Af8D/gH/A+0B/wP6Af8D/gH/A+0B/wP7Af8D/gH/
-        A+0B/wP6Af8D/gH/A+0B/wP7Af8D/gH/A+0B/wP9Af8D/gH/A+0B/xAAAzMBUgE8An8B/gE8An8B/gE8
-        An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8An8B/gE8
-        An8B/gE8An8B/gFZAmcB8hAAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBAMNAREDRQF/A14B5QMAAf8DUAGk
-        AwMBBAMDAQQDTwGcAwAB/wNcAecDSAGEAw4BEwMDAQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMD
-        AQQDAwEEAwMBBANFAX8DAAH/A1cB6ANIAYcDOwFkAysB/ANZAcMDVwG/A0AB/QM+AWsDSAGHA1cB6AMA
-        Af8DSAGGAwMBBAMDAQQDAwEEAwMBBAMCAQMDfwH+A/0B/wPvAf8D/AH/A/0B/wPvAf8D+wH/A/0B/wPv
-        Af8D+gH/A/0B/wPvAf8D+gH/A/0B/wPvAf8D+QH/A/0B/wPvAf8D+gH/A/0B/wPvAf8D+wH/A/0B/wPv
-        Af8MAAM+AWsBPAJ/Af4BAAG8AfoB/wE8An8B/gE8An8B/gEAAbwB+gH/AQABvAH6Af8BPAJ/Af4BAAG8
-        AfoB/wEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wEAAbwB+gH/AQABvAH6Af8BPAJ/Af4BAAG8
-        AfoB/wE9An8B/gwAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBANXAcUDAAH/AwAB/wMAAf8DAAH/A0YBgANE
-        AXsDAAH/AwAB/wMAAf8DAAH/A1oBzQMDAQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMDAQQDAwEE
-        AwMBBANIAYUDKwH8AwgBCwMDAQQDAwEEAz8BbQNTAfEDTgHwA0IBdQMDAQQDAwEEAwcBCgNIAfYDSwGO
-        AwMBBAMDAQQDAwEEAwMBBAMCAQMDfwH+A+0B/wP+Af8D7gH/A+0B/wP+Af8D8AH/A+0B/wMAAf8DAAH/
-        A+0B/wP+Af8D8gH/A+0B/wP+Af8D8QH/A+0B/wP+Af8D8QH/A+0B/wP+Af8D7wH/A+0B/wP+Af8IAAMd
-        ASoBAAG8AfoB/wE8An8B/gEAAbwB+gH/ATwCfwH+ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8An8B/gEA
-        AbwB+gH/AQABvAH6Af8BPAJ/Af4BAAG8AfoB/wEAAbwB+gH/AQABvAH6Af8BAAG8AfoB/wE8An8B/gEA
-        AbwB+gH/AQABvAH6Af8BWQJnAfIIAAMCBAMBBAMDAQQDAwEEAwMBBAMDAQQDVAGvAwAB/wMAAf8DAAH/
-        AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wNWAbgDAwEEAwMBBAMDAQQDAwEEAwMBBAMCAQMDAgQD
-        AQQDAwEEAwMBBAMDAQQDQgF2AwAB/wMNAREDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMI
-        AQsDAQH+A0UBfQMDAQQDAwEEAwMBBAMDAQQDAgEDA38E/gH/A+0B/wP+Af8D/gH/A+0B/wP7Af8DAAH/
-        AwAB/wMAAf8DAAH/A+0B/wP7Af8D/gH/A+0B/wP6Af8D/gH/A+0B/wP7Af8D/gH/A+0B/wP9Af8D/gH/
-        A+0B/wkAAbwB+gH/AQABvAH6Af8BPAJ/Af4BFwHQAfsB/wN/Af4DfwH+AvEB8AH/AvEB8AH/A38B/gLx
-        AfAB/wLxAfAB/wN/Af4C8QHwAf8C8QHwAf8C8QHwAf8C8QHwAf8DfwH+AQABvAH6Af8BAAG8AfoB/wE8
-        An8B/gNEAXsEAAMCBAMBBAMDAQQDAwEEAwMBBAMDAQQDTAGSAwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
-        AwAB/wMAAf8DAAH/AwAB/wNPAZsDAwEEAwMBBAMDAQQDAwEEAwMBBAMCAQMDAgEDAwQBBgNIAYYDSwGO
-        A0UBfQNdAeIDVAHuAwwBEAMDAQQDBgEIAysBQgM+AWwDPgFsAysBQgMGAQgDAwEEAwkBDANdAe0DWAHj
-        A0IBdgNIAYUDRgGAAwQBBgMCAQMDfwH+A/sB/wPxAf8D+wH/A/sB/wPxAf8DAAH/AwAB/wMAAf8DAAH/
-        AwAB/wMAAf8D+QH/A/sB/wPxAf8D+AH/A/sB/wPxAf8D+QH/A/sB/wPxAf8D+gH/A/sB/wPxAf8EAANM
-        AZMBAAG8AfoB/wEAAbwB+gH/ATwCfwH+AfcB/AH+Af8DfwH+A38B/gLxAfAB/wLxAfAB/wN/Af4C8QHw
-        Af8C8QHwAf8DfwH+AvEB8AH/AvEB8AH/AvEB8AH/AvEB8AH/A38B/gEAAbwB+gH/AQABvAH6Af8BPAJ/
-        Af4BAAG8AfoB/wQAAwIEAwEEAwsBDwNaAcoDVQG6A1ABmgNRAfcDAAH/AwAB/wMAAf8DAAH/AwAB/wMA
-        Af8DAAH/AwAB/wMAAf8DAAH/AykB+gNPAZsDVgG4A1oBzQMOARMDAwEEAwIBAwMCAQMDLwFJAwAB/wNI
-        AfYDAQH+A1QB7gMiATIDAwEEAzcBWgNdAeIDAAH/AwAB/wMAAf8DAAH/A10B4gM3AVoDAwEEAyEBMANd
-        Ae0DAAH/AysB/AMAAf8DMAFLAwIBAwN/Af4D7QH/A/4B/wPuAf8D7QH/AwAB/wMAAf8DAAH/A4UB/wMA
-        Af8DAAH/AwAB/wMAAf8D7QH/A/4B/wPxAf8D7QH/A/4B/wPxAf8D7QH/A/4B/wPvAf8D7QH/A/4B/wQA
-        ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8An8B/gH4AfwB/gH/A38B/gN/Af4DAAH/AvEB8AH/A38B/gKc
-        AZsB/wMAAf8DfwH+AvEB8AH/AoIBgQH/AwAB/wLxAfAB/wN/Af4BAAG8AfoB/wEAAbwB+gH/ATwCfwH+
-        AQABvAH6Af8DQAFxAwIEAwEEA0QBegMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DVwHFA0oBiwNK
-        AYsDVwHFAwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wNIAYQDAwEEAwIBAwMCAQMDVQGxA1cB6AMH
-        AQoDCAELAwoBDQMDAQQDSAGGAwAB/wNVAbQDLwFKAxMBGgMTARoDLwFKA1YBswMAAf8DSAGFAwMBBAMM
-        ARADDQESAwgBCwNXAegDVQGyAwIBAwN/BP4B/wPtAf8D/gH/AwAB/wMAAf8DAAH/A4cB/wPtAf8D+wH/
-        AwAB/wMAAf8DAAH/AwAB/wPtAf8D+gH/A/4B/wPtAf8D+wH/A/4B/wPtAf8D/QH/A/4B/wPtAf8DFAEb
-        ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+A38B/gN/Af4DfwH+AT4CPQH+A38B/gN/Af4BbAJrAf4BPgI9
-        Af4DfwH+A38B/gFSAlEB/gE+Aj0B/gN/Af4DfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+AUACqAH9
-        AwIBAwMEAQUDXwHgAwAB/wMAAf8DAAH/AwAB/wMAAf8DWAHvAy8BSgMDAQQDAwEEAwMBBAMDAQQDMAFL
-        A1gB7wMAAf8DAAH/AwAB/wMAAf8DAAH/A1wB5wMFAQcDAgEDAxYBHwMhAfsDSAGHAwMBBAMDAQQDAwEE
-        AzcBWwMAAf8DQwF4AwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEA0QBeQMAAf8DNwFaAwMBBAMDAQQDAwEE
-        A0gBhwMhAfsDFgEfA38B/gP6Af8D8gH/AwAB/wMAAf8DAAH/AzMB/wP6Af8D8QH/A/kB/wP6Af8DAAH/
-        AwAB/wMAAf8DAAH/A/gB/wP6Af8D8QH/A/gB/wP6Af8D8QH/A/oB/wP6Af8D8QH/A0wBkgE8An8B/gEA
-        AbwB+gH/AQABvAH6Af8BPAJ/Af4B+AH8Af4B/wN/Af4DfwH+AwAF/wN/Af4CAwGeAf8CAAGCAf8DfwH+
-        AvEB8AH/AwAB/wMAAf8C8QHwAf8DfwH+AQABvAH6Af8BAAG8AfoB/wE8An8B/gEAAbwB+gH/AQABvAH6
-        Af8DAgEDAyEBMQMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMvAUoDAwEEAwMBBAMDAQQDAwEEAwMBBAMD
-        AQQDMAFLAwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AycBOgMCAQMDPwFvAwAB/wM+AWsDAwEEAwMBBAMG
-        AQgDXQHiA1UBtAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEA1UBtANdAeIDBgEIAwMBBAMD
-        AQQDOwFkAwAB/wNAAXEDfwH+A+0B/wMAAf8DAAH/AwAB/wOJAf8D8gH/A+0B/wP+Af8D8QH/A+0B/wP+
-        Af8DAAH/AwAB/wMAAf8DAAH/A+0B/wP+Af8D8QH/A+0B/wP+Af8D7wH/A+0B/wP+Af8BXAJhAdwBPAJ/
-        Af4BAAG8AfoB/wEAAbwB+gH/ATwCfwH+AfgB/AH+Af8DfwH+A38B/gMABf8DfwH+AgAB+gH/AgAB+gH/
-        AVQBVQF/Af4C8QHwAf8DAAH/AwAB/wLxAfAB/wN/Af4BAAG8AfoB/wEAAbwB+gH/ATwCfwH+AQABvAH6
-        Af8BAAG8AfoB/wMCAQMDCQEMA00BlQMBAf4DAAH/AwAB/wMAAf8DVwHFAwMBBAMDAQQDAwEEAwMBBAMD
-        AQQDAwEEAwMBBAMDAQQDVwHFAwAB/wMAAf8DAAH/AwAB/wNPAZwDCgEOAwIBAwMQARYDWQHDA0AB/QNC
-        AXQDAwEEAysBQgMAAf8DLwFKAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDLwFKAwAB/wMq
-        AUEDAwEEAz4BbAMrAfwDWQHMAxQBGwN/Af4DAAH/AwAB/wMAAf8DNQH/A+0B/wP8Af8D/gH/A+0B/wP6
-        Af8D/gH/A+0B/wP7Af8DAAH/AwAB/wMAAf8DAAH/A+0B/wP7Af8D/gH/A+0B/wP9Af8D/gH/A+0B/wEy
-        Al8B+wE8An8B/gE8An8B/gE8An8B/gE8An8B/gN/Af4DfwH+A38B/gE+Aj0B/gN/Af4DfwH+AWwBawF/
-        Af4BQQFAAVUB/gN/Af4DfwH+AVICUQH+AT4CPQH+A38B/gN/Af4BPAJ/Af4BPAJ/Af4BPAJ/Af4BPAJ/
-        Af4BPAJ/Af4DAgQDAQQDAwEEA0EBcgMAAf8DAAH/AwAB/wNKAYsDAwEEAwMBBAMDAQQDAwEEAwMBBAMD
-        AQQDAwEEAwMBBANKAYsDAAH/AwAB/wMAAf8DRAF7AwMBBAMDAQQDAgEDAwIBAwMJAQwDVgG+A1kB8gMD
-        AQQDPgFsAwAB/wMTARoDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMTARoDAAH/Az4BbAMD
-        AQQDUwHxA1kBwwMLAQ8DAgEDA38B/gMAAf8DAAH/AzIB/wP6Af8D8gH/A/kB/wP7Af8D8gH/A/kB/wP7
-        Af8D8gH/A/kB/wP7Af8DAAH/AwAB/wMAAf8DAAH/A/kB/wP7Af8D8gH/A/oB/wP7Af8D8gH/AVMCZAHx
-        ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8An8B/gH4AfwB/gH/A38B/gJ/ARYB/gGYAbEBAAH/AZsBswEA
-        Af8DfwH+AQ8CDgH/AwAB/wN/Af4B5gHpAdYB/wGYAbEBAAH/AZgBsQEAAf8BqgG+AQAB/wN/Af4BAAG8
-        AfoB/wEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wMCBAMBBAMDAQQDQwF4AwAB/wMAAf8DAAH/
-        A0oBiwMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEA0oBiwMAAf8DAAH/AwAB/wNGAYADAwEE
-        AwMBBAMCAQMDAgEDAwsBDwNZAcMDWQHyAwMBBAM+AWwDAAH/AxMBGgMDAQQDAwEEAwMBBAMDAQQDAwEE
-        AwMBBAMDAQQDAwEEAxMBGgMAAf8DPgFsAwMBBANTAfEDVwG/AwkBDAMCAQMDfwH+A+wB/wP8Af8D7gH/
-        A+0B/wP+Af8D8AH/A+0B/wP+Af8D8QH/A+0B/wP+Af8D8gH/A+0B/wP+Af8DAAH/AwAB/wMAAf8DAAH/
-        A+0B/wP+Af8D7wH/A+0B/wP+Af8BVwJaAb0BPAJ/Af4BAAG8AfoB/wEAAbwB+gH/ATwCfwH+AfgB/AH+
-        Af8DfwH+An8BFgH+AZgBsQEAAf8BmAGxAQAB/wN/Af4BDwIOAf8DAAH/A38B/gHiAeYBzAH/AZgBsQEA
-        Af8BmAGxAQAB/wGjAbkBAAH/A38B/gEAAbwB+gH/AQABvAH6Af8BPAJ/Af4BAAG8AfoB/wEAAbwB+gH/
-        AwIBAwMLAQ8DUAGeAwAB/wMAAf8DAAH/AwAB/wNXAcUDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEE
-        AwMBBANXAcUDAAH/AwAB/wMAAf8DAAH/A1ABpAMNAREDAgEDAxMBGgNZAcwDKwH8Az4BbAMDAQQDKwFC
-        AwAB/wMvAUoDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMvAUoDAAH/AyoBQQMDAQQDQgF2
-        A0AB/QNZAcQDEAEWA38E/gH/A+0B/wP+Af8D/gH/A+0B/wP8Af8D/gH/A+0B/wP6Af8D/gH/A+0B/wP7
-        Af8D/gH/A+0B/wP6Af8DAAH/AwAB/wMAAf8DAAH/A+0B/wP9Af8D/gH/A+0B/wM3AVsBPAJ/Af4BPAJ/
-        Af4BPAJ/Af4BPAJ/Af4DfwH+A38B/gN/Af4BPgI9Af4DfwH+A38B/gFvAm4B/gE+Aj0B/gN/Af4DfwH+
-        AVICUQH+AT4CPQH+A38B/gN/Af4BPAJ/Af4BPAJ/Af4BPAJ/Af4BPAJ/Af4BPAJ/Af4DAgEDAyABLwMA
-        Af8DAAH/AwAB/wMAAf8DAAH/AwAB/wMvAUoDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDLwFKAwAB/wMA
-        Af8DAAH/AwAB/wMAAf8DAAH/AyYBOAMCAQMDQAFxAwAB/wM7AWMDAwEEAwMBBAMGAQgDXQHiA1YBswMD
-        AQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEA1UBtANdAeIDBgEIAwMBBAMDAQQDPgFsAwAB/wM/
-        AW8DfwH+A/oB/wPxAf8D+gH/A/oB/wPxAf8D+QH/A/oB/wPxAf8D+AH/A/oB/wPxAf8D+AH/A/oB/wPx
-        Af8D+QH/A/sB/wMAAf8DAAH/AwAB/wMAAf8D+QH/A/oB/wPxAf8EAAE8An8B/gEAAbwB+gH/AQABvAH6
-        Af8BPAJ/Af4B+AH8Af4B/wN/Af4DfwH+AwAF/wN/Af4BDwIOAf8DAAH/A38B/gT/AwAB/wMAAf8C8QHw
-        Af8DfwH+AQABvAH6Af8BAAG8AfoB/wE8An8B/gEAAbwB+gH/AVgCWwHLAwIBAwMEAQUDWgHeAwAB/wMA
-        Af8DAAH/AwAB/wMAAf8DTgHwAy8BSgMDAQQDAwEEAwMBBAMDAQQDLwFKA1gB7wMAAf8DAAH/AwAB/wMA
-        Af8DAAH/A14B5QMFAQcDAgEDAxYBHwMhAfsDSAGHAwMBBAMDAQQDAwEEAzcBWwMAAf8DQwF3AwMBBAMD
-        AQQDAwEEAwMBBAMDAQQDAwEEA0MBeAMAAf8DNwFaAwMBBAMDAQQDAwEEA0gBhwMhAfsDFgEfA38B/gPt
-        Af8D/gH/A+4B/wPtAf8D/gH/A/AB/wPtAf8D/gH/A/EB/wPtAf8D/gH/A/IB/wPtAf8D/gH/A/EB/wPt
-        Af8D/gH/AwAB/wMAAf8DAAH/AwAB/wPtAf8D/gH/BAABUgJlAfQBPAJ/Af4BPAJ/Af4BPAJ/Af4DfwH+
-        A38B/gN/Af4BbwJuAf4DfwH+A38B/gN/Af4BdgJ1Af4DfwH+A38B/gN/Af4DfwH+A38B/gN/Af4BPAJ/
-        Af4BPAJ/Af4BPAJ/Af4BPAJ/Af4DDgETAwIEAwEEA0IBdQMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMA
-        Af8DVwHFA0oBiwNKAYsDVwHFAwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wNFAX8DAwEEAwIBAwMC
-        AQMDVQGyA1cB6AMIAQsDDQERAwwBEAMDAQQDSAGGAwAB/wNWAbMDLwFKAxMBGgMTARoDLwFKA1UBtAMA
-        Af8DSAGFAwMBBAMKAQ0DCAELAwcBCgNYAekDVQGxAwIBAwN/BP4B/wPtAf8D/gH/A/4B/wPtAf8D/AH/
-        A/4B/wPtAf8D+gH/A/4B/wPtAf8D+wH/A/4B/wPtAf8D+gH/A/4B/wPtAf8D/AH/AwAB/wMAAf8DAAH/
-        AwAB/wPtAf8EAAMTARoBAAG8AfoB/wEAAbwB+gH/ATwCfwH+AdgB8QH9Af8DfwH+A38B/gj/A38B/gj/
-        A38B/hD/A38B/gEAAbwB+gH/AQABvAH6Af8BPAJ/Af4BUgJlAfQEAAMCBAMBBAMKAQ0DVwHCA1UBsQNM
-        AZEDQgH1AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wNRAfcDTAGSA1QBrwNX
-        AcUDDQERAwMBBAMCAQMDAgEDAzABSwMAAf8DKwH8AwAB/wNUAe4DIgEyAwMBBAM3BFsB4QMAAf8DAAH/
-        AwAB/wMAAf8DXQHiAzcBWgMDAQQDIgEyA1QB7gMBAf4DSAH2AwAB/wMvAUkDAgEDA38B/gP8Af8D8QH/
-        A/wB/wP8Af8D8gH/A/oB/wP8Af8D8AH/A/kB/wP8Af8D8AH/A/kB/wP8Af8D8AH/A/kB/wP8Af8D8AH/
-        A/kB/wP8Af8DAAH/AwAB/wMAAf8DAAH/CAABWQJcAc8BAAG8AfoB/wE8An8B/gEAAbwB+gH/A38B/gN/
-        Af4B+AH8Af4B/wH4AfwB/gH/A38B/gH4AfwB/gH/AfgB/AH+Af8DfwH+AfgB/AH+Af8B+AH8Af4B/wH4
-        AfwB/gH/AfcB/AH+Af8BdwJ/Af4BAAG8AfoB/wEAAbwB+gH/ATwCfwH+AwQBBgQAAwIEAwEEAwMBBAMD
-        AQQDAwEEAwMBBANMAZEDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/A1ABmgMD
-        AQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCAQMDBAEGA0YBgANIAYYDQwF3A10B4gNUAe4DCgENAwMBBAMG
-        AQgDKwFCAz4BbAM+AWwDKwFCAwYBCAMDAQQDDAEQA1QB7gNbAeEDRQF9A0sBjgNIAYYDBAEGAwIBAwN/
-        Af4D7QH/A/4B/wPuAf8D7QH/A/4B/wPwAf8D7QH/A/4B/wPxAf8D7QH/A/4B/wPyAf8D7QH/A/4B/wPx
-        Af8D7QH/A/4B/wPxAf8D7QH/A/4B/wMAAf8DAAH/AwAB/wwAAisBOwH8ATwCfwH+ATwCfwH+ATwCfwH+
-        ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+
-        ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+AzIBUQgAAwIEAwEEAwMBBAMDAQQDAwEEAwMBBANVAbEDAAH/
-        AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/A1UBugMDAQQDAwEEAwMBBAMDAQQDAwEE
-        AwIBAwMCBAMBBAMDAQQDAwEEAwMBBANFAX0DAQH+AwgBCwMDAQQDAwEEAwMBBAMDAQQDAwEEAwMBBAMD
-        AQQDAwEEAw0BEQMAAf8DQgF2AwMBBAMDAQQDAwEEAwMBBAMCAQMDfwT+Af8D7QH/A/4B/wP+Af8D7QH/
-        A/wB/wP+Af8D7QH/A/oB/wP+Af8D7QH/A/sB/wP+Af8D7QH/A/oB/wP+Af8D7QH/A/sB/wP+Af8D7QH/
-        A/0B/wMAAf8DAAH/EAACKwE7AfwBAAG8AfoB/wE8An8B/gE8An8B/gEAAbwB+gH/AQABvAH6Af8BPAJ/
-        Af4BAAG8AfoB/wEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wEAAbwB+gH/AQABvAH6Af8BPAJ/
-        Af4BAAG8AfoB/wM+AWsMAAMCBAMBBAMDAQQDAwEEAwMBBAMDAQQDVwHCAwAB/wMAAf8DAAH/AwAB/wND
-        AXgDQQFyAwEB/gMAAf8DAAH/AwAB/wNaAcoDAwEEAwMBBAMDAQQDAwEEAwMBBAMCAQMDAgQDAQQDAwEE
-        AwMBBAMDAQQDSwGOA1EB9wMHAQoDAwEEAwMBBANCAXUDWQHyA1kB8gM+AWwDAwEEAwMBBAMIAQsDKwH8
-        A0gBhQMDAQQDAwEEAwMBBAMDAQQDAgEDA38E/gH/A+4B/wP7Af8D/gH/A+4B/wP8Af8D/gH/A+4B/wP6
-        Af8D/gH/A+4B/wP6Af8D/gH/A+4B/wP7Af8D/gH/A+4B/wP7Af8D/gH/A+4B/wP8Af8D/gH/A+4B/xQA
-        AVkCXAHPATwCfwH+ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8An8B/gEAAbwB+gH/AQABvAH6Af8BPAJ/
-        Af4BAAG8AfoB/wEAAbwB+gH/AQABvAH6Af8BAAG8AfoB/wE8An8B/gMdASoQAAMCBAMBBAMDAQQDAwEE
-        AwMBBAMDAQQDCgEOA0IBdQNaAd4DAAH/A1ABngMDAQQDAwEEA00BlQMAAf8DXwHgA0QBegMMARADAwEE
-        AwMBBAMDAQQDAwEEAwMBBAMCAQMDAgQDAQQDAwEEAwMBBAMDAQQDSAGGAwAB/wNXAegDSAGHAz4BawNA
-        Af0DVwG/A1cBwgMrAfwDOwFkA0gBiANXAegDAAH/A0UBfwMDAQQDAwEEAwMBBAMDAQQDAgEDA38B/gPt
-        Af8D/gH/A+4B/wPtAf8D/gH/A/AB/wPtAf8D/gH/A/EB/wPtAf8D/gH/A/IB/wPtAf8D/gH/A/EB/wPt
-        Af8D/gH/A/EB/wPtAf8D/gH/A+8B/wPtAf8D/gH/GAADEwEaAVICZQH0ATwCfwH+ATwCfwH+ATwCfwH+
-        ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+ATwCfwH+A0wBkxgAAwIEAwEEAwMBBAMDAQQDAwEE
-        AwMBBAMDAQQDAwQEAQUDIAEvAwsBDwMDAQQDAwEEAwkBDAMhATEDBAEFAwMBBAMDAQQDAwEEAwMBBAMD
-        AQQDAwEEAwMBBAMCAQMDAgQDAQQDAwEEAwMBBAMDBAQBBgMvAUkDVQGyAyEB+wMAAf8DWQHEAwkBDAML
-        AQ8DWAHLAwAB/wMhAfsDVQGxAzABSwMEAQYDAwEEAwMBBAMDAQQDAwEEAwIBAwN/BP4B/wPtAf8D/gH/
-        A/4B/wPtAf8D/AH/A/4B/wPtAf8D+gH/A/4B/wPtAf8D+wH/A/4B/wPtAf8D+gH/A/4B/wPtAf8D+wH/
-        A/4B/wPtAf8D/QH/A/4B/wPtAf8kAAM3AVsBVgJYAbwBUwJkAfEBMgJfAfsBXAJhAdwDTAGSAxQBGyAA
-        AwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
-        AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwEBAgMBBAIBAwMCAQMDAgEDAwIBAwMCAQMDAgED
-        AwIBAwMXASADQAFwAxABFgMCAQMDAgEDAxMBGgNAAXEDFgEfAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgED
-        AwIBAwMBAQIDqAH9A38B/gN/Af4DfwH+A38B/gN/Af4DfwH+A38B/gN/Af4DfwH+A38B/gN/Af4DfwH+
-        A38B/gN/Af4DfwH+A38B/gN/Af4DfwH+A38B/gN/Af4DfwH+A38B/gN/Af4BQgFNAT4HAAE+AwABKAMA
-        AWADAAEwAwABAQEAAQEFAAFAAQIWAAP//wAiAAH+AQABfwkAAfgBAAEfCQAB8AEAAQ8JAAHgAQABBwkA
-        AcABAAEDCQABwAEAAQEJAAGAAQABAQkAAYBfAAGACwABgAsAAYABAAEBCQABwAEAAQEJAAHgAQABAwkA
-        AfABAAEHCQAB+AEAAQ8JAAH8AQABPwkAAf8BgAH/CQAL
-</value>
-  </data>
-  <data name="button_settings_cancel.Text" xml:space="preserve">
-    <value>キャンセル</value>
-  </data>
-  <data name="button_apply.Text" xml:space="preserve">
-    <value>適用</value>
+    <value>カメラ接続台数</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 12</value>
@@ -358,18 +449,6 @@
   <data name="groupBox5.Text" xml:space="preserve">
     <value>表示サイズ</value>
   </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 12</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Y座標</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 12</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>X座標</value>
-  </data>
   <data name="groupBox4.Text" xml:space="preserve">
     <value>表示位置</value>
   </data>
@@ -385,44 +464,38 @@
   <data name="label8.Text" xml:space="preserve">
     <value>フレームレート</value>
   </data>
-  <data name="cb_show_rec_icon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 16</value>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 12</value>
   </data>
-  <data name="cb_show_rec_icon.Text" xml:space="preserve">
-    <value>録画中アイコン表示</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>表示言語</value>
   </data>
-  <data name="cb_show_camera_number.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 16</value>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>カメラ番号</value>
   </data>
-  <data name="cb_show_camera_number.Text" xml:space="preserve">
-    <value>カメラ番号表示</value>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 12</value>
   </data>
-  <data name="cb_dateandtime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 16</value>
+  <data name="label11.Text" xml:space="preserve">
+    <value>録画時間(イベント発生後)</value>
   </data>
-  <data name="cb_dateandtime.Text" xml:space="preserve">
-    <value>現在日時表示</value>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 12</value>
   </data>
-  <data name="cb_window_pane.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 16</value>
+  <data name="label12.Text" xml:space="preserve">
+    <value>録画時間(イベント発生前)</value>
   </data>
-  <data name="cb_window_pane.Text" xml:space="preserve">
-    <value>ウィンドウ枠表示</value>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 12</value>
   </data>
-  <data name="cb_always_on_top.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 16</value>
+  <data name="label13.Text" xml:space="preserve">
+    <value>秒</value>
   </data>
-  <data name="cb_always_on_top.Text" xml:space="preserve">
-    <value>最前面表示</value>
+  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 12</value>
   </data>
-  <data name="groupBox_viewSettings.Text" xml:space="preserve">
-    <value>表示設定</value>
-  </data>
-  <data name="cb_record_upon_start.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 16</value>
-  </data>
-  <data name="cb_record_upon_start.Text" xml:space="preserve">
-    <value>操作開始時に録画する</value>
+  <data name="label14.Text" xml:space="preserve">
+    <value>秒</value>
   </data>
   <data name="cb_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 16</value>
@@ -430,29 +503,11 @@
   <data name="cb_operator_capture.Text" xml:space="preserve">
     <value>オペレーターを撮影する</value>
   </data>
-  <data name="cb_recording_during_facerec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 16</value>
-  </data>
-  <data name="cb_recording_during_facerec.Text" xml:space="preserve">
-    <value>顔認識時に録画する</value>
-  </data>
-  <data name="label18_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
-  </data>
-  <data name="label18_seconds.Text" xml:space="preserve">
-    <value>秒</value>
-  </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 12</value>
+    <value>126, 12</value>
   </data>
   <data name="label17.Text" xml:space="preserve">
-    <value>再撮影までの インターバル</value>
-  </data>
-  <data name="cm_capture_mode.Items" xml:space="preserve">
-    <value>録画</value>
-  </data>
-  <data name="cm_capture_mode.Items1" xml:space="preserve">
-    <value>静止画</value>
+    <value>再撮影までのインターバル</value>
   </data>
   <data name="lb_seconds2.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 12</value>
@@ -460,17 +515,11 @@
   <data name="lb_seconds2.Text" xml:space="preserve">
     <value>秒</value>
   </data>
-  <data name="lb_capture_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
-  </data>
-  <data name="lb_capture_seconds.Text" xml:space="preserve">
-    <value>録画時間</value>
-  </data>
   <data name="lb_capture_mode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
+    <value>41, 12</value>
   </data>
   <data name="lb_capture_mode.Text" xml:space="preserve">
-    <value>撮影種別</value>
+    <value>撮影別</value>
   </data>
   <data name="cb_event_recorder.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 16</value>
@@ -479,16 +528,16 @@
     <value>イベントレコーダー</value>
   </data>
   <data name="lb_post_event.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 12</value>
+    <value>133, 12</value>
   </data>
   <data name="lb_post_event.Text" xml:space="preserve">
-    <value>イベント発生後</value>
+    <value>録画時間(イベント発生後)</value>
   </data>
   <data name="lb_pre_event.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 12</value>
+    <value>133, 12</value>
   </data>
   <data name="lb_pre_event.Text" xml:space="preserve">
-    <value>イベント発生前</value>
+    <value>録画時間(イベント発生前)</value>
   </data>
   <data name="label23_seconds.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 12</value>
@@ -502,67 +551,26 @@
   <data name="label22_seconds.Text" xml:space="preserve">
     <value>秒</value>
   </data>
-  <data name="cb_backlight_off_idling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 16</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="cb_backlight_off_idling.Text" xml:space="preserve">
-    <value>未操作時にバックライトを OFF する</value>
+  <data name="tab_camera_and_window.Text" xml:space="preserve">
+    <value>カメラとウィンドウ</value>
   </data>
-  <data name="lb_backlight_off_idling_delay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 12</value>
+  <data name="tab_environment.Text" xml:space="preserve">
+    <value>環境</value>
   </data>
-  <data name="lb_backlight_off_idling_delay.Text" xml:space="preserve">
-    <value>未操作時間</value>
+  <data name="tab_event_recorder.Text" xml:space="preserve">
+    <value>イベントレコーダー</value>
   </data>
-  <data name="label20_minutes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
+  <data name="tab_face_recognition_settings.Text" xml:space="preserve">
+    <value>機能</value>
   </data>
-  <data name="label20_minutes.Text" xml:space="preserve">
-    <value>分</value>
+  <data name="tab_operator_capture.Text" xml:space="preserve">
+    <value>オペレーター</value>
   </data>
-  <data name="cb_face_recognition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 16</value>
-  </data>
-  <data name="cb_face_recognition.Text" xml:space="preserve">
-    <value>顔認識をする</value>
-  </data>
-  <data name="lb_milliseconds1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 12</value>
-  </data>
-  <data name="lb_milliseconds1.Text" xml:space="preserve">
-    <value>ミリ秒</value>
-  </data>
-  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 12</value>
-  </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>顔認識の実施周期</value>
-  </data>
-  <data name="lb_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
-  </data>
-  <data name="lb_seconds.Text" xml:space="preserve">
-    <value>秒</value>
-  </data>
-  <data name="lb_manual_recording_time.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 12</value>
-  </data>
-  <data name="lb_manual_recording_time.Text" xml:space="preserve">
-    <value>手動録画最大時間</value>
-  </data>
-  <data name="cb_backlight_on_recognition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 16</value>
-  </data>
-  <data name="cb_backlight_on_recognition.Text" xml:space="preserve">
-    <value>顔認識時にバックライトを ON する</value>
-  </data>
-  <data name="groupBox_functionalitySettings.Text" xml:space="preserve">
-    <value>機能設定</value>
-  </data>
-  <data name="groupBox_cameraNumber.Text" xml:space="preserve">
-    <value>カメラ番号</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>設定</value>
+  <data name="tab_view_settings.Text" xml:space="preserve">
+    <value>表示</value>
   </data>
 </root>

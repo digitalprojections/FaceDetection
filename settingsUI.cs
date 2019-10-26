@@ -23,7 +23,7 @@ namespace FaceDetection
         static ComboBox or_selected_camera_number;
 
         public int Camera_index {
-            get {                
+            get {
                 return Properties.Settings.Default.main_camera_index;
             }
             private set {
@@ -41,7 +41,7 @@ namespace FaceDetection
                 Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
                 Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
             }
-            catch(IOException iox)
+            catch (IOException iox)
             {
                 //resetting the default folders to C
                 //hoping it exists
@@ -50,14 +50,13 @@ namespace FaceDetection
                 Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
                 Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
             }
-            
+
 
             InitializeComponent();
             //Setup window
-            Size size = new Size(0,0);
-               size = GetWidth(Properties.Settings.Default.main_camera_index);
-            this.Width = 1024;
-            this.Height = 760;
+            Size size = new Size(0, 0);
+            size = GetWidth(Properties.Settings.Default.main_camera_index);
+        
             this.ControlBox = false;
 
             or_selected_camera_number = cm_camera_number;
@@ -67,24 +66,34 @@ namespace FaceDetection
 
         private Size GetWidth(int cam_ind)
         {
-            Size retval;
+            Size retval = new Size(0, 0);
+            
+
             switch (cam_ind)
             {
                 case 0:
                     retval = new Size(decimal.ToInt32(Properties.Settings.Default.C1w), decimal.ToInt32(Properties.Settings.Default.C1h));
-                    return retval;                    
+                    
+                    return retval;
                 case 1:
                     retval = new Size(decimal.ToInt32(Properties.Settings.Default.C2w), decimal.ToInt32(Properties.Settings.Default.C2h));
-                    return retval;                    
+                   
+                    return retval;
                 case 2:
                     retval = new Size(decimal.ToInt32(Properties.Settings.Default.C3w), decimal.ToInt32(Properties.Settings.Default.C3h));
-                    return retval;                    
+                   
+                    return retval;
                 case 3:
                     retval = new Size(decimal.ToInt32(Properties.Settings.Default.C4w), decimal.ToInt32(Properties.Settings.Default.C4h));
+                    
                     return retval;
-                default: return new Size(640,480);
-            }            
+                default: return new Size(640, 480);
+
+            }
+            
         }
+
+
 
         public static void ArrangeCameraNames(int len)
         {
@@ -94,7 +103,7 @@ namespace FaceDetection
             {
                 or_selected_camera_number.Items.Add(i + 1);
             }
-            if(or_selected_camera_number.Items.Count> Properties.Settings.Default.main_camera_index)
+            if (or_selected_camera_number.Items.Count > Properties.Settings.Default.main_camera_index)
             {
 
                 or_selected_camera_number.SelectedIndex = Properties.Settings.Default.main_camera_index;
@@ -103,7 +112,7 @@ namespace FaceDetection
             {
                 Properties.Settings.Default.main_camera_index = 0;
             }
-            
+
         }
 
 
@@ -166,6 +175,13 @@ namespace FaceDetection
              */
             Properties.Settings.Default.Save();
             MainForm.FormChangesApply();
+            
+
+
+
+
+
+
         }
 
         private void SetCameraPropertiesFromMemory()
@@ -179,28 +195,38 @@ namespace FaceDetection
             string camX = "C" + (Camera_index + 1) + "x";
             string camY = "C" + (Camera_index + 1) + "y";
             string camW = "C" + (Camera_index + 1) + "w";
-            string camH = "C" + (Camera_index + 1) + "h";
-            //string camF = "C" + (Camera_index + 1) + "f";
-            //string camRes = "C" + (Camera_index + 1) + "res";
-            
+            string camH = "C" + (Camera_index + 1) + "h";            //string camF = "C" + (Camera_index + 1) + "f";
+                                                                     //string camRes = "C" + (Camera_index + 1) + "res";
+
             numericUpDownX.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camX, true, DataSourceUpdateMode.OnPropertyChanged));
             numericUpDownY.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camY, true, DataSourceUpdateMode.OnPropertyChanged));
             numericUpDownW.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camW, true, DataSourceUpdateMode.OnPropertyChanged));
             numericUpDownH.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camH, true, DataSourceUpdateMode.OnPropertyChanged));
             //comboBoxFPS.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camF, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             //comboBoxResolutions.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camRes, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            //comboBoxFrames = comboBoxFPS;
+          //comboBoxFrames = comboBoxFPS;
+
+                numericUpDownX.Enabled = !Properties.Settings.Default.main_window_full_screen;
+                numericUpDownY.Enabled = !Properties.Settings.Default.main_window_full_screen;
+                numericUpDownW.Enabled = !Properties.Settings.Default.main_window_full_screen;
+                numericUpDownH.Enabled = !Properties.Settings.Default.main_window_full_screen;
+
+            
+
+
         }
 
-        
+        private static void Full_Screen_CheckedChanged(object sender, EventArgs e)
+        {
+        }
 
         public static void SetComboBoxValues(string vs)
         {
-            if(comboBoxFrames!=null)
+            if (comboBoxFrames != null)
             {
                 comboBoxFrames.Items.Add(vs);
                 Console.WriteLine(vs + " 177");
-            }            
+            }
         }
 
         private void cameraSelected(object sender, EventArgs e)
@@ -224,15 +250,18 @@ namespace FaceDetection
             CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture(Properties.Settings.Default.culture);
             ChangeLanguage();
             Debug.WriteLine(CultureInfo.CurrentCulture + " current culture");
+            SetCameraPropertiesFromMemory();
 
 
             Camera.SetNumberOfCameras();
-            
 
-            SetCheckBoxValues();            
+
+            SetCheckBoxValues();
         }
 
-        private void SetCheckBoxValues()
+
+
+                private void SetCheckBoxValues()
         {
             /*
             checkBox_full_screen.Checked = Properties.Settings.Default.main_window_full_screen;
@@ -251,7 +280,7 @@ namespace FaceDetection
             cb_show_rec_icon.Checked = Properties.Settings.Default.show_recording_icon;
             cb_window_pane.Checked = Properties.Settings.Default.show_window_pane;
             */
-            pictureBox_irsensor.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.use_ir_sensor)];
+            //pictureBox_irsensor.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.use_ir_sensor)];
             pictureBox_full_screen.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.main_window_full_screen)];
             pictureBox_allcam.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.show_all_cams_simulteneously)];
             pictureBox_DeleteOldData.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_delete_old_files)];
@@ -263,10 +292,11 @@ namespace FaceDetection
             pictureBox_faceRecognition.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_face_recognition)];
             pictureBox_BacklightOnRecognition.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.backlight_on_upon_face_rec)];
             pictureBox_operatorCapture.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.capture_operator)];
-            pictureBox_recordingDuringFaceRecognition.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.recording_while_face_recognition)];
-            pictureBox_recordUponStart.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.recording_on_start)];
+            //pictureBox_recordingDuringFaceRecognition.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.recording_while_face_recognition)];
+            //pictureBox_recordUponStart.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.recording_on_start)];
             pictureBox_backlightOffWhenIdle.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_backlight_off_when_idle)];
             pictureBox_EventRecorder.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_event_recorder)];
+            
         }
 
 
@@ -302,7 +332,7 @@ namespace FaceDetection
             {
                 resources.ApplyResources(c, c.Name, cult);
                 Debug.WriteLine(c.GetType().ToString());
-                if (c.GetType().ToString() == "System.Windows.Forms.GroupBox")
+                if (c.GetType().ToString() == "System.Windows.Forms.TabControl")
                 {
                     checkOnKids(cult, c, resources);
                 }
@@ -344,6 +374,8 @@ namespace FaceDetection
         {
             PictureBox picbox = (PictureBox)sender;
             checkOnKids(this.groupBox_viewSettings, "System.Windows.Forms.CheckBox", picbox);
+            SetCameraPropertiesFromMemory();
+
             //SetCheckBoxState(checkBox);
         }
 
@@ -374,6 +406,7 @@ namespace FaceDetection
                 {
                     checkOnKids(c, type, picbox);
                 }
+
             }
         }
 
@@ -489,6 +522,47 @@ namespace FaceDetection
         {
             PictureBox picbox = (PictureBox)sender;
             checkOnKids(this.groupBox_EventRecorder, "System.Windows.Forms.CheckBox", picbox);
+        }
+
+        private void NumericUpDownX_ValueChanged(object sender, EventArgs e)
+        {
+           
+           
+        }
+
+        private void NumericUpDownY_ValueChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void NumericUpDownW_ValueChanged(object sender, EventArgs e)
+        {
+            MainForm.GetMainForm.ReverseWindowSizeUpdate();
+        }
+
+        private void NumericUpDownH_ValueChanged(object sender, EventArgs e)
+        {
+            MainForm.GetMainForm.ReverseWindowSizeUpdate();
+        }
+
+        private void Lb_capture_seconds_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Cb_irsensor_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Cb_irsensor_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Cb_operator_capture_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
