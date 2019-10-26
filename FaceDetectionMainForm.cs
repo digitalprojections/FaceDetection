@@ -262,6 +262,7 @@ namespace FaceDetection
                         case "-s":
                             try
                             {
+                                 Console.WriteLine("テスト" + parameters.ElementAt(0) + "×" + parameters.ElementAt(1) + "×" + parameters.ElementAt(2) + "×" + parameters.ElementAt(3));
                                 if (CheckCameraIndex(parameters))
                                 {
                                     //Properties.Settings.Default.main_camera_index = Int32.Parse(parameters.ElementAt(2));
@@ -810,8 +811,13 @@ namespace FaceDetection
         private void LastPositionUpdate(object sender, EventArgs e)
         {
 
-            Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
-            Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);
+            LastPositionUpdate();
+        }
+
+        public void LastPositionUpdate()
+        {
+            Properties.Settings.Default["C" + Properties.Settings.Default.main_camera_index + 1 + "x"] = Convert.ToDecimal(this.Location.X);
+            Properties.Settings.Default["C" + Properties.Settings.Default.main_camera_index + 1 + "y"] = Convert.ToDecimal(this.Location.Y);
             Properties.Settings.Default.Save();
         }
 
@@ -840,6 +846,34 @@ namespace FaceDetection
                 Console.WriteLine(icom.Message + icom.StackTrace);
             }
                 
+        }
+
+        public void ReverseLastPositionUpdate()
+        {
+            Properties.Settings.Default["C" + Properties.Settings.Default.main_camera_index + 1 + "x"] = Convert.ToDecimal(this.Location.X);
+            Properties.Settings.Default["C" + Properties.Settings.Default.main_camera_index + 1 + "y"] = Convert.ToDecimal(this.Location.Y);
+            Properties.Settings.Default.Save();
+        }
+
+        public void ReverseWindowSizeUpdate()
+        {
+            if (settingUI != null && settingUI.Camera_index != 0)
+            {
+
+                Properties.Settings.Default["C" + settingUI.Camera_index + "w"] = Convert.ToDecimal(this.Width);
+                Properties.Settings.Default["C" + settingUI.Camera_index + "h"] = Convert.ToDecimal(this.Height);
+                Properties.Settings.Default.Save();
+            }
+
+            //Debug.WriteLine(Properties.Camera1.Default.view_width);
+            if (GetCamera() != null)
+            {
+                GetCamera().SetWindowPosition(new Size(this.Width, this.Height));
+            }
+            else if (camcorder != null)
+            {
+                camcorder.SetWindowPosition(new Size(this.Width, this.Height));
+            }
         }
 
         private void SnapShot(object sender, EventArgs e)
