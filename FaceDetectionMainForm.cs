@@ -43,10 +43,11 @@ namespace FaceDetection
         /// <para>HIDDEN (recording mode without preview)</para>
         /// </summary>
         internal enum CAMERA_MODES
-        {            
+        {
+            //NONE,         
             PREVIEW,
             CAPTURE,
-            FACE,
+            //FACE,
             HIDDEN,
             ERROR,
             PREEVENT
@@ -1022,7 +1023,7 @@ namespace FaceDetection
             //GC.KeepAlive(mouseListener);
             //GC.KeepAlive(keyboardListener);
 
-            CURRENT_MODE = CAMERA_MODES.PREVIEW;
+            CURRENT_MODE = CAMERA_MODES.PRE;
             OPERATOR_CAPTURE_ALLOWED = Properties.Settings.Default.capture_operator;
             if (settingUI == null)
             {
