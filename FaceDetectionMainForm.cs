@@ -980,7 +980,17 @@ namespace FaceDetection
                     else
                     {
                         //snapshot
-                        SNAPSHOT_SAVER.TakeSnapShot();
+                        try
+                        {
+                            SNAPSHOT_SAVER.TakeSnapShot();
+                        }
+                        catch(NullReferenceException nrx)
+                        {
+                            Logger.Add(nrx.HResult + "\n" + 
+                                nrx.InnerException + "\n" + 
+                                nrx.Message + "\n" + 
+                                nrx.StackTrace);
+                        }                        
                     }
                 }
             }
