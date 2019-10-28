@@ -6,7 +6,7 @@ namespace FaceDetection
 {
     class IRSensor
     {
-        Timer OM_Timer = new Timer();
+        Timer OneSecondTimer = new Timer();
         public IRSensor()
         {
             //init
@@ -14,54 +14,43 @@ namespace FaceDetection
         }
         private void InitOMTimer()
         {
-                DialogResult dialogResult = MessageBox.Show("Does this PC have an IR Sensor?", "Please, choose operation mode", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                
+                if (Properties.Settings.Default.capture_operator)
                 {
-                    OM_Timer.Tick += OM_Timer_Tick;
-                    OM_Timer.Interval = 1000;
+                    OneSecondTimer.Tick += OM_Timer_Tick;
+                    OneSecondTimer.Interval = 1000;
                 }
-                else if (dialogResult == DialogResult.No)
-                {
-                //do something else
-                Properties.Settings.Default.use_ir_sensor = false;
-                Properties.Settings.Default.Save();
-                }
-            
-            
+
         }
 
         private void OM_Timer_Tick(object sender, EventArgs e)
-        {
-            Console.WriteLine("IR Sensor TIMER tick: " + e.ToString());
-            if (MainForm.Or_testparam.Text != "sensor check")
-                MainForm.Or_testparam.Text = "sensor check";
-            else
-                MainForm.Or_testparam.Text = "";
+        {            
             uint rval = CheckSensor();
             if (rval == 1)
             {
                 //heat signature detected, stop timer
                 StopOM_Timer();
-                
                 //initiate RECORD mode
                 if (MainForm.GetMainForm != null)
-                {                    
+                {
+                    MainForm.ACTIVE_RECPATH = MainForm.RECPATH.EVENT;
                     MainForm.GetMainForm.RecordMode();
                     
                 }  
             }
+            SensorClose();
 
         }
 
         public void StartOM_Timer()
         {
-            OM_Timer.Start();
+            OneSecondTimer.Start();
         }
         
 
         public void StopOM_Timer()
         {
-            OM_Timer.Stop();
+            OneSecondTimer.Stop();
             //OM_Timer.AutoReset = false;
             //OM_Timer.SynchronizingObject = MainForm.GetMainForm;
         }

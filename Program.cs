@@ -36,8 +36,15 @@ namespace FaceDetection
             {
                 try
                 {
+                    /*
+                    uvc_param.Reverse();
+                    uvc_param.Add("uvccameraviewer");
+                    uvc_param.Reverse();
+                    var uvc_param_final = (IReadOnlyCollection<string>) uvc_param;
+                     */
+                    Logger.Add(vs1.Count + " PARAMETER COUNT at line 45");
                     SingleInstanceApplication.Run(new MainForm(vs1), NewInstanceHandler);
-                    //MainForm.HandleParameters(vs1);
+                    MainForm.HandleParameters(vs1);
                 }
                 catch (Exception e)
                 {
@@ -48,8 +55,10 @@ namespace FaceDetection
 
         public static void NewInstanceHandler(object sender, StartupNextInstanceEventArgs e)
         {
-            var uvc_param = e.CommandLine;
+            
+            var uvc_param = e.CommandLine.ToList<string>();
             //MessageBox.Show(uvc_param);
+            
             e.BringToForeground = false;
             MainForm.HandleParameters(uvc_param);
             

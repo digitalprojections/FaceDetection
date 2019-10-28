@@ -50,8 +50,8 @@ namespace GitHub.secile.Video
         /// <summary>Get image.</summary>
         /// <remarks>Immediately after starting, images may not be acquired.</remarks>
         public Func<Bitmap> GetBitmap { get; private set; }
-        public DirectShow.IBaseFilter Vcap_source { get { return vcap_source; } set => vcap_source = value; }
 
+        
         private DirectShow.IBaseFilter renderer;
         private DirectShow.IBaseFilter vcap_source;
 
@@ -84,6 +84,7 @@ namespace GitHub.secile.Video
         /// </param>
         public UsbCamera(int cameraIndex, Size size, double fps, IntPtr pbx)
         {
+            
             var camera_list = FindDevices();
             //if (cameraIndex >= camera_list.Length) throw new ArgumentException("USB camera is not available.", "index");
             Init(cameraIndex, size, fps, pbx);
@@ -116,8 +117,8 @@ namespace GitHub.secile.Video
             //----------------------------------
             // VideoCaptureSource
             //----------------------------------
-            Vcap_source = CreateVideoCaptureSource(index, size, fps);
-            graph.AddFilter(Vcap_source, "VideoCapture");
+            vcap_source = (CreateVideoCaptureSource(index, size, fps));
+            graph.AddFilter(vcap_source, "VideoCapture");
 
             //------------------------------
             // Smart Tee
@@ -163,7 +164,7 @@ namespace GitHub.secile.Video
             builder.SetFiltergraph(graph);
             var pinCategory = DirectShow.DsGuid.PIN_CATEGORY_PREVIEW;
             var mediaType = DirectShow.DsGuid.MEDIATYPE_Video;
-            builder.RenderStream(ref pinCategory, ref mediaType, Vcap_source, grabber, renderer);
+            builder.RenderStream(ref pinCategory, ref mediaType, vcap_source, grabber, renderer);
             
             // SampleGrabber Format.
             {
@@ -187,34 +188,12 @@ namespace GitHub.secile.Video
             Stop = () =>
             {
                 DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Stopped);
+                GC.Collect();
             };
             Release = () =>
             {
                 Stop();
-                
-/*                GitHub.secile.Video.DirectShow.IEnumFilters enumFilters = null;
-                GitHub.secile.Video.DirectShow.IBaseFilter baseFilters = { null};
-                IntPtr fetched = IntPtr.Zero;
-                hr = graph.EnumFilters(ref enumFilters);
-
-
-                int r = 0;
-                while (r == 0)
-                {
-                    try
-                    {
-                        hr = enumFilters.Next(1, ref baseFilters, ref fetched);
-                        DsError.ThrowExceptionForHR(hr);
-                        baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
-                        
-                    }
-                    catch
-                    {
-                        r = 1;
-                        continue;
-                    }
-
-                }*/
+                Console.WriteLine("Camera stop .........................");    
 
                 DirectShow.ReleaseInstance(ref grabber);
                 DirectShow.ReleaseInstance(ref control9);
@@ -225,6 +204,7 @@ namespace GitHub.secile.Video
                 DirectShow.ReleaseInstance(ref i_grabber);
                 DirectShow.ReleaseInstance(ref builder);
                 DirectShow.ReleaseInstance(ref graph);
+                SafeReleaseComObject(vcap_source);
             };
             /*
             videoWindow = (DirectShow.IVideoWindow)graph;
@@ -239,7 +219,13 @@ namespace GitHub.secile.Video
             videoWindow.SetWindowPosition(0, 0, 1280, 720);
             */
         }
-
+        private static void SafeReleaseComObject(object obj)
+        {
+            if (obj != null)
+            {
+                Marshal.ReleaseComObject(obj);
+            }
+        }
         public void SetWindowPosition(Size size)
         {
             try

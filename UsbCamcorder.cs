@@ -18,8 +18,7 @@ namespace FaceDetection
         string sourcePath = @"D:\TEMP";
         string targetPath = String.Empty;
         //BackgroundWorker backgroundWorker;
-        private string dstFile = String.Empty;
-        private string movFile = String.Empty;
+        
         private List<string> fileNames = new List<string>();
 
         IBaseFilter pVideoMixingRenderer9 = null;
