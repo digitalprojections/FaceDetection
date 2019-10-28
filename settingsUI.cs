@@ -20,8 +20,8 @@ namespace FaceDetection
         DsDevice[] capDevices;
         static string[] camera_names;
 
-        static ComboBox or_selected_camera_number;
 
+        static ComboBox or_selected_camera_number;
         public int Camera_index {
             get {
                 return Properties.Settings.Default.main_camera_index;
@@ -296,8 +296,10 @@ namespace FaceDetection
             //pictureBox_recordUponStart.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.recording_on_start)];
             pictureBox_backlightOffWhenIdle.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_backlight_off_when_idle)];
             pictureBox_EventRecorder.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_event_recorder)];
-            
+            pictureBox_recording_operator_capture.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.Recording_when_an_operator_senses)];
+            pictureBox_Recording_start_operation.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.Recording_when_at_the_start_of_operation)];
         }
+
 
 
 
@@ -326,34 +328,52 @@ namespace FaceDetection
             string lan = Properties.Settings.Default.culture;
             ComponentResourceManager resources = new ComponentResourceManager(typeof(SettingsUI));
             var cult = new CultureInfo(lan);
-
+            
             //foreach (Control c in this.Controls)
-            foreach (Control c in this.tabControl1.Controls)
+            foreach (Control c in this.Controls)
             {
                 resources.ApplyResources(c, c.Name, cult);
-                Debug.WriteLine(c.GetType().ToString());
+                
                 if (c.GetType().ToString() == "System.Windows.Forms.TabControl")
                 {
+                    
                     checkOnKids(cult, c, resources);
                 }
             }
 
         }
+
+
+
         private void checkOnKids(CultureInfo cult, Control control, ComponentResourceManager crm)
         {
             foreach (Control c in control.Controls)
             {
                 crm.ApplyResources(c, c.Name, cult);
-
-                if (c.GetType().ToString() == "System.Windows.Forms.GroupBox")
+                Debug.WriteLine(c.GetType().ToString() + "3333333333333333");
+                if (c.GetType().ToString() == "System.Windows.Forms.TabPage" || c.GetType().ToString() == "System.Windows.Forms.ControlBox")
                 {
-                    checkOnKids(cult, c, crm);
+                    
                 }
+                checkOnKids(cult, c, crm);
             }
         }
         private void Cm_capture_mode_SelectedIndexChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.capture_method = cm_capture_mode.SelectedIndex;
+            Console.WriteLine(cm_capture_mode.SelectedIndex);
+            if (cm_capture_mode.SelectedIndex == 1)
+            {
+                numericUpDown5.Enabled = false;
+                numericUpDown1.Enabled = false;
+                numericUpDown4.Enabled = false;
+            }
+            else
+            {
+                numericUpDown5.Enabled = true;
+                numericUpDown1.Enabled = true;
+                numericUpDown4.Enabled = true;
+            }
             Properties.Settings.Default.Save();
         }
 
@@ -504,18 +524,52 @@ namespace FaceDetection
         {
             PictureBox picbox = (PictureBox)sender;
             checkOnKids(this.groupBox_Environment, "System.Windows.Forms.CheckBox", picbox);
+           
         }
 
         private void PictureBox_faceRecognition_Click(object sender, EventArgs e)
         {
             PictureBox picbox = (PictureBox)sender;
             checkOnKids(this.groupBox_functionalitySettings, "System.Windows.Forms.CheckBox", picbox);
+            //if (this.tab_operator_capture.Enabled == false)
+            //{
+            //    this.tab_face_recognition_settings.Enabled = true;
+            //    Console.WriteLine("人感センサーは使える");
+            //}
+            //else if (tab_face_recognition_settings.Enabled == true)
+            //{
+            //    this.tab_operator_capture.Enabled = false;
+            //    Console.WriteLine("人感センサーは使えない");
+            //}
         }
 
         private void PictureBox_operatorCapture_Click(object sender, EventArgs e)
         {
             PictureBox picbox = (PictureBox)sender;
             checkOnKids(this.groupBox_OperatorCapture, "System.Windows.Forms.CheckBox", picbox);
+            //if (tab_face_recognition_settings.Enabled == false)
+            //{
+            //    Console.WriteLine("顔認識は使える");
+            //    this.tab_operator_capture.Enabled = true;
+
+            //}
+            //else if (tab_operator_capture.Enabled == true)
+            //{
+            //    Console.WriteLine("顔認識は使えない");
+            //    this.tab_face_recognition_settings.Enabled = false;
+            //}
+            
+        }
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void PictureBox_operatorCapture_Click_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+           
         }
 
         private void PictureBox_EventRecorder_Click(object sender, EventArgs e)
@@ -561,6 +615,28 @@ namespace FaceDetection
         }
 
         private void Cb_operator_capture_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PictureBox_recording_operator_capture_Click(object sender, EventArgs e)
+        {
+            PictureBox picbox = (PictureBox)sender;
+            checkOnKids(this.groupBox_OperatorCapture, "System.Windows.Forms.CheckBox", picbox);
+        }
+
+        private void PictureBox_Recording_start_operation_Click(object sender, EventArgs e)
+        {
+            PictureBox picbox = (PictureBox)sender;
+            checkOnKids(this.groupBox_OperatorCapture, "System.Windows.Forms.CheckBox", picbox);
+        }
+
+        private void Cb_recording_operator_capture_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NumericUpDown1_ValueChanged(object sender, EventArgs e)
         {
 
         }

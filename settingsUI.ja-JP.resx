@@ -122,7 +122,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADQ
-        HQAAAk1TRnQBSQFMAgEBAwEAAcQBAwHIAQMBGAEAARgBAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFg
+        HQAAAk1TRnQBSQFMAgEBAwEAAdABAwHQAQMBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
         AwABGAMAAQEBAAEgBgABJC4AAw8BFAFYAlsBywEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8
         An8B/gEAAbwB+gH/AUACqAH9A0ABcRwAAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
         AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMB
@@ -148,7 +148,7 @@
         AQQDAwEEAwMBBANUAa8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/A1YBuAMD
         AQQDAwEEAwMBBAMDAQQDAwEEAwIBAwMCBAMBBAMDAQQDAwEEAwMBBANCAXYDAAH/Aw0BEQMDAQQDAwEE
         AwMBBAMDAQQDAwEEAwMBBAMDAQQDAwEEAwgBCwMBAf4DRQF9AwMBBAMDAQQDAwEEAwMBBAMCAQNpAAG8
-        AfoB/wEAAbwB+gH/ATwCfwH+AQcB0AH7Af8DfwH+A38B/gLxAfAB/wLxAfAB/wN/Af4C8QHwAf8C8QHw
+        AfoB/wEAAbwB+gH/ATwCfwH+AQYB0AH7Af8DfwH+A38B/gLxAfAB/wLxAfAB/wN/Af4C8QHwAf8C8QHw
         Af8DfwH+AvEB8AH/AvEB8AH/AvEB8AH/AvEB8AH/A38B/gEAAbwB+gH/AQABvAH6Af8BPAJ/Af4DRAF7
         BAADAgQDAQQDAwEEAwMBBAMDAQQDAwEEA0wBkgMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
         AwAB/wMAAf8DTwGbAwMBBAMDAQQDAwEEAwMBBAMDAQQDAgEDAwIBAwMEAQYDSAGGA0sBjgNFAX0DXQHi
@@ -249,7 +249,7 @@
         AwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwEBAmAAAUIBTQE+BwABPgMAASgDAAFgAwABGAMAAQEBAAEB
         BQABIAEBFgAD/wEAAf4BAAF/CQAB+AEAAR8JAAHwAQABDwkAAeABAAEHCQABwAEAAQMJAAHAAQABAQkA
         AYABAAEBCQABgF8AAYALAAGACwABgAEAAQEJAAHAAQABAQkAAeABAAEDCQAB8AEAAQcJAAH4AQABDwkA
-        AfwBAAE/CQAB/wGAAf8fAAs=
+        AfwBAAE/CQAB/wGAAf8JAAs=
 </value>
   </data>
   <data name="check_state_images.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
@@ -257,12 +257,12 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA0
-        AQAAAk1TRnQBSQFMAgEBAgEAAVwBAQFgAQEBEAEAARABAAT/ARkBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        AQAAAk1TRnQBSQFMAgEBAgEAAWgBAQFoAQEBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEYBgABDBUALf8DAC3/YwAt/wMALf9jAC3/AwAt/2MALf8DAC3/YwAt/wMAD/8DHgPy
         GP9jAC3/AwAM/wMeBgADzxX/YwAt/wMACf8DDAMAA/UDDwMAFf9jAC3/AwAG/wNJAwAD5wb/A0ADAAPP
         D/9jAC3/AwAY/wMPAwAD8gz/YwAt/wMAG/8DPAMAA9cJ/2MALf8DAB7/AycDAAPeBv9jAC3/AwAh/wMw
         A9MG/2MALf8DAC3/YwAt/wMALf9jAC3/AwAt//8AIQABQgFNAT4HAAE+AwABKAMAAUADAAEQAwABAQEA
-        AQEFAAGAFwAD/5cACw==
+        AQEFAAGAFwAD/4EACw==
 </value>
   </data>
   <data name="button_settings_cancel.Text" xml:space="preserve">
@@ -270,6 +270,12 @@
   </data>
   <data name="button_apply.Text" xml:space="preserve">
     <value>適用</value>
+  </data>
+  <data name="tab_face_recognition_settings.Text" xml:space="preserve">
+    <value>機能</value>
+  </data>
+  <data name="groupBox_functionalitySettings.Text" xml:space="preserve">
+    <value>機能設定</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
@@ -295,6 +301,16 @@
   </data>
   <data name="label19.Text" xml:space="preserve">
     <value>秒</value>
+  </data>
+  <data name="pictureBox_faceRecognition.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
+        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
+        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
+        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
+        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
+</value>
   </data>
   <data name="cb_face_recognition.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 16</value>
@@ -326,8 +342,14 @@
   <data name="lb_manual_recording_time.Text" xml:space="preserve">
     <value>手動録画最大時間</value>
   </data>
-  <data name="groupBox_functionalitySettings.Text" xml:space="preserve">
-    <value>機能設定</value>
+  <data name="tab_view_settings.Text" xml:space="preserve">
+    <value>表示</value>
+  </data>
+  <data name="groupBox_viewSettings.Text" xml:space="preserve">
+    <value>表示設定</value>
+  </data>
+  <data name="groupBox8.Text" xml:space="preserve">
+    <value>バックライトをオフする</value>
   </data>
   <data name="lb_backlight_off_idling_delay.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 12</value>
@@ -341,8 +363,25 @@
   <data name="label20_minutes.Text" xml:space="preserve">
     <value>分</value>
   </data>
-  <data name="groupBox8.Text" xml:space="preserve">
-    <value>バックライトをオフする</value>
+  <data name="pictureBox_backlightOffWhenIdle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
+        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
+        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
+        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
+        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="pictureBox_BacklightOnRecognition.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
+        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
+        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
+        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
+        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
+</value>
   </data>
   <data name="cb_backlight_off_idling.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 16</value>
@@ -361,6 +400,66 @@
   </data>
   <data name="cb_all_cameras.Text" xml:space="preserve">
     <value>すべてのカメラ映像を同時に表示する</value>
+  </data>
+  <data name="pictureBox_showRecordingIcon.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
+        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
+        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
+        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
+        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="pictureBox_showCameraNo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
+        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
+        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
+        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
+        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="pictureBox_showCurrentDate.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
+        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
+        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
+        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
+        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="pictureBox_showWindowPane.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
+        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
+        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
+        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
+        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="pictureBox_full_screen.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
+        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
+        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
+        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
+        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="pictureBox_alwaysOnTop.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
+        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
+        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
+        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
+        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
+</value>
   </data>
   <data name="cb_show_rec_icon.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 16</value>
@@ -398,8 +497,11 @@
   <data name="cb_always_on_top.Text" xml:space="preserve">
     <value>常に最前面に表示する</value>
   </data>
-  <data name="groupBox_viewSettings.Text" xml:space="preserve">
-    <value>表示設定</value>
+  <data name="tab_environment.Text" xml:space="preserve">
+    <value>環境</value>
+  </data>
+  <data name="groupBox_Environment.Text" xml:space="preserve">
+    <value>環境設定</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 12</value>
@@ -413,6 +515,9 @@
   <data name="cb_delete_old.Text" xml:space="preserve">
     <value>古いデータを削除する</value>
   </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>保存先設置</value>
+  </data>
   <data name="button_Browse.Text" xml:space="preserve">
     <value>参照</value>
   </data>
@@ -422,17 +527,20 @@
   <data name="label9.Text" xml:space="preserve">
     <value>保存先ファイルパス</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>保存先設置</value>
+  <data name="tab_camera_and_window.Text" xml:space="preserve">
+    <value>カメラとウィンドウ</value>
   </data>
-  <data name="groupBox_Environment.Text" xml:space="preserve">
-    <value>環境設定</value>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>カメラ番号</value>
   </data>
   <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 12</value>
   </data>
   <data name="label26.Text" xml:space="preserve">
     <value>カメラ接続台数</value>
+  </data>
+  <data name="groupBox5.Text" xml:space="preserve">
+    <value>表示サイズ</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 12</value>
@@ -445,9 +553,6 @@
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>幅</value>
-  </data>
-  <data name="groupBox5.Text" xml:space="preserve">
-    <value>表示サイズ</value>
   </data>
   <data name="groupBox4.Text" xml:space="preserve">
     <value>表示位置</value>
@@ -470,8 +575,37 @@
   <data name="label1.Text" xml:space="preserve">
     <value>表示言語</value>
   </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>カメラ番号</value>
+  <data name="pictureBox_recording_operator_capture.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
+        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
+        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
+        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
+        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="cb_recording_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 16</value>
+  </data>
+  <data name="cb_recording_operator_capture.Text" xml:space="preserve">
+    <value>オペレーター感知時に録画する</value>
+  </data>
+  <data name="pictureBox_Recording_start_operation.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
+        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
+        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
+        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
+        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="cb_recording_operation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 16</value>
+  </data>
+  <data name="cb_recording_operation.Text" xml:space="preserve">
+    <value>操作開始時に録画する</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 12</value>
@@ -497,6 +631,16 @@
   <data name="label14.Text" xml:space="preserve">
     <value>秒</value>
   </data>
+  <data name="pictureBox_operatorCapture.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
+        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
+        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
+        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
+        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="cb_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 16</value>
   </data>
@@ -520,6 +664,22 @@
   </data>
   <data name="lb_capture_mode.Text" xml:space="preserve">
     <value>撮影別</value>
+  </data>
+  <data name="tab_operator_capture.Text" xml:space="preserve">
+    <value>オペレーター</value>
+  </data>
+  <data name="tab_event_recorder.Text" xml:space="preserve">
+    <value>イベントレコーダー</value>
+  </data>
+  <data name="pictureBox_EventRecorder.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
+        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
+        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
+        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
+        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
+</value>
   </data>
   <data name="cb_event_recorder.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 16</value>
@@ -550,27 +710,5 @@
   </data>
   <data name="label22_seconds.Text" xml:space="preserve">
     <value>秒</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tab_camera_and_window.Text" xml:space="preserve">
-    <value>カメラとウィンドウ</value>
-  </data>
-  <data name="tab_environment.Text" xml:space="preserve">
-    <value>環境</value>
-  </data>
-  <data name="tab_event_recorder.Text" xml:space="preserve">
-    <value>イベントレコーダー</value>
-  </data>
-  <data name="tab_face_recognition_settings.Text" xml:space="preserve">
-    <value>機能</value>
-  </data>
-  <data name="tab_operator_capture.Text" xml:space="preserve">
-    <value>オペレーター</value>
-  </data>
-  <data name="tab_view_settings.Text" xml:space="preserve">
-    <value>表示</value>
   </data>
 </root>

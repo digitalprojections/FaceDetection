@@ -193,7 +193,7 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("動画")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Video")]
         public string capture_type {
             get {
                 return ((string)(this["capture_type"]));
@@ -728,6 +728,30 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["main_camera_index"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Recording_when_an_operator_senses {
+            get {
+                return ((bool)(this["Recording_when_an_operator_senses"]));
+            }
+            set {
+                this["Recording_when_an_operator_senses"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Recording_when_at_the_start_of_operation {
+            get {
+                return ((bool)(this["Recording_when_at_the_start_of_operation"]));
+            }
+            set {
+                this["Recording_when_at_the_start_of_operation"] = value;
             }
         }
     }
