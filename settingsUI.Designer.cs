@@ -95,11 +95,7 @@
             this.tab_operator_capture = new System.Windows.Forms.TabPage();
             this.groupBox_OperatorCapture = new System.Windows.Forms.GroupBox();
             this.pictureBox_recording_operator_capture = new System.Windows.Forms.PictureBox();
-            this.cb_recording_operator_capture = new System.Windows.Forms.CheckBox();
             this.pictureBox_Recording_start_operation = new System.Windows.Forms.PictureBox();
-            this.cb_recording_operation = new System.Windows.Forms.CheckBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -179,8 +175,6 @@
             this.groupBox_OperatorCapture.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_recording_operator_capture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Recording_start_operation)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_operatorCapture)).BeginInit();
             this.tab_event_recorder.SuspendLayout();
             this.groupBox_EventRecorder.SuspendLayout();
@@ -758,50 +752,6 @@
             this.pictureBox_recording_operator_capture.Tag = "11";
             this.pictureBox_recording_operator_capture.Click += new System.EventHandler(this.PictureBox_recording_operator_capture_Click);
             // 
-            // cb_recording_operator_capture
-            // 
-            resources.ApplyResources(this.cb_recording_operator_capture, "cb_recording_operator_capture");
-            this.cb_recording_operator_capture.Checked = global::FaceDetection.Properties.Settings.Default.Recording_when_an_operator_senses;
-            this.cb_recording_operator_capture.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_recording_operator_capture.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "Recording_when_an_operator_senses", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cb_recording_operator_capture.Name = "cb_recording_operator_capture";
-            this.cb_recording_operator_capture.Tag = "11";
-            this.cb_recording_operator_capture.UseVisualStyleBackColor = true;
-            this.cb_recording_operator_capture.CheckedChanged += new System.EventHandler(this.Cb_recording_operator_capture_CheckedChanged);
-            // 
-            // pictureBox_Recording_start_operation
-            // 
-            this.pictureBox_Recording_start_operation.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox_Recording_start_operation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.pictureBox_Recording_start_operation, "pictureBox_Recording_start_operation");
-            this.pictureBox_Recording_start_operation.Name = "pictureBox_Recording_start_operation";
-            this.pictureBox_Recording_start_operation.TabStop = false;
-            this.pictureBox_Recording_start_operation.Tag = "11";
-            this.pictureBox_Recording_start_operation.Click += new System.EventHandler(this.PictureBox_Recording_start_operation_Click);
-            // 
-            // cb_recording_operation
-            // 
-            resources.ApplyResources(this.cb_recording_operation, "cb_recording_operation");
-            this.cb_recording_operation.Checked = global::FaceDetection.Properties.Settings.Default.Recording_when_at_the_start_of_operation;
-            this.cb_recording_operation.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_recording_operation.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "Recording_when_at_the_start_of_operation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cb_recording_operation.Name = "cb_recording_operation";
-            this.cb_recording_operation.Tag = "11";
-            this.cb_recording_operation.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDown1
-            // 
-            resources.ApplyResources(this.numericUpDown1, "numericUpDown1");
-            this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "seconds_after_event", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Value = global::FaceDetection.Properties.Settings.Default.seconds_after_event;
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.NumericUpDown1_ValueChanged);
-            // 
             // pictureBox_Recording_start_operation
             // 
             this.pictureBox_Recording_start_operation.BackColor = System.Drawing.SystemColors.Control;
@@ -1235,17 +1185,7 @@
             0,
             0});
             this.numericUpDown8.Name = "numericUpDown8";
-            this.numericUpDown8.Value = global::FaceDetection.Properties.Settings.Default.seconds_after_event;
-            // 
-            // pictureBox_EventRecorder
-            // 
-            this.pictureBox_EventRecorder.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox_EventRecorder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.pictureBox_EventRecorder, "pictureBox_EventRecorder");
-            this.pictureBox_EventRecorder.Name = "pictureBox_EventRecorder";
-            this.pictureBox_EventRecorder.TabStop = false;
-            this.pictureBox_EventRecorder.Tag = "13";
-            this.pictureBox_EventRecorder.Click += new System.EventHandler(this.PictureBox_EventRecorder_Click);
+            this.numericUpDown8.Value = global::FaceDetection.Properties.Settings.Default.event_record_time_after_event;
             // 
             // numericUpDown7
             // 
@@ -1326,8 +1266,6 @@
             this.groupBox_OperatorCapture.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_recording_operator_capture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Recording_start_operation)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_operatorCapture)).EndInit();
             this.tab_event_recorder.ResumeLayout(false);
             this.groupBox_EventRecorder.ResumeLayout(false);
