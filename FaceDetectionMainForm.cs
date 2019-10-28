@@ -192,7 +192,7 @@ namespace FaceDetection
         private void Recording_length_timer_permanent_Tick(object sender, EventArgs e)
         {
             cameraMan.ReleaseInterfaces();
-            cameraMan.StartCamera(SettingsUI.GetWidth(0), 15, CameraPanel.Handle);//restart camera
+            cameraMan.StartCamera(GetResolution(0), 15, CameraPanel.Handle);//restart camera
         }
 
         internal Bitmap GetSnapShot()
@@ -662,7 +662,7 @@ namespace FaceDetection
             //CURRENT_MODE = CAMERA_MODES.PREVIEW;
             MainForm.GetMainForm.cameraMan.ReleaseInterfaces();
             //MainForm.GetMainForm.cameraMan.GetInterfaces();
-            MainForm.GetMainForm.cameraMan.StartCamera(SettingsUI.GetWidth(0), 15, CameraPanel.Handle);
+            MainForm.GetMainForm.cameraMan.StartCamera(MainForm.GetMainForm.GetResolution(0), 15, CameraPanel.Handle);
 
             
 
@@ -692,7 +692,7 @@ namespace FaceDetection
             try
             {
                 cameraMan.ReleaseInterfaces();
-                cameraMan.StartRecorderCamera(new Size(1280, 720), 15, CameraPanel.Handle, dstFileName) ;
+                cameraMan.StartRecorderCamera(GetResolution(0), 15, CameraPanel.Handle, dstFileName) ;
                 //CURRENT_MODE = CAMERA_MODES.CAPTURE;
             }
             catch(InvalidOperationException iox)
@@ -702,6 +702,31 @@ namespace FaceDetection
                 Logger.Add(iox.Message);
                 Console.WriteLine(dstFileName + " dest file 560" + CameraPanel.Handle);
                 //camcorder = new UsbCamcorder(0, new Size(1280, 720), 15, or_cameraPanel.Handle, dstFileName);
+            }
+        }
+        private Size GetResolution(int cam_ind)
+        {
+            Size retval;
+            string[] res;
+            switch (cam_ind)
+            {
+                case 0:
+                    res = Properties.Settings.Default.C1res.Split('x');
+                    retval = new Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
+                    return retval;
+                case 1:
+                    res = Properties.Settings.Default.C2res.Split('x');
+                    retval = new Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
+                    return retval;
+                case 2:
+                    res = Properties.Settings.Default.C3res.Split('x');
+                    retval = new Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
+                    return retval;
+                case 3:
+                    res = Properties.Settings.Default.C4res.Split('x');
+                    retval = new Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
+                    return retval;
+                default: return new Size(640, 480);
             }
         }
         public void ShowButtons(object sender, EventArgs eventArgs)
@@ -841,7 +866,7 @@ namespace FaceDetection
             {
                 MainForm.GetMainForm.WindowState = FormWindowState.Normal;
             }
-            
+            MainForm.GetMainForm.Size = new Size(decimal.ToInt32(Properties.Settings.Default.C1w), decimal.ToInt32(Properties.Settings.Default.C1h));
             or_current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
             //capTimer.Interval = Decimal.ToInt32(Properties.Settings.Default.face_rec_interval);//milliseconds
             //or_mainForm.TopMost = Properties.Settings.Default.window_on_top;
@@ -893,20 +918,20 @@ namespace FaceDetection
 
         public void WindowSizeUpdate()
         {
-            if (settingUI != null && settingUI.Camera_index != 0)
+            if (settingUI != null)
             {
                 Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
                 Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
                 Properties.Settings.Default.Save();
+                try
+                {
+                    cameraMan.SetWindowPosition(new Size(this.Width, this.Height));
+                }catch(InvalidComObjectException icom)
+                {
+                    Console.WriteLine(icom.Message + icom.StackTrace);
+                }
             }
 
-            try
-            {
-                cameraMan.SetWindowPosition(new Size(this.Width, this.Height));
-            }catch(InvalidComObjectException icom)
-            {
-                Console.WriteLine(icom.Message + icom.StackTrace);
-            }
                 
         }
 
@@ -1132,10 +1157,6 @@ namespace FaceDetection
                 StopAllTimers();
             };
                                  
-            // Fill camera list combobox with available resolutions
-            
-            
-            //FillResolutionList();
             
             
             //TODO
@@ -1162,12 +1183,14 @@ namespace FaceDetection
             {
                 FullScreen(this, null);
             }
-
+            this.Size = new Size(decimal.ToInt32(Properties.Settings.Default.C1w), decimal.ToInt32(Properties.Settings.Default.C1h));
             WindowSizeUpdate();
             WindowPositionUpdate();
 
             Camera.SetNumberOfCameras();
 
+            // Fill camera list combobox with available resolutions
+            FillResolutionList();
         }
 
         private void Recording_length_timer_event_Tick(object sender, EventArgs e)
@@ -1211,7 +1234,7 @@ namespace FaceDetection
                     CURRENT_MODE = CAMERA_MODES.PREVIEW;
                 }
 
-                cameraMan.StartCamera(SettingsUI.GetWidth(0), 15, panelCamera.Handle);
+                cameraMan.StartCamera(GetResolution(0), 15, panelCamera.Handle);
                 //Console.WriteLine("CAMERA_MODES.NONE at 1128");
 
                 
@@ -1245,6 +1268,7 @@ namespace FaceDetection
         }
         private void FillResolutionList()
         {
+            long FPS;
             //////////////////////////////////////////////////////////////////
             ///VIDEOFORMAT
             //////////////////////////////////////////////////////////////////
@@ -1254,11 +1278,13 @@ namespace FaceDetection
                 if (GetMainForm.UniqueVideoParameter(vf_resolutions, videoFormat[k].Size) != true)
                 {
                     vf_resolutions.Add(videoFormat[k].Size.Width + "x" + videoFormat[k].Size.Height);
-                    SettingsUI.SetComboBoxValues(videoFormat[k].Size.Width + "x" + videoFormat[k].Size.Height);                    
+                    SettingsUI.SetComboBoxResolutionValues(videoFormat[k].Size.Width + "x" + videoFormat[k].Size.Height);
                 }
-                if (GetMainForm.UniqueFPS(videoFormat[k].TimePerFrame) == false)
+                FPS = 10000000 / videoFormat[k].TimePerFrame;
+                if (GetMainForm.UniqueFPS(FPS) != true)
                 {
-                    vf_fps.Add(videoFormat[k].TimePerFrame);
+                    vf_fps.Add(FPS);
+                    SettingsUI.SetComboBoxFPSValues(FPS.ToString());
                 }
             }
 

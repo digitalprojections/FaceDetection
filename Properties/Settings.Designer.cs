@@ -37,18 +37,6 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public decimal camera_count {
-            get {
-                return ((decimal)(this["camera_count"]));
-            }
-            set {
-                this["camera_count"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("D:\\UVCCAMERA")]
         public string video_file_location {
             get {
@@ -85,18 +73,6 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool enable_face_recognition {
-            get {
-                return ((bool)(this["enable_face_recognition"]));
-            }
-            set {
-                this["enable_face_recognition"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public decimal face_rec_interval {
             get {
@@ -116,18 +92,6 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["manual_record_maxtime"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool backlight_on_upon_face_rec {
-            get {
-                return ((bool)(this["backlight_on_upon_face_rec"]));
-            }
-            set {
-                this["backlight_on_upon_face_rec"] = value;
             }
         }
         
@@ -169,30 +133,6 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public decimal seconds_before_event {
-            get {
-                return ((decimal)(this["seconds_before_event"]));
-            }
-            set {
-                this["seconds_before_event"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public decimal seconds_after_event {
-            get {
-                return ((decimal)(this["seconds_after_event"]));
-            }
-            set {
-                this["seconds_after_event"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Video")]
         public string capture_type {
             get {
@@ -205,13 +145,25 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("60")]
-        public decimal recording_length_seconds {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool recording_while_face_recognition {
             get {
-                return ((decimal)(this["recording_length_seconds"]));
+                return ((bool)(this["recording_while_face_recognition"]));
             }
             set {
-                this["recording_length_seconds"] = value;
+                this["recording_while_face_recognition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool recording_on_start {
+            get {
+                return ((bool)(this["recording_on_start"]));
+            }
+            set {
+                this["recording_on_start"] = value;
             }
         }
         
@@ -236,6 +188,18 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["show_all_cams_simulteneously"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int current_camera_index {
+            get {
+                return ((int)(this["current_camera_index"]));
+            }
+            set {
+                this["current_camera_index"] = value;
             }
         }
         
@@ -277,18 +241,6 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool show_window_pane {
-            get {
-                return ((bool)(this["show_window_pane"]));
-            }
-            set {
-                this["show_window_pane"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool show_current_datetime {
             get {
@@ -296,18 +248,6 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["show_current_datetime"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool show_camera_no {
-            get {
-                return ((bool)(this["show_camera_no"]));
-            }
-            set {
-                this["show_camera_no"] = value;
             }
         }
         
@@ -368,30 +308,6 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["C1y"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("640")]
-        public decimal C1w {
-            get {
-                return ((decimal)(this["C1w"]));
-            }
-            set {
-                this["C1w"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("480")]
-        public decimal C1h {
-            get {
-                return ((decimal)(this["C1h"]));
-            }
-            set {
-                this["C1h"] = value;
             }
         }
         
@@ -637,6 +553,18 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string camera_index {
+            get {
+                return ((string)(this["camera_index"]));
+            }
+            set {
+                this["camera_index"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Please, select the location to store videos")]
         public string store_location_description {
             get {
@@ -685,10 +613,154 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("300")]
-        public int event_record_time_before_event {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Recording_when_an_operator_senses {
             get {
-                return ((int)(this["event_record_time_before_event"]));
+                return ((bool)(this["Recording_when_an_operator_senses"]));
+            }
+            set {
+                this["Recording_when_an_operator_senses"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Recording_when_at_the_start_of_operation {
+            get {
+                return ((bool)(this["Recording_when_at_the_start_of_operation"]));
+            }
+            set {
+                this["Recording_when_at_the_start_of_operation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal camera_count {
+            get {
+                return ((decimal)(this["camera_count"]));
+            }
+            set {
+                this["camera_count"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool enable_face_recognition {
+            get {
+                return ((bool)(this["enable_face_recognition"]));
+            }
+            set {
+                this["enable_face_recognition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool backlight_on_upon_face_rec {
+            get {
+                return ((bool)(this["backlight_on_upon_face_rec"]));
+            }
+            set {
+                this["backlight_on_upon_face_rec"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public decimal seconds_before_event {
+            get {
+                return ((decimal)(this["seconds_before_event"]));
+            }
+            set {
+                this["seconds_before_event"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public decimal seconds_after_event {
+            get {
+                return ((decimal)(this["seconds_after_event"]));
+            }
+            set {
+                this["seconds_after_event"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public decimal recording_length_seconds {
+            get {
+                return ((decimal)(this["recording_length_seconds"]));
+            }
+            set {
+                this["recording_length_seconds"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool show_window_pane {
+            get {
+                return ((bool)(this["show_window_pane"]));
+            }
+            set {
+                this["show_window_pane"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool show_camera_no {
+            get {
+                return ((bool)(this["show_camera_no"]));
+            }
+            set {
+                this["show_camera_no"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("640")]
+        public decimal C1w {
+            get {
+                return ((decimal)(this["C1w"]));
+            }
+            set {
+                this["C1w"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("480")]
+        public decimal C1h {
+            get {
+                return ((decimal)(this["C1h"]));
+            }
+            set {
+                this["C1h"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public decimal event_record_time_before_event {
+            get {
+                return ((decimal)(this["event_record_time_before_event"]));
             }
             set {
                 this["event_record_time_before_event"] = value;
@@ -698,9 +770,9 @@ namespace FaceDetection.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("300")]
-        public int event_record_time_after_event {
+        public decimal event_record_time_after_event {
             get {
-                return ((int)(this["event_record_time_after_event"]));
+                return ((decimal)(this["event_record_time_after_event"]));
             }
             set {
                 this["event_record_time_after_event"] = value;
@@ -710,9 +782,9 @@ namespace FaceDetection.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("60")]
-        public int face_record_time_before {
+        public decimal face_record_time_before {
             get {
-                return ((int)(this["face_record_time_before"]));
+                return ((decimal)(this["face_record_time_before"]));
             }
             set {
                 this["face_record_time_before"] = value;
@@ -722,9 +794,9 @@ namespace FaceDetection.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("60")]
-        public int face_record_time_after {
+        public decimal face_record_time_after {
             get {
-                return ((int)(this["face_record_time_after"]));
+                return ((decimal)(this["face_record_time_after"]));
             }
             set {
                 this["face_record_time_after"] = value;
