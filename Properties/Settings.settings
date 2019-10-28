@@ -32,6 +32,9 @@
     <Setting Name="capture_type" Type="System.String" Scope="User">
       <Value Profile="(Default)">Video</Value>
     </Setting>
+    <Setting Name="recording_length_seconds" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
     <Setting Name="recording_while_face_recognition" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>

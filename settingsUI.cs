@@ -365,8 +365,9 @@ namespace FaceDetection
                 Debug.WriteLine(c.GetType().ToString() + "3333333333333333");
                 //if (c.GetType().ToString() == "System.Windows.Forms.GroupBox")
                 {
-                    checkOnKids(cult, c, crm);
+                    
                 }
+                checkOnKids(cult, c, crm);
             }
         }
         private void Cm_capture_mode_SelectedIndexChanged(object sender, EventArgs e)
@@ -548,6 +549,17 @@ namespace FaceDetection
             checkOnKids(this.groupBox_OperatorCapture, "System.Windows.Forms.CheckBox", pictureBox_operatorCapture);
             changeControlEnabled(this.groupBox_functionalitySettings, chk);
             changeControlEnabled(this.groupBox_OperatorCapture, !chk);
+            checkOnKids(this.groupBox_functionalitySettings, "System.Windows.Forms.CheckBox", picbox);
+            //if (this.tab_operator_capture.Enabled == false)
+            //{
+            //    this.tab_face_recognition_settings.Enabled = true;
+            //    Console.WriteLine("人感センサーは使える");
+            //}
+            //else if (tab_face_recognition_settings.Enabled == true)
+            //{
+            //    this.tab_operator_capture.Enabled = false;
+            //    Console.WriteLine("人感センサーは使えない");
+            //}
         }
 
         private void PictureBox_operatorCapture_Click(object sender, EventArgs e)
@@ -573,6 +585,22 @@ namespace FaceDetection
                 }
             }
         }
+
+            checkOnKids(this.groupBox_OperatorCapture, "System.Windows.Forms.CheckBox", picbox);
+            //if (tab_face_recognition_settings.Enabled == false)
+            //{
+            //    Console.WriteLine("顔認識は使える");
+            //    this.tab_operator_capture.Enabled = true;
+
+            //}
+            //else if (tab_operator_capture.Enabled == true)
+            //{
+            //    Console.WriteLine("顔認識は使えない");
+            //    this.tab_face_recognition_settings.Enabled = false;
+            //}
+            
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
