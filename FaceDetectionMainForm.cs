@@ -10,12 +10,14 @@ using System.Runtime.InteropServices.ComTypes;
 using GitHub.secile.Video;
 using System.Configuration;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 
 namespace FaceDetection
 {
     public partial class MainForm : Form
     {
+       
         //User actions
         private readonly Timer recording_timer = new Timer();
         private readonly Timer recording_length_timer_manual = new Timer();
@@ -1342,6 +1344,20 @@ namespace FaceDetection
         private void MainForm_MouseMove(object sender, MouseEventArgs e)
         {
             OperatorCapture();
+            //Event KEYBOARD touched
+            if (Properties.Settings.Default.enable_event_recorder)
+            {
+                //turn on the firat camera and capture the user now
+               // OperatorCapture.Start();
+            }
+                        
+            if (Properties.Settings.Default.enable_backlight_off_when_idle)
+            {
+                backlight_timer.Stop();
+                backlight_timer.Start();
+            }
+            BacklightOn();            
+
         }
 
 
