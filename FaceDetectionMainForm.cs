@@ -1022,8 +1022,15 @@ namespace FaceDetection
             //Marshal.GetFunctionPointerForDelegate(mouseListener);            
             //GC.KeepAlive(mouseListener);
             //GC.KeepAlive(keyboardListener);
-
-            CURRENT_MODE = CAMERA_MODES.PRE;
+            if (Properties.Settings.Default.event_record_time_before_event > 0 || Properties.Settings.Default.seconds_before_event > 0)
+            {
+                CURRENT_MODE = CAMERA_MODES.PREEVENT;
+            }
+            else
+            {
+                CURRENT_MODE = CAMERA_MODES.PREVIEW;
+            }
+            
             OPERATOR_CAPTURE_ALLOWED = Properties.Settings.Default.capture_operator;
             if (settingUI == null)
             {
@@ -1186,7 +1193,17 @@ namespace FaceDetection
             if (CURRENT_MODE == CAMERA_MODES.ERROR)
             {
                 cameraMan.ReleaseInterfaces();
-                Console.WriteLine("CAMERA_MODES.NONE at 1128");
+                if(Properties.Settings.Default.event_record_time_before_event>0 || Properties.Settings.Default.seconds_before_event>0)
+                {
+                    CURRENT_MODE = CAMERA_MODES.PREEVENT;
+                }else
+                {
+                    CURRENT_MODE = CAMERA_MODES.PREVIEW;
+                }
+
+                cameraMan.StartCamera(SettingsUI.GetWidth(0), 15, panelCamera.Handle);
+                //Console.WriteLine("CAMERA_MODES.NONE at 1128");
+
                 
             }else if (CURRENT_MODE==CAMERA_MODES.CAPTURE)
             {
