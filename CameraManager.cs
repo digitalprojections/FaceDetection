@@ -1,30 +1,21 @@
 ﻿using DirectShowLib;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
-using FaceDetection;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
+using System.Threading;
 
-namespace WebCameraX
+namespace FaceDetectionX
 {
-    class CameraManager : IDisposable
+    class CameraManager
     {
-        public CameraManager(Panel panel, int w, int h)
-        {
-            GetInterfaces();
+        string sourcePath = @"D:\TEMP";
+        string targetPath = String.Empty;
 
-            this.panel = panel;
-            _width = w;
-            _height = h;
-        }
+        //public MainForm mainForm;        
 
         public enum PlayState : int
         {
@@ -34,50 +25,91 @@ namespace WebCameraX
             Init
         }
 
-        private Guid CLSID_SampleGrabber = new Guid("{C1F400A0-3F08-11D3-9F0B-006008039E37}"); //qedit.dll
+
+        IBaseFilter pVideoMixingRenderer9 = null;
+        private IGraphBuilder pGraph;
+        //private Guid CLSID_SampleGrabber = new Guid("{C1F400A0-3F08-11D3-9F0B-006008039E37}"); //qedit.dll
         private PlayState CurrentState = PlayState.Stopped;
         private int WM_GRAPHNOTIFY = Convert.ToInt32("0X8000", 16) + 1;
-        public IVideoWindow videoWindow = null;
-        private IMediaControl mediaControl = null;
+        //public IVideoWindow videoWindow = null;
+        private IMediaControl mediaControl = null;        
         private IMediaEventEx mediaEventEx = null;
         private IGraphBuilder graph = null;
         private ICaptureGraphBuilder2 pGraphBuilder = null;
         private IBaseFilter pUSB = null;
         private IBaseFilter renderFilter = null;
+        private NullRenderer nullRender = null;
         private IAMStreamConfig streamConfig = null;
-        ISampleGrabber i_grabber = null;
-
+        private ISampleGrabber pSampleGrabber = null;        
         private VideoInfoHeader format = null;
         private AMMediaType pmt = null;
-        private int _width;
-        private int _height;
 
         IBaseFilter pSmartTee = null;
         IBaseFilter pAVIMux = null;
-        private int selected_camera_index = 0;//defaults to 0 index camera
-        private Panel panel;
-       
+
         public void GetInterfaces()
         {
             graph = (IGraphBuilder)(new FilterGraph());
             pGraphBuilder = (ICaptureGraphBuilder2)(new CaptureGraphBuilder2());
             mediaControl = (IMediaControl)graph;
-            videoWindow = (IVideoWindow)graph;
+            //videoWindow = (IVideoWindow)graph;
             mediaEventEx = (IMediaEventEx)graph;
             renderFilter = (IBaseFilter)new VideoMixingRenderer9();
-
-
-
+            nullRender = new NullRenderer();
+            pSampleGrabber = new SampleGrabber() as ISampleGrabber;
             //send notification messages to the control window
             int hr = mediaEventEx.SetNotifyWindow(IntPtr.Zero, WM_GRAPHNOTIFY, IntPtr.Zero);
             DsError.ThrowExceptionForHR(hr);
         }
         
-        public void CaptureVideo(string dstFile)
-        {
-            IGraphBuilder pGraph = graph;
-            int hr = 0;
 
+        void SetFormat()
+        {
+            int hr = 0;
+            pmt = new AMMediaType();
+            pmt.majorType = MediaType.Video;
+            pmt.subType = MediaSubType.MJPG;
+            pmt.formatType = FormatType.VideoInfo;
+            pmt.fixedSizeSamples = false; //true for 640x480
+            pmt.formatSize = 88;
+            pmt.sampleSize = 2764800; //2764800 614400
+            pmt.temporalCompression = false;
+            //////////////////////////////////
+            format = new VideoInfoHeader();
+            format.SrcRect = new DsRect();
+            format.TargetRect = new DsRect();
+            format.BitRate = 5000000;
+            format.AvgTimePerFrame = 666666;
+            //////////////////////////////////            
+            format.BmiHeader = new BitmapInfoHeader();
+            format.BmiHeader.Size = 40;
+            format.BmiHeader.Width = 1280;
+            format.BmiHeader.Height = 720;
+            format.BmiHeader.Planes = 1;
+            format.BmiHeader.BitCount = 24;
+            format.BmiHeader.Compression = 1196444237; //1196444237 //844715353
+            format.BmiHeader.ImageSize = 2764800; //2764800 614400
+            pmt.formatPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(format));
+            Marshal.StructureToPtr(format, pmt.formatPtr, false);
+            Debug.WriteLine(getCatName(pUSB) + " at line 130");
+            streamConfig = (IAMStreamConfig)GetPin(pUSB, getCatName(pUSB));
+            hr = streamConfig.SetFormat(pmt);
+            DsUtils.FreeAMMediaType(pmt);
+            if (hr < 0)
+            {
+                
+                DsError.ThrowExceptionForHR(hr);
+            }
+        }
+
+        //The following is called for building the PREVIEW graph
+        #region PREVIEW ONLY
+        public void CaptureVideo(IntPtr pbx)
+        {            
+
+            Debug.WriteLine("VIDEO FOR PREVIEW");
+            pGraph = graph;
+            int hr = 0;
 
             hr = pGraphBuilder.SetFiltergraph(pGraph);
             DsError.ThrowExceptionForHR(hr);
@@ -87,6 +119,120 @@ namespace WebCameraX
             hr = pGraph.AddFilter(pUSB, "WebCamControl Video");
             DsError.ThrowExceptionForHR(hr);
 
+            //add smartTee
+            pSmartTee = (IBaseFilter)new SmartTee();
+            hr = pGraph.AddFilter(pSmartTee, "Smart Tee");
+            DsError.ThrowExceptionForHR(hr);
+                        
+            //connect smart tee to camera 
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pUSB, null, pSmartTee);
+            DsError.ThrowExceptionForHR(hr);
+
+            hr = pSampleGrabber.SetBufferSamples(true);
+            checkHR(hr, "Can't set buffer sample to true for the SampleGrabber");
+
+            
+
+            hr = pGraph.AddFilter(pSampleGrabber as IBaseFilter, "SampleGrabber");
+            checkHR(hr, "Can't add SampleGrabber to graph");
+
+            //connect Smart Tee and SampleGrabber
+            hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Preview"), GetPin(pSampleGrabber as IBaseFilter, "Input"), null);
+            //hr = pGraphBuilder.RenderStream(PinCategory.Preview, MediaType.Video, pSmartTee, null, pSampleGrabber);
+            checkHR(hr, "Can't connect Smart Tee and SampleGrabber");
+            
+            //フォーマットの設定
+            //暫くは一時的な値を使用してます
+
+            SetFormat();
+                        
+
+            IVMRAspectRatioControl9 ratioControl9 = (IVMRAspectRatioControl9)renderFilter;
+            hr = ratioControl9.SetAspectRatioMode(VMRAspectRatioMode.LetterBox);
+            DsError.ThrowExceptionForHR(hr);
+
+            IVMRFilterConfig9 config9 = (IVMRFilterConfig9)renderFilter;
+            hr = config9.SetRenderingMode(VMR9Mode.Windowless);
+            checkHR(hr, "Can't set windowless mode");
+
+            IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
+            hr = control9.SetVideoClippingWindow(pbx);
+            checkHR(hr, "Can't set video clipping window");
+            /*
+            if (MainForm.CURRENT_MODE != MainForm.CAMERA_MODES.HIDDEN)
+            {
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
+                checkHR(hr, "Can't set rectangles of the video position");
+                Console.WriteLine("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
+            }
+            */
+            hr = pGraph.AddFilter(renderFilter, "My Render Filter");
+            DsError.ThrowExceptionForHR(hr);
+
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSampleGrabber, null, renderFilter);
+            DsError.ThrowExceptionForHR(hr);
+            Debug.WriteLine(DsError.GetErrorText(hr) + " is error in rendering");
+
+            IEnumFilters enumFilters = null;
+            IBaseFilter[] baseFilters = { null };
+            IntPtr fetched = IntPtr.Zero;
+            hr = pGraph.EnumFilters(out enumFilters);
+            int r = 0;
+            while (r == 0)
+            {
+                try
+                {
+                    r = enumFilters.Next(baseFilters.Length, baseFilters, fetched);
+                    DsError.ThrowExceptionForHR(hr);
+                    baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
+                    Debug.WriteLine(filterInfo.achName + " -filtername");
+                }
+                catch
+                {
+                    r = 1;
+                    continue;
+                }
+
+            }
+
+            
+
+            SafeReleaseComObject(pUSB);
+            SafeReleaseComObject(pAVIMux);
+            SafeReleaseComObject(pGraph);
+            SafeReleaseComObject(pGraphBuilder);
+            SafeReleaseComObject(pSampleGrabber);
+            SafeReleaseComObject(pSmartTee);
+            SafeReleaseComObject(renderFilter);
+            SafeReleaseComObject(ratioControl9);
+            SafeReleaseComObject(control9);
+            SafeReleaseComObject(config9);
+            
+
+            SetupVideoWindow();
+        }
+        #endregion
+        public void SetWindowPosition(Size size)
+        {
+            int hr = 0;
+            IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
+            hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
+            checkHR(hr, "Can't set rectangles of the video position");
+            SafeReleaseComObject(control9);
+        }
+        //This one is for recording
+        public void CaptureVideo(IntPtr pbx, string dstFile)
+        {
+            pGraph = graph;
+            int hr = 0;
+
+            hr = pGraphBuilder.SetFiltergraph(pGraph);
+            DsError.ThrowExceptionForHR(hr);
+
+            pUSB = FindCaptureDevice();
+
+            hr = pGraph.AddFilter(pUSB, "WebCamControl Video");
+            DsError.ThrowExceptionForHR(hr);
 
             //add smartTee
             pSmartTee = (IBaseFilter)new SmartTee();
@@ -120,21 +266,22 @@ namespace WebCameraX
             DsError.ThrowExceptionForHR(hr);
 
             //add SampleGrabber
-            IBaseFilter pSampleGrabber = (IBaseFilter)Activator.CreateInstance(Type.GetTypeFromCLSID(CLSID_SampleGrabber));
-            hr = pGraph.AddFilter(pSampleGrabber, "SampleGrabber");
+            //_pSampleGrabberHelper = new SampleGrabberHelper(pSampleGrabber, false);
+            //_pSampleGrabberHelper.ConfigureMode();
+
+            hr = pGraph.AddFilter(pSampleGrabber as IBaseFilter, "SampleGrabber");
             checkHR(hr, "Can't add SampleGrabber to graph");
-            //i_grabber = (ISampleGrabber)pSampleGrabber;
-            //i_grabber.SetBufferSamples(true);
 
             //connect Smart Tee and SampleGrabber
-            //hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Preview"), GetPin(pSampleGrabber, "Input"), null);
-            hr = pGraphBuilder.RenderStream(PinCategory.Preview, MediaType.Video, pSmartTee, null, pSampleGrabber);
+            hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Preview"), GetPin(pSampleGrabber as IBaseFilter, "Input"), null);
+            //hr = pGraphBuilder.RenderStream(PinCategory.Preview, MediaType.Video, pSmartTee, null, pSampleGrabber);
             checkHR(hr, "Can't connect Smart Tee and SampleGrabber");
+
 
             //フォーマットの設定
             //暫くは一時的な値を使用してます
 
-            
+            SetFormat();
 
             //connect Smart Tee and AVI Mux
             hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, pAVIMux);
@@ -144,10 +291,25 @@ namespace WebCameraX
             hr = ratioControl9.SetAspectRatioMode(VMRAspectRatioMode.LetterBox);
             DsError.ThrowExceptionForHR(hr);
 
+            IVMRFilterConfig9 config9 = (IVMRFilterConfig9)renderFilter;
+            hr = config9.SetRenderingMode(VMR9Mode.Windowless);
+            checkHR(hr, "Can't set windowless mode");
+
+            IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
+            hr = control9.SetVideoClippingWindow(pbx);
+            checkHR(hr, "Can't set video clipping window");
+            /*
+            if (MainForm.CURRENT_MODE != MainForm.CAMERA_MODES.HIDDEN)
+            {
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
+                checkHR(hr, "Can't set rectangles of the video position");
+                Console.WriteLine("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
+            }
+            */
             hr = pGraph.AddFilter(renderFilter, "My Render Filter");
             DsError.ThrowExceptionForHR(hr);
 
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, null, pSampleGrabber, renderFilter);
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSampleGrabber, null, renderFilter);
             DsError.ThrowExceptionForHR(hr);
             Debug.WriteLine(DsError.GetErrorText(hr) + " is error in rendering");
 
@@ -173,12 +335,29 @@ namespace WebCameraX
 
             }
 
-            Marshal.ReleaseComObject(pUSB);
 
+
+            SafeReleaseComObject(pUSB);
+            SafeReleaseComObject(pAVIMux);
+            SafeReleaseComObject(pFilewriter);
+            SafeReleaseComObject(pFilewriter_sink);
+            SafeReleaseComObject(pGraph);
+            SafeReleaseComObject(pGraphBuilder);
+            SafeReleaseComObject(pSampleGrabber);
+            SafeReleaseComObject(pSmartTee);
+            SafeReleaseComObject(renderFilter);
+            SafeReleaseComObject(ratioControl9);
+            SafeReleaseComObject(control9);
+            SafeReleaseComObject(config9);
+
+            //Debug.WriteLine(pSampleGrabber.);
+            //_pSampleGrabberHelper.SaveMode();
             SetupVideoWindow();
-
-
         }
+                
+        
+
+        
         static void checkHR(int hr, string msg)
         {
             if (hr < 0)
@@ -191,110 +370,20 @@ namespace WebCameraX
         {
             int hr = 0;
 
-            //set the video window to be a child of the main window
-            //putowner : Sets the owning parent window for the video playback window. 
-            hr = videoWindow.put_Owner(panel.Handle);
-            DsError.ThrowExceptionForHR(hr);
-
-            hr = videoWindow.put_WindowStyle(WindowStyle.Child | WindowStyle.ClipChildren);
-            DsError.ThrowExceptionForHR(hr);
-
-
-            //Make the video window visible, now that it is properly positioned
-            //put_visible : This method changes the visibility of the video window. 
-            hr = videoWindow.put_Visible(OABool.True);
-            DsError.ThrowExceptionForHR(hr);
-
             hr = mediaControl.Run();
 
             DsError.ThrowExceptionForHR(hr);
             HandleGraphEvent();
 
             CurrentState = PlayState.Running;
-
-            videoWindow.SetWindowPosition(0, 0, _width, _height);
+            
+            //mainForm.ResumeSensor();
+            //mainForm.WebCamControl_Resize(this, null);
             //videoControl.GetMaxAvailableFrameRate(pUSB.FindPin(""));
         }
-        public static void DeleteMediaType(ref AMMediaType mt)
-        {
-            if (mt.sampleSize != 0) Marshal.FreeCoTaskMem(mt.formatPtr);
-            if (mt.unkPtr != IntPtr.Zero) Marshal.FreeCoTaskMem(mt.unkPtr);
-            mt = null;
-        }
-        public Bitmap GetBitmapImage
-        {
-            get
-            {
-                var mt = new AMMediaType();
-                i_grabber.GetConnectedMediaType(mt);
-                var header = (VideoInfoHeader)Marshal.PtrToStructure(mt.formatPtr, typeof(VideoInfoHeader));
-                var width = header.BmiHeader.Width;
-                var height = header.BmiHeader.Height;
-                var stride = width * (header.BmiHeader.BitCount / 8);
-                DeleteMediaType(ref mt);
-
-                Bitmap result = GetBitmap(i_grabber, width, height, stride);
-
-                //result.Save("testImage.jpeg");
-
-                Debug.WriteLine(width + " " + height + " " + stride + " Must be the IMAGE");
-                return result;
-            }
-        }
-        private Bitmap GetBitmap(ISampleGrabber i_grabber, int width, int height, int stride)
-        {
-            // サンプルグラバから画像を取得するためには
-            // まずサイズ0でGetCurrentBufferを呼び出しバッファサイズを取得し
-            // バッファ確保して再度GetCurrentBufferを呼び出す。
-            // 取得した画像は逆になっているので反転させる必要がある。
-            int sz = 0;
-            i_grabber.GetCurrentBuffer(ref sz, IntPtr.Zero); // IntPtr.Zeroで呼び出してバッファサイズ取得
-            if (sz == 0) return null;
-
-            // メモリ確保し画像データ取得
-            var ptr = Marshal.AllocCoTaskMem(sz);
-            i_grabber.GetCurrentBuffer(ref sz, ptr);
-
-            // 画像データをbyte配列に入れなおす
-            var data = new byte[sz];
-            Marshal.Copy(ptr, data, 0, sz);
-
-            Bitmap result = null;
-
-            try
-            {
-                // 画像を作成
-                result = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-                var bmp_data = result.LockBits(new Rectangle(Point.Empty, result.Size), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
-
-
-                //cambytes.AddRange(data);
-                //Console.WriteLine(cambytes.Count);
-                // 上下反転させながら1行ごとコピー
-                for (int y = 0; y < height; y++)
-                {
-                    var src_idx = sz - (stride * (y + 1)); // 最終行から
-                    //Console.WriteLine(src_idx);
-                    var dst = new IntPtr(bmp_data.Scan0.ToInt32() + (stride * y));
-                    Marshal.Copy(data, src_idx, dst, stride);
-                    //
-                    //Console.WriteLine(src_idx.ToString() + " data length");
-                }
-
-                result.UnlockBits(bmp_data);
-                Marshal.FreeCoTaskMem(ptr);
-            }
-            catch (ArgumentException ax)
-            {
-                //System.Windows.Forms.MessageBox.Show(ax.Message);
-                Console.WriteLine(ax.Message);
-            }
-
-            return result;
-        }
-
         public void ReleaseInterfaces()
         {
+
             if (mediaControl != null)
                 mediaControl.StopWhenReady();
 
@@ -308,12 +397,13 @@ namespace WebCameraX
             //// Failing to call put_Owner can lead to assert failures within
             //// the video renderer, as it still assumes that it has a valid
             //// parent window.
-            if (videoWindow != null)
+            /*if (videoWindow != null)
             {
                 videoWindow.put_Visible(OABool.False);
                 videoWindow.put_Owner(IntPtr.Zero);
+                videoWindow = null;
             }
-
+            */
             // Release DirectShow interfaces
             if (mediaControl != null)
             {
@@ -327,13 +417,12 @@ namespace WebCameraX
                 Marshal.ReleaseComObject(mediaEventEx);
                 mediaEventEx = null;
             }
-
+            /*
             if (videoWindow != null)
             {
-                Marshal.ReleaseComObject(videoWindow);
-                videoWindow = null;
+                Marshal.ReleaseComObject(videoWindow);                
             }
-
+            */
             if (graph != null)
             {
                 Marshal.ReleaseComObject(graph);
@@ -345,9 +434,16 @@ namespace WebCameraX
                 Marshal.ReleaseComObject(pGraphBuilder);
                 pGraphBuilder = null;
             }
+            GC.Collect();
 
         }
-        
+        private static void SafeReleaseComObject(object obj)
+        {
+            if (obj != null)
+            {
+                Marshal.ReleaseComObject(obj);
+            }
+        }
 
         //カメラデバイスにアクセス
         private IBaseFilter FindCaptureDevice()
@@ -377,13 +473,13 @@ namespace WebCameraX
                 devs.Add(source);
             }
 
-            Debug.WriteLine(devs.Count + " === cameras found");
+            Debug.WriteLine(devs.Count + " ==== cameras found");
 
             Marshal.ReleaseComObject(devEnum);
             Marshal.ReleaseComObject(classEnum);
 
             //we can now select cameras
-            return (IBaseFilter)devs[selected_camera_index];
+            return (IBaseFilter)devs[0];
         }
         //カメラのPINにアクセス
         static IPin GetPin(IBaseFilter filter, string pinname)
@@ -392,7 +488,7 @@ namespace WebCameraX
             int hr = filter.EnumPins(out epins);
             if (hr < 0)
             {
-                CustomMessage.ShowMessage("Can't enumerate pins");
+                
                 DsError.ThrowExceptionForHR(hr);
             }
 
@@ -403,13 +499,13 @@ namespace WebCameraX
                 PinInfo pinfo;
                 pins[0].QueryPinInfo(out pinfo);
                 bool found = (pinfo.name == pinname);
-                CustomMessage.ShowMessage(pinfo.name + " is PIN NAME");
+                
                 DsUtils.FreePinInfo(pinfo);
                 if (found)
                     return pins[0];
             }
 
-            CustomMessage.ShowMessage("Pin not found");
+            //CapTest.CustomMessage.ShowMessage("Pin not found");
             DsError.ThrowExceptionForHR(hr);
 
             return null;
@@ -422,7 +518,7 @@ namespace WebCameraX
             int hr = filter.EnumPins(out epins);
             if (hr < 0)
             {
-                CustomMessage.ShowMessage("Can't enumerate pins");
+                //CapTest.CustomMessage.ShowMessage("Can't enumerate pins");
                 DsError.ThrowExceptionForHR(hr);
             }
 
@@ -432,15 +528,13 @@ namespace WebCameraX
             {
                 PinInfo pinfo;
                 pins[0].QueryPinInfo(out pinfo);
-
-                //bool found = (pinfo.name == "Capture" || pinfo.name == "キャプチャ");
-                bool found = (pinfo.dir == PinDirection.Output);                
-                CustomMessage.ShowMessage(pinfo.name + " is pinname on getCatName");
+                bool found = (pinfo.name == "Capture" || pinfo.name == "キャプチャ");
+                //CapTest.CustomMessage.ShowMessage(pinfo.name + " is pinname on getCatName");
                 DsUtils.FreePinInfo(pinfo);
                 if (found)
                     retval = pinfo.name;
             }
-            CustomMessage.ShowMessage("Pin found " + retval);
+            //CapTest.CustomMessage.ShowMessage("Pin found " + retval);
             return retval;
         }
 
@@ -466,9 +560,5 @@ namespace WebCameraX
             }
         }
 
-        public void Dispose()
-        {
-            ReleaseInterfaces();
-        }
     }
 }
