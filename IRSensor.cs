@@ -6,7 +6,7 @@ namespace FaceDetection
 {
     class IRSensor
     {
-        Timer OM_Timer = new Timer();
+        Timer OneSecondTimer = new Timer();
         public IRSensor()
         {
             //init
@@ -17,8 +17,8 @@ namespace FaceDetection
                 
                 if (Properties.Settings.Default.capture_operator)
                 {
-                    OM_Timer.Tick += OM_Timer_Tick;
-                    OM_Timer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
+                    OneSecondTimer.Tick += OM_Timer_Tick;
+                    OneSecondTimer.Interval = 1000;
                 }
 
         }
@@ -44,13 +44,13 @@ namespace FaceDetection
 
         public void StartOM_Timer()
         {
-            OM_Timer.Start();
+            OneSecondTimer.Start();
         }
         
 
         public void StopOM_Timer()
         {
-            OM_Timer.Stop();
+            OneSecondTimer.Stop();
             //OM_Timer.AutoReset = false;
             //OM_Timer.SynchronizingObject = MainForm.GetMainForm;
         }

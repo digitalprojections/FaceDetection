@@ -54,17 +54,20 @@ namespace FaceDetection
             InitializeComponent();
             //Setup window
             Size size = new Size(0,0);
-               size = GetWidth(Properties.Settings.Default.main_camera_index);
-            this.Width = 1024;
-            this.Height = 760;
+            size = GetWidth(Properties.Settings.Default.main_camera_index);
+            
             this.ControlBox = false;
 
             or_selected_camera_number = cm_camera_number;
             //get reference to the mainform
             //Console.WriteLine(MainForm.GetCamera());
         }
-
-        private Size GetWidth(int cam_ind)
+        /// <summary>
+        /// Get CAMERA resolution by index
+        /// </summary>
+        /// <param name="cam_ind"></param>
+        /// <returns></returns>
+        internal static Size GetWidth(int cam_ind)
         {
             Size retval;
             switch (cam_ind)
@@ -135,7 +138,7 @@ namespace FaceDetection
                 this.TopMost = false;
                 //Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
                 //Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
-                Process.Start(Properties.Settings.Default.video_file_location);
+                //Process.Start(Properties.Settings.Default.video_file_location);
                 changeStoreLocation(sender, e);
             }
             catch (IOException ioe)
@@ -225,8 +228,8 @@ namespace FaceDetection
             Debug.WriteLine(CultureInfo.CurrentCulture + " current culture");
 
 
-            //Camera.SetNumberOfCameras();
-            
+
+            Camera.SetNumberOfCameras();
 
             SetCheckBoxValues();            
         }
@@ -250,7 +253,7 @@ namespace FaceDetection
             cb_show_rec_icon.Checked = Properties.Settings.Default.show_recording_icon;
             cb_window_pane.Checked = Properties.Settings.Default.show_window_pane;
             */
-            pictureBox_irsensor.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.use_ir_sensor)];
+            //pictureBox_irsensor.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.use_ir_sensor)];
             pictureBox_full_screen.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.main_window_full_screen)];
             pictureBox_allcam.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.show_all_cams_simulteneously)];
             pictureBox_DeleteOldData.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_delete_old_files)];
@@ -262,8 +265,8 @@ namespace FaceDetection
             pictureBox_faceRecognition.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_face_recognition)];
             pictureBox_BacklightOnRecognition.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.backlight_on_upon_face_rec)];
             pictureBox_operatorCapture.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.capture_operator)];
-            pictureBox_recordingDuringFaceRecognition.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.recording_while_face_recognition)];
-            pictureBox_recordUponStart.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.recording_on_start)];
+//pictureBox_recordingDuringFaceRecognition.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.recording_while_face_recognition)];
+            //pictureBox_recordUponStart.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.recording_on_start)];
             pictureBox_backlightOffWhenIdle.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_backlight_off_when_idle)];
             pictureBox_EventRecorder.Image = check_state_images.Images[Convert.ToInt32(Properties.Settings.Default.enable_event_recorder)];
         }
@@ -323,6 +326,7 @@ namespace FaceDetection
         private void Cm_capture_mode_SelectedIndexChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.capture_method = cm_capture_mode.SelectedIndex;
+            Console.WriteLine(cm_capture_mode.SelectedIndex);
             Properties.Settings.Default.Save();
         }
 

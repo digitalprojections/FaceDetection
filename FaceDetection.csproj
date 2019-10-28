@@ -88,7 +88,9 @@
     <Compile Include="Camera.cs" />
     <Compile Include="CameraManager.cs" />
     <Compile Include="FaceDetector.cs" />
+    <Compile Include="KeyboardListener.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="MouseListener.cs" />
     <Compile Include="RecorderCamera.cs" />
     <Compile Include="CustomMessage.cs" />
     <Compile Include="FaceDetectionMainForm.cs">
@@ -107,6 +109,7 @@
     <Compile Include="settingsUI.Designer.cs">
       <DependentUpon>settingsUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="SNAPSHOT_SAVER.cs" />
     <Compile Include="TaskManager.cs" />
     <Compile Include="UsbCamcorder.cs" />
     <Compile Include="UsbCamera.cs" />

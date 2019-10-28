@@ -49,7 +49,7 @@ namespace FaceDetection
         internal void StatusCheck()
         {
 
-            if (list.Count > 0 && MainForm.CURRENT_MODE == MainForm.CAMERA_MODES.NONE)
+            if (list.Count > 0 && MainForm.CURRENT_MODE == MainForm.CAMERA_MODES.ERROR)
             {
 
 
