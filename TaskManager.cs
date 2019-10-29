@@ -20,7 +20,6 @@ namespace FaceDetection
         // Directory of the project
         private static string directory = Environment.CurrentDirectory;
         
-
         public TaskManager()
         {
         }
