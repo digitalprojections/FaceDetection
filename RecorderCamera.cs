@@ -17,7 +17,7 @@ namespace FaceDetection
 {
     class RecorderCamera
     {
-        string sourcePath = @"D:\TEMP";
+        string sourcePath = String.Empty;
         string targetPath = String.Empty;
 
         int INDEX = 0;
@@ -88,6 +88,8 @@ namespace FaceDetection
         public RecorderCamera(int cameraIndex)
         {
             this.INDEX = cameraIndex;
+            sourcePath = Properties.Settings.Default.templocation;
+            
         }
 
         public void StartCamera(Size size, double fps, IntPtr pbx)
@@ -282,7 +284,20 @@ namespace FaceDetection
                     str = Path.Combine(Properties.Settings.Default.video_file_location, (INDEX + 1).ToString());
                 }
                 targetPath = str + "/" + dstFileName;
-                Directory.CreateDirectory(str);
+                try
+                {
+                    Directory.CreateDirectory(str);
+
+                }
+                catch (IOException iox) {
+                    Properties.Settings.Default.video_file_location = @"C:\UVCCAMERA";
+                    Properties.Settings.Default.Save();
+                    str = Path.Combine(Properties.Settings.Default.video_file_location, "CAMERA");
+                    str = Path.Combine(str, (INDEX + 1).ToString());
+                    str = Path.Combine(str, MainForm.ACTIVE_RECPATH);
+                    Directory.CreateDirectory(str);
+                }
+
 
                 Console.WriteLine(targetPath + " +++++++++++++++++ dest name 108 in  recorder");
             }else
@@ -290,7 +305,18 @@ namespace FaceDetection
                 //PREEVENT EXISTS. PERMANENT RECORDING MODE
                 targetPath = sourcePath + "/" + dstFileName;
                 Console.WriteLine(targetPath + " target path");
-                Directory.CreateDirectory(sourcePath);
+                try
+                {
+                    Directory.CreateDirectory(sourcePath);
+
+                }
+                catch (IOException iox)
+                {
+                    sourcePath = @"C:\TEMP";
+                    Properties.Settings.Default.templocation = sourcePath;
+                    Properties.Settings.Default.Save();
+                    Directory.CreateDirectory(Properties.Settings.Default.templocation);
+                }
                 MainForm.GetMainForm.RecordingStart();
             }
 

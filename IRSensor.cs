@@ -35,7 +35,7 @@ namespace FaceDetection
                 {
                     MainForm.ACTIVE_RECPATH = MainForm.RECPATH.EVENT;
                     MainForm.GetMainForm.RecordMode();
-                    
+                    //TaskManager.EventAppeared("EVENT", decimal.ToInt32(Properties.Settings.Default.event_record_time_before_event), decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event));
                 }  
             }
             SensorClose();

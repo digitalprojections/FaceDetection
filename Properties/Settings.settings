@@ -197,5 +197,11 @@
     <Setting Name="face_record_time_after" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">60</Value>
     </Setting>
+    <Setting Name="recording_length_seconds1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="templocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\TEMP</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

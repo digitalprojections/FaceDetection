@@ -889,6 +889,7 @@
             // comboBoxResolutions
             // 
             this.comboBoxResolutions.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "current_camera_index", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, null, "N0"));
+            this.comboBoxResolutions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.comboBoxResolutions, "comboBoxResolutions");
             this.comboBoxResolutions.FormattingEnabled = true;
             this.comboBoxResolutions.Name = "comboBoxResolutions";
@@ -896,6 +897,7 @@
             // comboBoxFPS
             // 
             this.comboBoxFPS.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "current_camera_index", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, null, "N0"));
+            this.comboBoxFPS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.comboBoxFPS, "comboBoxFPS");
             this.comboBoxFPS.FormattingEnabled = true;
             this.comboBoxFPS.Name = "comboBoxFPS";
@@ -912,6 +914,7 @@
             // 
             resources.ApplyResources(this.cm_language, "cm_language");
             this.cm_language.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cm_language.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cm_language.FormattingEnabled = true;
             this.cm_language.Items.AddRange(new object[] {
             resources.GetString("cm_language.Items"),
@@ -927,6 +930,7 @@
             // 
             // cm_camera_number
             // 
+            this.cm_camera_number.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cm_camera_number, "cm_camera_number");
             this.cm_camera_number.FormattingEnabled = true;
             this.cm_camera_number.Name = "cm_camera_number";
@@ -1083,7 +1087,7 @@
             // 
             // numericUpDown4
             // 
-            this.numericUpDown4.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "recording_length_seconds", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.numericUpDown4.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "interval_before_reinitiating_recording", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             resources.ApplyResources(this.numericUpDown4, "numericUpDown4");
             this.numericUpDown4.Maximum = new decimal(new int[] {
             600,
@@ -1096,7 +1100,7 @@
             0,
             0});
             this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Value = global::FaceDetection.Properties.Settings.Default.recording_length_seconds;
+            this.numericUpDown4.Value = global::FaceDetection.Properties.Settings.Default.interval_before_reinitiating_recording;
             // 
             // label17
             // 
@@ -1107,6 +1111,7 @@
             // 
             resources.ApplyResources(this.cm_capture_mode, "cm_capture_mode");
             this.cm_capture_mode.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "capture_type", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cm_capture_mode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cm_capture_mode.FormattingEnabled = true;
             this.cm_capture_mode.Items.AddRange(new object[] {
             resources.GetString("cm_capture_mode.Items"),

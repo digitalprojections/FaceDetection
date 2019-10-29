@@ -136,7 +136,7 @@ namespace FaceDetection
         {
             //Save settings
             //Properties.Settings.Default.Save();
-            MainForm.FormChangesApply();
+            MainForm.AllChangesApply();
         }
 
         private void OpenStoreLocation(object sender, EventArgs e)
@@ -165,7 +165,7 @@ namespace FaceDetection
         private void save_and_close(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save();
-            MainForm.FormChangesApply();
+            MainForm.AllChangesApply();
             this.Hide();
         }
 
@@ -175,7 +175,7 @@ namespace FaceDetection
              Here handle all immediate changes
              */
             Properties.Settings.Default.Save();
-            MainForm.FormChangesApply();
+            MainForm.AllChangesApply();
             
 
 
