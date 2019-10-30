@@ -46,7 +46,7 @@ namespace FaceDetection
 
         public static void EventAppeared(string path, int paramTimeBeforeEvent, int paramTimeAfterEvent)
         {
-            string videoInList, dateCutVideoString;
+            string videoInList, dateCutVideoString, preeventFilesName = "";
             int compareDateValue;
             DateTime dateCutVideo;
             TimeSpan tsBeforeEvent = new TimeSpan(0, 0, 0, paramTimeBeforeEvent);
@@ -55,11 +55,6 @@ namespace FaceDetection
             timeSpanEnd = new TimeSpan(0, 0, 0, paramTimeAfterEvent);
             task = new Task(timeSpanStart, timeSpanEnd, fullVideoStartTime, false, path);
             listTask.Add(task);
-            // Timer will count until end of the task
-            //Timer timertask = new Timer(paramTimeAfterEvent * 1000);
-            //timertask.Start();
-            //timertask.Elapsed += OnTimedEvent;
-
 
             AddFilesInList(); // Looking for files in the TEMP folder and add them to the list files
             
@@ -67,7 +62,6 @@ namespace FaceDetection
             {
                 for (int i = listRecordingFiles.Count; i >= 0; i--)
                 {
-                    string preeventFilesName = "";
                     videoInList = listRecordingFiles.ElementAt(i - 1);
                     dateCutVideoString = videoInList.Substring(videoInList.Length - 18, 18);
                     dateCutVideo = new DateTime(Convert.ToInt32(dateCutVideoString.Substring(0, 4)), Convert.ToInt32(dateCutVideoString.Substring(4, 2)), Convert.ToInt32(dateCutVideoString.Substring(6, 2)), Convert.ToInt32(dateCutVideoString.Substring(8, 2)), Convert.ToInt32(dateCutVideoString.Substring(10, 2)), Convert.ToInt32(dateCutVideoString.Substring(12, 2)));
@@ -105,8 +99,9 @@ namespace FaceDetection
 
         public static void RecordEnd() // Call by the main program when the camera status changed ?
         {
-            string videoInList, cutFile, dateCutVideoString;
+            string videoInList, cutFile, dateCutVideoString, startEventTime, fileToCutFromTheEnd;
             string posteventFilesName = "";
+            string[] arrayListOfFiles;
             DateTime dateCutVideo, dateEventStartTime;
             int compareDateValue, listTaskIndex = 0;
             DateTime DateEventStop;
@@ -125,9 +120,14 @@ namespace FaceDetection
                     }
                 }
 
-                string startEventTime = listTask[listTaskIndex].eventtime.ToString("yyyyMMddHHmmss");
+                startEventTime = listTask[listTaskIndex].eventtime.ToString("yyyyMMddHHmmss");
                 dateEventStartTime = listTask[listTaskIndex].eventtime;
 
+                // Cut the end of the file we found before that we need to start the full video
+                arrayListOfFiles = listTask[listTaskIndex].allPreEventVideo.Split('|');
+                fileToCutFromTheEnd = arrayListOfFiles.Last();
+                CutVideoKeepEnd(fileToCutFromTheEnd, decimal.ToInt32(Properties.Settings.Default.seconds_before_event));
+                
                 if (listRecordingFiles.Count != 0)
                 {
                     for (int i = listRecordingFiles.Count; i >= 0; i--)
@@ -164,7 +164,8 @@ namespace FaceDetection
                     }
                 }
 
-                ConcatVideo(listTask[listTaskIndex].allPreEventVideo, posteventFilesName, startEventTime);
+                ConcatVideo(listTask[listTaskIndex].allPreEventVideo, posteventFilesName, startEventTime); // Concat all path files to send to ffmpeg to make the final video with all cuts
+                listTask.Remove(listTask[listTaskIndex]); // Delete the task ended
             }
             catch { }
         }
@@ -235,7 +236,7 @@ namespace FaceDetection
         private static void ConcatVideo(string preEventVideoFiles, string postEventVideoFiles, string startTime)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191025-155508c-win64-static\bin\ffmpeg.exe");
-            startInfo.Arguments = @"-i concat:" + preEventVideoFiles + "|" + postEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location +"/" + startTime + ".avi";  //TODO: use targetPath 
+            startInfo.Arguments = @"-i concat:" + preEventVideoFiles + "|" + postEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location +"/" + startTime + ".avi";  // TODO: + Task.path ?
             Process.Start(startInfo);
         }
 
@@ -264,18 +265,6 @@ namespace FaceDetection
 
             return duration;
         }
-
-        //private static void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
-        //{
-        //    DateTime dateEndTimer = e.SignalTime;
-        //    for (int i = 0; i < listTask.Count; i++)
-        //    {
-        //        if(listTask.ElementAt(i).)
-        //    }
-
-        //    RecordEnd(0);
-        //}
-
     }
 
     class Task
