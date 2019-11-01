@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADQ
-        HQAAAk1TRnQBSQFMAgEBAwEAAagBBAGoAQQBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
+        HQAAAk1TRnQBSQFMAgEBAwEAAcABBAHAAQQBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
         AwABGAMAAQEBAAEgBgABJC4AAw8BFAFYAlsBywEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8
         An8B/gEAAbwB+gH/AUACqAH9A0ABcRwAAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
         AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMB
@@ -266,7 +266,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA0
-        AQAAAk1TRnQBSQFMAgEBAgEAAUABAgFAAQIBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        AQAAAk1TRnQBSQFMAgEBAgEAAVgBAgFYAQIBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEYBgABDBUALf8DAC3/YwAt/wMALf9jAC3/AwAt/2MALf8DAC3/YwAt/wMAD/8DHgPy
         GP9jAC3/AwAM/wMeBgADzxX/YwAt/wMACf8DDAMAA/UDDwMAFf9jAC3/AwAG/wNJAwAD5wb/A0ADAAPP
         D/9jAC3/AwAY/wMPAwAD8gz/YwAt/wMAG/8DPAMAA9cJ/2MALf8DAB7/AycDAAPeBv9jAC3/AwAh/wMw
@@ -313,42 +313,6 @@
   <data name="&gt;&gt;button_settings_cancel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="button_apply.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="button_apply.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 13.8pt</value>
-  </data>
-  <data name="button_apply.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button_apply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>388, 237</value>
-  </data>
-  <data name="button_apply.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="button_apply.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 52</value>
-  </data>
-  <data name="button_apply.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="button_apply.Text" xml:space="preserve">
-    <value>Apply</value>
-  </data>
-  <data name="&gt;&gt;button_apply.Name" xml:space="preserve">
-    <value>button_apply</value>
-  </data>
-  <data name="&gt;&gt;button_apply.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button_apply.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;button_apply.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="button_settings_save.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -383,7 +347,868 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button_settings_save.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="numericUpDown8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="numericUpDown8.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="numericUpDown8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>496, 24</value>
+  </data>
+  <data name="numericUpDown8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="numericUpDown8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 23</value>
+  </data>
+  <data name="numericUpDown8.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="numericUpDown8.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown8.Name" xml:space="preserve">
+    <value>numericUpDown8</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown8.Parent" xml:space="preserve">
+    <value>groupBox_EventRecorder</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown8.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="numericUpDown7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="numericUpDown7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="numericUpDown7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>373, 24</value>
+  </data>
+  <data name="numericUpDown7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="numericUpDown7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 23</value>
+  </data>
+  <data name="numericUpDown7.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="numericUpDown7.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown7.Name" xml:space="preserve">
+    <value>numericUpDown7</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown7.Parent" xml:space="preserve">
+    <value>groupBox_EventRecorder</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown7.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cb_event_recorder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cb_event_recorder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cb_event_recorder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 12</value>
+  </data>
+  <data name="cb_event_recorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 16</value>
+  </data>
+  <data name="cb_event_recorder.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cb_event_recorder.Text" xml:space="preserve">
+    <value>Event recorder</value>
+  </data>
+  <data name="&gt;&gt;cb_event_recorder.Name" xml:space="preserve">
+    <value>cb_event_recorder</value>
+  </data>
+  <data name="&gt;&gt;cb_event_recorder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cb_event_recorder.Parent" xml:space="preserve">
+    <value>groupBox_EventRecorder</value>
+  </data>
+  <data name="&gt;&gt;cb_event_recorder.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="lb_post_event.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lb_post_event.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lb_post_event.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="lb_post_event.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lb_post_event.Location" type="System.Drawing.Point, System.Drawing">
+    <value>451, 10</value>
+  </data>
+  <data name="lb_post_event.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lb_post_event.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 12</value>
+  </data>
+  <data name="lb_post_event.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lb_post_event.Text" xml:space="preserve">
+    <value>Record (after event)</value>
+  </data>
+  <data name="&gt;&gt;lb_post_event.Name" xml:space="preserve">
+    <value>lb_post_event</value>
+  </data>
+  <data name="&gt;&gt;lb_post_event.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb_post_event.Parent" xml:space="preserve">
+    <value>groupBox_EventRecorder</value>
+  </data>
+  <data name="&gt;&gt;lb_post_event.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lb_pre_event.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lb_pre_event.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lb_pre_event.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="lb_pre_event.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lb_pre_event.Location" type="System.Drawing.Point, System.Drawing">
+    <value>320, 10</value>
+  </data>
+  <data name="lb_pre_event.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lb_pre_event.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 12</value>
+  </data>
+  <data name="lb_pre_event.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lb_pre_event.Text" xml:space="preserve">
+    <value>Record (before event)</value>
+  </data>
+  <data name="&gt;&gt;lb_pre_event.Name" xml:space="preserve">
+    <value>lb_pre_event</value>
+  </data>
+  <data name="&gt;&gt;lb_pre_event.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb_pre_event.Parent" xml:space="preserve">
+    <value>groupBox_EventRecorder</value>
+  </data>
+  <data name="&gt;&gt;lb_pre_event.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="label23_seconds.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label23_seconds.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label23_seconds.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label23_seconds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>537, 49</value>
+  </data>
+  <data name="label23_seconds.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label23_seconds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 12</value>
+  </data>
+  <data name="label23_seconds.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="label23_seconds.Text" xml:space="preserve">
+    <value>sec</value>
+  </data>
+  <data name="&gt;&gt;label23_seconds.Name" xml:space="preserve">
+    <value>label23_seconds</value>
+  </data>
+  <data name="&gt;&gt;label23_seconds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label23_seconds.Parent" xml:space="preserve">
+    <value>groupBox_EventRecorder</value>
+  </data>
+  <data name="&gt;&gt;label23_seconds.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="label22_seconds.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label22_seconds.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label22_seconds.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label22_seconds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 49</value>
+  </data>
+  <data name="label22_seconds.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label22_seconds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 12</value>
+  </data>
+  <data name="label22_seconds.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label22_seconds.Text" xml:space="preserve">
+    <value>sec</value>
+  </data>
+  <data name="&gt;&gt;label22_seconds.Name" xml:space="preserve">
+    <value>label22_seconds</value>
+  </data>
+  <data name="&gt;&gt;label22_seconds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label22_seconds.Parent" xml:space="preserve">
+    <value>groupBox_EventRecorder</value>
+  </data>
+  <data name="&gt;&gt;label22_seconds.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="groupBox_EventRecorder.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="groupBox_EventRecorder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 2</value>
+  </data>
+  <data name="groupBox_EventRecorder.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="groupBox_EventRecorder.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="groupBox_EventRecorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>611, 207</value>
+  </data>
+  <data name="groupBox_EventRecorder.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;groupBox_EventRecorder.Name" xml:space="preserve">
+    <value>groupBox_EventRecorder</value>
+  </data>
+  <data name="&gt;&gt;groupBox_EventRecorder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox_EventRecorder.Parent" xml:space="preserve">
+    <value>tab_event_recorder</value>
+  </data>
+  <data name="&gt;&gt;groupBox_EventRecorder.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tab_event_recorder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tab_event_recorder.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tab_event_recorder.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tab_event_recorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>615, 211</value>
+  </data>
+  <data name="tab_event_recorder.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tab_event_recorder.Text" xml:space="preserve">
+    <value>Event Recorder</value>
+  </data>
+  <data name="&gt;&gt;tab_event_recorder.Name" xml:space="preserve">
+    <value>tab_event_recorder</value>
+  </data>
+  <data name="&gt;&gt;tab_event_recorder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tab_event_recorder.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tab_event_recorder.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <metadata name="tab_operator_capture.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="cb_recording_operator_capture.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cb_recording_operator_capture.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 9pt</value>
+  </data>
+  <data name="cb_recording_operator_capture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cb_recording_operator_capture.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 120</value>
+  </data>
+  <data name="cb_recording_operator_capture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="cb_recording_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 16</value>
+  </data>
+  <data name="cb_recording_operator_capture.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="cb_recording_operator_capture.Text" xml:space="preserve">
+    <value>Recording when an operator senses</value>
+  </data>
+  <data name="&gt;&gt;cb_recording_operator_capture.Name" xml:space="preserve">
+    <value>cb_recording_operator_capture</value>
+  </data>
+  <data name="&gt;&gt;cb_recording_operator_capture.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cb_recording_operator_capture.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;cb_recording_operator_capture.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cb_recording_operation.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cb_recording_operation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cb_recording_operation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 154</value>
+  </data>
+  <data name="cb_recording_operation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="cb_recording_operation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 16</value>
+  </data>
+  <data name="cb_recording_operation.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="cb_recording_operation.Text" xml:space="preserve">
+    <value>Recording when at the start of operation</value>
+  </data>
+  <data name="&gt;&gt;cb_recording_operation.Name" xml:space="preserve">
+    <value>cb_recording_operation</value>
+  </data>
+  <data name="&gt;&gt;cb_recording_operation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cb_recording_operation.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;cb_recording_operation.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="numericUpDown1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="numericUpDown1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="numericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>527, 99</value>
+  </data>
+  <data name="numericUpDown1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="numericUpDown1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 23</value>
+  </data>
+  <data name="numericUpDown1.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="numericUpDown1.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown1.Name" xml:space="preserve">
+    <value>numericUpDown1</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown1.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="numericUpDown5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="numericUpDown5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="numericUpDown5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>375, 99</value>
+  </data>
+  <data name="numericUpDown5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="numericUpDown5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 23</value>
+  </data>
+  <data name="numericUpDown5.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="numericUpDown5.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown5.Name" xml:space="preserve">
+    <value>numericUpDown5</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown5.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown5.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label11.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label11.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 85</value>
+  </data>
+  <data name="label11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 12</value>
+  </data>
+  <data name="label11.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value>Record (after event)</value>
+  </data>
+  <data name="&gt;&gt;label11.Name" xml:space="preserve">
+    <value>label11</value>
+  </data>
+  <data name="&gt;&gt;label11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="label12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label12.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>322, 85</value>
+  </data>
+  <data name="label12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 12</value>
+  </data>
+  <data name="label12.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="label12.Text" xml:space="preserve">
+    <value>Record (before event)</value>
+  </data>
+  <data name="&gt;&gt;label12.Name" xml:space="preserve">
+    <value>label12</value>
+  </data>
+  <data name="&gt;&gt;label12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="label13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label13.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>568, 124</value>
+  </data>
+  <data name="label13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 12</value>
+  </data>
+  <data name="label13.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="label13.Text" xml:space="preserve">
+    <value>sec</value>
+  </data>
+  <data name="&gt;&gt;label13.Name" xml:space="preserve">
+    <value>label13</value>
+  </data>
+  <data name="&gt;&gt;label13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="label14.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label14.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>416, 124</value>
+  </data>
+  <data name="label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 12</value>
+  </data>
+  <data name="label14.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="label14.Text" xml:space="preserve">
+    <value>sec</value>
+  </data>
+  <data name="&gt;&gt;label14.Name" xml:space="preserve">
+    <value>label14</value>
+  </data>
+  <data name="&gt;&gt;label14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label14.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="cb_operator_capture.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cb_operator_capture.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 9pt</value>
+  </data>
+  <data name="cb_operator_capture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cb_operator_capture.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 14</value>
+  </data>
+  <data name="cb_operator_capture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="cb_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 16</value>
+  </data>
+  <data name="cb_operator_capture.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="cb_operator_capture.Text" xml:space="preserve">
+    <value>Operator capture</value>
+  </data>
+  <data name="&gt;&gt;cb_operator_capture.Name" xml:space="preserve">
+    <value>cb_operator_capture</value>
+  </data>
+  <data name="&gt;&gt;cb_operator_capture.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cb_operator_capture.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;cb_operator_capture.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="numericUpDown4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="numericUpDown4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 54</value>
+  </data>
+  <data name="numericUpDown4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="numericUpDown4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 23</value>
+  </data>
+  <data name="numericUpDown4.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="numericUpDown4.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown4.Name" xml:space="preserve">
+    <value>numericUpDown4</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown4.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown4.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="label17.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label17.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="label17.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 38</value>
+  </data>
+  <data name="label17.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 12</value>
+  </data>
+  <data name="label17.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="label17.Text" xml:space="preserve">
+    <value>Recording re-initiation interval</value>
+  </data>
+  <data name="&gt;&gt;label17.Name" xml:space="preserve">
+    <value>label17</value>
+  </data>
+  <data name="&gt;&gt;label17.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label17.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cm_capture_mode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cm_capture_mode.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="cm_capture_mode.Items" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="cm_capture_mode.Items1" xml:space="preserve">
+    <value>Snapshot</value>
+  </data>
+  <data name="cm_capture_mode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>501, 22</value>
+  </data>
+  <data name="cm_capture_mode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="cm_capture_mode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 24</value>
+  </data>
+  <data name="cm_capture_mode.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;cm_capture_mode.Name" xml:space="preserve">
+    <value>cm_capture_mode</value>
+  </data>
+  <data name="&gt;&gt;cm_capture_mode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cm_capture_mode.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;cm_capture_mode.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="lb_seconds2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lb_seconds2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lb_seconds2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>52, 79</value>
+  </data>
+  <data name="lb_seconds2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lb_seconds2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 12</value>
+  </data>
+  <data name="lb_seconds2.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lb_seconds2.Text" xml:space="preserve">
+    <value>sec</value>
+  </data>
+  <data name="&gt;&gt;lb_seconds2.Name" xml:space="preserve">
+    <value>lb_seconds2</value>
+  </data>
+  <data name="&gt;&gt;lb_seconds2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb_seconds2.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;lb_seconds2.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="lb_capture_mode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lb_capture_mode.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lb_capture_mode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lb_capture_mode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>499, 8</value>
+  </data>
+  <data name="lb_capture_mode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lb_capture_mode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 12</value>
+  </data>
+  <data name="lb_capture_mode.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lb_capture_mode.Text" xml:space="preserve">
+    <value>Capture mode</value>
+  </data>
+  <data name="&gt;&gt;lb_capture_mode.Name" xml:space="preserve">
+    <value>lb_capture_mode</value>
+  </data>
+  <data name="&gt;&gt;lb_capture_mode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb_capture_mode.Parent" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;lb_capture_mode.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="groupBox_OperatorCapture.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="groupBox_OperatorCapture.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 2</value>
+  </data>
+  <data name="groupBox_OperatorCapture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="groupBox_OperatorCapture.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="groupBox_OperatorCapture.Size" type="System.Drawing.Size, System.Drawing">
+    <value>611, 207</value>
+  </data>
+  <data name="groupBox_OperatorCapture.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;groupBox_OperatorCapture.Name" xml:space="preserve">
+    <value>groupBox_OperatorCapture</value>
+  </data>
+  <data name="&gt;&gt;groupBox_OperatorCapture.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox_OperatorCapture.Parent" xml:space="preserve">
+    <value>tab_operator_capture</value>
+  </data>
+  <data name="&gt;&gt;groupBox_OperatorCapture.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tab_operator_capture.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tab_operator_capture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tab_operator_capture.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tab_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
+    <value>615, 211</value>
+  </data>
+  <data name="tab_operator_capture.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tab_operator_capture.Text" xml:space="preserve">
+    <value>Operator Capture</value>
+  </data>
+  <data name="&gt;&gt;tab_operator_capture.Name" xml:space="preserve">
+    <value>tab_operator_capture</value>
+  </data>
+  <data name="&gt;&gt;tab_operator_capture.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tab_operator_capture.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tab_operator_capture.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="numericUpDown6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -634,46 +1459,6 @@
   <data name="&gt;&gt;numericUpDown3.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="pictureBox_faceRecognition.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
-        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
-        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
-        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
-        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox_faceRecognition.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_faceRecognition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 9</value>
-  </data>
-  <data name="pictureBox_faceRecognition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_faceRecognition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_faceRecognition.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_faceRecognition.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_faceRecognition.Name" xml:space="preserve">
-    <value>pictureBox_faceRecognition</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_faceRecognition.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_faceRecognition.Parent" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_faceRecognition.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="numericUpDown2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -705,7 +1490,7 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;numericUpDown2.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="cb_face_recognition.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -738,7 +1523,7 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;cb_face_recognition.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="lb_milliseconds1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -774,7 +1559,7 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;lb_milliseconds1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="label10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -813,7 +1598,7 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 12</value>
@@ -1115,86 +1900,6 @@
   <data name="&gt;&gt;groupBox8.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="pictureBox_backlightOffWhenIdle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
-        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
-        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
-        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
-        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox_backlightOffWhenIdle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_backlightOffWhenIdle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 113</value>
-  </data>
-  <data name="pictureBox_backlightOffWhenIdle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_backlightOffWhenIdle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_backlightOffWhenIdle.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_backlightOffWhenIdle.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_backlightOffWhenIdle.Name" xml:space="preserve">
-    <value>pictureBox_backlightOffWhenIdle</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_backlightOffWhenIdle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_backlightOffWhenIdle.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_backlightOffWhenIdle.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="pictureBox_BacklightOnRecognition.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
-        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
-        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
-        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
-        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox_BacklightOnRecognition.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_BacklightOnRecognition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 46</value>
-  </data>
-  <data name="pictureBox_BacklightOnRecognition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_BacklightOnRecognition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_BacklightOnRecognition.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_BacklightOnRecognition.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_BacklightOnRecognition.Name" xml:space="preserve">
-    <value>pictureBox_BacklightOnRecognition</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_BacklightOnRecognition.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_BacklightOnRecognition.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_BacklightOnRecognition.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="cb_backlight_off_idling.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1226,7 +1931,7 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;cb_backlight_off_idling.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="cb_backlight_on_recognition.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1262,37 +1967,7 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;cb_backlight_on_recognition.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="pictureBox_allcam.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_allcam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 170</value>
-  </data>
-  <data name="pictureBox_allcam.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_allcam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_allcam.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_allcam.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_allcam.Name" xml:space="preserve">
-    <value>pictureBox_allcam</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_allcam.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_allcam.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_allcam.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="cb_all_cameras.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1328,247 +2003,7 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;cb_all_cameras.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="pictureBox_showRecordingIcon.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
-        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
-        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
-        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
-        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox_showRecordingIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_showRecordingIcon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 80</value>
-  </data>
-  <data name="pictureBox_showRecordingIcon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_showRecordingIcon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_showRecordingIcon.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_showRecordingIcon.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showRecordingIcon.Name" xml:space="preserve">
-    <value>pictureBox_showRecordingIcon</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showRecordingIcon.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showRecordingIcon.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showRecordingIcon.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="pictureBox_showCameraNo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
-        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
-        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
-        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
-        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox_showCameraNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_showCameraNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 139</value>
-  </data>
-  <data name="pictureBox_showCameraNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_showCameraNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_showCameraNo.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_showCameraNo.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCameraNo.Name" xml:space="preserve">
-    <value>pictureBox_showCameraNo</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCameraNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCameraNo.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCameraNo.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="pictureBox_showCurrentDate.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
-        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
-        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
-        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
-        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox_showCurrentDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_showCurrentDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 108</value>
-  </data>
-  <data name="pictureBox_showCurrentDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_showCurrentDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_showCurrentDate.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_showCurrentDate.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCurrentDate.Name" xml:space="preserve">
-    <value>pictureBox_showCurrentDate</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCurrentDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCurrentDate.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showCurrentDate.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="pictureBox_showWindowPane.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
-        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
-        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
-        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
-        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox_showWindowPane.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_showWindowPane.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 77</value>
-  </data>
-  <data name="pictureBox_showWindowPane.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_showWindowPane.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_showWindowPane.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_showWindowPane.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showWindowPane.Name" xml:space="preserve">
-    <value>pictureBox_showWindowPane</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showWindowPane.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showWindowPane.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_showWindowPane.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="pictureBox_full_screen.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
-        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
-        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
-        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
-        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox_full_screen.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_full_screen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 14</value>
-  </data>
-  <data name="pictureBox_full_screen.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_full_screen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_full_screen.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_full_screen.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_full_screen.Name" xml:space="preserve">
-    <value>pictureBox_full_screen</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_full_screen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_full_screen.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_full_screen.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="pictureBox_alwaysOnTop.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
-        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
-        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
-        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
-        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox_alwaysOnTop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_alwaysOnTop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 46</value>
-  </data>
-  <data name="pictureBox_alwaysOnTop.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_alwaysOnTop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_alwaysOnTop.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_alwaysOnTop.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_alwaysOnTop.Name" xml:space="preserve">
-    <value>pictureBox_alwaysOnTop</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_alwaysOnTop.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_alwaysOnTop.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_alwaysOnTop.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>3</value>
   </data>
   <data name="cb_show_rec_icon.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1601,7 +2036,7 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;cb_show_rec_icon.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>4</value>
   </data>
   <data name="cb_show_camera_number.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1634,7 +2069,7 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;cb_show_camera_number.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>5</value>
   </data>
   <data name="cb_dateandtime.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1667,7 +2102,7 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;cb_dateandtime.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>6</value>
   </data>
   <data name="cb_window_pane.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1700,7 +2135,7 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;cb_window_pane.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>7</value>
   </data>
   <data name="checkBox_full_screen.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1733,7 +2168,7 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;checkBox_full_screen.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>8</value>
   </data>
   <data name="cb_always_on_top.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1766,7 +2201,7 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;cb_always_on_top.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>9</value>
   </data>
   <data name="groupBox_viewSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -1834,36 +2269,6 @@
   <data name="groupBox12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="pictureBox_DeleteOldData.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_DeleteOldData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 9</value>
-  </data>
-  <data name="pictureBox_DeleteOldData.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_DeleteOldData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_DeleteOldData.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_DeleteOldData.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_DeleteOldData.Name" xml:space="preserve">
-    <value>pictureBox_DeleteOldData</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_DeleteOldData.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_DeleteOldData.Parent" xml:space="preserve">
-    <value>groupBox12</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_DeleteOldData.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="nud_erase_old.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -1895,7 +2300,7 @@
     <value>groupBox12</value>
   </data>
   <data name="&gt;&gt;nud_erase_old.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1934,7 +2339,7 @@
     <value>groupBox12</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="cb_delete_old.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1967,7 +2372,7 @@
     <value>groupBox12</value>
   </data>
   <data name="&gt;&gt;cb_delete_old.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="groupBox12.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 14</value>
@@ -2941,1024 +3346,6 @@
   <data name="&gt;&gt;tab_camera_and_window.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="tab_operator_capture.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="pictureBox_recording_operator_capture.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
-        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
-        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
-        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
-        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox_recording_operator_capture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_recording_operator_capture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 112</value>
-  </data>
-  <data name="pictureBox_recording_operator_capture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_recording_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_recording_operator_capture.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_recording_operator_capture.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_recording_operator_capture.Name" xml:space="preserve">
-    <value>pictureBox_recording_operator_capture</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_recording_operator_capture.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_recording_operator_capture.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_recording_operator_capture.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="cb_recording_operator_capture.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="cb_recording_operator_capture.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 9pt</value>
-  </data>
-  <data name="cb_recording_operator_capture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cb_recording_operator_capture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 120</value>
-  </data>
-  <data name="cb_recording_operator_capture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="cb_recording_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 16</value>
-  </data>
-  <data name="cb_recording_operator_capture.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="cb_recording_operator_capture.Text" xml:space="preserve">
-    <value>Recording when an operator senses</value>
-  </data>
-  <data name="&gt;&gt;cb_recording_operator_capture.Name" xml:space="preserve">
-    <value>cb_recording_operator_capture</value>
-  </data>
-  <data name="&gt;&gt;cb_recording_operator_capture.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_recording_operator_capture.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;cb_recording_operator_capture.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="pictureBox_Recording_start_operation.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
-        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
-        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
-        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
-        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox_Recording_start_operation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_Recording_start_operation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 146</value>
-  </data>
-  <data name="pictureBox_Recording_start_operation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_Recording_start_operation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_Recording_start_operation.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_Recording_start_operation.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_Recording_start_operation.Name" xml:space="preserve">
-    <value>pictureBox_Recording_start_operation</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_Recording_start_operation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_Recording_start_operation.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_Recording_start_operation.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="cb_recording_operation.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="cb_recording_operation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cb_recording_operation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 154</value>
-  </data>
-  <data name="cb_recording_operation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="cb_recording_operation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 16</value>
-  </data>
-  <data name="cb_recording_operation.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="cb_recording_operation.Text" xml:space="preserve">
-    <value>Recording when at the start of operation</value>
-  </data>
-  <data name="&gt;&gt;cb_recording_operation.Name" xml:space="preserve">
-    <value>cb_recording_operation</value>
-  </data>
-  <data name="&gt;&gt;cb_recording_operation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_recording_operation.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;cb_recording_operation.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="numericUpDown1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="numericUpDown1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 12pt</value>
-  </data>
-  <data name="numericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>527, 99</value>
-  </data>
-  <data name="numericUpDown1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="numericUpDown1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 23</value>
-  </data>
-  <data name="numericUpDown1.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="numericUpDown1.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.Name" xml:space="preserve">
-    <value>numericUpDown1</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="numericUpDown5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="numericUpDown5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 12pt</value>
-  </data>
-  <data name="numericUpDown5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>375, 99</value>
-  </data>
-  <data name="numericUpDown5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="numericUpDown5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 23</value>
-  </data>
-  <data name="numericUpDown5.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="numericUpDown5.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown5.Name" xml:space="preserve">
-    <value>numericUpDown5</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown5.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown5.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="label11.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label11.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>482, 85</value>
-  </data>
-  <data name="label11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 12</value>
-  </data>
-  <data name="label11.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>Record (after event)</value>
-  </data>
-  <data name="&gt;&gt;label11.Name" xml:space="preserve">
-    <value>label11</value>
-  </data>
-  <data name="&gt;&gt;label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="label12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label12.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>322, 85</value>
-  </data>
-  <data name="label12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 12</value>
-  </data>
-  <data name="label12.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="label12.Text" xml:space="preserve">
-    <value>Record (before event)</value>
-  </data>
-  <data name="&gt;&gt;label12.Name" xml:space="preserve">
-    <value>label12</value>
-  </data>
-  <data name="&gt;&gt;label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="label13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label13.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>568, 124</value>
-  </data>
-  <data name="label13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
-  </data>
-  <data name="label13.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="label13.Text" xml:space="preserve">
-    <value>sec</value>
-  </data>
-  <data name="&gt;&gt;label13.Name" xml:space="preserve">
-    <value>label13</value>
-  </data>
-  <data name="&gt;&gt;label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="label14.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label14.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>416, 124</value>
-  </data>
-  <data name="label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
-  </data>
-  <data name="label14.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="label14.Text" xml:space="preserve">
-    <value>sec</value>
-  </data>
-  <data name="&gt;&gt;label14.Name" xml:space="preserve">
-    <value>label14</value>
-  </data>
-  <data name="&gt;&gt;label14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label14.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="pictureBox_operatorCapture.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
-        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
-        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
-        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
-        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox_operatorCapture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_operatorCapture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 10</value>
-  </data>
-  <data name="pictureBox_operatorCapture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pictureBox_operatorCapture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="pictureBox_operatorCapture.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_operatorCapture.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_operatorCapture.Name" xml:space="preserve">
-    <value>pictureBox_operatorCapture</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_operatorCapture.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_operatorCapture.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_operatorCapture.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="cb_operator_capture.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="cb_operator_capture.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 9pt</value>
-  </data>
-  <data name="cb_operator_capture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cb_operator_capture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 14</value>
-  </data>
-  <data name="cb_operator_capture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="cb_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 16</value>
-  </data>
-  <data name="cb_operator_capture.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="cb_operator_capture.Text" xml:space="preserve">
-    <value>Operator capture</value>
-  </data>
-  <data name="&gt;&gt;cb_operator_capture.Name" xml:space="preserve">
-    <value>cb_operator_capture</value>
-  </data>
-  <data name="&gt;&gt;cb_operator_capture.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_operator_capture.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;cb_operator_capture.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="numericUpDown4.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 12pt</value>
-  </data>
-  <data name="numericUpDown4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 54</value>
-  </data>
-  <data name="numericUpDown4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="numericUpDown4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 23</value>
-  </data>
-  <data name="numericUpDown4.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="numericUpDown4.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown4.Name" xml:space="preserve">
-    <value>numericUpDown4</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown4.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown4.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="label17.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label17.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label17.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 38</value>
-  </data>
-  <data name="label17.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 12</value>
-  </data>
-  <data name="label17.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="label17.Text" xml:space="preserve">
-    <value>Recording re-initiation interval</value>
-  </data>
-  <data name="&gt;&gt;label17.Name" xml:space="preserve">
-    <value>label17</value>
-  </data>
-  <data name="&gt;&gt;label17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label17.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="cm_capture_mode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="cm_capture_mode.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 12pt</value>
-  </data>
-  <data name="cm_capture_mode.Items" xml:space="preserve">
-    <value>Video</value>
-  </data>
-  <data name="cm_capture_mode.Items1" xml:space="preserve">
-    <value>Snapshot</value>
-  </data>
-  <data name="cm_capture_mode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>501, 22</value>
-  </data>
-  <data name="cm_capture_mode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="cm_capture_mode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 24</value>
-  </data>
-  <data name="cm_capture_mode.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;cm_capture_mode.Name" xml:space="preserve">
-    <value>cm_capture_mode</value>
-  </data>
-  <data name="&gt;&gt;cm_capture_mode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cm_capture_mode.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;cm_capture_mode.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="lb_seconds2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lb_seconds2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lb_seconds2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 79</value>
-  </data>
-  <data name="lb_seconds2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="lb_seconds2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
-  </data>
-  <data name="lb_seconds2.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="lb_seconds2.Text" xml:space="preserve">
-    <value>sec</value>
-  </data>
-  <data name="&gt;&gt;lb_seconds2.Name" xml:space="preserve">
-    <value>lb_seconds2</value>
-  </data>
-  <data name="&gt;&gt;lb_seconds2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_seconds2.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;lb_seconds2.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="lb_capture_mode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="lb_capture_mode.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lb_capture_mode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lb_capture_mode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>499, 8</value>
-  </data>
-  <data name="lb_capture_mode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="lb_capture_mode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 12</value>
-  </data>
-  <data name="lb_capture_mode.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lb_capture_mode.Text" xml:space="preserve">
-    <value>Capture mode</value>
-  </data>
-  <data name="&gt;&gt;lb_capture_mode.Name" xml:space="preserve">
-    <value>lb_capture_mode</value>
-  </data>
-  <data name="&gt;&gt;lb_capture_mode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_capture_mode.Parent" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;lb_capture_mode.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="groupBox_OperatorCapture.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="groupBox_OperatorCapture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 2</value>
-  </data>
-  <data name="groupBox_OperatorCapture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="groupBox_OperatorCapture.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="groupBox_OperatorCapture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>611, 207</value>
-  </data>
-  <data name="groupBox_OperatorCapture.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;groupBox_OperatorCapture.Name" xml:space="preserve">
-    <value>groupBox_OperatorCapture</value>
-  </data>
-  <data name="&gt;&gt;groupBox_OperatorCapture.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox_OperatorCapture.Parent" xml:space="preserve">
-    <value>tab_operator_capture</value>
-  </data>
-  <data name="&gt;&gt;groupBox_OperatorCapture.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tab_operator_capture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tab_operator_capture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tab_operator_capture.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tab_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 211</value>
-  </data>
-  <data name="tab_operator_capture.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="tab_operator_capture.Text" xml:space="preserve">
-    <value>Operator Capture</value>
-  </data>
-  <data name="&gt;&gt;tab_operator_capture.Name" xml:space="preserve">
-    <value>tab_operator_capture</value>
-  </data>
-  <data name="&gt;&gt;tab_operator_capture.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tab_operator_capture.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tab_operator_capture.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="numericUpDown8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="numericUpDown8.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 12pt</value>
-  </data>
-  <data name="numericUpDown8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 24</value>
-  </data>
-  <data name="numericUpDown8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="numericUpDown8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 23</value>
-  </data>
-  <data name="numericUpDown8.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="numericUpDown8.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown8.Name" xml:space="preserve">
-    <value>numericUpDown8</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown8.Parent" xml:space="preserve">
-    <value>groupBox_EventRecorder</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown8.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pictureBox_EventRecorder.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        dAAAEnQB3mYfeAAAAPhJREFUWEftjtsKg0AMRP3/Jz/MB8EPshVmyrSs2YvZ1UIODNRuMjnTm/0PMu1P
-        JiS9CEkvQtKLkPTidsnj9jzP+EpzqySOf3IG3sdLUkxzBt7HSlJKY4GZcZKU0uTA3BhJSmlKwGx/SUpp
-        SsF8X0lKaWrATn5pWRb8qoNSmlqwZy+u69p0gDuaFrB7vrxt29cRa1b53SndS4F9u4BHNBa18znQkS/h
-        MU2K0rka0FNWxKMaJffeCrrKy3hcY/3vAfrqCilhxRN01pdSJhVv0NtWTClND9DdXk65Kx050H/tQE/B
-        AxfJ3oSkFyHpRUh6EZJe/JfkszPtLzF+4FtTJPmlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox_EventRecorder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox_EventRecorder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 11</value>
-  </data>
-  <data name="pictureBox_EventRecorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 32</value>
-  </data>
-  <data name="pictureBox_EventRecorder.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBox_EventRecorder.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_EventRecorder.Name" xml:space="preserve">
-    <value>pictureBox_EventRecorder</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_EventRecorder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_EventRecorder.Parent" xml:space="preserve">
-    <value>groupBox_EventRecorder</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_EventRecorder.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="numericUpDown7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="numericUpDown7.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 12pt</value>
-  </data>
-  <data name="numericUpDown7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>373, 24</value>
-  </data>
-  <data name="numericUpDown7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="numericUpDown7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 23</value>
-  </data>
-  <data name="numericUpDown7.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="numericUpDown7.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown7.Name" xml:space="preserve">
-    <value>numericUpDown7</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown7.Parent" xml:space="preserve">
-    <value>groupBox_EventRecorder</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown7.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="cb_event_recorder.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="cb_event_recorder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cb_event_recorder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 12</value>
-  </data>
-  <data name="cb_event_recorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 16</value>
-  </data>
-  <data name="cb_event_recorder.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="cb_event_recorder.Text" xml:space="preserve">
-    <value>Event recorder</value>
-  </data>
-  <data name="&gt;&gt;cb_event_recorder.Name" xml:space="preserve">
-    <value>cb_event_recorder</value>
-  </data>
-  <data name="&gt;&gt;cb_event_recorder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_event_recorder.Parent" xml:space="preserve">
-    <value>groupBox_EventRecorder</value>
-  </data>
-  <data name="&gt;&gt;cb_event_recorder.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="lb_post_event.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="lb_post_event.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lb_post_event.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lb_post_event.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lb_post_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>451, 10</value>
-  </data>
-  <data name="lb_post_event.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="lb_post_event.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 12</value>
-  </data>
-  <data name="lb_post_event.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="lb_post_event.Text" xml:space="preserve">
-    <value>Record (after event)</value>
-  </data>
-  <data name="&gt;&gt;lb_post_event.Name" xml:space="preserve">
-    <value>lb_post_event</value>
-  </data>
-  <data name="&gt;&gt;lb_post_event.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_post_event.Parent" xml:space="preserve">
-    <value>groupBox_EventRecorder</value>
-  </data>
-  <data name="&gt;&gt;lb_post_event.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="lb_pre_event.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="lb_pre_event.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lb_pre_event.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lb_pre_event.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lb_pre_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>320, 10</value>
-  </data>
-  <data name="lb_pre_event.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="lb_pre_event.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 12</value>
-  </data>
-  <data name="lb_pre_event.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lb_pre_event.Text" xml:space="preserve">
-    <value>Record (before event)</value>
-  </data>
-  <data name="&gt;&gt;lb_pre_event.Name" xml:space="preserve">
-    <value>lb_pre_event</value>
-  </data>
-  <data name="&gt;&gt;lb_pre_event.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_pre_event.Parent" xml:space="preserve">
-    <value>groupBox_EventRecorder</value>
-  </data>
-  <data name="&gt;&gt;lb_pre_event.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="label23_seconds.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label23_seconds.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label23_seconds.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label23_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>537, 49</value>
-  </data>
-  <data name="label23_seconds.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label23_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
-  </data>
-  <data name="label23_seconds.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="label23_seconds.Text" xml:space="preserve">
-    <value>sec</value>
-  </data>
-  <data name="&gt;&gt;label23_seconds.Name" xml:space="preserve">
-    <value>label23_seconds</value>
-  </data>
-  <data name="&gt;&gt;label23_seconds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label23_seconds.Parent" xml:space="preserve">
-    <value>groupBox_EventRecorder</value>
-  </data>
-  <data name="&gt;&gt;label23_seconds.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="label22_seconds.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label22_seconds.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label22_seconds.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label22_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 49</value>
-  </data>
-  <data name="label22_seconds.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label22_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
-  </data>
-  <data name="label22_seconds.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="label22_seconds.Text" xml:space="preserve">
-    <value>sec</value>
-  </data>
-  <data name="&gt;&gt;label22_seconds.Name" xml:space="preserve">
-    <value>label22_seconds</value>
-  </data>
-  <data name="&gt;&gt;label22_seconds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label22_seconds.Parent" xml:space="preserve">
-    <value>groupBox_EventRecorder</value>
-  </data>
-  <data name="&gt;&gt;label22_seconds.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="groupBox_EventRecorder.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="groupBox_EventRecorder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 2</value>
-  </data>
-  <data name="groupBox_EventRecorder.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="groupBox_EventRecorder.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="groupBox_EventRecorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>611, 207</value>
-  </data>
-  <data name="groupBox_EventRecorder.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;groupBox_EventRecorder.Name" xml:space="preserve">
-    <value>groupBox_EventRecorder</value>
-  </data>
-  <data name="&gt;&gt;groupBox_EventRecorder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox_EventRecorder.Parent" xml:space="preserve">
-    <value>tab_event_recorder</value>
-  </data>
-  <data name="&gt;&gt;groupBox_EventRecorder.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tab_event_recorder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tab_event_recorder.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tab_event_recorder.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tab_event_recorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 211</value>
-  </data>
-  <data name="tab_event_recorder.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="tab_event_recorder.Text" xml:space="preserve">
-    <value>Event Recorder</value>
-  </data>
-  <data name="&gt;&gt;tab_event_recorder.Name" xml:space="preserve">
-    <value>tab_event_recorder</value>
-  </data>
-  <data name="&gt;&gt;tab_event_recorder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tab_event_recorder.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tab_event_recorder.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="tabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -3984,7 +3371,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

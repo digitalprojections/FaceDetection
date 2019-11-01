@@ -19,7 +19,20 @@ namespace FaceDetection
     {
         string sourcePath = @"D:\TEMP";
         string targetPath = String.Empty;
-
+        /// <summary>
+        /// If Enabled and AutoReset are both set to false, 
+        /// and the timer has previously been enabled, 
+        /// setting the Interval property causes the Elapsed event to be raised once, 
+        /// as if the Enabled property had been set to true. 
+        /// To set the interval without raising the event, 
+        /// you can temporarily set the Enabled property to true, 
+        /// set the Interval property to the desired time interval, 
+        /// and then immediately set the Enabled property back to false.
+        /// </summary>
+        //User actions
+        private readonly System.Timers.Timer recording_timer = new System.Timers.Timer();
+        private readonly System.Timers.Timer operator_capture_idle_timer = new System.Timers.Timer();
+        public System.Timers.Timer RecordingTimer => recording_timer;
         int INDEX = 0;
 
         public enum PlayState : int
@@ -33,9 +46,9 @@ namespace FaceDetection
         public Action Release { get; private set; }
         public Func<Bitmap> GetBitmap { get; private set; }
 
-        internal PlayState GetCurrentState1() => CurrentState;
+        internal PlayState GetCurrentState() => CurrentState;
 
-        internal void SetCurrentState1(PlayState value)
+        internal void SetCurrentState(PlayState value)
         {
             CurrentState = value;
         }
@@ -88,12 +101,39 @@ namespace FaceDetection
         public RecorderCamera(int cameraIndex)
         {
             this.INDEX = cameraIndex;
+            RecordingTimer.AutoReset = false;
+            RecordingTimer.Elapsed += Recording_Timer_Elapsed;//cut to allow access to the files
+        }
+        /// <summary>
+        /// Must restart recording camera
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Recording_Timer_Elapsed(object sender, EventArgs e)
+        {
+            ReleaseInterfaces();
+            //cameraMan.StartCamera(GetResolution(0), 15, CameraPanel.Handle);//restart camera
+            TaskManager.RecordEnd();
+            //StartVideoRecording();
         }
 
+        internal void SetTimerIntervalsAsPerSettings()
+        {
+            if (Properties.Settings.Default.enable_event_recorder && Properties.Settings.Default.event_record_time_after_event > 0)
+            {
+                RecordingTimer.Interval = decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event) * 1000;
+            }
+            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.seconds_after_event > 0)
+            {
+                RecordingTimer.Interval = decimal.ToInt32(Properties.Settings.Default.seconds_after_event) * 1000;
+            }
+            if (Properties.Settings.Default.interval_before_reinitiating_recording > 0)
+            {
+                operator_capture_idle_timer.Interval = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording);
+            }
+        }
         public void StartCamera(Size size, double fps, IntPtr pbx)
         {
-            
-
             GetInterfaces();
             //var camera_list = FindDevices();
             //if (cameraIndex >= camera_list) throw new ArgumentException("USB camera is not available.", "index");
@@ -269,7 +309,7 @@ namespace FaceDetection
             //REGULAR 0 PREEVENT
             if (MainForm.CURRENT_MODE != MainForm.CAMERA_MODES.PREEVENT)
             {
-                MainForm.GetMainForm.RecordingTimer.Stop();
+                //MainForm.GetMainForm.RecordingTimer.Stop();
                 string str = "";
                 if (MainForm.ACTIVE_RECPATH != string.Empty || MainForm.ACTIVE_RECPATH != MainForm.RECPATH.NORMAL)
                 {                    

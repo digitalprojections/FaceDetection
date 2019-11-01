@@ -91,6 +91,8 @@
     <Compile Include="KeyboardListener.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MouseListener.cs" />
+    <Compile Include="Sequencer.cs" />
+    <Compile Include="TaskManager.cs" />
     <Compile Include="RecorderCamera.cs" />
     <Compile Include="CustomMessage.cs" />
     <Compile Include="FaceDetectionMainForm.cs">
@@ -110,7 +112,6 @@
       <DependentUpon>settingsUI.cs</DependentUpon>
     </Compile>
     <Compile Include="SNAPSHOT_SAVER.cs" />
-    <Compile Include="TaskManager.cs" />
     <Compile Include="UsbCamcorder.cs" />
     <Compile Include="UsbCamera.cs" />
     <EmbeddedResource Include="FaceDetectionMainForm.resx">

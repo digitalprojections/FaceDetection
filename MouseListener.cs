@@ -7,15 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FaceDetectionX
+namespace FaceDetection
 {
     public class MouseListener
     {
-        private WinEventDelegate winEventProc;
-        delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType,
-        IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
         #region Constant, Structures, and Delegate Definitions
-        private delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
+        public delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
+        public LowLevelMouseProc mouseProc;
 
         private enum MouseMessages
         {
@@ -81,8 +79,9 @@ namespace FaceDetectionX
         #region Public Methods
         public void Hook()
         {
+            mouseProc = HookCallback;
             IntPtr hInstance = LoadLibrary("User32");
-            hhook = SetWindowsHookEx(WH_MOUSE_LL, HookCallback, hInstance, 0);
+            hhook = SetWindowsHookEx(WH_MOUSE_LL, mouseProc, hInstance, 0);
         }
 
         public void Unhook()

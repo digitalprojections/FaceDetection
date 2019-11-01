@@ -4,7 +4,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace FaceDetectionX
+namespace FaceDetection
 {
     /// <summary>
     /// A class that manages a global low level keyboard hook
@@ -16,6 +16,7 @@ namespace FaceDetectionX
         /// defines the callback type for the hook
         /// </summary>
         public delegate int KeyboardHookProc(int code, int wParam, ref KeyboardHookStruct lParam);
+        public KeyboardHookProc keyProc;
 
         public struct KeyboardHookStruct
         {
@@ -92,8 +93,9 @@ namespace FaceDetectionX
         /// </summary>
         public void Hook()
         {
+            keyProc = HookCallback;
             IntPtr hInstance = LoadLibrary("User32");
-            hhook = SetWindowsHookEx(WH_KEYBOARD_LL, HookCallback, hInstance, 0);
+            hhook = SetWindowsHookEx(WH_KEYBOARD_LL, keyProc, hInstance, 0);
         }
 
         /// <summary>
@@ -115,7 +117,7 @@ namespace FaceDetectionX
         /// <returns></returns>
         private int HookCallback(int code, int wParam, ref KeyboardHookStruct lParam)
         {
-            if (code >= 0)
+              if (code >= 0)
             {
                 Keys key = (Keys)lParam.vkCode;
 
@@ -139,11 +141,6 @@ namespace FaceDetectionX
                 else if ((wParam == WM_KEYUP || wParam == WM_SYSKEYUP) && (KeyUpAll != null))
                 {
                     KeyUpAll(this, kea);
-                }
-
-                if (kea.Handled)
-                {
-                    return 1;
                 }
 
             }

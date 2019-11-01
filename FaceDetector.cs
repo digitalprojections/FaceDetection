@@ -32,9 +32,15 @@ namespace FaceDetection
             //We detected a face so we call this
             if (MainForm.GetMainForm != null)
             {
-                MainForm.ACTIVE_RECPATH = MainForm.RECPATH.EVENT;
-                MainForm.GetMainForm.RecordMode();
-
+                if (MainForm.GetMainForm != null && MainForm.CURRENT_MODE == MainForm.CAMERA_MODES.PREVIEW)
+                {
+                    MainForm.ACTIVE_RECPATH = MainForm.RECPATH.EVENT;
+                    MainForm.GetMainForm.RecordMode();
+                }
+                else
+                {
+                    TaskManager.EventAppeared("EVENT", decimal.ToInt32(Properties.Settings.Default.face_record_time_before), decimal.ToInt32(Properties.Settings.Default.face_record_time_after));
+                }
             }
         }
     }

@@ -505,7 +505,7 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("640x480")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1280x720")]
         public string C1res {
             get {
                 return ((string)(this["C1res"]));
@@ -517,7 +517,7 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("640x480")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1280x720")]
         public string C2res {
             get {
                 return ((string)(this["C2res"]));
@@ -529,7 +529,7 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("640x480")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1280x720")]
         public string C3res {
             get {
                 return ((string)(this["C3res"]));
@@ -541,7 +541,7 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("640x480")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1280x720")]
         public string C4res {
             get {
                 return ((string)(this["C4res"]));
@@ -800,6 +800,18 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["face_record_time_after"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\TEMP")]
+        public string temp_folder {
+            get {
+                return ((string)(this["temp_folder"]));
+            }
+            set {
+                this["temp_folder"] = value;
             }
         }
     }

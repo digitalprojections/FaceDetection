@@ -123,16 +123,16 @@
       <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="C1res" Type="System.String" Scope="User">
-      <Value Profile="(Default)">640x480</Value>
+      <Value Profile="(Default)">1280x720</Value>
     </Setting>
     <Setting Name="C2res" Type="System.String" Scope="User">
-      <Value Profile="(Default)">640x480</Value>
+      <Value Profile="(Default)">1280x720</Value>
     </Setting>
     <Setting Name="C3res" Type="System.String" Scope="User">
-      <Value Profile="(Default)">640x480</Value>
+      <Value Profile="(Default)">1280x720</Value>
     </Setting>
     <Setting Name="C4res" Type="System.String" Scope="User">
-      <Value Profile="(Default)">640x480</Value>
+      <Value Profile="(Default)">1280x720</Value>
     </Setting>
     <Setting Name="camera_index" Type="System.String" Scope="User">
       <Value Profile="(Default)">1</Value>
@@ -196,6 +196,9 @@
     </Setting>
     <Setting Name="face_record_time_after" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="temp_folder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\TEMP</Value>
     </Setting>
   </Settings>
 </SettingsFile>

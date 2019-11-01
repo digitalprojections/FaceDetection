@@ -31,12 +31,15 @@ namespace FaceDetection
                 //heat signature detected, stop timer
                 StopOM_Timer();
                 //initiate RECORD mode
-                if (MainForm.GetMainForm != null)
+                if (MainForm.GetMainForm != null && MainForm.CURRENT_MODE==MainForm.CAMERA_MODES.PREVIEW)
                 {
                     MainForm.ACTIVE_RECPATH = MainForm.RECPATH.EVENT;
                     MainForm.GetMainForm.RecordMode();
-                    
-                }  
+                }
+                else
+                {
+                    TaskManager.EventAppeared("EVENT", decimal.ToInt32(Properties.Settings.Default.event_record_time_before_event), decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event));
+                }
             }
             SensorClose();
 
@@ -82,9 +85,10 @@ namespace FaceDetection
                     data[5] = Convert.ToUInt32((stSensorValue.iValue[2] & 0xFF00) >> 8);        // TMP data (H)
                     //Console.WriteLine(ret + "\n" + ivals + "\n" + data[0] + "\n" + data[1] + "\n" + data[2] + "\n" + data[3] + "\n" + data[4] + "\n" + data[5] + "\n");
                 }
-                catch
+                catch(Exception e)
                 {
                     data[1] = 0;
+                    Console.WriteLine(e.Message + " IRSensor 91");
                 }
                 
             }
