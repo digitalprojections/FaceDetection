@@ -38,7 +38,6 @@
             this.cameraButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.or_dateTimeLabel = new System.Windows.Forms.Label();
-            this.panelCamera = new System.Windows.Forms.Panel();
             this.camera_number_txt = new System.Windows.Forms.Label();
             this.pbRecording = new System.Windows.Forms.PictureBox();
             this.or_controlButtons.SuspendLayout();
@@ -171,25 +170,13 @@
             this.or_dateTimeLabel.Font = new System.Drawing.Font("MS UI Gothic", 14F);
             this.or_dateTimeLabel.ForeColor = System.Drawing.Color.White;
             this.or_dateTimeLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.or_dateTimeLabel.Location = new System.Drawing.Point(12, 417);
+            this.or_dateTimeLabel.Location = new System.Drawing.Point(12, 411);
             this.or_dateTimeLabel.Name = "or_dateTimeLabel";
             this.or_dateTimeLabel.Padding = new System.Windows.Forms.Padding(3);
             this.or_dateTimeLabel.Size = new System.Drawing.Size(125, 30);
             this.or_dateTimeLabel.TabIndex = 13;
             this.or_dateTimeLabel.Text = "Date and time";
             this.or_dateTimeLabel.UseCompatibleTextRendering = true;
-            // 
-            // panelCamera
-            // 
-            this.panelCamera.BackColor = System.Drawing.SystemColors.Info;
-            this.panelCamera.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCamera.Enabled = false;
-            this.panelCamera.Location = new System.Drawing.Point(0, 0);
-            this.panelCamera.Name = "panelCamera";
-            this.panelCamera.Size = new System.Drawing.Size(800, 450);
-            this.panelCamera.TabIndex = 0;
-            this.panelCamera.Click += new System.EventHandler(this.Button1_Click);
-            this.panelCamera.DoubleClick += new System.EventHandler(this.FullScreen);
             // 
             // camera_number_txt
             // 
@@ -224,19 +211,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pbRecording);
             this.Controls.Add(this.or_dateTimeLabel);
             this.Controls.Add(this.or_controlButtons);
             this.Controls.Add(this.camera_number_txt);
-            this.Controls.Add(this.panelCamera);
             this.Name = "MainForm";
             this.Text = "UVC_CAMERA";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.SizeChanged += new System.EventHandler(this.WindowSizeUpdate);
             this.Click += new System.EventHandler(this.ShowButtons);
-            this.DragLeave += new System.EventHandler(this.LastPositionUpdate);
             this.DoubleClick += new System.EventHandler(this.FullScreen);
             this.or_controlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).EndInit();
@@ -257,7 +243,6 @@
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label or_dateTimeLabel;
-        private System.Windows.Forms.Panel panelCamera;
         private System.Windows.Forms.Label camera_number_txt;
     }
 }

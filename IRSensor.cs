@@ -31,9 +31,9 @@ namespace FaceDetection
                 //heat signature detected, stop timer
                 StopOM_Timer();
                 //initiate RECORD mode
-                if (MainForm.GetMainForm != null && MainForm.CURRENT_MODE==MainForm.CAMERA_MODES.PREVIEW)
+                if (MainForm.GetMainForm != null && RecorderCamera.CAMERA_MODE== RecorderCamera.CAMERA_MODES.PREVIEW)
                 {
-                    MainForm.ACTIVE_RECPATH = MainForm.RECPATH.EVENT;
+                    //MainForm.ACTIVE_RECPATH = MainForm.RECPATH.EVENT;
                     MainForm.GetMainForm.RecordMode();
                 }
                 else

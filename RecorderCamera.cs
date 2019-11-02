@@ -19,6 +19,51 @@ namespace FaceDetection
     {
         string sourcePath = @"D:\TEMP";
         string targetPath = String.Empty;
+        internal static string ACTIVE_RECPATH = RECPATH.MANUAL;
+        internal static int SELECTED_CAMERA = 0;
+        static int duration;
+        static int wait;
+        static System.Timers.Timer the_timer = new System.Timers.Timer();
+        
+
+        static Action Run;
+        static Action Destroy;
+        internal static class RECPATH
+        {
+            public const string PHOTO = "snapshot";
+            public const string MANUAL = "movie";
+            public const string EVENT = "event";
+        }
+        /// <summary>
+        ///All cameras have the same modes
+        ///But only the Main camera supports operator capture         
+        ///(各カメラには異なるモードがあります メインカメラのみがオペレータキャプチャをサポートしています)
+        /// Camera modes to assist identify current status 
+        /// of the application during operation
+        /// Manage it properly, carefully, 
+        /// so there are no confusion or contradictions
+        /// Available choices
+        /// </summary>
+        internal enum CAMERA_MODES
+        {
+            PREVIEW,
+            HIDDEN,
+            EVENT,
+            OPERATOR,
+            PREEVENT
+        }
+        private static CAMERA_MODES CURRENT_MODE = 0;
+        internal static CAMERA_MODES CAMERA_MODE
+        {
+            get
+            {
+                return CURRENT_MODE;
+            }
+            set
+            {
+                CURRENT_MODE = value;
+            }
+        }
         /// <summary>
         /// If Enabled and AutoReset are both set to false, 
         /// and the timer has previously been enabled, 
@@ -30,11 +75,9 @@ namespace FaceDetection
         /// and then immediately set the Enabled property back to false.
         /// </summary>
         //User actions
-        private readonly System.Timers.Timer recording_timer = new System.Timers.Timer();
-        private readonly System.Timers.Timer operator_capture_idle_timer = new System.Timers.Timer();
-        public System.Timers.Timer RecordingTimer => recording_timer;
+        //private readonly System.Timers.Timer recording_timer = new System.Timers.Timer();        
+        //public System.Timers.Timer RecordingTimer => recording_timer;
         int INDEX = 0;
-
         public enum PlayState : int
         {
             Stopped,
@@ -67,8 +110,7 @@ namespace FaceDetection
         static Guid CLSID_NullRenderer = new Guid("{C1F400A4-3F08-11D3-9F0B-006008039E37}"); //qedit.dll 
         IBaseFilter pNullRenderer = (IBaseFilter)Activator.CreateInstance(Type.GetTypeFromCLSID(CLSID_NullRenderer));
         private IAMStreamConfig streamConfig = null;
-       private SampleGrabber pSampleGrabber = null;
-        
+        private SampleGrabber pSampleGrabber = null;
         private VideoInfoHeader format = null;
         private AMMediaType pmt = null;
         private ISampleGrabber i_grabber = null;
@@ -78,15 +120,14 @@ namespace FaceDetection
 
         public void GetInterfaces()
         {
+            ReleaseInterfaces();
             graph = (IGraphBuilder)(new FilterGraph());
             pGraphBuilder = (ICaptureGraphBuilder2)(new CaptureGraphBuilder2());
             mediaControl = (IMediaControl)graph;
             videoWindow = (IVideoWindow)graph;
             mediaEventEx = (IMediaEventEx)graph;
-            renderFilter = (IBaseFilter)new VideoMixingRenderer9();
-            
-            pSampleGrabber = new SampleGrabber();
-            
+            renderFilter = (IBaseFilter)new VideoMixingRenderer9();            
+            pSampleGrabber = new SampleGrabber();            
             i_grabber = pSampleGrabber as ISampleGrabber;
             var mt = new AMMediaType();
             mt.majorType = MediaType.Video;
@@ -101,39 +142,100 @@ namespace FaceDetection
         public RecorderCamera(int cameraIndex)
         {
             this.INDEX = cameraIndex;
-            RecordingTimer.AutoReset = false;
-            RecordingTimer.Elapsed += Recording_Timer_Elapsed;//cut to allow access to the files
+            
+            //RecordingTimer.AutoReset = false;
+            //RecordingTimer.Elapsed += Recording_Timer_Elapsed;//cut to allow access to the files
+        }
+        public static void Start(int dur, int waitTime)
+        {
+            duration = dur;
+            wait = waitTime;
+            Run = () =>
+            {
+                Console.WriteLine("Running camera in " + " mode");
+                the_timer.Enabled = true;
+            };
+            Destroy = () =>
+            {
+                Console.WriteLine("Destroyed");
+            };
+
+            if (the_timer.Enabled)
+            {
+
+            }
+            else
+            {
+                //we got the same task as before, while running the camera
+                Destroy();
+            }
+
+            the_timer.AutoReset = false; //prevent from running - true
+            the_timer.Elapsed += The_timer_Elapsed;
+            the_timer.Interval = duration;
+
+
+            Run();
         }
         /// <summary>
-        /// Must restart recording camera
+        /// If Enabled and AutoReset are both set to false, 
+        /// and the timer has previously been enabled, 
+        /// setting the Interval property causes the Elapsed event to be raised once, 
+        /// as if the Enabled property had been set to true. 
+        /// To set the interval without raising the event, 
+        /// you can temporarily set the Enabled property to true, 
+        /// set the Interval property to the desired time interval, 
+        /// and then immediately set the Enabled property back to false.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Recording_Timer_Elapsed(object sender, EventArgs e)
+        private static void The_timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            ReleaseInterfaces();
-            //cameraMan.StartCamera(GetResolution(0), 15, CameraPanel.Handle);//restart camera
-            TaskManager.RecordEnd();
-            //StartVideoRecording();
+            Console.WriteLine(duration + " " + wait + " the_timer.Enabled: " + the_timer.Enabled);
+            if (wait > 0)
+            {
+                the_timer.Enabled = true;
+                the_timer.Interval = (int)wait;
+                wait = 0;
+                //the_timer.Enabled = false;
+            }
+            else
+            {
+                the_timer.Enabled = false;
+                the_timer.AutoReset = false;
+                //wait also ran or was not set
+                //task complete
+                Destroy();
+            }            
+            //TaskManager.RecordEnd();
         }
+        internal static int GetTimerIntervalsAsPerSettings(CAMERA_MODES cm)
+        {
+            int retVal = 0;
+            switch (cm)
+            {
+                case CAMERA_MODES.EVENT:
+                    //EVENT from parameters
+                    if (Properties.Settings.Default.enable_event_recorder && Properties.Settings.Default.event_record_time_after_event > 0)
+                    {
+                        retVal = decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event) * 1000;
+                    }
+                    break;
+                case CAMERA_MODES.OPERATOR:
+                    //operator sensed
+                    if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.seconds_after_event > 0)
+                    {
+                        retVal = decimal.ToInt32(Properties.Settings.Default.seconds_after_event) * 1000;
+                    }
+                    break;
+                case CAMERA_MODES.PREEVENT:
+                    retVal = 60000;
+                    break;
+            }
+            return retVal;
+        }
+        public void StartCamera(IntPtr pbx)
+        {
 
-        internal void SetTimerIntervalsAsPerSettings()
-        {
-            if (Properties.Settings.Default.enable_event_recorder && Properties.Settings.Default.event_record_time_after_event > 0)
-            {
-                RecordingTimer.Interval = decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event) * 1000;
-            }
-            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.seconds_after_event > 0)
-            {
-                RecordingTimer.Interval = decimal.ToInt32(Properties.Settings.Default.seconds_after_event) * 1000;
-            }
-            if (Properties.Settings.Default.interval_before_reinitiating_recording > 0)
-            {
-                operator_capture_idle_timer.Interval = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording);
-            }
-        }
-        public void StartCamera(Size size, double fps, IntPtr pbx)
-        {
+
             GetInterfaces();
             //var camera_list = FindDevices();
             //if (cameraIndex >= camera_list) throw new ArgumentException("USB camera is not available.", "index");
@@ -146,7 +248,7 @@ namespace FaceDetection
             DsError.ThrowExceptionForHR(hr);
 
             //pUSB = FindCaptureDevice();
-            pUSB = CreateVideoCaptureSource(INDEX, size, fps);
+            pUSB = CreateVideoCaptureSource(INDEX, GetResolution(INDEX), GetFPS(INDEX));
 
             hr = pGraph.AddFilter(pUSB, "WebCamControl Video");
             DsError.ThrowExceptionForHR(hr);
@@ -205,11 +307,11 @@ namespace FaceDetection
             hr = control9.SetVideoClippingWindow(pbx);
             checkHR(hr, "Can't set video clipping window");
 
-            if (MainForm.CURRENT_MODE != MainForm.CAMERA_MODES.HIDDEN)
+            if (CURRENT_MODE != CAMERA_MODES.HIDDEN)
             {
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
-                Logger.Add("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
+                //Logger.Add("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
             }
             else
             {
@@ -219,7 +321,7 @@ namespace FaceDetection
                 MainForm.GetMainForm.ShowInTaskbar = false;
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, 1, 1));
                 checkHR(hr, "Can't set rectangles of the video position");
-                Logger.Add("HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
+                //Logger.Add("HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
             }
 
 
@@ -291,7 +393,51 @@ namespace FaceDetection
                 Logger.Add("Can not start the camera");
             }
         }
-
+        private Size GetResolution(int cam_ind)
+        {
+            Size retval;
+            string[] res;
+            switch (cam_ind)
+            {
+                case 0:
+                    res = Properties.Settings.Default.C1res.Split('x');
+                    retval = new Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
+                    return retval;
+                case 1:
+                    res = Properties.Settings.Default.C2res.Split('x');
+                    retval = new Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
+                    return retval;
+                case 2:
+                    res = Properties.Settings.Default.C3res.Split('x');
+                    retval = new Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
+                    return retval;
+                case 3:
+                    res = Properties.Settings.Default.C4res.Split('x');
+                    retval = new Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
+                    return retval;
+                default: return new Size(640, 480);
+            }
+        }
+        private int GetFPS(int cam_ind)
+        {
+            int fps=15;
+            switch (cam_ind)
+            {
+                case 0:
+                    fps = Int32.Parse(Properties.Settings.Default.C1f);
+                    break;
+                case 1:
+                    fps = Int32.Parse(Properties.Settings.Default.C2f);
+                    break;
+                case 2:
+                    fps = Int32.Parse(Properties.Settings.Default.C3f);
+                    break;
+                case 3:
+                    fps = Int32.Parse(Properties.Settings.Default.C4f);
+                    break;                
+            }
+            return fps;
+        }
         //The following is called for building the PREVIEW graph
 
         //This one is for recording
@@ -303,19 +449,19 @@ namespace FaceDetection
         /// <param name="fps"></param>
         /// <param name="pbx">Control to display the video</param>
         /// <param name="dstFileName">destination file name</param>
-        public void StartRecorderCamera(Size size, double fps, IntPtr pbx, string dstFileName)
+        public void StartRecorderCamera(IntPtr pbx, string dstFileName)
         {
-            Console.WriteLine(MainForm.CURRENT_MODE  + " " + MainForm.CURRENT_MODE);
+            //Console.WriteLine(MainForm.CURRENT_MODE  + " " + MainForm.CURRENT_MODE);
             //REGULAR 0 PREEVENT
-            if (MainForm.CURRENT_MODE != MainForm.CAMERA_MODES.PREEVENT)
+            if (CURRENT_MODE != CAMERA_MODES.PREEVENT)
             {
                 //MainForm.GetMainForm.RecordingTimer.Stop();
                 string str = "";
-                if (MainForm.ACTIVE_RECPATH != string.Empty || MainForm.ACTIVE_RECPATH != MainForm.RECPATH.NORMAL)
+                if (ACTIVE_RECPATH != string.Empty || ACTIVE_RECPATH != RECPATH.MANUAL)
                 {                    
-                    str = Path.Combine(Properties.Settings.Default.video_file_location, "CAMERA");
+                    str = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
                     str = Path.Combine(str, (INDEX + 1).ToString());
-                    str = Path.Combine(str, MainForm.ACTIVE_RECPATH);
+                    str = Path.Combine(str, ACTIVE_RECPATH);
                 }
                 else
                 {
@@ -331,7 +477,7 @@ namespace FaceDetection
                 targetPath = sourcePath + "/" + dstFileName;
                 Console.WriteLine(targetPath + " target path");
                 Directory.CreateDirectory(sourcePath);
-                MainForm.GetMainForm.RecordingStart();
+                //MainForm.GetMainForm.RecordingStart();
             }
 
             GetInterfaces();
@@ -344,7 +490,7 @@ namespace FaceDetection
             DsError.ThrowExceptionForHR(hr);
 
             //pUSB = FindCaptureDevice();
-            pUSB = CreateVideoCaptureSource(INDEX, size, fps);
+            pUSB = CreateVideoCaptureSource(INDEX, GetResolution(INDEX), GetFPS(INDEX));
 
             hr = pGraph.AddFilter(pUSB, "WebCamControl Video");
             DsError.ThrowExceptionForHR(hr);
@@ -380,12 +526,6 @@ namespace FaceDetection
             checkHR(hr, "Can't connect AVI Mux and File writer");
 
 
-            
-
-            //add SampleGrabber
-            //_pSampleGrabberHelper = new SampleGrabberHelper(pSampleGrabber, false);
-            //_pSampleGrabberHelper.ConfigureMode();
-
             hr = pGraph.AddFilter(pSampleGrabber as IBaseFilter, "SampleGrabber");
             checkHR(hr, "Can't add SampleGrabber to graph");
             i_grabber.SetBufferSamples(true); //サンプルグラバでのサンプリングを開始
@@ -419,11 +559,11 @@ namespace FaceDetection
             hr = control9.SetVideoClippingWindow(pbx);
             checkHR(hr, "Can't set video clipping window");
 
-            if (MainForm.CURRENT_MODE != MainForm.CAMERA_MODES.HIDDEN)
+            if (CURRENT_MODE != CAMERA_MODES.HIDDEN)
             {
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
-                Console.WriteLine("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " +MainForm.ACTIVE_RECPATH);
+                Console.WriteLine("NOT HIDDEN MODE " + CURRENT_MODE + ", Active path: " +ACTIVE_RECPATH);
             }                
 
 
@@ -479,46 +619,8 @@ namespace FaceDetection
                 {
                     Console.WriteLine(icom.InnerException);
                 }
-                GC.Collect();
-                //SafeReleaseComObject(pSampleGrabber);
-                //SafeReleaseComObject(control9);
-                //SafeReleaseComObject(config9);
-                //SafeReleaseComObject(ratioControl9);
-                //SafeReleaseComObject(pGraphBuilder);
-                //SafeReleaseComObject(renderFilter);
-                //SafeReleaseComObject(i_grabber);
-                //SafeReleaseComObject(pGraphBuilder);
-                //SafeReleaseComObject(graph);
-                //SafeReleaseComObject(pAVIMux);
-                //SafeReleaseComObject(pSmartTee);
-                //SafeReleaseComObject(pFilewriter);
-                //SafeReleaseComObject(pFilewriter_sink);
-                //SafeReleaseComObject(pUSB);
-            };
-           /*
-            IEnumFilters enumFilters = null;
-            IBaseFilter[] baseFilters = { null };
-            IntPtr fetched = IntPtr.Zero;
-            hr = pGraph.EnumFilters(out enumFilters);
-            int r = 0;
-            while (r == 0)
-            {
-                
-                try
-                {
-                    r = enumFilters.Next(baseFilters.Length, baseFilters, fetched);
-                DsError.ThrowExceptionForHR(hr);
-                baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
-                Debug.WriteLine(filterInfo.achName + " -filtername");
-                }
-                catch (System.NullReferenceException snrx)
-                {
-                    Console.WriteLine(snrx.Message + snrx.HResult);
-                    r = 1;
-                    continue;
-                }
-            }
-            */
+                GC.Collect();                
+            };           
             try
             {
                 mediaControl = (IMediaControl)graph;
@@ -531,24 +633,6 @@ namespace FaceDetection
                 CustomMessage.ShowMessage("Can not start the camera");
                 Logger.Add("Can not start the camera");
             }
-            /*
-
-            var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, cameraIndex);
-            var pin = DirectShow.FindPin(filter, 0, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
-            //Console.WriteLine(GetVideoOutputFormat(pin).Length + " video format for camera " + cameraIndex);
-            VideoFormat[] videoFormats = GetVideoOutputFormat(pin);
-            
-            for (var i = 0; i<videoFormats.Length; i++)
-            {
-                Console.Write(videoFormats[i].MajorType + " ");
-                Console.Write(videoFormats[i].Size.Width + " ");
-                Console.Write(videoFormats[i].Size.Height + " ");
-                Console.Write(videoFormats[i].SubType + " ");
-                Console.Write(videoFormats[i].TimePerFrame + " /////");                
-
-            }
-            */
-            
         }
         private Bitmap GetBitmapMain(ISampleGrabber i_grabber, int width, int height, int stride)
         {
@@ -608,7 +692,7 @@ namespace FaceDetection
         public void SetWindowPosition(Size size)
         {
             int hr = 0;
-            if (MainForm.CURRENT_MODE!=MainForm.CAMERA_MODES.HIDDEN)
+            if (CURRENT_MODE!=CAMERA_MODES.HIDDEN)
             {
                 IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
