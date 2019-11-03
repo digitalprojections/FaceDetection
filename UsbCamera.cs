@@ -9,7 +9,7 @@ using System.Security;
 using System.Diagnostics;
 using DirectShowLib;
 
-namespace GitHub.secile.Video
+namespace FaceDetectionX
 {
     // [How to use]
     // string[] devices = UsbCamera.FindDevices();
@@ -32,7 +32,7 @@ namespace GitHub.secile.Video
      public class UsbCamera
     {
 
-        
+        public bool ON = false;
         //public DirectShow.IVideoWindow videoWindow = null;
 
         /// <summary>Usb camera image size.</summary>
@@ -82,12 +82,13 @@ namespace GitHub.secile.Video
         /// Size you want to create. If camera does not support the size, created with default size.
         /// Check Size property to know actual created size.
         /// </param>
-        public UsbCamera(int cameraIndex, Size size, double fps, IntPtr pbx)
+        public UsbCamera(int cameraIndex)
         {
-            
+            Size size = FaceDetection.MainForm.GetMainForm.GetResolution(0);
+            int fps = FaceDetection.MainForm.GetMainForm.GetFPS(0);
             var camera_list = FindDevices();
             //if (cameraIndex >= camera_list.Length) throw new ArgumentException("USB camera is not available.", "index");
-            Init(cameraIndex, size, fps, pbx);
+            Init(cameraIndex, size, fps, FaceDetection.MainForm.GetMainForm.Handle);
         }
         static void checkHR(int hr, string msg)
         {
@@ -104,6 +105,7 @@ namespace GitHub.secile.Video
 
         private void Init(int index, Size size, double fps, IntPtr pbx)
         {
+            ON = true;
             //----------------------------------
             // Create Filter Graph
             //----------------------------------
@@ -187,11 +189,13 @@ namespace GitHub.secile.Video
             };
             Stop = () =>
             {
+                ON = false;
                 DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Stopped);
                 GC.Collect();
             };
             Release = () =>
             {
+
                 Stop();
                 Console.WriteLine("Camera stop .........................");    
 
@@ -228,6 +232,7 @@ namespace GitHub.secile.Video
         }
         public void SetWindowPosition(Size size)
         {
+            
             try
             {
                 int hr = 0;
@@ -337,8 +342,7 @@ namespace GitHub.secile.Video
             var mt = new DirectShow.AM_MEDIA_TYPE();
             mt.MajorType = DirectShow.DsGuid.MEDIATYPE_Video;
             mt.SubType = DirectShow.DsGuid.MEDIASUBTYPE_RGB24;
-            ismp.SetMediaType(mt);
-            DirectShow.DeleteMediaType(ref mt);
+            ismp.SetMediaType(mt);            
             return filter;
         }
 

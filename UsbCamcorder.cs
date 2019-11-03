@@ -15,12 +15,12 @@ namespace FaceDetection
 {
      public class UsbCamcorder
     {
+        public bool ON = false;
+
         string sourcePath = @"D:\TEMP";
         string targetPath = String.Empty;
         //BackgroundWorker backgroundWorker;
         
-        private List<string> fileNames = new List<string>();
-
         IBaseFilter pVideoMixingRenderer9 = null;
         IBaseFilter pSmartTee;
         IBaseFilter pSampleGrabber;
@@ -86,17 +86,21 @@ namespace FaceDetection
         /// Size you want to create. If camera does not support the size, created with default size.
         /// Check Size property to know actual created size.
         /// </param>
-        public UsbCamcorder(int cameraIndex, Size size, double fps, IntPtr pbx, string dstFileName)
+        public UsbCamcorder(int cameraIndex)
         {
+            Size size = MainForm.GetMainForm.GetResolution(0);
+            int fps = MainForm.GetMainForm.GetFPS(0);            
+
+            string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
             string str = Path.Combine(FaceDetection.Properties.Settings.Default.video_file_location, (cameraIndex + 1).ToString());
             Console.WriteLine(str);
             Directory.CreateDirectory(str);
             targetPath = Path.Combine(str, dstFileName);
             Console.WriteLine(targetPath);
-            
+
             //var camera_list = FindDevices();
             //if (cameraIndex >= camera_list) throw new ArgumentException("USB camera is not available.", "index");
-            Init(cameraIndex, size, fps, pbx, targetPath);
+            
         }
 
         
@@ -104,7 +108,41 @@ namespace FaceDetection
         {
 
             pVideoMixingRenderer9 = (IBaseFilter)Activator.CreateInstance(Type.GetTypeFromCLSID(CLSID_VideoMixingRenderer9));
+            int hr = 0;
+            IVMRAspectRatioControl9 ratioControl9 = (IVMRAspectRatioControl9)pVideoMixingRenderer9;
+            hr = ratioControl9.SetAspectRatioMode(VMRAspectRatioMode.LetterBox);
+            DsError.ThrowExceptionForHR(hr);
+
+            IVMRFilterConfig9 config9 = (IVMRFilterConfig9)pVideoMixingRenderer9;
+            hr = config9.SetRenderingMode(VMR9Mode.Windowless);
+            checkHR(hr, "Can't set windowless mode");
+
+            IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)pVideoMixingRenderer9;
+            hr = control9.SetVideoClippingWindow(pbx);
+            checkHR(hr, "Can't set video clipping window");
+
             
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
+                checkHR(hr, "Can't set rectangles of the video position");
+                Logger.Add("NOT HIDDEN MODE " + ", Active path: ");
+            
+
+            //DirectShow.IVMRAspectRatioControl9 ratioControl9 = (DirectShow.IVMRAspectRatioControl9)pVideoMixingRenderer9;
+            //int hr = ratioControl9.SetAspectRatioMode(DirectShow.VMRAspectRatioMode.LetterBox);
+            //checkHR(hr, "can not set aspect ratio");
+
+            //IVMRFilterConfig9 config9 = (IVMRFilterConfig9)pVideoMixingRenderer9;
+            //hr = config9.SetRenderingMode(VMR9Mode.Windowless);
+            //checkHR(hr, "Can't set windowless mode");
+
+            //IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)pVideoMixingRenderer9;
+            //hr = control9.SetVideoClippingWindow(pbx);
+            //checkHR(hr, "Can't set video clipping window");
+
+            //hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
+            //checkHR(hr, "Can't set rectangles of the video position");
+
+
         }
         void BuildGraph(IGraphBuilder pGraph, string dstFile1)
         {
@@ -140,8 +178,8 @@ namespace FaceDetection
             pSampleGrabber = (IBaseFilter)Activator.CreateInstance(Type.GetTypeFromCLSID(CLSID_SampleGrabber));
             hr = pGraph.AddFilter(pSampleGrabber, "SampleGrabber");
             checkHR(hr, "Can't add SampleGrabber to graph");
-            
 
+            Init(0, new Size(1280, 720), 15, MainForm.GetMainForm.Handle, targetPath);
 
             //add Smart Tee
             pSmartTee = (IBaseFilter)new SmartTee();
@@ -172,7 +210,26 @@ namespace FaceDetection
             //connect Smart Tee and MJPEG Decompressor
             hr = pBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, pVideoMixingRenderer9);
             checkHR(hr, "Can't connect Smart Tee and MJPEG Decompressor");
-
+            IEnumFilters enumFilters = null;
+            IBaseFilter[] baseFilters = { null };
+            IntPtr fetched = IntPtr.Zero;
+            hr = pGraph.EnumFilters(out enumFilters);
+            int r = 0;
+            while (r == 0)
+            {
+                try
+                {
+                    r = enumFilters.Next(baseFilters.Length, baseFilters, fetched);
+                    DsError.ThrowExceptionForHR(hr);
+                    baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
+                    Debug.WriteLine(filterInfo.achName + " -filtername");
+                }
+                catch
+                {
+                    r = 1;
+                    continue;
+                }
+            }
 
         }
         private static void SafeReleaseComObject(object obj)
@@ -319,10 +376,12 @@ namespace FaceDetection
                 Marshal.ReleaseComObject(pFilewriter);
                 pFilewriter = null;
             }
+            ON = false;
         }
 
         internal void Start()
         {
+            ON = true;
             try
             {
                 graph = (IGraphBuilder)new FilterGraph();

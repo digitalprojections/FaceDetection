@@ -115,9 +115,8 @@ namespace FaceDetection
             //videoWindow = (IVideoWindow)graph;
             mediaEventEx = (IMediaEventEx)graph;
             renderFilter = (IBaseFilter)new VideoMixingRenderer9();
-            pSmartTee = (IBaseFilter)new SmartTee();
+
             pSampleGrabber = new SampleGrabber();
-            pAVIMux = (IBaseFilter)new AviDest();
 
             i_grabber = pSampleGrabber as ISampleGrabber;
             var mt = new AMMediaType();
@@ -238,7 +237,7 @@ namespace FaceDetection
                     
                 }
                 Console.WriteLine("calling recording mode 226");
-                //Run();
+                Run();
                 RecordingMode();
 
             }
@@ -297,13 +296,13 @@ namespace FaceDetection
             DsError.ThrowExceptionForHR(hr);
 
             //pUSB = FindCaptureDevice();
-            pUSB = CreateVideoCaptureSource(INDEX, GetResolution(0), GetFPS(0));
+            //pUSB = CreateVideoCaptureSource(INDEX, GetResolution(0), GetFPS(0));
 
             hr = pGraph.AddFilter(pUSB, "WebCamControl Video");
             DsError.ThrowExceptionForHR(hr);
 
             //add smartTee
-            //pSmartTee = (IBaseFilter)new SmartTee();
+            pSmartTee = (IBaseFilter)new SmartTee();
             hr = pGraph.AddFilter(pSmartTee, "Smart Tee");
             DsError.ThrowExceptionForHR(hr);
 
@@ -456,8 +455,8 @@ namespace FaceDetection
         /// <param name="pbx">Control to display the video</param>        
         public void StartRecorderCamera(IntPtr pbx)
         {
-            //ReleaseInterfaces();
-            /*
+            ReleaseInterfaces();
+            
             MainForm.Or_pb_recording.Visible = true;
             MainForm.Or_pb_recording.Refresh();
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
@@ -499,7 +498,7 @@ namespace FaceDetection
             DsError.ThrowExceptionForHR(hr);
 
             //pUSB = FindCaptureDevice();
-            pUSB = CreateVideoCaptureSource(INDEX, GetResolution(INDEX), GetFPS(INDEX));
+            //pUSB = CreateVideoCaptureSource(INDEX, GetResolution(INDEX), GetFPS(INDEX));
 
             hr = pGraph.AddFilter(pUSB, "WebCamControl Video");
             DsError.ThrowExceptionForHR(hr);
@@ -642,8 +641,8 @@ namespace FaceDetection
                 CustomMessage.ShowMessage("Can not start the camera");
                 Logger.Add("Can not start the camera");
             }
-            */
             /*
+
             var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, cameraIndex);
             var pin = DirectShow.FindPin(filter, 0, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
             //Console.WriteLine(GetVideoOutputFormat(pin).Length + " video format for camera " + cameraIndex);
@@ -667,8 +666,8 @@ namespace FaceDetection
             ///////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////
 
+            /*
 
-            int hr = 0;
             GetInterfaces();
             MainForm.Or_pb_recording.Visible = true;
             MainForm.Or_pb_recording.Refresh();
@@ -715,6 +714,18 @@ namespace FaceDetection
             //pUSB = FindCaptureDevice();
             pUSB = CreateVideoCaptureSource(INDEX, GetResolution(INDEX), GetFPS(INDEX));
 
+            hr = pGraph.AddFilter(pUSB, "WebCamControl Video");
+            DsError.ThrowExceptionForHR(hr);
+
+            //add smartTee
+            pSmartTee = (IBaseFilter)new SmartTee();
+            hr = pGraph.AddFilter(pSmartTee, "Smart Tee");
+            DsError.ThrowExceptionForHR(hr);
+
+            //connect smart tee to camera 
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pUSB, null, pSmartTee);
+            DsError.ThrowExceptionForHR(hr);
+
             //add File writer
             IBaseFilter pFilewriter = (IBaseFilter)new FileWriter();
             hr = pGraph.AddFilter(pFilewriter, "File writer");
@@ -727,41 +738,15 @@ namespace FaceDetection
             hr = pFilewriter_sink.SetFileName(targetPath, null);
             checkHR(hr, "Can't set filename");
 
-            hr = pGraph.AddFilter(pUSB, "WebCamControl Video");
-            DsError.ThrowExceptionForHR(hr);
-
-            //add smartTee            
-            hr = pGraph.AddFilter(pSmartTee, "Smart Tee");
-            DsError.ThrowExceptionForHR(hr);
-            
-            //connect smart tee to camera 
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pUSB, null, pSmartTee);
-            DsError.ThrowExceptionForHR(hr);
-
-            //add AVI MuxpAVIMux = (IBaseFilter)new AviDest();
+            //add AVI Mux
+            pAVIMux = (IBaseFilter)new AviDest();
             hr = pGraph.AddFilter(pAVIMux, "AVI Mux");
             checkHR(hr, "Can't add AVI Mux to graph");
-
-            
-            //connect Smart Tee and AVI Mux
-            //hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, pAVIMux);
-            //checkHR(hr, "Can't connect Smart Tee and AVI Mux");
-            //hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Capture"), GetPin(pAVIMux, "Input 01"), null);
-            //hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Capture"), GetPin(pAVIMux, "Input 01"), null);
-            //checkHR(hr, "Can't connect Smart Tee and AVI Mux");
-
-            
-
-            //hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Capture"), GetPin(pAVIMux, "Input 01"), null);
-            //checkHR(hr, "Can't connect Smart Tee and AVI Mux");
-
-            //connect Smart Tee and AVI Mux
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, pAVIMux);
-            checkHR(hr, "Can't connect Smart Tee and AVI Mux");
 
             //connect AVI Mux and File writer
             hr = pGraph.ConnectDirect(GetPin(pAVIMux, "AVI Out"), GetPin(pFilewriter, "in"), null);
             checkHR(hr, "Can't connect AVI Mux and File writer");
+
 
             hr = pGraph.AddFilter(pSampleGrabber as IBaseFilter, "SampleGrabber");
             checkHR(hr, "Can't add SampleGrabber to graph");
@@ -774,7 +759,9 @@ namespace FaceDetection
 
             //SetFormat();
 
-            
+            //connect Smart Tee and AVI Mux
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, pAVIMux);
+            checkHR(hr, "Can't connect Smart Tee and AVI Mux");
 
             //connect Smart Tee and SampleGrabber
             //hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Preview"), GetPin(pSampleGrabber as IBaseFilter, "Input"), null);
@@ -868,7 +855,7 @@ namespace FaceDetection
                 CustomMessage.ShowMessage("Can not start the camera");
                 Logger.Add("Can not start the camera");
             }
-            
+            */
         }
         private Bitmap GetBitmapMain(ISampleGrabber i_grabber, int width, int height, int stride)
         {
@@ -983,6 +970,12 @@ namespace FaceDetection
             if (mediaEventEx != null)
                 mediaEventEx.SetNotifyWindow(IntPtr.Zero, WM_GRAPHNOTIFY, IntPtr.Zero);
 
+            //// below we relinquish ownership (IMPORTANT!) of the video window.
+            //// Failing to call put_Owner can lead to assert failures within
+            //// the video renderer, as it still assumes that it has a valid
+            //// parent window.
+            
+
             // Release DirectShow interfaces
             if (mediaControl != null)
             {
@@ -990,7 +983,29 @@ namespace FaceDetection
                 mediaControl = null;
             }
 
-            
+            if (pAVIMux != null)
+            {
+                Marshal.ReleaseComObject(pAVIMux);
+                pAVIMux = null;
+            }
+
+            if (pUSB != null)
+            {
+                Marshal.ReleaseComObject(pUSB);
+                pUSB = null;
+            }
+
+            if (pSampleGrabber != null)
+            {
+                Marshal.ReleaseComObject(pSampleGrabber);
+                pSampleGrabber = null;
+            }
+
+            if (pSmartTee != null)
+            {
+                Marshal.ReleaseComObject(pSmartTee);
+                pSmartTee = null;
+            }
 
             if (mediaEventEx != null)
             {
@@ -1006,11 +1021,11 @@ namespace FaceDetection
                 graph = null;
             }
 
-            if (pGraphBuilder != null)
-            {
-                Marshal.ReleaseComObject(pGraphBuilder);
-                pGraphBuilder = null;
-            }
+            //if (pGraphBuilder != null)
+            //{
+            //    Marshal.ReleaseComObject(pGraphBuilder);
+            //    pGraphBuilder = null;
+            //}
             GC.Collect();
         }
         private static void SafeReleaseComObject(object obj)
@@ -1306,51 +1321,7 @@ namespace FaceDetection
         }
 
 
-        private Size GetResolution(int cam_ind)
-        {
-            Size retval;
-            string[] res;
-            switch (cam_ind)
-            {
-                case 0:
-                    res = Properties.Settings.Default.C1res.Split('x');
-                    retval = new Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
-                    return retval;
-                case 1:
-                    res = Properties.Settings.Default.C2res.Split('x');
-                    retval = new Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
-                    return retval;
-                case 2:
-                    res = Properties.Settings.Default.C3res.Split('x');
-                    retval = new Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
-                    return retval;
-                case 3:
-                    res = Properties.Settings.Default.C4res.Split('x');
-                    retval = new Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
-                    return retval;
-                default: return new Size(640, 480);
-            }
-        }
-        private int GetFPS(int cam_ind)
-        {
-            int fps = 15;
-            switch (cam_ind)
-            {
-                case 0:
-                    fps = Int32.Parse(Properties.Settings.Default.C1f);
-                    break;
-                case 1:
-                    fps = Int32.Parse(Properties.Settings.Default.C2f);
-                    break;
-                case 2:
-                    fps = Int32.Parse(Properties.Settings.Default.C3f);
-                    break;
-                case 3:
-                    fps = Int32.Parse(Properties.Settings.Default.C4f);
-                    break;
-            }
-            return fps;
-        }
+        
 
 
 
