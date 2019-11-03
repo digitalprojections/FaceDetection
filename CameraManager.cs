@@ -120,7 +120,7 @@ namespace FaceDetectionX
             DsError.ThrowExceptionForHR(hr);
 
             //add smartTee
-            pSmartTee = (IBaseFilter)new SmartTee();
+            //pSmartTee = (IBaseFilter)new SmartTee();
             hr = pGraph.AddFilter(pSmartTee, "Smart Tee");
             DsError.ThrowExceptionForHR(hr);
                         
@@ -235,7 +235,7 @@ namespace FaceDetectionX
             DsError.ThrowExceptionForHR(hr);
 
             //add smartTee
-            pSmartTee = (IBaseFilter)new SmartTee();
+            //pSmartTee = (IBaseFilter)new SmartTee();
             hr = pGraph.AddFilter(pSmartTee, "Smart Tee");
             DsError.ThrowExceptionForHR(hr);
 

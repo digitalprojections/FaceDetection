@@ -6,11 +6,6 @@ namespace FaceDetection
 {
     class BackLightController
     {
-        static int duration;
-        static int wait;
-
-        static Action Run;
-        static Action Destroy;
         //private FormSettings settingsBase = Properties.Camera1.Default;
         public enum MonitorState
         {
@@ -20,54 +15,16 @@ namespace FaceDetection
         }
         private static readonly System.Timers.Timer backlight_timer = new System.Timers.Timer();
         
-
-        public static void Start(int dur, int waitTime)
-        {
-            duration = dur;
-            wait = waitTime;
-            Run = () =>
-            {
-                ON();
-                Console.WriteLine("Running in " + " mode");
-                backlight_timer.Enabled = true;
-            };
-            Destroy = () =>
-            {
-                Console.WriteLine("Destroyed");
-            };
-
-            if (backlight_timer.Enabled)
-            {
-
-            }
-            else
-            {
-                //we got the same task as before, while running the camera
-                Destroy();
-            }
-            backlight_timer.Enabled = true;
-            backlight_timer.AutoReset = false; //prevent from running - true
-            backlight_timer.Elapsed += The_timer_Elapsed;
-            backlight_timer.Interval = duration;
-            backlight_timer.Enabled = false;
-
-            Run();
-        }
-
-        public static void Restart()
-        {
-            backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60 * 1000;
-        }
-
         public BackLightController()
         {            
             backlight_timer.Elapsed += Backlight_timer_Tick;
         }
         internal static void Init()
         {
+            
             if (Properties.Settings.Default.backlight_offset_mins > 0)
             {
-                backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60 * 1000;
+                backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60000;
             }
         }
         private void Backlight_timer_Tick(object sender, EventArgs e)
@@ -81,7 +38,7 @@ namespace FaceDetection
         }
         internal static void ON()
         {
-            //backlight_timer.Enabled = Properties.Settings.Default.enable_backlight_off_when_idle;
+            backlight_timer.Enabled = Properties.Settings.Default.enable_backlight_off_when_idle;
             BacklightOn();
         }
         /// <summary>
@@ -100,8 +57,7 @@ namespace FaceDetection
             try
             {
                 UIntPtr hr = UIntPtr.Zero;
-                SendMessage(0xFFFF, 0x112, 0xF170, (int)MonitorState.MonitorStateOn);
-                //SendMessageTimeout(MainForm.GetMainForm.Handle, 0112, UIntPtr.Zero, (IntPtr)MonitorState.MonitorStateOn, SendMessageTimeoutFlags.SMTO_ABORTIFHUNG, 1000, out hr);
+                SendMessageTimeout(MainForm.GetMainForm.Handle, 0x112, UIntPtr.Zero, (IntPtr)MonitorState.MonitorStateOn, SendMessageTimeoutFlags.SMTO_ABORTIFHUNG, 1000, out hr);
                 Console.WriteLine(hr + " backlight on request");
             }
             catch (Exception x)
@@ -109,30 +65,6 @@ namespace FaceDetection
                 Logger.Add(x);
                 Console.WriteLine(x.Message + " 661");
             }
-        }
-
-        private static void The_timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            Console.WriteLine(duration + " " + wait + " the_timer.Enabled: " + backlight_timer.Enabled);
-            if (wait > 0)
-            {
-                OFF();
-                backlight_timer.Enabled = true;
-                backlight_timer.Interval = (int)wait;
-                wait = 0;
-                //the_timer.Enabled = false;
-                //
-            }
-            else
-            {
-                OFF();
-                backlight_timer.Enabled = false;
-                backlight_timer.AutoReset = false;
-                //wait also ran or was not set
-                //task complete                
-                Destroy();
-            }
-
         }
         
         /// <summary>

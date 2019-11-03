@@ -464,7 +464,7 @@ namespace FaceDetection
 
             //Create and display the OlePropertyFrame
             object oDevice = (object)dev;
-            hr = OleCreatePropertyFrame(FaceDetection.MainForm.GetMainForm.Handle, 0, 0, filterInfo.achName, 1, ref oDevice, caGUID.cElems, caGUID.pElems, 0, 0, IntPtr.Zero);
+            hr = OleCreatePropertyFrame(this.Handle, 0, 0, filterInfo.achName, 1, ref oDevice, caGUID.cElems, caGUID.pElems, 0, 0, IntPtr.Zero);
             DsError.ThrowExceptionForHR(hr);
 
             // Release COM objects

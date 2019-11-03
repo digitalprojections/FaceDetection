@@ -112,7 +112,6 @@
     <Compile Include="Logger.cs" />
     <Compile Include="MouseListener.cs" />
     <Compile Include="PARAMETERS.cs" />
-    <Compile Include="Sequencer.cs" />
     <Compile Include="TaskManager.cs" />
     <Compile Include="RecorderCamera.cs" />
     <Compile Include="CustomMessage.cs" />
