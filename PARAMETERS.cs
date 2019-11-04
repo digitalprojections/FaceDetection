@@ -14,7 +14,7 @@ namespace FaceDetection
     {
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
-            Console.WriteLine("Parameters: " + String.Concat(parameters));
+            CustomMessage.ShowMessage("Parameters: " + String.Concat(parameters));
             string param = String.Concat(parameters).ToLower();
             /*
              Handle the initial start up CL parameters, if exist
@@ -87,7 +87,7 @@ namespace FaceDetection
                             {
                                 if (CheckCameraIndex(parameters))
                                 {
-                                    Console.WriteLine("テスト" + parameters.ElementAt(0) + "×" + parameters.ElementAt(1) + "×" + parameters.ElementAt(2) + "×" + parameters.ElementAt(3));
+                                    CustomMessage.ShowMessage("テスト" + parameters.ElementAt(0) + "×" + parameters.ElementAt(1) + "×" + parameters.ElementAt(2) + "×" + parameters.ElementAt(3));
 
                                     if (parameters.ElementAt(3) == "1")
                                     {
@@ -156,7 +156,7 @@ namespace FaceDetection
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
-                                Console.WriteLine(e.Message + " paramameters 399");
+                                CustomMessage.ShowMessage(e.Message + " paramameters 399");
                             }
                             break;
 
@@ -225,7 +225,7 @@ namespace FaceDetection
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine(e.Message + " paramameters 466");
+                                CustomMessage.ShowMessage(e.Message + " paramameters 466");
                             }
                             break;
                         case "-w":
@@ -291,20 +291,11 @@ namespace FaceDetection
                                 {
                                     if (parameters.ElementAt(2) == "1")
                                     {
-                                        if (MainForm.SettingUI != null && MainForm.SettingUI.Visible == false)
-                                        {
-                                            //settingUI.TopMost = true;
-                                            MainForm.GetMainForm.TopMost = false;
-                                            MainForm.SettingUI.ShowDialog();
-                                        }
-
+                                        MainForm.GetMainForm.EventRecorderOn();
                                     }
                                     else if (parameters.ElementAt(2) == "0")
                                     {
-                                        MainForm.SettingUI.Hide();
-                                        MainForm.AllChangesApply();
-
-
+                                        MainForm.GetMainForm.EventRecorderOff();
                                     }
                                 }
                             }
@@ -333,7 +324,7 @@ namespace FaceDetection
             {
                 case 1:
                     Retval = true;
-                    Console.WriteLine("カメラ番号まで来た");
+                    CustomMessage.ShowMessage("カメラ番号まで来た");
                     //Camera.CheckCamera(parameters.ElementAt());
                     break;
                 case 2:
@@ -378,7 +369,7 @@ namespace FaceDetection
         {
             if (Int32.Parse(parameters.ElementAt(4)) >= 0 && Int32.Parse(parameters.ElementAt(4)) <= 1000)
             {
-                Console.WriteLine("できた");
+                CustomMessage.ShowMessage("できた");
             }
         }
         #region DLL IMPORTS

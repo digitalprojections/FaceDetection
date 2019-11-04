@@ -44,7 +44,7 @@ namespace FaceDetection
             //two versions here. Depending on camera mode
 
             //pic from regular camera
-            //MainForm.GetMainForm.GetSnapShot().Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
+            MainForm.GetMainForm.GetSnapShot().Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
 
 
         }

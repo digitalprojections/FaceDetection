@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading;
 
-namespace FaceDetectionX
+namespace FaceDetectionY
 {
     class CameraManager
     {
@@ -163,7 +163,7 @@ namespace FaceDetectionX
             {
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
-                Console.WriteLine("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
+                CustomMessage.ShowMessage("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
             }
             */
             hr = pGraph.AddFilter(renderFilter, "My Render Filter");
@@ -303,7 +303,7 @@ namespace FaceDetectionX
             {
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
-                Console.WriteLine("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
+                CustomMessage.ShowMessage("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
             }
             */
             hr = pGraph.AddFilter(renderFilter, "My Render Filter");
@@ -362,7 +362,7 @@ namespace FaceDetectionX
         {
             if (hr < 0)
             {
-                Console.WriteLine(msg);
+                //CustomMessage.ShowMessage(msg);
                 DsError.ThrowExceptionForHR(hr);
             }
         }
@@ -555,7 +555,7 @@ namespace FaceDetectionX
                 hr = mediaEventEx.FreeEventParams(evCode, evParam1, evParam2);
                 DsError.ThrowExceptionForHR(hr);
 
-                Console.WriteLine(evCode + " -evCode " + evParam1 + " " + evParam2);
+                //CustomMessage.ShowMessage(evCode + " -evCode " + evParam1 + " " + evParam2);
                 // Insert event processing code here, if desired (see http://msdn2.microsoft.com/en-us/library/ms783649.aspx)
             }
         }

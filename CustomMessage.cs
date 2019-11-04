@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FaceDetection
 {
@@ -13,9 +9,32 @@ namespace FaceDetection
         public static void ShowMessage(string message,
     [CallerLineNumber] int lineNumber = 0,
     [CallerMemberName] string caller = null)
-        {
-            Debug.WriteLine(message + " at line " + lineNumber + " (" + caller + ")");
+        {            
+            Debug.WriteLine(message + " at line " + lineNumber + " (" + caller + ")\n");
             
+
+
+        }
+        public static void ShowMessage(int message,
+    [CallerLineNumber] int lineNumber = 0,
+    [CallerMemberName] string caller = null)
+        {
+            Debug.WriteLine(message + " at line " + lineNumber + " (" + caller + ")\n");
+
+        }
+        public static void ShowMessage(decimal message,
+    [CallerLineNumber] int lineNumber = 0,
+    [CallerMemberName] string caller = null)
+        {
+            Debug.WriteLine(message + " at line " + lineNumber + " (" + caller + ")\n");
+
+        }
+        public static void ShowMessage(decimal message, IntPtr x,
+    [CallerLineNumber] int lineNumber = 0,
+    [CallerMemberName] string caller = null)
+        {
+            Debug.WriteLine(message + " with " + x + " at line " + lineNumber + " (" + caller + ")\n");
+
         }
     }
 }

@@ -33,9 +33,9 @@ namespace FaceDetection
             try
             {
                 IGraphBuilder graph = (IGraphBuilder)new FilterGraph();
-                Console.WriteLine("Building graph...");
+                CustomMessage.ShowMessage("Building graph...");
                 BuildGraph(graph);
-                Console.WriteLine("Running...");
+                CustomMessage.ShowMessage("Running...");
                 IMediaControl mediaControl = (IMediaControl)graph;
                 IMediaEvent mediaEvent = (IMediaEvent)graph;
                 try
@@ -46,7 +46,7 @@ namespace FaceDetection
                 }
                 catch(COMException comx)
                 {
-                    Console.WriteLine(comx.Message);
+                    CustomMessage.ShowMessage(comx.Message);
                     retval = false;
                     Release();
                 }
@@ -64,7 +64,7 @@ namespace FaceDetection
                     {
                         if (ev == EventCode.Complete || ev == EventCode.UserAbort)
                         {
-                            Console.WriteLine("Done!");                            
+                            CustomMessage.ShowMessage("Done!");                            
                             mediaControl.Stop();
                             SafeReleaseComObject(mediaControl);
                             Release();
@@ -73,7 +73,7 @@ namespace FaceDetection
                         else
                         if (ev == EventCode.ErrorAbort)
                         {
-                            Console.WriteLine("An error occured: HRESULT={0:X}", p1);
+                            CustomMessage.ShowMessage("An error occured: HRESULT={0:X}"+ p1);
                             mediaControl.Stop();
                             SafeReleaseComObject(mediaControl);
                             stop = true;
@@ -84,7 +84,7 @@ namespace FaceDetection
                     }catch(Exception x)
                     {
                         retval = false;
-                        Console.WriteLine("An error occured:");                        
+                        CustomMessage.ShowMessage("An error occured:");                        
                         SafeReleaseComObject(mediaControl);
                         stop = true;                        
                     }
@@ -92,11 +92,11 @@ namespace FaceDetection
             }
             catch (COMException ex)
             {
-                Console.WriteLine("COM error: " + ex.ToString());
+                CustomMessage.ShowMessage("COM error: " + ex.ToString());
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.ToString());
+                CustomMessage.ShowMessage("Error: " + ex.ToString());
             }
             Release();
             return retval;
@@ -124,7 +124,7 @@ namespace FaceDetection
                     }
                     else
                     {
-                        Console.WriteLine(capDevices.Length + " capdevices");
+                        CustomMessage.ShowMessage(capDevices.Length + " capdevices");
                         SettingsUI.ArrangeCameraNames(capDevices.Length);
                         Properties.Settings.Default.camera_count = capDevices.Length;
                         Properties.Settings.Default.main_camera_index = 0;
@@ -204,7 +204,7 @@ namespace FaceDetection
         {
             if (hr < 0)
             {
-                Console.WriteLine(msg);
+                CustomMessage.ShowMessage(msg);
                 DsError.ThrowExceptionForHR(hr);
             }
         }

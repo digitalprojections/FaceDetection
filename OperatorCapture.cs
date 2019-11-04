@@ -27,7 +27,7 @@ namespace FaceDetection
                 {
                     //Initiate video
                     //var status = Camera.CheckCamera(0);
-                    //Console.WriteLine(status + " the camera state. Toal number of cameras " + Camera.GetCameraCount()[0].Name);
+                    //CustomMessage.ShowMessage(status + " the camera state. Toal number of cameras " + Camera.GetCameraCount()[0].Name);
                 }else
                 {
                     //Snapshot

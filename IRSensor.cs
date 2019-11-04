@@ -31,14 +31,11 @@ namespace FaceDetection
                 //heat signature detected, stop timer
                 StopOM_Timer();
                 //initiate RECORD mode
-                if (MainForm.GetMainForm != null && RecorderCamera.CAMERA_MODE== RecorderCamera.CAMERA_MODES.PREVIEW)
-                {
-                    //MainForm.ACTIVE_RECPATH = MainForm.RECPATH.EVENT;
-                    MainForm.GetMainForm.RecordMode();
-                }
+                if (MainForm.GetMainForm != null && MainForm.GetMainForm.crossbar.PREEVENT_RECORDING)
+                    TaskManager.EventAppeared("EVENT", 1, decimal.ToInt32(Properties.Settings.Default.seconds_before_event), decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
                 else
-                {
-                    TaskManager.EventAppeared("EVENT", decimal.ToInt32(Properties.Settings.Default.event_record_time_before_event), decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event));
+                {                    
+                    MainForm.GetMainForm.crossbar.Start(0, CROSSBAR.CAMERA_MODES.OPERATOR);                    
                 }
             }
             SensorClose();
@@ -83,12 +80,12 @@ namespace FaceDetection
                     data[3] = Convert.ToUInt32((stSensorValue.iValue[1] & 0xFF00) >> 8);     // IR data (H)
                     data[4] = Convert.ToUInt32((stSensorValue.iValue[2] & 0x00FF) >> 0);     // TMP data (L)
                     data[5] = Convert.ToUInt32((stSensorValue.iValue[2] & 0xFF00) >> 8);        // TMP data (H)
-                    //Console.WriteLine(ret + "\n" + ivals + "\n" + data[0] + "\n" + data[1] + "\n" + data[2] + "\n" + data[3] + "\n" + data[4] + "\n" + data[5] + "\n");
+                    //CustomMessage.ShowMessage(ret + "\n" + ivals + "\n" + data[0] + "\n" + data[1] + "\n" + data[2] + "\n" + data[3] + "\n" + data[4] + "\n" + data[5] + "\n");
                 }
                 catch(Exception e)
                 {
                     data[1] = 0;
-                    Console.WriteLine(e.Message + " IRSensor 91");
+                    CustomMessage.ShowMessage(e.Message + " IRSensor 91");
                 }
                 
             }

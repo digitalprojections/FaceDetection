@@ -28,12 +28,12 @@ namespace FaceDetection
             Run = () =>
             {
                 ON();
-                Console.WriteLine("Running in " + " mode");
+                CustomMessage.ShowMessage("Running in " + " mode");
                 backlight_timer.Enabled = true;
             };
             Destroy = () =>
             {
-                Console.WriteLine("Destroyed");
+                CustomMessage.ShowMessage("Destroyed");
             };
 
             if (backlight_timer.Enabled)
@@ -102,18 +102,18 @@ namespace FaceDetection
                 UIntPtr hr = UIntPtr.Zero;
                 SendMessage(0xFFFF, 0x112, 0xF170, (int)MonitorState.MonitorStateOn);
                 //SendMessageTimeout(MainForm.GetMainForm.Handle, 0112, UIntPtr.Zero, (IntPtr)MonitorState.MonitorStateOn, SendMessageTimeoutFlags.SMTO_ABORTIFHUNG, 1000, out hr);
-                Console.WriteLine(hr + " backlight on request");
+                CustomMessage.ShowMessage(hr + " backlight on request");
             }
             catch (Exception x)
             {
                 Logger.Add(x);
-                Console.WriteLine(x.Message + " 661");
+                CustomMessage.ShowMessage(x.Message + " 661");
             }
         }
 
         private static void The_timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            Console.WriteLine(duration + " " + wait + " the_timer.Enabled: " + backlight_timer.Enabled);
+            CustomMessage.ShowMessage(duration + " " + wait + " the_timer.Enabled: " + backlight_timer.Enabled);
             if (wait > 0)
             {
                 OFF();

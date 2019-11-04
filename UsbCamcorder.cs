@@ -93,10 +93,10 @@ namespace FaceDetection
 
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
             string str = Path.Combine(FaceDetection.Properties.Settings.Default.video_file_location, (cameraIndex + 1).ToString());
-            Console.WriteLine(str);
+            CustomMessage.ShowMessage(str);
             Directory.CreateDirectory(str);
             targetPath = Path.Combine(str, dstFileName);
-            Console.WriteLine(targetPath);
+            CustomMessage.ShowMessage(targetPath);
 
             //var camera_list = FindDevices();
             //if (cameraIndex >= camera_list) throw new ArgumentException("USB camera is not available.", "index");
@@ -385,9 +385,9 @@ namespace FaceDetection
             try
             {
                 graph = (IGraphBuilder)new FilterGraph();
-                Console.WriteLine("Building graph...");
+                CustomMessage.ShowMessage("Building graph...");
                 BuildGraph(graph, targetPath);
-                Console.WriteLine("Running...");
+                CustomMessage.ShowMessage("Running...");
                 mediaControl = (IMediaControl)graph;
                 mediaEvent = (IMediaEvent)graph;
                 int hr = mediaControl.Run();
@@ -404,13 +404,13 @@ namespace FaceDetection
                     {
                         if (ev == EventCode.Complete || ev == EventCode.UserAbort)
                         {
-                            Console.WriteLine("Done!");
+                            CustomMessage.ShowMessage("Done!");
                             stop = true;
                         }
                         else
                         if (ev == EventCode.ErrorAbort)
                         {
-                            Console.WriteLine("An error occured: HRESULT={0:X}", p1);
+                            CustomMessage.ShowMessage("An error occured: HRESULT={0:X}" + p1);
                             mediaControl.Stop();
                             stop = true;
                         }
@@ -420,11 +420,11 @@ namespace FaceDetection
             }
             catch (COMException ex)
             {
-                Console.WriteLine("COM error: " + ex.ToString());
+                CustomMessage.ShowMessage("COM error: " + ex.ToString());
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.ToString());
+                CustomMessage.ShowMessage("Error: " + ex.ToString());
             }
         }
 
@@ -481,7 +481,7 @@ namespace FaceDetection
         {
             if (hr < 0)
             {
-                Console.WriteLine(msg);
+                CustomMessage.ShowMessage(msg);
                 DsError.ThrowExceptionForHR(hr);
             }
         }

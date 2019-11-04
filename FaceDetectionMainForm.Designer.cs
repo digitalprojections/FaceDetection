@@ -144,8 +144,9 @@
             this.cameraButton.Padding = new System.Windows.Forms.Padding(10);
             this.cameraButton.Size = new System.Drawing.Size(52, 52);
             this.cameraButton.TabIndex = 3;
+            this.cameraButton.Tag = "play";
             this.cameraButton.UseVisualStyleBackColor = false;
-            this.cameraButton.Click += new System.EventHandler(this.StartVideoRecording);
+            this.cameraButton.Click += new System.EventHandler(this.ToggleVideoRecording);
             // 
             // closeButton
             // 
@@ -205,7 +206,6 @@
             this.pbRecording.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbRecording.TabIndex = 5;
             this.pbRecording.TabStop = false;
-            this.pbRecording.Visible = false;
             // 
             // MainForm
             // 

@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security;
-using System.Diagnostics;
 using DirectShowLib;
 
 namespace FaceDetectionX
@@ -17,7 +16,7 @@ namespace FaceDetectionX
     //
     // /* for debugging. */
     // var formats = UsbCamera.GetVideoFormat(0);
-    // foreach (var item in formats) Console.WriteLine(item);
+    // foreach (var item in formats) CustomMessage.ShowMessage(item);
     //
     // /* create usb camera and start. */
     // var index = 0;
@@ -31,7 +30,7 @@ namespace FaceDetectionX
 
      public class UsbCamera
     {
-
+        
         public bool ON = false;
         //public DirectShow.IVideoWindow videoWindow = null;
 
@@ -94,7 +93,7 @@ namespace FaceDetectionX
         {
             if (hr < 0)
             {
-                Console.WriteLine(msg);
+                FaceDetection.CustomMessage.ShowMessage(msg);
                 DirectShow.DsError.ThrowExceptionForHR(hr);
             }
         }
@@ -197,7 +196,7 @@ namespace FaceDetectionX
             {
 
                 Stop();
-                Console.WriteLine("Camera stop .........................");    
+                FaceDetection.CustomMessage.ShowMessage("Camera stop .........................");    
 
                 DirectShow.ReleaseInstance(ref grabber);
                 DirectShow.ReleaseInstance(ref control9);

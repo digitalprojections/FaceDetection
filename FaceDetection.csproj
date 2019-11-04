@@ -112,8 +112,9 @@
     <Compile Include="Logger.cs" />
     <Compile Include="MouseListener.cs" />
     <Compile Include="PARAMETERS.cs" />
-    <Compile Include="TaskManager.cs" />
     <Compile Include="RecorderCamera.cs" />
+    <Compile Include="TaskManager.cs" />
+    <Compile Include="CROSSBAR.cs" />
     <Compile Include="CustomMessage.cs" />
     <Compile Include="FaceDetectionMainForm.cs">
       <SubType>Form</SubType>

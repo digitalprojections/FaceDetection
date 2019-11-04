@@ -16,19 +16,13 @@ using System.Threading;
 namespace FaceDetection
 {
     class RecorderCamera
-    {        
+    {
+        public bool ON;
+        string sourcePath = @"D:\TEMP";
         string targetPath = String.Empty;
-        internal static string ACTIVE_RECPATH = RECPATH.MANUAL;
-        internal static int SELECTED_CAMERA = 0;
-        static bool recording_on = false;
-        static int duration;
-        static int wait;
-        static bool recording = false;
-        static System.Timers.Timer the_timer = new System.Timers.Timer();
-        
-
-        
-        internal static class RECPATH
+        internal string ACTIVE_RECPATH = null;
+        int INDEX = 0;
+        internal class RECPATH
         {
             public const string PHOTO = "snapshot";
             public const string MANUAL = "movie";
@@ -36,13 +30,13 @@ namespace FaceDetection
             public const string TEMP = "temp";
         }
         /// <summary>
-        ///All cameras have the same modes
-        ///But only the Main camera supports operator capture         
+        ///All cameras have the same modes,
+        ///but only the Main camera supports operator capture.         
         ///(各カメラには異なるモードがあります メインカメラのみがオペレータキャプチャをサポートしています)
         /// Camera modes to assist identify current status 
-        /// of the application during operation
+        /// of the application during operation.
         /// Manage it properly, carefully, 
-        /// so there are no confusion or contradictions
+        /// so there are no confusions or contradictions.
         /// Available choices
         /// </summary>
         internal enum CAMERA_MODES
@@ -54,42 +48,31 @@ namespace FaceDetection
             MANUAL,
             PREEVENT
         }
-        private static CAMERA_MODES CURRENT_MODE = 0;
-        internal static CAMERA_MODES CAMERA_MODE
+
+        internal CAMERA_MODES CAMERA_MODE { get { return cAMERA_MODE; } set => cAMERA_MODE = value; }
+        public enum PlayState : int
         {
-            get
-            {
-                return CURRENT_MODE;
-            }
-            set
-            {
-                CURRENT_MODE = value;
-            }
+            Stopped,
+            Paused,
+            Running,
+            Initiate
         }
-        /// <summary>
-        /// If Enabled and AutoReset are both set to false, 
-        /// and the timer has previously been enabled, 
-        /// setting the Interval property causes the Elapsed event to be raised once, 
-        /// as if the Enabled property had been set to true. 
-        /// To set the interval without raising the event, 
-        /// you can temporarily set the Enabled property to true, 
-        /// set the Interval property to the desired time interval, 
-        /// and then immediately set the Enabled property back to false.
-        /// </summary>
-        //User actions
-        //private readonly System.Timers.Timer recording_timer = new System.Timers.Timer();        
-        //public System.Timers.Timer RecordingTimer => recording_timer;
-        int INDEX = 0;
-        
         public Action Stop { get; private set; }
         public Action Release { get; private set; }
         public Func<Bitmap> GetBitmap { get; private set; }
-                
+
+        internal PlayState GetCurrentState1() => CurrentState;
+
+        internal void SetCurrentState1(PlayState value)
+        {
+            CurrentState = value;
+        }
+
         private IGraphBuilder pGraph;
         //private Guid CLSID_SampleGrabber = new Guid("{C1F400A0-3F08-11D3-9F0B-006008039E37}"); //qedit.dll
-        //PlayState CurrentState = PlayState.Stopped;
+        PlayState CurrentState = PlayState.Stopped;
         private int WM_GRAPHNOTIFY = Convert.ToInt32("0X8000", 16) + 1;
-        
+        public IVideoWindow videoWindow = null;
         private IMediaControl mediaControl = null;
         private IMediaEventEx mediaEventEx = null;
         private IGraphBuilder graph = null;
@@ -100,6 +83,7 @@ namespace FaceDetection
         IBaseFilter pNullRenderer = (IBaseFilter)Activator.CreateInstance(Type.GetTypeFromCLSID(CLSID_NullRenderer));
         private IAMStreamConfig streamConfig = null;
         private SampleGrabber pSampleGrabber = null;
+
         private VideoInfoHeader format = null;
         private AMMediaType pmt = null;
         private ISampleGrabber i_grabber = null;
@@ -112,7 +96,7 @@ namespace FaceDetection
             graph = (IGraphBuilder)(new FilterGraph());
             pGraphBuilder = (ICaptureGraphBuilder2)(new CaptureGraphBuilder2());
             mediaControl = (IMediaControl)graph;
-            //videoWindow = (IVideoWindow)graph;
+            videoWindow = (IVideoWindow)graph;
             mediaEventEx = (IMediaEventEx)graph;
             renderFilter = (IBaseFilter)new VideoMixingRenderer9();
 
@@ -132,162 +116,62 @@ namespace FaceDetection
         public RecorderCamera(int cameraIndex)
         {
             this.INDEX = cameraIndex;
-            
-            //RecordingTimer.AutoReset = false;
-            //RecordingTimer.Elapsed += Recording_Timer_Elapsed;//cut to allow access to the files
         }
 
-        internal void Run()
-        {
-            the_timer.Enabled = true;
-            recording_on = true;
-        }
-        internal void PreviewMode()
-        {
-            recording_on = false;
-            Console.WriteLine("Destroyed");
-            if (MainForm.GetMainForm != null)
-            {
-                StartCamera(MainForm.GetMainForm.Handle);
-            }
-        }
-        internal void RecordingMode()
-        {
-            Console.WriteLine("Destroyed");
-            if (MainForm.GetMainForm != null)
-            {
-                StartRecorderCamera(MainForm.GetMainForm.Handle);
-            }
-        }
-        public void Start(CAMERA_MODES mode)
-        {
-            CAMERA_MODE = mode;
-            int duration = 0;
-            
-            switch (mode)
-            {
-                case CAMERA_MODES.MANUAL:
-                    if(CAMERA_MODE==mode)
-                    {
-                        //the camera is already in manual recording mode
-                        //abort
-                        PreviewMode();
-                    }
-                    else
-                    {
-                        if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.manual_record_maxtime > 0)
-                        {
-                            recording = true;
-                            ACTIVE_RECPATH = RECPATH.MANUAL;
-                            duration = decimal.ToInt32(Properties.Settings.Default.manual_record_maxtime) * 1000;
-                        }
-                    }                    
-                    break;
-                case CAMERA_MODES.EVENT:
-                    //EVENT from parameters
-                    if (Properties.Settings.Default.enable_event_recorder && Properties.Settings.Default.event_record_time_after_event > 0 && !recording_on)
-                    {
-                        recording = true;
-                        ACTIVE_RECPATH = RECPATH.EVENT;
-                        duration = decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event) * 1000;
-                    }
-                    break;
-                case CAMERA_MODES.OPERATOR:
-                    //EVENT from parameters
-                    if (Properties.Settings.Default.enable_event_recorder && Properties.Settings.Default.seconds_after_event > 0 && !recording_on)
-                    {
-                        recording = true;
-                        ACTIVE_RECPATH = RECPATH.EVENT;
-                        duration = decimal.ToInt32(Properties.Settings.Default.seconds_after_event) * 1000;
-                    }
-                    break;
-                case CAMERA_MODES.PREVIEW:
-                    //preview
-                    duration = 0;
-                    wait = 0;
-                    recording = false;
-                    ACTIVE_RECPATH = "";
-                    break;
-                case CAMERA_MODES.PREEVENT:
-                    //permanent cycle
-                    duration = 5*60*1000;
-                    wait = 0;
-                    recording = true;
-                    ACTIVE_RECPATH = Properties.Settings.Default.temp_folder;
-                    break;
-            }
+        //The following is called for building the PREVIEW graph
 
-            Console.WriteLine("Running camera in " + CAMERA_MODE + " mode. 215 Active path: " + ACTIVE_RECPATH);
-
-            the_timer.AutoReset = false; //prevent from running - true
-            the_timer.Elapsed += The_timer_Elapsed;
-            the_timer.Enabled = false;
-
-            if (recording && duration> 0 && !recording_on)
+        //This one is for recording
+        /// <summary>
+        /// Initialize Camera in CAPTURE Mode
+        /// </summary>
+        /// <param name="cameraIndex">Camera index</param>
+        /// <param name="size"></param>
+        /// <param name="fps"></param>
+        /// <param name="pbx">Control to display the video</param>        
+        public void StartRecorderCamera()
+        {
+            ON = true;
+            Size size = MainForm.GetMainForm.GetResolution(INDEX);
+            int fps = MainForm.GetMainForm.GetFPS(0);
+            IntPtr pbx = MainForm.GetMainForm.Handle;
+            string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
+            CustomMessage.ShowMessage(CAMERA_MODE + " ");
+            CustomMessage.ShowMessage(CAMERA_MODE + " ");
+            CustomMessage.ShowMessage(CAMERA_MODE + " ");
+            //REGULAR 0 PREEVENT
+            if (CAMERA_MODE != CAMERA_MODES.PREEVENT)
             {
-                the_timer.Interval = duration;
-                if (CAMERA_MODE == CAMERA_MODES.PREEVENT)
-                {
-                    the_timer.AutoReset = true;
-                    
-                }
-                else
-                {
-                    the_timer.AutoReset = false;
-                    
-                }
-                Console.WriteLine("calling recording mode 226");
-                Run();
-                RecordingMode();
+                string str = Path.Combine(Properties.Settings.Default.video_file_location, "CAMERA");
+                str = Path.Combine(str, (INDEX + 1).ToString());
+                str = Path.Combine(str, ACTIVE_RECPATH);
+                targetPath = str + "/" + dstFileName;
 
+                 Directory.CreateDirectory(str);
+                
+
+                CustomMessage.ShowMessage(targetPath + " +++++++++++++++++ dest name 108 in  recorder");
             }
             else
             {
-                Console.WriteLine("calling preview mode 230" + recording +" " + duration +" " + recording_on);
-                //simply use preview camera
-                PreviewMode();
+                //PREEVENT EXISTS. PERMANENT RECORDING MODE
+                targetPath = sourcePath + "/" + dstFileName;
+                CustomMessage.ShowMessage(targetPath + " target path");
+                try
+                {
+                    Directory.CreateDirectory(sourcePath);
+                }catch(IOException iox)
+                {
+                    targetPath = @"C:\TEMP" + "/" + dstFileName;
+                    Directory.CreateDirectory(sourcePath);
+                    Logger.Add(iox);
+
+                }
+                
+                //MainForm.GetMainForm.RecordingStart();
             }
-            
-        }
-        /// <summary>
-        /// If Enabled and AutoReset are both set to false, 
-        /// and the timer has previously been enabled, 
-        /// setting the Interval property causes the Elapsed event to be raised once, 
-        /// as if the Enabled property had been set to true. 
-        /// To set the interval without raising the event, 
-        /// you can temporarily set the Enabled property to true, 
-        /// set the Interval property to the desired time interval, 
-        /// and then immediately set the Enabled property back to false.
-        /// </summary>
-        private void The_timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            //Console.WriteLine("The_timer_Elapsed " + duration + " is duration and " + wait + " is the wait time, the_timer.Enabled: " + the_timer.Enabled);
-            if (wait > 0)
-            {
-                Console.WriteLine("wait > 0 266");
-                the_timer.Enabled = true;
-                the_timer.Interval = (int)wait;
-                wait = 0;
-                recording_on = false;
-                PreviewMode();
-            }
-            else if(CAMERA_MODE!=CAMERA_MODES.PREEVENT)
-            {
-                Console.WriteLine("not preevent mode 275");
-                the_timer.Enabled = false;
-                the_timer.AutoReset = false;
-                ReleaseInterfaces();
-                PreviewMode();
-            }
-            //TaskManager.RecordEnd();
-        }
-        public void StartCamera(IntPtr pbx)
-        {
-            //ReleaseInterfaces();
+
             GetInterfaces();
             //var camera_list = FindDevices();
-            //if (cameraIndex >= camera_list) throw new ArgumentException("USB camera is not available.", "index");
-            //Init(cameraIndex, size, fps, pbx, targetPath);                        
             graph = (IGraphBuilder)(new FilterGraph());
             pGraph = graph;
             int hr = 0;
@@ -296,7 +180,7 @@ namespace FaceDetection
             DsError.ThrowExceptionForHR(hr);
 
             //pUSB = FindCaptureDevice();
-            //pUSB = CreateVideoCaptureSource(INDEX, GetResolution(0), GetFPS(0));
+            pUSB = CreateVideoCaptureSource(INDEX, size, fps);
 
             hr = pGraph.AddFilter(pUSB, "WebCamControl Video");
             DsError.ThrowExceptionForHR(hr);
@@ -310,12 +194,28 @@ namespace FaceDetection
             hr = pGraphBuilder.RenderStream(null, MediaType.Video, pUSB, null, pSmartTee);
             DsError.ThrowExceptionForHR(hr);
 
+            //add File writer
+            IBaseFilter pFilewriter = (IBaseFilter)new FileWriter();
+            hr = pGraph.AddFilter(pFilewriter, "File writer");
+            checkHR(hr, "Can't add File writer to graph");
 
+            //set destination filename
+            IFileSinkFilter pFilewriter_sink = pFilewriter as IFileSinkFilter;
+            if (pFilewriter_sink == null)
+                checkHR(unchecked((int)0x80004002), "Can't get IFileSinkFilter");
+            hr = pFilewriter_sink.SetFileName(targetPath, null);
+            checkHR(hr, "Can't set filename");
 
             //add AVI Mux
+            pAVIMux = (IBaseFilter)new AviDest();
+            hr = pGraph.AddFilter(pAVIMux, "AVI Mux");
+            checkHR(hr, "Can't add AVI Mux to graph");
 
-            hr = pGraph.AddFilter(pNullRenderer, "NULL Render");
-            checkHR(hr, "Can't add pNullRenderer to graph");
+            //connect AVI Mux and File writer
+            hr = pGraph.ConnectDirect(GetPin(pAVIMux, "AVI Out"), GetPin(pFilewriter, "in"), null);
+            checkHR(hr, "Can't connect AVI Mux and File writer");
+
+
 
 
             //add SampleGrabber
@@ -334,7 +234,7 @@ namespace FaceDetection
             //SetFormat();
 
             //connect Smart Tee and AVI Mux
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, pNullRenderer);
+            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, pAVIMux);
             checkHR(hr, "Can't connect Smart Tee and AVI Mux");
 
             //connect Smart Tee and SampleGrabber
@@ -355,21 +255,11 @@ namespace FaceDetection
             hr = control9.SetVideoClippingWindow(pbx);
             checkHR(hr, "Can't set video clipping window");
 
-            if (CURRENT_MODE != CAMERA_MODES.HIDDEN)
-            {
+            if (CAMERA_MODE != CAMERA_MODES.HIDDEN)
+            {                
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
-                Logger.Add("NOT HIDDEN MODE " + CURRENT_MODE + ", Active path: " + ACTIVE_RECPATH);
-            }
-            else
-            {
-                MainForm.GetMainForm.WindowState = System.Windows.Forms.FormWindowState.Minimized;
-                MainForm.GetMainForm.Width = 10;
-                MainForm.GetMainForm.Height = 10;
-                MainForm.GetMainForm.ShowInTaskbar = false;
-                hr = control9.SetVideoPosition(null, new DsRect(0, 0, 1, 1));
-                checkHR(hr, "Can't set rectangles of the video position");
-                Logger.Add("HIDDEN MODE " + CURRENT_MODE + ", Active path: " + ACTIVE_RECPATH);
+                CustomMessage.ShowMessage("NOT HIDDEN MODE " + CAMERA_MODE + ", Active path: " + ACTIVE_RECPATH);
             }
 
 
@@ -415,7 +305,7 @@ namespace FaceDetection
                         }
                         catch (System.NullReferenceException snrx)
                         {
-                            Console.WriteLine(snrx.Message + snrx.HResult);
+                            CustomMessage.ShowMessage(snrx.Message + snrx.HResult);
                             r = 1;
                             continue;
                         }
@@ -423,218 +313,54 @@ namespace FaceDetection
                 }
                 catch (InvalidComObjectException icom)
                 {
-                    Console.WriteLine(icom.InnerException);
+                    CustomMessage.ShowMessage(icom.InnerException.ToString());
                 }
                 GC.Collect();
-
+                //SafeReleaseComObject(pSampleGrabber);
+                //SafeReleaseComObject(control9);
+                //SafeReleaseComObject(config9);
+                //SafeReleaseComObject(ratioControl9);
+                //SafeReleaseComObject(pGraphBuilder);
+                //SafeReleaseComObject(renderFilter);
+                //SafeReleaseComObject(i_grabber);
+                //SafeReleaseComObject(pGraphBuilder);
+                //SafeReleaseComObject(graph);
+                //SafeReleaseComObject(pAVIMux);
+                //SafeReleaseComObject(pSmartTee);
+                //SafeReleaseComObject(pFilewriter);
+                //SafeReleaseComObject(pFilewriter_sink);
+                //SafeReleaseComObject(pUSB);
             };
+            /*
+             IEnumFilters enumFilters = null;
+             IBaseFilter[] baseFilters = { null };
+             IntPtr fetched = IntPtr.Zero;
+             hr = pGraph.EnumFilters(out enumFilters);
+             int r = 0;
+             while (r == 0)
+             {
+
+                 try
+                 {
+                     r = enumFilters.Next(baseFilters.Length, baseFilters, fetched);
+                 DsError.ThrowExceptionForHR(hr);
+                 baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
+                 Debug.WriteLine(filterInfo.achName + " -filtername");
+                 }
+                 catch (System.NullReferenceException snrx)
+                 {
+                     CustomMessage.ShowMessage(snrx.Message + snrx.HResult);
+                     r = 1;
+                     continue;
+                 }
+             }
+             */
             try
             {
                 mediaControl = (IMediaControl)graph;
                 hr = mediaControl.Run();
                 //checkHR(hr, "Can't run the graph");
-                Console.WriteLine(" running the recorder graph ");
-            }
-            catch (COMException comx)
-            {
-                CustomMessage.ShowMessage("Can not start the camera");
-                Logger.Add("Can not start the camera");
-            }
-
-
-
-        }
-        
-        //The following is called for building the PREVIEW graph
-
-        //This one is for recording
-        /// <summary>
-        /// Initialize Camera in CAPTURE Mode
-        /// </summary>
-        /// <param name="cameraIndex">Camera index</param>        
-        /// <param name="pbx">Control to display the video</param>        
-        public void StartRecorderCamera(IntPtr pbx)
-        {
-            ReleaseInterfaces();
-            
-            MainForm.Or_pb_recording.Visible = true;
-            MainForm.Or_pb_recording.Refresh();
-            string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
-            string sourcePath = Properties.Settings.Default.temp_folder;
-
-            if (CURRENT_MODE != CAMERA_MODES.PREEVENT)
-            {
-                //MainForm.GetMainForm.RecordingTimer.Stop();
-                string str = "";
-                if (ACTIVE_RECPATH != string.Empty || ACTIVE_RECPATH != RECPATH.MANUAL)
-                {
-                    str = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
-                    str = Path.Combine(str, (INDEX + 1).ToString());
-                    str = Path.Combine(str, ACTIVE_RECPATH);
-                }
-                else
-                {
-                    str = Path.Combine(Properties.Settings.Default.video_file_location, (INDEX + 1).ToString());
-                }
-                targetPath = str + "/" + dstFileName;
-                Directory.CreateDirectory(str);
-
-                Console.WriteLine(targetPath + " +++++++++++++++++ dest name 108 in  recorder");
-            }
-            else
-            {
-                //PREEVENT EXISTS. PERMANENT RECORDING MODE
-                targetPath = sourcePath + "/" + dstFileName;
-                Console.WriteLine(targetPath + " target path");
-                Directory.CreateDirectory(sourcePath + "/" + RECPATH.TEMP);
-                //MainForm.GetMainForm.RecordingStart();
-            }
-            GetInterfaces();
-            graph = (IGraphBuilder)(new FilterGraph());
-            pGraph = graph;
-            int hr = 0;
-
-            hr = pGraphBuilder.SetFiltergraph(pGraph);
-            DsError.ThrowExceptionForHR(hr);
-
-            //pUSB = FindCaptureDevice();
-            //pUSB = CreateVideoCaptureSource(INDEX, GetResolution(INDEX), GetFPS(INDEX));
-
-            hr = pGraph.AddFilter(pUSB, "WebCamControl Video");
-            DsError.ThrowExceptionForHR(hr);
-
-            //add smartTee
-            pSmartTee = (IBaseFilter)new SmartTee();
-            hr = pGraph.AddFilter(pSmartTee, "Smart Tee");
-            DsError.ThrowExceptionForHR(hr);
-
-            //connect smart tee to camera 
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pUSB, null, pSmartTee);
-            DsError.ThrowExceptionForHR(hr);
-
-            //add File writer
-            IBaseFilter pFilewriter = (IBaseFilter)new FileWriter();
-            hr = pGraph.AddFilter(pFilewriter, "File writer");
-            checkHR(hr, "Can't add File writer to graph");
-
-            //set destination filename
-            IFileSinkFilter pFilewriter_sink = pFilewriter as IFileSinkFilter;
-            if (pFilewriter_sink == null)
-                checkHR(unchecked((int)0x80004002), "Can't get IFileSinkFilter");
-            hr = pFilewriter_sink.SetFileName(targetPath, null);
-            checkHR(hr, "Can't set filename");
-
-            //add AVI Mux
-            pAVIMux = (IBaseFilter)new AviDest();
-            hr = pGraph.AddFilter(pAVIMux, "AVI Mux");
-            checkHR(hr, "Can't add AVI Mux to graph");
-
-            //connect AVI Mux and File writer
-            hr = pGraph.ConnectDirect(GetPin(pAVIMux, "AVI Out"), GetPin(pFilewriter, "in"), null);
-            checkHR(hr, "Can't connect AVI Mux and File writer");
-
-
-            hr = pGraph.AddFilter(pSampleGrabber as IBaseFilter, "SampleGrabber");
-            checkHR(hr, "Can't add SampleGrabber to graph");
-            i_grabber.SetBufferSamples(true); //サンプルグラバでのサンプリングを開始
-
-
-
-            //フォーマットの設定
-            //暫くは一時的な値を使用してます
-
-            //SetFormat();
-
-            //connect Smart Tee and AVI Mux
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, pAVIMux);
-            checkHR(hr, "Can't connect Smart Tee and AVI Mux");
-
-            //connect Smart Tee and SampleGrabber
-            //hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Preview"), GetPin(pSampleGrabber as IBaseFilter, "Input"), null);
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, (IBaseFilter)pSampleGrabber);
-            checkHR(hr, "Can't connect Smart Tee and SampleGrabber");
-
-
-            IVMRAspectRatioControl9 ratioControl9 = (IVMRAspectRatioControl9)renderFilter;
-            hr = ratioControl9.SetAspectRatioMode(VMRAspectRatioMode.LetterBox);
-            DsError.ThrowExceptionForHR(hr);
-
-            IVMRFilterConfig9 config9 = (IVMRFilterConfig9)renderFilter;
-            hr = config9.SetRenderingMode(VMR9Mode.Windowless);
-            checkHR(hr, "Can't set windowless mode");
-
-            IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
-            hr = control9.SetVideoClippingWindow(pbx);
-            checkHR(hr, "Can't set video clipping window");
-
-            if (CURRENT_MODE != CAMERA_MODES.HIDDEN)
-            {
-                hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
-                checkHR(hr, "Can't set rectangles of the video position");
-                Console.WriteLine("NOT HIDDEN MODE " + CURRENT_MODE + ", Active path: " + ACTIVE_RECPATH);
-            }
-
-
-            hr = pGraph.AddFilter(renderFilter, "My Render Filter");
-            DsError.ThrowExceptionForHR(hr);
-
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSampleGrabber, null, renderFilter);
-            DsError.ThrowExceptionForHR(hr);
-
-
-            {
-                var mt = new AMMediaType();
-                i_grabber.GetConnectedMediaType(mt);
-                var header = (VideoInfoHeader)Marshal.PtrToStructure(mt.formatPtr, typeof(VideoInfoHeader));
-                var width = header.BmiHeader.Width;
-                var height = header.BmiHeader.Height;
-                var stride = width * (header.BmiHeader.BitCount / 8);
-                DsUtils.FreeAMMediaType(mt);
-
-                GetBitmap = () => GetBitmapMain(i_grabber, width, height, stride);
-            }
-
-            Release = () =>
-            {
-
-
-                IEnumFilters enumFilters = null;
-                IBaseFilter[] baseFilters = { null };
-                IntPtr fetched = IntPtr.Zero;
-                try
-                {
-                    hr = pGraph.EnumFilters(out enumFilters);
-                    int r = 0;
-                    while (r == 0)
-                    {
-
-                        try
-                        {
-                            r = enumFilters.Next(baseFilters.Length, baseFilters, fetched);
-                            DsError.ThrowExceptionForHR(hr);
-                            baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
-                            Marshal.FreeCoTaskMem(fetched);
-                        }
-                        catch (System.NullReferenceException snrx)
-                        {
-                            Console.WriteLine(snrx.Message + snrx.HResult);
-                            r = 1;
-                            continue;
-                        }
-                    }
-                }
-                catch (InvalidComObjectException icom)
-                {
-                    Console.WriteLine(icom.InnerException);
-                }
-                GC.Collect();
-            };
-            try
-            {
-                mediaControl = (IMediaControl)graph;
-                hr = mediaControl.Run();
-                //checkHR(hr, "Can't run the graph");
-                //Console.WriteLine(" running the recorder graph ");
+                CustomMessage.ShowMessage(" running the recorder graph ");
             }
             catch (COMException comx)
             {
@@ -645,7 +371,7 @@ namespace FaceDetection
 
             var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, cameraIndex);
             var pin = DirectShow.FindPin(filter, 0, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
-            //Console.WriteLine(GetVideoOutputFormat(pin).Length + " video format for camera " + cameraIndex);
+            //CustomMessage.ShowMessage(GetVideoOutputFormat(pin).Length + " video format for camera " + cameraIndex);
             VideoFormat[] videoFormats = GetVideoOutputFormat(pin);
             
             for (var i = 0; i<videoFormats.Length; i++)
@@ -658,204 +384,7 @@ namespace FaceDetection
 
             }
             */
-            ///////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////
 
-            /*
-
-            GetInterfaces();
-            MainForm.Or_pb_recording.Visible = true;
-            MainForm.Or_pb_recording.Refresh();
-            string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
-            string sourcePath = Properties.Settings.Default.temp_folder;
-            //Console.WriteLine(MainForm.CURRENT_MODE  + " " + MainForm.CURRENT_MODE);
-            //REGULAR 0 PREEVENT
-            if (CURRENT_MODE != CAMERA_MODES.PREEVENT)
-            {
-                //MainForm.GetMainForm.RecordingTimer.Stop();
-                string str = "";
-                if (ACTIVE_RECPATH != string.Empty || ACTIVE_RECPATH != RECPATH.MANUAL)
-                {                    
-                    str = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
-                    str = Path.Combine(str, (INDEX + 1).ToString());
-                    str = Path.Combine(str, ACTIVE_RECPATH);
-                }
-                else
-                {
-                    str = Path.Combine(Properties.Settings.Default.video_file_location, (INDEX + 1).ToString());
-                }
-                targetPath = str + "/" + dstFileName;
-                Directory.CreateDirectory(str);
-
-                Console.WriteLine(targetPath + " +++++++++++++++++ dest name 108 in  recorder");
-            }else
-            {
-                //PREEVENT EXISTS. PERMANENT RECORDING MODE
-                targetPath = sourcePath + "/" + dstFileName;
-                Console.WriteLine(targetPath + " target path");
-                Directory.CreateDirectory(sourcePath + "/" + RECPATH.TEMP);
-                //MainForm.GetMainForm.RecordingStart();
-            }
-            //ReleaseInterfaces();
-            
-            //var camera_list = FindDevices();
-            graph = (IGraphBuilder)(new FilterGraph());
-            pGraph = graph;
-            hr = 0;
-
-            hr = pGraphBuilder.SetFiltergraph(pGraph);
-            DsError.ThrowExceptionForHR(hr);
-
-            //pUSB = FindCaptureDevice();
-            pUSB = CreateVideoCaptureSource(INDEX, GetResolution(INDEX), GetFPS(INDEX));
-
-            hr = pGraph.AddFilter(pUSB, "WebCamControl Video");
-            DsError.ThrowExceptionForHR(hr);
-
-            //add smartTee
-            pSmartTee = (IBaseFilter)new SmartTee();
-            hr = pGraph.AddFilter(pSmartTee, "Smart Tee");
-            DsError.ThrowExceptionForHR(hr);
-
-            //connect smart tee to camera 
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pUSB, null, pSmartTee);
-            DsError.ThrowExceptionForHR(hr);
-
-            //add File writer
-            IBaseFilter pFilewriter = (IBaseFilter)new FileWriter();
-            hr = pGraph.AddFilter(pFilewriter, "File writer");
-            checkHR(hr, "Can't add File writer to graph");
-
-            //set destination filename
-            IFileSinkFilter pFilewriter_sink = pFilewriter as IFileSinkFilter;
-            if (pFilewriter_sink == null)
-                checkHR(unchecked((int)0x80004002), "Can't get IFileSinkFilter");
-            hr = pFilewriter_sink.SetFileName(targetPath, null);
-            checkHR(hr, "Can't set filename");
-
-            //add AVI Mux
-            pAVIMux = (IBaseFilter)new AviDest();
-            hr = pGraph.AddFilter(pAVIMux, "AVI Mux");
-            checkHR(hr, "Can't add AVI Mux to graph");
-
-            //connect AVI Mux and File writer
-            hr = pGraph.ConnectDirect(GetPin(pAVIMux, "AVI Out"), GetPin(pFilewriter, "in"), null);
-            checkHR(hr, "Can't connect AVI Mux and File writer");
-
-
-            hr = pGraph.AddFilter(pSampleGrabber as IBaseFilter, "SampleGrabber");
-            checkHR(hr, "Can't add SampleGrabber to graph");
-            i_grabber.SetBufferSamples(true); //サンプルグラバでのサンプリングを開始
-
-         
-
-            //フォーマットの設定
-            //暫くは一時的な値を使用してます
-
-            //SetFormat();
-
-            //connect Smart Tee and AVI Mux
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, pAVIMux);
-            checkHR(hr, "Can't connect Smart Tee and AVI Mux");
-
-            //connect Smart Tee and SampleGrabber
-            //hr = pGraph.ConnectDirect(GetPin(pSmartTee, "Preview"), GetPin(pSampleGrabber as IBaseFilter, "Input"), null);
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSmartTee, null, (IBaseFilter)pSampleGrabber);
-            checkHR(hr, "Can't connect Smart Tee and SampleGrabber");
-
-
-            IVMRAspectRatioControl9 ratioControl9 = (IVMRAspectRatioControl9)renderFilter;
-            hr = ratioControl9.SetAspectRatioMode(VMRAspectRatioMode.LetterBox);
-            DsError.ThrowExceptionForHR(hr);
-
-            IVMRFilterConfig9 config9 = (IVMRFilterConfig9)renderFilter;
-            hr = config9.SetRenderingMode(VMR9Mode.Windowless);
-            checkHR(hr, "Can't set windowless mode");
-
-            IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
-            hr = control9.SetVideoClippingWindow(pbx);
-            checkHR(hr, "Can't set video clipping window");
-
-            if (CURRENT_MODE != CAMERA_MODES.HIDDEN)
-            {
-                hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
-                checkHR(hr, "Can't set rectangles of the video position");
-                Console.WriteLine("NOT HIDDEN MODE " + CURRENT_MODE + ", Active path: " +ACTIVE_RECPATH);
-            }                
-
-
-            hr = pGraph.AddFilter(renderFilter, "My Render Filter");
-            DsError.ThrowExceptionForHR(hr);
-
-            hr = pGraphBuilder.RenderStream(null, MediaType.Video, pSampleGrabber, null, renderFilter);
-            DsError.ThrowExceptionForHR(hr);
-            
-
-            {
-                var mt = new AMMediaType();
-                i_grabber.GetConnectedMediaType(mt);
-                var header = (VideoInfoHeader)Marshal.PtrToStructure(mt.formatPtr, typeof(VideoInfoHeader));
-                var width = header.BmiHeader.Width;
-                var height = header.BmiHeader.Height;
-                var stride = width * (header.BmiHeader.BitCount / 8);
-                DsUtils.FreeAMMediaType(mt);
-                
-                GetBitmap = () => GetBitmapMain(i_grabber, width, height, stride);
-            }
-            
-            Release = () =>
-            {
-            
-
-                IEnumFilters enumFilters = null;
-                IBaseFilter[] baseFilters = { null };
-                IntPtr fetched = IntPtr.Zero;
-                try
-                {
-                    hr = pGraph.EnumFilters(out enumFilters);
-                    int r = 0;
-                    while (r == 0)
-                    {
-
-                        try
-                        {
-                            r = enumFilters.Next(baseFilters.Length, baseFilters, fetched);
-                            DsError.ThrowExceptionForHR(hr);
-                            baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
-                            Marshal.FreeCoTaskMem(fetched);
-                        }
-                        catch (System.NullReferenceException snrx)
-                        {
-                            Console.WriteLine(snrx.Message + snrx.HResult);
-                            r = 1;
-                            continue;
-                        }
-                    }
-                }
-                catch(InvalidComObjectException icom)
-                {
-                    Console.WriteLine(icom.InnerException);
-                }
-                GC.Collect();                
-            };           
-            try
-            {
-                mediaControl = (IMediaControl)graph;
-                hr = mediaControl.Run();
-                //checkHR(hr, "Can't run the graph");
-                //Console.WriteLine(" running the recorder graph ");
-            }
-            catch(COMException comx)
-            {
-                CustomMessage.ShowMessage("Can not start the camera");
-                Logger.Add("Can not start the camera");
-            }
-            */
         }
         private Bitmap GetBitmapMain(ISampleGrabber i_grabber, int width, int height, int stride)
         {
@@ -908,29 +437,29 @@ namespace FaceDetection
             {
                 //SnapShot.Form1.CleanBuffer();
                 //System.Windows.Forms.MessageBox.Show(ax.Message);
-                Console.WriteLine(ax.Message);
+                CustomMessage.ShowMessage(ax.Message);
             }
             return result;
         }
         public void SetWindowPosition(Size size)
         {
             int hr = 0;
-            if (CURRENT_MODE!=CAMERA_MODES.HIDDEN)
+            if (CAMERA_MODE != CAMERA_MODES.HIDDEN)
             {
                 IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
             }
-            
+
         }
-        
+
         private volatile ManualResetEvent m_PictureReady = null;
         private IntPtr m_ipBuffer = IntPtr.Zero;
         private int m_videoWidth = 1280;
         private int m_videoHeight = 720;
         private int m_videoBitCount = 24;
         private volatile bool m_bWantOneFrame = false;
-        
+        private CAMERA_MODES cAMERA_MODE;
 
         public IntPtr GetNextFrame()
         {
@@ -943,8 +472,11 @@ namespace FaceDetection
             int dwStartTime = System.Environment.TickCount;
 
             while (true)
+
             {
+
                 if (System.Environment.TickCount - dwStartTime > 1000) break; //1000 milliseconds 
+
             }
 
             // Got one
@@ -954,18 +486,21 @@ namespace FaceDetection
         {
             if (hr < 0)
             {
-                Console.WriteLine(msg);
+                CustomMessage.ShowMessage(msg);
                 ReleaseInterfaces();
                 DsError.ThrowExceptionForHR(hr);
             }
         }
-        
+
         public void ReleaseInterfaces()
         {
+            ON = false;
+            CustomMessage.ShowMessage("ReleaseInterfaces ");
             if (mediaControl != null)
                 mediaControl.StopWhenReady();
 
-            
+            CurrentState = PlayState.Stopped;
+
             // stop notifications of events
             if (mediaEventEx != null)
                 mediaEventEx.SetNotifyWindow(IntPtr.Zero, WM_GRAPHNOTIFY, IntPtr.Zero);
@@ -974,7 +509,7 @@ namespace FaceDetection
             //// Failing to call put_Owner can lead to assert failures within
             //// the video renderer, as it still assumes that it has a valid
             //// parent window.
-            
+
 
             // Release DirectShow interfaces
             if (mediaControl != null)
@@ -983,37 +518,11 @@ namespace FaceDetection
                 mediaControl = null;
             }
 
-            if (pAVIMux != null)
-            {
-                Marshal.ReleaseComObject(pAVIMux);
-                pAVIMux = null;
-            }
-
-            if (pUSB != null)
-            {
-                Marshal.ReleaseComObject(pUSB);
-                pUSB = null;
-            }
-
-            if (pSampleGrabber != null)
-            {
-                Marshal.ReleaseComObject(pSampleGrabber);
-                pSampleGrabber = null;
-            }
-
-            if (pSmartTee != null)
-            {
-                Marshal.ReleaseComObject(pSmartTee);
-                pSmartTee = null;
-            }
-
             if (mediaEventEx != null)
             {
                 Marshal.ReleaseComObject(mediaEventEx);
                 mediaEventEx = null;
             }
-
-            
 
             if (graph != null)
             {
@@ -1021,11 +530,11 @@ namespace FaceDetection
                 graph = null;
             }
 
-            //if (pGraphBuilder != null)
-            //{
-            //    Marshal.ReleaseComObject(pGraphBuilder);
-            //    pGraphBuilder = null;
-            //}
+            if (pGraphBuilder != null)
+            {
+                Marshal.ReleaseComObject(pGraphBuilder);
+                pGraphBuilder = null;
+            }
             GC.Collect();
         }
         private static void SafeReleaseComObject(object obj)
@@ -1146,18 +655,17 @@ namespace FaceDetection
                 hr = mediaEventEx.FreeEventParams(evCode, evParam1, evParam2);
                 DsError.ThrowExceptionForHR(hr);
 
-                Console.WriteLine(evCode + " -evCode " + evParam1 + " " + evParam2);
+                CustomMessage.ShowMessage(evCode + " -evCode " + evParam1 + " " + evParam2);
                 // Insert event processing code here, if desired (see http://msdn2.microsoft.com/en-us/library/ms783649.aspx)
             }
         }
         private IBaseFilter CreateVideoCaptureSource(int index, Size size, double fps)
         {
-            Console.WriteLine(index + " INDEX, " + size.Width + " width, " + size.Height + " height and fps:" +  fps);
             var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, index);
             var pin = DirectShow.FindPin(filter, 0, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
-            
+
             SetVideoOutputFormat(pin, size, fps);
-            return (IBaseFilter) filter;
+            return (IBaseFilter)filter;
         }
 
         /// <summary>
@@ -1171,16 +679,16 @@ namespace FaceDetection
         private static bool SetVideoOutputFormat(DirectShow.IPin pin, Size size, double fps)
         {
             var vformat = GetVideoOutputFormat(pin);
-            
+
 
             for (int i = 0; i < vformat.Length; i++)
             {
-                Console.WriteLine(vformat[i].Size.Width + " " + vformat[i].TimePerFrame);
+                CustomMessage.ShowMessage(vformat[i].Size.Width + " " + vformat[i].TimePerFrame);
                 if (vformat[i].MajorType == DirectShow.DsGuid.GetNickname(DirectShow.DsGuid.MEDIATYPE_Video))
                 {
                     if (vformat[i].Caps.Guid == DirectShow.DsGuid.FORMAT_VideoInfo)
                     {
-                        
+
                         if (vformat[i].Size.Width == size.Width && vformat[i].Size.Height == size.Height)
                         {
                             SetVideoOutputFormat(pin, i, size, fps);
@@ -1267,7 +775,7 @@ namespace FaceDetection
         /// <param name="fps">0以上を指定するとフレームレートを変更する。事前にVIDEO_STREAM_CONFIG_CAPSで取得した可能範囲内を指定すること。</param>
         private static void SetVideoOutputFormat(DirectShow.IPin pin, int index, Size size, double fps)
         {
-            Console.WriteLine("675 CACCCCCCCCCCCCCCCCC");
+            CustomMessage.ShowMessage("CACCCCCCCCCCCCCCCCC");
             // IAMStreamConfigインタフェース取得
             var config = pin as DirectShow.IAMStreamConfig;
             if (config == null)
@@ -1282,7 +790,7 @@ namespace FaceDetection
             {
                 throw new Exception("VIDEO_STREAM_CONFIG_CAPSを取得できません。");
             }
-            Console.WriteLine("690 VVVVVVVVVVVVVVVVVVVVVVD");
+            CustomMessage.ShowMessage("VVVVVVVVVVVVVVVVVVVVVVD");
             // データ用領域確保
             var cap_data = Marshal.AllocHGlobal(cap_size);
 
@@ -1291,13 +799,13 @@ namespace FaceDetection
             config.GetStreamCaps(index, ref mt, cap_data);
             var cap = PtrToStructure<DirectShow.VIDEO_STREAM_CONFIG_CAPS>(cap_data);
 
-            if (mt.FormatType == DirectShow.DsGuid.FORMAT_VideoInfo && mt.SubType==DirectShow.DsGuid.MEDIASUBTYPE_MJPG)
+            if (mt.FormatType == DirectShow.DsGuid.FORMAT_VideoInfo && mt.SubType == DirectShow.DsGuid.MEDIASUBTYPE_MJPG)
             {
-                Console.WriteLine("SETTINGS OK ======================");
+                CustomMessage.ShowMessage("SETTINGS OK ======================");
                 var vinfo = PtrToStructure<DirectShow.VIDEOINFOHEADER>(mt.pbFormat);
                 if (!size.IsEmpty) { vinfo.bmiHeader.biWidth = size.Width; vinfo.bmiHeader.biHeight = size.Height; }
                 if (fps > 0) { vinfo.AvgTimePerFrame = (long)(10000000 / fps); }
-                vinfo.BitRate = 1000000;                
+                vinfo.BitRate = 1000000;
                 Marshal.StructureToPtr(vinfo, mt.pbFormat, true);
             }
             else if (mt.FormatType == DirectShow.DsGuid.FORMAT_VideoInfo2 && mt.SubType == DirectShow.DsGuid.MEDIASUBTYPE_MJPG)
@@ -1311,26 +819,14 @@ namespace FaceDetection
 
             // フォーマットを選択
             int hr = config.SetFormat(mt);
-            
-            Console.WriteLine("SETTINGS OK ????????????????????" + hr);
+
+            CustomMessage.ShowMessage("SETTINGS OK ????????????????????" + hr);
 
 
             // 解放
             if (cap_data != System.IntPtr.Zero) Marshal.FreeHGlobal(cap_data);
             if (mt != null) DirectShow.DeleteMediaType(ref mt);
         }
-
-
-        
-
-
-
-        /// <summary>
-        /// ///////////////////////////////////////////////////////////////////////////
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="ptr"></param>
-        /// <returns></returns>
 
         private static T PtrToStructure<T>(IntPtr ptr)
         {
@@ -1340,7 +836,7 @@ namespace FaceDetection
         public class VideoFormat
         {
             private DirectShow.VIDEO_STREAM_CONFIG_CAPS caps;
-            
+
             public string MajorType { get; set; }  // [Video]など
             public string SubType { get; set; }    // [YUY2], [MJPG]など
             public Size Size { get; set; }         // ビデオサイズ
