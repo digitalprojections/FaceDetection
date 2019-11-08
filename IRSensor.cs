@@ -21,7 +21,7 @@ namespace FaceDetection
         private void Init_IR_Timer()
         {
                 
-           if (Properties.Settings.Default.capture_operator && decimal.ToInt32(Properties.Settings.Default.face_rec_interval)>0)
+           if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_Human_sensor && decimal.ToInt32(Properties.Settings.Default.face_rec_interval)>0)
            {
                 SensorCheckTimer.Tick += IR_Timer_Tick;
                 SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
@@ -30,7 +30,7 @@ namespace FaceDetection
             }
             else
             {
-                MessageBox.Show("Invalid value was set for Face recorgnition interval");
+                
             }
 
         }

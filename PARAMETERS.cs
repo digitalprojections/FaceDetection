@@ -27,7 +27,6 @@ namespace FaceDetection
              */
             if (param.Contains("uvccameraviewer"))
             {
-
                 if (parameters.Count > 0)
                 {
                     //Only 2 parameter elements
@@ -42,12 +41,9 @@ namespace FaceDetection
                             }else
                             {
                                 //the value is 9. Start all cameras
-
                             }
                         }
                     }
-
-
                     switch (parameters.ElementAt(1))
                     {
                         case "-c":

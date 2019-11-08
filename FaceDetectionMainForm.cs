@@ -22,39 +22,8 @@ namespace FaceDetection
         //private readonly MouseListener mouseListener;
 
         private RecorderCamera cameraMan = null;
-        /// <summary>
-        /// Camera modes to assist identify current status 
-        /// of the application during operation
-        /// Manage it properly, carefully, 
-        /// so there are no confusion or contradictions
-        /// Available choices        
-        /// <para>PREVIEW</para>
-        /// <para>CAPTURE</para>
-        /// <para>FACE (recommended use on PC)</para>
-        /// <para>HIDDEN (recording mode without preview)</para>
-        /// </summary>
-        internal enum CAMERA_MODES
-        {
-            //NONE,         
-            PREVIEW,
-            CAPTURE,
-            //FACE,
-            HIDDEN,
-            ERROR,
-            PREEVENT
-        }
-
         internal bool OPERATOR_CAPTURE_ALLOWED = false;
         internal bool EVENT_RECORDING_IN_PROGRESS = false;
-
-        internal static class RECPATH
-        {
-            public const string NORMAL = "";
-            public const string MANUAL = "MOVIE";
-            public const string EVENT = "EVENT";            
-        }
-
-        internal static string ACTIVE_RECPATH = RECPATH.MANUAL;
         internal static int SELECTED_CAMERA = 0;
 
         /*
@@ -295,16 +264,16 @@ namespace FaceDetection
         private void WindowSizeUpdate(object sender, EventArgs e)
         {
             //Logger.Add(settingUI.Camera_number);
-            WindowSizeUpdate();
+            //WindowSizeUpdate();
         }
         public void WindowSizeUpdate()
         {
-            if (Setting_ui != null)
-            {
+            
                 Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
                 Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
+            if (crossbar!=null)
                 crossbar.SetWindowPosition(new System.Drawing.Size(this.Width, this.Height));
-            }
+            
         }
         public void EventRecorderOn()
         {
@@ -462,7 +431,9 @@ namespace FaceDetection
             or_camera_num_txt.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
             MainForm.GetMainForm.TopMost = Properties.Settings.Default.window_on_top;
             MainForm.GetMainForm.Size = new System.Drawing.Size(decimal.ToInt32(Properties.Settings.Default.C1w), decimal.ToInt32(Properties.Settings.Default.C1h));
-            MainForm.GetMainForm.Location = new System.Drawing.Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
+            MainForm.GetMainForm.Location = new System.Drawing.Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));            
+            
+
             or_current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
             if (Properties.Settings.Default.main_window_full_screen)
             {
@@ -488,7 +459,7 @@ namespace FaceDetection
             //Also must check if the PREEVENT mode is needed
             if (AtLeastOnePreEventTimeIsNotZero())
             {
-                //Logger.Add("DOING: " + CROSSBAR.CAMERA_MODES.PREEVENT);                
+                //Logger.Add("DOING: " + this.CAMERA_MODES.PREEVENT);                
                 MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREEVENT);
             }                
             else
@@ -669,6 +640,26 @@ namespace FaceDetection
         {
             //crossbar.StartTimer();
             Logger.Add("timer start " + e);
+        }
+
+        private void MainForm_ResizeEnd(object sender, EventArgs e)
+        {
+            WindowSizeUpdate();
+        }
+
+        private void MainForm_MaximumSizeChanged(object sender, EventArgs e)
+        {
+            WindowSizeUpdate();
+        }
+
+        private void MainForm_MaximizedBoundsChanged(object sender, EventArgs e)
+        {
+            WindowSizeUpdate();
+        }
+
+        private void MainForm_LocationChanged(object sender, EventArgs e)
+        {
+            WindowSizeUpdate();
         }
     }
 

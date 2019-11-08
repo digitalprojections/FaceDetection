@@ -91,8 +91,7 @@ namespace FaceDetection
         public RecorderCamera(int cameraIndex)
         {
             this.INDEX = cameraIndex;
-            sourcePath = Properties.Settings.Default.templocation;
-            
+            sourcePath = Properties.Settings.Default.temp_folder;            
         }
 
         private void WndProc(ref System.Windows.Forms.Message m)
@@ -321,24 +320,6 @@ namespace FaceDetection
                 Logger.Add("Can not start the camera");
                 Logger.Add("Can not start the camera");
             }
-            /*
-
-            var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, cameraIndex);
-            var pin = DirectShow.FindPin(filter, 0, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
-            //Logger.Add(GetVideoOutputFormat(pin).Length + " video format for camera " + cameraIndex);
-            VideoFormat[] videoFormats = GetVideoOutputFormat(pin);
-            
-            for (var i = 0; i<videoFormats.Length; i++)
-            {
-                Console.Write(videoFormats[i].MajorType + " ");
-                Console.Write(videoFormats[i].Size.Width + " ");
-                Console.Write(videoFormats[i].Size.Height + " ");
-                Console.Write(videoFormats[i].SubType + " ");
-                Console.Write(videoFormats[i].TimePerFrame + " /////");                
-
-            }
-            */
-
         }
         public void RESET_FILE_PATH()
         {
@@ -364,8 +345,6 @@ namespace FaceDetection
             mediaControl.Run();
             checkHR(hr, "Can't run the graph");
         }
-
-
         private Bitmap GetBitmapMain(ISampleGrabber i_grabber, int width, int height, int stride)
         {
             try
@@ -388,10 +367,8 @@ namespace FaceDetection
             int sz = 0;
             i_grabber.GetCurrentBuffer(ref sz, IntPtr.Zero); // IntPtr.Zeroで呼び出してバッファサイズ取得
             if (sz == 0) return null;
-            // メモリ確保し画像データ取得
             var ptr = Marshal.AllocCoTaskMem(sz);
             i_grabber.GetCurrentBuffer(ref sz, ptr);
-            // 画像データをbyte配列に入れなおす
             var data = new byte[sz];
             Marshal.Copy(ptr, data, 0, sz);
             Bitmap result = null;
@@ -400,10 +377,6 @@ namespace FaceDetection
                 // 画像を作成
                 result = new Bitmap(width, height, PixelFormat.Format24bppRgb);
                 var bmp_data = result.LockBits(new Rectangle(Point.Empty, result.Size), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
-
-                //Debug.WriteLine(i_grabber + " igrabber " + ptr + " pointer, " + data.Length + " data  length " + sz);
-
-                // 上下反転させながら1行ごとコピー
                 for (int y = 0; y < height; y++)
                 {
                     var src_idx = sz - (stride * (y + 1)); // 最終行から
@@ -415,8 +388,6 @@ namespace FaceDetection
             }
             catch (ArgumentException ax)
             {
-                //SnapShot.Form1.CleanBuffer();
-                //System.Windows.Forms.MessageBox.Show(ax.Message);
                 Logger.Add(ax.Message);
             }
             return result;
@@ -427,7 +398,7 @@ namespace FaceDetection
             if (CAMERA_MODE != CAMERA_MODES.HIDDEN)
             {
                 IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
-                hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
             }
 

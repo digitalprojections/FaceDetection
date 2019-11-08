@@ -37,23 +37,21 @@ namespace FaceDetection
         {
             try
             {
-                Bitmap bitmap = MainForm.GetMainForm.crossbar.GetBitmap();
-                if (bitmap != null && !fd)
+                if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_face_recognition)
                 {
-
-
-                    Rect[] rectList = fase_cascade.DetectMultiScale(bitmap.ToMat());
-                    if (rectList.Length == 0)
-                        rectList = eye_cascade.DetectMultiScale(bitmap.ToMat());
-
-                    if (rectList.Length == 0)
-                        rectList = body_cascade.DetectMultiScale(bitmap.ToMat());
-
-                    if (rectList.Length > 0)
+                    Bitmap bitmap = MainForm.GetMainForm.crossbar.GetBitmap();
+                    if (bitmap != null && !fd)
                     {
-                        fd = true;
-                        if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_face_recognition)
+                        Rect[] rectList = fase_cascade.DetectMultiScale(bitmap.ToMat());
+                        if (rectList.Length == 0)
+                            rectList = eye_cascade.DetectMultiScale(bitmap.ToMat());
+
+                        if (rectList.Length == 0)
+                            rectList = body_cascade.DetectMultiScale(bitmap.ToMat());
+
+                        if (rectList.Length > 0)
                         {
+                            fd = true;
                             //heat signature detected, stop timer
                             Stop_Face_Timer();
                             //↓20191107 Nagayama added↓

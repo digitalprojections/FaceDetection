@@ -8,8 +8,6 @@ namespace FaceDetection
 {
     public class CROSSBAR
     {
-        
-        private static CROSSBAR crossbar = null;
         public bool PREEVENT_RECORDING = false;
         private RecorderCamera recorder = null;
         private UsbCamera camera = null;
@@ -27,6 +25,16 @@ namespace FaceDetection
         /// </summary>
         static bool recording_is_on = false;
         //TIMERS, 2 timers only
+        /// <summary>
+        /// If Enabled and AutoReset are both set to false, 
+        /// and the timer has previously been enabled, 
+        /// setting the Interval property causes the Elapsed event to be raised once, 
+        /// as if the Enabled property had been set to true. 
+        /// To set the interval without raising the event, 
+        /// you can temporarily set the Enabled property to true, 
+        /// set the Interval property to the desired time interval, 
+        /// and then immediately set the Enabled property back to false.
+        /// </summary>
         static Timer the_timer = new Timer();
 
         
@@ -40,8 +48,7 @@ namespace FaceDetection
         public bool Recording_is_on { get => recording_is_on; set => recording_is_on = value; }
                         
         public CROSSBAR()
-        {
-            crossbar = this;
+        {            
             this.INDEX = 0;
             no_opcap_timer.AutoReset = false;
             no_opcap_timer.Elapsed += No_opcap_timer_Elapsed;
@@ -91,8 +98,8 @@ namespace FaceDetection
         public void No_Cap_Timer_ON(int vidlen)
         {
             wait_interval_enabled = true;
-            no_opcap_timer.Enabled = true;
-            //it is the sum of the 2 values
+            if(no_opcap_timer!=null)
+                no_opcap_timer.Enabled = true;
             int intt = decimal.ToInt32(
                 Properties.Settings.Default.interval_before_reinitiating_recording + vidlen)
                 * 1000;
@@ -112,19 +119,18 @@ namespace FaceDetection
             {
                 recorder.ReleaseInterfaces();
                 the_timer.Enabled = false;
-                if (CROSSBAR.crossbar != null)
-                    CROSSBAR.crossbar.PreviewMode();
+                if (this != null)
+                    this.PreviewMode();
             }
             else if (PREEVENT_RECORDING)
             {
-                //recorder.ReleaseInterfaces();
-                //recorder = new RecorderCamera(0);
-                //recorder.ACTIVE_RECPATH = Properties.Settings.Default.temp_folder;
                 recorder.CAMERA_MODE = CAMERA_MODES.PREEVENT;
-                the_timer.Enabled = true;
-                the_timer.Interval = BUFFER_DURATION.BUFFERDURATION;
-                recorder.RESET_FILE_PATH();
-                //CROSSBAR.crossbar.RecordingMode();
+                if(the_timer!=null)
+                {
+                    the_timer.Enabled = true;
+                    the_timer.Interval = BUFFER_DURATION.BUFFERDURATION;
+                }                    
+                recorder.RESET_FILE_PATH();                
             }
             if (wait_interval_enabled)
             {
@@ -176,6 +182,14 @@ namespace FaceDetection
                 return recorder.GetBitmap();
             else
                 return camera.GetBitmap();
+        }
+
+        internal void RESTART_CAMERA()
+        {
+            if (Recording_is_on)
+                this.RecordingMode();
+            else
+                this.PreviewMode();
         }
 
         internal void PreviewMode()
@@ -231,21 +245,21 @@ namespace FaceDetection
                     if (Properties.Settings.Default.manual_record_time > 0)
                     {
                         MainForm.Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon;
-                        decimal mrm = Properties.Settings.Default.manual_record_time;
+                        //decimal mrm = Properties.Settings.Default.manual_record_time;
                         //This does not check if the recording is on, as it prioritizes the manual recording
                         recorder.ReleaseInterfaces();
                         recorder = new RecorderCamera(0);
                         recorder.CAMERA_MODE = CAMERA_MODES.MANUAL;
                         recorder.ACTIVE_RECPATH = RECORD_PATH.MANUAL;
                         //↓20191106 Nagayama added↓
-                        the_timer.Stop();
+                        //the_timer.Stop();
                         //↑20191106 Nagayama added↑                        
-                        the_timer.Enabled = true;
+                        //the_timer.Enabled = true;
                         duration = decimal.ToInt32(Properties.Settings.Default.manual_record_time) * 1000;                        
                         the_timer.Interval = duration;
-                        the_timer.Enabled = false;
-                        if (CROSSBAR.crossbar != null)
-                            CROSSBAR.crossbar.RecordingMode();
+                        the_timer.Enabled = true;
+                        if (this != null)
+                            this.RecordingMode();
                     }
                     break;
                 case CAMERA_MODES.EVENT:
@@ -263,8 +277,8 @@ namespace FaceDetection
 
                         the_timer.Enabled = true;
                         the_timer.Interval = duration;                        
-                        if (CROSSBAR.crossbar != null)
-                            CROSSBAR.crossbar.RecordingMode();
+                        if (this != null)
+                            this.RecordingMode();
                     }
                     break;
                 case CAMERA_MODES.OPERATOR:
@@ -277,13 +291,13 @@ namespace FaceDetection
                         the_timer.Enabled = true;
                         the_timer.Interval = duration;
                         Logger.Add(no_opcap_timer.Interval.ToString());
-                        if (CROSSBAR.crossbar != null)
+                        if (this != null)
                         {
                             recorder.ACTIVE_RECPATH = RECORD_PATH.EVENT;
                             recorder.CAMERA_MODE = CAMERA_MODES.OPERATOR;
                             wait_interval_enabled = true;
-                            CROSSBAR.crossbar.OPER_BAN = true;
-                            CROSSBAR.crossbar.RecordingMode();
+                            this.OPER_BAN = true;
+                            this.RecordingMode();
                         }
 
                     }
@@ -295,22 +309,22 @@ namespace FaceDetection
                     the_timer.Stop();
                     recorder.ACTIVE_RECPATH = "";
                     recorder.ReleaseInterfaces();
-                    if (CROSSBAR.crossbar != null)
-                        CROSSBAR.crossbar.PreviewMode();
+                    if (this != null)
+                        this.PreviewMode();
                     break;
                 case CAMERA_MODES.PREEVENT:
                     //permanent cycle
                     PREEVENT_RECORDING = true;
                     duration = BUFFER_DURATION.BUFFERDURATION;
-                    Logger.Add(duration);
+                    //Logger.Add(duration);
                     recorder.ReleaseInterfaces();
                     recorder = new RecorderCamera(0);
                     recorder.ACTIVE_RECPATH = Properties.Settings.Default.temp_folder;
                     recorder.CAMERA_MODE = CAMERA_MODES.PREEVENT;
                     the_timer.Enabled = true;
                     the_timer.Interval = duration;                    
-                    if (CROSSBAR.crossbar != null)
-                        CROSSBAR.crossbar.RecordingMode();
+                    if (this != null)
+                        this.RecordingMode();
                     break;
             }
         }
@@ -319,11 +333,11 @@ namespace FaceDetection
         {
             try
             {
-                if (camera.ON)
+                if (camera!=null && camera.ON)
                 {
                     camera.SetWindowPosition(size);
                 }
-                else if (recorder.ON)
+                else if (recorder!=null && recorder.ON || PREEVENT_RECORDING)
                 {
                     recorder.SetWindowPosition(size);
                 }
@@ -333,24 +347,6 @@ namespace FaceDetection
             }
 
         }
-
-
-
-        /// <summary>
-        /// If Enabled and AutoReset are both set to false, 
-        /// and the timer has previously been enabled, 
-        /// setting the Interval property causes the Elapsed event to be raised once, 
-        /// as if the Enabled property had been set to true. 
-        /// To set the interval without raising the event, 
-        /// you can temporarily set the Enabled property to true, 
-        /// set the Interval property to the desired time interval, 
-        /// and then immediately set the Enabled property back to false.
-        /// </summary>
-        private void The_timer_Elapsed(object sender, EventHandler e)
-        {
-
-        }
-
         internal void ReleaseCameras()
         {
             Logger.Add("TODO: Releasing all cameras here");

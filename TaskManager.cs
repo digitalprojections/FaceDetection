@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace FaceDetection
@@ -17,8 +15,9 @@ namespace FaceDetection
         private static TimeSpan timeSpanStart; // Time to keep before event
         private static TimeSpan timeSpanEnd;  // Time to keep after event
         private static TimeSpan fiveMinutes = new TimeSpan(0, 0, 5, 0);
+        private static TimeSpan noTime = new TimeSpan(0, 0, 0, 0);
         private static string directory = Environment.CurrentDirectory; // Directory of the project
-        private const int BUFFERDURATION =BUFFER_DURATION.BUFFERDURATION; // Duration of the buffer (each time a new TEMP video file is created)
+        private const int BUFFERDURATION = BUFFER_DURATION.BUFFERDURATION; // Duration of the buffer (each time a new TEMP video file is created)
 
         public TaskManager()
         {
@@ -106,6 +105,7 @@ namespace FaceDetection
             DateTime dateCutVideo, dateEventStartTime, dateEventStop, dateStartVideoEvent;
             int compareDateWithEvent, compareDateWithFilePreevent, cutTime, durationOfVideoToCut, timeToCutLastVideo, listTaskIndex = 0;
             TimeSpan tsTimeBeforeEvent, timeFromStartVideoToEvent;
+            bool fileSaved = false;
 
             try
             {
@@ -130,53 +130,47 @@ namespace FaceDetection
                 arrayListOfFiles = listTask[listTaskIndex].allPreEventVideo.Split('|');
                 fileToCutFromTheEnd = arrayListOfFiles.First();
 
-                if (listTask[listTaskIndex].starttime.Seconds != 0) // We need to keep something before event appeared
+                try
                 {
-                    try
-                    {
-                        // Look for the interval between the event and the beginning of the video which contain the event to know the interval we need to cut in the video before this file
-                        startVideoForFullFileName = arrayListOfFiles.Last().Substring(arrayListOfFiles.Last().Length - 18, 18);
-                        dateStartVideoEvent = new DateTime(Convert.ToInt32(startVideoForFullFileName.Substring(0, 4)), Convert.ToInt32(startVideoForFullFileName.Substring(4, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(6, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(8, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(10, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(12, 2)));
-                        tsTimeBeforeEvent = listTask[listTaskIndex].eventtime - dateStartVideoEvent;
+                    // Look for the interval between the event and the beginning of the video which contain the event to know the interval we need to cut in the video before this file
+                    startVideoForFullFileName = arrayListOfFiles.Last().Substring(arrayListOfFiles.Last().Length - 18, 18);
+                    dateStartVideoEvent = new DateTime(Convert.ToInt32(startVideoForFullFileName.Substring(0, 4)), Convert.ToInt32(startVideoForFullFileName.Substring(4, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(6, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(8, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(10, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(12, 2)));
+                    tsTimeBeforeEvent = listTask[listTaskIndex].eventtime - dateStartVideoEvent;
 
-                        cutTime = listTask[listTaskIndex].starttime.Seconds - tsTimeBeforeEvent.Seconds; // Time wanted (param) before event - time ellapsed in the file before event appeared
-                        if (cutTime < 0) // The event and the time before we need to keep are in the same file. No need to look for interval between the event video file and the file before AND the file is finished
+                    cutTime = listTask[listTaskIndex].starttime.Seconds - tsTimeBeforeEvent.Seconds; // Time wanted (param) before event - time ellapsed in the file before event appeared
+                    if (cutTime < 0) // The event and the time before we need to keep are in the same file. No need to look for interval between the event video file and the file before AND the file is finished
+                    {
+                        try
                         {
-                            try
-                            {
-                                durationOfVideoToCut = Convert.ToInt32(GetVideoDuration(fileToCutFromTheEnd).Substring(5, 2));
-                                cutTime = (durationOfVideoToCut - tsTimeBeforeEvent.Seconds) + listTask[listTaskIndex].starttime.Seconds;
-                                startVideoForFullFile = CutVideoKeepEnd(fileToCutFromTheEnd, cutTime);
-                            }
-                            catch(Exception e) // Event and time to keep before are in the same file AND the file is still in recording, so we can't use the final duration
-                            {
-                                timeFromStartVideoToEvent = listTask[listTaskIndex].eventtime - dateStartVideoEvent;
-                                startVideoForFullFile = CutVideoFromEvent(fileToCutFromTheEnd, timeFromStartVideoToEvent, listTask[listTaskIndex].starttime.Seconds, listTask[listTaskIndex].stoptime.Seconds, listTaskIndex);
-                            }
+                            durationOfVideoToCut = Convert.ToInt32(GetVideoDuration(fileToCutFromTheEnd).Substring(5, 2));
+                            cutTime = (durationOfVideoToCut - tsTimeBeforeEvent.Seconds) + listTask[listTaskIndex].starttime.Seconds;
+                            startVideoForFullFile = CutVideoKeepEnd(fileToCutFromTheEnd, cutTime);
                         }
-                        else
+                        catch (Exception e) // Event and time to keep before are in the same file AND the file is still in recording, so we can't use the final duration
                         {
-                            if (listRecordingFiles.First() != fileToCutFromTheEnd) // Several files in TEMP folder. We can look for files before normally
-                            {
-                                startVideoForFullFile = CutVideoKeepEnd(fileToCutFromTheEnd, cutTime);
-                            }
-                            else // Just one file in TEMP folder, means that the time we want to keep before the event is > to the time which has actually passed since the beginning of the video. Don't need to keep this file here, the postevent will take care of it
-                            {
-                                startVideoForFullFile = "";
-                            }
+                            timeFromStartVideoToEvent = listTask[listTaskIndex].eventtime - dateStartVideoEvent;
+                            startVideoForFullFile = CutVideoFromEvent(fileToCutFromTheEnd, timeFromStartVideoToEvent, listTask[listTaskIndex].starttime.Seconds, listTask[listTaskIndex].stoptime.Seconds, listTaskIndex);
+                            fileSaved = true;
                         }
                     }
-                    catch (Exception e) // no file to cut
+                    else
                     {
-                        startVideoForFullFile = "";
+                        if (listRecordingFiles.Last() != fileToCutFromTheEnd) // If this is different, it's means that there are several files in TEMP folder. 
+                        {
+                            startVideoForFullFile = CutVideoKeepEnd(fileToCutFromTheEnd, cutTime);
+                        }
+                        else // Just one file in TEMP folder, means that the time we want to keep before the event is > to the time which has actually passed since the beginning of the video. Don't need to keep this file here, the postevent will take care of it
+                        {
+                            startVideoForFullFile = "";
+                        }
                     }
                 }
-                else
+                catch (Exception e) // no file to cut
                 {
                     startVideoForFullFile = "";
                 }
 
-                if (listRecordingFiles.Count != 0)
+                if (fileSaved == false && listRecordingFiles.Count != 0)
                 {
                     for (int i = 1; i <= listRecordingFiles.Count; i++)
                     {
@@ -245,9 +239,13 @@ namespace FaceDetection
                     }
                 }
 
-                System.Threading.Thread.Sleep(100); // Wait for the last files is released by the system
+                if (fileSaved == false) // The file isn't saved yet  (Because the function CutVideoFromEvent() saved it directly, so don't need to pass in the Concat() function in that case)
+                {
+                    System.Threading.Thread.Sleep(100); // Wait for the last files is released by the system
+                    ConcatVideo(startVideoForFullFile, posteventFilesName, startEventTime, listTaskIndex); // Concat all path files to send to ffmpeg to make the final video with all cuts
+                }
 
-                ConcatVideo(startVideoForFullFile, posteventFilesName, startEventTime, listTaskIndex); // Concat all path files to send to ffmpeg to make the final video with all cuts
+                fileSaved = false;
                 listTask.Remove(listTask[listTaskIndex]); // Delete the task ended
             }
             catch (Exception e) {
@@ -386,12 +384,7 @@ namespace FaceDetection
             ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffmpeg.exe");
             if (preEventVideoFiles != "" && postEventVideoFiles != "")
             {
-                startInfo.Arguments = @"-loglevel quiet -y -i concat:" + 
-                    preEventVideoFiles + "|" + 
-                    postEventVideoFiles + " -c copy " + 
-                    Properties.Settings.Default.video_file_location + "\\Camera\\" + 
-                    listTask[TaskIndex].cameraNumber.ToString() + "\\" + 
-                    listTask[TaskIndex].path + "\\" + startTime + ".avi"; 
+                startInfo.Arguments = @"-loglevel quiet -y -i concat:" + preEventVideoFiles + "|" + postEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[TaskIndex].cameraNumber.ToString() + "\\" + listTask[TaskIndex].path + "\\" + startTime + ".avi"; 
             }
             else if (preEventVideoFiles != "" && postEventVideoFiles == "") // All the video stream kept are inside the same file
             {

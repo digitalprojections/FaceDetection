@@ -677,7 +677,6 @@
             // 
             resources.ApplyResources(this.cb_show_camera_number, "cb_show_camera_number");
             this.cb_show_camera_number.Checked = global::FaceDetection.Properties.Settings.Default.show_camera_no;
-            this.cb_show_camera_number.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_show_camera_number.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "show_camera_no", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_show_camera_number.Name = "cb_show_camera_number";
             this.cb_show_camera_number.Tag = "7";

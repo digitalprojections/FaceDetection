@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -44,7 +45,17 @@ namespace FaceDetection
             //two versions here. Depending on camera mode
 
             //pic from regular camera
-            MainForm.GetMainForm.GetSnapShot().Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
+            Bitmap bitmap = new Bitmap(1, 1);
+            try
+            {
+                bitmap = MainForm.GetMainForm.GetSnapShot();
+                if (bitmap != null)
+                    bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
+            }catch(NullReferenceException nrx)
+            {
+                Logger.Add(nrx);
+            }
+            
 
 
         }

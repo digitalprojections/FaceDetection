@@ -10,27 +10,16 @@ using DirectShowLib;
 
 namespace FaceDetectionX
 {
-    // [How to use]
-    // string[] devices = UsbCamera.FindDevices();
-    // if (devices.Length == 0) return; // no camera.
-    //
-    // /* for debugging. */
-    // var formats = UsbCamera.GetVideoFormat(0);
-    // foreach (var item in formats) Logger.Add(item);
-    //
-    // /* create usb camera and start. */
-    // var index = 0;
-    // var camera = new UsbCamera(index, new Size(640, 480));
-    // camera.Start();
-    //
-    // /* wait a few seconds until image buffer filled. */
-    //
-    // /* get image. */
-    // var bmp = camera.GetBitmap();
 
      public class UsbCamera
     {
-        
+        /// <summary>
+        /// Camera Index
+        /// </summary>
+        private int INDEX = 0;        
+        /// <summary>
+        /// Camera ON
+        /// </summary>
         public bool ON = false;
         //public DirectShow.IVideoWindow videoWindow = null;
 
@@ -83,6 +72,7 @@ namespace FaceDetectionX
         /// </param>
         public UsbCamera(int cameraIndex)
         {
+            INDEX = cameraIndex;
             Size size = FaceDetection.MainForm.GetMainForm.GetResolution(0);
             int fps = FaceDetection.MainForm.GetMainForm.GetFPS(0);
             var camera_list = FindDevices();
@@ -105,69 +95,31 @@ namespace FaceDetectionX
         private void Init(int index, Size size, double fps, IntPtr pbx)
         {
             ON = true;
-            //----------------------------------
-            // Create Filter Graph
-            //----------------------------------
-            // +--------------------+  +----------------+  +---------------+
-            // |Video Capture Source|→| Sample Grabber |→| VMR9 Renderer attached to your form Control.Handle |
-            // +--------------------+  +----------------+  +---------------+
-            //                                 ↓GetBitmap()
-
             var graph = DirectShow.CreateGraph();
-
-            //----------------------------------
-            // VideoCaptureSource
-            //----------------------------------
             vcap_source = (CreateVideoCaptureSource(index, size, fps));
             graph.AddFilter(vcap_source, "VideoCapture");
-
-            //------------------------------
-            // Smart Tee
-            //------------------------------
-
-            //DisplayPropertyPage((IBaseFilter)vcap_source);
-            
-
-            //------------------------------
-            // SampleGrabber
-            //------------------------------
             var grabber = CreateSampleGrabber();
             graph.AddFilter(grabber, "SampleGrabber");
             var i_grabber = (DirectShow.ISampleGrabber)grabber;
             i_grabber.SetBufferSamples(true); //サンプルグラバでのサンプリングを開始
-
-            //---------------------------------------------------
-            // Null Renderer
-            //---------------------------------------------------
             renderer = DirectShow.CoCreateInstance(DirectShow.DsGuid.CLSID_VideoMixingRenderer9) as DirectShow.IBaseFilter;
             graph.AddFilter(renderer, "VMR9");
-
-            //---------------------------------------------------
-            // Create Filter Graph
-            //---------------------------------------------------
-
             DirectShow.IVMRAspectRatioControl9 ratioControl9 = (DirectShow.IVMRAspectRatioControl9)renderer;
             int hr = ratioControl9.SetAspectRatioMode(DirectShow.VMRAspectRatioMode.LetterBox);
             checkHR(hr, "can not set aspect ratio");
-
             IVMRFilterConfig9 config9 = (IVMRFilterConfig9)renderer;
             hr = config9.SetRenderingMode(VMR9Mode.Windowless);
             checkHR(hr, "Can't set windowless mode");
-
             IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
             hr = control9.SetVideoClippingWindow(pbx);
             checkHR(hr, "Can't set video clipping window");
-
             hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
             checkHR(hr, "Can't set rectangles of the video position");
-
             var builder = DirectShow.CoCreateInstance(DirectShow.DsGuid.CLSID_CaptureGraphBuilder2) as DirectShow.ICaptureGraphBuilder2;
             builder.SetFiltergraph(graph);
             var pinCategory = DirectShow.DsGuid.PIN_CATEGORY_PREVIEW;
             var mediaType = DirectShow.DsGuid.MEDIATYPE_Video;
             builder.RenderStream(ref pinCategory, ref mediaType, vcap_source, grabber, renderer);
-            
-            // SampleGrabber Format.
             {
                 var mt = new DirectShow.AM_MEDIA_TYPE();
                 i_grabber.GetConnectedMediaType(mt);
@@ -194,10 +146,7 @@ namespace FaceDetectionX
             };
             Release = () =>
             {
-
-                Stop();
-                FaceDetection.Logger.Add("Camera stop .........................");    
-
+                Stop();                
                 DirectShow.ReleaseInstance(ref grabber);
                 DirectShow.ReleaseInstance(ref control9);
                 DirectShow.ReleaseInstance(ref config9);
@@ -208,19 +157,7 @@ namespace FaceDetectionX
                 DirectShow.ReleaseInstance(ref builder);
                 DirectShow.ReleaseInstance(ref graph);
                 SafeReleaseComObject(vcap_source);
-            };
-            /*
-            videoWindow = (DirectShow.IVideoWindow)graph;
-            //need to pass the handle for the picture box
-            videoWindow.put_Owner(pbx);
-            videoWindow.put_WindowState(DirectShow.WindowState.Normal);
-            /*This method is a thin wrapper over the SetWindowLong function 
-             * and must be treated with care. In particular, you should retrieve 
-             * the current styles and then add or remove flags
-            videoWindow.put_WindowStyle(DirectShow.WindowStyle.Child | DirectShow.WindowStyle.ClipChildren);
-            //videoWindow.put_FullScreenMode(DirectShow.OABool.True);
-            videoWindow.SetWindowPosition(0, 0, 1280, 720);
-            */
+            };            
         }
         private static void SafeReleaseComObject(object obj)
         {
@@ -241,7 +178,7 @@ namespace FaceDetectionX
             }
             catch(NullReferenceException nrx)
             {
-
+                FaceDetection.Logger.Add(nrx);
             }
             
         }
@@ -258,7 +195,6 @@ namespace FaceDetectionX
                 const uint VFW_E_WRONG_STATE = 0x80040227;
                 if ((uint)ex.ErrorCode == VFW_E_WRONG_STATE)
                 {
-                    // image data is not ready yet. return empty bitmap.
                     return new Bitmap(width, height);
                 }
 
@@ -269,22 +205,13 @@ namespace FaceDetectionX
         /// <summary>Get Bitmap from Sample Grabber</summary>
         private Bitmap GetBitmapMainMain(DirectShow.ISampleGrabber i_grabber, int width, int height, int stride)
         {
-            // サンプルグラバから画像を取得するためには
-            // まずサイズ0でGetCurrentBufferを呼び出しバッファサイズを取得し
-            // バッファ確保して再度GetCurrentBufferを呼び出す。
-            // 取得した画像は逆になっているので反転させる必要がある。
             int sz = 0;
             i_grabber.GetCurrentBuffer(ref sz, IntPtr.Zero); // IntPtr.Zeroで呼び出してバッファサイズ取得
             if (sz == 0) return null;
-
-            // メモリ確保し画像データ取得
             var ptr = Marshal.AllocCoTaskMem(sz);
             i_grabber.GetCurrentBuffer(ref sz, ptr);
-
-            // 画像データをbyte配列に入れなおす
             var data = new byte[sz];
             Marshal.Copy(ptr, data, 0, sz);
-
             Bitmap result = null;
 
             try
@@ -292,10 +219,6 @@ namespace FaceDetectionX
                 // 画像を作成
                 result = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
                 var bmp_data = result.LockBits(new Rectangle(Point.Empty, result.Size), System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-
-                //Debug.WriteLine(i_grabber + " igrabber " + ptr + " pointer, " + data.Length + " data  length " + sz);
-
-                // 上下反転させながら1行ごとコピー
                 for (int y = 0; y < height; y++)
                 {
                     var src_idx = sz - (stride * (y + 1)); // 最終行から
@@ -322,22 +245,6 @@ namespace FaceDetectionX
         {
             var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_SampleGrabber);
             var ismp = filter as DirectShow.ISampleGrabber;
-
-            // サンプル グラバを最初に作成したときは、優先メディア タイプは設定されていない。
-            // これは、グラフ内のほぼすべてのフィルタに接続はできるが、受け取るデータ タイプを制御できないとうことである。
-            // したがって、残りのグラフを作成する前に、ISampleGrabber::SetMediaType メソッドを呼び出して、
-            // サンプル グラバに対してメディア タイプを設定すること。
-
-            // サンプル グラバは、接続した時に他のフィルタが提供するメディア タイプとこの設定されたメディア タイプとを比較する。
-            // 調べるフィールドは、メジャー タイプ、サブタイプ、フォーマット タイプだけである。
-            // これらのフィールドでは、値 GUID_NULL は "あらゆる値を受け付ける" という意味である。
-            // 通常は、メジャー タイプとサブタイプを設定する。
-
-            // https://msdn.microsoft.com/ja-jp/library/cc370616.aspx
-            // https://msdn.microsoft.com/ja-jp/library/cc369546.aspx
-            // サンプル グラバ フィルタはトップダウン方向 (負の biHeight) のビデオ タイプ、または
-            // FORMAT_VideoInfo2 のフォーマット タイプのビデオ タイプはすべて拒否する。
-
             var mt = new DirectShow.AM_MEDIA_TYPE();
             mt.MajorType = DirectShow.DsGuid.MEDIATYPE_Video;
             mt.SubType = DirectShow.DsGuid.MEDIASUBTYPE_RGB24;
@@ -397,7 +304,7 @@ namespace FaceDetectionX
                 throw new Exception("IAMStreamConfigインタフェースを取得できません。");
             }
 
-            // フォーマット個数取得
+            
             int cap_count = 0, cap_size = 0;
             config.GetNumberOfCapabilities(ref cap_count, ref cap_size);
             if (cap_size != Marshal.SizeOf(typeof(DirectShow.VIDEO_STREAM_CONFIG_CAPS)))
@@ -405,14 +312,13 @@ namespace FaceDetectionX
                 throw new Exception("IAMStreamConfigインタフェースを取得できません。");
             }
 
-            // 返却値の確保
+           
             var result = new VideoFormat[cap_count];
 
-            // データ用領域確保
+            
             var cap_data = Marshal.AllocHGlobal(cap_size);
 
-            // 列挙
-            for (int i = 0; i < cap_count; i++)
+                        for (int i = 0; i < cap_count; i++)
             {
                 var entry = new VideoFormat();
 
@@ -421,8 +327,7 @@ namespace FaceDetectionX
                 config.GetStreamCaps(i, ref mt, cap_data);
                 entry.Caps = PtrToStructure<DirectShow.VIDEO_STREAM_CONFIG_CAPS>(cap_data);
 
-                // フォーマット情報の読み取り
-                entry.MajorType = DirectShow.DsGuid.GetNickname(mt.MajorType);
+                                 entry.MajorType = DirectShow.DsGuid.GetNickname(mt.MajorType);
                 entry.SubType = DirectShow.DsGuid.GetNickname(mt.SubType);
 
                 if (mt.FormatType == DirectShow.DsGuid.FORMAT_VideoInfo)
@@ -438,58 +343,35 @@ namespace FaceDetectionX
                     entry.TimePerFrame = vinfo.AvgTimePerFrame;
                 }
 
-                // 解放
-                DirectShow.DeleteMediaType(ref mt);
+                                 DirectShow.DeleteMediaType(ref mt);
 
                 result[i] = entry;
             }
 
-            // 解放
-            Marshal.FreeHGlobal(cap_data);
+                         Marshal.FreeHGlobal(cap_data);
 
             return result;
         }
-
-        /// <summary>
-        /// ビデオキャプチャデバイスの出力形式を選択する。
-        /// 事前にGetVideoOutputFormatでメディアタイプ・サイズを得ておき、その中から希望のindexを指定する。
-        /// 同時に出力サイズとフレームレートを変更することができる。
-        /// </summary>
-        /// <param name="index">希望のindexを指定する</param>
-        /// <param name="size">Empty以外を指定すると出力サイズを変更する。事前にVIDEO_STREAM_CONFIG_CAPSで取得した可能範囲内を指定すること。</param>
-        /// <param name="fps">0以上を指定するとフレームレートを変更する。事前にVIDEO_STREAM_CONFIG_CAPSで取得した可能範囲内を指定すること。</param>
         private static void SetVideoOutputFormat(DirectShow.IPin pin, int index, Size size, double fps)
         {
-            // IAMStreamConfigインタフェース取得
-            var config = pin as DirectShow.IAMStreamConfig;
+                         var config = pin as DirectShow.IAMStreamConfig;
             if (config == null)
             {
                 throw new Exception("ピンはIAMStreamConfigインタフェースを公開しません。");
             }
 
-            // フォーマット個数取得
-            int cap_count = 0, cap_size = 0;
+                         int cap_count = 0, cap_size = 0;
             config.GetNumberOfCapabilities(ref cap_count, ref cap_size);
             if (cap_size != Marshal.SizeOf(typeof(DirectShow.VIDEO_STREAM_CONFIG_CAPS)))
             {
                 throw new Exception("VIDEO_STREAM_CONFIG_CAPSを取得できません。");
             }
 
-            // データ用領域確保
-            var cap_data = Marshal.AllocHGlobal(cap_size);
+                         var cap_data = Marshal.AllocHGlobal(cap_size);
 
-            // idx番目のフォーマット情報取得
-            DirectShow.AM_MEDIA_TYPE mt = null;
+                         DirectShow.AM_MEDIA_TYPE mt = null;
             config.GetStreamCaps(index, ref mt, cap_data);
             var cap = PtrToStructure<DirectShow.VIDEO_STREAM_CONFIG_CAPS>(cap_data);
-            // 仕様ではVideoCaptureDeviceはメディア タイプごとに一定範囲の出力フォーマットをサポートできる。例えば以下のように。
-            // [0]:YUY2 最小:160x120, 最大:320x240, X軸4STEP, Y軸2STEPごと
-            // [1]:RGB8 最小:640x480, 最大:640x480, X軸0STEP, Y軸0STEPごと
-            // SetFormatで出力サイズとフレームレートをこの範囲内で設定可能。
-            // ただし試した限り、ほとんどのUSBカメラはサイズ固定(最大・最小が同じ)で返してきた。
-            // https://msdn.microsoft.com/ja-jp/library/cc353344.aspx
-            // https://msdn.microsoft.com/ja-jp/library/cc371290.aspx
-
             if (mt.FormatType == DirectShow.DsGuid.FORMAT_VideoInfo)
             {
                 var vinfo = PtrToStructure<DirectShow.VIDEOINFOHEADER>(mt.pbFormat);

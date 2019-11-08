@@ -72,7 +72,7 @@ namespace FaceDetection
             comboBoxResolution = comboBoxResolutions;
         }
 
-        private Size GetWidth(int cam_ind)
+        public Size GetWidth(int cam_ind)
         {
             Size retval;
 
@@ -101,21 +101,62 @@ namespace FaceDetection
 
         }
 
-
+        public void SetWidth(int cam_ind)
+        {
+            char[] vs = { 'x' };
+            bool resolution_changed = false;
+            switch (cam_ind)
+            {
+                case 0:
+                    if(Properties.Settings.Default.C1w != decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[0]))
+                    {
+                        Properties.Settings.Default.C1w = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[0]);
+                        Properties.Settings.Default.C1h = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[1]);
+                        resolution_changed = true;
+                    }                    
+                    break;
+                case 1:
+                    if (Properties.Settings.Default.C2w != decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[0]))
+                    {
+                        Properties.Settings.Default.C2w = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[0]);
+                        Properties.Settings.Default.C2h = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[1]);
+                        resolution_changed = true;
+                    }                    
+                    break;
+                case 2:
+                    if(Properties.Settings.Default.C3w != decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[0]))
+                    {
+                        Properties.Settings.Default.C3w = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[0]);
+                        Properties.Settings.Default.C3h = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[1]);
+                        resolution_changed = true;
+                    }                    
+                    break;
+                case 3:
+                    if (Properties.Settings.Default.C4w != decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[0]))
+                    {
+                        Properties.Settings.Default.C4w = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[0]);
+                        Properties.Settings.Default.C4h = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[1]);
+                        resolution_changed = true;
+                    }                    
+                    break;                
+            }
+            if (resolution_changed)
+            {
+                MainForm.GetMainForm.crossbar.RESTART_CAMERA();
+            }
+        }
 
         public void ArrangeCameraNames(int len)
         {
             or_selected_camera_number.Items.Clear();
             camera_names = new string[len];
-            Logger.Add(len);
-
+            
             for (int i = 0; i < len; i++)
             {
                 or_selected_camera_number.Items.Add(i + 1);
             }
             if (or_selected_camera_number.Items.Count >= Properties.Settings.Default.main_camera_index)
-            {
-                Logger.Add(Properties.Settings.Default.main_camera_index);
+            {                
                 or_selected_camera_number.SelectedIndex = Properties.Settings.Default.main_camera_index;
             }
             else
@@ -166,8 +207,7 @@ namespace FaceDetection
 
         private void save_and_close(object sender, EventArgs e)
         {
-            Logger.Add(Properties.Settings.Default.manual_record_time);
-
+            SetWidth(Camera_index);
             Properties.Settings.Default.Save();
             MainForm.AllChangesApply();
             Hide();
@@ -488,8 +528,6 @@ namespace FaceDetection
         private void NUD_MouseClick(object sender, MouseEventArgs e)
         {
             NumericUpDown upDown = (NumericUpDown)sender;
-
-            Logger.Add(upDown.Value);
         }
 
         private void Cb_human_sensor_CheckedChanged(object sender, EventArgs e)
@@ -514,12 +552,12 @@ namespace FaceDetection
 
         private void Nud_seconds_after_Click(object sender, EventArgs e)
         {
-            Logger.Add(Properties.Settings.Default.seconds_after_event);
-            Logger.Add(Properties.Settings.Default.seconds_before_event);
-            Logger.Add(Properties.Settings.Default.event_record_time_before_event);
-            Logger.Add(Properties.Settings.Default.event_record_time_after_event);
-            Logger.Add(Properties.Settings.Default.manual_record_time);
-            Logger.Add(Properties.Settings.Default.interval_before_reinitiating_recording);
+            CustomMessage.Add(Properties.Settings.Default.seconds_after_event);
+            CustomMessage.Add(Properties.Settings.Default.seconds_before_event);
+            CustomMessage.Add(Properties.Settings.Default.event_record_time_before_event);
+            CustomMessage.Add(Properties.Settings.Default.event_record_time_after_event);
+            CustomMessage.Add(Properties.Settings.Default.manual_record_time);
+            CustomMessage.Add(Properties.Settings.Default.interval_before_reinitiating_recording);
         }
     }
 }

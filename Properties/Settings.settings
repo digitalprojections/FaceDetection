@@ -162,7 +162,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="show_camera_no" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="C1w" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">640</Value>
