@@ -60,11 +60,7 @@ namespace FaceDetection
                                 //↑20191107 Nagayama added↑
                                 //initiate RECORD mode
                                 if (MainForm.GetMainForm != null && MainForm.GetMainForm.crossbar.PREEVENT_RECORDING)
-                                {
-                                    TaskManager.EventAppeared("event", 1, decimal.ToInt32(Properties.Settings.Default.seconds_before_event), decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
-                                }
-                                else
-                                {
+                                {                                    
                                     TaskManager.EventAppeared(RECORD_PATH.EVENT, 1, decimal.ToInt32(Properties.Settings.Default.seconds_before_event), decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
                                     MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
                                     MainForm.GetMainForm.crossbar.SET_ICON_TIMER();
