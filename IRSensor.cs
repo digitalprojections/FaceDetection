@@ -10,7 +10,7 @@ namespace FaceDetection
         Timer SensorCheckTimer = new Timer();
         public IRSensor()
         {
-
+            
             //init
             Init_IR_Timer();
         }

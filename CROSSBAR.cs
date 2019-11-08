@@ -114,6 +114,7 @@ namespace FaceDetection
 
         private void The_timer_Tick(object sender, EventArgs e)
         {
+            MainForm.RSensor.SensorClose();
             MainForm.GetMainForm.SetRecordButtonState("play", false);
             //We end the recording here
             if (!PREEVENT_RECORDING)
