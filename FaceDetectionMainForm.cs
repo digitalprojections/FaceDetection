@@ -16,6 +16,71 @@ namespace FaceDetection
         private readonly System.Timers.Timer mouse_down_timer = new System.Timers.Timer();
         private readonly Timer datetime_ui_updater_timer = new Timer();
         
+       
+        
+        //private readonly KeyboardListener keyboardListener;
+        //private readonly MouseListener mouseListener;
+
+        private RecorderCamera cameraMan = null;
+        /// <summary>
+        /// Camera modes to assist identify current status 
+        /// of the application during operation
+        /// Manage it properly, carefully, 
+        /// so there are no confusion or contradictions
+        /// Available choices        
+        /// <para>PREVIEW</para>
+        /// <para>CAPTURE</para>
+        /// <para>FACE (recommended use on PC)</para>
+        /// <para>HIDDEN (recording mode without preview)</para>
+        /// </summary>
+        internal enum CAMERA_MODES
+        {
+            //NONE,         
+            PREVIEW,
+            CAPTURE,
+            //FACE,
+            HIDDEN,
+            ERROR,
+            PREEVENT
+        }
+
+        internal bool OPERATOR_CAPTURE_ALLOWED = false;
+        internal bool EVENT_RECORDING_IN_PROGRESS = false;
+
+        internal static class RECPATH
+        {
+            public const string NORMAL = "";
+            public const string MANUAL = "MOVIE";
+            public const string EVENT = "EVENT";            
+        }
+
+        internal static string ACTIVE_RECPATH = RECPATH.MANUAL;
+        internal static int SELECTED_CAMERA = 0;
+
+        /*
+         All cameras have the same modes
+         But only the Main camera supports operator capture         
+         (各カメラには異なるモードがあります メインカメラのみがオペレータキャプチャをサポートしています)
+             */
+
+        internal static CAMERA_MODES CURRENT_MODE = 0;
+               
+        internal CAMERA_MODES CAMERA_MODE {
+            get
+            {
+                return CURRENT_MODE;
+            }
+            set
+            {
+                CURRENT_MODE = value;
+            }
+            }
+
+
+        // Camera choice
+        //private CameraChoice _CameraChoice = new CameraChoice();
+
+
         
         private static MainForm or_mainForm;
         private static PictureBox or_pb_recording;
@@ -505,6 +570,26 @@ namespace FaceDetection
         private void Button1_Click(object sender, EventArgs e)
         {
             AllChangesApply();
+        }
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern IntPtr SendMessageTimeout(
+    IntPtr hWnd,
+    uint Msg,
+    UIntPtr wParam,
+    IntPtr lParam,
+    SendMessageTimeoutFlags fuFlags,
+    uint uTimeout,
+    out UIntPtr lpdwResult);
+
+        [Flags]
+         enum SendMessageTimeoutFlags : uint
+        {
+            SMTO_NORMAL = 0x0,
+            SMTO_BLOCK = 0x1,
+            SMTO_ABORTIFHUNG = 0x2,
+            SMTO_NOTIMEOUTIFNOTHUNG = 0x8,
+            SMTO_ERRORONEXIT = 0x20
         }
 
         private bool UniqueFPS(long fps)

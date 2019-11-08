@@ -91,6 +91,8 @@ namespace FaceDetection
         public RecorderCamera(int cameraIndex)
         {
             this.INDEX = cameraIndex;
+            sourcePath = Properties.Settings.Default.templocation;
+            
         }
 
         private void WndProc(ref System.Windows.Forms.Message m)
