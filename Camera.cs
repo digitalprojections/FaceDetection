@@ -10,7 +10,7 @@ using DirectShowLib;
 
 namespace FaceDetection
 {
-    public class Camera
+    public static class Camera
     {
         public static Action Release { get; private set; }       
 
@@ -33,9 +33,9 @@ namespace FaceDetection
             try
             {
                 IGraphBuilder graph = (IGraphBuilder)new FilterGraph();
-                CustomMessage.ShowMessage("Building graph...");
+                
                 BuildGraph(graph);
-                CustomMessage.ShowMessage("Running...");
+                
                 IMediaControl mediaControl = (IMediaControl)graph;
                 IMediaEvent mediaEvent = (IMediaEvent)graph;
                 try
@@ -46,7 +46,7 @@ namespace FaceDetection
                 }
                 catch(COMException comx)
                 {
-                    CustomMessage.ShowMessage(comx.Message);
+                    Logger.Add(comx);
                     retval = false;
                     Release();
                 }
@@ -64,7 +64,7 @@ namespace FaceDetection
                     {
                         if (ev == EventCode.Complete || ev == EventCode.UserAbort)
                         {
-                            CustomMessage.ShowMessage("Done!");                            
+                            Logger.Add("Done!");                            
                             mediaControl.Stop();
                             SafeReleaseComObject(mediaControl);
                             Release();
@@ -73,7 +73,7 @@ namespace FaceDetection
                         else
                         if (ev == EventCode.ErrorAbort)
                         {
-                            CustomMessage.ShowMessage("An error occured: HRESULT={0:X}"+ p1);
+                            Logger.Add("An error occured: HRESULT={0:X}"+ p1);
                             mediaControl.Stop();
                             SafeReleaseComObject(mediaControl);
                             stop = true;
@@ -84,7 +84,7 @@ namespace FaceDetection
                     }catch(Exception x)
                     {
                         retval = false;
-                        CustomMessage.ShowMessage("An error occured:");                        
+                        Logger.Add("An error occured:");                        
                         SafeReleaseComObject(mediaControl);
                         stop = true;                        
                     }
@@ -92,11 +92,11 @@ namespace FaceDetection
             }
             catch (COMException ex)
             {
-                CustomMessage.ShowMessage("COM error: " + ex.ToString());
+                Logger.Add("COM error: " + ex.ToString());
             }
             catch (Exception ex)
             {
-                CustomMessage.ShowMessage("Error: " + ex.ToString());
+                Logger.Add("Error: " + ex.ToString());
             }
             Release();
             return retval;
@@ -109,27 +109,18 @@ namespace FaceDetection
 
             if (Properties.Settings.Default.camera_count > 0)
             {
-                if (capDevices.Length > Properties.Settings.Default.camera_count && capDevices.Length < 5)
+                if (capDevices.Length > Properties.Settings.Default.camera_count && capDevices.Length<5)
                 {
                     //MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
                     //SettingsUI.ArrangeCameraNames(capDevices.Length);
+                    MainForm.Setting_ui.ArrangeCameraNames(decimal.ToInt32(Properties.Settings.Default.camera_count));
                 }
                 else
                 {
                     //settings are missing
-                    if (capDevices.Length > 4)
-                    {
-                        //SettingsUI.ArrangeCameraNames(4);
-                        Properties.Settings.Default.camera_count = 1;
-                    }
-                    else
-                    {
-                        CustomMessage.ShowMessage(capDevices.Length + " capdevices");
-                        SettingsUI.ArrangeCameraNames(capDevices.Length);
-                        Properties.Settings.Default.camera_count = capDevices.Length;
-                        Properties.Settings.Default.main_camera_index = 0;
-                    }
-
+                    MainForm.Setting_ui.ArrangeCameraNames(4);
+                    //Properties.Settings.Default.camera_count = 4;
+                    Logger.Add("There are more than 4 cameras");
                 }
             }
             else
@@ -204,7 +195,7 @@ namespace FaceDetection
         {
             if (hr < 0)
             {
-                CustomMessage.ShowMessage(msg);
+                Logger.Add(msg);
                 DsError.ThrowExceptionForHR(hr);
             }
         }

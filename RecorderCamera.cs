@@ -22,47 +22,11 @@ namespace FaceDetection
         string targetPath = String.Empty;
         internal string ACTIVE_RECPATH = null;
         int INDEX = 0;
-        internal class RECPATH
-        {
-            public const string PHOTO = "snapshot";
-            public const string MANUAL = "movie";
-            public const string EVENT = "event";
-            public const string TEMP = "temp";
-        }
-        /// <summary>
-        ///All cameras have the same modes,
-        ///but only the Main camera supports operator capture.         
-        ///(各カメラには異なるモードがあります メインカメラのみがオペレータキャプチャをサポートしています)
-        /// Camera modes to assist identify current status 
-        /// of the application during operation.
-        /// Manage it properly, carefully, 
-        /// so there are no confusions or contradictions.
-        /// Available choices
-        /// </summary>
-        internal enum CAMERA_MODES
-        {
-            PREVIEW,
-            HIDDEN,
-            EVENT,
-            OPERATOR,
-            MANUAL,
-            PREEVENT
-        }
-
-        internal CAMERA_MODES CAMERA_MODE { get { return cAMERA_MODE; } set => cAMERA_MODE = value; }
-        public enum PlayState : int
-        {
-            Stopped,
-            Paused,
-            Running,
-            Initiate
-        }
+        internal CAMERA_MODES CAMERA_MODE { get { return cAMERA_MODE; } set => cAMERA_MODE = value; }        
         public Action Stop { get; private set; }
         public Action Release { get; private set; }
         public Func<Bitmap> GetBitmap { get; private set; }
-
         internal PlayState GetCurrentState1() => CurrentState;
-
         internal void SetCurrentState1(PlayState value)
         {
             CurrentState = value;
@@ -71,7 +35,7 @@ namespace FaceDetection
         private IGraphBuilder pGraph;
         //private Guid CLSID_SampleGrabber = new Guid("{C1F400A0-3F08-11D3-9F0B-006008039E37}"); //qedit.dll
         PlayState CurrentState = PlayState.Stopped;
-        private int WM_GRAPHNOTIFY = Convert.ToInt32("0X8000", 16) + 1;
+        private const int WM_GRAPHNOTIFY = 0X8000+1;
         public IVideoWindow videoWindow = null;
         private IMediaControl mediaControl = null;
         private IMediaEventEx mediaEventEx = null;
@@ -83,10 +47,11 @@ namespace FaceDetection
         IBaseFilter pNullRenderer = (IBaseFilter)Activator.CreateInstance(Type.GetTypeFromCLSID(CLSID_NullRenderer));
         private IAMStreamConfig streamConfig = null;
         private SampleGrabber pSampleGrabber = null;
-
+        private IFileSinkFilter pFilewriter_sink;
         private VideoInfoHeader format = null;
         private AMMediaType pmt = null;
         private ISampleGrabber i_grabber = null;
+        //private delegate IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
         IBaseFilter pSmartTee = null;
         IBaseFilter pAVIMux = null;
@@ -108,15 +73,53 @@ namespace FaceDetection
             mt.subType = MediaSubType.RGB24;
             i_grabber.SetMediaType(mt);
             //send notification messages to the control window
-            int hr = mediaEventEx.SetNotifyWindow(IntPtr.Zero, WM_GRAPHNOTIFY, IntPtr.Zero);
+
+            int hr;
+            hr = mediaEventEx.SetNotifyWindow(MainForm.GetMainForm.Handle, WM_GRAPHNOTIFY, IntPtr.Zero);
             DsError.ThrowExceptionForHR(hr);
+            hr = mediaEventEx.SetNotifyFlags(NotifyFlags.None);
+            DsError.ThrowExceptionForHR(hr);
+            IntPtr p1 = IntPtr.Zero;
+            IntPtr p2 = IntPtr.Zero;
+            EventCode eventCode = (EventCode) WM.PAINT;
+            mediaEventEx.GetEvent(out eventCode, out p1, out p2, 1000);
             DsUtils.FreeAMMediaType(mt);
-        }
+
+            
+    }
 
         public RecorderCamera(int cameraIndex)
         {
             this.INDEX = cameraIndex;
         }
+
+        private void WndProc(ref System.Windows.Forms.Message m)
+        {
+            switch (m.Msg)
+            {
+                // フィルタ グラフ イベント
+                case WM_GRAPHNOTIFY:
+
+                    EventCode evCode;
+                    IntPtr evParam1;
+                    IntPtr evParam2;
+
+                    while (mediaEventEx.GetEvent(out evCode, out evParam1, out evParam2, 0) == 0)
+                    {
+                        // イベントのパラメータを解放する
+                        int hr = mediaEventEx.FreeEventParams(evCode, evParam1, evParam2);
+                        DsError.ThrowExceptionForHR(hr);
+
+
+                        // 必要ならば、ここにイベントを処理するコードを追加する
+                    }
+
+                    break;
+            }
+
+            //base.WndProc(ref m);
+        }
+        
 
         //The following is called for building the PREVIEW graph
 
@@ -135,39 +138,33 @@ namespace FaceDetection
             int fps = MainForm.GetMainForm.GetFPS(0);
             IntPtr pbx = MainForm.GetMainForm.Handle;
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
-            CustomMessage.ShowMessage(CAMERA_MODE + " ");
-            CustomMessage.ShowMessage(CAMERA_MODE + " ");
-            CustomMessage.ShowMessage(CAMERA_MODE + " ");
+            Logger.Add(CAMERA_MODE + " 1");
+            Logger.Add(CAMERA_MODE + " 2");
+            Logger.Add(CAMERA_MODE + " 3");
             //REGULAR 0 PREEVENT
             if (CAMERA_MODE != CAMERA_MODES.PREEVENT)
             {
-                string str = Path.Combine(Properties.Settings.Default.video_file_location, "CAMERA");
+                string str = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
                 str = Path.Combine(str, (INDEX + 1).ToString());
                 str = Path.Combine(str, ACTIVE_RECPATH);
                 targetPath = str + "/" + dstFileName;
-
                  Directory.CreateDirectory(str);
-                
-
-                CustomMessage.ShowMessage(targetPath + " +++++++++++++++++ dest name 108 in  recorder");
             }
             else
             {
                 //PREEVENT EXISTS. PERMANENT RECORDING MODE
                 targetPath = sourcePath + "/" + dstFileName;
-                CustomMessage.ShowMessage(targetPath + " target path");
+                Logger.Add(targetPath + " target path");
                 try
                 {
                     Directory.CreateDirectory(sourcePath);
                 }catch(IOException iox)
                 {
-                    targetPath = @"C:\TEMP" + "/" + dstFileName;
+                    sourcePath = @"C:\TEMP";
+                    targetPath = sourcePath + "/" + dstFileName;
                     Directory.CreateDirectory(sourcePath);
                     Logger.Add(iox);
-
-                }
-                
-                //MainForm.GetMainForm.RecordingStart();
+                }                
             }
 
             GetInterfaces();
@@ -200,7 +197,7 @@ namespace FaceDetection
             checkHR(hr, "Can't add File writer to graph");
 
             //set destination filename
-            IFileSinkFilter pFilewriter_sink = pFilewriter as IFileSinkFilter;
+            pFilewriter_sink = pFilewriter as IFileSinkFilter;
             if (pFilewriter_sink == null)
                 checkHR(unchecked((int)0x80004002), "Can't get IFileSinkFilter");
             hr = pFilewriter_sink.SetFileName(targetPath, null);
@@ -215,18 +212,9 @@ namespace FaceDetection
             hr = pGraph.ConnectDirect(GetPin(pAVIMux, "AVI Out"), GetPin(pFilewriter, "in"), null);
             checkHR(hr, "Can't connect AVI Mux and File writer");
 
-
-
-
-            //add SampleGrabber
-            //_pSampleGrabberHelper = new SampleGrabberHelper(pSampleGrabber, false);
-            //_pSampleGrabberHelper.ConfigureMode();
-
             hr = pGraph.AddFilter(pSampleGrabber as IBaseFilter, "SampleGrabber");
             checkHR(hr, "Can't add SampleGrabber to graph");
             i_grabber.SetBufferSamples(true); //サンプルグラバでのサンプリングを開始
-
-
 
             //フォーマットの設定
             //暫くは一時的な値を使用してます
@@ -259,7 +247,7 @@ namespace FaceDetection
             {                
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
-                CustomMessage.ShowMessage("NOT HIDDEN MODE " + CAMERA_MODE + ", Active path: " + ACTIVE_RECPATH);
+                Logger.Add("NOT HIDDEN MODE " + CAMERA_MODE + ", Active path: " + ACTIVE_RECPATH);
             }
 
 
@@ -305,7 +293,7 @@ namespace FaceDetection
                         }
                         catch (System.NullReferenceException snrx)
                         {
-                            CustomMessage.ShowMessage(snrx.Message + snrx.HResult);
+                            Logger.Add(snrx.Message + snrx.HResult);
                             r = 1;
                             continue;
                         }
@@ -313,65 +301,29 @@ namespace FaceDetection
                 }
                 catch (InvalidComObjectException icom)
                 {
-                    CustomMessage.ShowMessage(icom.InnerException.ToString());
+                    Logger.Add(icom.InnerException.ToString());
                 }
                 GC.Collect();
-                //SafeReleaseComObject(pSampleGrabber);
-                //SafeReleaseComObject(control9);
-                //SafeReleaseComObject(config9);
-                //SafeReleaseComObject(ratioControl9);
-                //SafeReleaseComObject(pGraphBuilder);
-                //SafeReleaseComObject(renderFilter);
-                //SafeReleaseComObject(i_grabber);
-                //SafeReleaseComObject(pGraphBuilder);
-                //SafeReleaseComObject(graph);
-                //SafeReleaseComObject(pAVIMux);
-                //SafeReleaseComObject(pSmartTee);
-                //SafeReleaseComObject(pFilewriter);
-                //SafeReleaseComObject(pFilewriter_sink);
-                //SafeReleaseComObject(pUSB);
+               
             };
-            /*
-             IEnumFilters enumFilters = null;
-             IBaseFilter[] baseFilters = { null };
-             IntPtr fetched = IntPtr.Zero;
-             hr = pGraph.EnumFilters(out enumFilters);
-             int r = 0;
-             while (r == 0)
-             {
-
-                 try
-                 {
-                     r = enumFilters.Next(baseFilters.Length, baseFilters, fetched);
-                 DsError.ThrowExceptionForHR(hr);
-                 baseFilters[0].QueryFilterInfo(out FilterInfo filterInfo);
-                 Debug.WriteLine(filterInfo.achName + " -filtername");
-                 }
-                 catch (System.NullReferenceException snrx)
-                 {
-                     CustomMessage.ShowMessage(snrx.Message + snrx.HResult);
-                     r = 1;
-                     continue;
-                 }
-             }
-             */
+            
             try
             {
                 mediaControl = (IMediaControl)graph;
                 hr = mediaControl.Run();
-                //checkHR(hr, "Can't run the graph");
-                CustomMessage.ShowMessage(" running the recorder graph ");
+                checkHR(hr, "Can't run the graph");
+                Logger.Add(" running the recorder graph ");
             }
             catch (COMException comx)
             {
-                CustomMessage.ShowMessage("Can not start the camera");
+                Logger.Add("Can not start the camera");
                 Logger.Add("Can not start the camera");
             }
             /*
 
             var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, cameraIndex);
             var pin = DirectShow.FindPin(filter, 0, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
-            //CustomMessage.ShowMessage(GetVideoOutputFormat(pin).Length + " video format for camera " + cameraIndex);
+            //Logger.Add(GetVideoOutputFormat(pin).Length + " video format for camera " + cameraIndex);
             VideoFormat[] videoFormats = GetVideoOutputFormat(pin);
             
             for (var i = 0; i<videoFormats.Length; i++)
@@ -386,6 +338,32 @@ namespace FaceDetection
             */
 
         }
+        public void RESET_FILE_PATH()
+        {
+            //PREEVENT EXISTS. PERMANENT RECORDING MODE
+            string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
+            targetPath = sourcePath + "/" + dstFileName;
+            Logger.Add(targetPath + " target path");
+            try
+            {
+                Directory.CreateDirectory(sourcePath);
+            }
+            catch (IOException iox)
+            {
+                sourcePath = @"C:\TEMP";
+                targetPath = sourcePath + "/" + dstFileName;
+                Directory.CreateDirectory(sourcePath);
+                Logger.Add(iox);
+
+            }
+            mediaControl.StopWhenReady();
+            int hr = pFilewriter_sink.SetFileName(targetPath, null);
+            checkHR(hr, "Can't set filename");
+            mediaControl.Run();
+            checkHR(hr, "Can't run the graph");
+        }
+
+
         private Bitmap GetBitmapMain(ISampleGrabber i_grabber, int width, int height, int stride)
         {
             try
@@ -437,7 +415,7 @@ namespace FaceDetection
             {
                 //SnapShot.Form1.CleanBuffer();
                 //System.Windows.Forms.MessageBox.Show(ax.Message);
-                CustomMessage.ShowMessage(ax.Message);
+                Logger.Add(ax.Message);
             }
             return result;
         }
@@ -486,7 +464,7 @@ namespace FaceDetection
         {
             if (hr < 0)
             {
-                CustomMessage.ShowMessage(msg);
+                Logger.Add(msg);
                 ReleaseInterfaces();
                 DsError.ThrowExceptionForHR(hr);
             }
@@ -495,7 +473,7 @@ namespace FaceDetection
         public void ReleaseInterfaces()
         {
             ON = false;
-            CustomMessage.ShowMessage("ReleaseInterfaces ");
+            Logger.Add("ReleaseInterfaces ");
             if (mediaControl != null)
                 mediaControl.StopWhenReady();
 
@@ -588,7 +566,7 @@ namespace FaceDetection
             int hr = filter.EnumPins(out epins);
             if (hr < 0)
             {
-                CustomMessage.ShowMessage("Can't enumerate pins");
+                Logger.Add("Can't enumerate pins");
                 DsError.ThrowExceptionForHR(hr);
             }
 
@@ -599,13 +577,13 @@ namespace FaceDetection
                 PinInfo pinfo;
                 pins[0].QueryPinInfo(out pinfo);
                 bool found = (pinfo.name == pinname);
-                CustomMessage.ShowMessage(pinfo.name + " is PIN for ");
+                Logger.Add(pinfo.name + " is PIN for ");
                 DsUtils.FreePinInfo(pinfo);
                 if (found)
                     return pins[0];
             }
 
-            CustomMessage.ShowMessage("Pin not found");
+            Logger.Add("Pin not found");
             DsError.ThrowExceptionForHR(hr);
 
             return null;
@@ -618,7 +596,7 @@ namespace FaceDetection
             int hr = filter.EnumPins(out epins);
             if (hr < 0)
             {
-                CustomMessage.ShowMessage("Can't enumerate pins");
+                Logger.Add("Can't enumerate pins");
                 DsError.ThrowExceptionForHR(hr);
             }
 
@@ -629,12 +607,12 @@ namespace FaceDetection
                 PinInfo pinfo;
                 pins[0].QueryPinInfo(out pinfo);
                 bool found = (pinfo.name == "Capture" || pinfo.name == "キャプチャ");
-                CustomMessage.ShowMessage(pinfo.name + " is pinname on getCatName");
+                Logger.Add(pinfo.name + " is pinname on getCatName");
                 DsUtils.FreePinInfo(pinfo);
                 if (found)
                     retval = pinfo.name;
             }
-            CustomMessage.ShowMessage("Pin found " + retval);
+            Logger.Add("Pin found " + retval);
             return retval;
         }
 
@@ -655,7 +633,7 @@ namespace FaceDetection
                 hr = mediaEventEx.FreeEventParams(evCode, evParam1, evParam2);
                 DsError.ThrowExceptionForHR(hr);
 
-                CustomMessage.ShowMessage(evCode + " -evCode " + evParam1 + " " + evParam2);
+                Logger.Add(evCode + " -evCode " + evParam1 + " " + evParam2);
                 // Insert event processing code here, if desired (see http://msdn2.microsoft.com/en-us/library/ms783649.aspx)
             }
         }
@@ -683,7 +661,7 @@ namespace FaceDetection
 
             for (int i = 0; i < vformat.Length; i++)
             {
-                CustomMessage.ShowMessage(vformat[i].Size.Width + " " + vformat[i].TimePerFrame);
+                Logger.Add(vformat[i].Size.Width + " " + vformat[i].TimePerFrame);
                 if (vformat[i].MajorType == DirectShow.DsGuid.GetNickname(DirectShow.DsGuid.MEDIATYPE_Video))
                 {
                     if (vformat[i].Caps.Guid == DirectShow.DsGuid.FORMAT_VideoInfo)
@@ -775,7 +753,7 @@ namespace FaceDetection
         /// <param name="fps">0以上を指定するとフレームレートを変更する。事前にVIDEO_STREAM_CONFIG_CAPSで取得した可能範囲内を指定すること。</param>
         private static void SetVideoOutputFormat(DirectShow.IPin pin, int index, Size size, double fps)
         {
-            CustomMessage.ShowMessage("CACCCCCCCCCCCCCCCCC");
+            Logger.Add("CACCCCCCCCCCCCCCCCC");
             // IAMStreamConfigインタフェース取得
             var config = pin as DirectShow.IAMStreamConfig;
             if (config == null)
@@ -790,7 +768,7 @@ namespace FaceDetection
             {
                 throw new Exception("VIDEO_STREAM_CONFIG_CAPSを取得できません。");
             }
-            CustomMessage.ShowMessage("VVVVVVVVVVVVVVVVVVVVVVD");
+            Logger.Add("VVVVVVVVVVVVVVVVVVVVVVD");
             // データ用領域確保
             var cap_data = Marshal.AllocHGlobal(cap_size);
 
@@ -801,7 +779,7 @@ namespace FaceDetection
 
             if (mt.FormatType == DirectShow.DsGuid.FORMAT_VideoInfo && mt.SubType == DirectShow.DsGuid.MEDIASUBTYPE_MJPG)
             {
-                CustomMessage.ShowMessage("SETTINGS OK ======================");
+                Logger.Add("SETTINGS OK ======================");
                 var vinfo = PtrToStructure<DirectShow.VIDEOINFOHEADER>(mt.pbFormat);
                 if (!size.IsEmpty) { vinfo.bmiHeader.biWidth = size.Width; vinfo.bmiHeader.biHeight = size.Height; }
                 if (fps > 0) { vinfo.AvgTimePerFrame = (long)(10000000 / fps); }
@@ -820,7 +798,7 @@ namespace FaceDetection
             // フォーマットを選択
             int hr = config.SetFormat(mt);
 
-            CustomMessage.ShowMessage("SETTINGS OK ????????????????????" + hr);
+            Logger.Add("SETTINGS OK ????????????????????" + hr);
 
 
             // 解放

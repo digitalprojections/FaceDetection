@@ -218,11 +218,12 @@
             this.Controls.Add(this.or_controlButtons);
             this.Controls.Add(this.camera_number_txt);
             this.Name = "MainForm";
-            this.Text = "UVC_CAMERA";
+            this.Text = "UVC Camera Viewer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.SizeChanged += new System.EventHandler(this.WindowSizeUpdate);
             this.Click += new System.EventHandler(this.ShowButtons);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
             this.DoubleClick += new System.EventHandler(this.FullScreen);
             this.or_controlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).EndInit();

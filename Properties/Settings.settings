@@ -14,12 +14,6 @@
     <Setting Name="keep_old_files_days" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">30</Value>
     </Setting>
-    <Setting Name="face_rec_interval" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">1000</Value>
-    </Setting>
-    <Setting Name="manual_record_maxtime" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">600</Value>
-    </Setting>
     <Setting Name="backlight_offset_mins" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
@@ -28,9 +22,6 @@
     </Setting>
     <Setting Name="enable_event_recorder" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="capture_type" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Video</Value>
     </Setting>
     <Setting Name="recording_while_face_recognition" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -66,7 +57,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="culture" Type="System.String" Scope="User">
-      <Value Profile="(Default)">en-US</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="C1x" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">16</Value>
@@ -84,10 +75,10 @@
       <Value Profile="(Default)">16</Value>
     </Setting>
     <Setting Name="C2w" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">1280</Value>
+      <Value Profile="(Default)">640</Value>
     </Setting>
     <Setting Name="C2h" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">720</Value>
+      <Value Profile="(Default)">480</Value>
     </Setting>
     <Setting Name="C2f" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
@@ -99,10 +90,10 @@
       <Value Profile="(Default)">16</Value>
     </Setting>
     <Setting Name="C3w" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">1280</Value>
+      <Value Profile="(Default)">640</Value>
     </Setting>
     <Setting Name="C3h" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">720</Value>
+      <Value Profile="(Default)">480</Value>
     </Setting>
     <Setting Name="C3f" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
@@ -112,12 +103,6 @@
     </Setting>
     <Setting Name="C4y" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">16</Value>
-    </Setting>
-    <Setting Name="C4w" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">1280</Value>
-    </Setting>
-    <Setting Name="C4h" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">720</Value>
     </Setting>
     <Setting Name="C4f" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
@@ -197,8 +182,29 @@
     <Setting Name="face_record_time_after" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">60</Value>
     </Setting>
+    <Setting Name="recording_length_seconds1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
     <Setting Name="temp_folder" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\TEMP</Value>
+    </Setting>
+    <Setting Name="face_rec_interval" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="capture_type" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Video</Value>
+    </Setting>
+    <Setting Name="C4w" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1280</Value>
+    </Setting>
+    <Setting Name="C4h" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">720</Value>
+    </Setting>
+    <Setting Name="enable_Human_sensor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="manual_record_time" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">600</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -12,10 +12,16 @@ namespace FaceDetection
 {
     class PARAMETERS
     {
+        public static List<string> PARAM;
+        static string param;
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
-            CustomMessage.ShowMessage("Parameters: " + String.Concat(parameters));
-            string param = String.Concat(parameters).ToLower();
+            
+            PARAM = parameters.ToList<string>();
+           
+            Logger.Add(param + "sdfsdfdsdgf");
+
+            param = String.Concat(parameters).ToLower();
             /*
              Handle the initial start up CL parameters, if exist
              */
@@ -27,9 +33,18 @@ namespace FaceDetection
                     //Only 2 parameter elements
                     if (parameters.Count == 2)
                     {
+                        if (CheckCameraIndex(parameters))
+                        {
+                            if(Int32.Parse(parameters.ElementAt(1))!=9)
+                            {
 
-                        //CURRENT_MODE = CAMERA_MODES.HIDDEN;
 
+                            }else
+                            {
+                                //the value is 9. Start all cameras
+
+                            }
+                        }
                     }
 
 
@@ -42,17 +57,17 @@ namespace FaceDetection
                                 {
 
 
-                                    if (MainForm.SettingUI != null && MainForm.SettingUI.Visible == false)
+                                    if (MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
                                     {
                                         //settingUI.TopMost = true;
                                         MainForm.GetMainForm.TopMost = false;
-                                        MainForm.SettingUI.ShowDialog();
+                                        MainForm.Setting_ui.ShowDialog();
                                     }
 
                                 }
                                 else
                                 {
-                                    MainForm.SettingUI.Hide();
+                                    MainForm.Setting_ui.Hide();
                                     MainForm.AllChangesApply();
 
                                 }
@@ -72,9 +87,6 @@ namespace FaceDetection
                                     //Properties.Settings.Default.main_camera_index = Int32.Parse(parameters.ElementAt(2));
                                     SNAPSHOT_SAVER.TakeSnapShot();
                                 }
-
-
-
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
@@ -87,7 +99,7 @@ namespace FaceDetection
                             {
                                 if (CheckCameraIndex(parameters))
                                 {
-                                    CustomMessage.ShowMessage("テスト" + parameters.ElementAt(0) + "×" + parameters.ElementAt(1) + "×" + parameters.ElementAt(2) + "×" + parameters.ElementAt(3));
+                                    Logger.Add("テスト" + parameters.ElementAt(0) + "×" + parameters.ElementAt(1) + "×" + parameters.ElementAt(2) + "×" + parameters.ElementAt(3));
 
                                     if (parameters.ElementAt(3) == "1")
                                     {
@@ -120,11 +132,16 @@ namespace FaceDetection
                                 {
                                     if (parameters.ElementAt(3) == "1")
                                     {
-
+                                        MainForm.FaceDetector.Start_Face_Timer();
                                     }
                                     if (parameters.ElementAt(3) == "0")
                                     {
-
+                                        if(MainForm.GetMainForm.crossbar.Recording_is_on)
+                                        {
+                                            MainForm.GetMainForm.crossbar.PreviewMode();
+                                            MainForm.FaceDetector.Stop_Face_Timer();
+                                        }
+                                        
                                     }
 
                                     CycleTime(parameters);
@@ -144,11 +161,11 @@ namespace FaceDetection
                                 {
                                     if (parameters.ElementAt(2) == "1")
                                     {
-                                        MainForm.RSensor.StartOM_Timer();
+                                        MainForm.RSensor.Start_IR_Timer();
                                     }
                                     else
                                     {
-                                        MainForm.RSensor.StopOM_Timer();
+                                        MainForm.RSensor.Stop_IR_Timer();
                                     }
 
                                     CycleTime(parameters);
@@ -156,7 +173,7 @@ namespace FaceDetection
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
-                                CustomMessage.ShowMessage(e.Message + " paramameters 399");
+                                Logger.Add(e.Message + " paramameters 399");
                             }
                             break;
 
@@ -192,13 +209,13 @@ namespace FaceDetection
 
                                 if (parameters.ElementAt(3) == "1")
                                 {
-                                    BackLightController.ON();
+                                    MainForm.GetMainForm.BackLight.ON();
 
                                 }
                                 else if (parameters.ElementAt(3) == "0")
                                 {
 
-                                    BackLightController.OFF();
+                                    MainForm.GetMainForm.BackLight.OFF();
                                 }
 
                             }
@@ -225,7 +242,7 @@ namespace FaceDetection
                             }
                             catch (Exception e)
                             {
-                                CustomMessage.ShowMessage(e.Message + " paramameters 466");
+                                Logger.Add(e.Message + " paramameters 466");
                             }
                             break;
                         case "-w":
@@ -240,19 +257,22 @@ namespace FaceDetection
                                         //Properties.Settings.Default.show_window_pane = true;
                                         //FormChangesApply();
                                         MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
+                                        Properties.Settings.Default.show_window_pane = true;
+                                        Properties.Settings.Default.Save();
 
-
-                                        if (MainForm.SettingUI != null && MainForm.SettingUI.Visible == false)
+                                        if (MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
                                         {
                                             //settingUI.TopMost = true;
                                             MainForm.GetMainForm.TopMost = false;
-                                            MainForm.SettingUI.ShowDialog();
+                                            //MainForm.Setting_ui.ShowDialog();
+                                            Logger.Add("Properties.Settings.Default.show_window_pane " + Properties.Settings.Default.show_window_pane);
                                         }
 
                                     }
                                     else
                                     {
-                                        MainForm.SettingUI.Hide();
+                                        Properties.Settings.Default.show_window_pane = false;
+                                        Properties.Settings.Default.Save();
                                         MainForm.AllChangesApply();
                                     }
                                 }
@@ -287,8 +307,9 @@ namespace FaceDetection
                         case "-e":
                             try
                             {
-                                if (CheckCameraIndex(parameters))
-                                {
+                                /////////////////////////////////////
+                                ///    dont CheckCameraIndex()    ///
+                                /////////////////////////////////////
                                     if (parameters.ElementAt(2) == "1")
                                     {
                                         MainForm.GetMainForm.EventRecorderOn();
@@ -296,7 +317,6 @@ namespace FaceDetection
                                     else if (parameters.ElementAt(2) == "0")
                                     {
                                         MainForm.GetMainForm.EventRecorderOff();
-                                    }
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -324,7 +344,7 @@ namespace FaceDetection
             {
                 case 1:
                     Retval = true;
-                    CustomMessage.ShowMessage("カメラ番号まで来た");
+                    Logger.Add("カメラ番号まで来た");
                     //Camera.CheckCamera(parameters.ElementAt());
                     break;
                 case 2:
@@ -369,7 +389,7 @@ namespace FaceDetection
         {
             if (Int32.Parse(parameters.ElementAt(4)) >= 0 && Int32.Parse(parameters.ElementAt(4)) <= 1000)
             {
-                CustomMessage.ShowMessage("できた");
+                Logger.Add("できた");
             }
         }
         #region DLL IMPORTS

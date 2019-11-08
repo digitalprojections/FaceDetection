@@ -163,7 +163,7 @@ namespace FaceDetectionY
             {
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
-                CustomMessage.ShowMessage("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
+                Logger.Add("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
             }
             */
             hr = pGraph.AddFilter(renderFilter, "My Render Filter");
@@ -303,7 +303,7 @@ namespace FaceDetectionY
             {
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
-                CustomMessage.ShowMessage("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
+                Logger.Add("NOT HIDDEN MODE " + MainForm.CURRENT_MODE + ", Active path: " + MainForm.ACTIVE_RECPATH);
             }
             */
             hr = pGraph.AddFilter(renderFilter, "My Render Filter");
@@ -362,7 +362,7 @@ namespace FaceDetectionY
         {
             if (hr < 0)
             {
-                //CustomMessage.ShowMessage(msg);
+                //Logger.Add(msg);
                 DsError.ThrowExceptionForHR(hr);
             }
         }
@@ -505,7 +505,7 @@ namespace FaceDetectionY
                     return pins[0];
             }
 
-            //CapTest.CustomMessage.ShowMessage("Pin not found");
+            //CapTest.Logger.Add("Pin not found");
             DsError.ThrowExceptionForHR(hr);
 
             return null;
@@ -518,7 +518,7 @@ namespace FaceDetectionY
             int hr = filter.EnumPins(out epins);
             if (hr < 0)
             {
-                //CapTest.CustomMessage.ShowMessage("Can't enumerate pins");
+                //CapTest.Logger.Add("Can't enumerate pins");
                 DsError.ThrowExceptionForHR(hr);
             }
 
@@ -529,12 +529,12 @@ namespace FaceDetectionY
                 PinInfo pinfo;
                 pins[0].QueryPinInfo(out pinfo);
                 bool found = (pinfo.name == "Capture" || pinfo.name == "キャプチャ");
-                //CapTest.CustomMessage.ShowMessage(pinfo.name + " is pinname on getCatName");
+                //CapTest.Logger.Add(pinfo.name + " is pinname on getCatName");
                 DsUtils.FreePinInfo(pinfo);
                 if (found)
                     retval = pinfo.name;
             }
-            //CapTest.CustomMessage.ShowMessage("Pin found " + retval);
+            //CapTest.Logger.Add("Pin found " + retval);
             return retval;
         }
 
@@ -555,7 +555,7 @@ namespace FaceDetectionY
                 hr = mediaEventEx.FreeEventParams(evCode, evParam1, evParam2);
                 DsError.ThrowExceptionForHR(hr);
 
-                //CustomMessage.ShowMessage(evCode + " -evCode " + evParam1 + " " + evParam2);
+                //Logger.Add(evCode + " -evCode " + evParam1 + " " + evParam2);
                 // Insert event processing code here, if desired (see http://msdn2.microsoft.com/en-us/library/ms783649.aspx)
             }
         }

@@ -5,11 +5,12 @@ using System.Windows.Forms;
 
 namespace FaceDetection
 {
-    public class BackLightController
+    class BackLightController
     {
-        int duration;
-        int wait;
-        Action Run;
+        static int duration;
+        static int wait;
+
+        static Action Run;
         public static Action Destroy;
         //private FormSettings settingsBase = Properties.Camera1.Default;
         public enum MonitorState
@@ -18,32 +19,48 @@ namespace FaceDetection
             MonitorStateOff = 2,
             MonitorStateStandBy = 1
         }
-        private readonly System.Timers.Timer backlight_timer = new System.Timers.Timer();
+        private static readonly System.Timers.Timer backlight_timer = new System.Timers.Timer();
 
 
-        public void Start()
-        {
-            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
+        public static void Start()
+        {            
+            Run = () =>
             {
-                backlight_timer.Elapsed += Backlight_timer_Tick1;
-                backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60 * 1000;
+                ON();
+                CustomMessage.ShowMessage("Running in " + " mode");
                 backlight_timer.Enabled = true;
-            }
-        }
-
-        private void Backlight_timer_Tick1(object sender, EventArgs e)
-        {   
-           OFF();
-        }
-
-        public void Restart()
-        {
-            
-            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
+            };
+            Destroy = () =>
             {
-                backlight_timer.Stop();
+                CustomMessage.ShowMessage("Destroyed");
+                backlight_timer.Enabled = false;
+                backlight_timer.Dispose();
+            };
+
+            if (backlight_timer.Enabled)
+            {
+
+            }
+            else
+            {
+                //we got the same task as before, while running the camera
+                
+            }
+            //backlight_timer.Enabled = true;
+            backlight_timer.AutoReset = false; //prevent from running - true
+            backlight_timer.Elapsed += The_timer_Elapsed;
+           
+            //backlight_timer.Enabled = false;
+
+            Run();
+        }
+
+        public static void Restart()
+        {
+            if (Properties.Settings.Default.backlight_offset_mins > 0)
+            {
                 backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60 * 1000;
-                backlight_timer.Start();
+                bool  cb = backlight_timer.Enabled;
             }
             else
             {
@@ -53,25 +70,30 @@ namespace FaceDetection
 
         public BackLightController()
         {
-            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
+            if (Properties.Settings.Default.backlight_offset_mins > 0)
             {
                 backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60 * 1000;
             }
         }
-       
-        internal void OFF()
+        private void Backlight_timer_Tick(object sender, EventArgs e)
+        {
+            Trace.WriteLine("back light off called");
+            BacklightOff();
+        }
+        internal static void OFF()
         {
             BacklightOff();
         }
-        internal void ON()
+        internal static void ON()
         {
+            //backlight_timer.Enabled = Properties.Settings.Default.enable_backlight_off_when_idle;
             BacklightOn();
             Restart();
         }
         /// <summary>
         /// Turns backlight off
         /// </summary>
-        public void BacklightOff()
+        public static void BacklightOff()
         {
             if (Properties.Settings.Default.backlight_offset_mins > 0)
             {
@@ -87,14 +109,41 @@ namespace FaceDetection
         {
             try
             {
-                mouse_event((int)(MouseEventFlags.MOVE), 0, 0, 0, UIntPtr.Zero);
+                UIntPtr hr = UIntPtr.Zero;
+                SendMessage(0xFFFF, 0x112, 0xF170, (int)MonitorState.MonitorStateOn);
+                //SendMessageTimeout(MainForm.GetMainForm.Handle, 0112, UIntPtr.Zero, (IntPtr)MonitorState.MonitorStateOn, SendMessageTimeoutFlags.SMTO_ABORTIFHUNG, 1000, out hr);
+                CustomMessage.ShowMessage(hr + " backlight on request");
             }
             catch (Exception x)
             {
                 Logger.Add(x);
+                CustomMessage.ShowMessage(x.Message + " 661");
             }
         }
 
+        private static void The_timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            CustomMessage.ShowMessage(duration + " " + wait + " the_timer.Enabled: " + backlight_timer.Enabled);
+            if (wait > 0)
+            {
+                OFF();
+                backlight_timer.Enabled = true;
+                backlight_timer.Interval = (int)wait;
+                wait = 0;
+                //the_timer.Enabled = false;
+                //
+            }
+            else
+            {
+                OFF();
+                backlight_timer.Enabled = false;
+                backlight_timer.AutoReset = false;
+                //wait also ran or was not set
+                //task complete                
+                Destroy();
+            }
+
+        }
         
         /// <summary>
         /// Backlight OFF
@@ -117,7 +166,7 @@ namespace FaceDetection
         /// <param name="fuFlags"></param>
         /// <param name="uTimeout"></param>
         /// <param name="lpdwResult"></param>
-        /// <returns></returns>        /// 
+        /// <returns></returns>
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         private static extern IntPtr SendMessageTimeout(
                 IntPtr hWnd,
@@ -127,9 +176,6 @@ namespace FaceDetection
                 SendMessageTimeoutFlags fuFlags,
                 uint uTimeout,
                 out UIntPtr lpdwResult);
-        [DllImport("user32.dll")]
-        static extern void mouse_event(uint dwFlags, int dx, int dy, uint dwData, UIntPtr dwExtraInfo);
-
 
         [Flags]
         enum SendMessageTimeoutFlags : uint
@@ -139,22 +185,6 @@ namespace FaceDetection
             SMTO_ABORTIFHUNG = 0x2,
             SMTO_NOTIMEOUTIFNOTHUNG = 0x8,
             SMTO_ERRORONEXIT = 0x20
-        }
-        
-        [Flags]
-        public enum MouseEventFlags : uint
-        {
-            LEFTDOWN = 0x00000002,
-            LEFTUP = 0x00000004,
-            MIDDLEDOWN = 0x00000020,
-            MIDDLEUP = 0x00000040,
-            MOVE = 0x00000001,
-            ABSOLUTE = 0x00008000,
-            RIGHTDOWN = 0x00000008,
-            RIGHTUP = 0x00000010,
-            WHEEL = 0x00000800,
-            XDOWN = 0x00000080,
-            XUP = 0x00000100
         }
     }    
 }

@@ -6,34 +6,34 @@ namespace FaceDetection
 {
     class CustomMessage
     {
-        public static void ShowMessage(string message,
+        public static void Add(string message,
     [CallerLineNumber] int lineNumber = 0,
     [CallerMemberName] string caller = null)
         {            
-            Debug.WriteLine(message + " at line " + lineNumber + " (" + caller + ")\n");
+            Debug.WriteLine(message + " at line " + lineNumber + " (" + caller + ")");
             
 
 
         }
-        public static void ShowMessage(int message,
+        public static void Add(int message,
     [CallerLineNumber] int lineNumber = 0,
     [CallerMemberName] string caller = null)
         {
-            Debug.WriteLine(message + " at line " + lineNumber + " (" + caller + ")\n");
+            Debug.WriteLine(message + " at line " + lineNumber + " (" + caller + ")");
 
         }
-        public static void ShowMessage(decimal message,
+        public static void Add(decimal message,
     [CallerLineNumber] int lineNumber = 0,
     [CallerMemberName] string caller = null)
         {
-            Debug.WriteLine(message + " at line " + lineNumber + " (" + caller + ")\n");
+            Debug.WriteLine(message + " at line " + lineNumber + " (" + caller + ")");
 
         }
-        public static void ShowMessage(decimal message, IntPtr x,
+        public static void Add(decimal message, IntPtr x,
     [CallerLineNumber] int lineNumber = 0,
     [CallerMemberName] string caller = null)
         {
-            Debug.WriteLine(message + " with " + x + " at line " + lineNumber + " (" + caller + ")\n");
+            Debug.WriteLine(message + " with " + x + " at line " + lineNumber + " (" + caller + ")");
 
         }
     }

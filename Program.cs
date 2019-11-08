@@ -22,8 +22,6 @@ namespace FaceDetection
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-            //Application.Run(new mainForm(vs));
             IReadOnlyCollection<string> vs1 = (IReadOnlyCollection<string>) vs;
 
             //
@@ -44,7 +42,7 @@ namespace FaceDetection
                      */
                     Logger.Add(vs1.Count + " PARAMETER COUNT at line 45");
                     SingleInstanceApplication.Run(new MainForm(vs1), NewInstanceHandler);
-                    PARAMETERS.HandleParameters(vs1);
+                    //PARAMETERS.HandleParameters(vs1);
                 }
                 catch (Exception e)
                 {

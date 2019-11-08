@@ -12,7 +12,7 @@ namespace FaceDetection.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.3.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -73,6 +73,30 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public decimal face_rec_interval {
+            get {
+                return ((decimal)(this["face_rec_interval"]));
+            }
+            set {
+                this["face_rec_interval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public decimal manual_record_maxtime {
+            get {
+                return ((decimal)(this["manual_record_maxtime"]));
+            }
+            set {
+                this["manual_record_maxtime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public decimal backlight_offset_mins {
             get {
@@ -104,6 +128,18 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["enable_event_recorder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string capture_type {
+            get {
+                return ((string)(this["capture_type"]));
+            }
+            set {
+                this["capture_type"] = value;
             }
         }
         
@@ -428,6 +464,30 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["C4y"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("640")]
+        public decimal C4w {
+            get {
+                return ((decimal)(this["C4w"]));
+            }
+            set {
+                this["C4w"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("480")]
+        public decimal C4h {
+            get {
+                return ((decimal)(this["C4h"]));
+            }
+            set {
+                this["C4h"] = value;
             }
         }
         
@@ -764,78 +824,6 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["temp_folder"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        public decimal face_rec_interval {
-            get {
-                return ((decimal)(this["face_rec_interval"]));
-            }
-            set {
-                this["face_rec_interval"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Video")]
-        public string capture_type {
-            get {
-                return ((string)(this["capture_type"]));
-            }
-            set {
-                this["capture_type"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1280")]
-        public decimal C4w {
-            get {
-                return ((decimal)(this["C4w"]));
-            }
-            set {
-                this["C4w"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("720")]
-        public decimal C4h {
-            get {
-                return ((decimal)(this["C4h"]));
-            }
-            set {
-                this["C4h"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool enable_Human_sensor {
-            get {
-                return ((bool)(this["enable_Human_sensor"]));
-            }
-            set {
-                this["enable_Human_sensor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public decimal manual_record_time {
-            get {
-                return ((decimal)(this["manual_record_time"]));
-            }
-            set {
-                this["manual_record_time"] = value;
             }
         }
     }

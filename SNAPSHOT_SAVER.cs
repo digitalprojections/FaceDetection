@@ -35,9 +35,9 @@ namespace FaceDetection
             myEncoderParameters.Param[0] = myEncoderParameter;
 
 
-            string picloc = Path.Combine(Properties.Settings.Default.video_file_location, "CAMERA");
+            string picloc = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
             picloc = Path.Combine(picloc, "1");
-            picloc = Path.Combine(picloc, "SNAPSHOT");
+            picloc = Path.Combine(picloc, "snapshot");
             Directory.CreateDirectory(picloc);
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
 

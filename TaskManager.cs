@@ -12,30 +12,38 @@ namespace FaceDetection
         private static List<Task> listTask = new List<Task>();
         private static List<string> listRecordingFiles = new List<string>();
         private static Task task;
-        private static TimeSpan timeSpanStart = new TimeSpan(0, 0, 0, decimal.ToInt32(Properties.Settings.Default.event_record_time_before_event)); // Time to keep before event
-        private static TimeSpan timeSpanEnd = new TimeSpan(0, 0, 0, decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event)); // Time to keep after event
+        private static TimeSpan timeSpanStart; // Time to keep before event
+        private static TimeSpan timeSpanEnd;  // Time to keep after event
         private static TimeSpan fiveMinutes = new TimeSpan(0, 0, 5, 0);
         private static string directory = Environment.CurrentDirectory; // Directory of the project
-        
+        private const int BUFFERDURATION =BUFFER_DURATION.BUFFERDURATION; // Duration of the buffer (each time a new TEMP video file is created)
+
         public TaskManager()
         {
         }
 
-        public static void EventAppeared(string path, int numCamera, int b, int a) // An event appeared
+        public static void EventAppeared(string path, int numCamera, int timeBeforeEvent, int timeAfterEvent) // An event appeared
         {
             string videoInList, dateCutVideoString, preeventFilesName = "";
             int compareDateValue, compareNotTooOld;
             DateTime dateCutVideo;
             DateTime eventTime = DateTime.Now;
+            timeSpanStart = new TimeSpan(0, 0, 0, timeBeforeEvent);
+            timeSpanEnd = new TimeSpan(0, 0, 0, timeAfterEvent);
             task = new Task(timeSpanStart, timeSpanEnd, eventTime, false, path, numCamera);
             listTask.Add(task);
-            Timer taskTimer = new Timer(a * 1000); // Timer the end of the task
+            Timer taskTimer = new Timer(timeAfterEvent * 1000); // Timer of the end of the task
             taskTimer.Enabled = true;
             taskTimer.Elapsed += OnTimerEvent;
+            taskTimer.AutoReset = false;
 
             AddFilesInList(); // Looking for files in the TEMP folder and add them to the list files
             
-            if (listRecordingFiles.Count != 0)
+            if (listRecordingFiles.Count == 1) // There is only one file in the TEMP folder. So we need this file and don't have to compare dates of files.
+            {
+                task.EditPath(listRecordingFiles.ElementAt(0));
+            }
+            else if (listRecordingFiles.Count != 0) // Several files in TEMP folder, we need to look for which ones we have to keep or not
             {
                 for (int i = listRecordingFiles.Count; i > 0; i--)
                 {
@@ -51,11 +59,11 @@ namespace FaceDetection
                         {
                             if (preeventFilesName == "")
                             {
-                                task.editPath(listRecordingFiles.ElementAt(i - 1));
+                                task.EditPath(listRecordingFiles.ElementAt(i - 1));
                             }
                             else
                             {
-                                task.editPath(listRecordingFiles.ElementAt(i - 1) + "|" + preeventFilesName);
+                                task.EditPath(listRecordingFiles.ElementAt(i - 1) + "|" + preeventFilesName);
                             }
                             break;
                         }
@@ -73,6 +81,19 @@ namespace FaceDetection
                     }
                 }
             }
+
+            // Create event folder if it doesn't exist (ffmpeg can't create folder itself)
+            if (!Directory.Exists(Properties.Settings.Default.video_file_location + "/Camera/" + numCamera + "/" + path)) 
+            {
+                try
+                {
+                    Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/" + numCamera + "/" + path);
+                }
+                catch (IOException iox)
+                {
+                    Console.WriteLine(iox.Message);
+                }
+            }
         }
 
         private static void RecordEnd() // The event (task) is finished
@@ -81,8 +102,8 @@ namespace FaceDetection
             string posteventFilesName = "";
             string[] arrayListOfFiles;
             DateTime dateCutVideo, dateEventStartTime, dateEventStop, dateStartVideoEvent;
-            int compareDateValue, listTaskIndex = 0;
-            TimeSpan tsTimeBeforeEvent;
+            int compareDateWithEvent, compareDateWithFilePreevent, cutTime, durationOfVideoToCut, timeToCutLastVideo, listTaskIndex = 0;
+            TimeSpan tsTimeBeforeEvent, timeFromStartVideoToEvent;
 
             try
             {
@@ -102,22 +123,53 @@ namespace FaceDetection
 
                 startEventTime = listTask[listTaskIndex].eventtime.ToString("yyyyMMddHHmmss");
                 dateEventStartTime = listTask[listTaskIndex].eventtime;
-
                 
                 // Cut the end of the file we found before that we need to start the full video
                 arrayListOfFiles = listTask[listTaskIndex].allPreEventVideo.Split('|');
                 fileToCutFromTheEnd = arrayListOfFiles.First();
 
-                try
+                if (listTask[listTaskIndex].starttime.Seconds != 0) // We need to keep something before event appeared
                 {
-                    // Look for the interval between the event and the beginning of the video which contain the event to know the interval we need to cut in the video before this file
-                    startVideoForFullFileName = arrayListOfFiles.Last().Substring(arrayListOfFiles.Last().Length - 18, 18);
-                    dateStartVideoEvent = new DateTime(Convert.ToInt32(startVideoForFullFileName.Substring(0, 4)), Convert.ToInt32(startVideoForFullFileName.Substring(4, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(6, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(8, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(10, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(12, 2)));
-                    tsTimeBeforeEvent = listTask[listTaskIndex].eventtime - dateStartVideoEvent;
+                    try
+                    {
+                        // Look for the interval between the event and the beginning of the video which contain the event to know the interval we need to cut in the video before this file
+                        startVideoForFullFileName = arrayListOfFiles.Last().Substring(arrayListOfFiles.Last().Length - 18, 18);
+                        dateStartVideoEvent = new DateTime(Convert.ToInt32(startVideoForFullFileName.Substring(0, 4)), Convert.ToInt32(startVideoForFullFileName.Substring(4, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(6, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(8, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(10, 2)), Convert.ToInt32(startVideoForFullFileName.Substring(12, 2)));
+                        tsTimeBeforeEvent = listTask[listTaskIndex].eventtime - dateStartVideoEvent;
 
-                    startVideoForFullFile = CutVideoKeepEnd(fileToCutFromTheEnd, decimal.ToInt32(Properties.Settings.Default.event_record_time_before_event) - tsTimeBeforeEvent.Seconds);
+                        cutTime = listTask[listTaskIndex].starttime.Seconds - tsTimeBeforeEvent.Seconds; // Time wanted (param) before event - time ellapsed in the file before event appeared
+                        if (cutTime < 0) // The event and the time before we need to keep are in the same file. No need to look for interval between the event video file and the file before AND the file is finished
+                        {
+                            try
+                            {
+                                durationOfVideoToCut = Convert.ToInt32(GetVideoDuration(fileToCutFromTheEnd).Substring(5, 2));
+                                cutTime = (durationOfVideoToCut - tsTimeBeforeEvent.Seconds) + listTask[listTaskIndex].starttime.Seconds;
+                                startVideoForFullFile = CutVideoKeepEnd(fileToCutFromTheEnd, cutTime);
+                            }
+                            catch(Exception e) // Event and time to keep before are in the same file AND the file is still in recording, so we can't use the final duration
+                            {
+                                timeFromStartVideoToEvent = listTask[listTaskIndex].eventtime - dateStartVideoEvent;
+                                startVideoForFullFile = CutVideoFromEvent(fileToCutFromTheEnd, timeFromStartVideoToEvent, listTask[listTaskIndex].starttime.Seconds, listTask[listTaskIndex].stoptime.Seconds, listTaskIndex);
+                            }
+                        }
+                        else
+                        {
+                            if (listRecordingFiles.First() != fileToCutFromTheEnd) // Several files in TEMP folder. We can look for files before normally
+                            {
+                                startVideoForFullFile = CutVideoKeepEnd(fileToCutFromTheEnd, cutTime);
+                            }
+                            else // Just one file in TEMP folder, means that the time we want to keep before the event is > to the time which has actually passed since the beginning of the video. Don't need to keep this file here, the postevent will take care of it
+                            {
+                                startVideoForFullFile = "";
+                            }
+                        }
+                    }
+                    catch (Exception e) // no file to cut
+                    {
+                        startVideoForFullFile = "";
+                    }
                 }
-                catch (Exception e) // no file before the event
+                else
                 {
                     startVideoForFullFile = "";
                 }
@@ -129,10 +181,12 @@ namespace FaceDetection
                         videoInList = listRecordingFiles.ElementAt(i - 1);
                         dateCutVideoString = videoInList.Substring(videoInList.Length - 18, 18);
                         dateCutVideo = new DateTime(Convert.ToInt32(dateCutVideoString.Substring(0, 4)), Convert.ToInt32(dateCutVideoString.Substring(4, 2)), Convert.ToInt32(dateCutVideoString.Substring(6, 2)), Convert.ToInt32(dateCutVideoString.Substring(8, 2)), Convert.ToInt32(dateCutVideoString.Substring(10, 2)), Convert.ToInt32(dateCutVideoString.Substring(12, 2)));
-                        compareDateValue = DateTime.Compare(dateCutVideo, dateEventStartTime - timeSpanStart);
-                        if (compareDateValue > 0) // the date of the saved file is > to the event start time. We keep only files after event started
+                        compareDateWithEvent = DateTime.Compare(dateCutVideo, dateEventStartTime);
+                        compareDateWithFilePreevent = DateTime.Compare(dateCutVideo, (listTask[listTaskIndex].eventtime - listTask[listTaskIndex].starttime));
+
+                        if (compareDateWithEvent < 0 && compareDateWithFilePreevent > 0) // the date of the saved file is > to the event start time. We keep only files after event started
                         {
-                            if (dateCutVideo <= (dateEventStartTime + listTask[listTaskIndex].stoptime)) // the date of the saved file is <= to the event start + time parametered we need after the start
+                            if (i != listRecordingFiles.Count) // Not last file
                             {
                                 if (posteventFilesName == "")
                                 {
@@ -145,7 +199,36 @@ namespace FaceDetection
                             }
                             else // We found the last file we need to save and need to cut it
                             {
-                                cutFile = CutVideoKeepStart(listRecordingFiles.ElementAt(i - 1), decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event));
+                                timeToCutLastVideo = listTask[listTaskIndex].stoptime.Seconds - (dateCutVideo - listTask[listTaskIndex].eventtime).Seconds;
+                                cutFile = CutVideoKeepStart(listRecordingFiles.ElementAt(i - 1), timeToCutLastVideo);
+                                if (posteventFilesName == "")
+                                {
+                                    posteventFilesName = cutFile;
+                                }
+                                else
+                                {
+                                    posteventFilesName += "|" + cutFile;
+                                }
+                                break;
+                            }
+                        }
+                        else if (compareDateWithFilePreevent > 0) // We finished to look for files before the event. Here are the files after the event, but different with the files we have already kept
+                        {
+                            if (i != listRecordingFiles.Count) // Not the last file
+                            {
+                                if (posteventFilesName == "")
+                                {
+                                    posteventFilesName = listRecordingFiles.ElementAt(i - 1);
+                                }
+                                else
+                                {
+                                    posteventFilesName += "|" + listRecordingFiles.ElementAt(i - 1);
+                                }
+                            }
+                            else // We found the last file we need to save and need to cut it
+                            {
+                                timeToCutLastVideo = listTask[listTaskIndex].stoptime.Seconds - (dateCutVideo - listTask[listTaskIndex].eventtime).Seconds;
+                                cutFile = CutVideoKeepStart(listRecordingFiles.ElementAt(i - 1), timeToCutLastVideo);
                                 if (posteventFilesName == "")
                                 {
                                     posteventFilesName = cutFile;
@@ -166,7 +249,7 @@ namespace FaceDetection
                 listTask.Remove(listTask[listTaskIndex]); // Delete the task ended
             }
             catch (Exception e) {
-                Console.WriteLine(e.Message + " line 169");
+                Console.WriteLine(e.Message + " TaskManager in RecordEnd() line 252");
             }
         }
 
@@ -200,13 +283,65 @@ namespace FaceDetection
                 videoStartTime = (new DateTime(Convert.ToInt32(videoDate.Substring(0, 4)), Convert.ToInt32(videoDate.Substring(4, 2)), Convert.ToInt32(videoDate.Substring(6, 2)), Convert.ToInt32(videoDate.Substring(8, 2)), Convert.ToInt32(videoDate.Substring(10, 2)), Convert.ToInt32(videoDate.Substring(12, 2))) + tsDuration - tsCut).ToString("yyyyMMddHHmmss");
                 videoCutName = path + videoStartTime + ".avi";
 
-                ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191025-155508c-win64-static\bin\ffmpeg.exe");
-                startInfo.Arguments = @"-y -i " + videoToCut + " -ss " + videoCutStartTimeFormated + " -to 0" + videoDuration + " -c copy -avoid_negative_ts 1 " + videoCutName;
+                ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffmpeg.exe");
+                startInfo.Arguments = @"-loglevel quiet -y -i " + videoToCut + " -ss " + videoCutStartTimeFormated + " -to 0" + videoDuration + " -c copy -avoid_negative_ts 1 " + videoCutName;
+                Console.WriteLine("CutVideoKeepEnd() : " + startInfo.Arguments); // DEBUG
+                startInfo.CreateNoWindow = true;
+                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 Process.Start(startInfo);
             }
             catch (Exception e) // No video to cut. The application has probably just started
             {
-                Console.WriteLine(e.Message + " line 209");
+                Console.WriteLine(e.Message + " TaskManager in CutVideoKeepEnd()");
+                videoCutName = "";
+            }
+            return videoCutName;
+        }
+
+        private static string CutVideoFromEvent(string videoToCut, TimeSpan tsEventTime, int cutTimeBeforeParameter, int cutTimeAfterParameter, int taskIndex) // Cut the video we need for the beginning of the full video keeping just the part we need from the event
+        {
+            string videoCutStartTimeFormated, videoCutName, videoStartTime, videoDate, videoDuration;
+            TimeSpan tsCutBefore = new TimeSpan(0, 0, 0, cutTimeBeforeParameter);
+
+            try
+            {
+                string path = videoToCut.Substring(0, videoToCut.Length - 18);
+                int videoCutStartTime = tsEventTime.Seconds - cutTimeBeforeParameter;
+                if ((videoCutStartTime % 60) >= 10)
+                {
+                    videoCutStartTimeFormated = "00:0" + videoCutStartTime / 60 + ":" + videoCutStartTime % 60;
+                }
+                else
+                {
+                    videoCutStartTimeFormated = "00:0" + videoCutStartTime / 60 + ":0" + videoCutStartTime % 60;
+                }
+                int videoCutEndTime = tsEventTime.Seconds + cutTimeAfterParameter;
+                if ((videoCutEndTime % 60) >= 10)
+                {
+                    videoDuration = "00:0" + videoCutEndTime / 60 + ":" + videoCutEndTime % 60;
+                }
+                else
+                {
+                    videoDuration = "00:0" + videoCutEndTime / 60 + ":0" + videoCutEndTime % 60;
+                }
+
+                // Create name for the cut video
+                videoDate = videoToCut.Substring(videoToCut.Length - 18, 14);
+                videoStartTime = (new DateTime(Convert.ToInt32(videoDate.Substring(0, 4)), Convert.ToInt32(videoDate.Substring(4, 2)), Convert.ToInt32(videoDate.Substring(6, 2)), Convert.ToInt32(videoDate.Substring(8, 2)), Convert.ToInt32(videoDate.Substring(10, 2)), Convert.ToInt32(videoDate.Substring(12, 2))) + tsEventTime - tsCutBefore).ToString("yyyyMMddHHmmss");
+                videoCutName = path + videoStartTime + ".avi";
+
+                ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffmpeg.exe");
+                startInfo.Arguments = @"-loglevel quiet -y -i " + videoToCut + " -ss " + videoCutStartTimeFormated + " -to " + videoDuration + " -c copy -avoid_negative_ts 1 " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[taskIndex].cameraNumber.ToString() + "\\" + listTask[taskIndex].path + "\\" + videoStartTime + ".avi";
+
+                System.Threading.Thread.Sleep(BUFFERDURATION - (cutTimeAfterParameter*1000)); // Wait for the last files is released by the system -> buffer file - time after event. we can't know better...
+                Console.WriteLine("CutVideoFromEvent() : " + startInfo.Arguments); // DEBUG
+                startInfo.CreateNoWindow = true;
+                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                Process.Start(startInfo); // --/!\-- We send the file directly in the final destination
+            }
+            catch (Exception e) // No video to cut. The application has probably just started
+            {
+                Console.WriteLine(e.Message + " TaskManager in CutVideoFromEvent()");
                 videoCutName = "";
             }
             return videoCutName;
@@ -215,7 +350,8 @@ namespace FaceDetection
         private static string CutVideoKeepStart(string videoToCut, int cutTimeParameter) // Cut the video we need for the end of the full video keeping just the beginning of the file
         {
             string videoCutEndTimeFormated, videoDate, videoEndTime, videoCutName;
-            TimeSpan tsCut = new TimeSpan(0, 0, 0, cutTimeParameter);
+            //TimeSpan tsCut = new TimeSpan(0, 0, 0, cutTimeParameter);
+            TimeSpan tsCut = new TimeSpan(0, 0, 0, 1); // Can't use the same name for the cut file and the original file, so just add 1 second in the name
             string path = videoToCut.Substring(0, videoToCut.Length - 18);
 
             if ((cutTimeParameter % 60) >= 10)
@@ -232,8 +368,12 @@ namespace FaceDetection
             videoEndTime = (new DateTime(Convert.ToInt32(videoDate.Substring(0, 4)), Convert.ToInt32(videoDate.Substring(4, 2)), Convert.ToInt32(videoDate.Substring(6, 2)), Convert.ToInt32(videoDate.Substring(8, 2)), Convert.ToInt32(videoDate.Substring(10, 2)), Convert.ToInt32(videoDate.Substring(12, 2))) + tsCut).ToString("yyyyMMddHHmmss");
             videoCutName = path + videoEndTime + ".avi";
 
-            ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191025-155508c-win64-static\bin\ffmpeg.exe");
-            startInfo.Arguments = @"-y -i " + videoToCut + " -ss 00:00:00 -to " + videoCutEndTimeFormated + " -c copy -avoid_negative_ts 1 " + videoCutName;
+            ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffmpeg.exe");
+            startInfo.Arguments = @"-loglevel quiet -y -i " + videoToCut + " -ss 00:00:00 -to " + videoCutEndTimeFormated + " -c copy -avoid_negative_ts 1 " + videoCutName;
+            System.Threading.Thread.Sleep(BUFFERDURATION - (cutTimeParameter - 100)); // Wait for the last files is released by the system -> buffer file - time we keep, that is already passed since the file started (+100ms to be sur the fil is released). 
+            Console.WriteLine("CutVideoKeepStart() : " + startInfo.Arguments); // DEBUG
+            startInfo.CreateNoWindow = true;
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             Process.Start(startInfo);
 
             return videoCutName;
@@ -241,19 +381,33 @@ namespace FaceDetection
 
         private static void ConcatVideo(string preEventVideoFiles, string postEventVideoFiles, string startTime, int TaskIndex) // Concat all videos needed to construct the full video
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191025-155508c-win64-static\bin\ffmpeg.exe");
-            if (preEventVideoFiles != "")
+            ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffmpeg.exe");
+            if (preEventVideoFiles != "" && postEventVideoFiles != "")
             {
-                startInfo.Arguments = @"-i concat:" + preEventVideoFiles + "|" + postEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[TaskIndex].cameraNumber.ToString() + "\\" + listTask[TaskIndex].path + "\\" + startTime + ".avi"; 
+                startInfo.Arguments = @"-loglevel quiet -y -i concat:" + 
+                    preEventVideoFiles + "|" + 
+                    postEventVideoFiles + " -c copy " + 
+                    Properties.Settings.Default.video_file_location + "\\Camera\\" + 
+                    listTask[TaskIndex].cameraNumber.ToString() + "\\" + 
+                    listTask[TaskIndex].path + "\\" + startTime + ".avi"; 
+            }
+            else if (preEventVideoFiles != "" && postEventVideoFiles == "") // All the video stream kept are inside the same file
+            {
+                //startInfo.Arguments = @"-i concat:" + preEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[TaskIndex].cameraNumber.ToString() + "\\" + listTask[TaskIndex].path + "\\" + startTime + ".avi";
+                // --/!\-- Sent directly in the function CutVideoFromEvent()
+                return;
             }
             else // No file to keep before the event
             {
-                startInfo.Arguments = @"-i concat:" + postEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[TaskIndex].cameraNumber.ToString() + "\\" + listTask[TaskIndex].path + "\\" + startTime + ".avi";
+                startInfo.Arguments = @"-loglevel quiet -y -i concat:" + postEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[TaskIndex].cameraNumber.ToString() + "\\" + listTask[TaskIndex].path + "\\" + startTime + ".avi";
             }
+            Console.WriteLine("ConcatVideo() : " + startInfo.Arguments); // DEBUG
+            startInfo.CreateNoWindow = true;
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             Process.Start(startInfo);
         }
 
-        private static void AddFilesInList() // Add all files in the temp folder into the list
+        private static void AddFilesInList() // Add all files in the TEMP folder into the list
         {
             try
             {
@@ -272,11 +426,11 @@ namespace FaceDetection
             }
             catch (IOException e)
             {
-                Console.WriteLine(e.Message + " line 275");
+                Console.WriteLine(e.Message + " TaskManager in AddFilesInList()");
             }
         }
 
-        private static void RefreshFilesInList() // Add all files in the temp folder into the list
+        private static void RefreshFilesInList() // Add all files in the TEMP folder into the list
         {
             try
             {
@@ -293,7 +447,7 @@ namespace FaceDetection
             }
             catch (IOException e)
             {
-                Console.WriteLine(e.Message + " line 296");
+                Console.WriteLine(e.Message + " TaskManager in RefreshFilesInList()");
             }
         }
 
@@ -302,7 +456,7 @@ namespace FaceDetection
             DirectoryInfo dir;
             string fileName;
             DateTime fileDate;
-            TimeSpan tsTimeMaxToKeep = new TimeSpan(10, 0, 15, 0); // TODO: How many time to keep ?
+            TimeSpan tsTimeMaxToKeep = new TimeSpan(0, 0, 15, 0); // TODO: How many time to keep ?
 
             try
             {
@@ -320,17 +474,18 @@ namespace FaceDetection
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message + " line 323");
+                Console.WriteLine(e.Message + " TaskManager in DeleteOldFiles()");
             }
         }
 
         private static string GetVideoDuration(string videoPath) // Get the duration of the video file gave in parameter
         {
-            string cmd = string.Format("-v error -select_streams v:0 -show_entries stream=duration -sexagesimal -of default=noprint_wrappers=1:nokey=1  {0}", videoPath);
+            string cmd = string.Format("-loglevel quiet -v error -select_streams v:0 -show_entries stream=duration -sexagesimal -of default=noprint_wrappers=1:nokey=1  {0}", videoPath);
             Process proc = new Process();
-            proc.StartInfo.FileName = directory + @"\ffmpeg-20191025-155508c-win64-static\bin\ffprobe.exe";
+            proc.StartInfo.FileName = directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffprobe.exe";
             proc.StartInfo.Arguments = cmd;
             proc.StartInfo.CreateNoWindow = true;
+            proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.UseShellExecute = false;
@@ -348,7 +503,7 @@ namespace FaceDetection
             return duration;
         }
 
-        public static void OnTimerEvent(object sender, EventArgs e) // The event task is finished
+        private static void OnTimerEvent(object sender, EventArgs e) // The event task is finished
         {
             RecordEnd();
         }
@@ -382,7 +537,7 @@ namespace FaceDetection
             this.cameraNumber = cameraNumber;
         }
 
-        public void editPath(string path)
+        public void EditPath(string path)
         {
             allPreEventVideo = path;
         }

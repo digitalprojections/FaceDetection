@@ -16,7 +16,7 @@ namespace FaceDetectionX
     //
     // /* for debugging. */
     // var formats = UsbCamera.GetVideoFormat(0);
-    // foreach (var item in formats) CustomMessage.ShowMessage(item);
+    // foreach (var item in formats) Logger.Add(item);
     //
     // /* create usb camera and start. */
     // var index = 0;
@@ -93,7 +93,7 @@ namespace FaceDetectionX
         {
             if (hr < 0)
             {
-                FaceDetection.CustomMessage.ShowMessage(msg);
+                FaceDetection.Logger.Add(msg);
                 DirectShow.DsError.ThrowExceptionForHR(hr);
             }
         }
@@ -196,7 +196,7 @@ namespace FaceDetectionX
             {
 
                 Stop();
-                FaceDetection.CustomMessage.ShowMessage("Camera stop .........................");    
+                FaceDetection.Logger.Add("Camera stop .........................");    
 
                 DirectShow.ReleaseInstance(ref grabber);
                 DirectShow.ReleaseInstance(ref control9);
