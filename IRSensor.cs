@@ -10,6 +10,7 @@ namespace FaceDetection
         Timer SensorCheckTimer = new Timer();
         public IRSensor()
         {
+
             //init
             Init_IR_Timer();
         }
@@ -25,7 +26,6 @@ namespace FaceDetection
            {
                 SensorCheckTimer.Tick += IR_Timer_Tick;
                 SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
-                SensorCheckTimer.Enabled = true;
                 SensorCheckTimer.Start();
             }
             else
@@ -36,31 +36,33 @@ namespace FaceDetection
         }
 
         private void IR_Timer_Tick(object sender, EventArgs e)
-        {            
+        {   
             uint rval = CheckSensor();
             if (checkOK && rval == 1)
             {
                 checkOK = false;
-                //heat signature detected, stop timer
-                Stop_IR_Timer();
+                //heat signature detected, stop timer                
                 if (Properties.Settings.Default.capture_method == 0)
                 {
-                //initiate RECORD mode
-                if (MainForm.GetMainForm != null && MainForm.GetMainForm.crossbar.PREEVENT_RECORDING)
+                    //initiate RECORD mode
+                    if (MainForm.GetMainForm != null && MainForm.GetMainForm.crossbar.PREEVENT_RECORDING)
                     {
                         TaskManager.EventAppeared(RECORD_PATH.EVENT, 1, decimal.ToInt32(Properties.Settings.Default.seconds_before_event), decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
                         MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
-                    }                    
-                else
-                {                    
-                    MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
+                        MainForm.GetMainForm.crossbar.SET_ICON_TIMER();
+                    }
+                    else
+                    {
+                        MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
+                    }
                 }
-                }
-                else
+             else
                 {
                     SNAPSHOT_SAVER.TakeSnapShot();
                     MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
                 }
+
+
                 Logger.Add("IR SENSOR: Motion detected");
                 if (Properties.Settings.Default.backlight_on_upon_face_rec)
                 {
@@ -68,7 +70,7 @@ namespace FaceDetection
                 }
             }            
             SensorClose();
-
+            Console.WriteLine("SENSOR " + checkOK);
         }
 
         public void Start_IR_Timer()
@@ -79,9 +81,10 @@ namespace FaceDetection
 
         public void Stop_IR_Timer()
         {
-            //SensorCheckTimer.Enabled = false;
+            SensorCheckTimer.Enabled = false;
             //SensorCheckTimer.Stop();
             checkOK = false;
+
         }
         
         public uint CheckSensor()

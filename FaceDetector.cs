@@ -17,7 +17,7 @@ namespace FaceDetection
         private CascadeClassifier eye_cascade = new CascadeClassifier();
         private CascadeClassifier body_cascade = new CascadeClassifier();
         Timer face_check_timer = new Timer();
-        bool fd = false;
+        bool checkOK = false;
 
         public FaceDetector()
         {
@@ -35,12 +35,13 @@ namespace FaceDetection
 
         private void Face_check_timer_Tick(object sender, EventArgs e)
         {
+            Console.WriteLine("FACE " + checkOK);
             try
             {
                 if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_face_recognition)
                 {
                     Bitmap bitmap = MainForm.GetMainForm.crossbar.GetBitmap();
-                    if (bitmap != null && !fd)
+                    if (bitmap != null && checkOK)
                     {
                         Rect[] rectList = fase_cascade.DetectMultiScale(bitmap.ToMat());
                         if (rectList.Length == 0)
@@ -51,7 +52,7 @@ namespace FaceDetection
 
                         if (rectList.Length > 0)
                         {
-                            fd = true;
+                            checkOK = false;
                             //heat signature detected, stop timer
                             Stop_Face_Timer();
                             //↓20191107 Nagayama added↓
@@ -83,8 +84,9 @@ namespace FaceDetection
 
                     }
                 }
-            }
 
+            }
+            
             catch (NullReferenceException ex)
             {
                 Logger.Add(ex);
@@ -108,7 +110,7 @@ namespace FaceDetection
         
         public void Start_Face_Timer()
         {
-            fd = false;
+            checkOK = true;
             face_check_timer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
             face_check_timer.Enabled = true;
         }
@@ -116,9 +118,9 @@ namespace FaceDetection
 
         public void Stop_Face_Timer()
         {
-            //face_check_timer.Enabled = false;
+            face_check_timer.Enabled = false;
             //face_check_timer.Stop();
-            fd = true;
+            checkOK = false;
         }
     }
 }

@@ -68,8 +68,8 @@ namespace FaceDetection
             //↓20191107 Nagayama deleted↓
             //MainForm.Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon;
             //↑20191107 Nagayama deleted↑
-            MainForm.RSensor.Stop_IR_Timer();
-            MainForm.FaceDetector.Stop_Face_Timer();
+            //MainForm.RSensor.Stop_IR_Timer();
+            //MainForm.FaceDetector.Stop_Face_Timer();
             keyboardListener.KeyDownAll -= new KeyEventHandler(KeyDownAllEventHandler);
             mouseListener.MouseMove -= MouseListener_MouseMove;
             Logger.Add("TODO: " + CAMERA_MODES.EVENT);
@@ -87,7 +87,8 @@ namespace FaceDetection
                         decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
                         decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
                         MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
-                    }                    
+                            MainForm.GetMainForm.crossbar.SET_ICON_TIMER();
+                        }                    
 
                     }
                     else

@@ -97,6 +97,7 @@ namespace FaceDetection
 
         public void No_Cap_Timer_ON(int vidlen)
         {
+            MainForm.GetMainForm.SET_REC_ICON();
             wait_interval_enabled = true;
             if(no_opcap_timer!=null)
                 no_opcap_timer.Enabled = true;

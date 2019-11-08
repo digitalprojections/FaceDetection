@@ -41,13 +41,14 @@ namespace FaceDetection
             
             if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
             {
-                backlight_timer.Stop();
+                //backlight_timer.Stop();
                 backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60 * 1000;
                 backlight_timer.Start();
             }
             else
             {
-                MessageBox.Show("backlight_offset is 0");
+                backlight_timer.Stop();
+                //MessageBox.Show("backlight_offset is 0");
             }
         }
 

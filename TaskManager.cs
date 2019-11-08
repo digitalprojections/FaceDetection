@@ -15,7 +15,6 @@ namespace FaceDetection
         private static TimeSpan timeSpanStart; // Time to keep before event
         private static TimeSpan timeSpanEnd;  // Time to keep after event
         private static TimeSpan fiveMinutes = new TimeSpan(0, 0, 5, 0);
-        private static TimeSpan noTime = new TimeSpan(0, 0, 0, 0);
         private static string directory = Environment.CurrentDirectory; // Directory of the project
         private const int BUFFERDURATION = BUFFER_DURATION.BUFFERDURATION; // Duration of the buffer (each time a new TEMP video file is created)
 
@@ -249,7 +248,7 @@ namespace FaceDetection
                 listTask.Remove(listTask[listTaskIndex]); // Delete the task ended
             }
             catch (Exception e) {
-                Console.WriteLine(e.Message + " TaskManager in RecordEnd() line 252");
+                Console.WriteLine(e.Message + " TaskManager in RecordEnd() line 251");
             }
         }
 
@@ -300,7 +299,7 @@ namespace FaceDetection
 
         private static string CutVideoFromEvent(string videoToCut, TimeSpan tsEventTime, int cutTimeBeforeParameter, int cutTimeAfterParameter, int taskIndex) // Cut the video we need for the beginning of the full video keeping just the part we need from the event
         {
-            string videoCutStartTimeFormated, videoCutName, videoStartTime, videoDate, videoDuration;
+            string videoCutStartTimeFormated, videoCutEndTimeFormated, videoCutName, videoStartTime, videoDate;
             TimeSpan tsCutBefore = new TimeSpan(0, 0, 0, cutTimeBeforeParameter);
 
             try
@@ -318,11 +317,11 @@ namespace FaceDetection
                 int videoCutEndTime = tsEventTime.Seconds + cutTimeAfterParameter;
                 if ((videoCutEndTime % 60) >= 10)
                 {
-                    videoDuration = "00:0" + videoCutEndTime / 60 + ":" + videoCutEndTime % 60;
+                    videoCutEndTimeFormated = "00:0" + videoCutEndTime / 60 + ":" + videoCutEndTime % 60;
                 }
                 else
                 {
-                    videoDuration = "00:0" + videoCutEndTime / 60 + ":0" + videoCutEndTime % 60;
+                    videoCutEndTimeFormated = "00:0" + videoCutEndTime / 60 + ":0" + videoCutEndTime % 60;
                 }
 
                 // Create name for the cut video
@@ -331,7 +330,7 @@ namespace FaceDetection
                 videoCutName = path + videoStartTime + ".avi";
 
                 ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffmpeg.exe");
-                startInfo.Arguments = @"-loglevel quiet -y -i " + videoToCut + " -ss " + videoCutStartTimeFormated + " -to " + videoDuration + " -c copy -avoid_negative_ts 1 " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[taskIndex].cameraNumber.ToString() + "\\" + listTask[taskIndex].path + "\\" + videoStartTime + ".avi";
+                startInfo.Arguments = @"-loglevel quiet -y -i " + videoToCut + " -ss " + videoCutStartTimeFormated + " -to " + videoCutEndTimeFormated + " -c copy -avoid_negative_ts 1 " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[taskIndex].cameraNumber.ToString() + "\\" + listTask[taskIndex].path + "\\" + videoStartTime + ".avi";
 
                 System.Threading.Thread.Sleep(BUFFERDURATION - (cutTimeAfterParameter*1000)); // Wait for the last files is released by the system -> buffer file - time after event. we can't know better...
                 Console.WriteLine("CutVideoFromEvent() : " + startInfo.Arguments); // DEBUG
@@ -350,7 +349,6 @@ namespace FaceDetection
         private static string CutVideoKeepStart(string videoToCut, int cutTimeParameter) // Cut the video we need for the end of the full video keeping just the beginning of the file
         {
             string videoCutEndTimeFormated, videoDate, videoEndTime, videoCutName;
-            //TimeSpan tsCut = new TimeSpan(0, 0, 0, cutTimeParameter);
             TimeSpan tsCut = new TimeSpan(0, 0, 0, 1); // Can't use the same name for the cut file and the original file, so just add 1 second in the name
             string path = videoToCut.Substring(0, videoToCut.Length - 18);
 
@@ -451,7 +449,7 @@ namespace FaceDetection
             DirectoryInfo dir;
             string fileName;
             DateTime fileDate;
-            TimeSpan tsTimeMaxToKeep = new TimeSpan(0, 0, 15, 0); // TODO: How many time to keep ?
+            TimeSpan tsTimeMaxToKeep = new TimeSpan(0, 0, 15, 0); 
 
             try
             {
@@ -463,6 +461,7 @@ namespace FaceDetection
                     fileDate = DateTime.ParseExact(fileName.Substring(files.FullName.Length - 18, 14), "yyyyMMddHHmmss", null);
                     if (DateTime.Compare(fileDate, (DateTime.Now - tsTimeMaxToKeep)) < 0)
                     {
+                        File.SetAttributes(files.FullName, FileAttributes.Normal); // Add in case of weird attribute on the file
                         File.Delete(files.FullName);
                     }
                 }

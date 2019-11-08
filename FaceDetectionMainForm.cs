@@ -26,31 +26,7 @@ namespace FaceDetection
         internal bool EVENT_RECORDING_IN_PROGRESS = false;
         internal static int SELECTED_CAMERA = 0;
 
-        /*
-         All cameras have the same modes
-         But only the Main camera supports operator capture         
-         (各カメラには異なるモードがあります メインカメラのみがオペレータキャプチャをサポートしています)
-             */
-
-        internal static CAMERA_MODES CURRENT_MODE = 0;
-               
-        internal CAMERA_MODES CAMERA_MODE {
-            get
-            {
-                return CURRENT_MODE;
-            }
-            set
-            {
-                CURRENT_MODE = value;
-            }
-            }
-
-
-        // Camera choice
-        //private CameraChoice _CameraChoice = new CameraChoice();
-
-
-        
+                
         private static MainForm or_mainForm;
         private static PictureBox or_pb_recording;
         public static Label or_current_date_text;
@@ -264,7 +240,7 @@ namespace FaceDetection
         private void WindowSizeUpdate(object sender, EventArgs e)
         {
             //Logger.Add(settingUI.Camera_number);
-            //WindowSizeUpdate();
+            WindowSizeUpdate();
         }
         public void WindowSizeUpdate()
         {
@@ -312,7 +288,7 @@ namespace FaceDetection
             //Or_pb_recording.Image = Properties.Resources.Pause_Normal_Red_icon;
             Or_pb_recording.Image = Properties.Resources.player_record;
             //↑20191106 Nagayama changed↑
-            Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon;
+            SET_REC_ICON();
             //BackLight.ON();            
             try
             {                
@@ -367,8 +343,9 @@ namespace FaceDetection
             #region Instances
             ///////////////////////////////////////
             crossbar = new CROSSBAR();
-            RSensor = new IRSensor();
-            FaceDetector = new FaceDetector();
+            //RSensor = new IRSensor();
+            //FaceDetector = new FaceDetector();
+            //backLight = new BackLightController();
             BackLight.Start();
             MOUSE_KEYBOARD.START_CLICK_LISTENER();
             ////////////////////////////////////////
@@ -398,27 +375,57 @@ namespace FaceDetection
             WindowSizeUpdate();
             FillResolutionList();
         }
+
+        public void SET_REC_ICON()
+        {
+            Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon;
+        }
+
         public static void AllChangesApply()
         {
-            if (Properties.Settings.Default.enable_Human_sensor && Properties.Settings.Default.seconds_after_event>0)
+            if (Properties.Settings.Default.enable_Human_sensor && !MainForm.GetMainForm.crossbar.OPER_BAN)
             {
+                if (RSensor != null)
+                {
+                    RSensor.Stop_IR_Timer();
+                    RSensor.Destroy();
+                }
+                RSensor = new IRSensor();
                 RSensor.Start_IR_Timer();
             }
             else
             {
-                RSensor.Stop_IR_Timer();
+                if(RSensor!=null)
+                {
+                    RSensor.Stop_IR_Timer();
+                    RSensor.Destroy();
+                }
+                    
+                
             }
 
-            if (Properties.Settings.Default.enable_face_recognition && Properties.Settings.Default.seconds_after_event>0 && !MainForm.GetMainForm.crossbar.OPER_BAN)
+            if (Properties.Settings.Default.enable_face_recognition && !MainForm.GetMainForm.crossbar.OPER_BAN)
             {
+                if (FaceDetector != null)
+                {
+                    FaceDetector.Stop_Face_Timer();
+                    FaceDetector.Destroy();
+                }
+                faceDetector = new FaceDetector();
                 FaceDetector.Start_Face_Timer();
             }
             else
             {
-                FaceDetector.Stop_Face_Timer();
+                if (FaceDetector != null)
+                {
+                    FaceDetector.Stop_Face_Timer();
+                    FaceDetector.Destroy();
+                }
+                
+                
             }
 
-            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation && !MainForm.GetMainForm.crossbar.OPER_BAN)
             {
                 MOUSE_KEYBOARD.AddMouseAndKeyboardBack();
             }
@@ -497,7 +504,10 @@ namespace FaceDetection
         {
             mouse_down_timer.Stop();
             datetime_ui_updater_timer.Stop();
-            FaceDetector.Destroy();
+            if(FaceDetector!=null)
+                FaceDetector.Destroy();
+            if (RSensor != null)
+                RSensor.Destroy();
             try
             {
                 mouse_down_timer.Dispose();
@@ -506,9 +516,7 @@ namespace FaceDetection
             catch (Exception x)
             {
                 Logger.Add(x);
-            }
-            
-            RSensor.Destroy();
+            }            
             crossbar.ReleaseCameras();
         }
 
