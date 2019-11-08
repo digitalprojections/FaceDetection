@@ -72,7 +72,7 @@ namespace FaceDetection
                             else
                             {
                                 SNAPSHOT_SAVER.TakeSnapShot();
-                                //MainForm.GetMainForm.crossbar.No_Cap_Timer_ON();
+                                MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
                             }
                             //↑20191107 Nagayama added↑    
 

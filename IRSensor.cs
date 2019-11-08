@@ -107,11 +107,11 @@ namespace FaceDetection
                         }
                     }
                     data[0] = Convert.ToUInt32((stSensorValue.iValue[0] & 0x00FF) >> 0);     // データ有無・種別 (0:データなし, 1:AK9753, 2:AK9754)
-                    data[1] = Convert.ToUInt32((stSensorValue.iValue[0] & 0xFF00) >> 8);        // 検出結果 (0:非検出, 1:検出)
+                    data[1] = Convert.ToUInt32((stSensorValue.iValue[0] & 0xFF00) >> 8);     // 検出結果 (0:非検出, 1:検出)
                     data[2] = Convert.ToUInt32((stSensorValue.iValue[1] & 0x00FF) >> 0);     // IR data (L)
                     data[3] = Convert.ToUInt32((stSensorValue.iValue[1] & 0xFF00) >> 8);     // IR data (H)
                     data[4] = Convert.ToUInt32((stSensorValue.iValue[2] & 0x00FF) >> 0);     // TMP data (L)
-                    data[5] = Convert.ToUInt32((stSensorValue.iValue[2] & 0xFF00) >> 8);        // TMP data (H)
+                    data[5] = Convert.ToUInt32((stSensorValue.iValue[2] & 0xFF00) >> 8);     // TMP data (H)
                  }
                 catch(Exception e)
                 {
