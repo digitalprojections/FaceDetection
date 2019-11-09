@@ -206,7 +206,7 @@ namespace FaceDetectionX
         private Bitmap GetBitmapMainMain(DirectShow.ISampleGrabber i_grabber, int width, int height, int stride)
         {
             int sz = 0;
-            i_grabber.GetCurrentBuffer(ref sz, IntPtr.Zero); // IntPtr.Zeroで呼び出してバッファサイズ取得
+            i_grabber.GetCurrentBuffer(ref sz, IntPtr.Zero); // IntPtr.Zeroで呼び出してバッファサイズ取得            
             if (sz == 0) return null;
             var ptr = Marshal.AllocCoTaskMem(sz);
             i_grabber.GetCurrentBuffer(ref sz, ptr);

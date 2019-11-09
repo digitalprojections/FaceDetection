@@ -1,11 +1,7 @@
 ﻿using OpenCvSharp;
 using OpenCvSharp.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FaceDetection
@@ -17,6 +13,7 @@ namespace FaceDetection
         private CascadeClassifier eye_cascade = new CascadeClassifier();
         private CascadeClassifier body_cascade = new CascadeClassifier();
         Timer face_check_timer = new Timer();
+        
         bool checkOK = false;
 
         public FaceDetector()
@@ -29,32 +26,36 @@ namespace FaceDetection
             eye_cascade.Load(eye_cascade_file);
             body_cascade.Load(body_cascade_file);
             face_check_timer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
-            face_check_timer.Tick += Face_check_timer_Tick;            
+            face_check_timer.Tick += Face_check_timer_Tick;
+            //face_check_timer.AutoReset = true;
+            //face_check_timer.Elapsed += Face_check_timer_Tick;
             face_check_timer.Start();
         }
 
         private void Face_check_timer_Tick(object sender, EventArgs e)
         {
+            
             Console.WriteLine("FACE " + checkOK);
             try
             {
-                if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_face_recognition)
+                if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_face_recognition && checkOK)
                 {
-                    Bitmap bitmap = MainForm.GetMainForm.crossbar.GetBitmap();
-                    if (bitmap != null && checkOK)
+                    Bitmap bitmap = MainForm.GetMainForm.crossbar.GetBitmap();                    
+                    if (bitmap != null)
                     {
-                        Rect[] rectList = fase_cascade.DetectMultiScale(bitmap.ToMat());
+                        Mat mat = bitmap.ToMat();
+                        Rect[] rectList = fase_cascade.DetectMultiScale(mat);
                         if (rectList.Length == 0)
-                            rectList = eye_cascade.DetectMultiScale(bitmap.ToMat());
+                            rectList = eye_cascade.DetectMultiScale(mat);
 
                         if (rectList.Length == 0)
-                            rectList = body_cascade.DetectMultiScale(bitmap.ToMat());
+                            rectList = body_cascade.DetectMultiScale(mat);
 
                         if (rectList.Length > 0)
                         {
                             checkOK = false;
                             //heat signature detected, stop timer
-                            Stop_Face_Timer();
+                            
                             //↓20191107 Nagayama added↓
                             if (Properties.Settings.Default.capture_method == 0)
                             {
@@ -62,27 +63,31 @@ namespace FaceDetection
                                 //initiate RECORD mode
                                 if (MainForm.GetMainForm != null && MainForm.GetMainForm.crossbar.PREEVENT_RECORDING)
                                 {                                    
-                                    TaskManager.EventAppeared(RECORD_PATH.EVENT, 1, decimal.ToInt32(Properties.Settings.Default.seconds_before_event), decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
-                                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
-                                    MainForm.GetMainForm.crossbar.SET_ICON_TIMER();
+                                    TaskManager.EventAppeared(RECORD_PATH.EVENT, 
+                                        1, 
+                                        decimal.ToInt32(Properties.Settings.Default.seconds_before_event), 
+                                        decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
                                 }
+                                else
+                                {
+                                    //Direct recording
+                                    MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.EVENT);
+                                }                                
+                                MainForm.GetMainForm.crossbar.SET_ICON_TIMER();
                             }
                             //↓20191107 Nagayama added↓
-
                             else
                             {
-                                SNAPSHOT_SAVER.TakeSnapShot();
-                                //MainForm.GetMainForm.crossbar.No_Cap_Timer_ON();
+                                SNAPSHOT_SAVER.TakeSnapShot(0);                                
                             }
                             //↑20191107 Nagayama added↑    
 
                             if (Properties.Settings.Default.backlight_on_upon_face_rec)
                                 MainForm.GetMainForm.BackLight.ON();
 
-
+                            MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
                         }
-
-                    }
+                    }                    
                 }
 
             }
@@ -90,10 +95,9 @@ namespace FaceDetection
             catch (NullReferenceException ex)
             {
                 Logger.Add(ex);
-                Stop_Face_Timer();
-                Destroy();
-            }
-                
+                //Stop_Face_Timer();
+                //Destroy();
+            }         
         }
 
         public void SetInterval()

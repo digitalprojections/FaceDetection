@@ -36,8 +36,6 @@ namespace FaceDetection
         /// and then immediately set the Enabled property back to false.
         /// </summary>
         static Timer the_timer = new Timer();
-
-        
         /// <summary>
         /// No operator capturing during this period.
         /// <see cref="OPER_BAN"/>
@@ -94,6 +92,35 @@ namespace FaceDetection
             
         }
 
+        internal bool ANY_CAMERA_ON()
+        {
+            bool rv = false;
+            if (recorder != null)
+            {
+                try
+                {
+                    if (recorder.ON)
+                        rv = true;                    
+                }
+                catch (NullReferenceException nrx)
+                {
+                    Logger.Add(nrx);
+                }
+
+            }else if (camera!=null)
+            {
+                try
+                {
+                    if (camera.ON)
+                        rv = true;
+                }
+                catch (NullReferenceException nrx)
+                {
+                    Logger.Add(nrx);
+                }
+            }
+            return rv;
+        }
 
         public void No_Cap_Timer_ON(int vidlen)
         {
@@ -101,9 +128,7 @@ namespace FaceDetection
             wait_interval_enabled = true;
             if(no_opcap_timer!=null)
                 no_opcap_timer.Enabled = true;
-            int intt = decimal.ToInt32(
-                Properties.Settings.Default.interval_before_reinitiating_recording + vidlen)
-                * 1000;
+            int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording + vidlen) * 1000;
             if (intt > 500)
             {
                 no_opcap_timer.Interval = intt;
@@ -114,7 +139,8 @@ namespace FaceDetection
 
         private void The_timer_Tick(object sender, EventArgs e)
         {
-            MainForm.RSensor.SensorClose();
+            if(MainForm.RSensor!=null)
+                MainForm.RSensor.SensorClose();
             MainForm.GetMainForm.SetRecordButtonState("play", false);
             //We end the recording here
             if (!PREEVENT_RECORDING)
@@ -161,7 +187,7 @@ namespace FaceDetection
                 if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
                 {
 
-                    MOUSE_KEYBOARD.AddMouseAndKeyboardBack();
+                    MainForm.Mklisteners.AddMouseAndKeyboardBack();
                 }
 
                 if (Properties.Settings.Default.enable_Human_sensor)
@@ -178,12 +204,23 @@ namespace FaceDetection
 
         internal Bitmap GetBitmap()
         {
-
-            if (Recording_is_on)
-
-                return recorder.GetBitmap();
-            else
-                return camera.GetBitmap();
+            Bitmap bitmap = null;
+            if(recorder!=null)
+            {
+                try
+                {
+                    if (recorder.ON || PREEVENT_RECORDING)
+                        bitmap = recorder.GetBitmap();
+                    else
+                        bitmap = camera.GetBitmap();
+                }
+                catch (NullReferenceException nrx)
+                {
+                    Logger.Add(nrx);
+                }
+                
+            }
+            return bitmap;
         }
 
         internal void RESTART_CAMERA()
@@ -257,9 +294,11 @@ namespace FaceDetection
                         //the_timer.Stop();
                         //↑20191106 Nagayama added↑                        
                         //the_timer.Enabled = true;
-                        duration = decimal.ToInt32(Properties.Settings.Default.manual_record_time) * 1000;                        
-                        the_timer.Interval = duration;
+                        duration = decimal.ToInt32(Properties.Settings.Default.manual_record_time) * 1000;
                         the_timer.Enabled = true;
+                        the_timer.Interval = duration + 2;
+                        the_timer.Enabled = false;
+                        
                         if (this != null)
                             this.RecordingMode();
                     }
@@ -275,10 +314,11 @@ namespace FaceDetection
                         recorder.ACTIVE_RECPATH = RECORD_PATH.EVENT;
                         recorder.CAMERA_MODE = CAMERA_MODES.EVENT;
                         duration = decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event) * 1000;
-                        Logger.Add(duration + "  " + recorder.CAMERA_MODE);
+                        Logger.Add(duration + " is the duration of " + recorder.CAMERA_MODE);
 
                         the_timer.Enabled = true;
-                        the_timer.Interval = duration;                        
+                        the_timer.Interval = duration + 3;
+                        the_timer.Enabled = false;
                         if (this != null)
                             this.RecordingMode();
                     }
@@ -291,7 +331,8 @@ namespace FaceDetection
                         duration = decimal.ToInt32(Properties.Settings.Default.seconds_after_event) * 1000;
                         Logger.Add(duration + "  " + recorder.CAMERA_MODE);
                         the_timer.Enabled = true;
-                        the_timer.Interval = duration;
+                        the_timer.Interval = duration + 3;
+                        the_timer.Enabled = false;
                         Logger.Add(no_opcap_timer.Interval.ToString());
                         if (this != null)
                         {
@@ -324,7 +365,8 @@ namespace FaceDetection
                     recorder.ACTIVE_RECPATH = Properties.Settings.Default.temp_folder;
                     recorder.CAMERA_MODE = CAMERA_MODES.PREEVENT;
                     the_timer.Enabled = true;
-                    the_timer.Interval = duration;                    
+                    the_timer.Interval = duration;
+                    the_timer.Enabled = false;
                     if (this != null)
                         this.RecordingMode();
                     break;

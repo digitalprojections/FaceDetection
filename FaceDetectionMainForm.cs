@@ -12,6 +12,7 @@ namespace FaceDetection
 {
     public partial class MainForm : Form
     {
+        private static MOUSE_KEYBOARD mklisteners = null;
         public CROSSBAR crossbar = null;
         private readonly System.Timers.Timer mouse_down_timer = new System.Timers.Timer();
         private readonly Timer datetime_ui_updater_timer = new Timer();
@@ -64,6 +65,7 @@ namespace FaceDetection
         public static FlowLayoutPanel Or_controlBut { get => or_controlBut; set => or_controlBut = value; }
         public static PictureBox Or_pb_recording { get => or_pb_recording; set => or_pb_recording = value; }
         public BackLightController BackLight { get => backLight; set => backLight = value; }
+        public static MOUSE_KEYBOARD Mklisteners { get => mklisteners; set => mklisteners = value; }
 
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
@@ -79,8 +81,7 @@ namespace FaceDetection
             if(PARAMETERS.PARAM!=null)
             {
                 Logger.Add(String.Concat(PARAMETERS.PARAM));
-            }
-            
+            }            
         }        
         
         /// <summary>
@@ -105,7 +106,7 @@ namespace FaceDetection
         private void SnapShot(object sender, EventArgs e)
         {
             //timage.Dispose();
-            SNAPSHOT_SAVER.TakeSnapShot();
+            SNAPSHOT_SAVER.TakeSnapShot(0);
 
         }
         /// <summary>
@@ -347,7 +348,7 @@ namespace FaceDetection
             //FaceDetector = new FaceDetector();
             //backLight = new BackLightController();
             BackLight.Start();
-            MOUSE_KEYBOARD.START_CLICK_LISTENER();
+            Mklisteners = new MOUSE_KEYBOARD();            
             ////////////////////////////////////////
             #endregion
 
@@ -375,7 +376,6 @@ namespace FaceDetection
             WindowSizeUpdate();
             FillResolutionList();
         }
-
         public void SET_REC_ICON()
         {
             Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon;
@@ -427,7 +427,7 @@ namespace FaceDetection
 
             if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation && !MainForm.GetMainForm.crossbar.OPER_BAN)
             {
-                MOUSE_KEYBOARD.AddMouseAndKeyboardBack();
+                Mklisteners.AddMouseAndKeyboardBack();
             }
             if (Setting_ui == null)
             {
@@ -479,7 +479,7 @@ namespace FaceDetection
             if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation)
             {                
                 Logger.Add("IR sensor START");
-                MOUSE_KEYBOARD.AddMouseAndKeyboardBack();
+                mklisteners.AddMouseAndKeyboardBack();
             }
 
             
@@ -493,8 +493,8 @@ namespace FaceDetection
                 PARAMETERS.PARAM.Clear();
 
             }
-            
 
+            //MOUSE_KEYBOARD.INIT();
 
             Debug.WriteLine(Or_pb_recording.Visible);
             GC.Collect();

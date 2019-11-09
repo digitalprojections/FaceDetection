@@ -7,28 +7,27 @@ using System.Windows.Forms;
 
 namespace FaceDetection
 {
-    public static class MOUSE_KEYBOARD
+    public class MOUSE_KEYBOARD
     {
         //LL Muse and keyboard
-        private static readonly KeyboardListener keyboardListener = new KeyboardListener();
-        private static readonly MouseListener mouseListener = new MouseListener();
+        private readonly KeyboardListener keyboardListener = new KeyboardListener();
+        private readonly MouseListener mouseListener = new MouseListener();
         //private static readonly MouseListener mouseListenerClick = new MouseListener();
 
-        public static void INIT()
+        public MOUSE_KEYBOARD()
         {
             if (Properties.Settings.Default.capture_operator || Properties.Settings.Default.Recording_when_at_the_start_of_operation)
             {
-                keyboardListener.KeyDownAll += new KeyEventHandler(KeyDownAllEventHandler);
-                mouseListener.MouseMove += MouseListener_MouseMove;                
+                START_CLICK_LISTENER();
             }
         }
-        public static void START_CLICK_LISTENER()
+        public void START_CLICK_LISTENER()
         {
             keyboardListener.KeyUpAll += KeyboardListener_KeyUpAll;
             mouseListener.MouseLeftDown += MouseListener_MouseLeftDown;
         }
 
-        private static void KeyboardListener_KeyUpAll(object sender, KeyEventArgs e)
+        private void KeyboardListener_KeyUpAll(object sender, KeyEventArgs e)
         {
             if (MainForm.GetMainForm != null)
             {
@@ -36,34 +35,34 @@ namespace FaceDetection
             }
         }
 
-        private static void MouseListener_MouseLeftDown(object sender, MouseEventArgs e)
+        private void MouseListener_MouseLeftDown(object sender, MouseEventArgs e)
         {
-            if(MainForm.GetMainForm!=null)
+            if (MainForm.GetMainForm != null)
             {
                 MainForm.GetMainForm.BackLight.Restart();
             }
 
-            
-            
+
+
         }
 
-        internal static void AddMouseAndKeyboardBack()
-        {            
+        public void AddMouseAndKeyboardBack()
+        {
             Logger.Add("AddMouseAndKeyboardBackAddMouseAndKeyboardBackAddMouseAndKeyboardBack");
             keyboardListener.KeyDownAll -= new KeyEventHandler(KeyDownAllEventHandler);
             mouseListener.MouseMove -= MouseListener_MouseMove;
             keyboardListener.KeyDownAll += new KeyEventHandler(KeyDownAllEventHandler);
             mouseListener.MouseMove += MouseListener_MouseMove;
         }
-        private static void KeyDownAllEventHandler(object sender, KeyEventArgs e)
+        private void KeyDownAllEventHandler(object sender, KeyEventArgs e)
         {
             MouseKeyEventInit();
         }
-        private static void MouseListener_MouseMove(object sender, MouseEventArgs e)
+        private void MouseListener_MouseMove(object sender, MouseEventArgs e)
         {
             MouseKeyEventInit();
         }
-        private static void MouseKeyEventInit()
+        private void MouseKeyEventInit()
         {
             //↓20191107 Nagayama deleted↓
             //MainForm.Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon;
@@ -73,39 +72,40 @@ namespace FaceDetection
             keyboardListener.KeyDownAll -= new KeyEventHandler(KeyDownAllEventHandler);
             mouseListener.MouseMove -= MouseListener_MouseMove;
             Logger.Add("TODO: " + CAMERA_MODES.EVENT);
-            if (Properties.Settings.Default.capture_operator)
+            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation)
             {
                 //↓20191107 Nagayama added↓
                 if (Properties.Settings.Default.capture_method == 0)
                 {
-                //↑20191107 Nagayama added↑
-                if (MainForm.GetMainForm.crossbar.PREEVENT_RECORDING)
-                {
-                    if(Properties.Settings.Default.seconds_after_event>0)
+                    //↑20191107 Nagayama added↑
+                    if (MainForm.GetMainForm.crossbar.PREEVENT_RECORDING && Properties.Settings.Default.seconds_after_event > 0)
                     {
                         TaskManager.EventAppeared(RECORD_PATH.EVENT, 1,
-                        decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
-                        decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
-                        MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
-                            MainForm.GetMainForm.crossbar.SET_ICON_TIMER();
-                        }                    
-
+                            decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
+                            decimal.ToInt32(Properties.Settings.Default.seconds_after_event));                                                
+                        //↓20191107 Nagayama added↓
                     }
                     else
                     {
-                        MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
+                        MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);                                                                        
                     }
-                //↓20191107 Nagayama added↓
+                    MainForm.GetMainForm.crossbar.SET_ICON_TIMER();
+                    //↑20191107 Nagayama added↑
                 }
                 else
                 {
-                    SNAPSHOT_SAVER.TakeSnapShot();
+                    SNAPSHOT_SAVER.TakeSnapShot(0);
                     MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
                 }
-                //↑20191107 Nagayama added↑
-            }
 
-            MainForm.GetMainForm.BackLight.Restart();
+                MainForm.GetMainForm.BackLight.Restart();
+                MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
+            }
+            else
+            {
+                keyboardListener.KeyDownAll -= new KeyEventHandler(KeyDownAllEventHandler);
+                mouseListener.MouseMove -= MouseListener_MouseMove;
+            }
         }
     }
 }

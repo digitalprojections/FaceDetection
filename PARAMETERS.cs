@@ -22,6 +22,13 @@ namespace FaceDetection
             Logger.Add(param + "sdfsdfdsdgf");
 
             param = String.Concat(parameters).ToLower();
+            //↓20191108 Nagayama added↓
+            string elem;
+            string method = "";
+            bool switchOnOff = false;
+            int cameraIndex = -1;
+            int time = 0;
+            //↑20191108 Nagayama added↑
             /*
              Handle the initial start up CL parameters, if exist
              */
@@ -29,27 +36,61 @@ namespace FaceDetection
             {
                 if (parameters.Count > 0)
                 {
-                    //Only 2 parameter elements
-                    if (parameters.Count == 2)
+                    //↓20191108 Nagayama added↓
+                    for (int i = 1; i < parameters.Count; i++)
                     {
-                        if (CheckCameraIndex(parameters))
+                        elem = parameters.ElementAt(i).ToLower();
+                        switch (elem.Substring(0, 1))
                         {
-                            if(Int32.Parse(parameters.ElementAt(1))!=9)
-                            {
-
-
-                            }else
-                            {
-                                //the value is 9. Start all cameras
-                            }
+                            case "m":
+                                method = elem.Substring(2);
+                                break;
+                            case "s":
+                                switchOnOff = (elem.Substring(2) != "0");
+                                break;
+                            case "c":
+                                cameraIndex = Int32.Parse(elem.Substring(2)) - 1;
+                                break;
+                            case "t":
+                                time = Int32.Parse(elem.Substring(2));
+                                break;
                         }
                     }
-                    switch (parameters.ElementAt(1))
+                    if(cameraIndex == -1)//カメラ番号が未入力の場合
                     {
-                        case "-c":
+                        if(MainForm.GetMainForm == null)
+                        {
+                            cameraIndex = 0;
+                        }
+                        else if(method == "n")
+                        {
+                            cameraIndex = GetNextCameraIndex(MainForm.SELECTED_CAMERA);
+                        }
+                        else
+                        {
+                            cameraIndex = MainForm.SELECTED_CAMERA;
+                        }
+                    }
+                    //↑20191108 Nagayama added↑
+                    switch (method)
+                    {
+                        case "":
+                            if (CheckCameraIndex(cameraIndex))
+                            {
+                                if(cameraIndex != 8)
+                                {
+
+
+                                }else
+                                {
+                                    //the value is 9. Start all cameras
+                                }
+                            }
+                            break;
+                        case "c":
                             try
                             {
-                                if (parameters.ElementAt(2) == "1")
+                                if (switchOnOff)
                                 {
 
 
@@ -75,13 +116,13 @@ namespace FaceDetection
                                 Trace.WriteLine(e.ToString() + " in line 271");
                             }
                             break;
-                        case "-s":
+                        case "s":
                             try
                             {
-                                if (CheckCameraIndex(parameters))
+                                if (CheckCameraIndex(cameraIndex))
                                 {
-                                    //Properties.Settings.Default.main_camera_index = Int32.Parse(parameters.ElementAt(2));
-                                    SNAPSHOT_SAVER.TakeSnapShot();
+                                    //Properties.Settings.Default.main_camera_index = cameraIndex;
+                                    SNAPSHOT_SAVER.TakeSnapShot(cameraIndex);
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -90,25 +131,25 @@ namespace FaceDetection
                                 //MessageBox.Show("Incorrect or missing parameters");
                             }
                             break;
-                        case "-b":
+                        case "b":
                             try
                             {
-                                if (CheckCameraIndex(parameters))
+                                if (CheckCameraIndex(cameraIndex))
                                 {
-                                    Logger.Add("テスト" + parameters.ElementAt(0) + "×" + parameters.ElementAt(1) + "×" + parameters.ElementAt(2) + "×" + parameters.ElementAt(3));
+                                    Logger.Add("テスト" + parameters.ElementAt(0) + "×" + method + "×" + (switchOnOff ? "1" : "0") + "×" + (cameraIndex + 1));
 
-                                    if (parameters.ElementAt(3) == "1")
+                                    if (switchOnOff)
                                     {
                                         /*
-                                     SHOW CONTROL BUTTONS    
-                                     */
+                                        SHOW CONTROL BUTTONS    
+                                        */
                                         MainForm.Or_controlBut.Visible = true;
                                     }
-                                    else if (parameters.ElementAt(3) == "0")
+                                    else
                                     {
                                         /*
-                                     HIDE CONTROL BUTTONS    
-                                     */
+                                        HIDE CONTROL BUTTONS    
+                                        */
                                         MainForm.Or_controlBut.Visible = false;
                                     }
 
@@ -121,26 +162,32 @@ namespace FaceDetection
                                 //MessageBox.Show("Incorrect or missing parameters");
                             }
                             break;
-                        case "-d":
+                        case "d":
                             try
                             {
-                                if (CheckCameraIndex(parameters))
+                                if (CheckCameraIndex(cameraIndex))
                                 {
-                                    if (parameters.ElementAt(3) == "1")
+                                    if (switchOnOff)
                                     {
-                                        MainForm.FaceDetector.Start_Face_Timer();
+                                        if (MainForm.FaceDetector != null)
+                                        {
+                                            MainForm.FaceDetector.Start_Face_Timer();
+                                        }
+                                        Properties.Settings.Default.enable_face_recognition = true;
+                                        Properties.Settings.Default.enable_Human_sensor = false;
+                                        Properties.Settings.Default.capture_operator = true;
                                     }
-                                    if (parameters.ElementAt(3) == "0")
+                                    else
                                     {
-                                        if(MainForm.GetMainForm.crossbar.Recording_is_on)
+                                        if (MainForm.FaceDetector != null && MainForm.GetMainForm.crossbar.Recording_is_on)
                                         {
                                             MainForm.GetMainForm.crossbar.PreviewMode();
                                             MainForm.FaceDetector.Stop_Face_Timer();
                                         }
-                                        
+                                        Properties.Settings.Default.enable_face_recognition = false;
                                     }
 
-                                    CycleTime(parameters);
+                                    CycleTime(time);
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -150,21 +197,30 @@ namespace FaceDetection
                             }
                             break;
                         //kameyama beginning 20191018  
-                        case "-h":
+                        case "h":
                             try
                             {
-                                if (CheckCameraIndex(parameters))
+                                if (CheckCameraIndex(cameraIndex))
                                 {
-                                    if (parameters.ElementAt(2) == "1")
+                                    if (switchOnOff)
                                     {
-                                        MainForm.RSensor.Start_IR_Timer();
+                                        if (MainForm.RSensor != null) {
+                                            MainForm.RSensor.Start_IR_Timer();
+                                        }
+                                        Properties.Settings.Default.enable_Human_sensor = true;
+                                        Properties.Settings.Default.enable_face_recognition = false;
+                                        Properties.Settings.Default.capture_operator = true;
                                     }
                                     else
                                     {
-                                        MainForm.RSensor.Stop_IR_Timer();
+                                        if (MainForm.RSensor != null)
+                                        {
+                                            MainForm.RSensor.Stop_IR_Timer();
+                                        }
+                                        Properties.Settings.Default.enable_Human_sensor = false;
                                     }
 
-                                    CycleTime(parameters);
+                                    CycleTime(time);
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -173,19 +229,19 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "-v":
+                        case "v":
                             try
                             {
-                                if (CheckCameraIndex(parameters))
+                                if (CheckCameraIndex(cameraIndex))
                                 {
 
-                                    if (parameters.ElementAt(3) == "1")
+                                    if (switchOnOff)
                                     {
                                         MainForm.GetMainForm.TopMost = true;
                                         //settingUI.TopMost = false;
                                         MainForm.GetMainForm.Show();
                                     }
-                                    else if (parameters.ElementAt(3) == "0")
+                                    else
                                     {
                                         MainForm.GetMainForm.Hide();
                                         MainForm.AllChangesApply();
@@ -199,16 +255,16 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "-l":
+                        case "l":
                             try
                             {
 
-                                if (parameters.ElementAt(3) == "1")
+                                if (switchOnOff)
                                 {
                                     MainForm.GetMainForm.BackLight.ON();
 
                                 }
-                                else if (parameters.ElementAt(3) == "0")
+                                else
                                 {
 
                                     MainForm.GetMainForm.BackLight.OFF();
@@ -221,32 +277,32 @@ namespace FaceDetection
                                 Debug.WriteLine(e.ToString() + " in line 271");
                             }
                             break;
-                        case "-n":
+                        case "n":
                             try
                             {
-                                if (CheckCameraIndex(parameters))
-                                {
-                                    if (parameters.ElementAt(3) == "1")
-                                    {
+                                //if (CheckCameraIndex(parameters))
+                                //{
+                                //    if (parameters.ElementAt(3) == "1")
+                                //    {
 
-                                    }
-                                    else if (parameters.ElementAt(3) == "0")
-                                    {
+                                //    }
+                                //    else if (parameters.ElementAt(3) == "0")
+                                //    {
 
-                                    }
-                                }
+                                //    }
+                                //}
                             }
                             catch (Exception e)
                             {
                                 Logger.Add(e.Message + " paramameters 466");
                             }
                             break;
-                        case "-w":
+                        case "w":
                             try
                             {
-                                if (CheckCameraIndex(parameters))
+                                if (CheckCameraIndex(cameraIndex))
                                 {
-                                    if (parameters.ElementAt(2) == "1")
+                                    if (switchOnOff)
                                     {
 
                                         //kameyama comennt 20191020
@@ -279,17 +335,17 @@ namespace FaceDetection
                                 //MessageBox.Show("Incorrect or missing parameters"); } 
                             }
                             break;
-                        case "-q":
+                        case "q":
                             try
                             {
-                                if (CheckCameraIndex(parameters))
-                                {
-                                    ManualRecordingOn(parameters.ElementAt(1));
-                                }
-                                else if (parameters.ElementAt(2) == "0")
-                                {
-                                    ManualRecordingOff(parameters.ElementAt(1));
-                                }
+                                //if (CheckCameraIndex(parameters))
+                                //{
+                                //    ManualRecordingOn(parameters.ElementAt(1));
+                                //}
+                                //else if (parameters.ElementAt(2) == "0")
+                                //{
+                                //    ManualRecordingOff(parameters.ElementAt(1));
+                                //}
 
 
 
@@ -300,17 +356,17 @@ namespace FaceDetection
                                 //MessageBox.Show("Incorrect or missing parameters"); } 
                             }
                             break;
-                        case "-e":
+                        case "e":
                             try
                             {
                                 /////////////////////////////////////
                                 ///    dont CheckCameraIndex()    ///
                                 /////////////////////////////////////
-                                    if (parameters.ElementAt(2) == "1")
+                                    if (switchOnOff)
                                     {
                                         MainForm.GetMainForm.EventRecorderOn();
                                     }
-                                    else if (parameters.ElementAt(2) == "0")
+                                    else
                                     {
                                         MainForm.GetMainForm.EventRecorderOff();
                                 }
@@ -330,18 +386,21 @@ namespace FaceDetection
         /// <summary>
         /// Camera number is correct if one of 1,2,3,4 or 9
         /// </summary>
-        /// <param name="parameters"></param>
+        /// <param name="cameraIndex"></param>
         /// <returns></returns>
-        private static bool CheckCameraIndex(IReadOnlyCollection<string> parameters)
+        private static bool CheckCameraIndex(int cameraIndex)
         {
             bool Retval = false;
-
-            switch (Int32.Parse(parameters.ElementAt(2)))
+            //cameraIndexは0から始まるので注意
+            switch (cameraIndex)
             {
-                case 1:
+                case 0:
                     Retval = true;
                     Logger.Add("カメラ番号まで来た");
                     //Camera.CheckCamera(parameters.ElementAt());
+                    break;
+                case 1:
+                    Retval = true;
                     break;
                 case 2:
                     Retval = true;
@@ -349,10 +408,7 @@ namespace FaceDetection
                 case 3:
                     Retval = true;
                     break;
-                case 4:
-                    Retval = true;
-                    break;
-                case 9:
+                case 8:
                     Retval = true;
                     break;
             }
@@ -381,11 +437,29 @@ namespace FaceDetection
         
         //kameyama comment 20191019 end
 
-        private static void CycleTime(IReadOnlyCollection<string> parameters)
+        private static void CycleTime(int time)
         {
-            if (Int32.Parse(parameters.ElementAt(4)) >= 0 && Int32.Parse(parameters.ElementAt(4)) <= 1000)
+            if (time >= 500 && time <= 1000)
             {
+                Properties.Settings.Default.face_rec_interval = time;
                 Logger.Add("できた");
+            }
+        }
+        private static int GetNextCameraIndex(int cameraIndex)
+        {
+            if(cameraIndex == 8)
+            {
+                //すべてのカメラ指定時
+                //1から始まって9なので、0から始まると8になる
+                return cameraIndex;
+            }
+            else if(cameraIndex >= 3)
+            {
+                return 0;
+            }
+            else
+            {
+                return cameraIndex + 1;
             }
         }
         #region DLL IMPORTS

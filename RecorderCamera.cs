@@ -134,7 +134,7 @@ namespace FaceDetection
         /// <param name="pbx">Control to display the video</param>        
         public void StartRecorderCamera()
         {
-            ON = true;
+            
             Size size = MainForm.GetMainForm.GetResolution(INDEX);
             int fps = MainForm.GetMainForm.GetFPS(0);
             IntPtr pbx = MainForm.GetMainForm.Handle;
@@ -169,6 +169,7 @@ namespace FaceDetection
             }
 
             GetInterfaces();
+            
             //var camera_list = FindDevices();
             graph = (IGraphBuilder)(new FilterGraph());
             pGraph = graph;
@@ -314,6 +315,8 @@ namespace FaceDetection
                 hr = mediaControl.Run();
                 checkHR(hr, "Can't run the graph");
                 Logger.Add(" running the recorder graph ");
+                ON = true;
+                MainForm.GetMainForm.crossbar.StartTimer();
             }
             catch (COMException comx)
             {
@@ -365,15 +368,16 @@ namespace FaceDetection
         private Bitmap GetBitmapMainMain(ISampleGrabber i_grabber, int width, int height, int stride)
         {
             int sz = 0;
-            i_grabber.GetCurrentBuffer(ref sz, IntPtr.Zero); // IntPtr.Zeroで呼び出してバッファサイズ取得
-            if (sz == 0) return null;
-            var ptr = Marshal.AllocCoTaskMem(sz);
-            i_grabber.GetCurrentBuffer(ref sz, ptr);
-            var data = new byte[sz];
-            Marshal.Copy(ptr, data, 0, sz);
             Bitmap result = null;
             try
             {
+                i_grabber.GetCurrentBuffer(ref sz, IntPtr.Zero); // IntPtr.Zeroで呼び出してバッファサイズ取得
+                if (sz == 0) return null;
+                var ptr = Marshal.AllocCoTaskMem(sz);
+                i_grabber.GetCurrentBuffer(ref sz, ptr);
+                var data = new byte[sz];
+                Marshal.Copy(ptr, data, 0, sz);
+                
                 // 画像を作成
                 result = new Bitmap(width, height, PixelFormat.Format24bppRgb);
                 var bmp_data = result.LockBits(new Rectangle(Point.Empty, result.Size), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
