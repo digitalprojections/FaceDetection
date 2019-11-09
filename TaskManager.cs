@@ -404,7 +404,7 @@ namespace FaceDetection
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message + " TaskManager in Concat() DEBUG");
+                Console.WriteLine(e.Message + " TaskManager in Concat()");
             }
         }
 

@@ -17,7 +17,11 @@ namespace FaceDetection
         private readonly System.Timers.Timer mouse_down_timer = new System.Timers.Timer();
         private readonly Timer datetime_ui_updater_timer = new Timer();
         
-       
+        // ADD Robin
+        private int timeForDeleteOldFiles;
+        //private int freeDiskSpaceLeft;
+        //private DiskSpaceWarning warningForm;
+        // END Robin
         
         //private readonly KeyboardListener keyboardListener;
         //private readonly MouseListener mouseListener;
@@ -114,6 +118,29 @@ namespace FaceDetection
         /// </summary>
         private void UpdateDateTimeText(object sender, EventArgs eventArgs)
         {
+            // ADD Robin
+            timeForDeleteOldFiles++;
+            if (timeForDeleteOldFiles >= 3600*12) // 3600 = 1 hour
+            {
+                timeForDeleteOldFiles = 0;
+                CheckDiskSpace.DeleteOldFiles();
+                //    freeDiskSpaceLeft = CheckDiskSpace.CheckDisk();
+                //    if (freeDiskSpaceLeft < 2) // 2 Go
+                //    {
+                //        try
+                //        {
+                //            warningForm.Select(); // If the form already exist, put it on the front
+                //        }
+                //        catch (Exception ex) // If the form doesn't exist yet, create it
+                //        {
+                //            warningForm = new DiskSpaceWarning();
+                //            warningForm.Show();
+                //        }
+                //    }
+            }
+            // END Robin 
+
+
             try
             {
                 or_dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
@@ -391,7 +418,7 @@ namespace FaceDetection
                     RSensor.Destroy();
                 }
                 RSensor = new IRSensor();
-                RSensor.Start_IR_Timer();
+                //RSensor.Start_IR_Timer();
             }
             else
             {
@@ -494,7 +521,7 @@ namespace FaceDetection
 
             }
 
-            //MOUSE_KEYBOARD.INIT();
+
 
             Debug.WriteLine(Or_pb_recording.Visible);
             GC.Collect();

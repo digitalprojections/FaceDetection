@@ -76,6 +76,10 @@ namespace FaceDetection
         {
             MainForm.Or_pb_recording.Visible = false;            
             icon_timer.Enabled = false;
+            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_Human_sensor)
+            {
+                MainForm.RSensor.CheckOK = true;
+            }
         }
 
         private void Icon_timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -85,11 +89,10 @@ namespace FaceDetection
 
         public void SET_ICON_TIMER()
         {
-            MainForm.Or_pb_recording.Visible = true;
-            
+            MainForm.Or_pb_recording.Visible = true;            
             icon_timer.Interval = decimal.ToInt32(Properties.Settings.Default.seconds_after_event) * 1000;
-            icon_timer.Start();
-            
+            icon_timer.Enabled = true;
+            icon_timer.Start();            
         }
 
         internal bool ANY_CAMERA_ON()
@@ -124,7 +127,9 @@ namespace FaceDetection
 
         public void No_Cap_Timer_ON(int vidlen)
         {
-            MainForm.GetMainForm.SET_REC_ICON();
+            if (Properties.Settings.Default.capture_method == 0)
+                MainForm.GetMainForm.SET_REC_ICON();
+
             wait_interval_enabled = true;
             if(no_opcap_timer!=null)
                 no_opcap_timer.Enabled = true;

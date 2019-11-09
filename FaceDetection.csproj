@@ -123,6 +123,7 @@
     <Compile Include="Camera.cs" />
     <Compile Include="CameraManager.cs" />
     <Compile Include="CAMERA_MODES.cs" />
+    <Compile Include="CheckDiskSpace.cs" />
     <Compile Include="FaceDetector.cs" />
     <Compile Include="KeyboardListener.cs" />
     <Compile Include="Logger.cs" />

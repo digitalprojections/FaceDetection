@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Threading;
+using System.Windows.Forms;
 using System.Timers;
 
 namespace FaceDetection
 {
     class IRSensor
     {
-        bool checkOK = false;
-        System.Timers.Timer SensorCheckTimer = new System.Timers.Timer();
-        Mutex mutex = new Mutex();
+        private int sensoroffcount = 0;
+        private bool checkOK = true;
+        System.Windows.Forms.Timer SensorCheckTimer = new System.Windows.Forms.Timer();
+        //Mutex mutex = new Mutex();
+
+        public bool CheckOK { get => checkOK; set => checkOK = value; }
 
         public IRSensor()
         {
-            
+            SensorClose();
             //init
             Init_IR_Timer();
+            
         }
         public void Destroy()
         {
@@ -27,9 +31,9 @@ namespace FaceDetection
                 
            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_Human_sensor && decimal.ToInt32(Properties.Settings.Default.face_rec_interval)>0)
            {
-                //SensorCheckTimer.Tick += IR_Timer_Tick;
-                SensorCheckTimer.Elapsed+= IR_Timer_Tick;
-                SensorCheckTimer.AutoReset = true;
+                SensorCheckTimer.Tick += IR_Timer_Tick;
+                //SensorCheckTimer.Elapsed+= IR_Timer_Tick;
+                //SensorCheckTimer.AutoReset = true;
                 SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
                 SensorCheckTimer.Start();
             }
@@ -42,11 +46,11 @@ namespace FaceDetection
 
         private void IR_Timer_Tick(object sender, EventArgs e)
         {
-            mutex.WaitOne();
+            
             uint rval = CheckSensor();
-            if (checkOK && rval == 1)
+            if (CheckOK && rval == 0)
             {
-                checkOK = false;
+                CheckOK = false;
                 //heat signature detected, stop timer                
                 if (Properties.Settings.Default.capture_method == 0)
                 {
@@ -68,9 +72,9 @@ namespace FaceDetection
              else
                 {
                     SNAPSHOT_SAVER.TakeSnapShot(0);
-                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
+                    
                 }
-
+                
 
                 Logger.Add("IR SENSOR: Motion detected");
                 if (Properties.Settings.Default.backlight_on_upon_face_rec)
@@ -78,15 +82,27 @@ namespace FaceDetection
                     MainForm.GetMainForm.BackLight.ON();
                 }
                 MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
-            }            
+            }
+            else
+            {
+                sensoroffcount++;
+                if (sensoroffcount > decimal.ToInt32(Properties.Settings.Default.seconds_after_event))
+                {
+                    sensoroffcount = 0;
+                    
+                    //CheckOK = true;
+                }
+            }
+            
             SensorClose();
-            Console.WriteLine("SENSOR " + checkOK);
-            mutex.ReleaseMutex();
+            
+            Console.WriteLine("SENSOR " + CheckOK);
+            //mutex.ReleaseMutex();
         }
 
         public void Start_IR_Timer()
         {
-            checkOK = true;
+            CheckOK = true;
         }
         
 
@@ -94,7 +110,7 @@ namespace FaceDetection
         {
             SensorCheckTimer.Enabled = false;
             //SensorCheckTimer.Stop();
-            checkOK = false;
+            CheckOK = false;
 
         }
         
