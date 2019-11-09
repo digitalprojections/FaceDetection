@@ -902,8 +902,10 @@
             // 
             // SettingsUI
             // 
+            this.AcceptButton = this.button_settings_save;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.CancelButton = this.button_settings_cancel;
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ControlBox = false;
             this.Controls.Add(this.button_settings_cancel);
             this.Controls.Add(this.button_settings_save);

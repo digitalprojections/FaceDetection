@@ -245,10 +245,11 @@ namespace FaceDetection
                 }
 
                 fileSaved = false;
-                listTask.Remove(listTask[listTaskIndex]); // Delete the task ended
+                listTask[listTaskIndex].complete = true;
+                //listTask.Remove(listTask[listTaskIndex]); // Delete the task ended --> If we delete the task, the index of the list change. So if a task is running, it will become a problem
             }
             catch (Exception e) {
-                Console.WriteLine(e.Message + " TaskManager in RecordEnd() line 251");
+                Console.WriteLine(e.Message + " TaskManager in RecordEnd() line 252");
             }
         }
 
@@ -379,25 +380,32 @@ namespace FaceDetection
 
         private static void ConcatVideo(string preEventVideoFiles, string postEventVideoFiles, string startTime, int TaskIndex) // Concat all videos needed to construct the full video
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffmpeg.exe");
-            if (preEventVideoFiles != "" && postEventVideoFiles != "")
+            try
             {
-                startInfo.Arguments = @"-loglevel quiet -y -i concat:" + preEventVideoFiles + "|" + postEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[TaskIndex].cameraNumber.ToString() + "\\" + listTask[TaskIndex].path + "\\" + startTime + ".avi"; 
+                ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffmpeg.exe");
+                if (preEventVideoFiles != "" && postEventVideoFiles != "")
+                {
+                    startInfo.Arguments = @"-loglevel quiet -y -i concat:" + preEventVideoFiles + "|" + postEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[TaskIndex].cameraNumber.ToString() + "\\" + listTask[TaskIndex].path + "\\" + startTime + ".avi";
+                }
+                else if (preEventVideoFiles != "" && postEventVideoFiles == "") // All the video stream kept are inside the same file
+                {
+                    //startInfo.Arguments = @"-i concat:" + preEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[TaskIndex].cameraNumber.ToString() + "\\" + listTask[TaskIndex].path + "\\" + startTime + ".avi";
+                    // --/!\-- Sent directly in the function CutVideoFromEvent()
+                    return;
+                }
+                else // No file to keep before the event
+                {
+                    startInfo.Arguments = @"-loglevel quiet -y -i concat:" + postEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[TaskIndex].cameraNumber.ToString() + "\\" + listTask[TaskIndex].path + "\\" + startTime + ".avi";
+                }
+                Console.WriteLine("ConcatVideo() : " + startInfo.Arguments); // DEBUG
+                startInfo.CreateNoWindow = true;
+                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                Process.Start(startInfo);
             }
-            else if (preEventVideoFiles != "" && postEventVideoFiles == "") // All the video stream kept are inside the same file
+            catch (Exception e)
             {
-                //startInfo.Arguments = @"-i concat:" + preEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[TaskIndex].cameraNumber.ToString() + "\\" + listTask[TaskIndex].path + "\\" + startTime + ".avi";
-                // --/!\-- Sent directly in the function CutVideoFromEvent()
-                return;
+                Console.WriteLine(e.Message + " TaskManager in Concat() DEBUG");
             }
-            else // No file to keep before the event
-            {
-                startInfo.Arguments = @"-loglevel quiet -y -i concat:" + postEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[TaskIndex].cameraNumber.ToString() + "\\" + listTask[TaskIndex].path + "\\" + startTime + ".avi";
-            }
-            Console.WriteLine("ConcatVideo() : " + startInfo.Arguments); // DEBUG
-            startInfo.CreateNoWindow = true;
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            Process.Start(startInfo);
         }
 
         private static void AddFilesInList() // Add all files in the TEMP folder into the list
@@ -508,7 +516,7 @@ namespace FaceDetection
         public TimeSpan starttime;
         public TimeSpan stoptime;
         public DateTime eventtime;
-        public bool complete; // not used
+        public bool complete; 
         public string path;
         public string allPreEventVideo = "";
         public int cameraNumber;

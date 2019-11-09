@@ -308,6 +308,9 @@ namespace FaceDetection
             SetCameraPropertiesFromMemory();
             Camera.SetNumberOfCameras();
             changeControlEnabled(this.groupBox_functionalitySettings, Properties.Settings.Default.capture_operator);
+
+            this.ControlBox = false;
+            this.MaximizeBox = false;
            
         }
         private void Cm_language_SelectedIndexChanged(object sender, EventArgs e)
@@ -334,6 +337,7 @@ namespace FaceDetection
             {
                 Logger.Add(nrx);
             }
+
             string lan = Properties.Settings.Default.culture;
             ComponentResourceManager resources = new ComponentResourceManager(typeof(SettingsUI));
             var cult = new CultureInfo(lan);
