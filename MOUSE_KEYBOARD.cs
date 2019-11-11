@@ -75,7 +75,7 @@ namespace FaceDetection
             if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation)
             {
                 //↓20191107 Nagayama added↓
-                if (Properties.Settings.Default.capture_method == 0)
+                if (Properties.Settings.Default.capture_method <= 0)
                 {
                     //↑20191107 Nagayama added↑
                     if (MainForm.GetMainForm.crossbar.PREEVENT_RECORDING && Properties.Settings.Default.seconds_after_event > 0)
@@ -94,7 +94,7 @@ namespace FaceDetection
                 }
                 else
                 {
-                    SNAPSHOT_SAVER.TakeSnapShot(0);
+                    SNAPSHOT_SAVER.TakeSnapShot(0, "event");
                     MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
                 }
 

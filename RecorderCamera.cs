@@ -17,6 +17,8 @@ namespace FaceDetection
 {
     class RecorderCamera
     {
+        //private delegate void StartCameraAsync();
+
         public bool ON;
         string sourcePath = @"D:\TEMP";
         string targetPath = String.Empty;
@@ -134,6 +136,9 @@ namespace FaceDetection
         /// <param name="pbx">Control to display the video</param>        
         public void StartRecorderCamera()
         {
+            if(MainForm.GetMainForm!=null)
+            {
+
             
             Size size = MainForm.GetMainForm.GetResolution(INDEX);
             int fps = MainForm.GetMainForm.GetFPS(0);
@@ -322,6 +327,7 @@ namespace FaceDetection
             {
                 Logger.Add("Can not start the camera");
                 Logger.Add("Can not start the camera");
+            }
             }
         }
         public void RESET_FILE_PATH()

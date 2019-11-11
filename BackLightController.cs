@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace FaceDetection
@@ -19,6 +20,7 @@ namespace FaceDetection
             MonitorStateStandBy = 1
         }
         private readonly System.Timers.Timer backlight_timer = new System.Timers.Timer();
+        //Stopwatch stopwatch = new Stopwatch();
 
 
         public void Start()
@@ -31,13 +33,13 @@ namespace FaceDetection
             }
         }
 
-        private void Backlight_timer_Tick1(object sender, EventArgs e)
-        {   
-           OFF();
+        private void Backlight_timer_Tick1(object sender, ElapsedEventArgs e)
+        {
+            OFF();
         }
 
         public void Restart()
-        {
+        {  
             
             if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
             {
@@ -73,8 +75,8 @@ namespace FaceDetection
         /// Turns backlight off
         /// </summary>
         public void BacklightOff()
-        {
-            if (Properties.Settings.Default.backlight_offset_mins > 0)
+        {            
+            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
             {
                 SendMessage(0xFFFF, 0x112, 0xF170, (int)MonitorState.MonitorStateOff);
             }

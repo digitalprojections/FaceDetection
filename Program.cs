@@ -46,7 +46,7 @@ namespace FaceDetection
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString());
+                    Logger.Add(e.ToString());
                 }
             }
         }                

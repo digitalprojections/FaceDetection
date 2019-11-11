@@ -12,10 +12,12 @@ namespace FaceDetection
 {
     public partial class MainForm : Form
     {
+        private delegate void dDateTimerUpdater();
+
         private static MOUSE_KEYBOARD mklisteners = null;
         public CROSSBAR crossbar = null;
         private readonly System.Timers.Timer mouse_down_timer = new System.Timers.Timer();
-        private readonly Timer datetime_ui_updater_timer = new Timer();
+        private readonly System.Timers.Timer datetime_ui_updater_timer = new System.Timers.Timer();
         
         // ADD Robin
         private int timeForDeleteOldFiles;
@@ -111,12 +113,11 @@ namespace FaceDetection
         {
             //timage.Dispose();
             SNAPSHOT_SAVER.TakeSnapShot(0);
-
         }
         /// <summary>
         /// One second timer to update UI datetime
         /// </summary>
-        private void UpdateDateTimeText(object sender, EventArgs eventArgs)
+        private void UpdateDateTimeText(object sender, System.Timers.ElapsedEventArgs eventArgs)
         {
             // ADD Robin
             timeForDeleteOldFiles++;
@@ -138,21 +139,31 @@ namespace FaceDetection
                 //        }
                 //    }
             }
-            // END Robin 
+            // END Robin
+            DateTimeUpdater();
+        }
 
-
-            try
+        private void DateTimeUpdater()
+        {
+            if (or_dateTimeLabel.InvokeRequired)
             {
-                or_dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                var d = new dDateTimerUpdater(DateTimeUpdater);
+                or_dateTimeLabel.Invoke(d);
             }
-            catch (NullReferenceException e)
+            else
             {
-                Debug.WriteLine(e.Message + " ProcessFrame 225");
-                datetime_ui_updater_timer.Stop();
+                try
+                {
+                    or_dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                }
+                catch (NullReferenceException e)
+                {
+                    Debug.WriteLine(e.Message + " ProcessFrame 225");
+                    datetime_ui_updater_timer.Stop();
+                }
             }
         }
-        
-        
+
         public static void HandleParameters(String[] parameters)
         {
 
@@ -315,8 +326,8 @@ namespace FaceDetection
             //↓20191106 Nagayama changed↓
             //Or_pb_recording.Image = Properties.Resources.Pause_Normal_Red_icon;
             Or_pb_recording.Image = Properties.Resources.player_record;
-            //↑20191106 Nagayama changed↑
-            SET_REC_ICON();
+            //↑20191106 Nagayama changed↑            
+            MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
             //BackLight.ON();            
             try
             {                
@@ -371,7 +382,7 @@ namespace FaceDetection
             #region Instances
             ///////////////////////////////////////
             crossbar = new CROSSBAR();
-            //RSensor = new IRSensor();
+            RSensor = new IRSensor();
             //FaceDetector = new FaceDetector();
             //backLight = new BackLightController();
             BackLight.Start();
@@ -384,7 +395,8 @@ namespace FaceDetection
             mouse_down_timer.Elapsed += ShowButtons;//制御ボタンの非/表示用クリックタイマー
             datetime_ui_updater_timer.Interval = 1000;
             datetime_ui_updater_timer.Start();
-            datetime_ui_updater_timer.Tick += new EventHandler(UpdateDateTimeText);
+            datetime_ui_updater_timer.AutoReset = true;
+            datetime_ui_updater_timer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateDateTimeText);
 
             //Object references
             rec_button = cameraButton;
@@ -402,6 +414,10 @@ namespace FaceDetection
             AllChangesApply();
             WindowSizeUpdate();
             FillResolutionList();
+            MainForm.GetMainForm.Width = decimal.ToInt32(Properties.Settings.Default.C1w);
+            MainForm.GetMainForm.Height = decimal.ToInt32(Properties.Settings.Default.C1h);
+            MainForm.GetMainForm.Location = new System.Drawing.Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));            
+
         }
         public void SET_REC_ICON()
         {
@@ -410,7 +426,7 @@ namespace FaceDetection
 
         public static void AllChangesApply()
         {
-            if (Properties.Settings.Default.enable_Human_sensor && !MainForm.GetMainForm.crossbar.OPER_BAN)
+            if (Properties.Settings.Default.enable_Human_sensor)
             {
                 if (RSensor != null)
                 {
@@ -418,20 +434,19 @@ namespace FaceDetection
                     RSensor.Destroy();
                 }
                 RSensor = new IRSensor();
-                //RSensor.Start_IR_Timer();
+                RSensor.Start_IR_Timer();
             }
             else
             {
-                if(RSensor!=null)
+                if (RSensor != null)
                 {
                     RSensor.Stop_IR_Timer();
                     RSensor.Destroy();
                 }
-                    
-                
             }
 
-            if (Properties.Settings.Default.enable_face_recognition && !MainForm.GetMainForm.crossbar.OPER_BAN)
+
+            if (Properties.Settings.Default.enable_face_recognition)
             {
                 if (FaceDetector != null)
                 {
@@ -452,7 +467,7 @@ namespace FaceDetection
                 
             }
 
-            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation && !MainForm.GetMainForm.crossbar.OPER_BAN)
+            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation)
             {
                 Mklisteners.AddMouseAndKeyboardBack();
             }
@@ -464,8 +479,6 @@ namespace FaceDetection
             or_camera_num_txt.Visible = Properties.Settings.Default.show_camera_no;
             or_camera_num_txt.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
             MainForm.GetMainForm.TopMost = Properties.Settings.Default.window_on_top;
-            MainForm.GetMainForm.Size = new System.Drawing.Size(decimal.ToInt32(Properties.Settings.Default.C1w), decimal.ToInt32(Properties.Settings.Default.C1h));
-            MainForm.GetMainForm.Location = new System.Drawing.Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));            
             
 
             or_current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
@@ -670,29 +683,7 @@ namespace FaceDetection
             }
             return fps;
         }
-
-        private void MainForm_Paint(object sender, PaintEventArgs e)
-        {
-            //crossbar.StartTimer();
-            Logger.Add("timer start " + e);
-        }
-
         private void MainForm_ResizeEnd(object sender, EventArgs e)
-        {
-            WindowSizeUpdate();
-        }
-
-        private void MainForm_MaximumSizeChanged(object sender, EventArgs e)
-        {
-            WindowSizeUpdate();
-        }
-
-        private void MainForm_MaximizedBoundsChanged(object sender, EventArgs e)
-        {
-            WindowSizeUpdate();
-        }
-
-        private void MainForm_LocationChanged(object sender, EventArgs e)
         {
             WindowSizeUpdate();
         }

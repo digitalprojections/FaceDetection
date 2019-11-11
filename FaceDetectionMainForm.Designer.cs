@@ -40,6 +40,7 @@
             this.or_dateTimeLabel = new System.Windows.Forms.Label();
             this.camera_number_txt = new System.Windows.Forms.Label();
             this.pbRecording = new System.Windows.Forms.PictureBox();
+            this.backgroundWorkerMain = new System.ComponentModel.BackgroundWorker();
             this.or_controlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).BeginInit();
             this.SuspendLayout();
@@ -223,8 +224,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
-            this.LocationChanged += new System.EventHandler(this.MainForm_LocationChanged);
-            this.SizeChanged += new System.EventHandler(this.WindowSizeUpdate);
             this.Click += new System.EventHandler(this.ShowButtons);
             this.DoubleClick += new System.EventHandler(this.FullScreen);
             this.or_controlButtons.ResumeLayout(false);
@@ -247,5 +246,6 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label or_dateTimeLabel;
         private System.Windows.Forms.Label camera_number_txt;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerMain;
     }
 }

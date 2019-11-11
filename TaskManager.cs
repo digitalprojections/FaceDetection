@@ -9,9 +9,9 @@ namespace FaceDetection
 {
     class TaskManager
     {
-        private static List<Task> listTask = new List<Task>();
+        private static List<TaskItem> listTask = new List<TaskItem>();
         private static List<string> listRecordingFiles = new List<string>();
-        private static Task task;
+        private static TaskItem task;
         private static TimeSpan timeSpanStart; // Time to keep before event
         private static TimeSpan timeSpanEnd;  // Time to keep after event
         private static TimeSpan fiveMinutes = new TimeSpan(0, 0, 5, 0);
@@ -30,7 +30,7 @@ namespace FaceDetection
             DateTime eventTime = DateTime.Now;
             timeSpanStart = new TimeSpan(0, 0, 0, timeBeforeEvent);
             timeSpanEnd = new TimeSpan(0, 0, 0, timeAfterEvent);
-            task = new Task(timeSpanStart, timeSpanEnd, eventTime, false, path, numCamera);
+            task = new TaskItem(timeSpanStart, timeSpanEnd, eventTime, false, path, numCamera);
             listTask.Add(task);
             Timer taskTimer = new Timer(timeAfterEvent * 1000); // Timer of the end of the task
             taskTimer.Enabled = true;
@@ -511,7 +511,7 @@ namespace FaceDetection
         }
     }
 
-    class Task
+    class TaskItem
     {
         public TimeSpan starttime;
         public TimeSpan stoptime;
@@ -529,7 +529,7 @@ namespace FaceDetection
         /// <param name="eventtime">event time</param>
         /// <param name="complete">complete</param>
         /// <param name="path">path</param>
-        public Task(TimeSpan starttime, TimeSpan stoptime, DateTime eventtime, bool complete, string path, int cameraNumber)
+        public TaskItem(TimeSpan starttime, TimeSpan stoptime, DateTime eventtime, bool complete, string path, int cameraNumber)
         {
             this.path = path;
             this.starttime = starttime;

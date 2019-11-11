@@ -13,16 +13,16 @@ using static System.Environment;
 
 namespace FaceDetection
 {
-
     public partial class SettingsUI : Form
     {
-        static ComboBox comboBoxFrames;
-        static ComboBox comboBoxResolution;
+        static ComboBox frame_rates_combo;
+        static ComboBox resolutions_combo;
+        static ComboBox selected_camera_combo;
+
         DsDevice[] capDevices;
         static string[] camera_names;
 
-
-        static ComboBox or_selected_camera_number;
+        
         public int Camera_index
         {
             get
@@ -35,17 +35,10 @@ namespace FaceDetection
                 Properties.Settings.Default.Save();
             }
         }
-        private int InitPanelWidth;
-        private int InitPanelHeight;
-
         public SettingsUI()
         {
-
             InitializeComponent();
             Properties.Settings.Default.Reload();
-
-            
-
             try
             {
                 Directory.CreateDirectory(Properties.Settings.Default.temp_folder);
@@ -67,16 +60,14 @@ namespace FaceDetection
             //size = GetWidth(Properties.Settings.Default.main_camera_index);
 
             this.ControlBox = false;
-            or_selected_camera_number = cm_camera_number;            
-            comboBoxFrames = comboBoxFPS;
-            comboBoxResolution = comboBoxResolutions;
+            selected_camera_combo = cm_camera_number;//that makes the camera the default, main camera aka camera 1
+            frame_rates_combo = comboBoxFPS;
+            resolutions_combo = comboBoxResolutions;
         }
 
         public Size GetWidth(int cam_ind)
         {
             Size retval;
-
-
             switch (cam_ind)
             {
                 case 0:
@@ -148,16 +139,16 @@ namespace FaceDetection
 
         public void ArrangeCameraNames(int len)
         {
-            or_selected_camera_number.Items.Clear();
+            selected_camera_combo.Items.Clear();
             camera_names = new string[len];
             
             for (int i = 0; i < len; i++)
             {
-                or_selected_camera_number.Items.Add(i + 1);
+                selected_camera_combo.Items.Add(i + 1);
             }
-            if (or_selected_camera_number.Items.Count >= Properties.Settings.Default.main_camera_index)
+            if (selected_camera_combo.Items.Count >= Properties.Settings.Default.main_camera_index)
             {                
-                or_selected_camera_number.SelectedIndex = Properties.Settings.Default.main_camera_index;
+                selected_camera_combo.SelectedIndex = Properties.Settings.Default.main_camera_index;
             }
             else
             {
@@ -207,9 +198,8 @@ namespace FaceDetection
 
         private void save_and_close(object sender, EventArgs e)
         {
-            SetWidth(Camera_index);
-            Properties.Settings.Default.Save();
-            MainForm.AllChangesApply();
+            backgroundWorker.RunWorkerAsync();
+
             Hide();
         }        
 
@@ -245,18 +235,18 @@ namespace FaceDetection
 
         public static void SetComboBoxFPSValues(List<string> vs)
         {
-            if (comboBoxFrames != null)
+            if (frame_rates_combo != null)
             {
-                comboBoxFrames.Items.AddRange(vs.ToArray());
+                frame_rates_combo.Items.AddRange(vs.ToArray());
                 for (int i=0; i<vs.Count;i++)
                 {
                     
                         if (vs[i] == Properties.Settings.Default.C1f)
                         {
-                            comboBoxFrames.SelectedItem = Properties.Settings.Default.C1f;
+                            frame_rates_combo.SelectedItem = Properties.Settings.Default.C1f;
                         }else
                     {
-                        comboBoxFrames.SelectedItem = vs[0];
+                        frame_rates_combo.SelectedItem = vs[0];
                     }
                     
                 }
@@ -272,15 +262,15 @@ namespace FaceDetection
         /// <param name="vs"></param>
         public static void SetComboBoxResolutionValues(List<string> vs)
         {
-            if (comboBoxResolution != null)
+            if (resolutions_combo != null)
             {
-                comboBoxResolution.Items.AddRange(vs.ToArray());
+                resolutions_combo.Items.AddRange(vs.ToArray());
 
-                if (comboBoxResolution.Items.Count > 0)
+                if (resolutions_combo.Items.Count > 0)
                 {
                     Console.WriteLine(Properties.Settings.Default.C1res);
 
-                    comboBoxResolution.SelectedItem = Properties.Settings.Default.C1res;
+                    resolutions_combo.SelectedItem = Properties.Settings.Default.C1res;
                 }
             }
         }
@@ -297,8 +287,8 @@ namespace FaceDetection
         {
             if (cm_camera_number.Items.Count > 0)
             {
-                cm_camera_number.SelectedIndex = Properties.Settings.Default.main_camera_index;
-                cm_capture_mode.SelectedIndex = Properties.Settings.Default.capture_method;
+                cm_camera_number.SelectedIndex = Properties.Settings.Default.main_camera_index <=0?0: Properties.Settings.Default.main_camera_index;
+                cm_capture_mode.SelectedIndex = Properties.Settings.Default.capture_method<=0 ? 0 : Properties.Settings.Default.capture_method;
             }
             SetCameraPropertiesFromMemory();
             cm_language.SelectedItem = Properties.Settings.Default.language;
@@ -435,20 +425,7 @@ namespace FaceDetection
             DisplayPropertyPage();
         }
 
-        [DllImport("olepro32.dll")]
-        public static extern int OleCreatePropertyFrame(
-            IntPtr hwndOwner,
-            int x,
-            int y,
-            [MarshalAs(UnmanagedType.LPWStr)] string lpszCaption,
-            int cObjects,
-            [MarshalAs(UnmanagedType.Interface, ArraySubType=UnmanagedType.IUnknown)]
-           ref object ppUnk,
-            int cPages,
-            IntPtr lpPageClsID,
-            int lcid,
-            int dwReserved,
-            IntPtr lpvReserved);
+        
 
 
         /// <summary>
@@ -528,12 +505,7 @@ namespace FaceDetection
             bool chk = chb.Checked;            
             changeControlEnabled(this.groupBox_functionalitySettings, chk);
         }
-
-        private void NUD_MouseClick(object sender, MouseEventArgs e)
-        {
-            NumericUpDown upDown = (NumericUpDown)sender;
-        }
-
+        
         private void Cb_human_sensor_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox check = (CheckBox)sender;
@@ -563,5 +535,33 @@ namespace FaceDetection
             CustomMessage.Add(Properties.Settings.Default.manual_record_time);
             CustomMessage.Add(Properties.Settings.Default.interval_before_reinitiating_recording);
         }
+
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            SetWidth(Camera_index);
+            Properties.Settings.Default.Save();
+            MainForm.AllChangesApply();
+        }
+
+
+        [DllImport("olepro32.dll")]
+        public static extern int OleCreatePropertyFrame(
+            IntPtr hwndOwner,
+            int x,
+            int y,
+            [MarshalAs(UnmanagedType.LPWStr)] string lpszCaption,
+            int cObjects,
+            [MarshalAs(UnmanagedType.Interface, ArraySubType=UnmanagedType.IUnknown)]
+           ref object ppUnk,
+            int cPages,
+            IntPtr lpPageClsID,
+            int lcid,
+            int dwReserved,
+            IntPtr lpvReserved);
     }
 }

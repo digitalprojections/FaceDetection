@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace FaceDetection
@@ -58,7 +59,7 @@ namespace FaceDetection
             
         }
             
-        public static void Add(string message)
+        public static void Add(string message,    [CallerLineNumber] int lineNumber = 0,    [CallerMemberName] string caller = null)
             {
 
 
@@ -76,9 +77,8 @@ namespace FaceDetection
             {
                // MessageBox.Show("Cannot access Log.txt file");
             }
-            
-                
 
+            Console.WriteLine(message + " at line " + lineNumber + " (" + caller + ")");            
 
             }
         }

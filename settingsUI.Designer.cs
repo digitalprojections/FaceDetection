@@ -112,6 +112,7 @@
             this.check_state_images = new System.Windows.Forms.ImageList(this.components);
             this.button_settings_cancel = new System.Windows.Forms.Button();
             this.button_settings_save = new System.Windows.Forms.Button();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             tab_view_settings = new System.Windows.Forms.TabPage();
             tab_view_settings.SuspendLayout();
             this.groupBox_viewSettings.SuspendLayout();
@@ -900,6 +901,11 @@
             this.button_settings_save.UseVisualStyleBackColor = true;
             this.button_settings_save.Click += new System.EventHandler(this.save_and_close);
             // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
+            // 
             // SettingsUI
             // 
             this.AcceptButton = this.button_settings_save;
@@ -1036,5 +1042,6 @@
         private System.Windows.Forms.NumericUpDown nud_seconds_after;
         private System.Windows.Forms.NumericUpDown nud_seconds_before_event;
         private System.Windows.Forms.NumericUpDown numericUpDownCamCount;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }

@@ -3,11 +3,15 @@ using System.Drawing;
 using FaceDetectionX;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Timers;
 
 namespace FaceDetection
 {
     public class CROSSBAR
     {
+        private delegate void dHideRecIcon();
+        private delegate void dStopVideoNow();
+        private delegate void dAllowOperCap();
         public bool PREEVENT_RECORDING = false;
         private RecorderCamera recorder = null;
         private UsbCamera camera = null;
@@ -35,13 +39,13 @@ namespace FaceDetection
         /// set the Interval property to the desired time interval, 
         /// and then immediately set the Enabled property back to false.
         /// </summary>
-        static Timer the_timer = new Timer();
+        static System.Timers.Timer the_timer = new System.Timers.Timer();
         /// <summary>
         /// No operator capturing during this period.
         /// <see cref="OPER_BAN"/>
         /// </summary>
         static System.Timers.Timer no_opcap_timer = new System.Timers.Timer();
-        Timer icon_timer = new Timer();
+        System.Timers.Timer icon_timer = new System.Timers.Timer();
 
         public bool Recording_is_on { get => recording_is_on; set => recording_is_on = value; }
                         
@@ -53,7 +57,7 @@ namespace FaceDetection
             no_opcap_timer.Enabled = true;
 
 
-            icon_timer.Tick += Icon_timer_Tick;
+            icon_timer.Elapsed += Icon_timer_Tick;
             icon_timer.Enabled = false;
 
             //it is the sum of the 2 values
@@ -68,25 +72,33 @@ namespace FaceDetection
 
             Logger.Add(no_opcap_timer.Interval.ToString());
 
-            the_timer.Tick += The_timer_Tick;
+            the_timer.Elapsed += The_timer_Tick;
+            the_timer.AutoReset = false;
             recorder = new RecorderCamera(0);
         }
 
-        private void Icon_timer_Tick(object sender, EventArgs e)
+        private void Icon_timer_Tick(object sender, ElapsedEventArgs e)
         {
-            MainForm.Or_pb_recording.Visible = false;            
-            icon_timer.Enabled = false;
-            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_Human_sensor)
+            HideTheRecIcon();           
+        }
+
+        private void HideTheRecIcon()
+        {
+            if (MainForm.Or_pb_recording.InvokeRequired)
             {
-                MainForm.RSensor.CheckOK = true;
+                var d = new dHideRecIcon(HideTheRecIcon);
+                MainForm.Or_pb_recording.Invoke(d);
+            }
+            else { 
+                MainForm.Or_pb_recording.Visible = false;
+                icon_timer.Enabled = false;
+                if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_Human_sensor)
+                {
+                    MainForm.RSensor.CheckOK = true;
+                }
             }
         }
-
-        private void Icon_timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            
-        }
-
+        
         public void SET_ICON_TIMER()
         {
             MainForm.Or_pb_recording.Visible = true;            
@@ -142,69 +154,91 @@ namespace FaceDetection
 
         }
 
-        private void The_timer_Tick(object sender, EventArgs e)
+        private void The_timer_Tick(object sender, ElapsedEventArgs e)
         {
-            if(MainForm.RSensor!=null)
-                MainForm.RSensor.SensorClose();
-            MainForm.GetMainForm.SetRecordButtonState("play", false);
-            //We end the recording here
-            if (!PREEVENT_RECORDING)
-            {
-                recorder.ReleaseInterfaces();
-                the_timer.Enabled = false;
-                if (this != null)
-                    this.PreviewMode();
-            }
-            else if (PREEVENT_RECORDING)
-            {
-                recorder.CAMERA_MODE = CAMERA_MODES.PREEVENT;
-                if(the_timer!=null)
-                {
-                    the_timer.Enabled = true;
-                    the_timer.Interval = BUFFER_DURATION.BUFFERDURATION;
-                }                    
-                recorder.RESET_FILE_PATH();                
-            }
-            if (wait_interval_enabled)
-            {
-                //Run the timer
-                int intt = decimal.ToInt32(
-                Properties.Settings.Default.interval_before_reinitiating_recording)
-                * 1000;
-                if (intt >= 500)
-                {
-                    no_opcap_timer.Interval = intt;
-                    no_opcap_timer.Enabled = true;
-                }
+            VideoRecordingEnd();
+        }
 
+        private void VideoRecordingEnd()
+        {
+            if (MainForm.GetMainForm.InvokeRequired)
+            {
+                var d = new dStopVideoNow(VideoRecordingEnd);
+                MainForm.GetMainForm.Invoke(d);
+            }
+            else
+            {
+                if (MainForm.RSensor != null)
+                    MainForm.RSensor.SensorClose();
+                MainForm.GetMainForm.SetRecordButtonState("play", false);
+                //We end the recording here
+                if (!PREEVENT_RECORDING)
+                {
+                    recorder.ReleaseInterfaces();
+                    the_timer.Enabled = false;
+                    if (this != null)
+                        this.PreviewMode();
+                }
+                else if (PREEVENT_RECORDING)
+                {
+                    recorder.CAMERA_MODE = CAMERA_MODES.PREEVENT;
+                    if (the_timer != null)
+                    {
+                        the_timer.Enabled = true;
+                        the_timer.Interval = BUFFER_DURATION.BUFFERDURATION;
+                    }
+                    recorder.RESET_FILE_PATH();
+                }
+                if (wait_interval_enabled)
+                {
+                    //Run the timer
+                    int intt = decimal.ToInt32(
+                    Properties.Settings.Default.interval_before_reinitiating_recording)
+                    * 1000;
+                    if (intt >= 500)
+                    {
+                        no_opcap_timer.Interval = intt;
+                        no_opcap_timer.Enabled = true;
+                    }
+
+                }
             }
         }
 
         private void No_opcap_timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            OPER_BAN = false;
-            Logger.Add("No_opcap_timer_Elapsed, OPER_BAN XXXXXXXXXXXXXXXXXXXXX " + OPER_BAN);
-            if (wait_interval_enabled)
-            {
-                no_opcap_timer.Enabled = false;
-                wait_interval_enabled = false;
-               
-                if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
-                {
+            AllowOperCap();
+        }
 
-                    MainForm.Mklisteners.AddMouseAndKeyboardBack();
+        private void AllowOperCap()
+        {
+            TaskItem task = new TaskItem()
+
+                OPER_BAN = false;
+                Logger.Add("No_opcap_timer_Elapsed, OPER_BAN XXXXXXXXXXXXXXXXXXXXX " + OPER_BAN);
+                if (wait_interval_enabled)
+                {
+                    no_opcap_timer.Enabled = false;
+                    wait_interval_enabled = false;
+
+                    if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+                    {
+
+                        MainForm.Mklisteners.AddMouseAndKeyboardBack();
+                    }
+
+                    if (Properties.Settings.Default.enable_Human_sensor)
+                    {
+
+                        MainForm.RSensor.Start_IR_Timer();
+                    }
+                    else if (Properties.Settings.Default.enable_face_recognition)
+                    {
+
+                        MainForm.FaceDetector.Start_Face_Timer();
+                    }
                 }
-
-                if (Properties.Settings.Default.enable_Human_sensor)
-                {
-
-                    MainForm.RSensor.Start_IR_Timer();
-                } else if (Properties.Settings.Default.enable_face_recognition)
-                {
-                    
-                    MainForm.FaceDetector.Start_Face_Timer();
-                }
-            }
+            
         }
 
         internal Bitmap GetBitmap()
