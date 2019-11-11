@@ -211,9 +211,7 @@ namespace FaceDetection
         }
 
         private void AllowOperCap()
-        {
-            TaskItem task = new TaskItem()
-
+        {            
                 OPER_BAN = false;
                 Logger.Add("No_opcap_timer_Elapsed, OPER_BAN XXXXXXXXXXXXXXXXXXXXX " + OPER_BAN);
                 if (wait_interval_enabled)

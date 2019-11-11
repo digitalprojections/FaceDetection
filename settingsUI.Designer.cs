@@ -293,7 +293,7 @@
             this.cb_backlight_off_idling.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_backlight_off_idling.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "enable_backlight_off_when_idle", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_backlight_off_idling.Name = "cb_backlight_off_idling";
-            this.cb_backlight_off_idling.Tag = "9";
+            this.cb_backlight_off_idling.Tag = "24";
             this.cb_backlight_off_idling.UseVisualStyleBackColor = true;
             // 
             // cb_backlight_on_recognition
@@ -378,6 +378,7 @@
             0});
             this.nud_seconds_before_event.Name = "nud_seconds_before_event";
             this.nud_seconds_before_event.Value = global::FaceDetection.Properties.Settings.Default.seconds_before_event;
+            this.nud_seconds_before_event.ValueChanged += new System.EventHandler(this.Nud_seconds_before_event_ValueChanged);
             // 
             // label11
             // 
@@ -420,6 +421,7 @@
             0});
             this.nud_reinitiation_interval.Name = "nud_reinitiation_interval";
             this.nud_reinitiation_interval.Value = global::FaceDetection.Properties.Settings.Default.interval_before_reinitiating_recording;
+            this.nud_reinitiation_interval.ValueChanged += new System.EventHandler(this.Nud_reinitiation_interval_ValueChanged);
             // 
             // cm_capture_mode
             // 

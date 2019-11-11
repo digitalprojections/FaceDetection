@@ -563,5 +563,25 @@ namespace FaceDetection
             int lcid,
             int dwReserved,
             IntPtr lpvReserved);
+
+        private void Nud_reinitiation_interval_ValueChanged(object sender, EventArgs e)
+        {
+            //check the other nud
+            if (Properties.Settings.Default.seconds_before_event>Properties.Settings.Default.interval_before_reinitiating_recording)
+            {
+                //MessageBox.Show("Invalid value!");
+                Properties.Settings.Default.interval_before_reinitiating_recording = Properties.Settings.Default.interval_before_reinitiating_recording + 2;
+            }
+        }
+
+        private void Nud_seconds_before_event_ValueChanged(object sender, EventArgs e)
+        {
+            //check the other nud
+            if (Properties.Settings.Default.seconds_before_event >= Properties.Settings.Default.interval_before_reinitiating_recording)
+            {
+                //MessageBox.Show("Invalid value!");
+                Properties.Settings.Default.seconds_before_event = Properties.Settings.Default.seconds_before_event - 1;
+            }
+        }
     }
 }
