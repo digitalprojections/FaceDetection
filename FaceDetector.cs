@@ -57,7 +57,7 @@ namespace FaceDetection
             }         
         }
 
-        private async void GetTheBMPForFaceCheck()
+        private void GetTheBMPForFaceCheck()
         {
             if (MainForm.GetMainForm.InvokeRequired)
             {
@@ -69,7 +69,7 @@ namespace FaceDetection
                 Bitmap bitmap = MainForm.GetMainForm.crossbar.GetBitmap();
                 if (bitmap != null)
                 {
-                    await Task.Run(() => {
+                    Task.Run(() => {
                         Mat mat = bitmap.ToMat();
                         Rect[] rectList = fase_cascade.DetectMultiScale(mat);
                         if (rectList.Length == 0)
@@ -97,7 +97,7 @@ namespace FaceDetection
 
         private void SetTheIcons()
         {
-            if (MainForm.GetMainForm.InvokeRequired)
+            if (MainForm.GetMainForm!=null && MainForm.GetMainForm.InvokeRequired)
             {
                 var d = new dSetTheIcons(SetTheIcons);
                 MainForm.GetMainForm.Invoke(d);

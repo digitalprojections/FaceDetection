@@ -88,8 +88,8 @@ namespace FaceDetection
         /// </param>
         public UsbCamcorder(int cameraIndex)
         {
-            Size size = MainForm.GetMainForm.GetResolution(0);
-            int fps = MainForm.GetMainForm.GetFPS(0);            
+            Size size = PROPERTY_FUNCTIONS.GetResolution(0);
+            int fps = PROPERTY_FUNCTIONS.GetFPS(0);            
 
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
             string str = Path.Combine(FaceDetection.Properties.Settings.Default.video_file_location, (cameraIndex + 1).ToString());

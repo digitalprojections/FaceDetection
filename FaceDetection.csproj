@@ -131,6 +131,7 @@
     <Compile Include="MOUSE_KEYBOARD.cs" />
     <Compile Include="PARAMETERS.cs" />
     <Compile Include="PlayState.cs" />
+    <Compile Include="PROPERTY_FUNCTIONS.cs" />
     <Compile Include="RecorderCamera.cs" />
     <Compile Include="RECORD_PATH.cs" />
     <Compile Include="TaskManager.cs" />

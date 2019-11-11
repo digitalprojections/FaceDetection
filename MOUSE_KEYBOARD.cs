@@ -12,7 +12,7 @@ namespace FaceDetection
         //LL Muse and keyboard
         private readonly KeyboardListener keyboardListener = new KeyboardListener();
         private readonly MouseListener mouseListener = new MouseListener();
-        //private static readonly MouseListener mouseListenerClick = new MouseListener();
+        private static readonly MouseListener mouseListenerClick = new MouseListener();
 
         public MOUSE_KEYBOARD()
         {
@@ -25,6 +25,7 @@ namespace FaceDetection
         {
             keyboardListener.KeyUpAll += KeyboardListener_KeyUpAll;
             mouseListener.MouseLeftDown += MouseListener_MouseLeftDown;
+            mouseListenerClick.MouseMove += MouseListener_MouseMove;
         }
 
         private void KeyboardListener_KeyUpAll(object sender, KeyEventArgs e)
@@ -41,9 +42,6 @@ namespace FaceDetection
             {
                 MainForm.GetMainForm.BackLight.Restart();
             }
-
-
-
         }
 
         public void AddMouseAndKeyboardBack()
@@ -57,6 +55,7 @@ namespace FaceDetection
         private void KeyDownAllEventHandler(object sender, KeyEventArgs e)
         {
             MouseKeyEventInit();
+
         }
         private void MouseListener_MouseMove(object sender, MouseEventArgs e)
         {
@@ -71,7 +70,7 @@ namespace FaceDetection
             //MainForm.FaceDetector.Stop_Face_Timer();
             keyboardListener.KeyDownAll -= new KeyEventHandler(KeyDownAllEventHandler);
             mouseListener.MouseMove -= MouseListener_MouseMove;
-            Logger.Add("TODO: " + CAMERA_MODES.EVENT);
+            //Logger.Add("TODO: " + CAMERA_MODES.EVENT);
             if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation)
             {
                 //↓20191107 Nagayama added↓
@@ -105,6 +104,10 @@ namespace FaceDetection
             {
                 keyboardListener.KeyDownAll -= new KeyEventHandler(KeyDownAllEventHandler);
                 mouseListener.MouseMove -= MouseListener_MouseMove;
+            }
+            if (MainForm.GetMainForm != null)
+            {
+                MainForm.GetMainForm.BackLight.Restart();
             }
         }
     }

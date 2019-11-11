@@ -174,6 +174,7 @@ namespace FaceDetection
                 //We end the recording here
                 if (!PREEVENT_RECORDING)
                 {
+                    Recording_is_on = false;
                     recorder.ReleaseInterfaces();
                     the_timer.Enabled = false;
                     if (this != null)
@@ -218,8 +219,9 @@ namespace FaceDetection
                 {
                     no_opcap_timer.Enabled = false;
                     wait_interval_enabled = false;
+                
 
-                    if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+                if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
                     {
 
                         MainForm.Mklisteners.AddMouseAndKeyboardBack();
@@ -287,6 +289,16 @@ namespace FaceDetection
                     camera = new UsbCamera(0);
                     camera.Start();
                 }
+                else if (camera.Size.Width != PROPERTY_FUNCTIONS.GetWidth(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetWidth(0).Height)
+                {
+                    camera.Release();
+                    camera = new UsbCamera(0);
+                    camera.Start();
+                }
+                else
+                {
+                    camera.Start();
+                }
 
             }
         }
@@ -294,14 +306,23 @@ namespace FaceDetection
         {
             Recording_is_on = true;
 
-            if (MainForm.GetMainForm != null)
-            {
+            
                 if (camera != null && camera.ON)
                 {
-                    camera.Release();
+                    camera.Release();                    
+                    recorder.StartRecorderCamera();
                 }
-                recorder.StartRecorderCamera();
-            }
+                else if (camera != null && camera.Size.Width != PROPERTY_FUNCTIONS.GetWidth(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetWidth(0).Height)
+                {
+                    recorder.ReleaseInterfaces();
+                    recorder = new RecorderCamera(0);
+                    recorder.StartRecorderCamera();
+                }
+                else
+                {
+                    recorder.StartRecorderCamera();
+                }
+            
         }
         public void StartTimer()
         {

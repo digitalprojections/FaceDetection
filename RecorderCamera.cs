@@ -11,14 +11,11 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security;
 using System.Text;
-using System.Threading;
 
 namespace FaceDetection
 {
     class RecorderCamera
     {
-        //private delegate void StartCameraAsync();
-
         public bool ON;
         string sourcePath = @"D:\TEMP";
         string targetPath = String.Empty;
@@ -136,17 +133,14 @@ namespace FaceDetection
         /// <param name="pbx">Control to display the video</param>        
         public void StartRecorderCamera()
         {
-            if(MainForm.GetMainForm!=null)
-            {
-
             
-            Size size = MainForm.GetMainForm.GetResolution(INDEX);
-            int fps = MainForm.GetMainForm.GetFPS(0);
+            Size size = PROPERTY_FUNCTIONS.GetResolution(INDEX);
+            int fps = PROPERTY_FUNCTIONS.GetFPS(0);
             IntPtr pbx = MainForm.GetMainForm.Handle;
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
-            Logger.Add(CAMERA_MODE + " 1");
-            Logger.Add(CAMERA_MODE + " 2");
-            Logger.Add(CAMERA_MODE + " 3");
+            //Logger.Add(CAMERA_MODE + " 1");
+            //Logger.Add(CAMERA_MODE + " 2");
+            Logger.Add(ACTIVE_RECPATH + " 3");
             //REGULAR 0 PREEVENT
             if (CAMERA_MODE != CAMERA_MODES.PREEVENT)
             {
@@ -328,7 +322,6 @@ namespace FaceDetection
                 Logger.Add("Can not start the camera");
                 Logger.Add("Can not start the camera");
             }
-            }
         }
         public void RESET_FILE_PATH()
         {
@@ -414,7 +407,7 @@ namespace FaceDetection
 
         }
 
-        private volatile ManualResetEvent m_PictureReady = null;
+        //private volatile ManualResetEvent m_PictureReady = null;
         private IntPtr m_ipBuffer = IntPtr.Zero;
         private int m_videoWidth = 1280;
         private int m_videoHeight = 720;

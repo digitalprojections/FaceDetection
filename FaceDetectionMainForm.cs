@@ -7,12 +7,14 @@ using System.Diagnostics;
 using System.IO;
 using FaceDetectionX;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace FaceDetection
 {
     public partial class MainForm : Form
     {
         private delegate void dDateTimerUpdater();
+        private delegate void dShowSettingsUI();
 
         private static MOUSE_KEYBOARD mklisteners = null;
         public CROSSBAR crossbar = null;
@@ -232,25 +234,34 @@ namespace FaceDetection
                 }
             }
         }
-        private void ShowSettings(object sender, EventArgs e)
+        private async void ShowSettings(object sender, EventArgs e)
+        {   
+                await Task.Run(() => 
+                {
+                    ShowSettingsDialogAsync();
+                });
+        }
+
+        private void ShowSettingsDialogAsync()
         {
-            
-            if (Setting_ui.Visible == false)
+            if (MainForm.GetMainForm.InvokeRequired)
             {
-                //settingUI.TopMost = true;
-                this.TopMost = false;
-                Debug.WriteLine("topmost 824");
-                //System.Drawing.Size s = new System.Drawing.Size(849, 415);
-                //SettingUI.Size = s;
-                Setting_ui.AutoSize = true;
-                Setting_ui.AutoSizeMode = AutoSizeMode.GrowOnly;
-                Setting_ui.FormBorderStyle = FormBorderStyle.FixedDialog;
-                Setting_ui.ShowDialog();
+                var d = new dShowSettingsUI(ShowSettingsDialogAsync);
+                MainForm.GetMainForm.Invoke(d);
             }
             else
             {
+                if (Setting_ui.Visible == false)
+                {
+                    this.TopMost = false;
+                    Setting_ui.ShowDialog();
+                }
+                else
+                {
+                }
             }
         }
+
         private void OpenStoreLocation(object sender, EventArgs e)
         {
             try
@@ -463,8 +474,6 @@ namespace FaceDetection
                     FaceDetector.Stop_Face_Timer();
                     FaceDetector.Destroy();
                 }
-                
-                
             }
 
             if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation)
@@ -638,51 +647,7 @@ namespace FaceDetection
             return retval;
         }
 
-        public System.Drawing.Size GetResolution(int cam_ind)
-        {
-            System.Drawing.Size retval;
-            string[] res;
-            switch (cam_ind)
-            {
-                case 0:
-                    res = Properties.Settings.Default.C1res.Split('x');
-                    retval = new System.Drawing.Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
-                    return retval;
-                case 1:
-                    res = Properties.Settings.Default.C2res.Split('x');
-                    retval = new System.Drawing.Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
-                    return retval;
-                case 2:
-                    res = Properties.Settings.Default.C3res.Split('x');
-                    retval = new System.Drawing.Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
-                    return retval;
-                case 3:
-                    res = Properties.Settings.Default.C4res.Split('x');
-                    retval = new System.Drawing.Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
-                    return retval;
-                default: return new System.Drawing.Size(640, 480);
-            }
-                    }
-        public int GetFPS(int cam_ind)
-        {
-            int fps = 15;
-            switch (cam_ind)
-            {
-                case 0:
-                    fps = Int32.Parse(Properties.Settings.Default.C1f);
-                    break;
-                case 1:
-                    fps = Int32.Parse(Properties.Settings.Default.C2f);
-                    break;
-                case 2:
-                    fps = Int32.Parse(Properties.Settings.Default.C3f);
-                    break;
-                case 3:
-                    fps = Int32.Parse(Properties.Settings.Default.C4f);
-                    break;
-            }
-            return fps;
-        }
+        
         private void MainForm_ResizeEnd(object sender, EventArgs e)
         {
             WindowSizeUpdate();

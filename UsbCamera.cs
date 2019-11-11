@@ -73,8 +73,8 @@ namespace FaceDetectionX
         public UsbCamera(int cameraIndex)
         {
             INDEX = cameraIndex;
-            Size size = FaceDetection.MainForm.GetMainForm.GetResolution(0);
-            int fps = FaceDetection.MainForm.GetMainForm.GetFPS(0);
+            Size size = FaceDetection.PROPERTY_FUNCTIONS.GetResolution(0);
+            int fps = FaceDetection.PROPERTY_FUNCTIONS.GetFPS(0);
             var camera_list = FindDevices();
             //if (cameraIndex >= camera_list.Length) throw new ArgumentException("USB camera is not available.", "index");
             Init(cameraIndex, size, fps, FaceDetection.MainForm.GetMainForm.Handle);

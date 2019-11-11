@@ -224,6 +224,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
+            this.SizeChanged += new System.EventHandler(this.WindowSizeUpdate);
             this.Click += new System.EventHandler(this.ShowButtons);
             this.DoubleClick += new System.EventHandler(this.FullScreen);
             this.or_controlButtons.ResumeLayout(false);

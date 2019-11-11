@@ -63,79 +63,12 @@ namespace FaceDetection
             selected_camera_combo = cm_camera_number;//that makes the camera the default, main camera aka camera 1
             frame_rates_combo = comboBoxFPS;
             resolutions_combo = comboBoxResolutions;
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowOnly;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
         }
 
-        public Size GetWidth(int cam_ind)
-        {
-            Size retval;
-            switch (cam_ind)
-            {
-                case 0:
-                    retval = new Size(decimal.ToInt32(Properties.Settings.Default.C1w), decimal.ToInt32(Properties.Settings.Default.C1h));
-
-                    return retval;
-                case 1:
-                    retval = new Size(decimal.ToInt32(Properties.Settings.Default.C2w), decimal.ToInt32(Properties.Settings.Default.C2h));
-
-                    return retval;
-                case 2:
-                    retval = new Size(decimal.ToInt32(Properties.Settings.Default.C3w), decimal.ToInt32(Properties.Settings.Default.C3h));
-
-                    return retval;
-                case 3:
-                    retval = new Size(decimal.ToInt32(Properties.Settings.Default.C4w), decimal.ToInt32(Properties.Settings.Default.C4h));
-
-                    return retval;
-                default: return new Size(640, 480);
-
-            }
-
-        }
-
-        public void SetWidth(int cam_ind)
-        {
-            char[] vs = { 'x' };
-            bool resolution_changed = false;
-            switch (cam_ind)
-            {
-                case 0:
-                    if(Properties.Settings.Default.C1w != decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[0]))
-                    {
-                        Properties.Settings.Default.C1w = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[0]);
-                        Properties.Settings.Default.C1h = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[1]);
-                        resolution_changed = true;
-                    }                    
-                    break;
-                case 1:
-                    if (Properties.Settings.Default.C2w != decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[0]))
-                    {
-                        Properties.Settings.Default.C2w = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[0]);
-                        Properties.Settings.Default.C2h = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[1]);
-                        resolution_changed = true;
-                    }                    
-                    break;
-                case 2:
-                    if(Properties.Settings.Default.C3w != decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[0]))
-                    {
-                        Properties.Settings.Default.C3w = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[0]);
-                        Properties.Settings.Default.C3h = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[1]);
-                        resolution_changed = true;
-                    }                    
-                    break;
-                case 3:
-                    if (Properties.Settings.Default.C4w != decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[0]))
-                    {
-                        Properties.Settings.Default.C4w = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[0]);
-                        Properties.Settings.Default.C4h = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[1]);
-                        resolution_changed = true;
-                    }                    
-                    break;                
-            }
-            if (resolution_changed)
-            {
-                MainForm.GetMainForm.crossbar.RESTART_CAMERA();
-            }
-        }
+        
 
         public void ArrangeCameraNames(int len)
         {
@@ -543,7 +476,7 @@ namespace FaceDetection
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            SetWidth(Camera_index);
+            PROPERTY_FUNCTIONS.SetWidth(Camera_index);
             Properties.Settings.Default.Save();
             MainForm.AllChangesApply();
         }
