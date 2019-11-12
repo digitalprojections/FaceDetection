@@ -422,9 +422,9 @@ namespace FaceDetection
             AllChangesApply();
             WindowSizeUpdate();
             FillResolutionList();
-            MainForm.GetMainForm.Width = decimal.ToInt32(Properties.Settings.Default.C1w);
-            MainForm.GetMainForm.Height = decimal.ToInt32(Properties.Settings.Default.C1h);
-            MainForm.GetMainForm.Location = new System.Drawing.Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));            
+            this.Width = decimal.ToInt32(Properties.Settings.Default.C1w);
+            this.Height = decimal.ToInt32(Properties.Settings.Default.C1h);
+            this.Location = new Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));            
 
         }
         public void SET_REC_ICON()

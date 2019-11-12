@@ -30,9 +30,9 @@ namespace FaceDetection
             }
             catch (IOException iox)
             {
-              //  MessageBox.Show("Cannot access Log.txt file");
+                //  MessageBox.Show("Cannot access Log.txt file");
             }
-            
+
         }
         public static void Add(Exception logMessage, string message)
         {
@@ -53,20 +53,21 @@ namespace FaceDetection
             }
             catch (IOException iox)
             {
-               // MessageBox.Show("Cannot access Log.txt file");
+                // MessageBox.Show("Cannot access Log.txt file");
             }
-        
-            
+
+
         }
-            
-        public static void Add(string message,    [CallerLineNumber] int lineNumber = 0,    [CallerMemberName] string caller = null)
-            {
+
+        public static void Add(string message, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string caller = null)
+        {
 
 
             try
             {
                 using (StreamWriter w = File.AppendText("log.txt"))
                 {
+
                     w.Write("\r\nLog Entry : ");
                     w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
                     w.WriteLine($"  : {message}");
@@ -75,11 +76,18 @@ namespace FaceDetection
             }
             catch (IOException iox)
             {
-               // MessageBox.Show("Cannot access Log.txt file");
+                using (StreamWriter w = File.AppendText("log2.txt"))
+                {
+
+                    w.Write("\r\nLog Entry : ");
+                    w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
+                    w.WriteLine($"  : {message}");
+                    w.WriteLine("-------------------------------");
+                }
+                // MessageBox.Show("Cannot access Log.txt file");
             }
 
-            Console.WriteLine(message + " at line " + lineNumber + " (" + caller + ")");            
-
-            }
+            Console.WriteLine(message + " at line " + lineNumber + " (" + caller + ")");
         }
     }
+}

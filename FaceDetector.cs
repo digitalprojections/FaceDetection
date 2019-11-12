@@ -22,6 +22,8 @@ namespace FaceDetection
         
         bool checkOK = false;
 
+        Task faceTask;
+
         public FaceDetector()
         {
             // Cascadeファイル読み込み
@@ -33,8 +35,14 @@ namespace FaceDetection
             body_cascade.Load(body_cascade_file);
             face_check_timer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
             face_check_timer.Elapsed += Face_check_timer_Tick;
-            face_check_timer.AutoReset = true;            
-            face_check_timer.Start();
+            face_check_timer.AutoReset = true;
+
+            Task.Run(() => {
+                Thread.Sleep(5000);
+                face_check_timer.Start();
+            });
+            
+            
         }
 
         private void Face_check_timer_Tick(object sender, ElapsedEventArgs e)
@@ -69,7 +77,8 @@ namespace FaceDetection
                 Bitmap bitmap = MainForm.GetMainForm.crossbar.GetBitmap();
                 if (bitmap != null)
                 {
-                    Task.Run(() => {
+                   faceTask = new Task(() => {
+
                         Mat mat = bitmap.ToMat();
                         Rect[] rectList = fase_cascade.DetectMultiScale(mat);
                         if (rectList.Length == 0)
@@ -90,7 +99,7 @@ namespace FaceDetection
 
                     });
 
-                    
+                    faceTask.Start();
                 }
             }
         }
@@ -159,12 +168,9 @@ namespace FaceDetection
 
             task.Start();
         }
-
-
         public void Stop_Face_Timer()
         {
             face_check_timer.Enabled = false;
-            //face_check_timer.Stop();
             checkOK = false;
         }
     }

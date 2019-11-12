@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Timers;
 
 namespace FaceDetection
@@ -34,7 +36,11 @@ namespace FaceDetection
                 SensorCheckTimer.Elapsed+= IR_Timer_Tick;
                 SensorCheckTimer.AutoReset = true;
                 SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
-                SensorCheckTimer.Start();
+
+                Task.Run(() => {
+                    Thread.Sleep(5000);
+                    SensorCheckTimer.Start();
+                }); 
             }
             else
             {
