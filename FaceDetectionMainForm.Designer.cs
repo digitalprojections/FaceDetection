@@ -54,9 +54,9 @@
             this.or_controlButtons.Controls.Add(this.snapshotButton);
             this.or_controlButtons.Controls.Add(this.cameraButton);
             this.or_controlButtons.Controls.Add(this.closeButton);
-            this.or_controlButtons.Location = new System.Drawing.Point(496, 379);
+            this.or_controlButtons.Location = new System.Drawing.Point(320, 365);
             this.or_controlButtons.Name = "or_controlButtons";
-            this.or_controlButtons.Size = new System.Drawing.Size(292, 59);
+            this.or_controlButtons.Size = new System.Drawing.Size(292, 64);
             this.or_controlButtons.TabIndex = 12;
             this.or_controlButtons.Visible = false;
             // 
@@ -70,7 +70,7 @@
             this.folderButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.folderButton.Location = new System.Drawing.Point(3, 3);
             this.folderButton.Name = "folderButton";
-            this.folderButton.Size = new System.Drawing.Size(52, 52);
+            this.folderButton.Size = new System.Drawing.Size(52, 56);
             this.folderButton.TabIndex = 3;
             this.folderButton.UseVisualStyleBackColor = false;
             this.folderButton.Click += new System.EventHandler(this.OpenStoreLocation);
@@ -112,7 +112,7 @@
             this.settingsButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.settingsButton.Location = new System.Drawing.Point(61, 3);
             this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(52, 52);
+            this.settingsButton.Size = new System.Drawing.Size(52, 56);
             this.settingsButton.TabIndex = 3;
             this.settingsButton.UseVisualStyleBackColor = false;
             this.settingsButton.Click += new System.EventHandler(this.ShowSettings);
@@ -127,7 +127,7 @@
             this.snapshotButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.snapshotButton.Location = new System.Drawing.Point(119, 3);
             this.snapshotButton.Name = "snapshotButton";
-            this.snapshotButton.Size = new System.Drawing.Size(52, 52);
+            this.snapshotButton.Size = new System.Drawing.Size(52, 56);
             this.snapshotButton.TabIndex = 3;
             this.snapshotButton.UseVisualStyleBackColor = false;
             this.snapshotButton.Click += new System.EventHandler(this.SnapShot);
@@ -142,8 +142,8 @@
             this.cameraButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cameraButton.Location = new System.Drawing.Point(177, 3);
             this.cameraButton.Name = "cameraButton";
-            this.cameraButton.Padding = new System.Windows.Forms.Padding(10);
-            this.cameraButton.Size = new System.Drawing.Size(52, 52);
+            this.cameraButton.Padding = new System.Windows.Forms.Padding(10, 11, 10, 11);
+            this.cameraButton.Size = new System.Drawing.Size(52, 56);
             this.cameraButton.TabIndex = 3;
             this.cameraButton.Tag = "play";
             this.cameraButton.UseVisualStyleBackColor = false;
@@ -159,7 +159,7 @@
             this.closeButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.closeButton.Location = new System.Drawing.Point(235, 3);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(52, 52);
+            this.closeButton.Size = new System.Drawing.Size(52, 56);
             this.closeButton.TabIndex = 3;
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.ShowButtons);
@@ -172,7 +172,7 @@
             this.or_dateTimeLabel.Font = new System.Drawing.Font("MS UI Gothic", 14F);
             this.or_dateTimeLabel.ForeColor = System.Drawing.Color.White;
             this.or_dateTimeLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.or_dateTimeLabel.Location = new System.Drawing.Point(12, 411);
+            this.or_dateTimeLabel.Location = new System.Drawing.Point(12, 398);
             this.or_dateTimeLabel.Name = "or_dateTimeLabel";
             this.or_dateTimeLabel.Padding = new System.Windows.Forms.Padding(3);
             this.or_dateTimeLabel.Size = new System.Drawing.Size(125, 30);
@@ -188,7 +188,7 @@
             this.camera_number_txt.Font = new System.Drawing.Font("MS UI Gothic", 50F);
             this.camera_number_txt.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.camera_number_txt.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.camera_number_txt.Location = new System.Drawing.Point(725, 9);
+            this.camera_number_txt.Location = new System.Drawing.Point(549, 10);
             this.camera_number_txt.Name = "camera_number_txt";
             this.camera_number_txt.Size = new System.Drawing.Size(63, 67);
             this.camera_number_txt.TabIndex = 10;
@@ -201,29 +201,30 @@
             this.pbRecording.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pbRecording.Image = global::FaceDetection.Properties.Resources.player_record;
             this.pbRecording.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pbRecording.Location = new System.Drawing.Point(12, 12);
+            this.pbRecording.Location = new System.Drawing.Point(12, 13);
             this.pbRecording.Name = "pbRecording";
-            this.pbRecording.Size = new System.Drawing.Size(52, 52);
+            this.pbRecording.Size = new System.Drawing.Size(52, 56);
             this.pbRecording.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbRecording.TabIndex = 5;
             this.pbRecording.TabStop = false;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(624, 441);
             this.Controls.Add(this.pbRecording);
             this.Controls.Add(this.or_dateTimeLabel);
             this.Controls.Add(this.or_controlButtons);
             this.Controls.Add(this.camera_number_txt);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::FaceDetection.Properties.Settings.Default, "cam1_position", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = global::FaceDetection.Properties.Settings.Default.cam1_position;
             this.Name = "MainForm";
             this.Text = "UVC Camera Viewer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.SizeChanged += new System.EventHandler(this.WindowSizeUpdate);
             this.Click += new System.EventHandler(this.ShowButtons);
             this.DoubleClick += new System.EventHandler(this.FullScreen);

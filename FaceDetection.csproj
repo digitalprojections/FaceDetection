@@ -121,7 +121,6 @@
     <Compile Include="BackLightController.cs" />
     <Compile Include="BUFFER_DURATION.cs" />
     <Compile Include="Camera.cs" />
-    <Compile Include="CameraManager.cs" />
     <Compile Include="CAMERA_MODES.cs" />
     <Compile Include="CheckDiskSpace.cs" />
     <Compile Include="FaceDetector.cs" />

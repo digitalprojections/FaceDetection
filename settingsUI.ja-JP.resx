@@ -119,43 +119,43 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lb_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
+    <value>19, 13</value>
   </data>
   <data name="lb_seconds.Text" xml:space="preserve">
     <value>秒</value>
   </data>
   <data name="lb_manual_recording_time.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 12</value>
+    <value>103, 13</value>
   </data>
   <data name="lb_manual_recording_time.Text" xml:space="preserve">
     <value>手動録画最大時間</value>
   </data>
   <data name="cb_event_recorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 16</value>
+    <value>108, 17</value>
   </data>
   <data name="cb_event_recorder.Text" xml:space="preserve">
     <value>イベントレコーダー</value>
   </data>
   <data name="lb_post_event.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 12</value>
+    <value>133, 13</value>
   </data>
   <data name="lb_post_event.Text" xml:space="preserve">
     <value>録画時間(イベント発生後)</value>
   </data>
   <data name="lb_pre_event.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 12</value>
+    <value>133, 13</value>
   </data>
   <data name="lb_pre_event.Text" xml:space="preserve">
     <value>録画時間(イベント発生前)</value>
   </data>
   <data name="label23_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
+    <value>19, 13</value>
   </data>
   <data name="label23_seconds.Text" xml:space="preserve">
     <value>秒</value>
   </data>
   <data name="label22_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
+    <value>19, 13</value>
   </data>
   <data name="label22_seconds.Text" xml:space="preserve">
     <value>秒</value>
@@ -164,13 +164,13 @@
     <value>74, 104</value>
   </data>
   <data name="label20_minutes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
+    <value>19, 13</value>
   </data>
   <data name="label20_minutes.Text" xml:space="preserve">
     <value>分</value>
   </data>
   <data name="cb_backlight_off_idling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 16</value>
+    <value>178, 17</value>
   </data>
   <data name="cb_backlight_off_idling.Text" xml:space="preserve">
     <value>未操作時にバックライトをオフする</value>
@@ -185,69 +185,67 @@
     <value>5, 17</value>
   </data>
   <data name="cb_human_sensor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 16</value>
+    <value>89, 17</value>
   </data>
   <data name="cb_human_sensor.Text" xml:space="preserve">
     <value>人感センサー</value>
   </data>
   <data name="nud_seconds_after.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 114</value>
+    <value>188, 126</value>
   </data>
   <data name="cb_face_recognition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 17</value>
+    <value>191, 17</value>
   </data>
   <data name="cb_face_recognition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 16</value>
+    <value>90, 17</value>
   </data>
   <data name="cb_face_recognition.Text" xml:space="preserve">
     <value>顔認識をする</value>
   </data>
   <data name="nud_seconds_before_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 112</value>
+    <value>9, 126</value>
   </data>
-  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 97</value>
+  <data name="label_record_after_event.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 106</value>
   </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 12</value>
+  <data name="label_record_after_event.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 13</value>
   </data>
-  <data name="label11.Text" xml:space="preserve">
+  <data name="label_record_after_event.Text" xml:space="preserve">
     <value>録画時間(イベント発生後)</value>
   </data>
-  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 97</value>
+  <data name="label_record_before_event.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 13</value>
   </data>
-  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 12</value>
+  <data name="label_record_before_event.Text" xml:space="preserve">
+    <value>録画時間(イベント発生前)
+</value>
   </data>
-  <data name="label12.Text" xml:space="preserve">
-    <value>録画時間(イベント発生前)</value>
+  <data name="recordingreinitlabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>155, 45</value>
   </data>
-  <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 49</value>
+  <data name="recordingreinitlabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 13</value>
   </data>
-  <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 12</value>
+  <data name="recordingreinitlabel.Text" xml:space="preserve">
+    <value>再撮影前のインターバル</value>
   </data>
-  <data name="label17.Text" xml:space="preserve">
-    <value>再撮影までのインターバル</value>
+  <data name="label_sec_opcap_post.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 136</value>
   </data>
-  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>224, 120</value>
+  <data name="label_sec_opcap_post.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 13</value>
   </data>
-  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
-  </data>
-  <data name="label13.Text" xml:space="preserve">
+  <data name="label_sec_opcap_post.Text" xml:space="preserve">
     <value>秒</value>
   </data>
-  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 118</value>
+  <data name="label_sec_opcap_pre.Location" type="System.Drawing.Point, System.Drawing">
+    <value>77, 136</value>
   </data>
-  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
+  <data name="label_sec_opcap_pre.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 13</value>
   </data>
-  <data name="label14.Text" xml:space="preserve">
+  <data name="label_sec_opcap_pre.Text" xml:space="preserve">
     <value>秒</value>
   </data>
   <data name="nud_reinitiation_interval.Location" type="System.Drawing.Point, System.Drawing">
@@ -260,7 +258,7 @@
     <value>240, 69</value>
   </data>
   <data name="lb_seconds2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
+    <value>19, 13</value>
   </data>
   <data name="lb_seconds2.Text" xml:space="preserve">
     <value>秒</value>
@@ -269,13 +267,13 @@
     <value>5, 45</value>
   </data>
   <data name="lb_capture_mode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 12</value>
+    <value>43, 13</value>
   </data>
   <data name="lb_capture_mode.Text" xml:space="preserve">
     <value>撮影別</value>
   </data>
   <data name="numericUpDown2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 161</value>
+    <value>193, 162</value>
   </data>
   <data name="cb_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 16</value>
@@ -283,29 +281,17 @@
   <data name="cb_operator_capture.Text" xml:space="preserve">
     <value>オペレーターを撮影する</value>
   </data>
-  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 147</value>
+  <data name="label_check_interval.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 166</value>
   </data>
-  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 12</value>
-  </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>実施周期(ミリ秒)</value>
-  </data>
-  <data name="lb_milliseconds1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 167</value>
-  </data>
-  <data name="lb_milliseconds1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 12</value>
-  </data>
-  <data name="lb_milliseconds1.Text" xml:space="preserve">
-    <value>ミリ秒</value>
+  <data name="lb_check_interval_milliseconds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>261, 173</value>
   </data>
   <data name="cb_recording_operation.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 166</value>
   </data>
   <data name="cb_recording_operation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 16</value>
+    <value>138, 17</value>
   </data>
   <data name="cb_recording_operation.Text" xml:space="preserve">
     <value>操作開始時に録画する</value>
@@ -326,25 +312,25 @@
     <value>すべてのカメラ映像を同時に表示する</value>
   </data>
   <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 12</value>
+    <value>80, 13</value>
   </data>
   <data name="label26.Text" xml:space="preserve">
     <value>カメラ接続台数</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 12</value>
+    <value>120, 13</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>日経過のファイルを削除</value>
   </data>
   <data name="cb_delete_old.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 16</value>
+    <value>128, 17</value>
   </data>
   <data name="cb_delete_old.Text" xml:space="preserve">
     <value>古いデータを削除する</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
+    <value>55, 13</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>表示言語</value>
@@ -353,7 +339,7 @@
     <value>参照</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 12</value>
+    <value>96, 13</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
     <value>保存先ファイルパス</value>
@@ -368,49 +354,49 @@
     <value>環境</value>
   </data>
   <data name="cb_show_rec_icon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 16</value>
+    <value>149, 17</value>
   </data>
   <data name="cb_show_rec_icon.Text" xml:space="preserve">
     <value>録画中アイコンを表示する</value>
   </data>
   <data name="cb_show_camera_number.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 16</value>
+    <value>127, 17</value>
   </data>
   <data name="cb_show_camera_number.Text" xml:space="preserve">
     <value>カメラ番号を表示する</value>
   </data>
   <data name="cb_dateandtime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 16</value>
+    <value>126, 17</value>
   </data>
   <data name="cb_dateandtime.Text" xml:space="preserve">
     <value>現在日時を表示する</value>
   </data>
   <data name="cb_window_pane.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 16</value>
+    <value>133, 17</value>
   </data>
   <data name="cb_window_pane.Text" xml:space="preserve">
     <value>ウィンドウ枠を表示する</value>
   </data>
   <data name="cb_always_on_top.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 16</value>
+    <value>135, 17</value>
   </data>
   <data name="cb_always_on_top.Text" xml:space="preserve">
     <value>常に最前面に表示する</value>
   </data>
   <data name="checkBox_full_screen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 16</value>
+    <value>87, 17</value>
   </data>
   <data name="checkBox_full_screen.Text" xml:space="preserve">
     <value>フルスクリーン</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 12</value>
+    <value>27, 13</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>高さ</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
+    <value>19, 13</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>幅</value>
@@ -422,13 +408,13 @@
     <value>表示位置</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 12</value>
+    <value>43, 13</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>解像度</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 12</value>
+    <value>71, 13</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>フレームレート</value>
@@ -438,7 +424,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADQ
-        HQAAAk1TRnQBSQFMAgEBAwEAASgBBAEoAQQBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
+        HQAAAk1TRnQBSQFMAgEBAwEAATgBBAE4AQQBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
         AwABGAMAAQEBAAEgBgABJC4AAw8BFAFYAlsBywEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8
         An8B/gEAAbwB+gH/AUACqAH9A0ABcRwAAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
         AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMB
@@ -582,7 +568,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA0
-        AQAAAk1TRnQBSQFMAgEBAgEAAcABAQHAAQEBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        AQAAAk1TRnQBSQFMAgEBAgEAAdABAQHQAQEBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEYBgABDBUALf8DAC3/YwAt/wMALf9jAC3/AwAt/2MALf8DAC3/YwAt/wMAD/8DHgPy
         GP9jAC3/AwAM/wMeBgADzxX/YwAt/wMACf8DDAMAA/UDDwMAFf9jAC3/AwAG/wNJAwAD5wb/A0ADAAPP
         D/9jAC3/AwAY/wMPAwAD8gz/YwAt/wMAG/8DPAMAA9cJ/2MALf8DAB7/AycDAAPeBv9jAC3/AwAh/wMw

@@ -23,7 +23,7 @@ namespace FaceDetection
 
         public void Start()
         {
-            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
+            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.idle_backlight_off)
             {
                 backlight_timer.Elapsed += Backlight_timer_Tick1;
                 backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60 * 1000;
@@ -39,7 +39,7 @@ namespace FaceDetection
         public void Restart()
         {  
             
-            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
+            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.idle_backlight_off)
             {
                 //backlight_timer.Stop();
                 backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60 * 1000;
@@ -54,7 +54,7 @@ namespace FaceDetection
 
         public BackLightController()
         {
-            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
+            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.idle_backlight_off)
             {
                 backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60 * 1000;
             }
@@ -74,7 +74,7 @@ namespace FaceDetection
         /// </summary>
         public void BacklightOff()
         {            
-            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
+            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.idle_backlight_off)
             {
                 SendMessage(0xFFFF, 0x112, 0xF170, (int)MonitorState.MonitorStateOff);
             }

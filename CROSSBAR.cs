@@ -92,7 +92,7 @@ namespace FaceDetection
             else { 
                 MainForm.Or_pb_recording.Visible = false;
                 icon_timer.Enabled = false;
-                if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_Human_sensor)
+                if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.human_sensor)
                 {
                     MainForm.RSensor.CheckOK = true;
                 }
@@ -101,10 +101,14 @@ namespace FaceDetection
         
         public void SET_ICON_TIMER()
         {
-            MainForm.Or_pb_recording.Visible = true;            
-            icon_timer.Interval = decimal.ToInt32(Properties.Settings.Default.seconds_after_event) * 1000;
-            icon_timer.Enabled = true;
-            icon_timer.Start();            
+            MainForm.Or_pb_recording.Visible = true;
+            if (icon_timer.ToString()!="")
+            {
+                Console.WriteLine(icon_timer.ToString());
+                icon_timer.Interval = decimal.ToInt32(Properties.Settings.Default.seconds_after_event) * 1000;
+                icon_timer.Enabled = true;
+                icon_timer.Start();
+            }
         }
 
         internal bool ANY_CAMERA_ON()
@@ -221,18 +225,18 @@ namespace FaceDetection
                     wait_interval_enabled = false;
                 
 
-                if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+                if (Properties.Settings.Default.recording_when_an_operation_starts)
                     {
 
                         MainForm.Mklisteners.AddMouseAndKeyboardBack();
                     }
 
-                    if (Properties.Settings.Default.enable_Human_sensor)
+                    if (Properties.Settings.Default.human_sensor)
                     {
 
                         MainForm.RSensor.Start_IR_Timer();
                     }
-                    else if (Properties.Settings.Default.enable_face_recognition)
+                    else if (Properties.Settings.Default.face_recognition)
                     {
 
                         MainForm.FaceDetector.Start_Face_Timer();
@@ -366,7 +370,7 @@ namespace FaceDetection
                     break;
                 case CAMERA_MODES.EVENT:
                     //EVENT from parameters
-                    if (camera != null && Properties.Settings.Default.enable_event_recorder && Properties.Settings.Default.event_record_time_after_event > 0 && camera.ON)
+                    if (camera != null && Properties.Settings.Default.event_recorder && Properties.Settings.Default.event_record_time_after_sec > 0 && camera.ON)
                     {
 
                         MainForm.Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon;
@@ -374,7 +378,7 @@ namespace FaceDetection
                         recorder = new RecorderCamera(0);
                         recorder.ACTIVE_RECPATH = RECORD_PATH.EVENT;
                         recorder.CAMERA_MODE = CAMERA_MODES.EVENT;
-                        duration = decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event) * 1000;
+                        duration = decimal.ToInt32(Properties.Settings.Default.event_record_time_after_sec) * 1000;
                         Logger.Add(duration + " is the duration of " + recorder.CAMERA_MODE);
 
                         the_timer.Enabled = true;
@@ -460,8 +464,10 @@ namespace FaceDetection
                 the_timer.Dispose();
                 no_opcap_timer.Dispose();
                 icon_timer.Dispose();
-                camera.Release();
-                recorder.ReleaseInterfaces();
+                if(camera!=null)
+                    camera.Release();
+                if(recorder!=null)
+                    recorder.ReleaseInterfaces();
             }
             catch (Exception x)
             {

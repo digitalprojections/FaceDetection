@@ -173,8 +173,8 @@ namespace FaceDetection
                                         {
                                             MainForm.FaceDetector.Start_Face_Timer();
                                         }
-                                        Properties.Settings.Default.enable_face_recognition = true;
-                                        Properties.Settings.Default.enable_Human_sensor = false;
+                                        Properties.Settings.Default.face_recognition = true;
+                                        Properties.Settings.Default.human_sensor = false;
                                         Properties.Settings.Default.capture_operator = true;
                                     }
                                     else
@@ -184,7 +184,7 @@ namespace FaceDetection
                                             MainForm.GetMainForm.crossbar.PreviewMode();
                                             MainForm.FaceDetector.Stop_Face_Timer();
                                         }
-                                        Properties.Settings.Default.enable_face_recognition = false;
+                                        Properties.Settings.Default.face_recognition = false;
                                     }
 
                                     CycleTime(time);
@@ -207,8 +207,8 @@ namespace FaceDetection
                                         if (MainForm.RSensor != null) {
                                             MainForm.RSensor.Start_IR_Timer();
                                         }
-                                        Properties.Settings.Default.enable_Human_sensor = true;
-                                        Properties.Settings.Default.enable_face_recognition = false;
+                                        Properties.Settings.Default.human_sensor = true;
+                                        Properties.Settings.Default.face_recognition = false;
                                         Properties.Settings.Default.capture_operator = true;
                                     }
                                     else
@@ -217,7 +217,7 @@ namespace FaceDetection
                                         {
                                             MainForm.RSensor.Stop_IR_Timer();
                                         }
-                                        Properties.Settings.Default.enable_Human_sensor = false;
+                                        Properties.Settings.Default.human_sensor = false;
                                     }
 
                                     CycleTime(time);
@@ -441,7 +441,7 @@ namespace FaceDetection
         {
             if (time >= 500 && time <= 1000)
             {
-                Properties.Settings.Default.face_rec_interval = time;
+                Properties.Settings.Default.sensor_tick_interval_ms = time;
                 Logger.Add("できた");
             }
         }

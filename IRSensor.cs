@@ -30,12 +30,12 @@ namespace FaceDetection
         private void Init_IR_Timer()
         {
                 
-           if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_Human_sensor && decimal.ToInt32(Properties.Settings.Default.face_rec_interval)>0)
+           if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.human_sensor && decimal.ToInt32(Properties.Settings.Default.sensor_tick_interval_ms)>0)
            {
                 //SensorCheckTimer.Tick += IR_Timer_Tick;
                 SensorCheckTimer.Elapsed+= IR_Timer_Tick;
                 SensorCheckTimer.AutoReset = true;
-                SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
+                SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.sensor_tick_interval_ms);
 
                 Task.Run(() => {
                     Thread.Sleep(5000);
@@ -102,7 +102,7 @@ namespace FaceDetection
 
 
                 Logger.Add("IR SENSOR: Motion detected");
-                if (Properties.Settings.Default.backlight_on_upon_face_rec)
+                if (Properties.Settings.Default.backlight_on_operator_capture)
                 {
                     MainForm.GetMainForm.BackLight.ON();
                 }

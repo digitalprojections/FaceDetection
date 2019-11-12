@@ -8,7 +8,7 @@
     <Setting Name="video_file_location" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\UVCCAMERA</Value>
     </Setting>
-    <Setting Name="enable_delete_old_files" Type="System.Boolean" Scope="User">
+    <Setting Name="delete_old_files" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="keep_old_files_days" Type="System.Decimal" Scope="User">
@@ -17,17 +17,14 @@
     <Setting Name="backlight_offset_mins" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
-    <Setting Name="enable_backlight_off_when_idle" Type="System.Boolean" Scope="User">
+    <Setting Name="idle_backlight_off" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="enable_event_recorder" Type="System.Boolean" Scope="User">
+    <Setting Name="event_recorder" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="recording_while_face_recognition" Type="System.Boolean" Scope="User">
+    <Setting Name="recording_upon_face_recognition" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="recording_on_start" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="interval_before_reinitiating_recording" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">60</Value>
@@ -35,14 +32,8 @@
     <Setting Name="show_all_cams_simulteneously" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="current_camera_index" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
-    </Setting>
     <Setting Name="capture_operator" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="window_location" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">10, 10</Value>
     </Setting>
     <Setting Name="window_on_top" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -59,65 +50,47 @@
     <Setting Name="culture" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="C1x" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">16</Value>
+    <Setting Name="cam1_position" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">16, 16</Value>
     </Setting>
-    <Setting Name="C1y" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">16</Value>
-    </Setting>
-    <Setting Name="C1f" Type="System.String" Scope="User">
+    <Setting Name="cam1f" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
-    <Setting Name="C2x" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">16</Value>
+    <Setting Name="cam2_position" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">16, 16</Value>
     </Setting>
-    <Setting Name="C2y" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">16</Value>
+    <Setting Name="cam2_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">1280, 720</Value>
     </Setting>
-    <Setting Name="C2w" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">640</Value>
-    </Setting>
-    <Setting Name="C2h" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">480</Value>
-    </Setting>
-    <Setting Name="C2f" Type="System.String" Scope="User">
+    <Setting Name="cam2f" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
-    <Setting Name="C3x" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">16</Value>
+    <Setting Name="cam3_position" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">16, 16</Value>
     </Setting>
-    <Setting Name="C3y" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">16</Value>
+    <Setting Name="cam3_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">1280, 720</Value>
     </Setting>
-    <Setting Name="C3w" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">640</Value>
-    </Setting>
-    <Setting Name="C3h" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">480</Value>
-    </Setting>
-    <Setting Name="C3f" Type="System.String" Scope="User">
+    <Setting Name="cam3f" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
-    <Setting Name="C4x" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">16</Value>
+    <Setting Name="cam4_position" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">16, 16</Value>
     </Setting>
-    <Setting Name="C4y" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">16</Value>
-    </Setting>
-    <Setting Name="C4f" Type="System.String" Scope="User">
+    <Setting Name="cam4f" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
-    <Setting Name="C1res" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1280x720</Value>
+    <Setting Name="cam1_resolution" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">1280, 720</Value>
     </Setting>
-    <Setting Name="C2res" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1280x720</Value>
+    <Setting Name="cam2_resolution" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">1280, 720</Value>
     </Setting>
-    <Setting Name="C3res" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1280x720</Value>
+    <Setting Name="cam3_resolution" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">1280, 720</Value>
     </Setting>
-    <Setting Name="C4res" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1280x720</Value>
+    <Setting Name="cam4_resolution" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">1280, 720</Value>
     </Setting>
     <Setting Name="camera_index" Type="System.String" Scope="User">
       <Value Profile="(Default)">1</Value>
@@ -125,28 +98,22 @@
     <Setting Name="store_location_description" Type="System.String" Scope="User">
       <Value Profile="(Default)">Please, select the location to store videos</Value>
     </Setting>
-    <Setting Name="main_window_full_screen" Type="System.Boolean" Scope="User">
+    <Setting Name="full_screen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="use_ir_sensor" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="main_camera_index" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Recording_when_an_operator_senses" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="Recording_when_at_the_start_of_operation" Type="System.Boolean" Scope="User">
+    <Setting Name="recording_when_an_operation_starts" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="camera_count" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="enable_face_recognition" Type="System.Boolean" Scope="User">
+    <Setting Name="face_recognition" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="backlight_on_upon_face_rec" Type="System.Boolean" Scope="User">
+    <Setting Name="backlight_on_operator_capture" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="seconds_before_event" Type="System.Decimal" Scope="User">
@@ -164,47 +131,92 @@
     <Setting Name="show_camera_no" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="C1w" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">640</Value>
+    <Setting Name="cam1_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">624, 441</Value>
     </Setting>
-    <Setting Name="C1h" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">480</Value>
-    </Setting>
-    <Setting Name="event_record_time_before_event" Type="System.Decimal" Scope="User">
+    <Setting Name="event_record_time_before_sec" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">300</Value>
     </Setting>
-    <Setting Name="event_record_time_after_event" Type="System.Decimal" Scope="User">
+    <Setting Name="event_record_time_after_sec" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">300</Value>
     </Setting>
-    <Setting Name="face_record_time_before" Type="System.Decimal" Scope="User">
+    <Setting Name="face_record_time_before_sec" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">60</Value>
     </Setting>
-    <Setting Name="face_record_time_after" Type="System.Decimal" Scope="User">
+    <Setting Name="face_record_time_after_sec" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">60</Value>
     </Setting>
-    <Setting Name="recording_length_seconds1" Type="System.String" Scope="User">
+    <Setting Name="recording_length_in_seconds" Type="System.String" Scope="User">
       <Value Profile="(Default)">60</Value>
     </Setting>
     <Setting Name="temp_folder" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\TEMP</Value>
     </Setting>
-    <Setting Name="face_rec_interval" Type="System.Decimal" Scope="User">
+    <Setting Name="sensor_tick_interval_ms" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="capture_type" Type="System.String" Scope="User">
       <Value Profile="(Default)">Video</Value>
     </Setting>
-    <Setting Name="C4w" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">1280</Value>
+    <Setting Name="cam4_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">1280, 720</Value>
     </Setting>
-    <Setting Name="C4h" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">720</Value>
-    </Setting>
-    <Setting Name="enable_Human_sensor" Type="System.Boolean" Scope="User">
+    <Setting Name="human_sensor" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="manual_record_time" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="camera_1_x" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="camera_1_y" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="camera_1_width" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">640</Value>
+    </Setting>
+    <Setting Name="camera_1_height" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">480</Value>
+    </Setting>
+    <Setting Name="camera_2_x" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="camera_2_y" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="camera_2_width" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">640</Value>
+    </Setting>
+    <Setting Name="camera_2_height" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">480</Value>
+    </Setting>
+    <Setting Name="camera_3_x" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="camera_3_y" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="camera_3_width" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">640</Value>
+    </Setting>
+    <Setting Name="camera_3_height" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">480</Value>
+    </Setting>
+    <Setting Name="camera_4_x" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="camera_4_y" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="camera_4_width" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">640</Value>
+    </Setting>
+    <Setting Name="camera_4_height" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">480</Value>
+    </Setting>
+    <Setting Name="Setting" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

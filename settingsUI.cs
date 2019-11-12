@@ -137,32 +137,32 @@ namespace FaceDetection
         }        
 
         private void SetCameraPropertiesFromMemory()
-        {            
-                numericUpDownX.DataBindings.Clear();
-                numericUpDownY.DataBindings.Clear();
-                numericUpDownW.DataBindings.Clear();
-                numericUpDownH.DataBindings.Clear();
-                comboBoxFPS.DataBindings.Clear();
-                comboBoxResolutions.DataBindings.Clear();
-                string camX = "C" + (Camera_index + 1) + "x";
-                string camY = "C" + (Camera_index + 1) + "y";
-                string camW = "C" + (Camera_index + 1) + "w";
-                string camH = "C" + (Camera_index + 1) + "h";
-                string camF = "C" + (Camera_index + 1) + "f";
-                string camRes = "C" + (Camera_index + 1) + "res";
+        {
+            numericUpDownX.DataBindings.Clear();
+            numericUpDownY.DataBindings.Clear();
+            numericUpDownW.DataBindings.Clear();
+            numericUpDownH.DataBindings.Clear();
+            comboBoxFPS.DataBindings.Clear();
+            comboBoxResolutions.DataBindings.Clear();
+            string camX = "camera_" + (Camera_index + 1) + "_x";
+            string camY = "camera_" + (Camera_index + 1) + "_y";
+            string camW = "camera_" + (Camera_index + 1) + "_width";
+            string camH = "camera_" + (Camera_index + 1) + "_height";
+            string camF = "cam" + (Camera_index + 1) + "f";
+            string camRes = "cam" + (Camera_index + 1) + "_resolution";
 
-                numericUpDownX.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camX, true, DataSourceUpdateMode.OnPropertyChanged));
-                numericUpDownY.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camY, true, DataSourceUpdateMode.OnPropertyChanged));
-                numericUpDownW.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camW, true, DataSourceUpdateMode.OnPropertyChanged));
-                numericUpDownH.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camH, true, DataSourceUpdateMode.OnPropertyChanged));
-                comboBoxFPS.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camF, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                comboBoxResolutions.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camRes, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownX.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camX, true, DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownY.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camY, true, DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownW.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camW, true, DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownH.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camH, true, DataSourceUpdateMode.OnPropertyChanged));
+            comboBoxFPS.DataBindings.Add(new Binding("Text", Properties.Settings.Default, camF, true, DataSourceUpdateMode.OnPropertyChanged));
+            comboBoxResolutions.DataBindings.Add(new Binding("Text", Properties.Settings.Default, camRes, true, DataSourceUpdateMode.OnPropertyChanged));
                 
 
-                numericUpDownX.Enabled = !Properties.Settings.Default.main_window_full_screen;
-                numericUpDownY.Enabled = !Properties.Settings.Default.main_window_full_screen;
-                numericUpDownW.Enabled = !Properties.Settings.Default.main_window_full_screen;
-                numericUpDownH.Enabled = !Properties.Settings.Default.main_window_full_screen;                        
+                numericUpDownX.Enabled = !Properties.Settings.Default.full_screen;
+                numericUpDownY.Enabled = !Properties.Settings.Default.full_screen;
+                numericUpDownW.Enabled = !Properties.Settings.Default.full_screen;
+                numericUpDownH.Enabled = !Properties.Settings.Default.full_screen;                        
         }
 
 
@@ -174,9 +174,9 @@ namespace FaceDetection
                 for (int i=0; i<vs.Count;i++)
                 {
                     
-                        if (vs[i] == Properties.Settings.Default.C1f)
+                        if (vs[i] == Properties.Settings.Default.cam1f)
                         {
-                            frame_rates_combo.SelectedItem = Properties.Settings.Default.C1f;
+                            frame_rates_combo.SelectedItem = Properties.Settings.Default.cam1f;
                         }else
                     {
                         frame_rates_combo.SelectedItem = vs[0];
@@ -201,9 +201,9 @@ namespace FaceDetection
 
                 if (resolutions_combo.Items.Count > 0)
                 {
-                    Console.WriteLine(Properties.Settings.Default.C1res);
+                    Console.WriteLine(Properties.Settings.Default.cam1_resolution);
 
-                    resolutions_combo.SelectedItem = Properties.Settings.Default.C1res;
+                    resolutions_combo.SelectedItem = Properties.Settings.Default.cam1_resolution;
                 }
             }
         }
@@ -223,7 +223,7 @@ namespace FaceDetection
                 cm_camera_number.SelectedIndex = Properties.Settings.Default.main_camera_index <=0?0: Properties.Settings.Default.main_camera_index;
                 cm_capture_mode.SelectedIndex = Properties.Settings.Default.capture_method<=0 ? 0 : Properties.Settings.Default.capture_method;
             }
-            SetCameraPropertiesFromMemory();
+            
             if(cm_language.SelectedItem!=null)
                 cm_language.SelectedItem = Properties.Settings.Default.language;
             CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture(Properties.Settings.Default.culture);
@@ -457,8 +457,8 @@ namespace FaceDetection
         {
             CustomMessage.Add(Properties.Settings.Default.seconds_after_event);
             CustomMessage.Add(Properties.Settings.Default.seconds_before_event);
-            CustomMessage.Add(Properties.Settings.Default.event_record_time_before_event);
-            CustomMessage.Add(Properties.Settings.Default.event_record_time_after_event);
+            CustomMessage.Add(Properties.Settings.Default.event_record_time_before_sec);
+            CustomMessage.Add(Properties.Settings.Default.event_record_time_after_sec);
             CustomMessage.Add(Properties.Settings.Default.manual_record_time);
             CustomMessage.Add(Properties.Settings.Default.interval_before_reinitiating_recording);
         }
