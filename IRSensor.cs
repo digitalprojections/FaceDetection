@@ -160,7 +160,10 @@ namespace FaceDetection
         }
         public void SensorClose()
         {
-            DispDeviceClose();
+            if (IsDllLoaded("DispApi.dll"))
+            {
+                DispDeviceClose();
+            }
         }
 
 
@@ -175,6 +178,14 @@ namespace FaceDetection
         {
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
             public int[] iValue;
+        }
+
+        [DllImport("kernel32.dll")]
+        private static extern IntPtr GetModuleHandle(string lpModuleName);
+
+        public static bool IsDllLoaded(string path)
+        {
+            return GetModuleHandle(path) != IntPtr.Zero;
         }
 
     }

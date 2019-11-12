@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>FaceDetection</RootNamespace>
     <AssemblyName>UVCCameraViewer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -200,7 +200,9 @@
     <Content Include="DispApi.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DispApi.h" />
+    <Content Include="DispApi.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="DispApiIO.h" />
     <Content Include="openh264-2.0.0-win32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

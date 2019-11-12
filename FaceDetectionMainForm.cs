@@ -16,6 +16,8 @@ namespace FaceDetection
         private delegate void dDateTimerUpdater();
         private delegate void dShowSettingsUI();
 
+        private Task openSettingsTask;
+
         private static MOUSE_KEYBOARD mklisteners = null;
         public CROSSBAR crossbar = null;
         private readonly System.Timers.Timer mouse_down_timer = new System.Timers.Timer();
@@ -89,7 +91,11 @@ namespace FaceDetection
             if(PARAMETERS.PARAM!=null)
             {
                 Logger.Add(String.Concat(PARAMETERS.PARAM));
-            }            
+            }
+
+            
+                
+           
         }        
         
         /// <summary>
@@ -147,7 +153,7 @@ namespace FaceDetection
 
         private void DateTimeUpdater()
         {
-            if (or_dateTimeLabel.InvokeRequired)
+            if (or_dateTimeLabel!=null && or_dateTimeLabel.InvokeRequired)
             {
                 var d = new dDateTimerUpdater(DateTimeUpdater);
                 or_dateTimeLabel.Invoke(d);
@@ -235,22 +241,13 @@ namespace FaceDetection
             }
         }
         private async void ShowSettings(object sender, EventArgs e)
-        {   
-                await Task.Run(() => 
-                {
-                    ShowSettingsDialogAsync();
-                });
+        {
+            ShowSettingsDialogAsync();
         }
 
         private void ShowSettingsDialogAsync()
         {
-            if (MainForm.GetMainForm.InvokeRequired)
-            {
-                var d = new dShowSettingsUI(ShowSettingsDialogAsync);
-                MainForm.GetMainForm.Invoke(d);
-            }
-            else
-            {
+            
                 if (Setting_ui.Visible == false)
                 {
                     this.TopMost = false;
@@ -259,7 +256,7 @@ namespace FaceDetection
                 else
                 {
                 }
-            }
+            
         }
 
         private void OpenStoreLocation(object sender, EventArgs e)
@@ -383,7 +380,7 @@ namespace FaceDetection
             Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
             Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
             Properties.Settings.Default.Save();
-            crossbar.ReleaseCameras();
+            
             Application.Exit();
         }
         
@@ -523,14 +520,7 @@ namespace FaceDetection
                 MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREVIEW);                
             }
             
-            //Set OPERATOR capture           
-            //No need for ELSE check. The target function will take care of it all
-            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation)
-            {                
-                Logger.Add("IR sensor START");
-                mklisteners.AddMouseAndKeyboardBack();
-            }
-
+           
             
             if (PARAMETERS.PARAM!=null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer"))
             {

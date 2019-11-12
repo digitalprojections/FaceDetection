@@ -118,7 +118,7 @@ namespace FaceDetection
                     else
                     {
                         //Direct recording
-                        MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.EVENT);
+                        MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
                     }
                     //MainForm.GetMainForm.crossbar.SET_ICON_TIMER();
                 }
@@ -150,9 +150,14 @@ namespace FaceDetection
         
         public void Start_Face_Timer()
         {
-            checkOK = true;
-            face_check_timer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
-            face_check_timer.Enabled = true;
+            Task task = new Task(() => {
+                Thread.Sleep(7000);
+                checkOK = true;
+                face_check_timer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
+                face_check_timer.Enabled = true;
+            });
+
+            task.Start();
         }
 
 

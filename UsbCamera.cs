@@ -206,13 +206,19 @@ namespace FaceDetectionX
         private Bitmap GetBitmapMainMain(DirectShow.ISampleGrabber i_grabber, int width, int height, int stride)
         {
             int sz = 0;
-            i_grabber.GetCurrentBuffer(ref sz, IntPtr.Zero); // IntPtr.Zeroで呼び出してバッファサイズ取得            
-            if (sz == 0) return null;
-            var ptr = Marshal.AllocCoTaskMem(sz);
-            i_grabber.GetCurrentBuffer(ref sz, ptr);
+            Bitmap result = null;
+            if (i_grabber!=null)
+            {
+                i_grabber.GetCurrentBuffer(ref sz, IntPtr.Zero); // IntPtr.Zeroで呼び出してバッファサイズ取得            
+                if (sz == 0) return null;
+                var ptr = Marshal.AllocCoTaskMem(sz);
+                i_grabber.GetCurrentBuffer(ref sz, ptr);
+                
+                
+           
             var data = new byte[sz];
             Marshal.Copy(ptr, data, 0, sz);
-            Bitmap result = null;
+            
 
             try
             {
@@ -234,7 +240,7 @@ namespace FaceDetectionX
                 System.Windows.Forms.MessageBox.Show(ax.Message);
 
             }
-
+ }
             return result;
         }
 

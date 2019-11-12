@@ -326,8 +326,11 @@ namespace FaceDetection
         }
         public void StartTimer()
         {
-            the_timer.Enabled = true;
-            Logger.Add("timer started " + the_timer.Interval);
+            if (the_timer!=null)
+            {
+                the_timer.Enabled = true;
+                Logger.Add("timer started " + the_timer.Interval);
+            }            
         }
         public void Start(int index, CAMERA_MODES mode)
         {
@@ -457,6 +460,8 @@ namespace FaceDetection
                 the_timer.Dispose();
                 no_opcap_timer.Dispose();
                 icon_timer.Dispose();
+                camera.Release();
+                recorder.ReleaseInterfaces();
             }
             catch (Exception x)
             {

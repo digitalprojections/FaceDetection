@@ -224,7 +224,8 @@ namespace FaceDetection
                 cm_capture_mode.SelectedIndex = Properties.Settings.Default.capture_method<=0 ? 0 : Properties.Settings.Default.capture_method;
             }
             SetCameraPropertiesFromMemory();
-            cm_language.SelectedItem = Properties.Settings.Default.language;
+            if(cm_language.SelectedItem!=null)
+                cm_language.SelectedItem = Properties.Settings.Default.language;
             CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture(Properties.Settings.Default.culture);
             ChangeLanguage();
             Debug.WriteLine(CultureInfo.CurrentCulture + " current culture");
@@ -243,9 +244,7 @@ namespace FaceDetection
 
         private void ChangeLanguage()
         {
-            try
-            {
-                if (cm_language.SelectedItem.ToString() == "English")
+               if (cm_language!=null && cm_language.SelectedItem!=null && cm_language.SelectedItem.ToString() == "English")
                 {
                     Properties.Settings.Default.culture = "en-US";
                     Properties.Settings.Default.language = "English";
@@ -255,12 +254,7 @@ namespace FaceDetection
                     Properties.Settings.Default.culture = "ja-JP";
                     Properties.Settings.Default.language = "日本語";
                 }
-            }
-            catch (NullReferenceException nrx)
-            {
-                Logger.Add(nrx);
-            }
-
+           
             string lan = Properties.Settings.Default.culture;
             ComponentResourceManager resources = new ComponentResourceManager(typeof(SettingsUI));
             var cult = new CultureInfo(lan);

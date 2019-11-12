@@ -84,7 +84,7 @@ namespace FaceDetection
                     }catch(Exception x)
                     {
                         retval = false;
-                        Logger.Add("An error occured:");                        
+                        Logger.Add("An error occured:" + x.InnerException);                        
                         SafeReleaseComObject(mediaControl);
                         stop = true;                        
                     }
