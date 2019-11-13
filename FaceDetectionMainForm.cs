@@ -353,7 +353,7 @@ namespace FaceDetection
                         
                         Or_pb_recording.Visible = false;                        
                         SetRecordButtonState("play", true);
-                        crossbar.Start(0, CAMERA_MODES.PREVIEW);
+                        SetCameraToDefaultMode();
                     }
                 }
                     
@@ -509,15 +509,7 @@ namespace FaceDetection
             }
 
             //Also must check if the PREEVENT mode is needed
-            if (AtLeastOnePreEventTimeIsNotZero())
-            {
-                //Logger.Add("DOING: " + this.CAMERA_MODES.PREEVENT);                
-                MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREEVENT);
-            }                
-            else
-            {                
-                MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREVIEW);                
-            }
+            SetCameraToDefaultMode();
             
            
             
@@ -537,7 +529,20 @@ namespace FaceDetection
             Debug.WriteLine(Or_pb_recording.Visible);
             GC.Collect();
         }
-                
+
+        private static void SetCameraToDefaultMode()
+        {
+            if (AtLeastOnePreEventTimeIsNotZero())
+            {
+                //Logger.Add("DOING: " + this.CAMERA_MODES.PREEVENT);                
+                MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREEVENT);
+            }
+            else
+            {
+                MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREVIEW);
+            }
+        }
+
         public void StopAllTimers()
         {
             mouse_down_timer.Stop();

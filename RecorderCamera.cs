@@ -324,6 +324,32 @@ namespace FaceDetection
                 Logger.Add("Can not start the camera");
             }
         }
+        public void SET_FILE_PATH_TO_MANUAL()
+        {
+            //PREEVENT EXISTS. PERMANENT RECORDING MODE
+            string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
+            string str = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
+            str = Path.Combine(str, (INDEX + 1).ToString());
+            if (ACTIVE_RECPATH != null)
+                str = Path.Combine(str, ACTIVE_RECPATH);
+            targetPath = str + "/" + dstFileName;
+
+            
+            try
+            {
+                Directory.CreateDirectory(str);
+                mediaControl.StopWhenReady();
+            }
+            catch (Exception x)
+            {
+                Console.WriteLine(x.StackTrace);
+            }
+            
+            int hr = pFilewriter_sink.SetFileName(targetPath, null);
+            checkHR(hr, "Can't set filename");
+            mediaControl.Run();
+            checkHR(hr, "Can't run the graph");
+        }
         public void RESET_FILE_PATH()
         {
             //PREEVENT EXISTS. PERMANENT RECORDING MODE

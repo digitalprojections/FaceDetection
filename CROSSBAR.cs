@@ -4,6 +4,7 @@ using FaceDetectionX;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Timers;
+using System.Threading.Tasks;
 
 namespace FaceDetection
 {
@@ -170,18 +171,36 @@ namespace FaceDetection
             {
                 if (MainForm.RSensor != null)
                     MainForm.RSensor.SensorClose();
-                MainForm.GetMainForm.SetRecordButtonState("play", false);
+                
                 //We end the recording here
                 if (!PREEVENT_RECORDING)
                 {
+                    MainForm.GetMainForm.SetRecordButtonState("play", false);
                     Recording_is_on = false;
                     recorder.ReleaseInterfaces();
                     the_timer.Enabled = false;
                     if (this != null)
                         this.PreviewMode();
                 }
+                else if (PREEVENT_RECORDING && recorder.CAMERA_MODE==CAMERA_MODES.MANUAL)
+                {
+                    the_timer.Enabled = false;
+                    the_timer.Stop();
+                    //
+                    if (the_timer != null)
+                    {
+                        the_timer.Enabled = true;
+                        the_timer.Interval = decimal.ToInt32(Properties.Settings.Default.manual_record_time)*1000;
+                        recorder.ReleaseInterfaces();
+                        recorder.StartRecorderCamera();
+                    }
+                    recorder.CAMERA_MODE = CAMERA_MODES.PREEVENT;
+
+                }
                 else if (PREEVENT_RECORDING)
                 {
+                    MainForm.GetMainForm.SetRecordButtonState("play", false);
+                    MainForm.Or_pb_recording.Visible = false;
                     recorder.CAMERA_MODE = CAMERA_MODES.PREEVENT;
                     if (the_timer != null)
                     {
@@ -318,10 +337,16 @@ namespace FaceDetection
                     recorder = new RecorderCamera(0);
                     recorder.StartRecorderCamera();
                 }
-                else
+                else if(recorder!=null && recorder.CAMERA_MODE==CAMERA_MODES.MANUAL)
                 {
-                    recorder.StartRecorderCamera();
+                    Task manual_rec_task = new Task(VideoRecordingEnd);
+
+                manual_rec_task.Start();
                 }
+            else
+            {
+                recorder.StartRecorderCamera();
+            }
             
         }
         public void StartTimer()

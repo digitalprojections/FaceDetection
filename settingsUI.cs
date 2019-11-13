@@ -80,8 +80,8 @@ namespace FaceDetection
                 selected_camera_combo.Items.Add(i + 1);
             }
             if (Properties.Settings.Default.main_camera_index>=0 && selected_camera_combo.Items.Count >= Properties.Settings.Default.main_camera_index)
-            {                
-                selected_camera_combo.SelectedIndex = Properties.Settings.Default.main_camera_index;
+            {                  
+                selected_camera_combo.SelectedIndex = Properties.Settings.Default.main_camera_index <=0 ? 0 : Properties.Settings.Default.main_camera_index;
             }
             else
             {
@@ -224,8 +224,9 @@ namespace FaceDetection
                 cm_capture_mode.SelectedIndex = Properties.Settings.Default.capture_method<=0 ? 0 : Properties.Settings.Default.capture_method;
             }
             SetCameraPropertiesFromMemory();
-            if(cm_language.SelectedItem!=null)
-                cm_language.SelectedItem = Properties.Settings.Default.language;
+            //if(cm_language.SelectedItem!=null)
+
+            cm_language.SelectedItem = Properties.Settings.Default.language;
             CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture(Properties.Settings.Default.culture);
             ChangeLanguage();
             Debug.WriteLine(CultureInfo.CurrentCulture + " current culture");
