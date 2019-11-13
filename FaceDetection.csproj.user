@@ -48,4 +48,13 @@
     <StartArguments>
     </StartArguments>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <RemoteDebugMachine>WINDOWS-PEITNV4</RemoteDebugMachine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Remote|x64'">
+    <StartProgram>\\WINDOWS-PEITNV4\alt\UVCCamView\UVCCameraViewer.exe</StartProgram>
+    <StartAction>Program</StartAction>
+    <RemoteDebugEnabled>true</RemoteDebugEnabled>
+    <RemoteDebugMachine>WINDOWS-PEITNV4</RemoteDebugMachine>
+  </PropertyGroup>
 </Project>

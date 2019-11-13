@@ -18,8 +18,8 @@ namespace FaceDetection
 
         public IRSensor()
         {
-            DispDeviceOpen();
-            SensorClose();
+            //DispDeviceOpen();
+            //SensorClose();
             //init
             Init_IR_Timer();            
         }
@@ -66,7 +66,7 @@ namespace FaceDetection
             
             SensorClose();
 
-            Logger.Add("SENSOR " + CheckOK);
+            //Logger.Add("SENSOR " + CheckOK);
             //mutex.ReleaseMutex();
         }
 

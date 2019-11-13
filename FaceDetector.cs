@@ -39,7 +39,14 @@ namespace FaceDetection
 
             Task.Run(() => {
                 Thread.Sleep(5000);
-                face_check_timer.Start();
+                try
+                {
+                    face_check_timer.Start();
+                }
+                catch(ObjectDisposedException odx)
+                {
+                    Logger.Add(odx);
+                }
             });
             
             
@@ -47,7 +54,7 @@ namespace FaceDetection
 
         private void Face_check_timer_Tick(object sender, ElapsedEventArgs e)
         {   
-            Console.WriteLine("FACE " + checkOK);
+            //Console.WriteLine("FACE " + checkOK);
             try
             {
                 if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_face_recognition && checkOK)
