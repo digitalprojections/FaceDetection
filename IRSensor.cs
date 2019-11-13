@@ -18,6 +18,7 @@ namespace FaceDetection
 
         public IRSensor()
         {
+            DispDeviceOpen();
             SensorClose();
             //init
             Init_IR_Timer();            
@@ -92,7 +93,7 @@ namespace FaceDetection
                     {
                         MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
                     }
-                    MainForm.GetMainForm.crossbar.SET_ICON_TIMER();
+                    MainForm.GetMainForm.crossbar.SET_ICON_TIMER(Properties.Settings.Default.seconds_after_event);
                 }
                 else
                 {
@@ -136,32 +137,41 @@ namespace FaceDetection
                 try
                 {
                     ret = DispGetSensorRawValue(ref stSensorValue, iError);
+                    DispDeviceClose();
                     var ivals = String.Empty;
-                    if (stSensorValue.iValue != null)
+                    if (ret == true)
                     {
-                        for (var i = 0; i < 4; i++)
+                        if (stSensorValue.iValue != null)
                         {
-                            ivals += stSensorValue.iValue[i] + ", ";
+                            for (var i = 0; i < 4; i++)
+                            {
+                                ivals += stSensorValue.iValue[i] + ", ";
+                            }
                         }
+                        data[0] = Convert.ToUInt32((stSensorValue.iValue[0] & 0x00FF) >> 0);     // データ有無・種別 (0:データなし, 1:AK9753, 2:AK9754)
+                        data[1] = Convert.ToUInt32((stSensorValue.iValue[0] & 0xFF00) >> 8);        // 検出結果 (0:非検出, 1:検出)
+                        data[2] = Convert.ToUInt32((stSensorValue.iValue[1] & 0x00FF) >> 0);     // IR data (L)
+                        data[3] = Convert.ToUInt32((stSensorValue.iValue[1] & 0xFF00) >> 8);     // IR data (H)
+                        data[4] = Convert.ToUInt32((stSensorValue.iValue[2] & 0x00FF) >> 0);     // TMP data (L)
+                        data[5] = Convert.ToUInt32((stSensorValue.iValue[2] & 0xFF00) >> 8);        // TMP data (H)
+
+                        Logger.Add("IRSENSOR VALUE DETECTED: 0 -> " + data[0] + ";\n 1 -> " + data[1] + ";\n 2 -> " + data[2] + ";\n 3-> " + data[3] + ";\n 4-> " + data[4] + ";\n 5-> " + data[5] + ";");
                     }
-                    data[0] = Convert.ToUInt32((stSensorValue.iValue[0] & 0x00FF) >> 0);     // データ有無・種別 (0:データなし, 1:AK9753, 2:AK9754)
-                    data[1] = Convert.ToUInt32((stSensorValue.iValue[0] & 0xFF00) >> 8);        // 検出結果 (0:非検出, 1:検出)
-                    data[2] = Convert.ToUInt32((stSensorValue.iValue[1] & 0x00FF) >> 0);     // IR data (L)
-                    data[3] = Convert.ToUInt32((stSensorValue.iValue[1] & 0xFF00) >> 8);     // IR data (H)
-                    data[4] = Convert.ToUInt32((stSensorValue.iValue[2] & 0x00FF) >> 0);     // TMP data (L)
-                    data[5] = Convert.ToUInt32((stSensorValue.iValue[2] & 0xFF00) >> 8);        // TMP data (H)
-                 }
-                catch(Exception e)
+                    else
+                    {
+                        data[1] = 0;
+                    }
+                }
+                catch (Exception e)
                 {
                     data[1] = 0;
-                    Logger.Add(e.Message + " IRSensor 91");
+                    Logger.Add(e.Message + " ******** IRSensor ERROR");
                 }                
             }
             else
             {             
                 data[1] = 0;                
-            }
-          
+            }            
             return data[1];
         }
         public void SensorClose()

@@ -10,7 +10,7 @@ namespace FaceDetection
 {
     class FaceDetector
     {
-
+        private bool first = true;
         private delegate void dGetTheBMPImage();
         private delegate void dSetTheIcons();
 
@@ -93,7 +93,7 @@ namespace FaceDetection
                             //heat signature detected, stop timer
 
                             //↓20191107 Nagayama added↓
-                            SetTheIcons();
+                            FaceDetectedAction();
                             
                         }
 
@@ -104,11 +104,11 @@ namespace FaceDetection
             }
         }
 
-        private void SetTheIcons()
+        private void FaceDetectedAction()
         {
             if (MainForm.GetMainForm!=null && MainForm.GetMainForm.InvokeRequired)
             {
-                var d = new dSetTheIcons(SetTheIcons);
+                var d = new dSetTheIcons(FaceDetectedAction);
                 MainForm.GetMainForm.Invoke(d);
             }
             else
@@ -129,7 +129,7 @@ namespace FaceDetection
                         //Direct recording
                         MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
                     }
-                    //MainForm.GetMainForm.crossbar.SET_ICON_TIMER();
+                    MainForm.GetMainForm.crossbar.SET_ICON_TIMER(Properties.Settings.Default.seconds_after_event);
                 }
                 //↓20191107 Nagayama added↓
                 else
@@ -160,7 +160,9 @@ namespace FaceDetection
         public void Start_Face_Timer()
         {
             Task task = new Task(() => {
-                Thread.Sleep(7000);
+                if (first)
+                    Thread.Sleep(7000);
+                first = false;
                 checkOK = true;
                 face_check_timer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
                 face_check_timer.Enabled = true;

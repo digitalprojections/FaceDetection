@@ -79,7 +79,7 @@ namespace FaceDetection
             {
                 selected_camera_combo.Items.Add(i + 1);
             }
-            if (selected_camera_combo.Items.Count >= Properties.Settings.Default.main_camera_index)
+            if (Properties.Settings.Default.main_camera_index>=0 && selected_camera_combo.Items.Count >= Properties.Settings.Default.main_camera_index)
             {                
                 selected_camera_combo.SelectedIndex = Properties.Settings.Default.main_camera_index;
             }

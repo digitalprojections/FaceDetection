@@ -146,7 +146,8 @@ namespace FaceDetection
             {
                 string str = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
                 str = Path.Combine(str, (INDEX + 1).ToString());
-                str = Path.Combine(str, ACTIVE_RECPATH);
+                if (ACTIVE_RECPATH != null)
+                    str = Path.Combine(str, ACTIVE_RECPATH);
                 targetPath = str + "/" + dstFileName;
                  Directory.CreateDirectory(str);
             }
@@ -728,8 +729,7 @@ namespace FaceDetection
         /// <param name="size">Empty以外を指定すると出力サイズを変更する。事前にVIDEO_STREAM_CONFIG_CAPSで取得した可能範囲内を指定すること。</param>
         /// <param name="fps">0以上を指定するとフレームレートを変更する。事前にVIDEO_STREAM_CONFIG_CAPSで取得した可能範囲内を指定すること。</param>
         private static void SetVideoOutputFormat(DirectShow.IPin pin, int index, Size size, double fps)
-        {
-            Logger.Add("CACCCCCCCCCCCCCCCCC");
+        {            
             // IAMStreamConfigインタフェース取得
             var config = pin as DirectShow.IAMStreamConfig;
             if (config == null)
@@ -743,8 +743,7 @@ namespace FaceDetection
             if (cap_size != Marshal.SizeOf(typeof(DirectShow.VIDEO_STREAM_CONFIG_CAPS)))
             {
                 throw new Exception("VIDEO_STREAM_CONFIG_CAPSを取得できません。");
-            }
-            Logger.Add("VVVVVVVVVVVVVVVVVVVVVVD");
+            }         
             // データ用領域確保
             var cap_data = Marshal.AllocHGlobal(cap_size);
 
@@ -754,8 +753,7 @@ namespace FaceDetection
             var cap = PtrToStructure<DirectShow.VIDEO_STREAM_CONFIG_CAPS>(cap_data);
 
             if (mt.FormatType == DirectShow.DsGuid.FORMAT_VideoInfo && mt.SubType == DirectShow.DsGuid.MEDIASUBTYPE_MJPG)
-            {
-                Logger.Add("SETTINGS OK ======================");
+            {             
                 var vinfo = PtrToStructure<DirectShow.VIDEOINFOHEADER>(mt.pbFormat);
                 if (!size.IsEmpty) { vinfo.bmiHeader.biWidth = size.Width; vinfo.bmiHeader.biHeight = size.Height; }
                 if (fps > 0) { vinfo.AvgTimePerFrame = (long)(10000000 / fps); }
