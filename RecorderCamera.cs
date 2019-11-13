@@ -146,7 +146,8 @@ namespace FaceDetection
             {
                 string str = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
                 str = Path.Combine(str, (INDEX + 1).ToString());
-                str = Path.Combine(str, ACTIVE_RECPATH);
+                if(ACTIVE_RECPATH!=null)
+                    str = Path.Combine(str, ACTIVE_RECPATH);
                 targetPath = str + "/" + dstFileName;
                  Directory.CreateDirectory(str);
             }

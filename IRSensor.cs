@@ -93,7 +93,7 @@ namespace FaceDetection
                     {
                         MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
                     }
-                    MainForm.GetMainForm.crossbar.SET_ICON_TIMER();
+                    MainForm.GetMainForm.crossbar.SET_ICON_TIMER(Properties.Settings.Default.seconds_after_event);
                 }
                 else
                 {

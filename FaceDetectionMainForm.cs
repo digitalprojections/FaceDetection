@@ -46,7 +46,7 @@ namespace FaceDetection
         public Button rec_button;
 
 
-        private BackLightController backLight = new BackLightController();
+        private BackLightController backLight;
 
         /// <summary>
         /// IR Sensor 人感センサー
@@ -93,9 +93,9 @@ namespace FaceDetection
                 Logger.Add(String.Concat(PARAMETERS.PARAM));
             }
 
-            
-                
-           
+
+            backLight = new BackLightController();
+
         }        
         
         /// <summary>
@@ -311,6 +311,7 @@ namespace FaceDetection
                 crossbar.Start(0, CAMERA_MODES.EVENT);
                 Logger.Add("TODO: start event recording now");
             }
+            crossbar.SET_ICON_TIMER(Properties.Settings.Default.event_record_time_after_sec);
         }
         public void EventRecorderOff()
         {

@@ -99,13 +99,13 @@ namespace FaceDetection
             }
         }
         
-        public void SET_ICON_TIMER()
+        public void SET_ICON_TIMER(decimal recording_length)
         {
             MainForm.Or_pb_recording.Visible = true;
             if (icon_timer.ToString()!="")
             {
                 Console.WriteLine(icon_timer.ToString());
-                icon_timer.Interval = decimal.ToInt32(Properties.Settings.Default.seconds_after_event) * 1000;
+                icon_timer.Interval = decimal.ToInt32(recording_length) * 1000;
                 icon_timer.Enabled = true;
                 icon_timer.Start();
             }
