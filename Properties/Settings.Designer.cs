@@ -431,12 +431,15 @@ namespace FaceDetection.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool recording_when_an_operation_starts {
             get {
                 return ((bool)(this["recording_when_an_operation_starts"]));
+            }
+            set {
+                this["recording_when_an_operation_starts"] = value;
             }
         }
         

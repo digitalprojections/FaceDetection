@@ -104,7 +104,7 @@
     <Setting Name="main_camera_index" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="recording_when_an_operation_starts" Type="System.Boolean" Scope="Application">
+    <Setting Name="recording_when_an_operation_starts" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="camera_count" Type="System.Decimal" Scope="User">

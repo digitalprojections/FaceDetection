@@ -48,21 +48,12 @@ namespace FaceDetection
         private void Face_check_timer_Tick(object sender, ElapsedEventArgs e)
         {   
             Console.WriteLine("FACE " + checkOK);
-            try
-            {
-                if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.face_recognition && checkOK)
-                {
+           if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.face_recognition && checkOK)
+           {
                     GetTheBMPForFaceCheck();                    
                 }
 
-            }
             
-            catch (NullReferenceException ex)
-            {
-                Logger.Add(ex);
-                //Stop_Face_Timer();
-                //Destroy();
-            }         
         }
 
         private void GetTheBMPForFaceCheck()
