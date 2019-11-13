@@ -23,7 +23,6 @@ namespace FaceDetection
         bool checkOK = false;
 
         Task faceTask;
-        private bool first = true;
 
         public FaceDetector()
         {
@@ -132,7 +131,7 @@ namespace FaceDetection
 
                 if (Properties.Settings.Default.backlight_on_operator_capture)
                     MainForm.GetMainForm.BackLight.ON();
-                MainForm.GetMainForm.crossbar.SET_ICON_TIMER(Properties.Settings.Default.seconds_after_event);
+
                 MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
             }
         }
@@ -152,10 +151,7 @@ namespace FaceDetection
         public void Start_Face_Timer()
         {
             Task task = new Task(() => {
-                if(first)
-                    Thread.Sleep(7000);
-
-                first = false;
+                Thread.Sleep(7000);
                 checkOK = true;
                 face_check_timer.Interval = decimal.ToInt32(Properties.Settings.Default.sensor_tick_interval_ms);
                 face_check_timer.Enabled = true;
