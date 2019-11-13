@@ -33,7 +33,7 @@ namespace FaceDetection
             fase_cascade.Load(fase_cascade_file);
             eye_cascade.Load(eye_cascade_file);
             body_cascade.Load(body_cascade_file);
-            face_check_timer.Interval = decimal.ToInt32(Properties.Settings.Default.sensor_tick_interval_ms);
+            face_check_timer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
             face_check_timer.Elapsed += Face_check_timer_Tick;
             face_check_timer.AutoReset = true;
 
@@ -50,7 +50,7 @@ namespace FaceDetection
             Console.WriteLine("FACE " + checkOK);
             try
             {
-                if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.face_recognition && checkOK)
+                if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_face_recognition && checkOK)
                 {
                     GetTheBMPForFaceCheck();                    
                 }
@@ -138,7 +138,7 @@ namespace FaceDetection
                 }
                 //↑20191107 Nagayama added↑    
 
-                if (Properties.Settings.Default.backlight_on_operator_capture)
+                if (Properties.Settings.Default.backlight_on_upon_face_rec)
                     MainForm.GetMainForm.BackLight.ON();
 
                 MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
@@ -148,7 +148,7 @@ namespace FaceDetection
         public void SetInterval()
         {
             face_check_timer.Enabled = true;
-            face_check_timer.Interval = decimal.ToInt32(Properties.Settings.Default.sensor_tick_interval_ms);
+            face_check_timer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
         }
 
           public void Destroy()
@@ -162,7 +162,7 @@ namespace FaceDetection
             Task task = new Task(() => {
                 Thread.Sleep(7000);
                 checkOK = true;
-                face_check_timer.Interval = decimal.ToInt32(Properties.Settings.Default.sensor_tick_interval_ms);
+                face_check_timer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
                 face_check_timer.Enabled = true;
             });
 

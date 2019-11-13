@@ -15,19 +15,19 @@ namespace FaceDetection
             switch (cam_ind)
             {
                 case 0:
-                    retval = Properties.Settings.Default.cam1_size;
+                    retval = new Size(decimal.ToInt32(Properties.Settings.Default.C1w), decimal.ToInt32(Properties.Settings.Default.C1h));
 
                     return retval;
                 case 1:
-                    retval = Properties.Settings.Default.cam2_size;
+                    retval = new Size(decimal.ToInt32(Properties.Settings.Default.C2w), decimal.ToInt32(Properties.Settings.Default.C2h));
 
                     return retval;
                 case 2:
-                    retval = Properties.Settings.Default.cam3_size;
+                    retval = new Size(decimal.ToInt32(Properties.Settings.Default.C3w), decimal.ToInt32(Properties.Settings.Default.C3h));
 
                     return retval;
                 case 3:
-                    retval = Properties.Settings.Default.cam4_size;
+                    retval = new Size(decimal.ToInt32(Properties.Settings.Default.C4w), decimal.ToInt32(Properties.Settings.Default.C4h));
 
                     return retval;
                 default: return new Size(640, 480);
@@ -43,30 +43,34 @@ namespace FaceDetection
             switch (cam_ind)
             {
                 case 0:
-                    if ((Properties.Settings.Default.cam1_size.Width != Properties.Settings.Default.camera_1_width) && (Properties.Settings.Default.cam1_size.Height != Properties.Settings.Default.camera_1_height))
+                    if (Properties.Settings.Default.C1w != decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[0]))
                     {
-                        Properties.Settings.Default.cam1_size = new Size(decimal.ToInt32(Properties.Settings.Default.camera_1_width), decimal.ToInt32(Properties.Settings.Default.camera_1_height));
+                        Properties.Settings.Default.C1w = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[0]);
+                        Properties.Settings.Default.C1h = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[1]);
                         resolution_changed = true;
                     }
                     break;
                 case 1:
-                    if ((Properties.Settings.Default.cam2_size.Width != Properties.Settings.Default.camera_2_width) && (Properties.Settings.Default.cam2_size.Height != Properties.Settings.Default.camera_2_height))
+                    if (Properties.Settings.Default.C2w != decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[0]))
                     {
-                        Properties.Settings.Default.cam2_size = new Size(decimal.ToInt32(Properties.Settings.Default.camera_2_width), decimal.ToInt32(Properties.Settings.Default.camera_2_height));
+                        Properties.Settings.Default.C2w = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[0]);
+                        Properties.Settings.Default.C2h = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[1]);
                         resolution_changed = true;
                     }
                     break;
                 case 2:
-                    if ((Properties.Settings.Default.cam3_size.Width != Properties.Settings.Default.camera_3_width) && (Properties.Settings.Default.cam3_size.Height != Properties.Settings.Default.camera_3_height))
+                    if (Properties.Settings.Default.C3w != decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[0]))
                     {
-                        Properties.Settings.Default.cam3_size = new Size(decimal.ToInt32(Properties.Settings.Default.camera_3_width), decimal.ToInt32(Properties.Settings.Default.camera_3_height));
+                        Properties.Settings.Default.C3w = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[0]);
+                        Properties.Settings.Default.C3h = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[1]);
                         resolution_changed = true;
                     }
                     break;
                 case 3:
-                    if ((Properties.Settings.Default.cam4_size.Width != Properties.Settings.Default.camera_4_width) && (Properties.Settings.Default.cam4_size.Height != Properties.Settings.Default.camera_4_height))
+                    if (Properties.Settings.Default.C4w != decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[0]))
                     {
-                        Properties.Settings.Default.cam4_size = new Size(decimal.ToInt32(Properties.Settings.Default.camera_4_width), decimal.ToInt32(Properties.Settings.Default.camera_4_height));
+                        Properties.Settings.Default.C4w = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[0]);
+                        Properties.Settings.Default.C4h = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[1]);
                         resolution_changed = true;
                     }
                     break;
@@ -83,20 +87,20 @@ namespace FaceDetection
             switch (cam_ind)
             {
                 case 0:
-                  
-                    retval = Properties.Settings.Default.cam1_resolution;
+                    res = Properties.Settings.Default.C1res.Split('x');
+                    retval = new System.Drawing.Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
                     break;
                 case 1:
-                   
-                    retval = Properties.Settings.Default.cam2_resolution;
+                    res = Properties.Settings.Default.C2res.Split('x');
+                    retval = new System.Drawing.Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
                     break;
                 case 2:
-                    
-                    retval = Properties.Settings.Default.cam3_resolution;
+                    res = Properties.Settings.Default.C3res.Split('x');
+                    retval = new System.Drawing.Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
                     break;
                 case 3:
-                    
-                    retval = Properties.Settings.Default.cam4_resolution;
+                    res = Properties.Settings.Default.C4res.Split('x');
+                    retval = new System.Drawing.Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
                     break;
                 default:
                     retval = new System.Drawing.Size(640, 480);
@@ -110,16 +114,16 @@ namespace FaceDetection
             switch (cam_ind)
             {
                 case 0:
-                    fps = Int32.Parse(Properties.Settings.Default.cam1f);
+                    fps = Int32.Parse(Properties.Settings.Default.C1f);
                     break;
                 case 1:
-                    fps = Int32.Parse(Properties.Settings.Default.cam2f);
+                    fps = Int32.Parse(Properties.Settings.Default.C2f);
                     break;
                 case 2:
-                    fps = Int32.Parse(Properties.Settings.Default.cam3f);
+                    fps = Int32.Parse(Properties.Settings.Default.C3f);
                     break;
                 case 3:
-                    fps = Int32.Parse(Properties.Settings.Default.cam4f);
+                    fps = Int32.Parse(Properties.Settings.Default.C4f);
                     break;
             }
             return fps;
