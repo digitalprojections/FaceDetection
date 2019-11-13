@@ -18,8 +18,7 @@ namespace FaceDetection
 
         public IRSensor()
         {
-            DispDeviceOpen();
-            DispDeviceClose();
+            SensorClose();
             //init
             Init_IR_Timer();            
         }
@@ -64,7 +63,7 @@ namespace FaceDetection
                 
             }
             
-            
+            SensorClose();
 
             Logger.Add("SENSOR " + CheckOK);
             //mutex.ReleaseMutex();
@@ -138,8 +137,6 @@ namespace FaceDetection
                 {
                     ret = DispGetSensorRawValue(ref stSensorValue, iError);
                     var ivals = String.Empty;
-                    if(ret==true)
-                    {
                     if (stSensorValue.iValue != null)
                     {
                         for (var i = 0; i < 4; i++)
@@ -153,14 +150,8 @@ namespace FaceDetection
                     data[3] = Convert.ToUInt32((stSensorValue.iValue[1] & 0xFF00) >> 8);     // IR data (H)
                     data[4] = Convert.ToUInt32((stSensorValue.iValue[2] & 0x00FF) >> 0);     // TMP data (L)
                     data[5] = Convert.ToUInt32((stSensorValue.iValue[2] & 0xFF00) >> 8);        // TMP data (H)
-
-                    }
-                    else
-                    {
-                        data[1] = 0;
-                    }
-                }
-                catch (Exception e)
+                 }
+                catch(Exception e)
                 {
                     data[1] = 0;
                     Logger.Add(e.Message + " IRSensor 91");
@@ -170,7 +161,7 @@ namespace FaceDetection
             {             
                 data[1] = 0;                
             }
-            DispDeviceClose();
+          
             return data[1];
         }
         public void SensorClose()

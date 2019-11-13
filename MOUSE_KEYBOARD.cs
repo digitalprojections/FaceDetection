@@ -92,7 +92,7 @@ namespace FaceDetection
             }
             else
             {
-                
+                Listen = false;
             }
             if (MainForm.GetMainForm != null)
             {

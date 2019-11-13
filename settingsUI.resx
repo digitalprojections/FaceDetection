@@ -193,7 +193,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lb_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
+    <value>24, 13</value>
   </data>
   <data name="lb_seconds.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -232,7 +232,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lb_manual_recording_time.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 12</value>
+    <value>111, 13</value>
   </data>
   <data name="lb_manual_recording_time.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -262,7 +262,7 @@
     <value>10, 139</value>
   </data>
   <data name="cb_event_recorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 16</value>
+    <value>96, 17</value>
   </data>
   <data name="cb_event_recorder.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -355,7 +355,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lb_post_event.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 12</value>
+    <value>102, 13</value>
   </data>
   <data name="lb_post_event.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -394,7 +394,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lb_pre_event.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 12</value>
+    <value>111, 13</value>
   </data>
   <data name="lb_pre_event.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -430,7 +430,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label23_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
+    <value>24, 13</value>
   </data>
   <data name="label23_seconds.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -466,7 +466,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label22_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
+    <value>24, 13</value>
   </data>
   <data name="label22_seconds.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -520,7 +520,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label20_minutes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
+    <value>23, 13</value>
   </data>
   <data name="label20_minutes.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -553,7 +553,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="cb_backlight_off_idling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 16</value>
+    <value>133, 17</value>
   </data>
   <data name="cb_backlight_off_idling.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -622,7 +622,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="cb_human_sensor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 16</value>
+    <value>94, 17</value>
   </data>
   <data name="cb_human_sensor.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -679,13 +679,13 @@
     <value>NoControl</value>
   </data>
   <data name="cb_face_recognition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 20</value>
+    <value>143, 20</value>
   </data>
   <data name="cb_face_recognition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="cb_face_recognition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 16</value>
+    <value>138, 17</value>
   </data>
   <data name="cb_face_recognition.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -751,7 +751,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label_record_after_event.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 12</value>
+    <value>102, 13</value>
   </data>
   <data name="label_record_after_event.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
@@ -790,7 +790,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label_record_before_event.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 12</value>
+    <value>111, 13</value>
   </data>
   <data name="label_record_before_event.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
@@ -826,7 +826,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="recordingreinitlabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 12</value>
+    <value>146, 13</value>
   </data>
   <data name="recordingreinitlabel.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
@@ -862,7 +862,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label_sec_opcap_post.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
+    <value>24, 13</value>
   </data>
   <data name="label_sec_opcap_post.TabIndex" type="System.Int32, mscorlib">
     <value>53</value>
@@ -898,7 +898,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label_sec_opcap_pre.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
+    <value>24, 13</value>
   </data>
   <data name="label_sec_opcap_pre.TabIndex" type="System.Int32, mscorlib">
     <value>51</value>
@@ -997,7 +997,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lb_seconds2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
+    <value>24, 13</value>
   </data>
   <data name="lb_seconds2.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
@@ -1033,7 +1033,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lb_capture_mode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 12</value>
+    <value>73, 13</value>
   </data>
   <data name="lb_capture_mode.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -1141,7 +1141,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label_check_interval.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 12</value>
+    <value>75, 13</value>
   </data>
   <data name="label_check_interval.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1177,7 +1177,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lb_check_interval_milliseconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>20, 12</value>
+    <value>20, 13</value>
   </data>
   <data name="lb_check_interval_milliseconds.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1210,7 +1210,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="cb_recording_operation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 16</value>
+    <value>225, 17</value>
   </data>
   <data name="cb_recording_operation.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1384,7 +1384,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 12</value>
+    <value>102, 13</value>
   </data>
   <data name="label26.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1498,7 +1498,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 12</value>
+    <value>135, 13</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1531,7 +1531,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="cb_delete_old.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 16</value>
+    <value>98, 17</value>
   </data>
   <data name="cb_delete_old.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1594,7 +1594,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 12</value>
+    <value>88, 13</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1669,7 +1669,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 12</value>
+    <value>72, 13</value>
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1699,7 +1699,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="storePath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>599, 19</value>
+    <value>599, 20</value>
   </data>
   <data name="storePath.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1825,7 +1825,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="cb_show_rec_icon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 16</value>
+    <value>123, 17</value>
   </data>
   <data name="cb_show_rec_icon.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1858,7 +1858,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="cb_show_camera_number.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 16</value>
+    <value>129, 17</value>
   </data>
   <data name="cb_show_camera_number.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1891,7 +1891,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="cb_dateandtime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 16</value>
+    <value>156, 17</value>
   </data>
   <data name="cb_dateandtime.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1924,7 +1924,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="cb_window_pane.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 16</value>
+    <value>121, 17</value>
   </data>
   <data name="cb_window_pane.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1957,7 +1957,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="cb_always_on_top.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 16</value>
+    <value>92, 17</value>
   </data>
   <data name="cb_always_on_top.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1990,7 +1990,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="checkBox_full_screen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 16</value>
+    <value>77, 17</value>
   </data>
   <data name="checkBox_full_screen.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -2095,7 +2095,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 12</value>
+    <value>38, 13</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2131,7 +2131,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>33, 12</value>
+    <value>35, 13</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2263,7 +2263,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 12</value>
+    <value>14, 13</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2299,7 +2299,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 12</value>
+    <value>14, 13</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2362,7 +2362,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label9_fps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 12</value>
+    <value>21, 13</value>
   </data>
   <data name="label9_fps.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -2395,7 +2395,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 12</value>
+    <value>57, 13</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2428,7 +2428,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 12</value>
+    <value>57, 13</value>
   </data>
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -2513,7 +2513,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADQ
-        HQAAAk1TRnQBSQFMAgEBAwEAATQBCAE0AQgBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
+        HQAAAk1TRnQBSQFMAgEBAwEAASwBCAEsAQgBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
         AwABGAMAAQEBAAEgBgABJC4AAw8BFAFYAlsBywEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8
         An8B/gEAAbwB+gH/AUACqAH9A0ABcRwAAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
         AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMB
@@ -2798,7 +2798,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA0
-        AQAAAk1TRnQBSQFMAgEBAgEAAcwBBQHMAQUBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        AQAAAk1TRnQBSQFMAgEBAgEAAcQBBQHEAQUBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEYBgABDBUALf8DAC3/YwAt/wMALf9jAC3/AwAt/2MALf8DAC3/YwAt/wMAD/8DHgPy
         GP9jAC3/AwAM/wMeBgADzxX/YwAt/wMACf8DDAMAA/UDDwMAFf9jAC3/AwAG/wNJAwAD5wb/A0ADAAPP
         D/9jAC3/AwAY/wMPAwAD8gz/YwAt/wMAG/8DPAMAA9cJ/2MALf8DAB7/AycDAAPeBv9jAC3/AwAh/wMw
