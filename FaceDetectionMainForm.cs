@@ -341,7 +341,7 @@ namespace FaceDetection
                 {
                     if ((String)cameraButton.Tag == "play")
                     {
-                        SetRecordButtonState("rec", false);
+                        SetRecordButtonState("rec");
                         crossbar.Start(0, CAMERA_MODES.MANUAL);                        
                     }
                     else
@@ -352,7 +352,7 @@ namespace FaceDetection
                         //ONLY 0 index camera or the main camera is the one to be used to the manual reording?
                         
                         Or_pb_recording.Visible = false;                        
-                        SetRecordButtonState("play", true);
+                        SetRecordButtonState("play");
                         SetCameraToDefaultMode();
                     }
                 }
@@ -364,9 +364,9 @@ namespace FaceDetection
             }
         }
 
-        public void SetRecordButtonState(string state, bool camnum_visible)
+        public void SetRecordButtonState(string state)
         {
-            or_camera_num_txt.Visible = camnum_visible;
+            or_camera_num_txt.Visible = Properties.Settings.Default.show_camera_no;
             cameraButton.Tag = state;
         }
 
