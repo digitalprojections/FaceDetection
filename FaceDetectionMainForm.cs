@@ -186,11 +186,11 @@ namespace FaceDetection
             //Debug.WriteLine(timer.ToString());
             if (folderButton.Visible == false)
             {
-                or_controlButtons.Visible = true;
+                Or_controlBut.Visible = true;
            }
             else
             {
-                or_controlButtons.Visible = false;
+                Or_controlBut.Visible = false;
             }
             this.TopMost = true;
         }
@@ -378,7 +378,7 @@ namespace FaceDetection
             {
                 RSensor.SensorClose();
             }
-            Logger.Add(this.Location.X.ToString());
+            Console.WriteLine(this.Location.X.ToString());
             Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
             Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);
             Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
@@ -394,7 +394,7 @@ namespace FaceDetection
             ///////////////////////////////////////
             crossbar = new CROSSBAR();
             RSensor = new IRSensor();
-            //FaceDetector = new FaceDetector();
+            FaceDetector = new FaceDetector();
             //backLight = new BackLightController();
             BackLight.Start();
             Mklisteners = new MOUSE_KEYBOARD();            
@@ -415,6 +415,7 @@ namespace FaceDetection
             Or_pb_recording = pbRecording;            
             or_mainForm = this;
             or_current_date_text = or_dateTimeLabel;
+            or_controlBut = or_controlButtons;
                         
             if (Properties.Settings.Default.window_on_top)
             {
@@ -462,23 +463,23 @@ namespace FaceDetection
             {
                 if (faceDetector != null)
                 {
-                    FaceDetector.Stop_Face_Timer();
+                    FaceDetector.StopFaceTimer();
                     //faceDetector.Destroy();
                 }
                 //faceDetector = new FaceDetector();
                 faceDetector.SetInterval();
-                faceDetector.Start_Face_Timer();
+                faceDetector.StartFaceTimer();
             }
             else
             {
                 if (faceDetector != null)
                 {
-                    FaceDetector.Stop_Face_Timer();
+                    FaceDetector.StopFaceTimer();
                     //faceDetector.Destroy();
                 }
             }
 
-            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+            if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
             {
                 Mklisteners.AddMouseAndKeyboardBack();
             }
@@ -534,14 +535,7 @@ namespace FaceDetection
                     GetMainForm.WindowState = FormWindowState.Normal;
                 }
 
-                if (PARAMETERS.isControlButtonVisible)
-                {
-                    GetMainForm.or_controlButtons.Visible = true;
-                }
-                else
-                {
-                    GetMainForm.or_controlButtons.Visible = false;
-                }
+                GetMainForm.or_controlButtons.Visible = PARAMETERS.isControlButtonVisible;
 
                 PARAMETERS.PARAM.Clear();
             }
@@ -550,27 +544,18 @@ namespace FaceDetection
             GC.Collect();
             }
 
-        public static void ParametersChangesApply()
-        {
-            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
-            {
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.PARAM.Add("uvccameraviewer.exe");
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.HandleParameters(PARAMETERS.PARAM);
-
-                if (PARAMETERS.isControlButtonVisible)
-                {
-                    GetMainForm.or_controlButtons.Visible = true;
-                }
-                else
-                {
-                    GetMainForm.or_controlButtons.Visible = false;
-                }
-
-                PARAMETERS.PARAM.Clear();
-            }
-        }
+        //public static void ParametersChangesApply()
+        //{
+        //    //if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
+        //    //{
+        //    //    PARAMETERS.PARAM.Reverse();
+        //    //    PARAMETERS.PARAM.Add("uvccameraviewer.exe");
+        //    //    PARAMETERS.PARAM.Reverse();
+        //    //    PARAMETERS.HandleParameters(PARAMETERS.PARAM);                
+        //    //    PARAMETERS.PARAM.Clear();
+            
+        //    //}
+        //}
 
         public static void SetCameraToDefaultMode()
         {

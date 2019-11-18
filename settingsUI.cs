@@ -124,7 +124,7 @@ namespace FaceDetection
         private void CloseSettings(object sender, EventArgs e)
         {           
             Hide();
-            Properties.Settings.Default.Reload();  //Matsuura add 20191115
+            Properties.Settings.Default.Reload();  //Matsuura add 20191115            
         }
 
         private void Save_and_close(object sender, EventArgs e)
@@ -163,22 +163,19 @@ namespace FaceDetection
 
         public static void SetComboBoxFPSValues(List<string> vs)
         {
+            bool matching_fps_found = false;
             if (frame_rates_combo != null)
             {
                 frame_rates_combo.Items.AddRange(vs.ToArray());
                 for (int i=0; i<vs.Count;i++)
                 {
-                        if (vs[i] == Properties.Settings.Default.C1f)
-                        {
-                            frame_rates_combo.SelectedItem = Properties.Settings.Default.C1f;
-                    }
-                    else
+                    if (vs[i] == Properties.Settings.Default.C1f)
                     {
-                        frame_rates_combo.SelectedItem = vs[0];
+                        matching_fps_found = true;
                     }
-                }
-                Console.WriteLine(vs.Count + " 177");
+                }                
             }
+            frame_rates_combo.SelectedItem = matching_fps_found ? Properties.Settings.Default.C1f : vs[0];            
         }
 
         /// <summary>
@@ -232,22 +229,22 @@ namespace FaceDetection
         
         private void Cm_language_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cm_language.SelectedItem.ToString() =="English")
+            {
+                Properties.Settings.Default.culture = "en-US";
+                Properties.Settings.Default.language = "English";
+            }
+            else
+            {
+                Properties.Settings.Default.culture = "ja-JP";
+                Properties.Settings.Default.language = "日本語";
+            }
+
             ChangeLanguage();
         }
 
         private void ChangeLanguage()
-        {
-               if (cm_language!=null && cm_language.SelectedItem!=null && cm_language.SelectedItem.ToString() == "English")
-                {
-                    Properties.Settings.Default.culture = "en-US";
-                    Properties.Settings.Default.language = "English";
-                }
-                else
-                {
-                    Properties.Settings.Default.culture = "ja-JP";
-                    Properties.Settings.Default.language = "日本語";
-                }
-           
+        {  
             string lan = Properties.Settings.Default.culture;
             ComponentResourceManager resources = new ComponentResourceManager(typeof(SettingsUI));
             var cult = new CultureInfo(lan);
@@ -397,8 +394,15 @@ namespace FaceDetection
             {
                 if (c!=cb_operator_capture)
                 {
-                    c.Enabled = enabled;
+                    c.Enabled = enabled;                    
                 }
+            }
+
+            if (!enabled)
+            {
+                Properties.Settings.Default.enable_Human_sensor = false;
+                Properties.Settings.Default.enable_face_recognition = false;
+                Properties.Settings.Default.Recording_when_at_the_start_of_operation = false;
             }
         }
 
@@ -427,6 +431,10 @@ namespace FaceDetection
                 cb_human_sensor.Checked = check.Checked;
                 cb_face_recognition.Checked = !check.Checked;
             }
+            else
+            {
+                DisableOperatorCaptureCheckBox_ifNeeded();
+            }
         }
 
         private void Cb_face_recognition_CheckedChanged(object sender, EventArgs e)
@@ -437,20 +445,47 @@ namespace FaceDetection
                 cb_human_sensor.Checked = !check.Checked;
                 cb_face_recognition.Checked = check.Checked;
             }
+            else
+            {
+                DisableOperatorCaptureCheckBox_ifNeeded();
+            }
         }
+        private void Cb_recording_operation_CheckStateChanged(object sender, EventArgs e)
+        {
+            CheckBox check = (CheckBox)sender;
+            if (check.Checked)
+            {
+                
+            }
+            else
+            {
+                DisableOperatorCaptureCheckBox_ifNeeded();
+            }
+        }
+
+        private void DisableOperatorCaptureCheckBox_ifNeeded()
+        {
+            if (!Properties.Settings.Default.enable_Human_sensor && !Properties.Settings.Default.enable_face_recognition && !Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+            {
+                //All three are off. Disable
+                Properties.Settings.Default.capture_operator = false;
+            }
+        }
+
         private void Cb_backlight_off_idling_CheckStateChanged(object sender, EventArgs e)
         {
             numericUpDownBacklight.Enabled = cb_backlight_off_idling.Checked;
         }
-        private void Nud_seconds_after_Click(object sender, EventArgs e)
-        {
-            CustomMessage.Add(Properties.Settings.Default.seconds_after_event);
-            CustomMessage.Add(Properties.Settings.Default.seconds_before_event);
-            CustomMessage.Add(Properties.Settings.Default.event_record_time_before_event);
-            CustomMessage.Add(Properties.Settings.Default.event_record_time_after_event);
-            CustomMessage.Add(Properties.Settings.Default.manual_record_time);
-            CustomMessage.Add(Properties.Settings.Default.interval_before_reinitiating_recording);
-        }
+        
+        //private void Nud_seconds_after_Click(object sender, EventArgs e)
+        //{
+        //    CustomMessage.Add(Properties.Settings.Default.seconds_after_event);
+        //    CustomMessage.Add(Properties.Settings.Default.seconds_before_event);
+        //    CustomMessage.Add(Properties.Settings.Default.event_record_time_before_event);
+        //    CustomMessage.Add(Properties.Settings.Default.event_record_time_after_event);
+        //    CustomMessage.Add(Properties.Settings.Default.manual_record_time);
+        //    CustomMessage.Add(Properties.Settings.Default.interval_before_reinitiating_recording);
+        //}
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -481,7 +516,12 @@ namespace FaceDetection
                 Properties.Settings.Default.interval_before_reinitiating_recording = Properties.Settings.Default.seconds_before_event;
             }
         }
+        private void SettingsUI_Shown(object sender, EventArgs e)
+        {
+            DisableOperatorCaptureCheckBox_ifNeeded();
+        }
 
+        #region DLLIMPORT
         [DllImport("olepro32.dll")]
         public static extern int OleCreatePropertyFrame(
             IntPtr hwndOwner,
@@ -496,7 +536,6 @@ namespace FaceDetection
             int lcid,
             int dwReserved,
             IntPtr lpvReserved);
-
-       
+        #endregion
     }
 }

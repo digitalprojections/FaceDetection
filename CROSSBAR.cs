@@ -260,7 +260,7 @@ namespace FaceDetection
                     }
                     else if (Properties.Settings.Default.enable_face_recognition)
                     {
-                        MainForm.FaceDetector.Start_Face_Timer();
+                        MainForm.FaceDetector.StartFaceTimer();
                     }
                 }
         }
