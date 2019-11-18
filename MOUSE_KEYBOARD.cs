@@ -71,14 +71,15 @@ namespace FaceDetection
                     {
                         TaskManager.EventAppeared(RECORD_PATH.EVENT, 1,
                             decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
-                            decimal.ToInt32(Properties.Settings.Default.seconds_after_event));                                                
+                            decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
+                            DateTime.Now);                                                
                         //↓20191107 Nagayama added↓
                     }
                     else
                     {
                         MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);                                                                        
                     }
-                    MainForm.GetMainForm.crossbar.SET_ICON_TIMER(Properties.Settings.Default.seconds_after_event);
+                    MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
                     //↑20191107 Nagayama added↑
                 }
                 else

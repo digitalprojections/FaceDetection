@@ -14,7 +14,7 @@ namespace FaceDetection
         private static TaskItem task;
         private static TimeSpan timeSpanStart; // Time to keep before event
         private static TimeSpan timeSpanEnd;  // Time to keep after event
-        private static TimeSpan fiveMinutes = new TimeSpan(0, 0, 5, 0);
+        private static TimeSpan tenMinutes = new TimeSpan(0, 0, 10, 0); // Time span of 10 minutes
         private static string directory = Environment.CurrentDirectory; // Directory of the project
         private const int BUFFERDURATION = BUFFER_DURATION.BUFFERDURATION; // Duration of the buffer (each time a new TEMP video file is created)
 
@@ -22,14 +22,20 @@ namespace FaceDetection
         {
         }
 
-        public static void EventAppeared(string path, int numCamera, int timeBeforeEvent, int timeAfterEvent) // An event appeared
+        public static void EventAppeared(string path, int numCamera, int timeBeforeEvent, int timeAfterEvent, DateTime triggerTime) // An event appeared
         {
             if (Directory.Exists(@"ffmpeg-20191101-53c21c2-win32-static"))
             {
                 string videoInList, dateTempVideoString, preeventFilesName = "";
                 int compareDateValue, compareNotTooOld;
                 DateTime dateTempVideo;
-                DateTime eventTime = DateTime.Now;
+                DateTime eventTime = triggerTime; // DateTime.Now;
+
+                // Nishida DEBUG
+                Console.WriteLine("eventTime:" + eventTime);
+                Console.WriteLine("nowTime:" + DateTime.Now);
+                // Nishida DEBUG
+
                 timeSpanStart = new TimeSpan(0, 0, 0, timeBeforeEvent);
                 timeSpanEnd = new TimeSpan(0, 0, 0, timeAfterEvent);
                 task = new TaskItem(timeSpanStart, timeSpanEnd, eventTime, false, path, numCamera);
@@ -54,10 +60,10 @@ namespace FaceDetection
                             videoInList = listRecordingFiles.ElementAt(i - 1);
                             dateTempVideoString = videoInList.Substring(videoInList.Length - 18, 18);
                             dateTempVideo = new DateTime(Convert.ToInt32(dateTempVideoString.Substring(0, 4)), Convert.ToInt32(dateTempVideoString.Substring(4, 2)), Convert.ToInt32(dateTempVideoString.Substring(6, 2)), Convert.ToInt32(dateTempVideoString.Substring(8, 2)), Convert.ToInt32(dateTempVideoString.Substring(10, 2)), Convert.ToInt32(dateTempVideoString.Substring(12, 2)));
-                            compareNotTooOld = DateTime.Compare(dateTempVideo, eventTime - fiveMinutes);
+                            compareNotTooOld = DateTime.Compare(dateTempVideo, eventTime - tenMinutes);
                             compareDateValue = DateTime.Compare(dateTempVideo, eventTime - timeSpanStart);
 
-                            if (compareNotTooOld > 0) // The file found is not too old (older than 5 minutes before the full video start)
+                            if (compareNotTooOld >= 0) // The file found is not too old (older than 10 minutes before the full video start) (If buffer 5 minutes and time wantedbefore is 5 minutes, we need to look until 10 minutes before files)
                             {
                                 if (compareDateValue < 0) // Date of the temp video is < than the started time of the full video. So we found the file to cut (And finished to look for more file)
                                 {
@@ -71,7 +77,7 @@ namespace FaceDetection
                                     }
                                     break;
                                 }
-                                else // Date of the saved video is > at the started time of the full video => so we have to keep this file
+                                else // Date of the temp video is > at the started time of the full video => so we have to keep this file
                                 {
                                     if (preeventFilesName == "")
                                     {
@@ -87,7 +93,7 @@ namespace FaceDetection
                     }
                     catch (Exception ex) // Unexpected files in TEMP folder
                     {
-                        Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Message + " TaskManager in EventAppeared()");
                     }
                 }
 
@@ -108,13 +114,14 @@ namespace FaceDetection
 
         private static void RecordEnd() // The event (task) is finished
         {
-            string videoInList, cutFile, dateCutVideoString, startEventTime, fileToCutFromTheEnd, startVideoForFullFile, startVideoForFullFileName, fileToCutFromTheEndDate;
+            string videoInList, cutFile, dateCutVideoString, startEventTime, fileToCutFromTheEnd, startVideoForFullFile, startVideoForFullFileName, fileToCutFromTheEndDate, durationOfVideoToCutString;
             string posteventFilesName = "";
             string[] arrayListOfFiles;
             DateTime dateCutVideo, dateEventStartTime, dateEventStop, dateStartVideoEvent, dateEventMinusWantedTime, dateFileToCutFromTheEnd;
             int compareDateWithEvent, compareDateWithFilePreevent, cutTime, durationOfVideoToCut, timeToCutLastVideo, timeWanted, listTaskIndex = 0;
             TimeSpan tsTimeBeforeEvent, timeFromStartVideoToEvent, timeWantedToCut;
             bool fileSaved = false;
+            TimeSpan tsBufferLengthDuration = new TimeSpan(0, 0, 0, BUFFERDURATION / 1000);
 
             try
             {
@@ -150,17 +157,18 @@ namespace FaceDetection
                     cutTime = timeWanted - (tsTimeBeforeEvent.Minutes * 60 + tsTimeBeforeEvent.Seconds); // Time wanted (param) before event - time ellapsed in the file before event appeared
                     if (cutTime < 0) // The event and the time before we need to keep are in the same file. No need to look for interval between the event video file and the file before AND the file is finished
                     {
-                        try
-                        {
-                            durationOfVideoToCut = Convert.ToInt32(GetVideoDuration(fileToCutFromTheEnd).Substring(5, 2));
-                            cutTime = (durationOfVideoToCut - (tsTimeBeforeEvent.Minutes * 60 + tsTimeBeforeEvent.Seconds)) + (listTask[listTaskIndex].starttime.Minutes * 60 + listTask[listTaskIndex].starttime.Seconds);
-                            startVideoForFullFile = CutVideoKeepEnd(fileToCutFromTheEnd, cutTime);
-                        }
-                        catch (Exception e) // Event and time to keep before are in the same file AND the file is still in recording, so we can't use the final duration
+                        if (((dateEventStartTime - listTask[listTaskIndex].starttime) > dateStartVideoEvent) && ((dateEventStartTime - dateStartVideoEvent + listTask[listTaskIndex].stoptime) < tsBufferLengthDuration)) // Time before anf afterthe event are in the same file
                         {
                             timeFromStartVideoToEvent = listTask[listTaskIndex].eventtime - dateStartVideoEvent;
                             startVideoForFullFile = CutVideoFromEvent(fileToCutFromTheEnd, timeFromStartVideoToEvent, listTask[listTaskIndex].starttime.Minutes * 60 + listTask[listTaskIndex].starttime.Seconds, listTask[listTaskIndex].stoptime.Minutes * 60 + listTask[listTaskIndex].stoptime.Seconds, listTaskIndex);
                             fileSaved = true;
+                        }
+                        else
+                        {
+                            durationOfVideoToCutString = GetVideoDuration(fileToCutFromTheEnd);
+                            durationOfVideoToCut = Convert.ToInt32(durationOfVideoToCutString.Substring(2, 2)) * 60 + Convert.ToInt32(durationOfVideoToCutString.Substring(5, 2));
+                            cutTime = (durationOfVideoToCut - (tsTimeBeforeEvent.Minutes * 60 + tsTimeBeforeEvent.Seconds)) + (listTask[listTaskIndex].starttime.Minutes * 60 + listTask[listTaskIndex].starttime.Seconds);
+                            startVideoForFullFile = CutVideoKeepEnd(fileToCutFromTheEnd, cutTime);
                         }
                     }
                     else
@@ -282,7 +290,7 @@ namespace FaceDetection
                 // Manage the duration to create the name of the cut video
                 string videoDuration = GetVideoDuration(videoToCut);
                 DateTime dateDuration = Convert.ToDateTime(videoDuration);
-                int iduration = dateDuration.Hour * 10000 + dateDuration.Minute * 100 + dateDuration.Second;
+                int iduration = dateDuration.Minute * 60 + dateDuration.Second;
                 TimeSpan tsDuration = new TimeSpan(0, 0, 0, iduration);
 
                 string path = videoToCut.Substring(0, videoToCut.Length - 18);

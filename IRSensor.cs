@@ -1,47 +1,46 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace FaceDetection
 {
-    class IRSensor
+    class IRSensor:IDisposable
     {
         private delegate void IRTimerTickDelegate();
-        //private int sensoroffcount = 0;
-        private bool checkOK = true;
         System.Timers.Timer SensorCheckTimer = new System.Timers.Timer();
-        //Mutex mutex = new Mutex();
 
-        public bool CheckOK { get => checkOK; set => checkOK = value; }
+        static bool bIsIRCheck = true;
+
+        public bool bIsIRCheckExec { get => bIsIRCheck; set => bIsIRCheck = value; }
 
         public IRSensor()
         {
-            //DispDeviceOpen();
-            //SensorClose();
+            bIsIRCheckExec = true;
+            DispDeviceOpen();
+            SensorClose();
             //init
-            Init_IR_Timer();            
+            Init_IR_Timer();
+            SensorCheckTimer.Elapsed += IR_Timer_Tick;
+            SensorCheckTimer.AutoReset = true;
         }
         public void Destroy()
         {
             Stop_IR_Timer();
             SensorCheckTimer.Dispose();
         }
+
+        public void SetInterval()
+        {
+            SensorCheckTimer.Enabled = true;
+            SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
+        }
         private void Init_IR_Timer()
         {
-                
            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_Human_sensor && decimal.ToInt32(Properties.Settings.Default.face_rec_interval)>0)
            {
                 //SensorCheckTimer.Tick += IR_Timer_Tick;
-                SensorCheckTimer.Elapsed+= IR_Timer_Tick;
-                SensorCheckTimer.AutoReset = true;
+                
                 SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
-
-                Task.Run(() => {
-                    Thread.Sleep(5000);
-                    SensorCheckTimer.Start();
-                }); 
             }
             else
             {
@@ -52,29 +51,26 @@ namespace FaceDetection
         private void IR_Timer_Tick(object sender, ElapsedEventArgs e)
         {
             uint rval = CheckSensor();
-            if (CheckOK && rval == 1)
+            if (bIsIRCheckExec)
             {
-                CheckOK = false;
+                SensorClose();
+                if ( rval == 1 )
+                {
+                    bIsIRCheckExec = false;
                 Stop_IR_Timer();
                 //heat signature detected, stop timer
-                TIMERELAPSED();
+                    TimerElapsed();
             }
-            else
-            {
-                
             }
             
-            SensorClose();
-
-            //Logger.Add("SENSOR " + CheckOK);
-            //mutex.ReleaseMutex();
+            Logger.Add("SENSOR " + bIsIRCheckExec);
         }
 
-        private void TIMERELAPSED()
+        private void TimerElapsed()
         {
             if (MainForm.GetMainForm.InvokeRequired)
             {
-                var d = new IRTimerTickDelegate(TIMERELAPSED);
+                var d = new IRTimerTickDelegate(TimerElapsed);
                 MainForm.GetMainForm.Invoke(d);
             }
                 else
@@ -87,20 +83,19 @@ namespace FaceDetection
                         TaskManager.EventAppeared(RECORD_PATH.EVENT,
                             1,
                             decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
-                            decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
+                            decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
+                            DateTime.Now);
                     }
                     else
                     {
                         MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
                     }
-                    MainForm.GetMainForm.crossbar.SET_ICON_TIMER(Properties.Settings.Default.seconds_after_event);
+                    MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
                 }
                 else
                 {
                     SNAPSHOT_SAVER.TakeSnapShot(0, "event");
-
                 }
-
 
                 Logger.Add("IR SENSOR: Motion detected");
                 if (Properties.Settings.Default.backlight_on_upon_face_rec)
@@ -113,16 +108,16 @@ namespace FaceDetection
 
         public void Start_IR_Timer()
         {
-            CheckOK = true;
+            bIsIRCheckExec = true;
             SensorCheckTimer.Start();
         }
         
 
         public void Stop_IR_Timer()
-        {
+        {            
             SensorCheckTimer.Enabled = false;
             SensorCheckTimer.Stop();
-            CheckOK = false;
+            bIsIRCheckExec = false;
 
         }
         
@@ -136,8 +131,7 @@ namespace FaceDetection
             {
                 try
                 {
-                    ret = DispGetSensorRawValue(ref stSensorValue, iError);
-                    DispDeviceClose();
+                    ret = DispGetSensorRawValue(ref stSensorValue, ref iError);
                     var ivals = String.Empty;
                     if (ret == true)
                     {
@@ -172,8 +166,10 @@ namespace FaceDetection
             {             
                 data[1] = 0;                
             }            
+
             return data[1];
         }
+
         public void SensorClose()
         {
             if (IsDllLoaded("DispApi.dll"))
@@ -181,14 +177,20 @@ namespace FaceDetection
                 DispDeviceClose();
             }
         }
-
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
 
         [DllImport("DispApi.dll")]
         static extern bool DispDeviceOpen();
+
         [DllImport("DispApi.dll")]
         static extern bool DispDeviceClose();
+
         [DllImport("DispApi.dll")]
-        static extern bool DispGetSensorRawValue(ref DISP_SENSOR_VALUE x, int y);
+        static extern bool DispGetSensorRawValue(ref DISP_SENSOR_VALUE stSensor, ref int iErrors);
+
         [StructLayout(LayoutKind.Sequential)]
         private struct DISP_SENSOR_VALUE
         {
@@ -204,5 +206,6 @@ namespace FaceDetection
             return GetModuleHandle(path) != IntPtr.Zero;
         }
 
+        
     }
 }

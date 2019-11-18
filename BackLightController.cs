@@ -8,6 +8,7 @@ namespace FaceDetection
 {
     public class BackLightController
     {
+
         
         public static Action Destroy;
         //private FormSettings settingsBase = Properties.Camera1.Default;
@@ -19,7 +20,13 @@ namespace FaceDetection
         }
         private readonly System.Timers.Timer backlight_timer = new System.Timers.Timer();
         //Stopwatch stopwatch = new Stopwatch();
-
+        public BackLightController()
+        {
+            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
+            {
+                backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60 * 1000;
+            }
+        }
 
         public void Start()
         {
@@ -52,13 +59,7 @@ namespace FaceDetection
             }
         }
 
-        public BackLightController()
-        {
-            if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
-            {
-                backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60 * 1000;
-            }
-        }
+        
        
         internal void OFF()
         {

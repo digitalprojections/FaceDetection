@@ -47,23 +47,19 @@ namespace FaceDetection
                 {
                     Logger.Add(odx);
                 }
-            });
-            
-            
+              });
         }
 
         private void Face_check_timer_Tick(object sender, ElapsedEventArgs e)
         {   
-            //Console.WriteLine("FACE " + checkOK);
+            Console.WriteLine("FACE " + checkOK);
             try
             {
                 if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_face_recognition && checkOK)
                 {
                     GetTheBMPForFaceCheck();                    
                 }
-
             }
-            
             catch (NullReferenceException ex)
             {
                 Logger.Add(ex);
@@ -78,8 +74,8 @@ namespace FaceDetection
             {
                 var d = new dGetTheBMPImage(GetTheBMPForFaceCheck);
                 MainForm.GetMainForm.Invoke(d);
-
-            }else
+            }
+            else
             {
                 Bitmap bitmap = MainForm.GetMainForm.crossbar.GetBitmap();
                 if (bitmap != null)
@@ -101,9 +97,7 @@ namespace FaceDetection
 
                             //↓20191107 Nagayama added↓
                             FaceDetectedAction();
-                            
                         }
-
                     });
 
                     faceTask.Start();
@@ -129,14 +123,15 @@ namespace FaceDetection
                         TaskManager.EventAppeared(RECORD_PATH.EVENT,
                             1,
                             decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
-                            decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
+                            decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
+                            DateTime.Now);
                     }
                     else
                     {
                         //Direct recording
                         MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
                     }
-                    MainForm.GetMainForm.crossbar.SET_ICON_TIMER(Properties.Settings.Default.seconds_after_event);
+                    MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
                 }
                 //↓20191107 Nagayama added↓
                 else

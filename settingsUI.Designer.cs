@@ -32,6 +32,7 @@
             System.Windows.Forms.TabPage tab_view_settings;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsUI));
             this.groupBox_viewSettings = new System.Windows.Forms.GroupBox();
+            this.bl_idling_time_label = new System.Windows.Forms.Label();
             this.numericUpDownBacklight = new System.Windows.Forms.NumericUpDown();
             this.nud_manual_record_time = new System.Windows.Forms.NumericUpDown();
             this.lb_seconds = new System.Windows.Forms.Label();
@@ -152,6 +153,7 @@
             // 
             // groupBox_viewSettings
             // 
+            this.groupBox_viewSettings.Controls.Add(this.bl_idling_time_label);
             this.groupBox_viewSettings.Controls.Add(this.numericUpDownBacklight);
             this.groupBox_viewSettings.Controls.Add(this.nud_manual_record_time);
             this.groupBox_viewSettings.Controls.Add(this.lb_seconds);
@@ -165,6 +167,11 @@
             resources.ApplyResources(this.groupBox_viewSettings, "groupBox_viewSettings");
             this.groupBox_viewSettings.Name = "groupBox_viewSettings";
             this.groupBox_viewSettings.TabStop = false;
+            // 
+            // bl_idling_time_label
+            // 
+            resources.ApplyResources(this.bl_idling_time_label, "bl_idling_time_label");
+            this.bl_idling_time_label.Name = "bl_idling_time_label";
             // 
             // numericUpDownBacklight
             // 
@@ -295,6 +302,7 @@
             this.cb_backlight_off_idling.Name = "cb_backlight_off_idling";
             this.cb_backlight_off_idling.Tag = "24";
             this.cb_backlight_off_idling.UseVisualStyleBackColor = true;
+            this.cb_backlight_off_idling.CheckStateChanged += new System.EventHandler(this.Cb_backlight_off_idling_CheckStateChanged);
             // 
             // cb_backlight_on_recognition
             // 
@@ -724,7 +732,7 @@
             this.checkBox_full_screen.Name = "checkBox_full_screen";
             this.checkBox_full_screen.Tag = "3";
             this.checkBox_full_screen.UseVisualStyleBackColor = true;
-            this.checkBox_full_screen.CheckedChanged += new System.EventHandler(this.checkBox_full_screen_CheckedChanged);
+            this.checkBox_full_screen.CheckedChanged += new System.EventHandler(this.CheckBox_full_screen_CheckedChanged);
             // 
             // groupBox5
             // 
@@ -863,7 +871,7 @@
             this.button_cameraProperties.ImageList = this.imageList1;
             this.button_cameraProperties.Name = "button_cameraProperties";
             this.button_cameraProperties.UseVisualStyleBackColor = true;
-            this.button_cameraProperties.Click += new System.EventHandler(this.button_cameraProperties_Click);
+            this.button_cameraProperties.Click += new System.EventHandler(this.Button_cameraProperties_Click);
             // 
             // imageList1
             // 
@@ -879,7 +887,7 @@
             resources.ApplyResources(this.cm_camera_number, "cm_camera_number");
             this.cm_camera_number.FormattingEnabled = true;
             this.cm_camera_number.Name = "cm_camera_number";
-            this.cm_camera_number.SelectedValueChanged += new System.EventHandler(this.cameraSelected);
+            this.cm_camera_number.SelectedValueChanged += new System.EventHandler(this.CameraSelected);
             // 
             // check_state_images
             // 
@@ -894,14 +902,14 @@
             this.button_settings_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button_settings_cancel.Name = "button_settings_cancel";
             this.button_settings_cancel.UseVisualStyleBackColor = true;
-            this.button_settings_cancel.Click += new System.EventHandler(this.closeSettings);
+            this.button_settings_cancel.Click += new System.EventHandler(this.CloseSettings);
             // 
             // button_settings_save
             // 
             resources.ApplyResources(this.button_settings_save, "button_settings_save");
             this.button_settings_save.Name = "button_settings_save";
             this.button_settings_save.UseVisualStyleBackColor = true;
-            this.button_settings_save.Click += new System.EventHandler(this.save_and_close);
+            this.button_settings_save.Click += new System.EventHandler(this.Save_and_close);
             // 
             // backgroundWorker
             // 
@@ -1045,5 +1053,6 @@
         private System.Windows.Forms.NumericUpDown nud_seconds_before_event;
         private System.Windows.Forms.NumericUpDown numericUpDownCamCount;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private System.Windows.Forms.Label bl_idling_time_label;
     }
 }
