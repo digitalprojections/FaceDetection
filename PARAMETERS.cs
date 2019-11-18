@@ -19,7 +19,7 @@ namespace FaceDetection
         {
             PARAM = parameters.ToList<string>();
            
-            Logger.Add(param + "sdfsdfdsdgf");
+            Logger.Add(param);
 
             param = String.Concat(parameters).ToLower();
             //↓20191108 Nagayama added↓
@@ -223,15 +223,14 @@ namespace FaceDetection
                                 if (CheckCameraIndex(cameraIndex))
                                 {
                                     if (switchOnOff)
-                                    {
-                                        isMinimized = false;
-                                        MainForm.GetMainForm.TopMost = true;
+                                    {                                        
                                         MainForm.GetMainForm.Show();
+                                        MainForm.GetMainForm.TopMost = true;
                                     }
                                     else
                                     {
-                                        isMinimized = true;
-                                        MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
+                                        MainForm.GetMainForm.Hide();
+                                        MainForm.GetMainForm.TopMost = false;
                                     }
                                 }
                             }

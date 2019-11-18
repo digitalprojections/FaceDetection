@@ -94,17 +94,6 @@ namespace FaceDetection
         }        
         
         /// <summary>
-        /// Sets the camera to the Recording mode
-        /// </summary>
-        //internal void RecordMode()
-        //{
-        //    this.Update();
-        //    //this will set the backlight ON            
-        //    //backlight.ON();
-        //    //StartTheRecorder();
-        //}
-
-        /// <summary>
         /// Get the bitmap from the 
         /// <see cref="CROSSBAR"/>
         /// </summary>
@@ -114,14 +103,18 @@ namespace FaceDetection
             return  crossbar.GetBitmap();
         }
 
+        /// <summary>
+        /// Main screen UI button snapshot
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SnapShot(object sender, EventArgs e)
         {
-            //timage.Dispose();
             SNAPSHOT_SAVER.TakeSnapShot(0);
         }
 
         /// <summary>
-        /// One second timer to update UI datetime
+        /// One second timer to update UI datetime (it also deletes old files)
         /// </summary>
         private void UpdateDateTimeText(object sender, System.Timers.ElapsedEventArgs eventArgs)
         {
@@ -355,7 +348,7 @@ namespace FaceDetection
                         //ONLY 0 index camera or the main camera is the one to be used to the manual reording?
                         
                         Or_pb_recording.Visible = false;                        
-                    SetRecordButtonState("play", true);
+                        SetRecordButtonState("play", true);
                         SetCameraToDefaultMode();
                     }
                 }
