@@ -60,9 +60,7 @@ namespace FaceDetection
             icon_timer.Enabled = false;
 
             //it is the sum of the 2 values
-            int intt = decimal.ToInt32(
-                Properties.Settings.Default.interval_before_reinitiating_recording)
-                * 1000;
+            int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording)* 1000;
             if (intt > 500)
             {
                 no_opcap_timer.Interval = intt;
@@ -193,7 +191,7 @@ namespace FaceDetection
                     manualRecording = true;
                     the_timer.Enabled = false;
                     the_timer.Stop();
-                    //
+
                     if (the_timer != null)
                     {
                         the_timer.Enabled = true;
@@ -224,9 +222,7 @@ namespace FaceDetection
                 if (wait_interval_enabled)
                 {
                     //Run the timer
-                    int intt = decimal.ToInt32(
-                    Properties.Settings.Default.interval_before_reinitiating_recording)
-                    * 1000;
+                    int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording) * 1000;
                     if (intt >= 500)
                     {
                         no_opcap_timer.Interval = intt;

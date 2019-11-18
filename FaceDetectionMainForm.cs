@@ -294,6 +294,8 @@ namespace FaceDetection
             
         public void EventRecorderOn()
         {
+            PARAMETERS.PARAM.Clear();
+
             if (crossbar.PREEVENT_RECORDING)
             {
                 TaskManager.EventAppeared(RECORD_PATH.EVENT, 1, decimal.ToInt32(Properties.Settings.Default.event_record_time_before_event), decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event), DateTime.Now);

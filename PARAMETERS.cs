@@ -40,6 +40,8 @@ namespace FaceDetection
                     for (int i = 1; i < parameters.Count; i++)
                     {
                         elem = parameters.ElementAt(i).ToLower();
+                        try
+                        {
                         switch (elem.Substring(0, 1))
                         {
                             case "m":
@@ -54,6 +56,11 @@ namespace FaceDetection
                             case "t":
                                 time = Int32.Parse(elem.Substring(2));
                                 break;
+                        }
+                    }
+                        catch (Exception e) 
+                        {
+                            Debug.WriteLine(e.Message + " parameters in the command were sent with unexpected values");
                         }
                     }
                     if(cameraIndex == -1)//カメラ番号が未入力の場合
@@ -72,6 +79,7 @@ namespace FaceDetection
                         }
                     }
                     //↑20191108 Nagayama added↑
+
                     switch (method)
                     {
                         case "":

@@ -1,4 +1,4 @@
-﻿using DirectShowLib;
+using DirectShowLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -105,7 +105,7 @@ namespace FaceDetection
         private void CameraSettingsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Save settings
-            MainForm.AllChangesApply();
+            //MainForm.AllChangesApply(); --> Robin delete: Don't save parameters if click on "Cancel" button !
         }
 
         private void OpenStoreLocation(object sender, EventArgs e)
@@ -225,8 +225,7 @@ namespace FaceDetection
             this.ControlBox = false;
             this.MaximizeBox = false;
         }
-           
-        
+                 
         private void Cm_language_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cm_language.SelectedItem.ToString() =="English")
