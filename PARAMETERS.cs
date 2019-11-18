@@ -19,7 +19,7 @@ namespace FaceDetection
         {
             PARAM = parameters.ToList<string>();
            
-            Logger.Add(param + "sdfsdfdsdgf");
+            Logger.Add(param);
 
             param = String.Concat(parameters).ToLower();
             //↓20191108 Nagayama added↓
@@ -137,18 +137,20 @@ namespace FaceDetection
                             {
                                 if (CheckCameraIndex(cameraIndex))
                                 {
-                                    if (switchOnOff)
-                                    {
-                                        //SHOW CONTROL BUTTONS 
-                                        isControlButtonVisible = true;
-                                        MainForm.ParametersChangesApply();
-                                    }
-                                    else
-                                    {
-                                        //HIDE CONTROL BUTTONS
-                                        isControlButtonVisible = false;
-                                        MainForm.ParametersChangesApply();
-                                    }
+                                    //if (switchOnOff)
+                                    //{
+                                    //    //SHOW CONTROL BUTTONS 
+                                    //    isControlButtonVisible = true;
+                                    //    MainForm.ParametersChangesApply();
+                                    //}
+                                    //else
+                                    //{
+                                    //    //HIDE CONTROL BUTTONS
+                                    //    isControlButtonVisible = false;
+                                    //    MainForm.ParametersChangesApply();
+                                    //}
+
+                                    MainForm.Or_controlBut.Visible = switchOnOff;                                                                        
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -166,7 +168,7 @@ namespace FaceDetection
                                     {
                                         if (MainForm.FaceDetector != null)
                                         {
-                                            MainForm.FaceDetector.Start_Face_Timer();
+                                            MainForm.FaceDetector.StartFaceTimer();
                                         }
                                         Properties.Settings.Default.enable_face_recognition = true;
                                         Properties.Settings.Default.enable_Human_sensor = false;
@@ -177,7 +179,7 @@ namespace FaceDetection
                                         if (MainForm.FaceDetector != null && MainForm.GetMainForm.crossbar.Recording_is_on)
                                         {
                                             MainForm.GetMainForm.crossbar.PreviewMode();
-                                            MainForm.FaceDetector.Stop_Face_Timer();
+                                            MainForm.FaceDetector.StopFaceTimer();
                                         }
                                         Properties.Settings.Default.enable_face_recognition = false;
                                     }
@@ -229,15 +231,14 @@ namespace FaceDetection
                                 if (CheckCameraIndex(cameraIndex))
                                 {
                                     if (switchOnOff)
-                                    {
-                                        isMinimized = false;
-                                        MainForm.GetMainForm.TopMost = true;
+                                    {                                        
                                         MainForm.GetMainForm.Show();
+                                        MainForm.GetMainForm.TopMost = true;
                                     }
                                     else
                                     {
-                                        isMinimized = true;
-                                        MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
+                                        MainForm.GetMainForm.Hide();
+                                        MainForm.GetMainForm.TopMost = false;
                                     }
                                 }
                             }

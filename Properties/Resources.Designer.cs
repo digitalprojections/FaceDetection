@@ -113,6 +113,16 @@ namespace FaceDetection.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ic_settings_48px_128 {
+            get {
+                object obj = ResourceManager.GetObject("ic_settings_48px-128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Pause_Normal_Red_icon {
             get {
                 object obj = ResourceManager.GetObject("Pause-Normal-Red-icon", resourceCulture);
@@ -156,6 +166,16 @@ namespace FaceDetection.Properties {
         internal static System.Drawing.Bitmap setting_512 {
             get {
                 object obj = ResourceManager.GetObject("setting-512", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap setting_5121 {
+            get {
+                object obj = ResourceManager.GetObject("setting-5121", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

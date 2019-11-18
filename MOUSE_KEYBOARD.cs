@@ -20,11 +20,12 @@ namespace FaceDetection
 
         public MOUSE_KEYBOARD()
         {
+            START_CLICK_LISTENER();
             if (Properties.Settings.Default.capture_operator || Properties.Settings.Default.Recording_when_at_the_start_of_operation)
-            {
-                START_CLICK_LISTENER();
+            {                
                 Listen = true;
             }
+            
         }
         public void START_CLICK_LISTENER()
         {
@@ -60,7 +61,7 @@ namespace FaceDetection
         }
         private void MouseKeyEventInit()
         {            
-            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation && Listen)
+            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation && Listen && !MainForm.GetMainForm.crossbar.OPER_BAN)
             {
                 Listen = false;
                 //↓20191107 Nagayama added↓

@@ -153,7 +153,6 @@
       <DependentUpon>settingsUI.cs</DependentUpon>
     </Compile>
     <Compile Include="SNAPSHOT_SAVER.cs" />
-    <Compile Include="UsbCamcorder.cs" />
     <Compile Include="UsbCamera.cs" />
     <Compile Include="WM.cs" />
     <EmbeddedResource Include="FaceDetectionMainForm.resx">
@@ -178,7 +177,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="DispApi.lib" />
-    <None Include="FaceDetection_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\DataSources\FaceDetection.Properties.Settings.datasource" />
@@ -201,11 +199,8 @@
     </Content>
     <Content Include="DispApi.h" />
     <Content Include="DispApiIO.h" />
-    <Content Include="openh264-2.0.0-win32.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="OpenH264Lib.dll" />
     <Content Include="Resources\check-mark260.jpg" />
+    <None Include="Resources\ic_settings_48px-128.png" />
     <None Include="Resources\player_record.png" />
     <None Include="Resources\setting-512.png" />
     <None Include="Resources\checkered.png" />

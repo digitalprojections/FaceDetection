@@ -94,17 +94,6 @@ namespace FaceDetection
         }        
         
         /// <summary>
-        /// Sets the camera to the Recording mode
-        /// </summary>
-        //internal void RecordMode()
-        //{
-        //    this.Update();
-        //    //this will set the backlight ON            
-        //    //backlight.ON();
-        //    //StartTheRecorder();
-        //}
-
-        /// <summary>
         /// Get the bitmap from the 
         /// <see cref="CROSSBAR"/>
         /// </summary>
@@ -114,14 +103,18 @@ namespace FaceDetection
             return  crossbar.GetBitmap();
         }
 
+        /// <summary>
+        /// Main screen UI button snapshot
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SnapShot(object sender, EventArgs e)
         {
-            //timage.Dispose();
             SNAPSHOT_SAVER.TakeSnapShot(0);
         }
 
         /// <summary>
-        /// One second timer to update UI datetime
+        /// One second timer to update UI datetime (it also deletes old files)
         /// </summary>
         private void UpdateDateTimeText(object sender, System.Timers.ElapsedEventArgs eventArgs)
         {
@@ -186,11 +179,11 @@ namespace FaceDetection
             //Debug.WriteLine(timer.ToString());
             if (folderButton.Visible == false)
             {
-                or_controlButtons.Visible = true;
+                Or_controlBut.Visible = true;
            }
             else
             {
-                or_controlButtons.Visible = false;
+                Or_controlBut.Visible = false;
             }
             this.TopMost = true;
         }
@@ -357,7 +350,7 @@ namespace FaceDetection
                         //ONLY 0 index camera or the main camera is the one to be used to the manual reording?
                         
                         Or_pb_recording.Visible = false;                        
-                    SetRecordButtonState("play", true);
+                        SetRecordButtonState("play", true);
                         SetCameraToDefaultMode();
                     }
                 }
@@ -380,7 +373,7 @@ namespace FaceDetection
             {
                 RSensor.SensorClose();
             }
-            Logger.Add(this.Location.X.ToString());
+            Console.WriteLine(this.Location.X.ToString());
             Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
             Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);
             Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
@@ -396,7 +389,7 @@ namespace FaceDetection
             ///////////////////////////////////////
             crossbar = new CROSSBAR();
             RSensor = new IRSensor();
-            //FaceDetector = new FaceDetector();
+            FaceDetector = new FaceDetector();
             //backLight = new BackLightController();
             BackLight.Start();
             Mklisteners = new MOUSE_KEYBOARD();            
@@ -417,6 +410,7 @@ namespace FaceDetection
             Or_pb_recording = pbRecording;            
             or_mainForm = this;
             or_current_date_text = or_dateTimeLabel;
+            or_controlBut = or_controlButtons;
                         
             if (Properties.Settings.Default.window_on_top)
             {
@@ -464,23 +458,23 @@ namespace FaceDetection
             {
                 if (faceDetector != null)
                 {
-                    FaceDetector.Stop_Face_Timer();
+                    FaceDetector.StopFaceTimer();
                     //faceDetector.Destroy();
                 }
                 //faceDetector = new FaceDetector();
                 faceDetector.SetInterval();
-                faceDetector.Start_Face_Timer();
+                faceDetector.StartFaceTimer();
             }
             else
             {
                 if (faceDetector != null)
                 {
-                    FaceDetector.Stop_Face_Timer();
+                    FaceDetector.StopFaceTimer();
                     //faceDetector.Destroy();
                 }
             }
 
-            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+            if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
             {
                 Mklisteners.AddMouseAndKeyboardBack();
             }
@@ -536,14 +530,7 @@ namespace FaceDetection
                     GetMainForm.WindowState = FormWindowState.Normal;
                 }
 
-                //if (PARAMETERS.isControlButtonVisible)
-                //{
-                //    GetMainForm.or_controlButtons.Visible = true;
-                //}
-                //else
-                //{
-                //    GetMainForm.or_controlButtons.Visible = false;
-                //}
+                GetMainForm.or_controlButtons.Visible = PARAMETERS.isControlButtonVisible;
 
                 PARAMETERS.PARAM.Clear();
             }
@@ -552,22 +539,18 @@ namespace FaceDetection
             GC.Collect();
             }
 
-        public static void ParametersChangesApply()
-        {
-            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0)
-            {
-                if (PARAMETERS.isControlButtonVisible)
-                {
-                    GetMainForm.or_controlButtons.Visible = true;
-                }
-                else
-                {
-                    GetMainForm.or_controlButtons.Visible = false;
-                }
-
-                PARAMETERS.PARAM.Clear();
-            }
-        }
+        //public static void ParametersChangesApply()
+        //{
+        //    //if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
+        //    //{
+        //    //    PARAMETERS.PARAM.Reverse();
+        //    //    PARAMETERS.PARAM.Add("uvccameraviewer.exe");
+        //    //    PARAMETERS.PARAM.Reverse();
+        //    //    PARAMETERS.HandleParameters(PARAMETERS.PARAM);                
+        //    //    PARAMETERS.PARAM.Clear();
+            
+        //    //}
+        //}
 
         public static void SetCameraToDefaultMode()
         {
