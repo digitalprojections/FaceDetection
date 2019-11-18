@@ -9,7 +9,6 @@ namespace FaceDetection
     public class BackLightController
     {
 
-        
         public static Action Destroy;
         //private FormSettings settingsBase = Properties.Camera1.Default;
         public enum MonitorState

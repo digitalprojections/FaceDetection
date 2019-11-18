@@ -301,6 +301,8 @@ namespace FaceDetection
             
         public void EventRecorderOn()
         {
+            PARAMETERS.PARAM.Clear();
+
             if (crossbar.PREEVENT_RECORDING)
             {
                 TaskManager.EventAppeared(RECORD_PATH.EVENT, 1, decimal.ToInt32(Properties.Settings.Default.event_record_time_before_event), decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event), DateTime.Now);
@@ -534,14 +536,14 @@ namespace FaceDetection
                     GetMainForm.WindowState = FormWindowState.Normal;
                 }
 
-                if (PARAMETERS.isControlButtonVisible)
-                {
-                    GetMainForm.or_controlButtons.Visible = true;
-                }
-                else
-                {
-                    GetMainForm.or_controlButtons.Visible = false;
-                }
+                //if (PARAMETERS.isControlButtonVisible)
+                //{
+                //    GetMainForm.or_controlButtons.Visible = true;
+                //}
+                //else
+                //{
+                //    GetMainForm.or_controlButtons.Visible = false;
+                //}
 
                 PARAMETERS.PARAM.Clear();
             }
@@ -552,13 +554,8 @@ namespace FaceDetection
 
         public static void ParametersChangesApply()
         {
-            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
+            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0)
             {
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.PARAM.Add("uvccameraviewer.exe");
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.HandleParameters(PARAMETERS.PARAM);
-
                 if (PARAMETERS.isControlButtonVisible)
                 {
                     GetMainForm.or_controlButtons.Visible = true;
