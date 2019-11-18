@@ -78,7 +78,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBoxResolutions = new System.Windows.Forms.ComboBox();
-            this.comboBoxFPS = new System.Windows.Forms.ComboBox();
             this.button_cameraProperties = new System.Windows.Forms.Button();
             this.cm_camera_number = new System.Windows.Forms.ComboBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -114,6 +113,7 @@
             this.cb_window_pane = new System.Windows.Forms.CheckBox();
             this.cb_always_on_top = new System.Windows.Forms.CheckBox();
             this.checkBox_full_screen = new System.Windows.Forms.CheckBox();
+            this.comboBoxFPS = new System.Windows.Forms.ComboBox();
             tab_view_settings = new System.Windows.Forms.TabPage();
             tab_view_settings.SuspendLayout();
             this.groupBox_viewSettings.SuspendLayout();
@@ -526,14 +526,6 @@
             this.comboBoxResolutions.FormattingEnabled = true;
             this.comboBoxResolutions.Name = "comboBoxResolutions";
             // 
-            // comboBoxFPS
-            // 
-            this.comboBoxFPS.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "current_camera_index", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, null, "N0"));
-            this.comboBoxFPS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.comboBoxFPS, "comboBoxFPS");
-            this.comboBoxFPS.FormattingEnabled = true;
-            this.comboBoxFPS.Name = "comboBoxFPS";
-            // 
             // button_cameraProperties
             // 
             this.button_cameraProperties.Image = global::FaceDetection.Properties.Resources.setting_5121;
@@ -915,6 +907,13 @@
             this.checkBox_full_screen.Tag = "3";
             this.checkBox_full_screen.UseVisualStyleBackColor = true;
             this.checkBox_full_screen.CheckedChanged += new System.EventHandler(this.CheckBox_full_screen_CheckedChanged);
+            // 
+            // comboBoxFPS
+            // 
+            this.comboBoxFPS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.comboBoxFPS, "comboBoxFPS");
+            this.comboBoxFPS.FormattingEnabled = true;
+            this.comboBoxFPS.Name = "comboBoxFPS";
             // 
             // SettingsUI
             // 

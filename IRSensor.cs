@@ -115,8 +115,8 @@ namespace FaceDetection
 
         public void Stop_IR_Timer()
         {            
-            SensorCheckTimer.Enabled = false;
-            SensorCheckTimer.Stop();
+            //SensorCheckTimer.Enabled = false;
+            //SensorCheckTimer.Stop();
             bIsIRCheckExec = false;
 
         }
