@@ -75,7 +75,7 @@ namespace FaceDetection
             }
                 else
             {
-                if (Properties.Settings.Default.capture_method <= 0)
+                if (Properties.Settings.Default.capture_method <= 0 && !MainForm.GetMainForm.crossbar.OPER_BAN)
                 {
                     //initiate RECORD mode
                     if (MainForm.GetMainForm != null && MainForm.GetMainForm.crossbar.PREEVENT_RECORDING)
@@ -115,8 +115,8 @@ namespace FaceDetection
 
         public void Stop_IR_Timer()
         {            
-            SensorCheckTimer.Enabled = false;
-            SensorCheckTimer.Stop();
+            //SensorCheckTimer.Enabled = false;
+            //SensorCheckTimer.Stop();
             bIsIRCheckExec = false;
 
         }

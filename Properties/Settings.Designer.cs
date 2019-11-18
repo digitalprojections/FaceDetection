@@ -838,5 +838,17 @@ namespace FaceDetection.Properties {
                 this["manual_record_time"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public string main_camera_fps {
+            get {
+                return ((string)(this["main_camera_fps"]));
+            }
+            set {
+                this["main_camera_fps"] = value;
+            }
+        }
     }
 }

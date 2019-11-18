@@ -169,13 +169,13 @@ namespace FaceDetection
                 frame_rates_combo.Items.AddRange(vs.ToArray());
                 for (int i=0; i<vs.Count;i++)
                 {
-                    if (vs[i] == Properties.Settings.Default.C1f)
+                    if (vs[i] == Properties.Settings.Default.main_camera_fps)
                     {
                         matching_fps_found = true;
                     }
                 }                
             }
-            frame_rates_combo.SelectedItem = matching_fps_found ? Properties.Settings.Default.C1f : vs[0];            
+            Properties.Settings.Default.main_camera_fps = matching_fps_found ? Properties.Settings.Default.main_camera_fps : vs[0];
         }
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace FaceDetection
                  
         private void Cm_language_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cm_language.SelectedItem.ToString() =="English")
+            if (cm_language.SelectedItem != null && cm_language.SelectedItem.ToString() =="English")
             {
                 Properties.Settings.Default.culture = "en-US";
                 Properties.Settings.Default.language = "English";
