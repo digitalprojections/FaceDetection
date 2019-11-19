@@ -46,6 +46,7 @@ namespace FaceDetection
         internal static void TakeSnapShot(int cameraIndex, string ev)
         {
             CameraIndex = cameraIndex;
+
             myImageCodecInfo = GetEncoderInfo("image/jpeg");
             myEncoder = Encoder.Quality;
             myEncoderParameters = new EncoderParameters(1);
@@ -87,14 +88,23 @@ namespace FaceDetection
         {
             Thread newThread = new Thread(new ThreadStart(ThreadProc));
             newThread.Name = String.Format("Thread SNAPSHOT");
+            newThread.IsBackground = true;
             newThread.Start();
+            ThreadProc();
         }
         private static void ThreadProc()
         {
+            myImageCodecInfo = GetEncoderInfo("image/jpeg");
+            myEncoder = Encoder.Quality;
+            myEncoderParameters = new EncoderParameters(1);
+            myEncoderParameter = new EncoderParameter(myEncoder, 80L);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+
             if (MainForm.GetMainForm.InvokeRequired)
-            {
-                var d = new dTakeAsyncSnapShot(ThreadProc);
-                MainForm.GetMainForm.Invoke(d);
+            {                
+                var d = new dTakeAsyncSnapShot(ThreadProc);                
+                if(MainForm.GetMainForm!=null)
+                    MainForm.GetMainForm.Invoke(d);
 
             } else {
                 bool snap = false;

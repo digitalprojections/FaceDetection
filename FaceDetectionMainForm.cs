@@ -430,7 +430,7 @@ namespace FaceDetection
             }
             
             this.WindowState = FormWindowState.Minimized; // Matsuura
-            AllChangesApply();
+            
             WindowSizeUpdate();
             FillResolutionList();
             this.Width = Properties.Settings.Default.main_screen_size.Width;
@@ -444,6 +444,7 @@ namespace FaceDetection
             Or_controlBut.Location = new Point(this.Width-320, this.Height-110);
             or_camera_num_txt.Location = new Point(this.Width - 90, 10);
             ///////////////////////////////////////////////////////////
+            AllChangesApply();
         }
 
         public void SET_REC_ICON()
@@ -453,6 +454,26 @@ namespace FaceDetection
 
         public static void AllChangesApply()
         {
+            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
+            {
+
+                PARAMETERS.PARAM.Reverse();
+                PARAMETERS.PARAM.Add("uvccameraviewer.exe");
+                PARAMETERS.PARAM.Reverse();
+                PARAMETERS.HandleParameters(PARAMETERS.PARAM);
+                //if (PARAMETERS.isMinimized)
+                //{
+                //    GetMainForm.WindowState = FormWindowState.Minimized;
+                //}
+                //else
+                //{
+                //    GetMainForm.WindowState = FormWindowState.Normal;
+                //}
+
+                //GetMainForm.or_controlButtons.Visible = PARAMETERS.isControlButtonVisible;
+
+                PARAMETERS.PARAM.Clear();
+            }
             if (Properties.Settings.Default.enable_Human_sensor)
             {
                 if (RSensor != null)
@@ -513,11 +534,13 @@ namespace FaceDetection
             or_current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
             if (Properties.Settings.Default.main_window_full_screen)
             {
-                MainForm.GetMainForm.WindowState = FormWindowState.Maximized;                
+                if(!PARAMETERS.isHidden)
+                    MainForm.GetMainForm.WindowState = FormWindowState.Maximized;                
             }
             else
             {
-                MainForm.GetMainForm.WindowState = FormWindowState.Normal;                
+                if (!PARAMETERS.isHidden)
+                    MainForm.GetMainForm.WindowState = FormWindowState.Normal;                
             }
             //FULL SCREEN
 
@@ -534,29 +557,12 @@ namespace FaceDetection
 
             //Also must check if the PREEVENT mode is needed
             SetCameraToDefaultMode();
-            
-            if (PARAMETERS.PARAM!=null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
-            {
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.PARAM.Add("uvccameraviewer.exe");
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.HandleParameters(PARAMETERS.PARAM);
-                //if (PARAMETERS.isMinimized)
-                //{
-                //    GetMainForm.WindowState = FormWindowState.Minimized;
-                //}
-                //else
-                //{
-                //    GetMainForm.WindowState = FormWindowState.Normal;
-                //}
-
-                //GetMainForm.or_controlButtons.Visible = PARAMETERS.isControlButtonVisible;
-
-                PARAMETERS.PARAM.Clear();
-            }
-
             Debug.WriteLine(Or_pb_recording.Visible);
             GC.Collect();
+
+            
+
+            
             }
 
         //public static void ParametersChangesApply()

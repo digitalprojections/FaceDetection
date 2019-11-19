@@ -12,7 +12,7 @@ namespace FaceDetection
     {
         public static List<string> PARAM;
         static string param;
-        //public static bool isMinimized = false;
+        public static bool isHidden = false;
         //public static bool isControlButtonVisible = true;
 
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
@@ -123,7 +123,8 @@ namespace FaceDetection
                                 if (CheckCameraIndex(cameraIndex))
                                 {
                                     //Properties.Settings.Default.main_camera_index = cameraIndex;
-                                    SNAPSHOT_SAVER.TakeSnapShot(cameraIndex);
+                                    //SNAPSHOT_SAVER.TakeSnapShot(cameraIndex);
+                                    SNAPSHOT_SAVER.TakeAsyncSnapShot(0);
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -234,11 +235,24 @@ namespace FaceDetection
                                     {                                        
                                         MainForm.GetMainForm.Show();
                                         MainForm.GetMainForm.TopMost = true;
+                                        isHidden = false;
+                                        if (Properties.Settings.Default.main_window_full_screen)
+                                        {
+                                            if (!PARAMETERS.isHidden)
+                                                MainForm.GetMainForm.WindowState = FormWindowState.Maximized;
+                                        }
+                                        else
+                                        {
+                                            if (!PARAMETERS.isHidden)
+                                                MainForm.GetMainForm.WindowState = FormWindowState.Normal;
+                                        }
                                     }
                                     else
-                                    {
+                                    {                                        
                                         MainForm.GetMainForm.Hide();
                                         MainForm.GetMainForm.TopMost = false;
+                                        isHidden = true;
+                                        
                                     }
                                 }
                             }
