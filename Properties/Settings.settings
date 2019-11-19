@@ -209,5 +209,8 @@
     <Setting Name="main_camera_fps" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
+    <Setting Name="main_screen_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">640, 480</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

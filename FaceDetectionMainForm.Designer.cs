@@ -48,13 +48,13 @@
             // or_controlButtons
             // 
             this.or_controlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.or_controlButtons.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.or_controlButtons.BackColor = System.Drawing.Color.Transparent;
             this.or_controlButtons.Controls.Add(this.folderButton);
             this.or_controlButtons.Controls.Add(this.settingsButton);
             this.or_controlButtons.Controls.Add(this.snapshotButton);
             this.or_controlButtons.Controls.Add(this.cameraButton);
             this.or_controlButtons.Controls.Add(this.closeButton);
-            this.or_controlButtons.Location = new System.Drawing.Point(496, 379);
+            this.or_controlButtons.Location = new System.Drawing.Point(422, 401);
             this.or_controlButtons.Name = "or_controlButtons";
             this.or_controlButtons.Size = new System.Drawing.Size(292, 59);
             this.or_controlButtons.TabIndex = 12;
@@ -172,7 +172,7 @@
             this.or_dateTimeLabel.Font = new System.Drawing.Font("MS UI Gothic", 14F);
             this.or_dateTimeLabel.ForeColor = System.Drawing.Color.White;
             this.or_dateTimeLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.or_dateTimeLabel.Location = new System.Drawing.Point(12, 411);
+            this.or_dateTimeLabel.Location = new System.Drawing.Point(12, 433);
             this.or_dateTimeLabel.Name = "or_dateTimeLabel";
             this.or_dateTimeLabel.Padding = new System.Windows.Forms.Padding(3);
             this.or_dateTimeLabel.Size = new System.Drawing.Size(125, 30);
@@ -188,7 +188,7 @@
             this.camera_number_txt.Font = new System.Drawing.Font("MS UI Gothic", 50F);
             this.camera_number_txt.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.camera_number_txt.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.camera_number_txt.Location = new System.Drawing.Point(725, 9);
+            this.camera_number_txt.Location = new System.Drawing.Point(651, 9);
             this.camera_number_txt.Name = "camera_number_txt";
             this.camera_number_txt.Size = new System.Drawing.Size(63, 67);
             this.camera_number_txt.TabIndex = 10;
@@ -213,11 +213,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = global::FaceDetection.Properties.Settings.Default.main_screen_size;
             this.Controls.Add(this.pbRecording);
             this.Controls.Add(this.or_dateTimeLabel);
             this.Controls.Add(this.or_controlButtons);
             this.Controls.Add(this.camera_number_txt);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::FaceDetection.Properties.Settings.Default, "main_screen_size", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "UVC Camera Viewer";

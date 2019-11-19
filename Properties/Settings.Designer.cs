@@ -850,5 +850,17 @@ namespace FaceDetection.Properties {
                 this["main_camera_fps"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("640, 480")]
+        public global::System.Drawing.Size main_screen_size {
+            get {
+                return ((global::System.Drawing.Size)(this["main_screen_size"]));
+            }
+            set {
+                this["main_screen_size"] = value;
+            }
+        }
     }
 }

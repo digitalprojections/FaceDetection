@@ -284,8 +284,8 @@ namespace FaceDetection
 
         public void WindowSizeUpdate()
         {
-                Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
-                Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
+                //Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
+                //Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
             if (crossbar!=null)
             {
                 crossbar.SetWindowPosition(new System.Drawing.Size(this.Width, this.Height));
@@ -369,10 +369,10 @@ namespace FaceDetection
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             StopAllTimers();            
-            if (RSensor != null)
-            {
-                RSensor.SensorClose();
-            }
+            //if (RSensor != null)
+            //{
+            //    RSensor.SensorClose();
+            //}
             Console.WriteLine(this.Location.X.ToString());
             Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
             Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);
@@ -421,9 +421,14 @@ namespace FaceDetection
             AllChangesApply();
             WindowSizeUpdate();
             FillResolutionList();
-            this.Width = decimal.ToInt32(Properties.Settings.Default.C1w);
-            this.Height = decimal.ToInt32(Properties.Settings.Default.C1h);
-            this.Location = new Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));            
+            this.Width = Properties.Settings.Default.main_screen_size.Width;
+            this.Height = Properties.Settings.Default.main_screen_size.Height;
+            Properties.Settings.Default.C1w = Properties.Settings.Default.main_screen_size.Width;
+            Properties.Settings.Default.C1h = Properties.Settings.Default.main_screen_size.Height;
+            this.Location = new Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
+
+            or_dateTimeLabel.Location = new Point(12, this.Height-80);
+            Or_controlBut.Location = new Point(this.Width-320, this.Height-110);
         }
 
         public void SET_REC_ICON()
@@ -449,7 +454,7 @@ namespace FaceDetection
                 if (RSensor != null)
                 {
                     RSensor.Stop_IR_Timer();
-                    RSensor.SensorClose();
+                    //RSensor.SensorClose();
                     // RSensor.Destroy();
                 }
             }

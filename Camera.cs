@@ -113,7 +113,7 @@ namespace FaceDetection
                 {
                     //MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
                     //SettingsUI.ArrangeCameraNames(capDevices.Length);
-                    MainForm.Setting_ui.ArrangeCameraNames(decimal.ToInt32(Properties.Settings.Default.camera_count));
+                    MainForm.Setting_ui.ArrangeCameraNames(capDevices.Length);
                 }
                 else
                 {

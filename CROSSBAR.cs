@@ -169,10 +169,10 @@ namespace FaceDetection
             }
             else
             {
-                if (MainForm.RSensor != null)
-                {
-                    MainForm.RSensor.SensorClose();
-                }
+                //if (MainForm.RSensor != null)
+                //{
+                //    MainForm.RSensor.SensorClose();
+                //}
                 
                 //We end the recording here
                 if (!PREEVENT_RECORDING)
