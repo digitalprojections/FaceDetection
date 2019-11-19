@@ -430,6 +430,9 @@ namespace FaceDetection
                 startInfo.CreateNoWindow = true;
                 startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 Process.Start(startInfo);
+
+                System.Threading.Thread.Sleep(1000);
+                DeleteLastFileFromTemp(postEventVideoFiles); // Delete file I made for the last part of the full video to not taking it in the next event
             }
             catch (Exception e)
             {
@@ -532,6 +535,19 @@ namespace FaceDetection
             proc.Close();
 
             return duration;
+        }
+
+        private static void DeleteLastFileFromTemp(string postEventVideoFiles)
+        {
+            string lastFile = postEventVideoFiles.Substring(postEventVideoFiles.Length - 18, 18);
+            if (Directory.Exists(@"D:\TEMP"))
+            {
+                File.Delete(@"D:\TEMP\" + lastFile);
+            }
+            else
+            {
+                File.Delete(@"C:\TEMP\" + lastFile);
+            }
         }
 
         private static void OnTimerEvent(object sender, EventArgs e) // The event task is finished
