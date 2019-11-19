@@ -368,19 +368,12 @@ namespace FaceDetection
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            StopAllTimers();            
+            StopAllTimers();
             //if (RSensor != null)
             //{
             //    RSensor.SensorClose();
             //}
-            Console.WriteLine(this.Location.X.ToString());
-            Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
-            Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);
-            Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
-            Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
-            Properties.Settings.Default.Save();
-            
-            Application.Exit();
+            //Console.WriteLine(this.Location.X.ToString());            
         }
         
         private void MainForm_Load(object sender, EventArgs e)
@@ -423,12 +416,15 @@ namespace FaceDetection
             FillResolutionList();
             this.Width = Properties.Settings.Default.main_screen_size.Width;
             this.Height = Properties.Settings.Default.main_screen_size.Height;
-            Properties.Settings.Default.C1w = Properties.Settings.Default.main_screen_size.Width;
-            Properties.Settings.Default.C1h = Properties.Settings.Default.main_screen_size.Height;
+            //Properties.Settings.Default.C1w = Properties.Settings.Default.main_screen_size.Width;
+            //Properties.Settings.Default.C1h = Properties.Settings.Default.main_screen_size.Height;
             this.Location = new Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
-
+            
+            ///SET THE MAIN WINDOW ICONS AND BUTTON POSITIONS MANUALLY
             or_dateTimeLabel.Location = new Point(12, this.Height-80);
             Or_controlBut.Location = new Point(this.Width-320, this.Height-110);
+            or_camera_num_txt.Location = new Point(this.Width - 90, 10);
+            ///////////////////////////////////////////////////////////
         }
 
         public void SET_REC_ICON()
@@ -526,16 +522,16 @@ namespace FaceDetection
                 PARAMETERS.PARAM.Add("uvccameraviewer.exe");
                 PARAMETERS.PARAM.Reverse();
                 PARAMETERS.HandleParameters(PARAMETERS.PARAM);
-                if (PARAMETERS.isMinimized)
-                {
-                    GetMainForm.WindowState = FormWindowState.Minimized;
-                }
-                else
-                {
-                    GetMainForm.WindowState = FormWindowState.Normal;
-                }
+                //if (PARAMETERS.isMinimized)
+                //{
+                //    GetMainForm.WindowState = FormWindowState.Minimized;
+                //}
+                //else
+                //{
+                //    GetMainForm.WindowState = FormWindowState.Normal;
+                //}
 
-                GetMainForm.or_controlButtons.Visible = PARAMETERS.isControlButtonVisible;
+                //GetMainForm.or_controlButtons.Visible = PARAMETERS.isControlButtonVisible;
 
                 PARAMETERS.PARAM.Clear();
             }
@@ -620,20 +616,16 @@ namespace FaceDetection
             //////////////////////////////////////////////////////////////////            
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            AllChangesApply();
-        }
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         private static extern IntPtr SendMessageTimeout(
-    IntPtr hWnd,
-    uint Msg,
-    UIntPtr wParam,
-    IntPtr lParam,
-    SendMessageTimeoutFlags fuFlags,
-    uint uTimeout,
-    out UIntPtr lpdwResult);
+            IntPtr hWnd,
+            uint Msg,
+            UIntPtr wParam,
+            IntPtr lParam,
+            SendMessageTimeoutFlags fuFlags,
+            uint uTimeout,
+            out UIntPtr lpdwResult);
 
         [Flags]
          enum SendMessageTimeoutFlags : uint
@@ -676,6 +668,22 @@ namespace FaceDetection
         private void MainForm_ResizeEnd(object sender, EventArgs e)
         {
             WindowSizeUpdate();
+        }
+
+        private void BackgroundWorkerMain_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
+            Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);
+            Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
+            Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
+            Properties.Settings.Default.Save();
+
+            Application.Exit();
         }
     }
 }

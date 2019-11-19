@@ -142,16 +142,15 @@ namespace FaceDetection
             {
                 MainForm.GetMainForm.SET_REC_ICON();
             }
-
-            wait_interval_enabled = true;
-            if(no_opcap_timer!=null)
-            {
-                no_opcap_timer.Enabled = true;
-            }
+            wait_interval_enabled = true;            
             int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording + vidlen) * 1000;
             if (intt > 500)
             {
                 no_opcap_timer.Interval = intt;
+            }
+            if (no_opcap_timer != null)
+            {
+                no_opcap_timer.Enabled = true;
             }
         }
 

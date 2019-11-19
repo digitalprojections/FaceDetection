@@ -4,7 +4,7 @@ using System.Timers;
 
 namespace FaceDetection
 {
-    class IRSensor:IDisposable
+    class IRSensor
     {
         private delegate void IRTimerTickDelegate();
         System.Timers.Timer SensorCheckTimer = new System.Timers.Timer();
@@ -23,17 +23,7 @@ namespace FaceDetection
             SensorCheckTimer.Elapsed += IR_Timer_Tick;
             SensorCheckTimer.AutoReset = true;
         }
-        public void Destroy()
-        {
-            Stop_IR_Timer();
-            SensorCheckTimer.Dispose();
-        }
-
-        public void SetInterval()
-        {
-            SensorCheckTimer.Enabled = true;
-            SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
-        }
+        
         private void Init_IR_Timer()
         {
            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_Human_sensor && decimal.ToInt32(Properties.Settings.Default.face_rec_interval)>0)
@@ -121,7 +111,18 @@ namespace FaceDetection
             bIsIRCheckExec = false;
 
         }
-        
+        public void Destroy()
+        {
+            Stop_IR_Timer();
+            SensorCheckTimer.Dispose();
+        }
+
+        public void SetInterval()
+        {
+            SensorCheckTimer.Enabled = true;
+            SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
+            SensorCheckTimer.Enabled = false;
+        }
         public uint CheckSensor()
         {
             bool ret = false;
@@ -160,7 +161,7 @@ namespace FaceDetection
                 catch (Exception e)
                 {
                     data[1] = 0;
-                    Logger.Add(e.Message + " ******** IRSensor ERROR");
+                    //Logger.Add(e.Message + " ******** IRSensor ERROR");
                 }
                 SensorClose();
             }
@@ -176,10 +177,7 @@ namespace FaceDetection
         {
                DispDeviceClose();
         }
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         [DllImport("DispApi.dll")]
         static extern bool DispDeviceOpen();

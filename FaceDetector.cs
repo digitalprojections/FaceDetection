@@ -54,7 +54,7 @@ namespace FaceDetection
         }
 
         private void Face_check_timer_Tick(object sender, ElapsedEventArgs e)
-        {   
+        {
             Console.WriteLine("FACE " + checkOK);
             try
             {

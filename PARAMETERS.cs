@@ -12,8 +12,8 @@ namespace FaceDetection
     {
         public static List<string> PARAM;
         static string param;
-        public static bool isMinimized = false;
-        public static bool isControlButtonVisible = true;
+        //public static bool isMinimized = false;
+        //public static bool isControlButtonVisible = true;
 
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
