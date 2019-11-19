@@ -180,7 +180,7 @@ namespace FaceDetection
             if (folderButton.Visible == false)
             {
                 Or_controlBut.Visible = true;
-           }
+            }
             else
             {
                 Or_controlBut.Visible = false;
@@ -244,11 +244,11 @@ namespace FaceDetection
 
         private void ShowSettingsDialogAsync()
         {
-                if (Setting_ui.Visible == false)
-                {
-                    this.TopMost = false;
-                    Setting_ui.ShowDialog();
-                }
+            if (Setting_ui.Visible == false)
+            {
+                this.TopMost = false;
+                Setting_ui.ShowDialog();
+            }
         }
 
         private void OpenStoreLocation(object sender, EventArgs e)
@@ -337,23 +337,23 @@ namespace FaceDetection
             //BackLight.ON();            
             try
             {                
-                    if ((String)cameraButton.Tag == "play")
-                    {
-                    SetRecordButtonState("rec", false);
-                        crossbar.Start(0, CAMERA_MODES.MANUAL);                        
-                    }
-                    else
-                    {
-                        //it really depends if we shoul PREVIEW ro PREEVENT
-                        //set the deciding factors
-                        //for now we can use this value as a test
-                        //ONLY 0 index camera or the main camera is the one to be used to the manual reording?
-                        
-                        Or_pb_recording.Visible = false;                        
-                        SetRecordButtonState("play", true);
-                        SetCameraToDefaultMode();
-                    }
+                if ((String)cameraButton.Tag == "play")
+                {
+                SetRecordButtonState("rec", false);
+                    crossbar.Start(0, CAMERA_MODES.MANUAL);                        
                 }
+                else
+                {
+                    //it really depends if we shoul PREVIEW ro PREEVENT
+                    //set the deciding factors
+                    //for now we can use this value as a test
+                    //ONLY 0 index camera or the main camera is the one to be used to the manual reording?
+                        
+                    Or_pb_recording.Visible = false;                        
+                    SetRecordButtonState("play", true);
+                    SetCameraToDefaultMode();
+                }
+            }
             catch (InvalidOperationException iox)
             {
                 Logger.Add(iox);
@@ -610,7 +610,7 @@ namespace FaceDetection
                 if (GetMainForm.UniqueFPS(FPS) != true)
                 {
                     vf_fps.Add(FPS.ToString());        
-            }
+                }
             }
             SettingsUI.SetComboBoxResolutionValues(vf_resolutions);
             SettingsUI.SetComboBoxFPSValues(vf_fps);
