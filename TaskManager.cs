@@ -122,13 +122,14 @@ namespace FaceDetection
             TimeSpan tsTimeBeforeEvent, timeFromStartVideoToEvent, timeWantedToCut;
             bool fileSaved = false;
             TimeSpan tsBufferLengthDuration = new TimeSpan(0, 0, 0, BUFFERDURATION / 1000);
+            DateTime recordEnd = DateTime.Now;
 
             try
             {
                 RefreshFilesInList(); // Add the new files recorded since the event started in the list
+                listRecordingFiles.Sort(); // If files are in wrong order (Touch panel issues), bring them back in a right order
 
                 // Check the date of the end of the event with the time of event + time after event in the task list to match which one we need to use
-                DateTime recordEnd = DateTime.Now;
                 for (int i = 0; i < listTask.Count; i++)
                 {
                     dateEventStop = listTask.ElementAt(i).eventtime + listTask.ElementAt(i).stoptime;
@@ -549,14 +550,6 @@ namespace FaceDetection
         public string allPreEventVideo = "";
         public int cameraNumber;
 
-        /// <summary>
-        /// Initialize a task
-        /// </summary>
-        /// <param name="starttime">start time</param>
-        /// <param name="stoptime">stop time</param>
-        /// <param name="eventtime">event time</param>
-        /// <param name="complete">complete</param>
-        /// <param name="path">path</param>
         public TaskItem(TimeSpan starttime, TimeSpan stoptime, DateTime eventtime, bool complete, string path, int cameraNumber)
         {
             this.path = path;
