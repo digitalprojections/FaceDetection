@@ -228,18 +228,20 @@ namespace FaceDetection
                  
         private void Cm_language_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cm_language.SelectedItem != null && cm_language.SelectedItem.ToString() =="English")
+            if (cm_language.SelectedItem != null)
             {
-                Properties.Settings.Default.culture = "en-US";
-                Properties.Settings.Default.language = "English";
+                if (cm_language.SelectedItem.ToString() == "English")
+                {
+                    Properties.Settings.Default.culture = "en-US";
+                    Properties.Settings.Default.language = "English";
+                }
+                else
+                {
+                    Properties.Settings.Default.culture = "ja-JP";
+                    Properties.Settings.Default.language = "日本語";
+                }
+                ChangeLanguage();
             }
-            else
-            {
-                Properties.Settings.Default.culture = "ja-JP";
-                Properties.Settings.Default.language = "日本語";
-            }
-
-            ChangeLanguage();
         }
 
         private void ChangeLanguage()

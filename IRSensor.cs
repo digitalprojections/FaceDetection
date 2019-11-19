@@ -16,8 +16,8 @@ namespace FaceDetection
         public IRSensor()
         {
             bIsIRCheckExec = true;
-            DispDeviceOpen();
-            SensorClose();
+            //DispDeviceOpen();
+            //SensorClose();
             //init
             Init_IR_Timer();
             SensorCheckTimer.Elapsed += IR_Timer_Tick;
@@ -53,56 +53,57 @@ namespace FaceDetection
             uint rval = CheckSensor();
             if (bIsIRCheckExec)
             {
-                SensorClose();
                 if ( rval == 1 )
                 {
                     bIsIRCheckExec = false;
-                Stop_IR_Timer();
-                //heat signature detected, stop timer
-                    TimerElapsed();
-            }
-            }
-            
-            Logger.Add("SENSOR " + bIsIRCheckExec);
+                    Stop_IR_Timer();
+                    //heat signature detected, stop timer
+                    MotionDetected();
+                }
+            }            
+            //Logger.Add("SENSOR " + bIsIRCheckExec);
         }
 
-        private void TimerElapsed()
+        private void MotionDetected()
         {
             if (MainForm.GetMainForm.InvokeRequired)
             {
-                var d = new IRTimerTickDelegate(TimerElapsed);
+                var d = new IRTimerTickDelegate(MotionDetected);
                 MainForm.GetMainForm.Invoke(d);
             }
                 else
             {
-                if (Properties.Settings.Default.capture_method <= 0 && !MainForm.GetMainForm.crossbar.OPER_BAN)
+                if (!MainForm.GetMainForm.crossbar.OPER_BAN)
                 {
-                    //initiate RECORD mode
-                    if (MainForm.GetMainForm != null && MainForm.GetMainForm.crossbar.PREEVENT_RECORDING)
+                    if (Properties.Settings.Default.capture_method <= 0)
                     {
-                        TaskManager.EventAppeared(RECORD_PATH.EVENT,
-                            1,
-                            decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
-                            decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
-                            DateTime.Now);
+                        //initiate RECORD mode
+                        if (MainForm.GetMainForm != null && MainForm.GetMainForm.crossbar.PREEVENT_RECORDING)
+                        {
+                            TaskManager.EventAppeared(RECORD_PATH.EVENT,
+                                1,
+                                decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
+                                decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
+                                DateTime.Now);
+                        }
+                        else
+                        {
+                            MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
+                        }
+                        MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
                     }
                     else
                     {
-                        MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
+                        SNAPSHOT_SAVER.TakeSnapShot(0, "event");
                     }
-                    MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
-                }
-                else
-                {
-                    SNAPSHOT_SAVER.TakeSnapShot(0, "event");
-                }
 
-                Logger.Add("IR SENSOR: Motion detected");
-                if (Properties.Settings.Default.backlight_on_upon_face_rec)
-                {
-                    MainForm.GetMainForm.BackLight.ON();
-                }
-                MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
+                    Logger.Add("IR SENSOR: Motion detected");
+                    if (Properties.Settings.Default.backlight_on_upon_face_rec)
+                    {
+                        MainForm.GetMainForm.BackLight.ON();
+                    }
+                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
+                }                
             }
         }
 
@@ -160,7 +161,8 @@ namespace FaceDetection
                 {
                     data[1] = 0;
                     Logger.Add(e.Message + " ******** IRSensor ERROR");
-                }                
+                }
+                SensorClose();
             }
             else
             {             
@@ -172,10 +174,7 @@ namespace FaceDetection
 
         public void SensorClose()
         {
-            if (IsDllLoaded("DispApi.dll"))
-            {
-                DispDeviceClose();
-            }
+               DispDeviceClose();
         }
         public void Dispose()
         {
