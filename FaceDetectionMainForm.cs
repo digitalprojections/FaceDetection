@@ -239,16 +239,33 @@ namespace FaceDetection
 
         private async void ShowSettings(object sender, EventArgs e)
         {
+            
             ShowSettingsDialogAsync();
         }
 
         private void ShowSettingsDialogAsync()
         {
+            if (Setting_ui.InvokeRequired)
+            {
+                var d = new dShowSettingsUI(ShowSettingsDialogAsync);
+                Setting_ui.Invoke(d);
+            }
+            else
+            {
                 if (Setting_ui.Visible == false)
                 {
                     this.TopMost = false;
-                    Setting_ui.ShowDialog();
+                    try
+                    {
+                        Setting_ui.ShowDialog();
+                    }
+                   catch(InvalidOperationException invx)
+                    {
+                        Setting_ui = new SettingsUI();
+                    }
                 }
+            }
+            
         }
 
         private void OpenStoreLocation(object sender, EventArgs e)
@@ -369,6 +386,7 @@ namespace FaceDetection
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             StopAllTimers();
+            backgroundWorkerMain.RunWorkerAsync();
             //if (RSensor != null)
             //{
             //    RSensor.SensorClose();
@@ -380,6 +398,7 @@ namespace FaceDetection
         {
             #region Instances
             ///////////////////////////////////////
+            settingUI = new SettingsUI();
             crossbar = new CROSSBAR();
             RSensor = new IRSensor();
             FaceDetector = new FaceDetector();
@@ -672,15 +691,15 @@ namespace FaceDetection
 
         private void BackgroundWorkerMain_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            
-        }
-
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
             Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
             Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);
             Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
             Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
             Properties.Settings.Default.Save();
 
             Application.Exit();

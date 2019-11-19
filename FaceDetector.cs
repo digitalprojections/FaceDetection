@@ -74,12 +74,13 @@ namespace FaceDetection
             }         
         }
 
-        private void GetTheBMPForFaceCheck()
+        private async void GetTheBMPForFaceCheck()
         {
             if (MainForm.GetMainForm.InvokeRequired)
             {
                 var d = new dGetTheBMPImage(GetTheBMPForFaceCheck);
-                MainForm.GetMainForm.Invoke(d);
+                if(MainForm.GetMainForm!=null)
+                    MainForm.GetMainForm.Invoke(d);
             }
             else
             {
@@ -104,9 +105,9 @@ namespace FaceDetection
                             //↓20191107 Nagayama added↓
                             FaceDetectedAction();
                         }
-                    });
-
+                    });                    
                     faceTask.Start();
+                    //faceTask.Wait();
                 }
             }
         }

@@ -129,7 +129,10 @@ namespace FaceDetection
 
         private void Save_and_close(object sender, EventArgs e)
         {
-            backgroundWorker.RunWorkerAsync();
+            
+            PROPERTY_FUNCTIONS.SetWidth(Camera_index);
+            Properties.Settings.Default.Save();
+            MainForm.AllChangesApply();
             Hide();
         }        
 
@@ -492,17 +495,7 @@ namespace FaceDetection
         //    CustomMessage.Add(Properties.Settings.Default.interval_before_reinitiating_recording);
         //}
 
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            PROPERTY_FUNCTIONS.SetWidth(Camera_index);
-            Properties.Settings.Default.Save();
-            
-        }
-
-        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            MainForm.AllChangesApply();
-        }
+        
 
         private void Nud_reinitiation_interval_ValueChanged(object sender, EventArgs e)
         {
