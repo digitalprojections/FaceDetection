@@ -245,6 +245,7 @@ namespace FaceDetection
                                         {
                                             if (!PARAMETERS.isHidden)
                                                 MainForm.GetMainForm.WindowState = FormWindowState.Normal;
+                                            MainForm.GetMainForm.Size = PROPERTY_FUNCTIONS.GetResolution(0);
                                         }
                                     }
                                     else

@@ -217,10 +217,9 @@ namespace FaceDetection
                     this.TopMost = true;
                 }
 
-                if(Properties.Settings.Default.main_window_full_screen)
-                {
+                
                     this.WindowState = FormWindowState.Maximized;
-            }
+            
             }
             else
             {
@@ -430,7 +429,7 @@ namespace FaceDetection
             }
             
             this.WindowState = FormWindowState.Minimized; // Matsuura
-            
+            AllChangesApply();
             WindowSizeUpdate();
             FillResolutionList();
             this.Width = Properties.Settings.Default.main_screen_size.Width;
@@ -444,7 +443,7 @@ namespace FaceDetection
             Or_controlBut.Location = new Point(this.Width-320, this.Height-110);
             or_camera_num_txt.Location = new Point(this.Width - 90, 10);
             ///////////////////////////////////////////////////////////
-            AllChangesApply();
+            
         }
 
         public void SET_REC_ICON()
@@ -557,7 +556,7 @@ namespace FaceDetection
 
             //Also must check if the PREEVENT mode is needed
             SetCameraToDefaultMode();
-            Debug.WriteLine(Or_pb_recording.Visible);
+            //Debug.WriteLine(Or_pb_recording.Visible);
             GC.Collect();
 
             

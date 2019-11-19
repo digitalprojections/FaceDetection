@@ -207,6 +207,7 @@
             this.pbRecording.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbRecording.TabIndex = 5;
             this.pbRecording.TabStop = false;
+            this.pbRecording.Visible = false;
             // 
             // backgroundWorkerMain
             // 
