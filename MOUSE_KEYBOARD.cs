@@ -73,8 +73,13 @@ namespace FaceDetection
                         TaskManager.EventAppeared(RECORD_PATH.EVENT, 1,
                             decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
                             decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
-                            DateTime.Now);                                                
+                            DateTime.Now);
+                        if (Properties.Settings.Default.capture_method == 0)
+                        {
+                            MainForm.GetMainForm.SET_REC_ICON();
+                        }
                         //↓20191107 Nagayama added↓
+
                     }
                     else
                     {

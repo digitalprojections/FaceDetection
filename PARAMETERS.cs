@@ -379,6 +379,10 @@ namespace FaceDetection
                                     MainForm.Or_pb_recording.Image = Properties.Resources.player_record;
                                     MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                                     MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.MANUAL);
+                                    if (Properties.Settings.Default.capture_method == 0)
+                                    {
+                                        MainForm.GetMainForm.SET_REC_ICON();
+                                    }
                                 }
                                 else
                                 {
