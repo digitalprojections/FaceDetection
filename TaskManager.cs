@@ -434,9 +434,9 @@ namespace FaceDetection
                 System.Threading.Thread.Sleep(1000);
                 if (preEventVideoFiles != "")
                 {
-                    DeleteFileFromTemp(preEventVideoFiles); // Delete file cut for the first part of the full video to not taking it in the next event 
+                    DeleteCutFileFromTemp(preEventVideoFiles); // Delete file cut for the first part of the full video to not taking it in the next event 
                 }
-                DeleteFileFromTemp(postEventVideoFiles); // Delete file cut for the last part of the full video to not taking it in the next event 
+                DeleteCutFileFromTemp(postEventVideoFiles); // Delete file cut for the last part of the full video to not taking it in the next event 
             }
             catch (Exception e)
             {
@@ -488,33 +488,33 @@ namespace FaceDetection
             }
         }
 
-        public static void DeleteOldFiles(string pathTempFolder) // Delete old files that we don't need anymore
-        {
-            DirectoryInfo dir;
-            string fileName;
-            DateTime fileDate;
-            TimeSpan tsTimeMaxToKeep = new TimeSpan(0, 0, 15, 0);
+        //private static void DeleteOldFiles(string pathTempFolder) // Delete old files that we don't need anymore
+        //{
+        //    DirectoryInfo dir;
+        //    string fileName;
+        //    DateTime fileDate;
+        //    TimeSpan tsTimeMaxToKeep = new TimeSpan(0, 0, 15, 0);
 
-            try
-            {
-                dir = new DirectoryInfo(pathTempFolder);
-                FileInfo[] filesList = dir.GetFiles();
-                foreach (FileInfo files in filesList)
-                {
-                    fileName = files.FullName;
-                    fileDate = DateTime.ParseExact(fileName.Substring(files.FullName.Length - 18, 14), "yyyyMMddHHmmss", null);
-                    if (DateTime.Compare(fileDate, (DateTime.Now - tsTimeMaxToKeep)) < 0)
-                    {
-                        File.SetAttributes(files.FullName, FileAttributes.Normal); // Add in case of weird attribute on the file
-                        File.Delete(files.FullName);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message + " TaskManager in DeleteOldFiles()");
-            }
-        }
+        //    try
+        //    {
+        //        dir = new DirectoryInfo(pathTempFolder);
+        //        FileInfo[] filesList = dir.GetFiles();
+        //        foreach (FileInfo files in filesList)
+        //        {
+        //            fileName = files.FullName;
+        //            fileDate = DateTime.ParseExact(fileName.Substring(files.FullName.Length - 18, 14), "yyyyMMddHHmmss", null);
+        //            if (DateTime.Compare(fileDate, (DateTime.Now - tsTimeMaxToKeep)) < 0)
+        //            {
+        //                File.SetAttributes(files.FullName, FileAttributes.Normal); // Add in case of weird attribute on the file
+        //                File.Delete(files.FullName);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e.Message + " TaskManager in DeleteOldFiles()");
+        //    }
+        //}
 
         private static string GetVideoDuration(string videoPath) // Get the duration of the video file gave in parameter
         {
@@ -541,7 +541,7 @@ namespace FaceDetection
             return duration;
         }
 
-        private static void DeleteFileFromTemp(string VideoFiles)
+        private static void DeleteCutFileFromTemp(string VideoFiles)
         {
             string file = VideoFiles.Substring(VideoFiles.Length - 18, 18);
             if (Directory.Exists(@"D:\TEMP"))
