@@ -75,20 +75,21 @@ namespace FaceDetection
                                 decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
                                 decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
                                 DateTime.Now);
-                            if (Properties.Settings.Default.capture_method == 0)
-                            {
+                            
                                 MainForm.GetMainForm.SET_REC_ICON();
-                            }
+                            
                         }
                         else
                         {
                             MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
                         }
                         MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
+                        MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
                     }
                     else
                     {
                         SNAPSHOT_SAVER.TakeSnapShot(0, "event");
+                        MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
                     }
 
                     Logger.Add("IR SENSOR: Motion detected");
@@ -96,7 +97,7 @@ namespace FaceDetection
                     {
                         MainForm.GetMainForm.BackLight.ON();
                     }
-                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
+                    
                 }                
             }
         }

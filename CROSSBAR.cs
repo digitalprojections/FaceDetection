@@ -220,14 +220,17 @@ namespace FaceDetection
                     recorder.RESET_FILE_PATH();
                     try
                     {
-                        if (Directory.Exists(@"D:\TEMP"))
-                        {
-                            TaskManager.DeleteOldFiles(@"D:\TEMP");                            
-                        }
-                        else
-                        {
-                            TaskManager.DeleteOldFiles(@"C:\TEMP");                            
-                        }
+                        Task task = Task.Factory.StartNew(() => {
+                            if (Directory.Exists(@"D:\TEMP"))
+                            {
+                                TaskManager.DeleteOldFiles(@"D:\TEMP");
+                            }
+                            else
+                            {
+                                TaskManager.DeleteOldFiles(@"C:\TEMP");
+                            }
+                        });
+                        //task.Wait();
                     }
                     catch (IOException e)
                     {
@@ -373,7 +376,7 @@ namespace FaceDetection
             if (the_timer!=null)
             {
                 the_timer.Enabled = true;
-                Logger.Add("timer started " + the_timer.Interval);
+                Logger.Add("THE_TIMER started " + the_timer.Interval);
             }            
         }
 

@@ -32,8 +32,8 @@ namespace FaceDetection
                 DateTime eventTime = triggerTime; // DateTime.Now;
 
                 // Nishida DEBUG
-                Console.WriteLine("eventTime:" + eventTime);
-                Console.WriteLine("nowTime:" + DateTime.Now);
+                CustomMessage.Add("eventTime:" + eventTime);
+                CustomMessage.Add("nowTime:" + DateTime.Now);
                 // Nishida DEBUG
 
                 timeSpanStart = new TimeSpan(0, 0, 0, timeBeforeEvent);

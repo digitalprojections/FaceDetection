@@ -360,11 +360,8 @@ namespace FaceDetection
                     if ((String)cameraButton.Tag == "play")
                     {
                     SetRecordButtonState("rec", false);
-                        crossbar.Start(0, CAMERA_MODES.MANUAL);
-                    if (Properties.Settings.Default.capture_method == 0)
-                    {
-                        MainForm.GetMainForm.SET_REC_ICON();
-                    }
+                    crossbar.Start(0, CAMERA_MODES.MANUAL);                    
+                    MainForm.GetMainForm.SET_REC_ICON();
                 }
                     else
                     {
@@ -481,56 +478,73 @@ namespace FaceDetection
 
                 PARAMETERS.PARAM.Clear();
             }
-            if (Properties.Settings.Default.enable_Human_sensor)
-            {
-                if (RSensor != null)
+            Task task = new Task(() => {
+                if (Properties.Settings.Default.enable_Human_sensor)
                 {
-                    RSensor.Stop_IR_Timer();
-                    // RSensor.Destroy();
+                    if (RSensor != null)
+                    {
+                        RSensor.Stop_IR_Timer();
+                        // RSensor.Destroy();
+                    }
+                    //RSensor = new IRSensor();
+                    RSensor.SetInterval();
+                    RSensor.Start_IR_Timer();
                 }
-                //RSensor = new IRSensor();
-                RSensor.SetInterval();
-                RSensor.Start_IR_Timer();
-            }
-            else
-            {
-                if (RSensor != null)
+                else
                 {
-                    RSensor.Stop_IR_Timer();
-                    //RSensor.SensorClose();
-                    // RSensor.Destroy();
+                    if (RSensor != null)
+                    {
+                        RSensor.Stop_IR_Timer();
+                        //RSensor.SensorClose();
+                        // RSensor.Destroy();
+                    }
                 }
+
+                if (Properties.Settings.Default.enable_face_recognition)
+                {
+                    if (faceDetector != null)
+                    {
+                        FaceDetector.StopFaceTimer();
+                        //faceDetector.Destroy();
+                    }
+                    //faceDetector = new FaceDetector();
+                    faceDetector.SetInterval();
+                    faceDetector.StartFaceTimer();
+                }
+                else
+                {
+                    if (faceDetector != null)
+                    {
+                        FaceDetector.StopFaceTimer();
+                        //faceDetector.Destroy();
+                    }
+                }
+
+                if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+                {
+                    Mklisteners.AddMouseAndKeyboardBack();
+                }
+            });
+
+            task.Start();
+            
+
+            //SCREEN PROPS
+            SetMainScreenProperties();
+            
+
+            //Also must check if the PREEVENT mode is needed
+            SetCameraToDefaultMode();
+            //Debug.WriteLine(Or_pb_recording.Visible);
+            GC.Collect();
             }
 
-            if (Properties.Settings.Default.enable_face_recognition)
-            {
-                if (faceDetector != null)
-                {
-                    FaceDetector.StopFaceTimer();
-                    //faceDetector.Destroy();
-                }
-                //faceDetector = new FaceDetector();
-                faceDetector.SetInterval();
-                faceDetector.StartFaceTimer();
-            }
-            else
-            {
-                if (faceDetector != null)
-                {
-                    FaceDetector.StopFaceTimer();
-                    //faceDetector.Destroy();
-                }
-            }
-
-            if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
-            {
-                Mklisteners.AddMouseAndKeyboardBack();
-            }
-
+        private static void SetMainScreenProperties()
+        {
             if (Setting_ui == null)
             {
                 Or_pb_recording.Visible = false;
-                Setting_ui = new SettingsUI();                
+                Setting_ui = new SettingsUI();
             }
 
             or_camera_num_txt.Visible = Properties.Settings.Default.show_camera_no;
@@ -541,16 +555,14 @@ namespace FaceDetection
             or_current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
             if (Properties.Settings.Default.main_window_full_screen)
             {
-                if(!PARAMETERS.isHidden)
-                    MainForm.GetMainForm.WindowState = FormWindowState.Maximized;                
+                if (!PARAMETERS.isHidden)
+                    MainForm.GetMainForm.WindowState = FormWindowState.Maximized;
             }
             else
             {
                 if (!PARAMETERS.isHidden)
-                    MainForm.GetMainForm.WindowState = FormWindowState.Normal;                
+                    MainForm.GetMainForm.WindowState = FormWindowState.Normal;
             }
-            //FULL SCREEN
-
             //Window pane
             if (Properties.Settings.Default.show_window_pane == true)
             {
@@ -561,16 +573,7 @@ namespace FaceDetection
             {
                 or_mainForm.FormBorderStyle = FormBorderStyle.None;
             }
-
-            //Also must check if the PREEVENT mode is needed
-            SetCameraToDefaultMode();
-            //Debug.WriteLine(Or_pb_recording.Visible);
-            GC.Collect();
-
-            
-
-            
-            }
+        }
 
         //public static void ParametersChangesApply()
         //{
