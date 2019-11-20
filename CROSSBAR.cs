@@ -338,7 +338,7 @@ namespace FaceDetection
                     camera = new UsbCamera(this.INDEX, this.parentwindow);
                     camera.Start();
                 }
-                else if (camera.Size.Width != PROPERTY_FUNCTIONS.GetWidth(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetWidth(0).Height)
+                else if (camera.Size.Width != PROPERTY_FUNCTIONS.GetCameraSize(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetCameraSize(0).Height)
                 {
                     camera.Release();
                     camera = new UsbCamera(this.INDEX, this.parentwindow);
@@ -359,7 +359,7 @@ namespace FaceDetection
                     camera.Release();                    
                     recorder.StartRecorderCamera();
                 }
-                else if (camera != null && camera.Size.Width != PROPERTY_FUNCTIONS.GetWidth(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetWidth(0).Height)
+                else if (camera != null && camera.Size.Width != PROPERTY_FUNCTIONS.GetCameraSize(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetCameraSize(0).Height)
                 {
                     recorder.ReleaseInterfaces();
                     recorder = new RecorderCamera(this.INDEX, this.parentwindow);
