@@ -14,6 +14,12 @@ namespace FaceDetection
         static string param;
         public static bool isHidden = false;
         //public static bool isControlButtonVisible = true;
+        /// <summary>
+        ///An IMPORTANT variable. It is always referring to a different window, depending on the parameter`s <see cref="C"/> value
+        /// </summary>
+        static Form the_form = null;
+
+        public static Form The_form { get => the_form; set => the_form = value; }
 
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
@@ -245,7 +251,7 @@ namespace FaceDetection
                                         {
                                             if (!PARAMETERS.isHidden)
                                                 MainForm.GetMainForm.WindowState = FormWindowState.Normal;
-                                            MainForm.GetMainForm.Size = PROPERTY_FUNCTIONS.GetResolution(0);
+                                            MainForm.GetMainForm.Size = PROPERTY_FUNCTIONS.Get_Stored_Resolution(0);
                                         }
                                     }
                                     else
@@ -312,11 +318,12 @@ namespace FaceDetection
                                         //kameyama comennt 20191020
                                         //Properties.Settings.Default.show_window_pane = true;
                                         //FormChangesApply();
-                                        MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
+                                        
+                                        //MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
                                         Properties.Settings.Default.show_window_pane = true;
                                         Properties.Settings.Default.Save();
 
-                                        if (MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
+                                        if (MainForm.GetMainForm!=null && MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
                                         {
                                             //settingUI.TopMost = true;
                                             MainForm.GetMainForm.TopMost = false;
@@ -330,7 +337,8 @@ namespace FaceDetection
                                         Properties.Settings.Default.Save();
                                         
                                     }
-                                    MainForm.AllChangesApply();
+                                    if (MainForm.GetMainForm != null)
+                                        MainForm.AllChangesApply();
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
