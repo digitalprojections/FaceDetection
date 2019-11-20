@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security;
 using System.Text;
+using System.Windows.Forms;
 
 namespace FaceDetection
 {
@@ -21,6 +22,7 @@ namespace FaceDetection
         string targetPath = String.Empty;
         internal string ACTIVE_RECPATH = null;
         int INDEX = 0;
+        Form parentwindow = null; 
         internal CAMERA_MODES CAMERA_MODE { get { return cAMERA_MODE; } set => cAMERA_MODE = value; }        
         public Action Stop { get; private set; }
         public Action Release { get; private set; }
@@ -87,9 +89,10 @@ namespace FaceDetection
             
     }
 
-        public RecorderCamera(int cameraIndex)
+        public RecorderCamera(int cameraIndex, Form pbx)
         {
             this.INDEX = cameraIndex;
+            this.parentwindow = pbx;
             sourcePath = Properties.Settings.Default.temp_folder;            
         }
 
@@ -136,7 +139,7 @@ namespace FaceDetection
             
             Size size = PROPERTY_FUNCTIONS.GetResolution(INDEX);
             int fps = PROPERTY_FUNCTIONS.GetFPS(0);
-            IntPtr pbx = MainForm.GetMainForm.Handle;
+            //IntPtr pbx = MainForm.GetMainForm.Handle;
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
             //Logger.Add(CAMERA_MODE + " 1");
             //Logger.Add(CAMERA_MODE + " 2");
@@ -242,12 +245,12 @@ namespace FaceDetection
             checkHR(hr, "Can't set windowless mode");
 
             IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
-            hr = control9.SetVideoClippingWindow(pbx);
+            hr = control9.SetVideoClippingWindow(parentwindow.Handle);
             checkHR(hr, "Can't set video clipping window");
 
             if (CAMERA_MODE != CAMERA_MODES.HIDDEN)
             {                
-                hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, parentwindow.Width, parentwindow.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
                 Logger.Add("NOT HIDDEN MODE " + CAMERA_MODE + ", Active path: " + ACTIVE_RECPATH);
             }
@@ -428,7 +431,7 @@ namespace FaceDetection
             if (CAMERA_MODE != CAMERA_MODES.HIDDEN)
             {
                 IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderFilter;
-                hr = control9.SetVideoPosition(null, new DsRect(0, 0, MainForm.GetMainForm.Width, MainForm.GetMainForm.Height));
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, parentwindow.Width, parentwindow.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
             }
 

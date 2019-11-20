@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security;
 using DirectShowLib;
+using System.Windows.Forms;
 
 namespace FaceDetectionX
 {
@@ -16,7 +17,8 @@ namespace FaceDetectionX
         /// <summary>
         /// Camera Index
         /// </summary>
-        private int INDEX = 0;        
+        private int INDEX = 0;
+        Form parentwindow = null;
         /// <summary>
         /// Camera ON
         /// </summary>
@@ -70,14 +72,15 @@ namespace FaceDetectionX
         /// Size you want to create. If camera does not support the size, created with default size.
         /// Check Size property to know actual created size.
         /// </param>
-        public UsbCamera(int cameraIndex)
+        public UsbCamera(int cameraIndex, Form ptr)
         {
             INDEX = cameraIndex;
+            this.parentwindow = ptr;
             Size size = FaceDetection.PROPERTY_FUNCTIONS.GetResolution(0);
             int fps = FaceDetection.PROPERTY_FUNCTIONS.GetFPS(0);
             var camera_list = FindDevices();
             //if (cameraIndex >= camera_list.Length) throw new ArgumentException("USB camera is not available.", "index");
-            Init(cameraIndex, size, fps, FaceDetection.MainForm.GetMainForm.Handle);
+            Init(cameraIndex, size, fps, parentwindow.Handle);
         }
         static void checkHR(int hr, string msg)
         {
@@ -113,7 +116,7 @@ namespace FaceDetectionX
             IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
             hr = control9.SetVideoClippingWindow(pbx);
             checkHR(hr, "Can't set video clipping window");
-            hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
+            hr = control9.SetVideoPosition(null, new DsRect(0, 0, this.parentwindow.Width, this.parentwindow.Height));
             checkHR(hr, "Can't set rectangles of the video position");
             var builder = DirectShow.CoCreateInstance(DirectShow.DsGuid.CLSID_CaptureGraphBuilder2) as DirectShow.ICaptureGraphBuilder2;
             builder.SetFiltergraph(graph);
@@ -173,7 +176,7 @@ namespace FaceDetectionX
             {
                 int hr = 0;
                 IVMRWindowlessControl9 control9 = (IVMRWindowlessControl9)renderer;
-                hr = control9.SetVideoPosition(null, new DsRect(0, 0, FaceDetection.MainForm.GetMainForm.Width, FaceDetection.MainForm.GetMainForm.Height));
+                hr = control9.SetVideoPosition(null, new DsRect(0, 0, parentwindow.Width, parentwindow.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
             }
             catch(NullReferenceException nrx)

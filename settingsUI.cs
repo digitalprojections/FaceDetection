@@ -130,9 +130,12 @@ namespace FaceDetection
         private void Save_and_close(object sender, EventArgs e)
         {
             
-            PROPERTY_FUNCTIONS.SetCameraResolution(Camera_index);
+            //PROPERTY_FUNCTIONS.SetCameraResolution(Camera_index);
             Properties.Settings.Default.Save();
             MainForm.AllChangesApply();
+
+            MainForm.GetMainForm.Width = decimal.ToInt32(Properties.Settings.Default.C1w);
+            MainForm.GetMainForm.Height = decimal.ToInt32(Properties.Settings.Default.C1h);
             Hide();
         }        
 

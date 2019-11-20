@@ -4,6 +4,7 @@ using FaceDetectionX;
 using System.Timers;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 namespace FaceDetection
 {
@@ -17,6 +18,7 @@ namespace FaceDetection
         private UsbCamera camera = null;
 
         internal int INDEX = 0;
+        Form parentwindow = null;
         //BOOLEAN
         public bool OPER_BAN = false;
         private bool manualRecording; // Robin
@@ -50,9 +52,12 @@ namespace FaceDetection
 
         public bool Recording_is_on { get => recording_is_on; set => recording_is_on = value; }
                         
-        public CROSSBAR()
+        public CROSSBAR(int cameraindex, Form window_ptr)
         {            
-            this.INDEX = 0;
+            
+            this.INDEX = cameraindex;
+            this.parentwindow = window_ptr;
+            
             no_opcap_timer.AutoReset = false;
             no_opcap_timer.Elapsed += No_opcap_timer_Elapsed;
             no_opcap_timer.Enabled = true;
@@ -72,7 +77,7 @@ namespace FaceDetection
 
             the_timer.Elapsed += The_timer_Tick;
             the_timer.AutoReset = false;
-            recorder = new RecorderCamera(0);
+            recorder = new RecorderCamera(this.INDEX, this.parentwindow);
         }
 
         private void Icon_timer_Tick(object sender, ElapsedEventArgs e)
@@ -330,13 +335,13 @@ namespace FaceDetection
                 }
                 if (camera == null || !camera.ON)
                 {
-                    camera = new UsbCamera(0);
+                    camera = new UsbCamera(this.INDEX, this.parentwindow);
                     camera.Start();
                 }
                 else if (camera.Size.Width != PROPERTY_FUNCTIONS.GetWidth(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetWidth(0).Height)
                 {
                     camera.Release();
-                    camera = new UsbCamera(0);
+                    camera = new UsbCamera(this.INDEX, this.parentwindow);
                     camera.Start();
                 }
                 else
@@ -357,7 +362,7 @@ namespace FaceDetection
                 else if (camera != null && camera.Size.Width != PROPERTY_FUNCTIONS.GetWidth(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetWidth(0).Height)
                 {
                     recorder.ReleaseInterfaces();
-                    recorder = new RecorderCamera(0);
+                    recorder = new RecorderCamera(this.INDEX, this.parentwindow);
                     recorder.StartRecorderCamera();
                 }
                 else if(recorder!=null && recorder.CAMERA_MODE==CAMERA_MODES.MANUAL)
@@ -396,7 +401,7 @@ namespace FaceDetection
                         //decimal mrm = Properties.Settings.Default.manual_record_time;
                         //This does not check if the recording is on, as it prioritizes the manual recording
                         recorder.ReleaseInterfaces();
-                        recorder = new RecorderCamera(0);
+                        recorder = new RecorderCamera(this.INDEX, parentwindow);
                         recorder.CAMERA_MODE = CAMERA_MODES.MANUAL;
                         recorder.ACTIVE_RECPATH = RECORD_PATH.MANUAL;
                         //↓20191106 Nagayama added↓
@@ -421,7 +426,7 @@ namespace FaceDetection
 
                         MainForm.Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon;
                         recorder.ReleaseInterfaces();
-                        recorder = new RecorderCamera(0);
+                        recorder = new RecorderCamera(INDEX, parentwindow);
                         recorder.ACTIVE_RECPATH = RECORD_PATH.EVENT;
                         recorder.CAMERA_MODE = CAMERA_MODES.EVENT;
                         duration = decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event) * 1000;
@@ -475,7 +480,7 @@ namespace FaceDetection
                     duration = BUFFER_DURATION.BUFFERDURATION;
                     //Logger.Add(duration);
                     recorder.ReleaseInterfaces();
-                    recorder = new RecorderCamera(0);
+                    recorder = new RecorderCamera(INDEX, parentwindow);
                     recorder.ACTIVE_RECPATH = Properties.Settings.Default.temp_folder;
                     recorder.CAMERA_MODE = CAMERA_MODES.PREEVENT;
                     the_timer.Enabled = true;

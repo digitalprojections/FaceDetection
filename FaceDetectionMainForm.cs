@@ -404,13 +404,24 @@ namespace FaceDetection
             #region Instances
             ///////////////////////////////////////
             settingUI = new SettingsUI();
-            crossbar = new CROSSBAR();
+            crossbar = new CROSSBAR(0, this);
             RSensor = new IRSensor();
             FaceDetector = new FaceDetector();
             //backLight = new BackLightController();
             BackLight.Start();
-            Mklisteners = new MOUSE_KEYBOARD();            
+            Mklisteners = new MOUSE_KEYBOARD();
             ////////////////////////////////////////
+            #endregion
+
+            #region PARAMETERS
+            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
+            {
+                PARAMETERS.PARAM.Reverse();
+                PARAMETERS.PARAM.Add("uvccameraviewer.exe");
+                PARAMETERS.PARAM.Reverse();
+                PARAMETERS.HandleParameters(PARAMETERS.PARAM);
+                PARAMETERS.PARAM.Clear();
+            }
             #endregion
 
 
@@ -454,26 +465,7 @@ namespace FaceDetection
 
         public static void AllChangesApply()
         {
-            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
-            {
-
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.PARAM.Add("uvccameraviewer.exe");
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.HandleParameters(PARAMETERS.PARAM);
-                //if (PARAMETERS.isMinimized)
-                //{
-                //    GetMainForm.WindowState = FormWindowState.Minimized;
-                //}
-                //else
-                //{
-                //    GetMainForm.WindowState = FormWindowState.Normal;
-                //}
-
-                //GetMainForm.or_controlButtons.Visible = PARAMETERS.isControlButtonVisible;
-
-                PARAMETERS.PARAM.Clear();
-            }
+            
             
                 if (Properties.Settings.Default.enable_Human_sensor)
                 {
@@ -524,7 +516,9 @@ namespace FaceDetection
 
             //SCREEN PROPS
             SetMainScreenProperties();
-            
+
+            //CREATE MORE WINDOWS for more cameras
+            MULTI_WINDOW.CreateCameraWindows(2);
 
             //Also must check if the PREEVENT mode is needed
             SetCameraToDefaultMode();
