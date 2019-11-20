@@ -20,17 +20,19 @@ namespace FaceDetection
                 
         public static void CreateCameraWindows(int camera_count)
         {
-            for (int i=1; i<camera_count;i++)
+            if(Properties.Settings.Default.show_all_cams_simulteneously)
             {
-                
-                form = new Form();
-                formList.Add(form);
-                form.Text = "UVC Camera Viewer - camera " + (i);//counting from the second camera
-                form.Show();
-                crossbar = new CROSSBAR(i, form);
-                crosbarList.Add(crossbar);
-                crossbar.Start(i, CAMERA_MODES.PREVIEW);
-            }
+                for (int i = 1; i < camera_count; i++)
+                {
+                    form = new Form();
+                    formList.Add(form);
+                    form.Text = "UVC Camera Viewer - camera " + (i);//counting from the second camera
+                    form.Show();
+                    crossbar = new CROSSBAR(i, form);
+                    crosbarList.Add(crossbar);
+                    crossbar.Start(i, CAMERA_MODES.PREVIEW);
+                }
+            }            
         }
     }
 }
