@@ -90,7 +90,7 @@ namespace FaceDetection
             newThread.Name = String.Format("Thread SNAPSHOT");
             newThread.IsBackground = true;
             newThread.Start();
-            ThreadProc();
+            //ThreadProc();
         }
         private static void ThreadProc()
         {

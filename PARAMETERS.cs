@@ -205,7 +205,7 @@ namespace FaceDetection
                                         Properties.Settings.Default.capture_operator = true;
                                         Properties.Settings.Default.enable_Human_sensor = true;
                                         Properties.Settings.Default.enable_face_recognition = false;
-                                        MainForm.AllChangesApply();
+                                        
                                     }
                                     else
                                     {
@@ -214,9 +214,9 @@ namespace FaceDetection
                                             MainForm.RSensor.Stop_IR_Timer();
                                         }
                                         Properties.Settings.Default.enable_Human_sensor = false;
-                                        MainForm.AllChangesApply();
+                                        
                                     }
-
+                                    MainForm.AllChangesApply();
                                     CycleTime(time);
                                 }
                             }
@@ -313,7 +313,7 @@ namespace FaceDetection
                                         //Properties.Settings.Default.show_window_pane = true;
                                         //FormChangesApply();
                                         MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
-                                        Properties.Settings.Default.show_window_pane = false;
+                                        Properties.Settings.Default.show_window_pane = true;
                                         Properties.Settings.Default.Save();
 
                                         if (MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
@@ -326,10 +326,11 @@ namespace FaceDetection
                                     }
                                     else
                                     {
-                                        Properties.Settings.Default.show_window_pane = true;
+                                        Properties.Settings.Default.show_window_pane = false;
                                         Properties.Settings.Default.Save();
-                                        MainForm.AllChangesApply();
+                                        
                                     }
+                                    MainForm.AllChangesApply();
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -447,7 +448,7 @@ namespace FaceDetection
             if (time >= 500 && time <= 1000)
             {
                 Properties.Settings.Default.face_rec_interval = time;
-                Logger.Add("できた");
+                //Logger.Add("できた");
             }
         }
 

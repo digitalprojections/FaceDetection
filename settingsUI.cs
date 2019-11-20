@@ -130,7 +130,7 @@ namespace FaceDetection
         private void Save_and_close(object sender, EventArgs e)
         {
             
-            //PROPERTY_FUNCTIONS.SetWidth(Camera_index);
+            PROPERTY_FUNCTIONS.SetCameraResolution(Camera_index);
             Properties.Settings.Default.Save();
             MainForm.AllChangesApply();
             Hide();
@@ -535,5 +535,10 @@ namespace FaceDetection
             int dwReserved,
             IntPtr lpvReserved);
         #endregion
+
+        private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PROPERTY_FUNCTIONS.resolution_changed = true;
+        }
     }
 }

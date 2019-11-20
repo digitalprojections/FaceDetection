@@ -9,6 +9,8 @@ namespace FaceDetection
 {
     class PROPERTY_FUNCTIONS
     {
+        public static bool resolution_changed { get; set; }
+
         public static Size GetWidth(int cam_ind)
         {
             Size retval;
@@ -36,48 +38,39 @@ namespace FaceDetection
 
         }
 
-        public static void SetWidth(int cam_ind)
+        public static void SetCameraResolution(int cam_ind)
         {
-            char[] vs = { 'x' };
-            bool resolution_changed = false;
+            char[] vs = { 'x' };            
             switch (cam_ind)
             {
                 case 0:
-                    if (Properties.Settings.Default.C1w != decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[0]))
-                    {
+                    
                         Properties.Settings.Default.C1w = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[0]);
-                        Properties.Settings.Default.C1h = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[1]);
-                        resolution_changed = true;
-                    }
+                        Properties.Settings.Default.C1h = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[1]);                        
+                    
                     break;
                 case 1:
-                    if (Properties.Settings.Default.C2w != decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[0]))
-                    {
+                    
                         Properties.Settings.Default.C2w = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[0]);
                         Properties.Settings.Default.C2h = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[1]);
-                        resolution_changed = true;
-                    }
+                    
                     break;
                 case 2:
-                    if (Properties.Settings.Default.C3w != decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[0]))
-                    {
+                    
                         Properties.Settings.Default.C3w = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[0]);
-                        Properties.Settings.Default.C3h = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[1]);
-                        resolution_changed = true;
-                    }
+                        Properties.Settings.Default.C3h = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[1]);                        
+                    
                     break;
                 case 3:
-                    if (Properties.Settings.Default.C4w != decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[0]))
-                    {
                         Properties.Settings.Default.C4w = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[0]);
-                        Properties.Settings.Default.C4h = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[1]);
-                        resolution_changed = true;
-                    }
+                        Properties.Settings.Default.C4h = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[1]);                        
+                    
                     break;
             }
             if (resolution_changed)
             {
                 MainForm.GetMainForm.crossbar.RESTART_CAMERA();
+                resolution_changed = false;
             }
         }
         public static System.Drawing.Size GetResolution(int cam_ind)
