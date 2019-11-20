@@ -217,10 +217,9 @@ namespace FaceDetection
                     this.TopMost = true;
                 }
 
-                if(Properties.Settings.Default.main_window_full_screen)
-                {
+                
                     this.WindowState = FormWindowState.Maximized;
-            }
+            
             }
             else
             {
@@ -239,16 +238,33 @@ namespace FaceDetection
 
         private async void ShowSettings(object sender, EventArgs e)
         {
+            
             ShowSettingsDialogAsync();
         }
 
         private void ShowSettingsDialogAsync()
         {
-            if (Setting_ui.Visible == false)
+            if (Setting_ui.InvokeRequired)
             {
-                this.TopMost = false;
-                Setting_ui.ShowDialog();
+                var d = new dShowSettingsUI(ShowSettingsDialogAsync);
+                Setting_ui.Invoke(d);
             }
+            else
+            {
+                if (Setting_ui.Visible == false)
+                {
+                    this.TopMost = false;
+                    try
+                    {
+                        Setting_ui.ShowDialog();
+                    }
+                   catch(InvalidOperationException invx)
+                    {
+                        Setting_ui = new SettingsUI();
+                    }
+                }
+            }
+            
         }
 
         private void OpenStoreLocation(object sender, EventArgs e)
@@ -298,6 +314,10 @@ namespace FaceDetection
 
             if (crossbar.PREEVENT_RECORDING)
             {
+                if (Properties.Settings.Default.capture_method == 0)
+                {
+                    MainForm.GetMainForm.SET_REC_ICON();
+                }
                 TaskManager.EventAppeared(RECORD_PATH.EVENT, 1, decimal.ToInt32(Properties.Settings.Default.event_record_time_before_event), decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event), DateTime.Now);
                 MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event));
             }
@@ -337,17 +357,21 @@ namespace FaceDetection
             //BackLight.ON();            
             try
             {                
-                if ((String)cameraButton.Tag == "play")
-                {
-                SetRecordButtonState("rec", false);
-                    crossbar.Start(0, CAMERA_MODES.MANUAL);                        
+                    if ((String)cameraButton.Tag == "play")
+                    {
+                    SetRecordButtonState("rec", false);
+                        crossbar.Start(0, CAMERA_MODES.MANUAL);
+                    if (Properties.Settings.Default.capture_method == 0)
+                    {
+                        MainForm.GetMainForm.SET_REC_ICON();
+                    }
                 }
-                else
-                {
-                    //it really depends if we shoul PREVIEW ro PREEVENT
-                    //set the deciding factors
-                    //for now we can use this value as a test
-                    //ONLY 0 index camera or the main camera is the one to be used to the manual reording?
+                    else
+                    {
+                        //it really depends if we shoul PREVIEW ro PREEVENT
+                        //set the deciding factors
+                        //for now we can use this value as a test
+                        //ONLY 0 index camera or the main camera is the one to be used to the manual reording?
                         
                     Or_pb_recording.Visible = false;                        
                     SetRecordButtonState("play", true);
@@ -368,25 +392,20 @@ namespace FaceDetection
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            StopAllTimers();            
+            StopAllTimers();
+            backgroundWorkerMain.RunWorkerAsync();
             //if (RSensor != null)
             //{
             //    RSensor.SensorClose();
             //}
-            Console.WriteLine(this.Location.X.ToString());
-            Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
-            Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);
-            Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
-            Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
-            Properties.Settings.Default.Save();
-            
-            Application.Exit();
+            //Console.WriteLine(this.Location.X.ToString());            
         }
         
         private void MainForm_Load(object sender, EventArgs e)
         {
             #region Instances
             ///////////////////////////////////////
+            settingUI = new SettingsUI();
             crossbar = new CROSSBAR();
             RSensor = new IRSensor();
             FaceDetector = new FaceDetector();
@@ -423,12 +442,16 @@ namespace FaceDetection
             FillResolutionList();
             this.Width = Properties.Settings.Default.main_screen_size.Width;
             this.Height = Properties.Settings.Default.main_screen_size.Height;
-            Properties.Settings.Default.C1w = Properties.Settings.Default.main_screen_size.Width;
-            Properties.Settings.Default.C1h = Properties.Settings.Default.main_screen_size.Height;
+            //Properties.Settings.Default.C1w = Properties.Settings.Default.main_screen_size.Width;
+            //Properties.Settings.Default.C1h = Properties.Settings.Default.main_screen_size.Height;
             this.Location = new Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
-
+            
+            ///SET THE MAIN WINDOW ICONS AND BUTTON POSITIONS MANUALLY
             or_dateTimeLabel.Location = new Point(12, this.Height-80);
             Or_controlBut.Location = new Point(this.Width-320, this.Height-110);
+            or_camera_num_txt.Location = new Point(this.Width - 90, 10);
+            ///////////////////////////////////////////////////////////
+            
         }
 
         public void SET_REC_ICON()
@@ -438,6 +461,26 @@ namespace FaceDetection
 
         public static void AllChangesApply()
         {
+            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
+            {
+
+                PARAMETERS.PARAM.Reverse();
+                PARAMETERS.PARAM.Add("uvccameraviewer.exe");
+                PARAMETERS.PARAM.Reverse();
+                PARAMETERS.HandleParameters(PARAMETERS.PARAM);
+                //if (PARAMETERS.isMinimized)
+                //{
+                //    GetMainForm.WindowState = FormWindowState.Minimized;
+                //}
+                //else
+                //{
+                //    GetMainForm.WindowState = FormWindowState.Normal;
+                //}
+
+                //GetMainForm.or_controlButtons.Visible = PARAMETERS.isControlButtonVisible;
+
+                PARAMETERS.PARAM.Clear();
+            }
             if (Properties.Settings.Default.enable_Human_sensor)
             {
                 if (RSensor != null)
@@ -498,11 +541,13 @@ namespace FaceDetection
             or_current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
             if (Properties.Settings.Default.main_window_full_screen)
             {
-                MainForm.GetMainForm.WindowState = FormWindowState.Maximized;                
+                if(!PARAMETERS.isHidden)
+                    MainForm.GetMainForm.WindowState = FormWindowState.Maximized;                
             }
             else
             {
-                MainForm.GetMainForm.WindowState = FormWindowState.Normal;                
+                if (!PARAMETERS.isHidden)
+                    MainForm.GetMainForm.WindowState = FormWindowState.Normal;                
             }
             //FULL SCREEN
 
@@ -519,29 +564,12 @@ namespace FaceDetection
 
             //Also must check if the PREEVENT mode is needed
             SetCameraToDefaultMode();
-            
-            if (PARAMETERS.PARAM!=null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
-            {
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.PARAM.Add("uvccameraviewer.exe");
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.HandleParameters(PARAMETERS.PARAM);
-                if (PARAMETERS.isMinimized)
-                {
-                    GetMainForm.WindowState = FormWindowState.Minimized;
-                }
-                else
-                {
-                    GetMainForm.WindowState = FormWindowState.Normal;
-                }
-
-                GetMainForm.or_controlButtons.Visible = PARAMETERS.isControlButtonVisible;
-
-                PARAMETERS.PARAM.Clear();
-            }
-
-            Debug.WriteLine(Or_pb_recording.Visible);
+            //Debug.WriteLine(Or_pb_recording.Visible);
             GC.Collect();
+
+            
+
+            
             }
 
         //public static void ParametersChangesApply()
@@ -620,20 +648,16 @@ namespace FaceDetection
             //////////////////////////////////////////////////////////////////            
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            AllChangesApply();
-        }
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         private static extern IntPtr SendMessageTimeout(
-    IntPtr hWnd,
-    uint Msg,
-    UIntPtr wParam,
-    IntPtr lParam,
-    SendMessageTimeoutFlags fuFlags,
-    uint uTimeout,
-    out UIntPtr lpdwResult);
+            IntPtr hWnd,
+            uint Msg,
+            UIntPtr wParam,
+            IntPtr lParam,
+            SendMessageTimeoutFlags fuFlags,
+            uint uTimeout,
+            out UIntPtr lpdwResult);
 
         [Flags]
          enum SendMessageTimeoutFlags : uint
@@ -676,6 +700,22 @@ namespace FaceDetection
         private void MainForm_ResizeEnd(object sender, EventArgs e)
         {
             WindowSizeUpdate();
+        }
+
+        private void BackgroundWorkerMain_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
+            Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);
+            Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
+            Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
+            Properties.Settings.Default.Save();
+
+            Application.Exit();
         }
     }
 }

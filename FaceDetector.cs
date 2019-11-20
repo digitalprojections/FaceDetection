@@ -54,7 +54,7 @@ namespace FaceDetection
         }
 
         private void Face_check_timer_Tick(object sender, ElapsedEventArgs e)
-        {   
+        {
             Console.WriteLine("FACE " + checkOK);
             try
             {
@@ -74,12 +74,13 @@ namespace FaceDetection
             }         
         }
 
-        private void GetTheBMPForFaceCheck()
+        private async void GetTheBMPForFaceCheck()
         {
             if (MainForm.GetMainForm.InvokeRequired)
             {
                 var d = new dGetTheBMPImage(GetTheBMPForFaceCheck);
-                MainForm.GetMainForm.Invoke(d);
+                if(MainForm.GetMainForm!=null)
+                    MainForm.GetMainForm.Invoke(d);
             }
             else
             {
@@ -104,9 +105,9 @@ namespace FaceDetection
                             //↓20191107 Nagayama added↓
                             FaceDetectedAction();
                         }
-                    });
-
+                    });                    
                     faceTask.Start();
+                    //faceTask.Wait();
                 }
             }
         }
@@ -131,6 +132,10 @@ namespace FaceDetection
                             decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
                             decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
                             DateTime.Now);
+                        if (Properties.Settings.Default.capture_method == 0)
+                        {
+                            MainForm.GetMainForm.SET_REC_ICON();
+                        }
                     }
                     else
                     {
@@ -148,6 +153,7 @@ namespace FaceDetection
 
                 if (Properties.Settings.Default.backlight_on_upon_face_rec)
                     MainForm.GetMainForm.BackLight.ON();
+                
 
                 MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
             }
