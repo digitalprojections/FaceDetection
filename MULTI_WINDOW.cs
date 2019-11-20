@@ -18,6 +18,10 @@ namespace FaceDetection
         private static Form form;
         private static List<Form> formList = new List<Form>();
                 
+        /// <summary>
+        /// MULTICAMERA
+        /// </summary>
+        /// <param name="camera_count"></param>
         public static void CreateCameraWindows(int camera_count)
         {
             if(Properties.Settings.Default.show_all_cams_simulteneously)
@@ -31,6 +35,7 @@ namespace FaceDetection
                     crossbar = new CROSSBAR(i, form);
                     crosbarList.Add(crossbar);
                     crossbar.Start(i, CAMERA_MODES.PREVIEW);
+                    
                 }
             }            
         }
