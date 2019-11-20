@@ -24,6 +24,15 @@ namespace FaceDetection
 
         public static void EventAppeared(string path, int numCamera, int timeBeforeEvent, int timeAfterEvent, DateTime triggerTime) // An event appeared
         {
+            if (Directory.Exists(@"D:\TEMP"))
+            {
+                Directory.CreateDirectory(@"D:\TEMP\CutTemp");
+            }
+            else
+            {
+                Directory.CreateDirectory(@"C:\TEMP\CutTemp");
+            }
+
             if (Directory.Exists(@"ffmpeg-20191101-53c21c2-win32-static"))
             {
                 string videoInList, dateTempVideoString, preeventFilesName = "";
@@ -267,7 +276,7 @@ namespace FaceDetection
 
                 if (fileSaved == false) // The file isn't saved yet  (Because the function CutVideoFromEvent() saved it directly, so don't need to pass in the Concat() function in that case)
                 {
-                    System.Threading.Thread.Sleep(10000); // Wait for the last files is released by the system. (On PC short time is enough but it touch panel it is better to wait more to be sure)
+                    System.Threading.Thread.Sleep(5000); // Wait for the last files is released by the system. (On PC short time is enough but it touch panel it is better to wait more to be sure)
                     ConcatVideo(startVideoForFullFile, posteventFilesName, startEventTime, listTaskIndex); // Concat all path files to send to ffmpeg to make the final video with all cuts
                 }
 
@@ -309,7 +318,7 @@ namespace FaceDetection
                 // Create name for the cut video
                 videoDate = videoToCut.Substring(videoToCut.Length - 18, 14);
                 videoStartTime = (new DateTime(Convert.ToInt32(videoDate.Substring(0, 4)), Convert.ToInt32(videoDate.Substring(4, 2)), Convert.ToInt32(videoDate.Substring(6, 2)), Convert.ToInt32(videoDate.Substring(8, 2)), Convert.ToInt32(videoDate.Substring(10, 2)), Convert.ToInt32(videoDate.Substring(12, 2))) + tsDuration - tsCut).ToString("yyyyMMddHHmmss");
-                videoCutName = path + videoStartTime + ".avi";
+                videoCutName = path + @"CutTemp\" + videoStartTime + ".avi";
 
                 ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffmpeg.exe");
                 startInfo.Arguments = @"-loglevel quiet -y -i " + videoToCut + " -ss " + videoCutStartTimeFormated + " -to 0" + videoDuration + " -c copy -avoid_negative_ts 1 " + videoCutName;
@@ -394,7 +403,7 @@ namespace FaceDetection
             // Create name for cut video
             videoDate = videoToCut.Substring(videoToCut.Length - 18, 14);
             videoEndTime = (new DateTime(Convert.ToInt32(videoDate.Substring(0, 4)), Convert.ToInt32(videoDate.Substring(4, 2)), Convert.ToInt32(videoDate.Substring(6, 2)), Convert.ToInt32(videoDate.Substring(8, 2)), Convert.ToInt32(videoDate.Substring(10, 2)), Convert.ToInt32(videoDate.Substring(12, 2))) + tsCut).ToString("yyyyMMddHHmmss");
-            videoCutName = path + videoEndTime + ".avi";
+            videoCutName = path + @"CutTemp\" + videoEndTime + ".avi";
 
             ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffmpeg.exe");
             startInfo.Arguments = @"-loglevel quiet -y -i " + videoToCut + " -ss 00:00:00 -to " + videoCutEndTimeFormated + " -c copy -avoid_negative_ts 1 " + videoCutName;
@@ -432,6 +441,8 @@ namespace FaceDetection
                 Process.Start(startInfo);
 
                 System.Threading.Thread.Sleep(1000);
+                Console.WriteLine("preEventVideoFiles: " + preEventVideoFiles);
+                Console.WriteLine("postEventVideoFiles " + postEventVideoFiles);
                 if (preEventVideoFiles != "")
                 {
                     DeleteCutFileFromTemp(preEventVideoFiles); // Delete file cut for the first part of the full video to not taking it in the next event 
@@ -546,11 +557,11 @@ namespace FaceDetection
             string file = VideoFiles.Substring(VideoFiles.Length - 18, 18);
             if (Directory.Exists(@"D:\TEMP"))
             {
-                File.Delete(@"D:\TEMP\" + file);
+                File.Delete(@"D:\TEMP\CutTemp\" + file);
             }
             else
             {
-                File.Delete(@"C:\TEMP\" + file);
+                File.Delete(@"C:\TEMP\CutTemp\" + file);
             }
         }
 
