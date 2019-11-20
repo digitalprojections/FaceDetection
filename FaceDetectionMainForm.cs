@@ -373,11 +373,11 @@ namespace FaceDetection
                         //for now we can use this value as a test
                         //ONLY 0 index camera or the main camera is the one to be used to the manual reording?
                         
-                        Or_pb_recording.Visible = false;                        
-                        SetRecordButtonState("play", true);
-                        SetCameraToDefaultMode();
-                    }
+                    Or_pb_recording.Visible = false;                        
+                    SetRecordButtonState("play", true);
+                    SetCameraToDefaultMode();
                 }
+            }
             catch (InvalidOperationException iox)
             {
                 Logger.Add(iox);

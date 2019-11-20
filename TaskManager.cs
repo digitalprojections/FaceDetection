@@ -432,7 +432,7 @@ namespace FaceDetection
                 Process.Start(startInfo);
 
                 System.Threading.Thread.Sleep(1000);
-                DeleteLastFileFromTemp(postEventVideoFiles); // Delete file I made for the last part of the full video to not taking it in the next event            
+                DeleteLastFileFromTemp(postEventVideoFiles); // Delete file I made for the last part of the full video to not taking it in the next event
             }
             catch (Exception e)
             {
