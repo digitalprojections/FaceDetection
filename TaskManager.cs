@@ -488,7 +488,7 @@ namespace FaceDetection
             }
         }
 
-        private static void DeleteOldFiles(string pathTempFolder) // Delete old files that we don't need anymore
+        public static void DeleteOldFiles(string pathTempFolder) // Delete old files that we don't need anymore
         {
             DirectoryInfo dir;
             string fileName;

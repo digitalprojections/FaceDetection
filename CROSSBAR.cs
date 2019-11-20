@@ -3,6 +3,7 @@ using System.Drawing;
 using FaceDetectionX;
 using System.Timers;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace FaceDetection
 {
@@ -217,6 +218,21 @@ namespace FaceDetection
                         the_timer.Interval = BUFFER_DURATION.BUFFERDURATION;
                     }
                     recorder.RESET_FILE_PATH();
+                    try
+                    {
+                        if (Directory.Exists(@"D:\TEMP"))
+                        {
+                            TaskManager.DeleteOldFiles(@"D:\TEMP");                            
+                        }
+                        else
+                        {
+                            TaskManager.DeleteOldFiles(@"C:\TEMP");                            
+                        }
+                    }
+                    catch (IOException e)
+                    {
+                        Console.WriteLine(e.Message + " TaskManager in AddFilesInList()");
+                    }
                 }
                 if (wait_interval_enabled)
                 {
@@ -293,7 +309,7 @@ namespace FaceDetection
             else
             {
                 this.PreviewMode();
-        }
+            }
         }
 
         internal void PreviewMode()
