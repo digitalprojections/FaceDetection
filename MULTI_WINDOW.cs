@@ -20,7 +20,7 @@ namespace FaceDetection
                 
         public static void CreateCameraWindows(int camera_count)
         {
-            if(Properties.Settings.Default.show_all_cams_simulteneously)
+            if(Properties.Settings.Default.show_all_cams_simulteneously && crosbarList.Count==0)
             {
                 for (int i = 1; i < camera_count; i++)
                 {
