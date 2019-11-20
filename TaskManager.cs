@@ -432,7 +432,11 @@ namespace FaceDetection
                 Process.Start(startInfo);
 
                 System.Threading.Thread.Sleep(1000);
-                DeleteLastFileFromTemp(postEventVideoFiles); // Delete file I made for the last part of the full video to not taking it in the next event
+                if (preEventVideoFiles != "")
+                {
+                    DeleteFileFromTemp(preEventVideoFiles); // Delete file cut for the first part of the full video to not taking it in the next event
+                }
+                DeleteFileFromTemp(postEventVideoFiles); // Delete file cut for the last part of the full video to not taking it in the next event
             }
             catch (Exception e)
             {
@@ -537,16 +541,16 @@ namespace FaceDetection
             return duration;
         }
 
-        private static void DeleteLastFileFromTemp(string postEventVideoFiles)
+        private static void DeleteFileFromTemp(string VideoFiles)
         {
-            string lastFile = postEventVideoFiles.Substring(postEventVideoFiles.Length - 18, 18);
+            string file = VideoFiles.Substring(VideoFiles.Length - 18, 18);
             if (Directory.Exists(@"D:\TEMP"))
             {
-                File.Delete(@"D:\TEMP\" + lastFile);
+                File.Delete(@"D:\TEMP\" + file);
             }
             else
             {
-                File.Delete(@"C:\TEMP\" + lastFile);
+                File.Delete(@"C:\TEMP\" + file);
             }
         }
 
