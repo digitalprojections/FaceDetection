@@ -434,9 +434,9 @@ namespace FaceDetection
                 System.Threading.Thread.Sleep(1000);
                 if (preEventVideoFiles != "")
                 {
-                    DeleteFileFromTemp(preEventVideoFiles); // Delete file cut for the first part of the full video to not taking it in the next event
+                    DeleteFileFromTemp(preEventVideoFiles); // Delete file cut for the first part of the full video to not taking it in the next event 
                 }
-                DeleteFileFromTemp(postEventVideoFiles); // Delete file cut for the last part of the full video to not taking it in the next event
+                DeleteFileFromTemp(postEventVideoFiles); // Delete file cut for the last part of the full video to not taking it in the next event 
             }
             catch (Exception e)
             {
