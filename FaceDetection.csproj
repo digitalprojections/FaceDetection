@@ -130,6 +130,7 @@
     <Compile Include="Logger.cs" />
     <Compile Include="MouseListener.cs" />
     <Compile Include="MOUSE_KEYBOARD.cs" />
+    <Compile Include="MULTI_WINDOW.cs" />
     <Compile Include="PARAMETERS.cs" />
     <Compile Include="PlayState.cs" />
     <Compile Include="PROPERTY_FUNCTIONS.cs" />
