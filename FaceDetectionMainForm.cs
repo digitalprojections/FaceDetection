@@ -394,8 +394,7 @@ namespace FaceDetection
             //{
             //    RSensor.SensorClose();
             //}
-            //Console.WriteLine(this.Location.X.ToString());            
-
+            //Console.WriteLine(this.Location.X.ToString());        
             
         }
         
