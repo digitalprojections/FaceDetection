@@ -173,11 +173,12 @@ namespace FaceDetection
             if (frame_rates_combo != null)
             {
                 frame_rates_combo.Items.AddRange(vs.ToArray());
-                for (int i=0; i<vs.Count;i++)
+                for (int i=0; i<vs.Count; i++)
                 {
                     if (vs[i] == Properties.Settings.Default.main_camera_fps)
                     {
                         matching_fps_found = true;
+                        break;
                     }
                 }                
             }
