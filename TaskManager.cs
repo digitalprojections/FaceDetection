@@ -45,7 +45,7 @@ namespace FaceDetection
                 taskTimer.Elapsed += OnTimerEvent;
                 taskTimer.AutoReset = false;
 
-                AddFilesInList(); // Looking for files in the TEMP folder and add them to the list files
+                RefreshFilesInList(); // Looking for files in the TEMP folder and add them to the list files
 
                 if (listRecordingFiles.Count == 1) // There is only one file in the TEMP folder. So we need this file and don't have to compare dates of files.
                 {
@@ -434,9 +434,9 @@ namespace FaceDetection
                 System.Threading.Thread.Sleep(1000);
                 if (preEventVideoFiles != "")
                 {
-                    DeleteFileFromTemp(preEventVideoFiles); // Delete file cut for the first part of the full video to not taking it in the next event 
+                    DeleteCutFileFromTemp(preEventVideoFiles); // Delete file cut for the first part of the full video to not taking it in the next event 
                 }
-                DeleteFileFromTemp(postEventVideoFiles); // Delete file cut for the last part of the full video to not taking it in the next event 
+                DeleteCutFileFromTemp(postEventVideoFiles); // Delete file cut for the last part of the full video to not taking it in the next event 
             }
             catch (Exception e)
             {
@@ -444,28 +444,28 @@ namespace FaceDetection
             }
         }
 
-        private static void AddFilesInList() // Add all files in the TEMP folder into the list
-        {
-            try
-            {
-                if (Directory.Exists(@"D:\TEMP"))
-                {
-                    DeleteOldFiles(@"D:\TEMP");
-                    string[] list = Directory.GetFiles(@"D:\TEMP");
-                    listRecordingFiles = list.ToList();
-                }
-                else
-                {
-                    DeleteOldFiles(@"C:\TEMP");
-                    string[] list = Directory.GetFiles(@"C:\TEMP");
-                    listRecordingFiles = list.ToList();
-                }
-            }
-            catch (IOException e)
-            {
-                Console.WriteLine(e.Message + " TaskManager in AddFilesInList()");
-            }
-        }
+        //private static void AddFilesInList() // Add all files in the TEMP folder into the list
+        //{
+        //    try
+        //    {
+        //        if (Directory.Exists(@"D:\TEMP"))
+        //        {
+        //            //DeleteOldFiles(@"D:\TEMP");
+        //            string[] list = Directory.GetFiles(@"D:\TEMP");
+        //            listRecordingFiles = list.ToList();
+        //        }
+        //        else
+        //        {
+        //            //DeleteOldFiles(@"C:\TEMP");
+        //            string[] list = Directory.GetFiles(@"C:\TEMP");
+        //            listRecordingFiles = list.ToList();
+        //        }
+        //    }
+        //    catch (IOException e)
+        //    {
+        //        Console.WriteLine(e.Message + " TaskManager in AddFilesInList()");
+        //    }
+        //}
 
         private static void RefreshFilesInList() // Add all files in the TEMP folder into the list
         {
@@ -541,7 +541,7 @@ namespace FaceDetection
             return duration;
         }
 
-        private static void DeleteFileFromTemp(string VideoFiles)
+        private static void DeleteCutFileFromTemp(string VideoFiles)
         {
             string file = VideoFiles.Substring(VideoFiles.Length - 18, 18);
             if (Directory.Exists(@"D:\TEMP"))
