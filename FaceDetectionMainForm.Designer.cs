@@ -207,6 +207,11 @@
             this.pbRecording.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbRecording.TabIndex = 5;
             this.pbRecording.TabStop = false;
+            this.pbRecording.Visible = false;
+            // 
+            // backgroundWorkerMain
+            // 
+            this.backgroundWorkerMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorkerMain_DoWork);
             // 
             // MainForm
             // 
@@ -223,6 +228,7 @@
             this.Name = "MainForm";
             this.Text = "UVC Camera Viewer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.SizeChanged += new System.EventHandler(this.WindowSizeUpdate);

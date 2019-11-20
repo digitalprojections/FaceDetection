@@ -129,7 +129,10 @@ namespace FaceDetection
 
         private void Save_and_close(object sender, EventArgs e)
         {
-            backgroundWorker.RunWorkerAsync();
+            
+            PROPERTY_FUNCTIONS.SetWidth(Camera_index);
+            Properties.Settings.Default.Save();
+            MainForm.AllChangesApply();
             Hide();
         }        
 
@@ -429,7 +432,7 @@ namespace FaceDetection
             CheckBox check = (CheckBox)sender;
             if(check.Checked)
             {
-                cb_human_sensor.Checked = check.Checked;
+                //cb_human_sensor.Checked = check.Checked;
                 cb_face_recognition.Checked = !check.Checked;
             }
             else
@@ -444,7 +447,7 @@ namespace FaceDetection
             if (check.Checked)
             {
                 cb_human_sensor.Checked = !check.Checked;
-                cb_face_recognition.Checked = check.Checked;
+                //cb_face_recognition.Checked = check.Checked;
             }
             else
             {
@@ -466,7 +469,11 @@ namespace FaceDetection
 
         private void DisableOperatorCaptureCheckBox_ifNeeded()
         {
-            if (!Properties.Settings.Default.enable_Human_sensor && !Properties.Settings.Default.enable_face_recognition && !Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+            if (Properties.Settings.Default.enable_Human_sensor || Properties.Settings.Default.enable_face_recognition || Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+            {                
+                Properties.Settings.Default.capture_operator = true;
+            }
+            else
             {
                 //All three are off. Disable
                 Properties.Settings.Default.capture_operator = false;
@@ -488,17 +495,7 @@ namespace FaceDetection
         //    CustomMessage.Add(Properties.Settings.Default.interval_before_reinitiating_recording);
         //}
 
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-
-        }
-
-        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            PROPERTY_FUNCTIONS.SetWidth(Camera_index);
-            Properties.Settings.Default.Save();
-            MainForm.AllChangesApply();
-        }
+        
 
         private void Nud_reinitiation_interval_ValueChanged(object sender, EventArgs e)
         {
