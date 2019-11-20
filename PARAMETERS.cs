@@ -355,8 +355,9 @@ namespace FaceDetection
                         case "e":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex))
-                                {
+                                /////////////////////////////////////
+                                ///    dont CheckCameraIndex()    ///
+                                /////////////////////////////////////
                                     if (switchOnOff)
                                     {
                                         MainForm.GetMainForm.EventRecorderOn();
@@ -364,7 +365,6 @@ namespace FaceDetection
                                     else
                                     {
                                         MainForm.GetMainForm.EventRecorderOff();
-                                    }
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
