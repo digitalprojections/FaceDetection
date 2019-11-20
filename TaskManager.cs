@@ -353,6 +353,7 @@ namespace FaceDetection
                 {
                     videoCutStartTimeFormated = "00:0" + videoCutStartTime / 60 + ":0" + videoCutStartTime % 60;
                 }
+
                 videoCutEndTime = tsEventTime.Minutes * 60 + tsEventTime.Seconds + cutTimeAfterParameter;
                 if ((videoCutEndTime % 60) >= 10)
                 {

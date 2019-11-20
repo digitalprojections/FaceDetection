@@ -42,22 +42,22 @@ namespace FaceDetection
                         elem = parameters.ElementAt(i).ToLower();
                         try
                         {
-                        switch (elem.Substring(0, 1))
-                        {
-                            case "m":
-                                method = elem.Substring(2);
-                                break;
-                            case "s":
-                                switchOnOff = (elem.Substring(2) != "0");
-                                break;
-                            case "c":
-                                cameraIndex = Int32.Parse(elem.Substring(2)) - 1;
-                                break;
-                            case "t":
-                                time = Int32.Parse(elem.Substring(2));
-                                break;
+                            switch (elem.Substring(0, 1))
+                            {
+                                case "m":
+                                    method = elem.Substring(2);
+                                    break;
+                                case "s":
+                                    switchOnOff = (elem.Substring(2) != "0");
+                                    break;
+                                case "c":
+                                    cameraIndex = Int32.Parse(elem.Substring(2)) - 1;
+                                    break;
+                                case "t":
+                                    time = Int32.Parse(elem.Substring(2));
+                                    break;
+                            }
                         }
-                    }
                         catch (Exception e) 
                         {
                             Debug.WriteLine(e.Message + " parameters in the command were sent with unexpected values");
@@ -205,7 +205,6 @@ namespace FaceDetection
                                         Properties.Settings.Default.capture_operator = true;
                                         Properties.Settings.Default.enable_Human_sensor = true;
                                         Properties.Settings.Default.enable_face_recognition = false;
-                                        
                                     }
                                     else
                                     {
@@ -214,7 +213,6 @@ namespace FaceDetection
                                             MainForm.RSensor.Stop_IR_Timer();
                                         }
                                         Properties.Settings.Default.enable_Human_sensor = false;
-                                        
                                     }
                                     MainForm.AllChangesApply();
                                     CycleTime(time);
@@ -239,12 +237,16 @@ namespace FaceDetection
                                         if (Properties.Settings.Default.main_window_full_screen)
                                         {
                                             if (!PARAMETERS.isHidden)
+                                            {
                                                 MainForm.GetMainForm.WindowState = FormWindowState.Maximized;
+                                            }
                                         }
                                         else
                                         {
                                             if (!PARAMETERS.isHidden)
+                                            { 
                                                 MainForm.GetMainForm.WindowState = FormWindowState.Normal;
+                                            }
                                             MainForm.GetMainForm.Size = PROPERTY_FUNCTIONS.GetResolution(0);
                                         }
                                     }
@@ -253,7 +255,6 @@ namespace FaceDetection
                                         MainForm.GetMainForm.Hide();
                                         MainForm.GetMainForm.TopMost = false;
                                         isHidden = true;
-                                        
                                     }
                                 }
                             }
@@ -328,7 +329,6 @@ namespace FaceDetection
                                     {
                                         Properties.Settings.Default.show_window_pane = false;
                                         Properties.Settings.Default.Save();
-                                        
                                     }
                                     MainForm.AllChangesApply();
                                 }
@@ -357,13 +357,13 @@ namespace FaceDetection
                                 /////////////////////////////////////
                                 ///    dont CheckCameraIndex()    ///
                                 /////////////////////////////////////
-                                    if (switchOnOff)
-                                    {
-                                        MainForm.GetMainForm.EventRecorderOn();
-                                    }
-                                    else
-                                    {
-                                        MainForm.GetMainForm.EventRecorderOff();
+                                if (switchOnOff)
+                                {
+                                    MainForm.GetMainForm.EventRecorderOn();
+                                }
+                                else
+                                {
+                                    MainForm.GetMainForm.EventRecorderOff();
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -433,22 +433,11 @@ namespace FaceDetection
             return Retval;
         }
 
-        //private static void SetWindowPane(bool value)
-        //{
-        //    MainForm.GetMainForm.ControlBox = value;
-        //}
-
-        //public static void HandleParameters()
-        //{
-        
-        //}
-
         private static void CycleTime(int time)
         {
             if (time >= 500 && time <= 1000)
             {
                 Properties.Settings.Default.face_rec_interval = time;
-                //Logger.Add("できた");
             }
         }
 
@@ -469,8 +458,8 @@ namespace FaceDetection
                 return cameraIndex + 1;
             }
         }
+        
         #region DLL IMPORTS
-
         [DllImport("user32.dll")]
         public static extern bool GetCursorPos(out Point p);
         [DllImport("user32.dll")]
