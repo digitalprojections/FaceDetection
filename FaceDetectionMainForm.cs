@@ -299,9 +299,8 @@ namespace FaceDetection
         }
 
         public void WindowSizeUpdate()
-        {
-                //Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
-                //Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
+        {            
+            //Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
             if (crossbar!=null)
             {
                 crossbar.SetWindowPosition(new System.Drawing.Size(this.Width, this.Height));
@@ -360,11 +359,8 @@ namespace FaceDetection
                     if ((String)cameraButton.Tag == "play")
                     {
                     SetRecordButtonState("rec", false);
-                        crossbar.Start(0, CAMERA_MODES.MANUAL);
-                    if (Properties.Settings.Default.capture_method == 0)
-                    {
-                        MainForm.GetMainForm.SET_REC_ICON();
-                    }
+                    crossbar.Start(0, CAMERA_MODES.MANUAL);                    
+                    MainForm.GetMainForm.SET_REC_ICON();
                 }
                     else
                     {
@@ -393,12 +389,14 @@ namespace FaceDetection
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             StopAllTimers();
-            backgroundWorkerMain.RunWorkerAsync();
+            //backgroundWorkerMain.RunWorkerAsync();
             //if (RSensor != null)
             //{
             //    RSensor.SensorClose();
             //}
             //Console.WriteLine(this.Location.X.ToString());            
+
+            
         }
         
         private void MainForm_Load(object sender, EventArgs e)
@@ -438,13 +436,8 @@ namespace FaceDetection
             
             this.WindowState = FormWindowState.Minimized; // Matsuura
             AllChangesApply();
-            WindowSizeUpdate();
+            //WindowSizeUpdate();
             FillResolutionList();
-            this.Width = Properties.Settings.Default.main_screen_size.Width;
-            this.Height = Properties.Settings.Default.main_screen_size.Height;
-            //Properties.Settings.Default.C1w = Properties.Settings.Default.main_screen_size.Width;
-            //Properties.Settings.Default.C1h = Properties.Settings.Default.main_screen_size.Height;
-            this.Location = new Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
             
             ///SET THE MAIN WINDOW ICONS AND BUTTON POSITIONS MANUALLY
             or_dateTimeLabel.Location = new Point(12, this.Height-80);
@@ -481,76 +474,89 @@ namespace FaceDetection
 
                 PARAMETERS.PARAM.Clear();
             }
-            if (Properties.Settings.Default.enable_Human_sensor)
-            {
-                if (RSensor != null)
+            
+                if (Properties.Settings.Default.enable_Human_sensor)
                 {
-                    RSensor.Stop_IR_Timer();
-                    // RSensor.Destroy();
+                    if (RSensor != null)
+                    {
+                        RSensor.Stop_IR_Timer();
+                        // RSensor.Destroy();
+                    }
+                    //RSensor = new IRSensor();
+                    RSensor.SetInterval();
+                    RSensor.Start_IR_Timer();
                 }
-                //RSensor = new IRSensor();
-                RSensor.SetInterval();
-                RSensor.Start_IR_Timer();
-            }
-            else
-            {
-                if (RSensor != null)
+                else
                 {
-                    RSensor.Stop_IR_Timer();
-                    //RSensor.SensorClose();
-                    // RSensor.Destroy();
+                    if (RSensor != null)
+                    {
+                        RSensor.Stop_IR_Timer();
+                        //RSensor.SensorClose();
+                        // RSensor.Destroy();
+                    }
                 }
+
+                if (Properties.Settings.Default.enable_face_recognition)
+                {
+                    if (faceDetector != null)
+                    {
+                        FaceDetector.StopFaceTimer();
+                        //faceDetector.Destroy();
+                    }
+                    //faceDetector = new FaceDetector();
+                    faceDetector.SetInterval();
+                    faceDetector.StartFaceTimer();
+                }
+                else
+                {
+                    if (faceDetector != null)
+                    {
+                        FaceDetector.StopFaceTimer();
+                        //faceDetector.Destroy();
+                    }
+                }
+
+                if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+                {
+                    Mklisteners.AddMouseAndKeyboardBack();
+                }
+            
+
+            //SCREEN PROPS
+            SetMainScreenProperties();
+            
+
+            //Also must check if the PREEVENT mode is needed
+            SetCameraToDefaultMode();
+            //Debug.WriteLine(Or_pb_recording.Visible);
+            GC.Collect();
             }
 
-            if (Properties.Settings.Default.enable_face_recognition)
-            {
-                if (faceDetector != null)
-                {
-                    FaceDetector.StopFaceTimer();
-                    //faceDetector.Destroy();
-                }
-                //faceDetector = new FaceDetector();
-                faceDetector.SetInterval();
-                faceDetector.StartFaceTimer();
-            }
-            else
-            {
-                if (faceDetector != null)
-                {
-                    FaceDetector.StopFaceTimer();
-                    //faceDetector.Destroy();
-                }
-            }
-
-            if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
-            {
-                Mklisteners.AddMouseAndKeyboardBack();
-            }
-
+        private static void SetMainScreenProperties()
+        {
             if (Setting_ui == null)
             {
                 Or_pb_recording.Visible = false;
-                Setting_ui = new SettingsUI();                
+                Setting_ui = new SettingsUI();
             }
 
             or_camera_num_txt.Visible = Properties.Settings.Default.show_camera_no;
             or_camera_num_txt.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
             MainForm.GetMainForm.TopMost = Properties.Settings.Default.window_on_top;
             MainForm.GetMainForm.Location = new System.Drawing.Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
+            
 
             or_current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
             if (Properties.Settings.Default.main_window_full_screen)
             {
-                if(!PARAMETERS.isHidden)
-                    MainForm.GetMainForm.WindowState = FormWindowState.Maximized;                
+                if (!PARAMETERS.isHidden)
+                    MainForm.GetMainForm.WindowState = FormWindowState.Maximized;
             }
             else
             {
                 if (!PARAMETERS.isHidden)
-                    MainForm.GetMainForm.WindowState = FormWindowState.Normal;                
+                    MainForm.GetMainForm.WindowState = FormWindowState.Normal;
             }
-            //FULL SCREEN
-
             //Window pane
             if (Properties.Settings.Default.show_window_pane == true)
             {
@@ -561,16 +567,14 @@ namespace FaceDetection
             {
                 or_mainForm.FormBorderStyle = FormBorderStyle.None;
             }
+            //MainForm.GetMainForm.ClientSize = new Size(decimal.ToInt32(Properties.Settings.Default.C1w), decimal.ToInt32(Properties.Settings.Default.C1h));
+            MainForm.GetMainForm.Width = Properties.Settings.Default.main_screen_size.Width;
+            MainForm.GetMainForm.Height = Properties.Settings.Default.main_screen_size.Height;
+            //Properties.Settings.Default.C1w = Properties.Settings.Default.main_screen_size.Width;
+            //Properties.Settings.Default.C1h = Properties.Settings.Default.main_screen_size.Height;
+            MainForm.GetMainForm.Location = new Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
 
-            //Also must check if the PREEVENT mode is needed
-            SetCameraToDefaultMode();
-            //Debug.WriteLine(Or_pb_recording.Visible);
-            GC.Collect();
-
-            
-
-            
-            }
+        }
 
         //public static void ParametersChangesApply()
         //{
@@ -581,7 +585,7 @@ namespace FaceDetection
         //    //    PARAMETERS.PARAM.Reverse();
         //    //    PARAMETERS.HandleParameters(PARAMETERS.PARAM);                
         //    //    PARAMETERS.PARAM.Clear();
-            
+
         //    //}
         //}
 
@@ -704,18 +708,19 @@ namespace FaceDetection
 
         private void BackgroundWorkerMain_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
-            Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);
-            Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
-            Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
+            
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
+            Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
+            Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);
+            Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
+            Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
             Properties.Settings.Default.Save();
 
             Application.Exit();
+
         }
     }
 }

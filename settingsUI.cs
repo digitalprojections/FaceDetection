@@ -130,7 +130,7 @@ namespace FaceDetection
         private void Save_and_close(object sender, EventArgs e)
         {
             
-            PROPERTY_FUNCTIONS.SetWidth(Camera_index);
+            PROPERTY_FUNCTIONS.SetCameraResolution(Camera_index);
             Properties.Settings.Default.Save();
             MainForm.AllChangesApply();
             Hide();
@@ -214,7 +214,7 @@ namespace FaceDetection
                 cm_camera_number.SelectedIndex = Properties.Settings.Default.main_camera_index <=0?0: Properties.Settings.Default.main_camera_index;
                 cm_capture_mode.SelectedIndex = Properties.Settings.Default.capture_method<=0 ? 0 : Properties.Settings.Default.capture_method;
             }
-            SetCameraPropertiesFromMemory();
+            //SetCameraPropertiesFromMemory();
             //if(cm_language.SelectedItem!=null)
 
             cm_language.SelectedItem = Properties.Settings.Default.language;
@@ -535,5 +535,10 @@ namespace FaceDetection
             int dwReserved,
             IntPtr lpvReserved);
         #endregion
+
+        private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PROPERTY_FUNCTIONS.resolution_changed = true;
+        }
     }
 }
