@@ -312,11 +312,11 @@ namespace FaceDetection
                                         //kameyama comennt 20191020
                                         //Properties.Settings.Default.show_window_pane = true;
                                         //FormChangesApply();
-                                        MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
+                                        //MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
                                         Properties.Settings.Default.show_window_pane = true;
                                         Properties.Settings.Default.Save();
 
-                                        if (MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
+                                        if (MainForm.GetMainForm != null && MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
                                         {
                                             //settingUI.TopMost = true;
                                             MainForm.GetMainForm.TopMost = false;
@@ -330,7 +330,8 @@ namespace FaceDetection
                                         Properties.Settings.Default.Save();
                                         
                                     }
-                                    MainForm.AllChangesApply();
+                                    if(MainForm.GetMainForm!=null)
+                                        MainForm.AllChangesApply();
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
