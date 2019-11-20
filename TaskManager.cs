@@ -450,13 +450,13 @@ namespace FaceDetection
             {
                 if (Directory.Exists(@"D:\TEMP"))
                 {
-                    DeleteOldFiles(@"D:\TEMP");
+                    //DeleteOldFiles(@"D:\TEMP");
                     string[] list = Directory.GetFiles(@"D:\TEMP");
                     listRecordingFiles = list.ToList();
                 }
                 else
                 {
-                    DeleteOldFiles(@"C:\TEMP");
+                    //DeleteOldFiles(@"C:\TEMP");
                     string[] list = Directory.GetFiles(@"C:\TEMP");
                     listRecordingFiles = list.ToList();
                 }
@@ -488,7 +488,7 @@ namespace FaceDetection
             }
         }
 
-        private static void DeleteOldFiles(string pathTempFolder) // Delete old files that we don't need anymore
+        public static void DeleteOldFiles(string pathTempFolder) // Delete old files that we don't need anymore
         {
             DirectoryInfo dir;
             string fileName;
