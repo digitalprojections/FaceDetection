@@ -470,12 +470,12 @@ namespace FaceDetection
         private void DisableOperatorCaptureCheckBox_ifNeeded()
         {
             if (Properties.Settings.Default.enable_Human_sensor || Properties.Settings.Default.enable_face_recognition || Properties.Settings.Default.Recording_when_at_the_start_of_operation)
-            {
-                //All three are off. Disable
+            {                
                 Properties.Settings.Default.capture_operator = true;
             }
             else
             {
+                //All three are off. Disable
                 Properties.Settings.Default.capture_operator = false;
             }
         }

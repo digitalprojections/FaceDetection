@@ -132,6 +132,10 @@ namespace FaceDetection
                             decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
                             decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
                             DateTime.Now);
+                        if (Properties.Settings.Default.capture_method == 0)
+                        {
+                            MainForm.GetMainForm.SET_REC_ICON();
+                        }
                     }
                     else
                     {
@@ -149,10 +153,7 @@ namespace FaceDetection
 
                 if (Properties.Settings.Default.backlight_on_upon_face_rec)
                     MainForm.GetMainForm.BackLight.ON();
-                if (Properties.Settings.Default.capture_method == 0)
-                {
-                    MainForm.GetMainForm.SET_REC_ICON();
-                }
+                
 
                 MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
             }

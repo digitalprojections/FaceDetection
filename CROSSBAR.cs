@@ -138,7 +138,10 @@ namespace FaceDetection
 
         public void No_Cap_Timer_ON(int vidlen)
         {
-            
+            //if (Properties.Settings.Default.capture_method == 0)
+            //{
+            //    MainForm.GetMainForm.SET_REC_ICON();
+            //}
             wait_interval_enabled = true;            
             int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording + vidlen) * 1000;
             if (intt > 500)

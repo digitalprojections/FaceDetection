@@ -75,6 +75,10 @@ namespace FaceDetection
                                 decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
                                 decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
                                 DateTime.Now);
+                            if (Properties.Settings.Default.capture_method == 0)
+                            {
+                                MainForm.GetMainForm.SET_REC_ICON();
+                            }
                         }
                         else
                         {

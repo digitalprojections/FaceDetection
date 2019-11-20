@@ -140,12 +140,12 @@ namespace FaceDetection
         {
             try
             {
-            listEventFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\1\\event\\");
-            listRecordingEventFiles = listEventFiles.ToList();
-            listMovieFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\1\\movie\\");
-            listRecordingMovieFiles = listMovieFiles.ToList();
-            listSnapshotFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\1\\snapshot\\");
-            listRecordingSnapshotFiles = listSnapshotFiles.ToList();
+                listEventFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\1\\event\\");
+                listRecordingEventFiles = listEventFiles.ToList();
+                listMovieFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\1\\movie\\");
+                listRecordingMovieFiles = listMovieFiles.ToList();
+                listSnapshotFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\1\\snapshot\\");
+                listRecordingSnapshotFiles = listSnapshotFiles.ToList();
             }
             catch (IOException iox)
             {

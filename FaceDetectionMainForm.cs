@@ -180,7 +180,7 @@ namespace FaceDetection
             if (folderButton.Visible == false)
             {
                 Or_controlBut.Visible = true;
-           }
+            }
             else
             {
                 Or_controlBut.Visible = false;
@@ -638,7 +638,7 @@ namespace FaceDetection
                 if (GetMainForm.UniqueFPS(FPS) != true)
                 {
                     vf_fps.Add(FPS.ToString());        
-            }
+                }
             }
             SettingsUI.SetComboBoxResolutionValues(vf_resolutions);
             SettingsUI.SetComboBoxFPSValues(vf_fps);
