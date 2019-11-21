@@ -60,7 +60,6 @@ namespace FaceDetection
                 default: return new Point(16, 16);
             }
         }
-
         public static void Set_Window_Size_From_Camera_Resolution(int cam_ind)
         {
             char[] vs = { 'x' };            
@@ -96,7 +95,6 @@ namespace FaceDetection
                 resolution_changed = false;
             }
         }
-
         internal static bool Get_Rec_Icon(int cam_ind)
         {
             bool retval = false;
@@ -155,7 +153,6 @@ namespace FaceDetection
                     break;
             }
         }
-
         /// <summary>
         /// Settings UI has variable window size values stored as per camera index.
         /// You can get those values by camera index
