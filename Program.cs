@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
 using Microsoft.VisualBasic.ApplicationServices;
-using System.Reflection;
 
 namespace FaceDetection
 {

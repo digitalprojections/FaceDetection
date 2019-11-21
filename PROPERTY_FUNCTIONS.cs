@@ -39,6 +39,27 @@ namespace FaceDetection
 
         }
 
+        internal static Point Get_Camera_Window_Location(int cam_ind)
+        {
+            Point retval;
+            switch (cam_ind)
+            {
+                case 0:
+                    retval = Properties.Settings.Default.window_location;
+                    return retval;
+                case 1:
+                    retval = Properties.Settings.Default.C2_window_location;
+                    return retval;
+                case 2:
+                    //retval = new Point(decimal.ToInt32(Properties.Settings.Default.C3x), decimal.ToInt32(Properties.Settings.Default.C3y));
+                    retval = Properties.Settings.Default.C3_window_location;
+                    return retval;
+                case 3:
+                    retval = Properties.Settings.Default.C4_window_location;
+                    return retval;
+                default: return new Point(16, 16);
+            }
+        }
         public static void Set_Window_Size_From_Camera_Resolution(int cam_ind)
         {
             char[] vs = { 'x' };            
@@ -72,6 +93,64 @@ namespace FaceDetection
             {
                 MainForm.GetMainForm.crossbar.RESTART_CAMERA();
                 resolution_changed = false;
+            }
+        }
+        internal static bool Get_Rec_Icon(int cam_ind)
+        {
+            bool retval = false;
+            switch (cam_ind)
+            {
+                case 0:
+                    retval = Properties.Settings.Default.show_recording_icon;
+                    break;
+                case 1:
+                    retval = Properties.Settings.Default.C2_show_record_icon;
+                    break;
+                case 2:
+                    retval = Properties.Settings.Default.C3_show_record_icon;
+                    break;
+                case 3:
+                    retval = Properties.Settings.Default.C4_show_record_icon;
+                    break;
+            }
+            return retval;
+        }
+
+        internal static void Set_Rec_Icon(int cam_ind, bool val)
+        {            
+            switch (cam_ind)
+            {
+                case 0:
+                    Properties.Settings.Default.show_recording_icon = val;
+                    break;
+                case 1:
+                    Properties.Settings.Default.C2_show_record_icon = val;
+                    break;
+                case 2:
+                    Properties.Settings.Default.C3_show_record_icon = val;
+                    break;
+                case 3:
+                    Properties.Settings.Default.C4_show_record_icon = val;
+                    break;
+            }
+        }
+
+        internal static void Set_Window_Location(int cam_ind, FormClass formClass)
+        {
+            switch (cam_ind)
+            {
+                case 0:
+                    Properties.Settings.Default.window_location = formClass.Location;
+                    break;
+                case 1:
+                    Properties.Settings.Default.C2_window_location = formClass.Location;
+                    break;
+                case 2:
+                    Properties.Settings.Default.C3_window_location = formClass.Location;
+                    break;
+                case 3:
+                    Properties.Settings.Default.C4_window_location = formClass.Location;
+                    break;
             }
         }
         /// <summary>

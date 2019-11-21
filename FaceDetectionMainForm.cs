@@ -30,7 +30,7 @@ namespace FaceDetection
         //private readonly KeyboardListener keyboardListener;
         //private readonly MouseListener mouseListener;
 
-        private RecorderCamera cameraMan = null;
+        //private RecorderCamera cameraMan = null;
         internal bool OPERATOR_CAPTURE_ALLOWED = false;
         internal bool EVENT_RECORDING_IN_PROGRESS = false;
         internal static int SELECTED_CAMERA = 0;
@@ -63,7 +63,7 @@ namespace FaceDetection
         private static List<string> vf_fps = new List<string>();
         //User actions end
         static SettingsUI settingUI;
-        static Form or_mainform;
+        //static Form or_mainform;
         
         //public static Panel CameraPanel => GetMainForm.panelCamera;
         public static MainForm GetMainForm => or_mainForm;
@@ -74,7 +74,7 @@ namespace FaceDetection
         public static PictureBox Or_pb_recording { get => or_pb_recording; set => or_pb_recording = value; }
         public BackLightController BackLight { get => backLight; set => backLight = value; }
         public static MOUSE_KEYBOARD Mklisteners { get => mklisteners; set => mklisteners = value; }
-
+                
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             InitializeComponent();
@@ -145,16 +145,16 @@ namespace FaceDetection
 
         private void DateTimeUpdater()
         {
-            if (or_dateTimeLabel!=null && or_dateTimeLabel.InvokeRequired)
+            if (dateTimeLabel!=null && dateTimeLabel.InvokeRequired)
             {
                 var d = new dDateTimerUpdater(DateTimeUpdater);
-                or_dateTimeLabel.Invoke(d);
+                dateTimeLabel.Invoke(d);
             }
             else
             {
                 try
                 {
-                    or_dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                    dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 }
                 catch (NullReferenceException e)
                 {
@@ -236,7 +236,7 @@ namespace FaceDetection
             }
         }
 
-        private async void ShowSettings(object sender, EventArgs e)
+        private void ShowSettings(object sender, EventArgs e)
         {
             
             ShowSettingsDialogAsync();
@@ -261,6 +261,8 @@ namespace FaceDetection
                    catch(InvalidOperationException invx)
                     {
                         Setting_ui = new SettingsUI();
+                        Setting_ui.ShowDialog();
+                        Logger.Add(invx);
                     }
                 }
             }
@@ -311,21 +313,24 @@ namespace FaceDetection
         {
             PARAMETERS.PARAM.Clear();
 
-            if (crossbar.PREEVENT_RECORDING)
+            if (crossbar.OPER_BAN == false)
             {
-                if (Properties.Settings.Default.capture_method == 0)
+                if (crossbar.PREEVENT_RECORDING)
                 {
-                    MainForm.GetMainForm.SET_REC_ICON();
+                    if (Properties.Settings.Default.capture_method == 0)
+                    {
+                        MainForm.GetMainForm.SET_REC_ICON();
+                    }
+                    TaskManager.EventAppeared(RECORD_PATH.EVENT, 1, decimal.ToInt32(Properties.Settings.Default.event_record_time_before_event), decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event), DateTime.Now);
+                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event));
                 }
-                TaskManager.EventAppeared(RECORD_PATH.EVENT, 1, decimal.ToInt32(Properties.Settings.Default.event_record_time_before_event), decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event), DateTime.Now);
-                MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event));
+                else
+                {
+                    crossbar.Start(0, CAMERA_MODES.EVENT);
+                    Logger.Add("TODO: start event recording now");
+                }
+                crossbar.SetIconTimer(Properties.Settings.Default.event_record_time_after_event);
             }
-            else
-            {
-                crossbar.Start(0, CAMERA_MODES.EVENT);
-                Logger.Add("TODO: start event recording now");
-            }
-            crossbar.SetIconTimer(Properties.Settings.Default.event_record_time_after_event);
         }
 
         public void EventRecorderOff()
@@ -400,6 +405,14 @@ namespace FaceDetection
         
         private void MainForm_Load(object sender, EventArgs e)
         {
+            //Object references
+            rec_button = cameraButton;
+            or_camera_num_txt = camera_number_txt;
+            Or_pb_recording = pbRecording;
+            or_mainForm = this;
+            or_current_date_text = dateTimeLabel;
+            or_controlBut = controlButtons;
+
             #region Instances
             ///////////////////////////////////////
             settingUI = new SettingsUI();
@@ -431,13 +444,7 @@ namespace FaceDetection
             datetime_ui_updater_timer.AutoReset = true;
             datetime_ui_updater_timer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateDateTimeText);
 
-            //Object references
-            rec_button = cameraButton;
-            or_camera_num_txt = camera_number_txt;
-            Or_pb_recording = pbRecording;            
-            or_mainForm = this;
-            or_current_date_text = or_dateTimeLabel;
-            or_controlBut = or_controlButtons;
+            
                         
             if (Properties.Settings.Default.window_on_top)
             {
@@ -450,7 +457,7 @@ namespace FaceDetection
             FillResolutionList();
             
             ///SET THE MAIN WINDOW ICONS AND BUTTON POSITIONS MANUALLY
-            or_dateTimeLabel.Location = new Point(12, this.Height-80);
+            dateTimeLabel.Location = new Point(12, this.Height-80);
             Or_controlBut.Location = new Point(this.Width-320, this.Height-110);
             or_camera_num_txt.Location = new Point(this.Width - 90, 10);
             ///////////////////////////////////////////////////////////

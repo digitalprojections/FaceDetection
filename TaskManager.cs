@@ -203,6 +203,7 @@ namespace FaceDetection
                 catch (Exception e) // no file to cut
                 {
                     startVideoForFullFile = "";
+                    Logger.Add(e);
                 }
 
                 if (fileSaved == false && listRecordingFiles.Count != 0)

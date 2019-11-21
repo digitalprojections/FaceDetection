@@ -19,8 +19,8 @@ namespace FaceDetection
         static ComboBox resolutions_combo;
         static ComboBox selected_camera_combo;
 
-        DsDevice[] capDevices;
-        static string[] camera_names;
+        //DsDevice[] capDevices;
+        //static string[] camera_names;
 
         public int Camera_index
         {
@@ -53,6 +53,7 @@ namespace FaceDetection
 
                 Directory.CreateDirectory(Properties.Settings.Default.temp_folder);
                 Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
+                Logger.Add(iox);
             }
 
             //Setup window
@@ -71,7 +72,7 @@ namespace FaceDetection
         public void ArrangeCameraNames(int len)
         {
             selected_camera_combo.Items.Clear();
-            camera_names = new string[len];
+            //camera_names = new string[len];
             
             for (int i = 0; i < len; i++)
             {

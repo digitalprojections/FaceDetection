@@ -46,11 +46,11 @@ namespace FaceDetection
         private IBaseFilter renderFilter = null;
         static Guid CLSID_NullRenderer = new Guid("{C1F400A4-3F08-11D3-9F0B-006008039E37}"); //qedit.dll 
         IBaseFilter pNullRenderer = (IBaseFilter)Activator.CreateInstance(Type.GetTypeFromCLSID(CLSID_NullRenderer));
-        private IAMStreamConfig streamConfig = null;
+        //private IAMStreamConfig streamConfig = null;
         private SampleGrabber pSampleGrabber = null;
         private IFileSinkFilter pFilewriter_sink;
-        private VideoInfoHeader format = null;
-        private AMMediaType pmt = null;
+        //private VideoInfoHeader format = null;
+        //private AMMediaType pmt = null;
         private ISampleGrabber i_grabber = null;
         //private delegate IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
@@ -137,8 +137,8 @@ namespace FaceDetection
         public void StartRecorderCamera()
         {
             
-            Size size = PROPERTY_FUNCTIONS.Get_Stored_Resolution(INDEX);
-            int fps = PROPERTY_FUNCTIONS.Get_FPS(0);
+            Size size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(INDEX);
+            int fps = PROPERTY_FUNCTIONS.Get_FPS(INDEX);
             //IntPtr pbx = MainForm.GetMainForm.Handle;
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
             //Logger.Add(CAMERA_MODE + " 1");
@@ -157,14 +157,17 @@ namespace FaceDetection
             else
             {
                 //PREEVENT EXISTS. PERMANENT RECORDING MODE
-                targetPath = sourcePath + "/" + dstFileName;
+                targetPath = sourcePath + "/"+(INDEX+1) + "/" + dstFileName;
                 Logger.Add(targetPath + " target path");
                 try
                 {
                     Directory.CreateDirectory(sourcePath);
                 }catch(IOException iox)
                 {
-                    sourcePath = @"C:\TEMP";
+                    //WE HAVE TO ADD CAMERA NUMBER HERE IN THIS PATH TOO
+                    //var str = Path.Combine(sourcePath, (INDEX + 1).ToString());
+                    //
+                    sourcePath = @"C:\TEMP"+ "/" + (INDEX + 1);
                     targetPath = sourcePath + "/" + dstFileName;
                     Directory.CreateDirectory(sourcePath);
                     Logger.Add(iox);
@@ -323,8 +326,7 @@ namespace FaceDetection
             }
             catch (COMException comx)
             {
-                Logger.Add("Can not start the camera");
-                Logger.Add("Can not start the camera");
+                Logger.Add(comx);                
             }
         }
         public void SET_FILE_PATH_TO_MANUAL()
@@ -345,7 +347,7 @@ namespace FaceDetection
             }
             catch (Exception x)
             {
-                Console.WriteLine(x.StackTrace);
+                Logger.Add(x);
             }
             
             int hr = pFilewriter_sink.SetFileName(targetPath, null);
@@ -442,7 +444,7 @@ namespace FaceDetection
         private int m_videoWidth = 1280;
         private int m_videoHeight = 720;
         private int m_videoBitCount = 24;
-        private volatile bool m_bWantOneFrame = false;
+        //private volatile bool m_bWantOneFrame = false;
         private CAMERA_MODES cAMERA_MODE;
 
         public IntPtr GetNextFrame()

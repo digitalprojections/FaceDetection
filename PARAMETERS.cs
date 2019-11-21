@@ -323,7 +323,7 @@ namespace FaceDetection
                                         Properties.Settings.Default.show_window_pane = true;
                                         Properties.Settings.Default.Save();
 
-                                        if (MainForm.GetMainForm!=null && MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
+                                        if (MainForm.GetMainForm != null && MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
                                         {
                                             //settingUI.TopMost = true;
                                             MainForm.GetMainForm.TopMost = false;
@@ -362,9 +362,8 @@ namespace FaceDetection
                         case "e":
                             try
                             {
-                                /////////////////////////////////////
-                                ///    dont CheckCameraIndex()    ///
-                                /////////////////////////////////////
+                                if (CheckCameraIndex(cameraIndex))
+                                {
                                     if (switchOnOff)
                                     {
                                         MainForm.GetMainForm.EventRecorderOn();
@@ -372,6 +371,7 @@ namespace FaceDetection
                                     else
                                     {
                                         MainForm.GetMainForm.EventRecorderOff();
+                                    }
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
