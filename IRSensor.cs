@@ -166,7 +166,7 @@ namespace FaceDetection
                 catch (Exception e)
                 {
                     data[1] = 0;
-                    //Logger.Add(e.Message + " ******** IRSensor ERROR");
+                    Logger.Add(e);
                 }
                 SensorClose();
             }

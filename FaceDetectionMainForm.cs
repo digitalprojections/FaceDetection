@@ -30,7 +30,7 @@ namespace FaceDetection
         //private readonly KeyboardListener keyboardListener;
         //private readonly MouseListener mouseListener;
 
-        private RecorderCamera cameraMan = null;
+        //private RecorderCamera cameraMan = null;
         internal bool OPERATOR_CAPTURE_ALLOWED = false;
         internal bool EVENT_RECORDING_IN_PROGRESS = false;
         internal static int SELECTED_CAMERA = 0;
@@ -63,7 +63,7 @@ namespace FaceDetection
         private static List<string> vf_fps = new List<string>();
         //User actions end
         static SettingsUI settingUI;
-        static Form or_mainform;
+        //static Form or_mainform;
         
         //public static Panel CameraPanel => GetMainForm.panelCamera;
         public static MainForm GetMainForm => or_mainForm;
@@ -236,7 +236,7 @@ namespace FaceDetection
             }
         }
 
-        private async void ShowSettings(object sender, EventArgs e)
+        private void ShowSettings(object sender, EventArgs e)
         {
             
             ShowSettingsDialogAsync();
@@ -261,6 +261,8 @@ namespace FaceDetection
                    catch(InvalidOperationException invx)
                     {
                         Setting_ui = new SettingsUI();
+                        Setting_ui.ShowDialog();
+                        Logger.Add(invx);
                     }
                 }
             }

@@ -31,6 +31,7 @@ namespace FaceDetection
             catch (IOException iox)
             {
                 //  MessageBox.Show("Cannot access Log.txt file");
+                Add(iox);
             }
 
         }
@@ -54,6 +55,7 @@ namespace FaceDetection
             catch (IOException iox)
             {
                 // MessageBox.Show("Cannot access Log.txt file");
+                Add(iox);
             }
 
 
@@ -79,7 +81,7 @@ namespace FaceDetection
                 using (StreamWriter w = File.AppendText("log2.txt"))
                 {
 
-                    w.Write("\r\nLog Entry : ");
+                    w.Write("\r\nLog Entry : " + iox.Message);
                     w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
                     w.WriteLine($"  : {message}");
                     w.WriteLine("-------------------------------");

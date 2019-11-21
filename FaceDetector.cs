@@ -74,7 +74,7 @@ namespace FaceDetection
             }         
         }
 
-        private async void GetTheBMPForFaceCheck()
+        private void GetTheBMPForFaceCheck()
         {
             if (MainForm.GetMainForm.InvokeRequired)
             {

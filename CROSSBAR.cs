@@ -24,7 +24,7 @@ namespace FaceDetection
         private bool manualRecording; // Robin
 
         bool wait_interval_enabled = false;
-        int duration = 0;
+        //int duration = 0;
 
         /// <summary>
         /// Recording on. 
