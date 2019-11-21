@@ -145,16 +145,16 @@ namespace FaceDetection
 
         private void DateTimeUpdater()
         {
-            if (or_dateTimeLabel!=null && or_dateTimeLabel.InvokeRequired)
+            if (dateTimeLabel!=null && dateTimeLabel.InvokeRequired)
             {
                 var d = new dDateTimerUpdater(DateTimeUpdater);
-                or_dateTimeLabel.Invoke(d);
+                dateTimeLabel.Invoke(d);
             }
             else
             {
                 try
                 {
-                    or_dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                    dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 }
                 catch (NullReferenceException e)
                 {
@@ -442,8 +442,8 @@ namespace FaceDetection
             or_camera_num_txt = camera_number_txt;
             Or_pb_recording = pbRecording;            
             or_mainForm = this;
-            or_current_date_text = or_dateTimeLabel;
-            or_controlBut = or_controlButtons;
+            or_current_date_text = dateTimeLabel;
+            or_controlBut = controlButtons;
                         
             if (Properties.Settings.Default.window_on_top)
             {
@@ -456,7 +456,7 @@ namespace FaceDetection
             FillResolutionList();
             
             ///SET THE MAIN WINDOW ICONS AND BUTTON POSITIONS MANUALLY
-            or_dateTimeLabel.Location = new Point(12, this.Height-80);
+            dateTimeLabel.Location = new Point(12, this.Height-80);
             Or_controlBut.Location = new Point(this.Width-320, this.Height-110);
             or_camera_num_txt.Location = new Point(this.Width - 90, 10);
             ///////////////////////////////////////////////////////////

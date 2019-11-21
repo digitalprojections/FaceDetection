@@ -234,12 +234,11 @@ namespace FaceDetection
                             {
                                 TaskManager.DeleteOldFiles(@"C:\TEMP");
                             }
-                        });
-                        //task.Wait();
+                        });                        
                     }
                     catch (IOException e)
                     {
-                        Console.WriteLine(e.Message + " TaskManager in AddFilesInList()");
+                        Logger.Add(e);
                     }
                 }
                 if (wait_interval_enabled)
