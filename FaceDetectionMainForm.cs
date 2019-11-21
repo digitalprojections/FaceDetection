@@ -310,22 +310,24 @@ namespace FaceDetection
         public void EventRecorderOn()
         {
             PARAMETERS.PARAM.Clear();
-
-            if (crossbar.PREEVENT_RECORDING)
+            if (crossbar.OPER_BAN == false)
             {
-                if (Properties.Settings.Default.capture_method == 0)
+                if (crossbar.PREEVENT_RECORDING)
                 {
-                    MainForm.GetMainForm.SET_REC_ICON();
+                    if (Properties.Settings.Default.capture_method == 0)
+                    {
+                        MainForm.GetMainForm.SET_REC_ICON();
+                    }
+                    TaskManager.EventAppeared(RECORD_PATH.EVENT, 1, decimal.ToInt32(Properties.Settings.Default.event_record_time_before_event), decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event), DateTime.Now);
+                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event));
                 }
-                TaskManager.EventAppeared(RECORD_PATH.EVENT, 1, decimal.ToInt32(Properties.Settings.Default.event_record_time_before_event), decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event), DateTime.Now);
-                MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event));
+                else
+                {
+                    crossbar.Start(0, CAMERA_MODES.EVENT);
+                    Logger.Add("TODO: start event recording now");
+                }
+                crossbar.SetIconTimer(Properties.Settings.Default.event_record_time_after_event);
             }
-            else
-            {
-                crossbar.Start(0, CAMERA_MODES.EVENT);
-                Logger.Add("TODO: start event recording now");
-            }
-            crossbar.SetIconTimer(Properties.Settings.Default.event_record_time_after_event);
         }
 
         public void EventRecorderOff()
