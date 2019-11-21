@@ -137,7 +137,7 @@ namespace FaceDetection
         public void StartRecorderCamera()
         {
             
-            Size size = PROPERTY_FUNCTIONS.Get_Stored_Resolution(INDEX);
+            Size size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(INDEX);
             int fps = PROPERTY_FUNCTIONS.Get_FPS(INDEX);
             //IntPtr pbx = MainForm.GetMainForm.Handle;
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
@@ -157,7 +157,7 @@ namespace FaceDetection
             else
             {
                 //PREEVENT EXISTS. PERMANENT RECORDING MODE
-                targetPath = sourcePath + "/" + dstFileName;
+                targetPath = sourcePath + "/"+(INDEX+1) + "/" + dstFileName;
                 Logger.Add(targetPath + " target path");
                 try
                 {
@@ -167,7 +167,7 @@ namespace FaceDetection
                     //WE HAVE TO ADD CAMERA NUMBER HERE IN THIS PATH TOO
                     //var str = Path.Combine(sourcePath, (INDEX + 1).ToString());
                     //
-                    sourcePath = @"C:\TEMP";
+                    sourcePath = @"C:\TEMP"+ "/" + (INDEX + 1);
                     targetPath = sourcePath + "/" + dstFileName;
                     Directory.CreateDirectory(sourcePath);
                     Logger.Add(iox);

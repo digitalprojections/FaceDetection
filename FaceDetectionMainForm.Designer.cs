@@ -45,7 +45,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).BeginInit();
             this.SuspendLayout();
             // 
-            // or_controlButtons
+            // controlButtons
             // 
             this.controlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.controlButtons.BackColor = System.Drawing.Color.Transparent;
@@ -54,8 +54,8 @@
             this.controlButtons.Controls.Add(this.snapshotButton);
             this.controlButtons.Controls.Add(this.cameraButton);
             this.controlButtons.Controls.Add(this.closeButton);
-            this.controlButtons.Location = new System.Drawing.Point(422, 401);
-            this.controlButtons.Name = "or_controlButtons";
+            this.controlButtons.Location = new System.Drawing.Point(323, 409);
+            this.controlButtons.Name = "controlButtons";
             this.controlButtons.Size = new System.Drawing.Size(292, 59);
             this.controlButtons.TabIndex = 12;
             this.controlButtons.Visible = false;
@@ -164,7 +164,7 @@
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.ShowButtons);
             // 
-            // or_dateTimeLabel
+            // dateTimeLabel
             // 
             this.dateTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dateTimeLabel.AutoSize = true;
@@ -173,7 +173,7 @@
             this.dateTimeLabel.ForeColor = System.Drawing.Color.White;
             this.dateTimeLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dateTimeLabel.Location = new System.Drawing.Point(12, 433);
-            this.dateTimeLabel.Name = "or_dateTimeLabel";
+            this.dateTimeLabel.Name = "dateTimeLabel";
             this.dateTimeLabel.Padding = new System.Windows.Forms.Padding(3);
             this.dateTimeLabel.Size = new System.Drawing.Size(125, 30);
             this.dateTimeLabel.TabIndex = 13;
@@ -185,15 +185,17 @@
             this.camera_number_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.camera_number_txt.AutoSize = true;
             this.camera_number_txt.BackColor = System.Drawing.SystemColors.Control;
+            this.camera_number_txt.DataBindings.Add(new System.Windows.Forms.Binding("Visible", global::FaceDetection.Properties.Settings.Default, "show_camera_no", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.camera_number_txt.Font = new System.Drawing.Font("MS UI Gothic", 50F);
             this.camera_number_txt.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.camera_number_txt.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.camera_number_txt.Location = new System.Drawing.Point(651, 9);
+            this.camera_number_txt.Location = new System.Drawing.Point(552, 12);
             this.camera_number_txt.Name = "camera_number_txt";
             this.camera_number_txt.Size = new System.Drawing.Size(63, 67);
             this.camera_number_txt.TabIndex = 10;
             this.camera_number_txt.Text = "1";
             this.camera_number_txt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.camera_number_txt.Visible = global::FaceDetection.Properties.Settings.Default.show_camera_no;
             // 
             // pbRecording
             // 

@@ -74,7 +74,7 @@ namespace FaceDetection
         public static PictureBox Or_pb_recording { get => or_pb_recording; set => or_pb_recording = value; }
         public BackLightController BackLight { get => backLight; set => backLight = value; }
         public static MOUSE_KEYBOARD Mklisteners { get => mklisteners; set => mklisteners = value; }
-
+                
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             InitializeComponent();
@@ -406,6 +406,14 @@ namespace FaceDetection
         
         private void MainForm_Load(object sender, EventArgs e)
         {
+            //Object references
+            rec_button = cameraButton;
+            or_camera_num_txt = camera_number_txt;
+            Or_pb_recording = pbRecording;
+            or_mainForm = this;
+            or_current_date_text = dateTimeLabel;
+            or_controlBut = controlButtons;
+
             #region Instances
             ///////////////////////////////////////
             settingUI = new SettingsUI();
@@ -437,13 +445,7 @@ namespace FaceDetection
             datetime_ui_updater_timer.AutoReset = true;
             datetime_ui_updater_timer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateDateTimeText);
 
-            //Object references
-            rec_button = cameraButton;
-            or_camera_num_txt = camera_number_txt;
-            Or_pb_recording = pbRecording;            
-            or_mainForm = this;
-            or_current_date_text = dateTimeLabel;
-            or_controlBut = controlButtons;
+            
                         
             if (Properties.Settings.Default.window_on_top)
             {
@@ -523,7 +525,7 @@ namespace FaceDetection
             SetMainScreenProperties();
 
             //CREATE MORE WINDOWS for more cameras
-            //MULTI_WINDOW.CreateCameraWindows(Camera.GetCameraCount().Length);
+            MULTI_WINDOW.CreateCameraWindows(Camera.GetCameraCount().Length);
 
             //Also must check if the PREEVENT mode is needed
             SetCameraToDefaultMode();

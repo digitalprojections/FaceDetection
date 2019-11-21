@@ -23,7 +23,7 @@ namespace FaceDetection
         public bool OPER_BAN = false;
         private bool manualRecording; // Robin
 
-        bool wait_interval_enabled = false;
+        //bool wait_interval_enabled = false;
         //int duration = 0;
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace FaceDetection
             //{
             //    MainForm.GetMainForm.SET_REC_ICON();
             //}
-            wait_interval_enabled = true;            
+            OPER_BAN = true;
             int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording + vidlen) * 1000;
             if (intt > 500)
             {
@@ -204,7 +204,7 @@ namespace FaceDetection
                     {
                         manualRecording = false;
                         MainForm.Or_pb_recording.Visible = false;
-                    MainForm.GetMainForm.SetRecordButtonState("play", false);
+                        MainForm.GetMainForm.SetRecordButtonState("play", false);
                     }
 
                     recorder.CAMERA_MODE = CAMERA_MODES.PREEVENT;
@@ -217,13 +217,13 @@ namespace FaceDetection
                     try
                     {
                         Task task = Task.Factory.StartNew(() => {
-                            if (Directory.Exists(@"D:\TEMP"))
+                            if (Directory.Exists(@"D:\TEMP\"+(INDEX+1)))
                             {
-                                TaskManager.DeleteOldFiles(@"D:\TEMP");
+                                TaskManager.DeleteOldFiles(@"D:\TEMP\" + (INDEX + 1));
                             }
                             else
                             {
-                                TaskManager.DeleteOldFiles(@"C:\TEMP");
+                                TaskManager.DeleteOldFiles(@"C:\TEMP\" + (INDEX + 1));
                             }
                         });                        
                     }
@@ -232,16 +232,16 @@ namespace FaceDetection
                         Logger.Add(e);
                     }
                 }
-                if (wait_interval_enabled)
-                {
-                    //Run the timer
-                    int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording) * 1000;
-                    if (intt >= 500)
-                    {
-                        no_opcap_timer.Interval = intt;
-                        no_opcap_timer.Enabled = true;
-                    }
-                }
+                //if (wait_interval_enabled)
+                //{
+                //    //Run the timer
+                //    int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording) * 1000;
+                //    if (intt >= 500)
+                //    {
+                //        no_opcap_timer.Interval = intt;
+                //        no_opcap_timer.Enabled = true;
+                //    }
+                //}
             }
         }
 
@@ -252,17 +252,17 @@ namespace FaceDetection
 
         private void AllowOperCap()
         {            
-                OPER_BAN = false;
-                Logger.Add("No_opcap_timer Elapsed, OPER_BAN (operator capture ban) set " + OPER_BAN);
-                if (wait_interval_enabled)
+                
+                
+                if (OPER_BAN)
                 {
                     no_opcap_timer.Enabled = false;
-                    wait_interval_enabled = false;
-                if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+                    OPER_BAN = false;
+                    Logger.Add("No_opcap_timer Elapsed, OPER_BAN (operator capture ban) set " + OPER_BAN);
+                    if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
                     {
                         MainForm.Mklisteners.AddMouseAndKeyboardBack();
                     }
-
                     if (Properties.Settings.Default.enable_Human_sensor)
                     {
                         MainForm.RSensor.Start_IR_Timer();
@@ -445,8 +445,7 @@ namespace FaceDetection
                         if (this != null)
                         {
                             recorder.ACTIVE_RECPATH = RECORD_PATH.EVENT;
-                            recorder.CAMERA_MODE = CAMERA_MODES.OPERATOR;
-                            wait_interval_enabled = true;
+                            recorder.CAMERA_MODE = CAMERA_MODES.OPERATOR;                            
                             this.OPER_BAN = true;
                             this.RecordingMode();
                         }

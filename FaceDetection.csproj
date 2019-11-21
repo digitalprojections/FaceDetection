@@ -105,6 +105,7 @@
       <HintPath>packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\lib\net461\OpenCvSharp.UserInterface.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -125,7 +126,11 @@
     <Compile Include="Camera.cs" />
     <Compile Include="CAMERA_MODES.cs" />
     <Compile Include="CheckDiskSpace.cs" />
+    <Compile Include="FaceDetectorX.cs" />
     <Compile Include="FaceDetector.cs" />
+    <Compile Include="FormClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="KeyboardListener.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MouseListener.cs" />

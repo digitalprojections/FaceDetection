@@ -212,5 +212,41 @@
     <Setting Name="main_screen_size" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">640, 480</Value>
     </Setting>
+    <Setting Name="C4_show_camera_number" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C2_show_camera_number" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C3_show_camera_number" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C2_show_record_icon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C3_show_record_icon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C4_show_record_icon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C2_window_location" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">32, 32</Value>
+    </Setting>
+    <Setting Name="C3_window_location" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">48, 48</Value>
+    </Setting>
+    <Setting Name="C4_window_location" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">64, 64</Value>
+    </Setting>
+    <Setting Name="C2_window_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">640, 480</Value>
+    </Setting>
+    <Setting Name="C3_window_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">640, 480</Value>
+    </Setting>
+    <Setting Name="C4_window_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">640, 480</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
