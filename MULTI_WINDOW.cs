@@ -16,7 +16,7 @@ namespace FaceDetection
         //private static List<CROSSBAR> crosbarList = new List<CROSSBAR>();
 
         private static FormClass form;
-        private static List<Form> formList = new List<Form>();
+        private static List<FormClass> formList = new List<FormClass>();
                 
         /// <summary>
         /// MULTI-CAMERA
@@ -35,6 +35,14 @@ namespace FaceDetection
                     form.ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);                                        
                 }
             }            
+        }
+
+        internal static void START_FACE_TIMERS()
+        {
+            for (int i=0; i<formList.Count; i++)
+            {
+                formList[i].faceDetector.StartFaceTimer();
+            }
         }
     }
 }

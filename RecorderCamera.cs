@@ -157,7 +157,7 @@ namespace FaceDetection
             else
             {
                 //PREEVENT EXISTS. PERMANENT RECORDING MODE
-                targetPath = sourcePath + "/"+(INDEX+1) + "/" + dstFileName;
+                targetPath = Path.Combine(sourcePath, (INDEX+1).ToString()) + "/" + dstFileName;
                 Logger.Add(targetPath + " target path");
                 try
                 {
@@ -359,7 +359,7 @@ namespace FaceDetection
         {
             //PREEVENT EXISTS. PERMANENT RECORDING MODE
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
-            targetPath = sourcePath + "/" + dstFileName;
+            targetPath = sourcePath + "/" + (INDEX + 1).ToString() + "/" + dstFileName;
             Logger.Add(targetPath + " target path");
             try
             {
@@ -368,7 +368,7 @@ namespace FaceDetection
             catch (IOException iox)
             {
                 sourcePath = @"C:\TEMP";
-                targetPath = sourcePath + "/" + dstFileName;
+                targetPath = sourcePath + "/" + (INDEX + 1).ToString() + "/" + dstFileName;
                 Directory.CreateDirectory(sourcePath);
                 Logger.Add(iox);
 

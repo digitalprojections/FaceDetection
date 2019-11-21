@@ -270,6 +270,7 @@ namespace FaceDetection
                     else if (Properties.Settings.Default.enable_face_recognition)
                     {
                         MainForm.FaceDetector.StartFaceTimer();
+                        MULTI_WINDOW.START_FACE_TIMERS();
                     }
                 }
         }

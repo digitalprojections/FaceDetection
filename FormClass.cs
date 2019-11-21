@@ -68,7 +68,7 @@ namespace FaceDetection
         private void FormClass_ResizeEnd(object sender, EventArgs e)
         {
             PROPERTY_FUNCTIONS.Set_Camera_Window_Size(CAMERA_INDEX, this);
-            this.crossbar.SetWindowPosition(this.Size);
+            crossbar.SetWindowPosition(this.Size);
         }
 
         private void FormClass_FormClosed(object sender, FormClosedEventArgs e)
