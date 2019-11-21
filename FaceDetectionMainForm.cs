@@ -399,8 +399,7 @@ namespace FaceDetection
             //{
             //    RSensor.SensorClose();
             //}
-            //Console.WriteLine(this.Location.X.ToString());            
-
+            //Console.WriteLine(this.Location.X.ToString());        
             
         }
         
@@ -525,7 +524,7 @@ namespace FaceDetection
             SetMainScreenProperties();
 
             //CREATE MORE WINDOWS for more cameras
-            MULTI_WINDOW.CreateCameraWindows(Camera.GetCameraCount().Length);
+            //MULTI_WINDOW.CreateCameraWindows(Camera.GetCameraCount().Length);
 
             //Also must check if the PREEVENT mode is needed
             SetCameraToDefaultMode();
