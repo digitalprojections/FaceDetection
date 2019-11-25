@@ -103,6 +103,7 @@ namespace FaceDetection
                     catch (Exception ex) // Unexpected files in TEMP folder
                     {
                         Console.WriteLine(ex.Message + " TaskManager in EventAppeared()");
+                        Logger.Add(ex.Message + " TaskManager in EventAppeared()");
                     }
                 }
 
@@ -276,7 +277,7 @@ namespace FaceDetection
 
                 if (fileSaved == false) // The file isn't saved yet  (Because the function CutVideoFromEvent() saved it directly, so don't need to pass in the Concat() function in that case)
                 {
-                    System.Threading.Thread.Sleep(5000); // Wait for the last files is released by the system. (On PC short time is enough but it touch panel it is better to wait more to be sure)
+                    System.Threading.Thread.Sleep(10000); // Wait for the last files is released by the system. (On PC short time is enough but it touch panel it is better to wait more to be sure)
                     ConcatVideo(startVideoForFullFile, posteventFilesName, startEventTime, listTaskIndex); // Concat all path files to send to ffmpeg to make the final video with all cuts
                 }
 
@@ -284,9 +285,10 @@ namespace FaceDetection
                 listTask[listTaskIndex].complete = true;
                 //listTask.Remove(listTask[listTaskIndex]); // Delete the task ended --> If we delete the task, the index of the list change. So if a task is running, it will become a problem
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message + " TaskManager in RecordEnd()");
+                Console.WriteLine(ex.Message + " TaskManager in RecordEnd()");
+                Logger.Add(ex.Message + " TaskManager in RecordEnd()");
             }
         }
 
@@ -327,9 +329,10 @@ namespace FaceDetection
                 startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 Process.Start(startInfo);
             }
-            catch (Exception e) // No video to cut. The application has probably just started
+            catch (Exception ex) // No video to cut. The application has probably just started
             {
-                Console.WriteLine(e.Message + " TaskManager in CutVideoKeepEnd()");
+                Console.WriteLine(ex.Message + " TaskManager in CutVideoKeepEnd()");
+                Logger.Add(ex.Message + " TaskManager in CutVideoKeepEnd()");
                 videoCutName = "";
             }
             return videoCutName;
@@ -378,9 +381,10 @@ namespace FaceDetection
                 startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 Process.Start(startInfo); // --/!\-- We send the file directly in the final destination
             }
-            catch (Exception e) // No video to cut. The application has probably just started
+            catch (Exception ex) // No video to cut. The application has probably just started
             {
-                Console.WriteLine(e.Message + " TaskManager in CutVideoFromEvent()");
+                Console.WriteLine(ex.Message + " TaskManager in CutVideoFromEvent()");
+                Logger.Add(ex.Message + " TaskManager in CutVideoFromEvent()");
                 videoCutName = "";
             }
             return videoCutName;
@@ -436,23 +440,26 @@ namespace FaceDetection
                 {
                     startInfo.Arguments = @"-loglevel quiet -y -i concat:" + postEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[TaskIndex].cameraNumber.ToString() + "\\" + listTask[TaskIndex].path + "\\" + startTime + ".avi";
                 }
-                Console.WriteLine("ConcatVideo() : " + startInfo.Arguments); // DEBUG
+                Console.WriteLine("ConcatVideo() : " + startInfo.Arguments);
+                Logger.Add("ConcatVideo() : " + startInfo.Arguments);
                 startInfo.CreateNoWindow = true;
                 startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 Process.Start(startInfo);
 
-                System.Threading.Thread.Sleep(1000);
                 Console.WriteLine("preEventVideoFiles: " + preEventVideoFiles);
                 Console.WriteLine("postEventVideoFiles " + postEventVideoFiles);
+                Logger.Add("preEventVideoFiles: " + preEventVideoFiles);
+                Logger.Add("postEventVideoFiles " + postEventVideoFiles);
                 if (preEventVideoFiles != "")
                 {
                     DeleteCutFileFromTemp(preEventVideoFiles); // Delete file cut for the first part of the full video to not taking it in the next event 
                 }
                 DeleteCutFileFromTemp(postEventVideoFiles); // Delete file cut for the last part of the full video to not taking it in the next event 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message + " TaskManager in Concat()");
+                Console.WriteLine(ex.Message + " TaskManager in Concat()  pre: " + preEventVideoFiles + " post: " + postEventVideoFiles);
+                Logger.Add(ex.Message + " TaskManager in Concat()  pre: " + preEventVideoFiles + " post: " + postEventVideoFiles);
             }
         }
 
@@ -494,9 +501,10 @@ namespace FaceDetection
                     listRecordingFiles = list.ToList();
                 }
             }
-            catch (IOException e)
+            catch (IOException ex)
             {
-                Console.WriteLine(e.Message + " TaskManager in RefreshFilesInList()");
+                Console.WriteLine(ex.Message + " TaskManager in RefreshFilesInList()");
+                Logger.Add(ex.Message + " TaskManager in RefreshFilesInList()");
             }
         }
 
@@ -522,9 +530,10 @@ namespace FaceDetection
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message + " TaskManager in DeleteOldFiles()");
+                Console.WriteLine(ex.Message + " TaskManager in DeleteOldFiles()" + pathTempFolder);
+                Logger.Add(ex.Message + " TaskManager in DeleteOldFiles()" + pathTempFolder);
             }
         }
 
@@ -553,16 +562,26 @@ namespace FaceDetection
             return duration;
         }
 
-        private static void DeleteCutFileFromTemp(string VideoFiles)
+        private static void DeleteCutFileFromTemp(string videoFiles)
         {
-            string file = VideoFiles.Substring(VideoFiles.Length - 18, 18);
-            if (Directory.Exists(@"D:\TEMP"))
+            System.Threading.Thread.Sleep(30000);
+
+            try
             {
-                File.Delete(@"D:\TEMP\CutTemp\" + file);
+                string file = videoFiles.Substring(videoFiles.Length - 18, 18);
+                if (Directory.Exists(@"D:\TEMP"))
+                {
+                    File.Delete(@"D:\TEMP\CutTemp\" + file);
+                }
+                else
+                {
+                    File.Delete(@"C:\TEMP\CutTemp\" + file);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                File.Delete(@"C:\TEMP\CutTemp\" + file);
+                Console.WriteLine(ex.Message + " TaskManager in DeleteCutFileFromTemp()" + videoFiles);
+                Logger.Add(ex.Message + " TaskManager in DeleteCutFileFromTemp()" + videoFiles);
             }
         }
 

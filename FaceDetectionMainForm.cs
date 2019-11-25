@@ -163,11 +163,6 @@ namespace FaceDetection
                 }
             }
         }
-
-        //public static void HandleParameters(String[] parameters)
-        //{
-
-        //}
       
         public void ShowButtons(object sender, EventArgs eventArgs)
         {
@@ -191,7 +186,7 @@ namespace FaceDetection
         //public void HoldButton(object sender, MouseEventArgs eventArgs)
         //{
         //    Logger.Add("mouse down");
-        
+
         //    mouse_down_timer.Interval = 1000;//Set it to 3000 for production            
         //    mouse_down_timer.Enabled = true;
         //}
@@ -205,6 +200,11 @@ namespace FaceDetection
 
         private void FullScreen(object sender, EventArgs eventArgs)
         {
+            FullScreen();
+        }
+
+        private void FullScreen()
+        {
             if (this.WindowState == FormWindowState.Normal)
             {
                 if (!Properties.Settings.Default.show_window_pane)
@@ -217,14 +217,10 @@ namespace FaceDetection
                     this.TopMost = true;
                 }
 
-                
-                    this.WindowState = FormWindowState.Maximized;
-            
+                this.WindowState = FormWindowState.Maximized;
             }
             else
             {
-                this.TopMost = false;
-                this.WindowState = FormWindowState.Normal;
                 if (Properties.Settings.Default.show_window_pane == true)
                 {
                     this.FormBorderStyle = FormBorderStyle.Sizable;
@@ -233,12 +229,13 @@ namespace FaceDetection
                 {
                     this.FormBorderStyle = FormBorderStyle.None;
                 }
+                this.TopMost = false;
+                this.WindowState = FormWindowState.Normal;
             }
         }
 
         private async void ShowSettings(object sender, EventArgs e)
         {
-            
             ShowSettingsDialogAsync();
         }
 
@@ -264,7 +261,6 @@ namespace FaceDetection
                     }
                 }
             }
-            
         }
 
         private void OpenStoreLocation(object sender, EventArgs e)
@@ -284,8 +280,8 @@ namespace FaceDetection
         internal static bool AtLeastOnePreEventTimeIsNotZero()
         {
             bool retval = false;
-            if (Properties.Settings.Default.seconds_before_event>0 || 
-                Properties.Settings.Default.event_record_time_before_event>0)
+            if ((Properties.Settings.Default.enable_event_recorder && Properties.Settings.Default.event_record_time_before_event > 0 ) 
+                || ((Properties.Settings.Default.enable_Human_sensor || Properties.Settings.Default.enable_face_recognition || Properties.Settings.Default.Recording_when_at_the_start_of_operation) && Properties.Settings.Default.seconds_before_event > 0))
             {
                 retval = true;
             }
@@ -356,18 +352,18 @@ namespace FaceDetection
             //BackLight.ON();            
             try
             {                
-                    if ((String)cameraButton.Tag == "play")
-                    {
-                    SetRecordButtonState("rec", false);
-                    crossbar.Start(0, CAMERA_MODES.MANUAL);                    
-                    MainForm.GetMainForm.SET_REC_ICON();
+                if ((String)cameraButton.Tag == "play")
+                {
+                SetRecordButtonState("rec", false);
+                crossbar.Start(0, CAMERA_MODES.MANUAL);                    
+                MainForm.GetMainForm.SET_REC_ICON();
                 }
-                    else
-                    {
-                        //it really depends if we shoul PREVIEW ro PREEVENT
-                        //set the deciding factors
-                        //for now we can use this value as a test
-                        //ONLY 0 index camera or the main camera is the one to be used to the manual reording?
+                else
+                {
+                    //it really depends if we shoul PREVIEW ro PREEVENT
+                    //set the deciding factors
+                    //for now we can use this value as a test
+                    //ONLY 0 index camera or the main camera is the one to be used to the manual reording?
                         
                     Or_pb_recording.Visible = false;                        
                     SetRecordButtonState("play", true);
@@ -394,9 +390,7 @@ namespace FaceDetection
             //{
             //    RSensor.SensorClose();
             //}
-            //Console.WriteLine(this.Location.X.ToString());            
-
-            
+            //Console.WriteLine(this.Location.X.ToString());  
         }
         
         private void MainForm_Load(object sender, EventArgs e)
@@ -413,18 +407,6 @@ namespace FaceDetection
             ////////////////////////////////////////
             #endregion
 
-            #region PARAMETERS
-            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
-            {
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.PARAM.Add("uvccameraviewer.exe");
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.HandleParameters(PARAMETERS.PARAM);
-                PARAMETERS.PARAM.Clear();
-            }
-            #endregion
-
-
             //Main window TIMERS
             mouse_down_timer.Elapsed += ShowButtons;//制御ボタンの非/表示用クリックタイマー
             datetime_ui_updater_timer.Interval = 1000;
@@ -439,11 +421,6 @@ namespace FaceDetection
             or_mainForm = this;
             or_current_date_text = or_dateTimeLabel;
             or_controlBut = or_controlButtons;
-                        
-            if (Properties.Settings.Default.window_on_top)
-            {
-                FullScreen(this, null);
-            }
             
             this.WindowState = FormWindowState.Minimized; // Matsuura
             AllChangesApply();
@@ -455,7 +432,6 @@ namespace FaceDetection
             Or_controlBut.Location = new Point(this.Width-320, this.Height-110);
             or_camera_num_txt.Location = new Point(this.Width - 90, 10);
             ///////////////////////////////////////////////////////////
-            
         }
 
         public void SET_REC_ICON()
@@ -465,54 +441,56 @@ namespace FaceDetection
 
         public static void AllChangesApply()
         {
-            
-            
-                if (Properties.Settings.Default.enable_Human_sensor)
-                {
-                    if (RSensor != null)
-                    {
-                        RSensor.Stop_IR_Timer();
-                        // RSensor.Destroy();
-                    }
-                    //RSensor = new IRSensor();
-                    RSensor.SetInterval();
-                    RSensor.Start_IR_Timer();
-                }
-                else
-                {
-                    if (RSensor != null)
-                    {
-                        RSensor.Stop_IR_Timer();
-                        //RSensor.SensorClose();
-                        // RSensor.Destroy();
-                    }
-                }
+            if (Properties.Settings.Default.window_on_top)
+            {
+                MainForm.GetMainForm.FullScreen();
+            }
 
-                if (Properties.Settings.Default.enable_face_recognition)
+            if (Properties.Settings.Default.enable_Human_sensor)
+            {
+                if (RSensor != null)
                 {
-                    if (faceDetector != null)
-                    {
-                        FaceDetector.StopFaceTimer();
-                        //faceDetector.Destroy();
-                    }
-                    //faceDetector = new FaceDetector();
-                    faceDetector.SetInterval();
-                    faceDetector.StartFaceTimer();
+                    RSensor.Stop_IR_Timer();
+                    // RSensor.Destroy();
                 }
-                else
+                //RSensor = new IRSensor();
+                RSensor.SetInterval();
+                RSensor.Start_IR_Timer();
+            }
+            else
+            {
+                if (RSensor != null)
                 {
-                    if (faceDetector != null)
-                    {
-                        FaceDetector.StopFaceTimer();
-                        //faceDetector.Destroy();
-                    }
+                    RSensor.Stop_IR_Timer();
+                    //RSensor.SensorClose();
+                    // RSensor.Destroy();
                 }
+            }
 
-                if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+            if (Properties.Settings.Default.enable_face_recognition)
+            {
+                if (faceDetector != null)
                 {
-                    Mklisteners.AddMouseAndKeyboardBack();
+                    FaceDetector.StopFaceTimer();
+                    //faceDetector.Destroy();
                 }
-            
+                //faceDetector = new FaceDetector();
+                faceDetector.SetInterval();
+                faceDetector.StartFaceTimer();
+            }
+            else
+            {
+                if (faceDetector != null)
+                {
+                    FaceDetector.StopFaceTimer();
+                    //faceDetector.Destroy();
+                }
+            }
+
+            if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+            {
+                Mklisteners.AddMouseAndKeyboardBack();
+            }
 
             //SCREEN PROPS
             SetMainScreenProperties();
@@ -522,9 +500,47 @@ namespace FaceDetection
 
             //Also must check if the PREEVENT mode is needed
             SetCameraToDefaultMode();
-            //Debug.WriteLine(Or_pb_recording.Visible);
-            GC.Collect();
+
+            #region PARAMETERS
+            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
+            {
+                PARAMETERS.PARAM.Reverse();
+                PARAMETERS.PARAM.Add("uvccameraviewer.exe");
+                PARAMETERS.PARAM.Reverse();
+                PARAMETERS.HandleParameters(PARAMETERS.PARAM);
+
+                if (PARAMETERS.isMinimized)
+                {
+                    GetMainForm.WindowState = FormWindowState.Minimized;
+                }
+                else
+                {
+                    GetMainForm.WindowState = FormWindowState.Normal;
+                }
+
+                PARAMETERS.PARAM.Clear();
             }
+            #endregion
+
+            GC.Collect();
+        }
+
+        public static void ParametersChangesApply()
+        {
+            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0)
+            {
+                if (PARAMETERS.isControlButtonVisible)
+                {
+                    GetMainForm.or_controlButtons.Visible = true;
+                }
+                else
+                {
+                    GetMainForm.or_controlButtons.Visible = false;
+                }
+
+                PARAMETERS.PARAM.Clear();
+            }
+        }
 
         private static void SetMainScreenProperties()
         {
@@ -539,16 +555,16 @@ namespace FaceDetection
             MainForm.GetMainForm.TopMost = Properties.Settings.Default.window_on_top;
             MainForm.GetMainForm.Location = new System.Drawing.Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
             
-
             or_current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
+
             if (Properties.Settings.Default.main_window_full_screen)
             {
-                if (!PARAMETERS.isHidden)
+                //if (!PARAMETERS.isHidden)
                     MainForm.GetMainForm.WindowState = FormWindowState.Maximized;
             }
             else
             {
-                if (!PARAMETERS.isHidden)
+               // if (!PARAMETERS.isHidden)
                     MainForm.GetMainForm.WindowState = FormWindowState.Normal;
             }
             //Window pane
@@ -567,21 +583,7 @@ namespace FaceDetection
             //Properties.Settings.Default.C1w = Properties.Settings.Default.main_screen_size.Width;
             //Properties.Settings.Default.C1h = Properties.Settings.Default.main_screen_size.Height;
             MainForm.GetMainForm.Location = new Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
-
         }
-
-        //public static void ParametersChangesApply()
-        //{
-        //    //if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
-        //    //{
-        //    //    PARAMETERS.PARAM.Reverse();
-        //    //    PARAMETERS.PARAM.Add("uvccameraviewer.exe");
-        //    //    PARAMETERS.PARAM.Reverse();
-        //    //    PARAMETERS.HandleParameters(PARAMETERS.PARAM);                
-        //    //    PARAMETERS.PARAM.Clear();
-
-        //    //}
-        //}
 
         public static void SetCameraToDefaultMode()
         {
@@ -646,27 +648,6 @@ namespace FaceDetection
             //////////////////////////////////////////////////////////////////            
         }
 
-
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        private static extern IntPtr SendMessageTimeout(
-            IntPtr hWnd,
-            uint Msg,
-            UIntPtr wParam,
-            IntPtr lParam,
-            SendMessageTimeoutFlags fuFlags,
-            uint uTimeout,
-            out UIntPtr lpdwResult);
-
-        [Flags]
-         enum SendMessageTimeoutFlags : uint
-        {
-            SMTO_NORMAL = 0x0,
-            SMTO_BLOCK = 0x1,
-            SMTO_ABORTIFHUNG = 0x2,
-            SMTO_NOTIMEOUTIFNOTHUNG = 0x8,
-            SMTO_ERRORONEXIT = 0x20
-        }
-
         private bool UniqueFPS(long fps)
         {
             bool retval = false;
@@ -714,7 +695,26 @@ namespace FaceDetection
             Properties.Settings.Default.Save();
 
             Application.Exit();
+        }
 
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern IntPtr SendMessageTimeout(
+            IntPtr hWnd,
+            uint Msg,
+            UIntPtr wParam,
+            IntPtr lParam,
+            SendMessageTimeoutFlags fuFlags,
+            uint uTimeout,
+            out UIntPtr lpdwResult);
+
+        [Flags]
+        enum SendMessageTimeoutFlags : uint
+        {
+            SMTO_NORMAL = 0x0,
+            SMTO_BLOCK = 0x1,
+            SMTO_ABORTIFHUNG = 0x2,
+            SMTO_NOTIMEOUTIFNOTHUNG = 0x8,
+            SMTO_ERRORONEXIT = 0x20
         }
     }
 }
