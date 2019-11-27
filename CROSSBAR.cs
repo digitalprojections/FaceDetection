@@ -242,16 +242,16 @@ namespace FaceDetection
                         Console.WriteLine(e.Message + " TaskManager in AddFilesInList()");
                     }
                 }
-                if (wait_interval_enabled)
-                {
-                    //Run the timer
-                    int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording) * 1000;
-                    if (intt >= 500)
-                    {
-                        no_opcap_timer.Interval = intt;
-                        no_opcap_timer.Enabled = true;
-                    }
-                }
+                //if (wait_interval_enabled)
+                //{
+                //    //Run the timer
+                //    int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording) * 1000;
+                //    if (intt >= 500)
+                //    {
+                //        no_opcap_timer.Interval = intt;
+                //        no_opcap_timer.Enabled = true;
+                //    }
+                //}
             }
         }
 
