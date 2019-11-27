@@ -354,22 +354,22 @@ namespace FaceDetection
         internal void RecordingMode()
         {
             Recording_is_on = true;
-                if (camera != null && camera.ON)
-                {
-                    camera.Release();                    
-                    recorder.StartRecorderCamera();
-                }
-                else if (camera != null && camera.Size.Width != PROPERTY_FUNCTIONS.GetWidth(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetWidth(0).Height)
-                {
-                    recorder.ReleaseInterfaces();
-                    recorder = new RecorderCamera(this.INDEX, this.parentwindow);
-                    recorder.StartRecorderCamera();
-                }
-                else if(recorder!=null && recorder.CAMERA_MODE==CAMERA_MODES.MANUAL)
-                {
-                    Task manual_rec_task = new Task(VideoRecordingEnd);
+            if (camera != null && camera.ON)
+            {
+                camera.Release();                    
+                recorder.StartRecorderCamera();
+            }
+            else if (camera != null && camera.Size.Width != PROPERTY_FUNCTIONS.GetWidth(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetWidth(0).Height)
+            {
+                recorder.ReleaseInterfaces();
+                recorder = new RecorderCamera(this.INDEX, this.parentwindow);
+                recorder.StartRecorderCamera();
+            }
+            else if(recorder!=null && recorder.CAMERA_MODE==CAMERA_MODES.MANUAL)
+            {
+                Task manual_rec_task = new Task(VideoRecordingEnd);
                 manual_rec_task.Start();
-                }
+            }
             else
             {
                 recorder.StartRecorderCamera();

@@ -267,23 +267,13 @@ namespace FaceDetection
             }
         }
 
-        private void CheckOnKids(CultureInfo cult, Control control, ComponentResourceManager crm)
-        {
-            foreach (Control c in control.Controls)
-            {
-                crm.ApplyResources(c, c.Name, cult);
-                {
-                    CheckOnKids(cult, c, crm);
-                }
-            }
-        }
         private void Cm_capture_mode_SelectedIndexChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.capture_method = cm_capture_mode.SelectedIndex;
             Console.WriteLine(cm_capture_mode.SelectedIndex);
             if (cm_capture_mode.SelectedIndex == 1)
             {
-                nud_seconds_after.Enabled = false;
+                nud_seconds_after_event.Enabled = false;
                 nud_seconds_before_event.Enabled = false;
                 nud_reinitiation_interval.Enabled = false;
             }
@@ -291,9 +281,20 @@ namespace FaceDetection
             {
                 if (cm_capture_mode.SelectedIndex == 0)
                 {
-                    nud_seconds_after.Enabled = true;
+                    nud_seconds_after_event.Enabled = true;
                     nud_seconds_before_event.Enabled = true;
                     nud_reinitiation_interval.Enabled = true;
+                }
+            }
+        }
+
+        private void CheckOnKids(CultureInfo cult, Control control, ComponentResourceManager crm)
+        {
+            foreach (Control c in control.Controls)
+            {
+                crm.ApplyResources(c, c.Name, cult);
+                {
+                    CheckOnKids(cult, c, crm);
                 }
             }
         }
@@ -429,6 +430,17 @@ namespace FaceDetection
             CheckBox chb = (CheckBox)sender;
             bool chk = chb.Checked;            
             ChangeControlEnabled(this.groupBox_functionalitySettings, chk);
+
+            if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked))
+            {
+                nud_seconds_before_event.Enabled = true;
+                nud_seconds_after_event.Enabled = true;
+            }
+            else
+            {
+                nud_seconds_before_event.Enabled = false;
+                nud_seconds_after_event.Enabled = false;
+            }
         }
         
         private void Cb_human_sensor_CheckedChanged(object sender, EventArgs e)
@@ -442,6 +454,17 @@ namespace FaceDetection
             else
             {
                 DisableOperatorCaptureCheckBox_ifNeeded();
+            }
+
+            if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked))
+            {
+                nud_seconds_before_event.Enabled = true;
+                nud_seconds_after_event.Enabled = true;
+            }
+            else
+            {
+                nud_seconds_before_event.Enabled = false;
+                nud_seconds_after_event.Enabled = false;
             }
         }
 
@@ -457,6 +480,17 @@ namespace FaceDetection
             {
                 DisableOperatorCaptureCheckBox_ifNeeded();
             }
+
+            if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked))
+            {
+                nud_seconds_before_event.Enabled = true;
+                nud_seconds_after_event.Enabled = true;
+            }
+            else
+            {
+                nud_seconds_before_event.Enabled = false;
+                nud_seconds_after_event.Enabled = false;
+            }
         }
         private void Cb_recording_operation_CheckStateChanged(object sender, EventArgs e)
         {
@@ -468,6 +502,17 @@ namespace FaceDetection
             else
             {
                 DisableOperatorCaptureCheckBox_ifNeeded();
+            }
+
+            if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked))
+            {
+                nud_seconds_before_event.Enabled = true;
+                nud_seconds_after_event.Enabled = true;
+            }
+            else
+            {
+                nud_seconds_before_event.Enabled = false;
+                nud_seconds_after_event.Enabled = false;
             }
         }
 
@@ -499,8 +544,6 @@ namespace FaceDetection
         //    CustomMessage.Add(Properties.Settings.Default.interval_before_reinitiating_recording);
         //}
 
-        
-
         private void Nud_reinitiation_interval_ValueChanged(object sender, EventArgs e)
         {
             //check the other nud
@@ -518,9 +561,67 @@ namespace FaceDetection
                 Properties.Settings.Default.interval_before_reinitiating_recording = Properties.Settings.Default.seconds_before_event;
             }
         }
+
         private void SettingsUI_Shown(object sender, EventArgs e)
         {
             DisableOperatorCaptureCheckBox_ifNeeded();
+        }
+
+        private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PROPERTY_FUNCTIONS.resolution_changed = true;
+        }
+
+        private void NumericUpDownX_ValueChanged(object sender, EventArgs e)
+        {
+            if(numericUpDownX.Value > 700)
+            {
+                //numericUpDownX.Value = Properties.Settings.Default.C1x;
+                numericUpDownX.Value = 700;
+            }
+            else if (numericUpDownX.Value < 0)
+            {
+                numericUpDownX.Value = 0;
+            }
+        }
+
+        private void NumericUpDownY_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDownY.Value > 500)
+            {
+                //numericUpDownY.Value = Properties.Settings.Default.C1y;
+                numericUpDownY.Value = 500;
+            }
+            else if (numericUpDownY.Value < 0)
+            {
+                numericUpDownY.Value = 0;
+            }
+        }
+
+        private void NumericUpDownW_ValueChanged(object sender, EventArgs e)
+        {
+            if(numericUpDownW.Value > 1280)
+            {
+                //numericUpDownW.Value = Properties.Settings.Default.C1w;
+                numericUpDownW.Value = 1280;
+            }
+            else if (numericUpDownW.Value < 0)
+            {
+                numericUpDownW.Value = 0;
+            }
+        }
+
+        private void NumericUpDownH_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDownH.Value > 720)
+            {
+                //numericUpDownH.Value = Properties.Settings.Default.C1h;
+                numericUpDownH.Value = 720;
+            }
+            else if (numericUpDownH.Value < 0)
+            {
+                numericUpDownH.Value = 0;
+            }
         }
 
         #region DLLIMPORT
@@ -540,9 +641,9 @@ namespace FaceDetection
             IntPtr lpvReserved);
         #endregion
 
-        private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cb_human_sensor_CheckedChanged_1(object sender, EventArgs e)
         {
-            PROPERTY_FUNCTIONS.resolution_changed = true;
+
         }
     }
 }
