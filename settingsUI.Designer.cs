@@ -50,7 +50,7 @@
             this.cb_backlight_on_recognition = new System.Windows.Forms.CheckBox();
             this.groupBox_functionalitySettings = new System.Windows.Forms.GroupBox();
             this.cb_human_sensor = new System.Windows.Forms.CheckBox();
-            this.nud_seconds_after = new System.Windows.Forms.NumericUpDown();
+            this.nud_seconds_after_event = new System.Windows.Forms.NumericUpDown();
             this.cb_face_recognition = new System.Windows.Forms.CheckBox();
             this.nud_seconds_before_event = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
@@ -122,7 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.event_record_time_before_event)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_event_record_after)).BeginInit();
             this.groupBox_functionalitySettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_seconds_after)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_seconds_after_event)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_seconds_before_event)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_reinitiation_interval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -315,7 +315,7 @@
             // groupBox_functionalitySettings
             // 
             this.groupBox_functionalitySettings.Controls.Add(this.cb_human_sensor);
-            this.groupBox_functionalitySettings.Controls.Add(this.nud_seconds_after);
+            this.groupBox_functionalitySettings.Controls.Add(this.nud_seconds_after_event);
             this.groupBox_functionalitySettings.Controls.Add(this.cb_face_recognition);
             this.groupBox_functionalitySettings.Controls.Add(this.nud_seconds_before_event);
             this.groupBox_functionalitySettings.Controls.Add(this.label11);
@@ -346,22 +346,22 @@
             this.cb_human_sensor.UseVisualStyleBackColor = true;
             this.cb_human_sensor.CheckStateChanged += new System.EventHandler(this.Cb_human_sensor_CheckedChanged);
             // 
-            // nud_seconds_after
+            // nud_seconds_after_event
             // 
-            this.nud_seconds_after.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "seconds_after_event", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            resources.ApplyResources(this.nud_seconds_after, "nud_seconds_after");
-            this.nud_seconds_after.Maximum = new decimal(new int[] {
+            this.nud_seconds_after_event.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "seconds_after_event", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.nud_seconds_after_event, "nud_seconds_after_event");
+            this.nud_seconds_after_event.Maximum = new decimal(new int[] {
             300,
             0,
             0,
             0});
-            this.nud_seconds_after.Minimum = new decimal(new int[] {
+            this.nud_seconds_after_event.Minimum = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.nud_seconds_after.Name = "nud_seconds_after";
-            this.nud_seconds_after.Value = global::FaceDetection.Properties.Settings.Default.seconds_after_event;
+            this.nud_seconds_after_event.Name = "nud_seconds_after_event";
+            this.nud_seconds_after_event.Value = global::FaceDetection.Properties.Settings.Default.seconds_after_event;
             // 
             // cb_face_recognition
             // 
@@ -757,6 +757,7 @@
             0,
             0,
             0});
+            this.numericUpDownH.ValueChanged += new System.EventHandler(this.NumericUpDownH_ValueChanged);
             // 
             // numericUpDownW
             // 
@@ -772,6 +773,7 @@
             0,
             0,
             0});
+            this.numericUpDownW.ValueChanged += new System.EventHandler(this.NumericUpDownW_ValueChanged);
             // 
             // label6
             // 
@@ -807,6 +809,7 @@
             0,
             0,
             0});
+            this.numericUpDownY.ValueChanged += new System.EventHandler(this.NumericUpDownY_ValueChanged);
             // 
             // numericUpDownX
             // 
@@ -822,6 +825,7 @@
             0,
             0,
             0});
+            this.numericUpDownX.ValueChanged += new System.EventHandler(this.NumericUpDownX_ValueChanged);
             // 
             // label5
             // 
@@ -936,7 +940,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_event_record_after)).EndInit();
             this.groupBox_functionalitySettings.ResumeLayout(false);
             this.groupBox_functionalitySettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_seconds_after)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_seconds_after_event)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_seconds_before_event)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_reinitiation_interval)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
@@ -1044,7 +1048,7 @@
         private System.Windows.Forms.NumericUpDown nud_event_record_after;
         private System.Windows.Forms.NumericUpDown numericUpDownBacklight;
         private System.Windows.Forms.NumericUpDown event_record_time_before_event;
-        private System.Windows.Forms.NumericUpDown nud_seconds_after;
+        private System.Windows.Forms.NumericUpDown nud_seconds_after_event;
         private System.Windows.Forms.NumericUpDown nud_seconds_before_event;
         private System.Windows.Forms.NumericUpDown numericUpDownCamCount;
         private System.Windows.Forms.Label bl_idling_time_label;

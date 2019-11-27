@@ -12,8 +12,8 @@ namespace FaceDetection
     {
         public static List<string> PARAM;
         static string param;
-        public static bool isHidden = false;
-        //public static bool isControlButtonVisible = true;
+        public static bool isMinimized = false;
+        public static bool isControlButtonVisible = true;
 
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
@@ -42,22 +42,22 @@ namespace FaceDetection
                         elem = parameters.ElementAt(i).ToLower();
                         try
                         {
-                        switch (elem.Substring(0, 1))
-                        {
-                            case "m":
-                                method = elem.Substring(2);
-                                break;
-                            case "s":
-                                switchOnOff = (elem.Substring(2) != "0");
-                                break;
-                            case "c":
-                                cameraIndex = Int32.Parse(elem.Substring(2)) - 1;
-                                break;
-                            case "t":
-                                time = Int32.Parse(elem.Substring(2));
-                                break;
+                            switch (elem.Substring(0, 1))
+                            {
+                                case "m":
+                                    method = elem.Substring(2);
+                                    break;
+                                case "s":
+                                    switchOnOff = (elem.Substring(2) != "0");
+                                    break;
+                                case "c":
+                                    cameraIndex = Int32.Parse(elem.Substring(2)) - 1;
+                                    break;
+                                case "t":
+                                    time = Int32.Parse(elem.Substring(2));
+                                    break;
+                            }
                         }
-                    }
                         catch (Exception e) 
                         {
                             Debug.WriteLine(e.Message + " parameters in the command were sent with unexpected values");
@@ -138,20 +138,20 @@ namespace FaceDetection
                             {
                                 if (CheckCameraIndex(cameraIndex))
                                 {
-                                    //if (switchOnOff)
-                                    //{
-                                    //    //SHOW CONTROL BUTTONS 
-                                    //    isControlButtonVisible = true;
-                                    //    MainForm.ParametersChangesApply();
-                                    //}
-                                    //else
-                                    //{
-                                    //    //HIDE CONTROL BUTTONS
-                                    //    isControlButtonVisible = false;
-                                    //    MainForm.ParametersChangesApply();
-                                    //}
+                                    if (switchOnOff)
+                                    {
+                                        //SHOW CONTROL BUTTONS 
+                                        isControlButtonVisible = true;
+                                        MainForm.ParametersChangesApply();
+                                    }
+                                    else
+                                    {
+                                        //HIDE CONTROL BUTTONS
+                                        isControlButtonVisible = false;
+                                        MainForm.ParametersChangesApply();
+                                    }
 
-                                    MainForm.Or_controlBut.Visible = switchOnOff;                                                                        
+                                    //MainForm.Or_controlBut.Visible = switchOnOff;                                                                        
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -205,7 +205,6 @@ namespace FaceDetection
                                         Properties.Settings.Default.capture_operator = true;
                                         Properties.Settings.Default.enable_Human_sensor = true;
                                         Properties.Settings.Default.enable_face_recognition = false;
-                                        
                                     }
                                     else
                                     {
@@ -214,7 +213,6 @@ namespace FaceDetection
                                             MainForm.RSensor.Stop_IR_Timer();
                                         }
                                         Properties.Settings.Default.enable_Human_sensor = false;
-                                        
                                     }
                                     MainForm.AllChangesApply();
                                     CycleTime(time);
@@ -232,28 +230,16 @@ namespace FaceDetection
                                 if (CheckCameraIndex(cameraIndex))
                                 {
                                     if (switchOnOff)
-                                    {                                        
+                                    {
+                                        isMinimized = false;
+                                        MainForm.GetMainForm.WindowState = FormWindowState.Normal;
                                         MainForm.GetMainForm.Show();
                                         MainForm.GetMainForm.TopMost = true;
-                                        isHidden = false;
-                                        if (Properties.Settings.Default.main_window_full_screen)
-                                        {
-                                            if (!PARAMETERS.isHidden)
-                                                MainForm.GetMainForm.WindowState = FormWindowState.Maximized;
-                                        }
-                                        else
-                                        {
-                                            if (!PARAMETERS.isHidden)
-                                                MainForm.GetMainForm.WindowState = FormWindowState.Normal;
-                                            MainForm.GetMainForm.Size = PROPERTY_FUNCTIONS.GetResolution(0);
-                                        }
                                     }
                                     else
-                                    {                                        
-                                        MainForm.GetMainForm.Hide();
-                                        MainForm.GetMainForm.TopMost = false;
-                                        isHidden = true;
-                                        
+                                    {
+                                        isMinimized = true;
+                                        MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
                                     }
                                 }
                             }
@@ -328,7 +314,6 @@ namespace FaceDetection
                                     {
                                         Properties.Settings.Default.show_window_pane = false;
                                         Properties.Settings.Default.Save();
-                                        
                                     }
                                     if(MainForm.GetMainForm!=null)
                                         MainForm.AllChangesApply();
@@ -434,22 +419,11 @@ namespace FaceDetection
             return Retval;
         }
 
-        //private static void SetWindowPane(bool value)
-        //{
-        //    MainForm.GetMainForm.ControlBox = value;
-        //}
-
-        //public static void HandleParameters()
-        //{
-        
-        //}
-
         private static void CycleTime(int time)
         {
             if (time >= 500 && time <= 1000)
             {
                 Properties.Settings.Default.face_rec_interval = time;
-                //Logger.Add("できた");
             }
         }
 
@@ -470,8 +444,8 @@ namespace FaceDetection
                 return cameraIndex + 1;
             }
         }
+        
         #region DLL IMPORTS
-
         [DllImport("user32.dll")]
         public static extern bool GetCursorPos(out Point p);
         [DllImport("user32.dll")]
