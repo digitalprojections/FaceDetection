@@ -493,7 +493,7 @@ namespace FaceDetectionX
             }
             catch(COMException comx)
             {
-                
+                FaceDetection.Logger.Add(comx);
             }
         }
 

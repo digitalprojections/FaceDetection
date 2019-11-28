@@ -40,10 +40,7 @@ namespace FaceDetection
                 DateTime dateTempVideo;
                 DateTime eventTime = triggerTime; // DateTime.Now;
 
-                // Nishida DEBUG
-                CustomMessage.Add("eventTime:" + eventTime);
-                CustomMessage.Add("nowTime:" + DateTime.Now);
-                // Nishida DEBUG
+                Logger.Add("eventTime: " + eventTime);
 
                 timeSpanStart = new TimeSpan(0, 0, 0, timeBeforeEvent);
                 timeSpanEnd = new TimeSpan(0, 0, 0, timeAfterEvent);
@@ -377,6 +374,7 @@ namespace FaceDetection
 
                 System.Threading.Thread.Sleep(BUFFERDURATION - (cutTimeAfterParameter * 1000)); // Wait for the last files is released by the system -> buffer file - time after event. we can't know better...
                 Console.WriteLine("CutVideoFromEvent() : " + startInfo.Arguments); // DEBUG
+                Logger.Add("CutVideoFromEvent() : " + startInfo.Arguments);
                 startInfo.CreateNoWindow = true;
                 startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 Process.Start(startInfo); // --/!\-- We send the file directly in the final destination

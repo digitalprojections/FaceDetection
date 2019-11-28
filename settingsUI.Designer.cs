@@ -585,6 +585,7 @@
             // nud_erase_old
             // 
             resources.ApplyResources(this.nud_erase_old, "nud_erase_old");
+            this.nud_erase_old.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "keep_old_files_days", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nud_erase_old.Maximum = new decimal(new int[] {
             365,
             0,

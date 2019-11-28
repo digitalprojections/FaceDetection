@@ -95,6 +95,7 @@ namespace FaceDetection
             else
             {
                 MainForm.Or_pb_recording.Visible = false;
+                MainForm.GetMainForm.recordingInProgress = false;
                 icon_timer.Enabled = false;
                 if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_Human_sensor)
                 {
@@ -104,9 +105,8 @@ namespace FaceDetection
         }
         
         public void SetIconTimer(decimal recording_length)
-        {
-            //MainForm.Or_pb_recording.Visible = true;            
-            MainForm.Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon; // True only if checkbox checked
+        {          
+            MainForm.GetMainForm.SET_REC_ICON();
             icon_timer.Interval = decimal.ToInt32(recording_length) * 1000;
             icon_timer.Enabled = true;
             icon_timer.Start();            
@@ -148,7 +148,7 @@ namespace FaceDetection
             //{
             //    MainForm.GetMainForm.SET_REC_ICON();
             //}
-            wait_interval_enabled = true;            
+            wait_interval_enabled = true;
             int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording + vidlen) * 1000;
             if (intt > 500)
             {
@@ -157,6 +157,7 @@ namespace FaceDetection
             if (no_opcap_timer != null)
             {
                 no_opcap_timer.Enabled = true;
+                OPER_BAN = true;
             }
         }
 
@@ -174,11 +175,6 @@ namespace FaceDetection
             }
             else
             {
-                //if (MainForm.RSensor != null)
-                //{
-                //    MainForm.RSensor.SensorClose();
-                //}
-                
                 //We end the recording here
                 if (!PREEVENT_RECORDING)
                 {
@@ -189,7 +185,7 @@ namespace FaceDetection
                     if (this != null)
                     {
                         this.PreviewMode();
-                }
+                    }
                 }
                 else if (PREEVENT_RECORDING && recorder.CAMERA_MODE==CAMERA_MODES.MANUAL)
                 {
@@ -213,7 +209,8 @@ namespace FaceDetection
                     {
                         manualRecording = false;
                         MainForm.Or_pb_recording.Visible = false;
-                    MainForm.GetMainForm.SetRecordButtonState("play", false);
+                        MainForm.GetMainForm.recordingInProgress = false;
+                        MainForm.GetMainForm.SetRecordButtonState("play", false);
                     }
 
                     recorder.CAMERA_MODE = CAMERA_MODES.PREEVENT;
@@ -235,53 +232,55 @@ namespace FaceDetection
                                 TaskManager.DeleteOldFiles(@"C:\TEMP");
                             }
                         });
-                        //task.Wait();
                     }
                     catch (IOException e)
                     {
-                        Console.WriteLine(e.Message + " TaskManager in AddFilesInList()");
+                        Logger.Add(e.Message + " TaskManager in DeleteOldFiles()");
                     }
                 }
-                //if (wait_interval_enabled)
-                //{
-                //    //Run the timer
-                //    int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording) * 1000;
-                //    if (intt >= 500)
-                //    {
-                //        no_opcap_timer.Interval = intt;
-                //        no_opcap_timer.Enabled = true;
-                //    }
-                //}
+                if (wait_interval_enabled)
+                {
+                    //Run the timer
+                    int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording) * 1000;
+                    if (intt >= 500)
+                    {
+                        no_opcap_timer.Interval = intt;
+                        no_opcap_timer.Enabled = true;
+                    }
+                }
             }
         }
 
         private void No_opcap_timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            AllowOperCap();
+            if (MainForm.GetMainForm.recordingInProgress == false)
+            {
+                AllowOperCap();
+            }
         }
 
         private void AllowOperCap()
         {            
-                OPER_BAN = false;
-                Logger.Add("No_opcap_timer_Elapsed, OPER_BAN XXXXXXXXXXXXXXXXXXXXX " + OPER_BAN);
-                if (wait_interval_enabled)
-                {
-                    no_opcap_timer.Enabled = false;
-                    wait_interval_enabled = false;
+            OPER_BAN = false;
+            Logger.Add("No_opcap_timer_Elapsed, OPER_BAN (operator capture ban) set " + OPER_BAN);
+            if (wait_interval_enabled)
+            {
+                no_opcap_timer.Enabled = false;
+                wait_interval_enabled = false;
                 if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
-                    {
-                        MainForm.Mklisteners.AddMouseAndKeyboardBack();
-                    }
-
-                    if (Properties.Settings.Default.enable_Human_sensor)
-                    {
-                        MainForm.RSensor.Start_IR_Timer();
-                    }
-                    else if (Properties.Settings.Default.enable_face_recognition)
-                    {
-                        MainForm.FaceDetector.StartFaceTimer();
-                    }
+                {
+                    MainForm.Mklisteners.AddMouseAndKeyboardBack();
                 }
+
+                if (Properties.Settings.Default.enable_Human_sensor)
+                {
+                    MainForm.RSensor.Start_IR_Timer();
+                }
+                else if (Properties.Settings.Default.enable_face_recognition)
+                {
+                    MainForm.FaceDetector.StartFaceTimer();
+                }
+            }
         }
 
         internal Bitmap GetBitmap()
@@ -325,6 +324,7 @@ namespace FaceDetection
             //recording_permission = true;
             Recording_is_on = false;
             MainForm.Or_pb_recording.Visible = false;
+            MainForm.GetMainForm.recordingInProgress = false;
             PREEVENT_RECORDING = false;
             if (MainForm.GetMainForm != null)
             {
@@ -397,7 +397,7 @@ namespace FaceDetection
 
                     if (Properties.Settings.Default.manual_record_time > 0)
                     {
-                        MainForm.Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon;
+                        MainForm.GetMainForm.SET_REC_ICON();
                         //decimal mrm = Properties.Settings.Default.manual_record_time;
                         //This does not check if the recording is on, as it prioritizes the manual recording
                         recorder.ReleaseInterfaces();
@@ -416,15 +416,14 @@ namespace FaceDetection
                         if (this != null)
                         {
                             this.RecordingMode();
-                    }
+                        }
                     }
                     break;
                 case CAMERA_MODES.EVENT:
                     //EVENT from parameters
                     if (camera != null && Properties.Settings.Default.enable_event_recorder && Properties.Settings.Default.event_record_time_after_event > 0 && camera.ON)
                     {
-
-                        MainForm.Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon;
+                        MainForm.GetMainForm.SET_REC_ICON();
                         recorder.ReleaseInterfaces();
                         recorder = new RecorderCamera(INDEX, parentwindow);
                         recorder.ACTIVE_RECPATH = RECORD_PATH.EVENT;
@@ -438,14 +437,14 @@ namespace FaceDetection
                         if (this != null)
                         {
                             this.RecordingMode();
-                    }
+                        }
                     }
                     break;
                 case CAMERA_MODES.OPERATOR:
                     //EVENT from parameters                    
                     if (camera != null && Properties.Settings.Default.capture_operator && Properties.Settings.Default.seconds_after_event > 0 && camera.ON && !no_opcap_timer.Enabled)
                     {
-                        MainForm.Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon;
+                        MainForm.GetMainForm.SET_REC_ICON();
                         duration = decimal.ToInt32(Properties.Settings.Default.seconds_after_event) * 1000;
                         Logger.Add(duration + "  " + recorder.CAMERA_MODE);
                         the_timer.Enabled = true;
@@ -458,6 +457,7 @@ namespace FaceDetection
                             recorder.CAMERA_MODE = CAMERA_MODES.OPERATOR;
                             wait_interval_enabled = true;
                             this.OPER_BAN = true;
+                            Logger.Add("OPERATOR BAN in CAMERA_MODE.OPERATOR : " + OPER_BAN);
                             this.RecordingMode();
                         }
                     }
@@ -514,7 +514,7 @@ namespace FaceDetection
 
         internal void ReleaseCameras()
         {
-            Logger.Add("TODO: Releasing all cameras here");
+            Logger.Add("Release camera");
             try
             {
                 the_timer.Dispose();

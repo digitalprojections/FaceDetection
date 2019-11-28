@@ -104,8 +104,7 @@ namespace FaceDetection
 
         private void CameraSettingsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //Save settings
-            //MainForm.AllChangesApply(); --> Robin delete: Don't save parameters if click on "Cancel" button !
+            
         }
 
         private void OpenStoreLocation(object sender, EventArgs e)
@@ -641,9 +640,5 @@ namespace FaceDetection
             IntPtr lpvReserved);
         #endregion
 
-        private void Cb_human_sensor_CheckedChanged_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -298,11 +298,11 @@ namespace FaceDetection
                                         //kameyama comennt 20191020
                                         //Properties.Settings.Default.show_window_pane = true;
                                         //FormChangesApply();
-                                        //MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
+                                        MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
                                         Properties.Settings.Default.show_window_pane = true;
                                         Properties.Settings.Default.Save();
 
-                                        if (MainForm.GetMainForm != null && MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
+                                        if (MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
                                         {
                                             //settingUI.TopMost = true;
                                             MainForm.GetMainForm.TopMost = false;
@@ -315,8 +315,7 @@ namespace FaceDetection
                                         Properties.Settings.Default.show_window_pane = false;
                                         Properties.Settings.Default.Save();
                                     }
-                                    if(MainForm.GetMainForm!=null)
-                                        MainForm.AllChangesApply();
+                                    MainForm.AllChangesApply();
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -340,16 +339,16 @@ namespace FaceDetection
                         case "e":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex))
+                                /////////////////////////////////////
+                                ///    dont CheckCameraIndex()    ///
+                                /////////////////////////////////////
+                                if (switchOnOff && MainForm.GetMainForm.recordingInProgress == false)
                                 {
-                                    if (switchOnOff)
-                                    {
-                                        MainForm.GetMainForm.EventRecorderOn();
-                                    }
-                                    else
-                                    {
-                                        MainForm.GetMainForm.EventRecorderOff();
-                                    }
+                                    MainForm.GetMainForm.EventRecorderOn();
+                                }
+                                else
+                                {
+                                    MainForm.GetMainForm.EventRecorderOff();
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -374,6 +373,7 @@ namespace FaceDetection
                                 else
                                 {
                                     MainForm.Or_pb_recording.Visible = false;
+                                    MainForm.GetMainForm.recordingInProgress = false;
                                     MainForm.SetCameraToDefaultMode();
                                 }
                             }

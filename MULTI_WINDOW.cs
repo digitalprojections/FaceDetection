@@ -13,23 +13,23 @@ namespace FaceDetection
     class MULTI_WINDOW
     {
         private static CROSSBAR crossbar;
-        private static List<CROSSBAR> crosbarList = new List<CROSSBAR>();
+        private static List<CROSSBAR> crossbarList = new List<CROSSBAR>();
 
         private static Form form;
         private static List<Form> formList = new List<Form>();
                 
         public static void CreateCameraWindows(int camera_count)
         {
-            if(Properties.Settings.Default.show_all_cams_simulteneously)
+            if(Properties.Settings.Default.show_all_cams_simulteneously && formList.Count == 0)
             {
-                for (int i = 1; i < camera_count; i++)
+                for (int i = 1; i < camera_count-1; i++)
                 {
                     form = new Form();
                     formList.Add(form);
                     form.Text = "UVC Camera Viewer - camera " + (i);//counting from the second camera
                     form.Show();
                     crossbar = new CROSSBAR(i, form);
-                    crosbarList.Add(crossbar);
+                    crossbarList.Add(crossbar);
                     crossbar.Start(i, CAMERA_MODES.PREVIEW);
                 }
             }            
