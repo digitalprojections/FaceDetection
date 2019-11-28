@@ -145,10 +145,9 @@ namespace FaceDetection
             if (rectList.Length > 0) // Face signature detected
             {
                 Rectangle rectangle = new Rectangle(rectPosX, rectPosY, rectWidth, rectHeight);
-                //PictureBox picture = new PictureBox();
                 Pen redPen = new Pen(Color.Red, 3);
 
-                // Draw rectangle to screen.
+                // Draw rectangle to screen
                 Graphics gr = MainForm.GetMainForm.CreateGraphics();
                 gr.DrawRectangle(redPen, rectangle);
             }

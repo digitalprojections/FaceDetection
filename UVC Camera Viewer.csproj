@@ -88,8 +88,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DirectShowLib-2010">
@@ -206,6 +205,7 @@
     </Content>
     <Content Include="DispApi.h" />
     <Content Include="DispApiIO.h" />
+    <Content Include="Icon.ico" />
     <Content Include="Resources\check-mark260.jpg" />
     <None Include="Resources\ic_settings_48px-128.png" />
     <None Include="Resources\player_record.png" />

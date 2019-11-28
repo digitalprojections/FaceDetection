@@ -417,6 +417,7 @@ namespace FaceDetection
             or_mainForm = this;
             or_current_date_text = or_dateTimeLabel;
             or_controlBut = controlButtons;
+            Or_controlBut.Location = new Point(this.Width-335, this.Height-110);
             
             this.WindowState = FormWindowState.Minimized; 
             AllChangesApply();
@@ -425,7 +426,6 @@ namespace FaceDetection
             
             ///SET THE MAIN WINDOW ICONS AND BUTTON POSITIONS MANUALLY
             or_dateTimeLabel.Location = new Point(12, this.Height-80);
-            Or_controlBut.Location = new Point(this.Width-320, this.Height-110);
             or_camera_num_txt.Location = new Point(this.Width - 90, 10);
             ///////////////////////////////////////////////////////////
         }
