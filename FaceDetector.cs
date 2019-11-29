@@ -98,17 +98,18 @@ namespace FaceDetection
                        Mat mat = bitmap.ToMat();
                        //Rect[] rectList = face_cascade.DetectMultiScale(mat)
                        rectList = face_cascade.DetectMultiScale(mat);
-                       if (rectList.Length == 0)
-                       {
-                           rectList = eye_cascade.DetectMultiScale(mat);
-                       }
-                       if (rectList.Length == 0)
-                       {
-                           rectList = body_cascade.DetectMultiScale(mat);
-                       }
+                       //if (rectList.Length == 0)
+                       //{
+                       //    rectList = eye_cascade.DetectMultiScale(mat);
+                       //}
+                       //if (rectList.Length == 0)
+                       //{
+                       //    rectList = body_cascade.DetectMultiScale(mat);
+                       //}
                        if (rectList.Length > 0) // Face signature detected
                        {
                            checkOK = false;
+                           Logger.Add("Face detected");
 
                            // Launch timer to display rectangle around the detected face
                            face_display_end_timer.Enabled = true;

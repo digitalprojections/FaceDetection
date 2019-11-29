@@ -120,7 +120,7 @@ namespace FaceDetection
                     //settings are missing
                     MainForm.Setting_ui.ArrangeCameraNames(4);
                     //Properties.Settings.Default.camera_count = 4;
-                    Logger.Add("There are more than 4 cameras");
+                    //Logger.Add("There are more than 4 cameras");
                 }
             }
             else

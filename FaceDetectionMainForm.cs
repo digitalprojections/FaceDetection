@@ -428,6 +428,8 @@ namespace FaceDetection
             or_dateTimeLabel.Location = new Point(12, this.Height-80);
             or_camera_num_txt.Location = new Point(this.Width - 90, 10);
             ///////////////////////////////////////////////////////////
+            
+            ClearCutFileTempFolder();
         }
 
         public void SET_REC_ICON()
@@ -665,6 +667,34 @@ namespace FaceDetection
                 }
             }
             return retval;
+        }
+
+        private void ClearCutFileTempFolder()
+        {
+            string[] listFiles;
+            List<string> listFilesToClear = new List<string>();
+            try
+            {
+                if (Directory.Exists(@"D:\TEMP\CutTemp"))
+                {
+                    listFiles = Directory.GetFiles(@"D:\TEMP\CutTemp");
+                }
+                else
+                {
+                    listFiles = Directory.GetFiles(@"C:\TEMP\CutTemp");
+                }
+
+                listFilesToClear = listFiles.ToList();
+                for (int i = listFilesToClear.Count; i > 0; i--)
+                {
+                    File.SetAttributes(listFilesToClear.ElementAt(i - 1), FileAttributes.Normal); // Add in case of weird attribute on the file
+                    File.Delete(listFilesToClear.ElementAt(i - 1));
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         private void MainForm_ResizeEnd(object sender, EventArgs e)

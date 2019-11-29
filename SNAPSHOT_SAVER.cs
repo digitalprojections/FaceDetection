@@ -105,14 +105,14 @@ namespace FaceDetection
                 var d = new dTakeAsyncSnapShot(ThreadProc);                
                 if(MainForm.GetMainForm!=null)
                     MainForm.GetMainForm.Invoke(d);
-
-            } else {
+            }
+            else {
                 bool snap = false;
                 while (snap == false)
                 {
                     if (MainForm.GetMainForm != null)
                     {
-                        if (MainForm.GetMainForm.crossbar != null && MainForm.GetMainForm.crossbar.ANY_CAMERA_ON())
+                        if (MainForm.GetMainForm.crossbar != null) // && MainForm.GetMainForm.crossbar.ANY_CAMERA_ON())
                         {
                             Thread.Sleep(1000);
                             string picloc = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");

@@ -274,7 +274,7 @@ namespace FaceDetection
             {
                 nud_seconds_after_event.Enabled = false;
                 nud_seconds_before_event.Enabled = false;
-                nud_reinitiation_interval.Enabled = false;
+                //nud_reinitiation_interval.Enabled = false;
             }
             else if (cb_operator_capture.Checked == true)
             {
