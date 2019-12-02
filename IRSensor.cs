@@ -31,11 +31,11 @@ namespace FaceDetection
                 //SensorCheckTimer.Tick += IR_Timer_Tick;
                 
                 SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
-            }
-            else
-            {
+           }
+           else
+           {
                 Stop_IR_Timer();
-            }
+           }
         }
 
         private void IR_Timer_Tick(object sender, ElapsedEventArgs e)
@@ -50,7 +50,7 @@ namespace FaceDetection
                     //heat signature detected, stop timer
                     MotionDetected();
                 }
-            }            
+            }
             //Logger.Add("SENSOR " + bIsIRCheckExec);
         }
 
@@ -61,30 +61,37 @@ namespace FaceDetection
                 var d = new IRTimerTickDelegate(MotionDetected);
                 MainForm.GetMainForm.Invoke(d);
             }
-                else
+            else
             {
-                if (!MainForm.GetMainForm.crossbar.OPER_BAN)
+                if (MainForm.GetMainForm.crossbar.OPER_BAN == false)
                 {
                     if (Properties.Settings.Default.capture_method <= 0)
                     {
                         //initiate RECORD mode
                         if (MainForm.GetMainForm != null && MainForm.GetMainForm.crossbar.PREEVENT_RECORDING)
                         {
-                            TaskManager.EventAppeared(RECORD_PATH.EVENT,
-                                1,
-                                decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
-                                decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
-                                DateTime.Now);
-                            
+                            if (MainForm.GetMainForm.recordingInProgress == false)
+                            {
+                                TaskManager.EventAppeared(RECORD_PATH.EVENT,
+                                    1,
+                                    decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
+                                    decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
+                                    DateTime.Now);
+
                                 MainForm.GetMainForm.SET_REC_ICON();
-                            
+                                MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
+                                MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
+                            }
                         }
                         else
                         {
                             MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
                         }
-                        MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
-                        MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
+                        if (MainForm.GetMainForm.recordingInProgress == false)
+                        {
+                            MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
+                            MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
+                        }
                     }
                     else
                     {
@@ -97,7 +104,6 @@ namespace FaceDetection
                     {
                         MainForm.GetMainForm.BackLight.ON();
                     }
-                    
                 }                
             }
         }
@@ -108,14 +114,13 @@ namespace FaceDetection
             SensorCheckTimer.Start();
         }
         
-
         public void Stop_IR_Timer()
         {            
             //SensorCheckTimer.Enabled = false;
             //SensorCheckTimer.Stop();
             bIsIRCheckExec = false;
-
         }
+
         public void Destroy()
         {
             Stop_IR_Timer();
@@ -128,6 +133,7 @@ namespace FaceDetection
             SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
             SensorCheckTimer.Enabled = false;
         }
+
         public uint CheckSensor()
         {
             bool ret = false;
@@ -180,7 +186,7 @@ namespace FaceDetection
 
         public void SensorClose()
         {
-               DispDeviceClose();
+             DispDeviceClose();
         }
         
 
@@ -207,7 +213,5 @@ namespace FaceDetection
         {
             return GetModuleHandle(path) != IntPtr.Zero;
         }
-
-        
     }
 }

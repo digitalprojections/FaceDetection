@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.or_controlButtons = new System.Windows.Forms.FlowLayoutPanel();
+            this.controlButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.folderButton = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.settingsButton = new System.Windows.Forms.Button();
@@ -41,24 +41,24 @@
             this.camera_number_txt = new System.Windows.Forms.Label();
             this.pbRecording = new System.Windows.Forms.PictureBox();
             this.backgroundWorkerMain = new System.ComponentModel.BackgroundWorker();
-            this.or_controlButtons.SuspendLayout();
+            this.controlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).BeginInit();
             this.SuspendLayout();
             // 
-            // or_controlButtons
+            // controlButtons
             // 
-            this.or_controlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.or_controlButtons.BackColor = System.Drawing.Color.Transparent;
-            this.or_controlButtons.Controls.Add(this.folderButton);
-            this.or_controlButtons.Controls.Add(this.settingsButton);
-            this.or_controlButtons.Controls.Add(this.snapshotButton);
-            this.or_controlButtons.Controls.Add(this.cameraButton);
-            this.or_controlButtons.Controls.Add(this.closeButton);
-            this.or_controlButtons.Location = new System.Drawing.Point(422, 401);
-            this.or_controlButtons.Name = "or_controlButtons";
-            this.or_controlButtons.Size = new System.Drawing.Size(292, 59);
-            this.or_controlButtons.TabIndex = 12;
-            this.or_controlButtons.Visible = false;
+            this.controlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.controlButtons.BackColor = System.Drawing.Color.Transparent;
+            this.controlButtons.Controls.Add(this.folderButton);
+            this.controlButtons.Controls.Add(this.settingsButton);
+            this.controlButtons.Controls.Add(this.snapshotButton);
+            this.controlButtons.Controls.Add(this.cameraButton);
+            this.controlButtons.Controls.Add(this.closeButton);
+            this.controlButtons.Location = new System.Drawing.Point(340, 401);
+            this.controlButtons.Name = "controlButtons";
+            this.controlButtons.Size = new System.Drawing.Size(292, 59);
+            this.controlButtons.TabIndex = 12;
+            this.controlButtons.Visible = false;
             // 
             // folderButton
             // 
@@ -221,7 +221,7 @@
             this.ClientSize = global::FaceDetection.Properties.Settings.Default.main_screen_size;
             this.Controls.Add(this.pbRecording);
             this.Controls.Add(this.or_dateTimeLabel);
-            this.Controls.Add(this.or_controlButtons);
+            this.Controls.Add(this.controlButtons);
             this.Controls.Add(this.camera_number_txt);
             this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::FaceDetection.Properties.Settings.Default, "main_screen_size", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -234,7 +234,7 @@
             this.SizeChanged += new System.EventHandler(this.WindowSizeUpdate);
             this.Click += new System.EventHandler(this.ShowButtons);
             this.DoubleClick += new System.EventHandler(this.FullScreen);
-            this.or_controlButtons.ResumeLayout(false);
+            this.controlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -245,7 +245,7 @@
 
         
         private System.Windows.Forms.PictureBox pbRecording;
-        private System.Windows.Forms.FlowLayoutPanel or_controlButtons;
+        private System.Windows.Forms.FlowLayoutPanel controlButtons;
         private System.Windows.Forms.Button folderButton;
         private System.Windows.Forms.Button settingsButton;
         private System.Windows.Forms.Button snapshotButton;

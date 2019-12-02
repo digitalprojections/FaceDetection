@@ -324,7 +324,6 @@ namespace FaceDetection
             catch (COMException comx)
             {
                 Logger.Add("Can not start the camera");
-                Logger.Add("Can not start the camera");
             }
         }
         public void SET_FILE_PATH_TO_MANUAL()
@@ -345,7 +344,7 @@ namespace FaceDetection
             }
             catch (Exception x)
             {
-                Console.WriteLine(x.StackTrace);
+                Logger.Add(x);
             }
             
             int hr = pFilewriter_sink.SetFileName(targetPath, null);
