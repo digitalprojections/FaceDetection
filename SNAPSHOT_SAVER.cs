@@ -125,6 +125,7 @@ namespace FaceDetection
                             bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
                             snap = true;
 
+                            PARAMETERS.PARAM.Clear();
                         }
 
                     }

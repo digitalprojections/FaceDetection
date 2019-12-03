@@ -295,7 +295,7 @@ namespace FaceDetection
         }
 
         public void WindowSizeUpdate()
-        {            
+        {
             //Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
             if (crossbar!=null)
             {
@@ -332,7 +332,6 @@ namespace FaceDetection
             }
             else
             {
-                Logger.Add("TODO: STOP event recording now");
                 crossbar.Start(0, CAMERA_MODES.PREVIEW);
             }
         }
@@ -343,20 +342,20 @@ namespace FaceDetection
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ToggleVideoRecording(object sender, EventArgs e)
-        {
+        {            
             Or_pb_recording.Image = Properties.Resources.player_record;
             MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
             //BackLight.ON();            
             try
-            {
+            {                
                 if ((String)cameraButton.Tag == "play")
                 {
                     if (recordingInProgress == false)
                     {
-                        SetRecordButtonState("rec", false);
-                        crossbar.Start(0, CAMERA_MODES.MANUAL);
-                        MainForm.GetMainForm.SET_REC_ICON();
-                    }
+                SetRecordButtonState("rec", false);
+                crossbar.Start(0, CAMERA_MODES.MANUAL);                    
+                MainForm.GetMainForm.SET_REC_ICON();
+                }
                 }
                 else
                 {
@@ -364,8 +363,8 @@ namespace FaceDetection
                     //set the deciding factors
                     //for now we can use this value as a test
                     //ONLY 0 index camera or the main camera is the one to be used to the manual recording?
-
-                    Or_pb_recording.Visible = false;
+                        
+                    Or_pb_recording.Visible = false;                        
                     MainForm.GetMainForm.recordingInProgress = false;
                     SetRecordButtonState("play", true);
                     SetCameraToDefaultMode();
@@ -491,7 +490,7 @@ namespace FaceDetection
             SetMainScreenProperties();
 
             //CREATE MORE WINDOWS for more cameras
-            //MULTI_WINDOW.CreateCameraWindows(Camera.GetCameraCount().Length);
+            MULTI_WINDOW.CreateCameraWindows(decimal.ToInt32(Properties.Settings.Default.camera_count));
 
 
             //Also must check if the PREEVENT mode is needed

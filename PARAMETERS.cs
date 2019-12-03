@@ -400,7 +400,6 @@ namespace FaceDetection
             {
                 case 0:
                     Retval = true;
-                    Logger.Add("カメラ番号まで来た");
                     //Camera.CheckCamera(parameters.ElementAt());
                     break;
                 case 1:

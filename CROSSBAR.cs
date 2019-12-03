@@ -53,14 +53,13 @@ namespace FaceDetection
         public bool Recording_is_on { get => recording_is_on; set => recording_is_on = value; }
                         
         public CROSSBAR(int cameraindex, Form window_ptr)
-        {            
-            
+        {        
             this.INDEX = cameraindex;
             this.parentwindow = window_ptr;
             
             no_opcap_timer.AutoReset = false;
             no_opcap_timer.Elapsed += No_opcap_timer_Elapsed;
-            no_opcap_timer.Enabled = true;
+            no_opcap_timer.Enabled = false;
 
             icon_timer.Elapsed += Icon_timer_Tick;
             icon_timer.Enabled = false;
@@ -105,7 +104,7 @@ namespace FaceDetection
         }
         
         public void SetIconTimer(decimal recording_length)
-        {          
+        {
             MainForm.GetMainForm.SET_REC_ICON();
             icon_timer.Interval = decimal.ToInt32(recording_length) * 1000;
             icon_timer.Enabled = true;
@@ -148,7 +147,7 @@ namespace FaceDetection
             //{
             //    MainForm.GetMainForm.SET_REC_ICON();
             //}
-            wait_interval_enabled = true;
+            wait_interval_enabled = true;            
             int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording + vidlen) * 1000;
             if (intt > 500)
             {
@@ -210,7 +209,7 @@ namespace FaceDetection
                         manualRecording = false;
                         MainForm.Or_pb_recording.Visible = false;
                         MainForm.GetMainForm.recordingInProgress = false;
-                        MainForm.GetMainForm.SetRecordButtonState("play", false);
+                    MainForm.GetMainForm.SetRecordButtonState("play", false);
                     }
 
                     recorder.CAMERA_MODE = CAMERA_MODES.PREEVENT;
@@ -297,7 +296,7 @@ namespace FaceDetection
                     else
                     {
                         bitmap = camera.GetBitmap();
-                }
+                    }
                 }
                 catch (NullReferenceException nrx)
                 {
@@ -328,7 +327,7 @@ namespace FaceDetection
             PREEVENT_RECORDING = false;
             if (MainForm.GetMainForm != null)
             {
-                Logger.Add("DONE: PREVIEW MODE !!!!!!!!!!!!!");
+                Logger.Add("PREVIEW MODE");
                 if (recorder != null && recorder.ON)
                 {
                     recorder.ReleaseInterfaces();
@@ -338,7 +337,7 @@ namespace FaceDetection
                     camera = new UsbCamera(this.INDEX, this.parentwindow);
                     camera.Start();
                 }
-                else if (camera.Size.Width != PROPERTY_FUNCTIONS.GetWidth(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetWidth(0).Height)
+                else if (camera.Size.Width != PROPERTY_FUNCTIONS.GetCameraSize(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetCameraSize(0).Height)
                 {
                     camera.Release();
                     camera = new UsbCamera(this.INDEX, this.parentwindow);
@@ -359,7 +358,7 @@ namespace FaceDetection
                 camera.Release();                    
                 recorder.StartRecorderCamera();
             }
-            else if (camera != null && camera.Size.Width != PROPERTY_FUNCTIONS.GetWidth(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetWidth(0).Height)
+            else if (camera != null && camera.Size.Width != PROPERTY_FUNCTIONS.GetCameraSize(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetCameraSize(0).Height)
             {
                 recorder.ReleaseInterfaces();
                 recorder = new RecorderCamera(this.INDEX, this.parentwindow);
@@ -506,7 +505,8 @@ namespace FaceDetection
                 {
                     recorder.SetWindowPosition(size);
                 }
-            } catch (NullReferenceException nrx)
+            }
+            catch (NullReferenceException nrx)
             {
                 Logger.Add(nrx);
             }
@@ -522,6 +522,19 @@ namespace FaceDetection
                 icon_timer.Dispose();
                 camera.Release();
                 recorder.ReleaseInterfaces();
+            }
+            catch (Exception x)
+            {
+                Logger.Add(x);
+            }
+        }
+
+        internal void ReleaseSecondaryCamera()
+        {
+            Logger.Add("Release secondary camera");
+            try
+            {
+                camera.Release();
             }
             catch (Exception x)
             {
