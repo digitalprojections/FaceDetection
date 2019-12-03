@@ -56,27 +56,30 @@ namespace FaceDetection
         {        
             this.INDEX = cameraindex;
             this.parentwindow = window_ptr;
-            
-            no_opcap_timer.AutoReset = false;
-            no_opcap_timer.Elapsed += No_opcap_timer_Elapsed;
-            no_opcap_timer.Enabled = false;
 
-            icon_timer.Elapsed += Icon_timer_Tick;
-            icon_timer.Enabled = false;
-
-            //it is the sum of the 2 values
-            int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording)* 1000;
-            if (intt > 500)
+            if (cameraindex == 0) // Main camera only
             {
-                no_opcap_timer.Interval = intt;
+                no_opcap_timer.AutoReset = false;
+                no_opcap_timer.Elapsed += No_opcap_timer_Elapsed;
                 no_opcap_timer.Enabled = false;
+
+                icon_timer.Elapsed += Icon_timer_Tick;
+                icon_timer.Enabled = false;
+
+                //it is the sum of the 2 values
+                int intt = decimal.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording) * 1000;
+                if (intt > 500)
+                {
+                    no_opcap_timer.Interval = intt;
+                    no_opcap_timer.Enabled = false;
+                }
+
+                Logger.Add(no_opcap_timer.Interval.ToString());
+
+                the_timer.Elapsed += The_timer_Tick;
+                the_timer.AutoReset = false;
+                recorder = new RecorderCamera(this.INDEX, this.parentwindow);
             }
-
-            Logger.Add(no_opcap_timer.Interval.ToString());
-
-            the_timer.Elapsed += The_timer_Tick;
-            the_timer.AutoReset = false;
-            recorder = new RecorderCamera(this.INDEX, this.parentwindow);
         }
 
         private void Icon_timer_Tick(object sender, ElapsedEventArgs e)
@@ -403,10 +406,6 @@ namespace FaceDetection
                         recorder = new RecorderCamera(this.INDEX, parentwindow);
                         recorder.CAMERA_MODE = CAMERA_MODES.MANUAL;
                         recorder.ACTIVE_RECPATH = RECORD_PATH.MANUAL;
-                        //↓20191106 Nagayama added↓
-                        //the_timer.Stop();
-                        //↑20191106 Nagayama added↑                        
-                        //the_timer.Enabled = true;
                         duration = decimal.ToInt32(Properties.Settings.Default.manual_record_time) * 1000;
                         the_timer.Enabled = true;
                         the_timer.Interval = duration + 2;
