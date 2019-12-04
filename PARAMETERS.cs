@@ -122,8 +122,6 @@ namespace FaceDetection
                             {
                                 if (CheckCameraIndex(cameraIndex))
                                 {
-                                    //Properties.Settings.Default.main_camera_index = cameraIndex;
-                                    //SNAPSHOT_SAVER.TakeSnapShot(cameraIndex);
                                     SNAPSHOT_SAVER.TakeAsyncSnapShot(0);
                                 }
                             }

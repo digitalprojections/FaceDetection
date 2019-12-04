@@ -28,22 +28,17 @@ namespace FaceDetection
         public bool recordingInProgress;
         // END Robin
         
-        //private readonly KeyboardListener keyboardListener;
-        //private readonly MouseListener mouseListener;
-
         private RecorderCamera cameraMan = null;
         internal bool OPERATOR_CAPTURE_ALLOWED = false;
         internal bool EVENT_RECORDING_IN_PROGRESS = false;
         internal static int SELECTED_CAMERA = 0;
 
-                
         private static MainForm or_mainForm;
         private static PictureBox or_pb_recording;
         public static Label or_current_date_text;
         private static Label or_camera_num_txt;
         private static FlowLayoutPanel or_controlBut;
         public Button rec_button;
-
 
         private BackLightController backLight;
 
@@ -54,8 +49,7 @@ namespace FaceDetection
         /// <summary>
         /// FACEDETECTOR
         /// </summary>
-        static FaceDetector faceDetector;
-        //readonly Thread t;                
+        static FaceDetector faceDetector; 
         private static UsbCamera.VideoFormat[] videoFormat = UsbCamera.GetVideoFormat(0);
         /// <summary>
         /// SettingsUI resolutions data, generated each time. But set to the memory value
@@ -65,8 +59,7 @@ namespace FaceDetection
         //User actions end
         static SettingsUI settingUI;
         static Form or_mainform;
-        
-        //public static Panel CameraPanel => GetMainForm.panelCamera;
+
         public static MainForm GetMainForm => or_mainForm;
         public static SettingsUI Setting_ui { get => settingUI; set => settingUI = value; }
         internal static IRSensor RSensor { get => rSensor; set => rSensor = value; }
@@ -488,6 +481,7 @@ namespace FaceDetection
 
             //SCREEN PROPS
             SetMainScreenProperties();
+            MULTI_WINDOW.formSettingsChanged();
 
             //CREATE MORE WINDOWS for more cameras
             MULTI_WINDOW.CreateCameraWindows(decimal.ToInt32(Properties.Settings.Default.camera_count));
@@ -569,11 +563,9 @@ namespace FaceDetection
             {
                 or_mainForm.FormBorderStyle = FormBorderStyle.None;
             }
-            //MainForm.GetMainForm.ClientSize = new Size(decimal.ToInt32(Properties.Settings.Default.C1w), decimal.ToInt32(Properties.Settings.Default.C1h));
+
             MainForm.GetMainForm.Width = Properties.Settings.Default.main_screen_size.Width;
             MainForm.GetMainForm.Height = Properties.Settings.Default.main_screen_size.Height;
-            //Properties.Settings.Default.C1w = Properties.Settings.Default.main_screen_size.Width;
-            //Properties.Settings.Default.C1h = Properties.Settings.Default.main_screen_size.Height;
             MainForm.GetMainForm.Location = new Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
         }
 

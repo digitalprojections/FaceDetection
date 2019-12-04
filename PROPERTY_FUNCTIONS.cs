@@ -47,7 +47,6 @@ namespace FaceDetection
                     retval = Properties.Settings.Default.C2_window_location;
                     return retval;
                 case 2:
-                    //retval = new Point(decimal.ToInt32(Properties.Settings.Default.C3x), decimal.ToInt32(Properties.Settings.Default.C3y));
                     retval = Properties.Settings.Default.C3_window_location;
                     return retval;
                 case 3:

@@ -563,6 +563,7 @@
             // cm_language
             // 
             resources.ApplyResources(this.cm_language, "cm_language");
+            this.cm_language.BackColor = System.Drawing.SystemColors.Window;
             this.cm_language.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cm_language.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cm_language.FormattingEnabled = true;

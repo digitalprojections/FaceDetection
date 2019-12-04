@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace FaceDetection
@@ -40,6 +41,28 @@ namespace FaceDetection
                 for (int i = formList.Count; i >= numberCameraToDisplay; i--)
                 {
                     formList[i-1].Close();
+                }
+            }
+        }
+
+        public static void formSettingsChanged()
+        {
+            for (int i = 0; i < formList.Count; i++)
+            {
+                if (i == 0)
+                {
+                    formList[0].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C2x), decimal.ToInt32(Properties.Settings.Default.C2y));
+                    formList[0].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(1);
+                }
+                else if (i == 1)
+                {
+                    formList[1].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C3x), decimal.ToInt32(Properties.Settings.Default.C3y));
+                    formList[0].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(2);
+                }
+                else if (i == 2)
+                {
+                    formList[2].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C4x), decimal.ToInt32(Properties.Settings.Default.C4y));
+                    formList[0].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(3);
                 }
             }
         }
