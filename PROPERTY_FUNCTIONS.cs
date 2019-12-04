@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FaceDetection
 {
@@ -11,7 +8,7 @@ namespace FaceDetection
     {
         public static bool resolution_changed { get; set; }
 
-        public static Size GetWidth(int cam_ind)
+        public static Size GetCameraSize(int cam_ind)
         {
             Size retval;
             switch (cam_ind)
@@ -38,7 +35,27 @@ namespace FaceDetection
 
         }
 
-        public static void SetCameraResolution(int cam_ind)
+        internal static Point Get_Camera_Window_Location(int cam_ind)
+        {
+            Point retval;
+            switch (cam_ind)
+            {
+                case 0:
+                    retval = Properties.Settings.Default.window_location;
+                    return retval;
+                case 1:
+                    retval = Properties.Settings.Default.C2_window_location;
+                    return retval;
+                case 2:
+                    retval = Properties.Settings.Default.C3_window_location;
+                    return retval;
+                case 3:
+                    retval = Properties.Settings.Default.C4_window_location;
+                    return retval;
+                default: return new Point(16, 16);
+            }
+        }
+        public static void Set_Window_Size_From_Camera_Resolution(int cam_ind)
         {
             char[] vs = { 'x' };            
             switch (cam_ind)
@@ -73,7 +90,125 @@ namespace FaceDetection
                 resolution_changed = false;
             }
         }
-        public static System.Drawing.Size GetResolution(int cam_ind)
+        internal static bool Get_Rec_Icon(int cam_ind)
+        {
+            bool retval = false;
+            switch (cam_ind)
+            {
+                case 0:
+                    retval = Properties.Settings.Default.show_recording_icon;
+                    break;
+                case 1:
+                    retval = Properties.Settings.Default.C2_show_record_icon;
+                    break;
+                case 2:
+                    retval = Properties.Settings.Default.C3_show_record_icon;
+                    break;
+                case 3:
+                    retval = Properties.Settings.Default.C4_show_record_icon;
+                    break;
+            }
+            return retval;
+        }
+
+        internal static void Set_Rec_Icon(int cam_ind, bool val)
+        {            
+            switch (cam_ind)
+            {
+                case 0:
+                    Properties.Settings.Default.show_recording_icon = val;
+                    break;
+                case 1:
+                    Properties.Settings.Default.C2_show_record_icon = val;
+                    break;
+                case 2:
+                    Properties.Settings.Default.C3_show_record_icon = val;
+                    break;
+                case 3:
+                    Properties.Settings.Default.C4_show_record_icon = val;
+                    break;
+            }
+        }
+
+        internal static void Set_Window_Location(int cam_ind, FormClass formClass)
+        {
+            switch (cam_ind)
+            {
+                case 0:
+                    Properties.Settings.Default.window_location = formClass.Location;
+                    break;
+                case 1:
+                    Properties.Settings.Default.C2_window_location = formClass.Location;
+                    break;
+                case 2:
+                    Properties.Settings.Default.C3_window_location = formClass.Location;
+                    break;
+                case 3:
+                    Properties.Settings.Default.C4_window_location = formClass.Location;
+                    break;
+            }
+        }
+        /// <summary>
+        /// Settings UI has variable window size values stored as per camera index.
+        /// You can get those values by camera index
+        /// </summary>
+        /// <param name="cam_ind"></param>
+        /// <returns></returns>
+        public static Size Get_Camera_Window_Size(int cam_ind)
+        {
+            Size size = new Size(100,100);
+            switch (cam_ind)
+            {
+                case 0:
+                    size = new Size(decimal.ToInt32(Properties.Settings.Default.C1w), decimal.ToInt32(Properties.Settings.Default.C1h));
+                    break;
+                case 1:
+                    size = new Size(decimal.ToInt32(Properties.Settings.Default.C2w), decimal.ToInt32(Properties.Settings.Default.C2h));
+                    break;
+                case 2:
+                    size = new Size(decimal.ToInt32(Properties.Settings.Default.C3w), decimal.ToInt32(Properties.Settings.Default.C3h));
+                    break;
+                case 3:
+                    size = new Size(decimal.ToInt32(Properties.Settings.Default.C4w), decimal.ToInt32(Properties.Settings.Default.C4h));
+                    break;
+            }
+            return size;
+        }
+        /// <summary>
+        /// Set individual window sizes for each camera
+        /// </summary>
+        /// <param name="cam_ind"></param>
+        /// <returns></returns>
+        public static void Set_Camera_Window_Size(int cam_ind, Form form)
+        {            
+            switch (cam_ind)
+            {
+                case 0:
+
+                    Properties.Settings.Default.C1w = Convert.ToDecimal(form.Width);
+                    Properties.Settings.Default.C1h = Convert.ToDecimal(form.Height);
+
+                    break;
+                case 1:
+
+                    Properties.Settings.Default.C2w = Convert.ToDecimal(form.Width);
+                    Properties.Settings.Default.C2h = Convert.ToDecimal(form.Height);
+
+                    break;
+                case 2:
+
+                    Properties.Settings.Default.C3w = Convert.ToDecimal(form.Width);
+                    Properties.Settings.Default.C3h = Convert.ToDecimal(form.Height);
+
+                    break;
+                case 3:
+                    Properties.Settings.Default.C4w = Convert.ToDecimal(form.Width);
+                    Properties.Settings.Default.C4h = Convert.ToDecimal(form.Height);
+
+                    break;
+            }
+        }
+        public static System.Drawing.Size Get_Stored_Resolution(int cam_ind)
         {
             System.Drawing.Size retval;
             string[] res;
@@ -101,7 +236,7 @@ namespace FaceDetection
             }
             return retval;
         }
-        public static int GetFPS(int cam_ind)
+        public static int Get_FPS(int cam_ind)
         {
             int fps = 15;
             switch (cam_ind)

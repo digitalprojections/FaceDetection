@@ -129,6 +129,9 @@
     <Compile Include="CAMERA_MODES.cs" />
     <Compile Include="CheckDiskSpace.cs" />
     <Compile Include="FaceDetector.cs" />
+    <Compile Include="FormClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="KeyboardListener.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MouseListener.cs" />

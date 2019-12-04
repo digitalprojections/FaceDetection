@@ -31,11 +31,11 @@ namespace FaceDetection
                 //SensorCheckTimer.Tick += IR_Timer_Tick;
                 
                 SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
-           }
-           else
-           {
+            }
+            else
+            {
                 Stop_IR_Timer();
-           }
+            }
         }
 
         private void IR_Timer_Tick(object sender, ElapsedEventArgs e)
@@ -50,7 +50,7 @@ namespace FaceDetection
                     //heat signature detected, stop timer
                     MotionDetected();
                 }
-            }
+            }            
             //Logger.Add("SENSOR " + bIsIRCheckExec);
         }
 
@@ -61,7 +61,7 @@ namespace FaceDetection
                 var d = new IRTimerTickDelegate(MotionDetected);
                 MainForm.GetMainForm.Invoke(d);
             }
-            else
+                else
             {
                 if (MainForm.GetMainForm.crossbar.OPER_BAN == false)
                 {
@@ -77,7 +77,7 @@ namespace FaceDetection
                                     decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
                                     decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
                                     DateTime.Now);
-
+                            
                                 MainForm.GetMainForm.SET_REC_ICON();
                                 MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
                                 MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
@@ -89,8 +89,8 @@ namespace FaceDetection
                         }
                         if (MainForm.GetMainForm.recordingInProgress == false)
                         {
-                            MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
-                            MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
+                        MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
+                        MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
                         }
                     }
                     else
@@ -186,7 +186,7 @@ namespace FaceDetection
 
         public void SensorClose()
         {
-             DispDeviceClose();
+               DispDeviceClose();
         }
         
 

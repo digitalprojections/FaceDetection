@@ -87,7 +87,7 @@ namespace FaceDetection
                 // MessageBox.Show("Cannot access Log.txt file");
             }
 
-            Console.WriteLine(message + " at line " + lineNumber + " (" + caller + ")");
+            //Console.WriteLine(message + " at line " + lineNumber + " (" + caller + ")");
         }
     }
 }

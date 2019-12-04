@@ -1222,19 +1222,19 @@
     <value>NoControl</value>
   </data>
   <data name="cb_face_recognition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 20</value>
+    <value>137, 20</value>
   </data>
   <data name="cb_face_recognition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="cb_face_recognition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 16</value>
+    <value>144, 16</value>
   </data>
   <data name="cb_face_recognition.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="cb_face_recognition.Text" xml:space="preserve">
-    <value>Face recognition</value>
+    <value>Enable face recognition</value>
   </data>
   <data name="&gt;&gt;cb_face_recognition.Name" xml:space="preserve">
     <value>cb_face_recognition</value>
@@ -1773,9 +1773,6 @@
   <data name="&gt;&gt;cb_recording_operation.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="numericUpDownCamCount.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="numericUpDownCamCount.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
@@ -1802,9 +1799,6 @@
   </data>
   <data name="cb_all_cameras.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="cb_all_cameras.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="cb_all_cameras.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 9pt</value>
@@ -2266,13 +2260,13 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 12</value>
+    <value>145, 12</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>days and over</value>
+    <value>days old data to be deleted</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -3447,9 +3441,6 @@
   <data name="&gt;&gt;button_cameraProperties.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="cm_camera_number.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="cm_camera_number.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 14.25pt</value>
   </data>
@@ -3485,7 +3476,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADQ
-        HQAAAk1TRnQBSQFMAgEBAwEAAagBCAGoAQgBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
+        HQAAAk1TRnQBSQFMAgEBAwEAAaABCAGgAQgBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
         AwABGAMAAQEBAAEgBgABJC4AAw8BFAFYAlsBywEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8
         An8B/gEAAbwB+gH/AUACqAH9A0ABcRwAAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
         AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMB
@@ -3626,7 +3617,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA0
-        AQAAAk1TRnQBSQFMAgEBAgEAAUABBgFAAQYBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        AQAAAk1TRnQBSQFMAgEBAgEAATgBBgE4AQYBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEYBgABDBUALf8DAC3/YwAt/wMALf9jAC3/AwAt/2MALf8DAC3/YwAt/wMAD/8DHgPy
         GP9jAC3/AwAM/wMeBgADzxX/YwAt/wMACf8DDAMAA/UDDwMAFf9jAC3/AwAG/wNJAwAD5wb/A0ADAAPP
         D/9jAC3/AwAY/wMPAwAD8gz/YwAt/wMAG/8DPAMAA9cJ/2MALf8DAB7/AycDAAPeBv9jAC3/AwAh/wMw

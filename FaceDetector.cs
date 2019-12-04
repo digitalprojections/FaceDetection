@@ -83,7 +83,7 @@ namespace FaceDetection
             if (MainForm.GetMainForm.InvokeRequired)
             {
                 var d = new dGetTheBMPImage(GetTheBMPForFaceCheck);
-                if (MainForm.GetMainForm != null)
+                if(MainForm.GetMainForm!=null)
                 {
                     MainForm.GetMainForm.Invoke(d);
                 }
@@ -95,7 +95,7 @@ namespace FaceDetection
                 {
                    faceTask = new Task(() => {
 
-                       Mat mat = bitmap.ToMat();
+                        Mat mat = bitmap.ToMat();
                        //Rect[] rectList = face_cascade.DetectMultiScale(mat)
                        rectList = face_cascade.DetectMultiScale(mat);
                        //if (rectList.Length == 0)
@@ -107,8 +107,8 @@ namespace FaceDetection
                        //    rectList = body_cascade.DetectMultiScale(mat);
                        //}
                        if (rectList.Length > 0) // Face signature detected
-                       {
-                           checkOK = false;
+                        {
+                            checkOK = false;
                            Logger.Add("Face detected");
 
                            // Launch timer to display rectangle around the detected face
@@ -117,8 +117,8 @@ namespace FaceDetection
                            face_display_end_timer.Elapsed += Face_display_end_timer_Tick;
                            face_display_end_timer.AutoReset = true;
 
-                           FaceDetectedAction();
-                       }
+                            FaceDetectedAction();
+                        }
                     });                    
                     faceTask.Start();
                     //faceTask.Wait();
@@ -170,46 +170,46 @@ namespace FaceDetection
             {
                 if (MainForm.GetMainForm.crossbar.OPER_BAN == false)
                 {
-                    if (Properties.Settings.Default.capture_method <= 0)
+                if (Properties.Settings.Default.capture_method <= 0)
+                {
+                    //initiate RECORD mode
+                    if (MainForm.GetMainForm != null && MainForm.GetMainForm.crossbar.PREEVENT_RECORDING)
                     {
-                        //initiate RECORD mode
-                        if (MainForm.GetMainForm != null && MainForm.GetMainForm.crossbar.PREEVENT_RECORDING)
-                        {
-                            if (MainForm.GetMainForm.recordingInProgress == false)
-                            {
-                                TaskManager.EventAppeared(RECORD_PATH.EVENT,
-                                    1,
-                                    decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
-                                    decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
-                                    DateTime.Now);
-
-                                MainForm.GetMainForm.SET_REC_ICON();
-                                MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
-                                MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
-                            }
-                        }
-                        else
-                        {
-                            //Direct recording
-                            MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
-                        }
                         if (MainForm.GetMainForm.recordingInProgress == false)
                         {
+                        TaskManager.EventAppeared(RECORD_PATH.EVENT,
+                            1,
+                            decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
+                            decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
+                            DateTime.Now);
+                        
+                            MainForm.GetMainForm.SET_REC_ICON();
                             MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
                             MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
                         }
                     }
-                    //↓20191107 Nagayama added↓
                     else
                     {
-                        SNAPSHOT_SAVER.TakeSnapShot(0, "event");
-                        MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
+                        //Direct recording
+                        MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
                     }
-                    //↑20191107 Nagayama added↑    
-
-                    if (Properties.Settings.Default.backlight_on_upon_face_rec)
+                    if (MainForm.GetMainForm.recordingInProgress == false)
                     {
-                        MainForm.GetMainForm.BackLight.ON();
+                    MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
+                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
+                    }
+                }
+                //↓20191107 Nagayama added↓
+                else
+                {
+                    SNAPSHOT_SAVER.TakeSnapShot(0, "event");
+                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
+                }
+                //↑20191107 Nagayama added↑    
+
+                if (Properties.Settings.Default.backlight_on_upon_face_rec)
+                {
+                    MainForm.GetMainForm.BackLight.ON();
                     }
                 }
             }

@@ -2,14 +2,11 @@ using DirectShowLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using static System.Environment;
 
 namespace FaceDetection
 {
@@ -54,10 +51,6 @@ namespace FaceDetection
                 Directory.CreateDirectory(Properties.Settings.Default.temp_folder);
                 Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
             }
-
-            //Setup window
-            //Size size = new Size(0, 0);
-            //size = GetWidth(Properties.Settings.Default.main_camera_index);
 
             this.ControlBox = false;
             selected_camera_combo = cm_camera_number;//that makes the camera the default, main camera aka camera 1
@@ -128,7 +121,6 @@ namespace FaceDetection
 
         private void Save_and_close(object sender, EventArgs e)
         {
-            
             //PROPERTY_FUNCTIONS.SetCameraResolution(Camera_index);
             Properties.Settings.Default.Save();
             MainForm.AllChangesApply();
@@ -139,31 +131,31 @@ namespace FaceDetection
         }        
 
         private void SetCameraPropertiesFromMemory()
-        {            
-                numericUpDownX.DataBindings.Clear();
-                numericUpDownY.DataBindings.Clear();
-                numericUpDownW.DataBindings.Clear();
-                numericUpDownH.DataBindings.Clear();
-                comboBoxFPS.DataBindings.Clear();
-                comboBoxResolutions.DataBindings.Clear();
-                string camX = "C" + (Camera_index + 1) + "x";
-                string camY = "C" + (Camera_index + 1) + "y";
-                string camW = "C" + (Camera_index + 1) + "w";
-                string camH = "C" + (Camera_index + 1) + "h";
-                string camF = "C" + (Camera_index + 1) + "f";
-                string camRes = "C" + (Camera_index + 1) + "res";
+        {
+            numericUpDownX.DataBindings.Clear();
+            numericUpDownY.DataBindings.Clear();
+            numericUpDownW.DataBindings.Clear();
+            numericUpDownH.DataBindings.Clear();
+            comboBoxFPS.DataBindings.Clear();
+            comboBoxResolutions.DataBindings.Clear();
+            string camX = "C" + (Camera_index + 1) + "x";
+            string camY = "C" + (Camera_index + 1) + "y";
+            string camW = "C" + (Camera_index + 1) + "w";
+            string camH = "C" + (Camera_index + 1) + "h";
+            string camF = "C" + (Camera_index + 1) + "f";
+            string camRes = "C" + (Camera_index + 1) + "res";
 
-                numericUpDownX.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camX, true, DataSourceUpdateMode.OnPropertyChanged));
-                numericUpDownY.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camY, true, DataSourceUpdateMode.OnPropertyChanged));
-                numericUpDownW.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camW, true, DataSourceUpdateMode.OnPropertyChanged));
-                numericUpDownH.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camH, true, DataSourceUpdateMode.OnPropertyChanged));
-                comboBoxFPS.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camF, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                comboBoxResolutions.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, camRes, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                
-                numericUpDownX.Enabled = !Properties.Settings.Default.main_window_full_screen;
-                numericUpDownY.Enabled = !Properties.Settings.Default.main_window_full_screen;
-                numericUpDownW.Enabled = !Properties.Settings.Default.main_window_full_screen;
-                numericUpDownH.Enabled = !Properties.Settings.Default.main_window_full_screen;                        
+            numericUpDownX.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camX, true, DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownY.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camY, true, DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownW.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camW, true, DataSourceUpdateMode.OnPropertyChanged));
+            numericUpDownH.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camH, true, DataSourceUpdateMode.OnPropertyChanged));
+            comboBoxFPS.DataBindings.Add(new Binding("Text", Properties.Settings.Default, camF, true, DataSourceUpdateMode.OnPropertyChanged));
+            comboBoxResolutions.DataBindings.Add(new Binding("Text", Properties.Settings.Default, camRes, true, DataSourceUpdateMode.OnPropertyChanged));
+            
+            numericUpDownX.Enabled = !Properties.Settings.Default.main_window_full_screen;
+            numericUpDownY.Enabled = !Properties.Settings.Default.main_window_full_screen;
+            numericUpDownW.Enabled = !Properties.Settings.Default.main_window_full_screen;
+            numericUpDownH.Enabled = !Properties.Settings.Default.main_window_full_screen;                
         }
 
         public static void SetComboBoxFPSValues(List<string> vs)
@@ -179,7 +171,7 @@ namespace FaceDetection
                         matching_fps_found = true;
                         break;
                     }
-                }                
+                }
             }
             Properties.Settings.Default.main_camera_fps = matching_fps_found ? Properties.Settings.Default.main_camera_fps : vs[0];
         }
@@ -217,8 +209,6 @@ namespace FaceDetection
                 cm_camera_number.SelectedIndex = Properties.Settings.Default.main_camera_index <=0?0: Properties.Settings.Default.main_camera_index;
                 cm_capture_mode.SelectedIndex = Properties.Settings.Default.capture_method<=0 ? 0 : Properties.Settings.Default.capture_method;
             }
-            //SetCameraPropertiesFromMemory();
-            //if(cm_language.SelectedItem!=null)
 
             cm_language.SelectedItem = Properties.Settings.Default.language;
             CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture(Properties.Settings.Default.culture);
@@ -274,7 +264,6 @@ namespace FaceDetection
             {
                 nud_seconds_after_event.Enabled = false;
                 nud_seconds_before_event.Enabled = false;
-                //nud_reinitiation_interval.Enabled = false;
             }
             else if (cb_operator_capture.Checked == true)
             {
@@ -330,18 +319,6 @@ namespace FaceDetection
             }
             return ret;
         }
-
-        //private void SetCheckBoxState(CheckBox ChBox)
-        //{
-        //    if (ChBox.Checked == true)
-        //    {
-        //        ChBox.Checked = false;
-        //    }
-        //    else
-        //    {
-        //        ChBox.Checked = true;
-        //    }
-        //}
 
         private void Button_cameraProperties_Click(object sender, EventArgs e)
         {
@@ -573,10 +550,9 @@ namespace FaceDetection
 
         private void NumericUpDownX_ValueChanged(object sender, EventArgs e)
         {
-            if(numericUpDownX.Value > 700)
+            if(numericUpDownX.Value > Screen.PrimaryScreen.Bounds.Width - 400)
             {
-                //numericUpDownX.Value = Properties.Settings.Default.C1x;
-                numericUpDownX.Value = 700;
+                numericUpDownX.Value = Screen.PrimaryScreen.Bounds.Width - 400;
             }
             else if (numericUpDownX.Value < 0)
             {
@@ -586,10 +562,9 @@ namespace FaceDetection
 
         private void NumericUpDownY_ValueChanged(object sender, EventArgs e)
         {
-            if (numericUpDownY.Value > 500)
+            if (numericUpDownY.Value > Screen.PrimaryScreen.Bounds.Height - 300)
             {
-                //numericUpDownY.Value = Properties.Settings.Default.C1y;
-                numericUpDownY.Value = 500;
+                numericUpDownY.Value = Screen.PrimaryScreen.Bounds.Height - 300;
             }
             else if (numericUpDownY.Value < 0)
             {
@@ -599,10 +574,9 @@ namespace FaceDetection
 
         private void NumericUpDownW_ValueChanged(object sender, EventArgs e)
         {
-            if(numericUpDownW.Value > 1280)
+            if(numericUpDownW.Value > Screen.PrimaryScreen.Bounds.Width)
             {
-                //numericUpDownW.Value = Properties.Settings.Default.C1w;
-                numericUpDownW.Value = 1280;
+                numericUpDownW.Value = Screen.PrimaryScreen.Bounds.Width;
             }
             else if (numericUpDownW.Value < 0)
             {
@@ -612,10 +586,9 @@ namespace FaceDetection
 
         private void NumericUpDownH_ValueChanged(object sender, EventArgs e)
         {
-            if (numericUpDownH.Value > 720)
+            if (numericUpDownH.Value > Screen.PrimaryScreen.Bounds.Height)
             {
-                //numericUpDownH.Value = Properties.Settings.Default.C1h;
-                numericUpDownH.Value = 720;
+                numericUpDownH.Value = Screen.PrimaryScreen.Bounds.Height;
             }
             else if (numericUpDownH.Value < 0)
             {

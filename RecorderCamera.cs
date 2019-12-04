@@ -87,7 +87,7 @@ namespace FaceDetection
             DsUtils.FreeAMMediaType(mt);
 
             
-    }
+        }
 
         public RecorderCamera(int cameraIndex, Form pbx)
         {
@@ -137,13 +137,11 @@ namespace FaceDetection
         public void StartRecorderCamera()
         {
             
-            Size size = PROPERTY_FUNCTIONS.GetResolution(INDEX);
-            int fps = PROPERTY_FUNCTIONS.GetFPS(0);
+            Size size = PROPERTY_FUNCTIONS.Get_Stored_Resolution(INDEX);
+            int fps = PROPERTY_FUNCTIONS.Get_FPS(0);
             //IntPtr pbx = MainForm.GetMainForm.Handle;
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
-            //Logger.Add(CAMERA_MODE + " 1");
-            //Logger.Add(CAMERA_MODE + " 2");
-            Logger.Add(ACTIVE_RECPATH + " 3");
+            Logger.Add(ACTIVE_RECPATH);
             //REGULAR 0 PREEVENT
             if (CAMERA_MODE != CAMERA_MODES.PREEVENT)
             {
@@ -335,7 +333,7 @@ namespace FaceDetection
             if (ACTIVE_RECPATH != null)
                 str = Path.Combine(str, ACTIVE_RECPATH);
             targetPath = str + "/" + dstFileName;
-
+            
             
             try
             {
@@ -458,7 +456,7 @@ namespace FaceDetection
 
             {
 
-                if (System.Environment.TickCount - dwStartTime > 1000) break; //1000 milliseconds 
+                if (System.Environment.TickCount - dwStartTime > 1000) break; //1000 milliseconds
 
             }
 
@@ -800,7 +798,7 @@ namespace FaceDetection
             // フォーマットを選択
             int hr = config.SetFormat(mt);
 
-            Logger.Add("SETTINGS OK ????????????????????" + hr);
+            Logger.Add("SETTINGS OK ?" + hr);
 
 
             // 解放

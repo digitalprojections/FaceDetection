@@ -28,22 +28,17 @@ namespace FaceDetection
         public bool recordingInProgress;
         // END Robin
         
-        //private readonly KeyboardListener keyboardListener;
-        //private readonly MouseListener mouseListener;
-
         private RecorderCamera cameraMan = null;
         internal bool OPERATOR_CAPTURE_ALLOWED = false;
         internal bool EVENT_RECORDING_IN_PROGRESS = false;
         internal static int SELECTED_CAMERA = 0;
 
-                
         private static MainForm or_mainForm;
         private static PictureBox or_pb_recording;
         public static Label or_current_date_text;
         private static Label or_camera_num_txt;
         private static FlowLayoutPanel or_controlBut;
         public Button rec_button;
-
 
         private BackLightController backLight;
 
@@ -54,8 +49,7 @@ namespace FaceDetection
         /// <summary>
         /// FACEDETECTOR
         /// </summary>
-        static FaceDetector faceDetector;
-        //readonly Thread t;                
+        static FaceDetector faceDetector; 
         private static UsbCamera.VideoFormat[] videoFormat = UsbCamera.GetVideoFormat(0);
         /// <summary>
         /// SettingsUI resolutions data, generated each time. But set to the memory value
@@ -65,8 +59,7 @@ namespace FaceDetection
         //User actions end
         static SettingsUI settingUI;
         static Form or_mainform;
-        
-        //public static Panel CameraPanel => GetMainForm.panelCamera;
+
         public static MainForm GetMainForm => or_mainForm;
         public static SettingsUI Setting_ui { get => settingUI; set => settingUI = value; }
         internal static IRSensor RSensor { get => rSensor; set => rSensor = value; }
@@ -295,7 +288,7 @@ namespace FaceDetection
         }
 
         public void WindowSizeUpdate()
-        {            
+        {
             //Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
             if (crossbar!=null)
             {
@@ -332,7 +325,6 @@ namespace FaceDetection
             }
             else
             {
-                Logger.Add("TODO: STOP event recording now");
                 crossbar.Start(0, CAMERA_MODES.PREVIEW);
             }
         }
@@ -343,20 +335,20 @@ namespace FaceDetection
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ToggleVideoRecording(object sender, EventArgs e)
-        {
+        {            
             Or_pb_recording.Image = Properties.Resources.player_record;
             MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
             //BackLight.ON();            
             try
-            {
+            {                
                 if ((String)cameraButton.Tag == "play")
                 {
                     if (recordingInProgress == false)
                     {
-                        SetRecordButtonState("rec", false);
-                        crossbar.Start(0, CAMERA_MODES.MANUAL);
-                        MainForm.GetMainForm.SET_REC_ICON();
-                    }
+                SetRecordButtonState("rec", false);
+                crossbar.Start(0, CAMERA_MODES.MANUAL);                    
+                MainForm.GetMainForm.SET_REC_ICON();
+                }
                 }
                 else
                 {
@@ -364,8 +356,8 @@ namespace FaceDetection
                     //set the deciding factors
                     //for now we can use this value as a test
                     //ONLY 0 index camera or the main camera is the one to be used to the manual recording?
-
-                    Or_pb_recording.Visible = false;
+                        
+                    Or_pb_recording.Visible = false;                        
                     MainForm.GetMainForm.recordingInProgress = false;
                     SetRecordButtonState("play", true);
                     SetCameraToDefaultMode();
@@ -489,9 +481,10 @@ namespace FaceDetection
 
             //SCREEN PROPS
             SetMainScreenProperties();
+            MULTI_WINDOW.formSettingsChanged();
 
             //CREATE MORE WINDOWS for more cameras
-            //MULTI_WINDOW.CreateCameraWindows(Camera.GetCameraCount().Length);
+            MULTI_WINDOW.CreateCameraWindows(decimal.ToInt32(Properties.Settings.Default.camera_count));
 
 
             //Also must check if the PREEVENT mode is needed
@@ -570,11 +563,9 @@ namespace FaceDetection
             {
                 or_mainForm.FormBorderStyle = FormBorderStyle.None;
             }
-            //MainForm.GetMainForm.ClientSize = new Size(decimal.ToInt32(Properties.Settings.Default.C1w), decimal.ToInt32(Properties.Settings.Default.C1h));
+
             MainForm.GetMainForm.Width = Properties.Settings.Default.main_screen_size.Width;
             MainForm.GetMainForm.Height = Properties.Settings.Default.main_screen_size.Height;
-            //Properties.Settings.Default.C1w = Properties.Settings.Default.main_screen_size.Width;
-            //Properties.Settings.Default.C1h = Properties.Settings.Default.main_screen_size.Height;
             MainForm.GetMainForm.Location = new Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
         }
 

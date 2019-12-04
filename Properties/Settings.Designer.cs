@@ -862,5 +862,149 @@ namespace FaceDetection.Properties {
                 this["main_screen_size"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C4_show_camera_number {
+            get {
+                return ((bool)(this["C4_show_camera_number"]));
+            }
+            set {
+                this["C4_show_camera_number"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C2_show_camera_number {
+            get {
+                return ((bool)(this["C2_show_camera_number"]));
+            }
+            set {
+                this["C2_show_camera_number"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C3_show_camera_number {
+            get {
+                return ((bool)(this["C3_show_camera_number"]));
+            }
+            set {
+                this["C3_show_camera_number"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C2_show_record_icon {
+            get {
+                return ((bool)(this["C2_show_record_icon"]));
+            }
+            set {
+                this["C2_show_record_icon"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C3_show_record_icon {
+            get {
+                return ((bool)(this["C3_show_record_icon"]));
+            }
+            set {
+                this["C3_show_record_icon"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C4_show_record_icon {
+            get {
+                return ((bool)(this["C4_show_record_icon"]));
+            }
+            set {
+                this["C4_show_record_icon"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("32, 32")]
+        public global::System.Drawing.Point C2_window_location {
+            get {
+                return ((global::System.Drawing.Point)(this["C2_window_location"]));
+            }
+            set {
+                this["C2_window_location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("48, 48")]
+        public global::System.Drawing.Point C3_window_location {
+            get {
+                return ((global::System.Drawing.Point)(this["C3_window_location"]));
+            }
+            set {
+                this["C3_window_location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("64, 64")]
+        public global::System.Drawing.Point C4_window_location {
+            get {
+                return ((global::System.Drawing.Point)(this["C4_window_location"]));
+            }
+            set {
+                this["C4_window_location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("640, 480")]
+        public global::System.Drawing.Size C2_window_size {
+            get {
+                return ((global::System.Drawing.Size)(this["C2_window_size"]));
+            }
+            set {
+                this["C2_window_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("640, 480")]
+        public global::System.Drawing.Size C3_window_size {
+            get {
+                return ((global::System.Drawing.Size)(this["C3_window_size"]));
+            }
+            set {
+                this["C3_window_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("640, 480")]
+        public global::System.Drawing.Size C4_window_size {
+            get {
+                return ((global::System.Drawing.Size)(this["C4_window_size"]));
+            }
+            set {
+                this["C4_window_size"] = value;
+            }
+        }
     }
 }
