@@ -21,12 +21,10 @@ namespace FaceDetection
         private readonly System.Timers.Timer mouse_down_timer = new System.Timers.Timer();
         private readonly System.Timers.Timer datetime_ui_updater_timer = new System.Timers.Timer();
         
-        // ADD Robin
         private int timeForDeleteOldFiles;
         //private int freeDiskSpaceLeft;
         //private DiskSpaceWarning warningForm;
         public bool recordingInProgress;
-        // END Robin
         
         private RecorderCamera cameraMan = null;
         internal bool OPERATOR_CAPTURE_ALLOWED = false;
@@ -102,7 +100,7 @@ namespace FaceDetection
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SnapShot(object sender, EventArgs e)
+        public void SnapShot(object sender, EventArgs e)
         {
             SNAPSHOT_SAVER.TakeSnapShot(0);
         }
@@ -114,7 +112,6 @@ namespace FaceDetection
         {
             DateTimeUpdater();
 
-            // ADD Robin
             timeForDeleteOldFiles++;
             if (timeForDeleteOldFiles >= 3600*1) // Check time 3600*1 = 1 hour
             {
@@ -134,7 +131,6 @@ namespace FaceDetection
                 //        }
                 //    }
             }
-            // END Robin
         }
 
         private void DateTimeUpdater()
@@ -165,7 +161,7 @@ namespace FaceDetection
                 mouse_down_timer.Stop();
                 mouse_down_timer.Enabled = false;
             }
-            //Debug.WriteLine(timer.ToString());
+            
             if (folderButton.Visible == false)
             {
                 Or_controlBut.Visible = true;
@@ -174,23 +170,7 @@ namespace FaceDetection
             {
                 Or_controlBut.Visible = false;
             }
-            this.TopMost = true;
         }
-
-        //public void HoldButton(object sender, MouseEventArgs eventArgs)
-        //{
-        //    Logger.Add("mouse down");
-
-        //    mouse_down_timer.Interval = 1000;//Set it to 3000 for production            
-        //    mouse_down_timer.Enabled = true;
-        //}
-        //private void ReleaseButton(object sender, MouseEventArgs e)
-        //{
-        //    if (mouse_down_timer.Enabled == true)
-        //    {                
-        //        mouse_down_timer.Enabled = false;
-        //    }
-        //}
 
         private void FullScreen(object sender, EventArgs eventArgs)
         {
@@ -228,7 +208,7 @@ namespace FaceDetection
             }
         }
 
-        private async void ShowSettings(object sender, EventArgs e)
+        public async void ShowSettings(object sender, EventArgs e)
         {
             ShowSettingsDialogAsync();
         }
@@ -244,7 +224,6 @@ namespace FaceDetection
             {
                 if (Setting_ui.Visible == false)
                 {
-                    this.TopMost = false;
                     try
                     {
                         Setting_ui.ShowDialog();
@@ -271,13 +250,40 @@ namespace FaceDetection
             }
         }
 
-        internal static bool AtLeastOnePreEventTimeIsNotZero()
+        internal static bool AtLeastOnePreEventTimeIsNotZero(int cameraindex)
         {
             bool retval = false;
-            if ((Properties.Settings.Default.enable_event_recorder && Properties.Settings.Default.event_record_time_before_event > 0 ) 
-                || ((Properties.Settings.Default.enable_Human_sensor || Properties.Settings.Default.enable_face_recognition || Properties.Settings.Default.Recording_when_at_the_start_of_operation) && Properties.Settings.Default.seconds_before_event > 0))
+
+            switch (cameraindex)
             {
-                retval = true;
+                case 0:
+                    if ((Properties.Settings.Default.C1_enable_event_recorder && Properties.Settings.Default.C1_event_record_time_before_event > 0)
+                        || ((Properties.Settings.Default.C1_enable_Human_sensor || Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation) && Properties.Settings.Default.C1_seconds_before_event > 0))
+                    {
+                        retval = true;
+                    }
+                    break;
+                case 1:
+                    if ((Properties.Settings.Default.C2_enable_event_recorder && Properties.Settings.Default.C2_event_record_time_before_event > 0)
+                        || ((Properties.Settings.Default.C2_enable_Human_sensor || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation) && Properties.Settings.Default.C2_seconds_before_event > 0))
+                    {
+                        retval = true;
+                    }
+                    break;
+                case 2:
+                    if ((Properties.Settings.Default.C3_enable_event_recorder && Properties.Settings.Default.C3_event_record_time_before_event > 0)
+                        || ((Properties.Settings.Default.C3_enable_Human_sensor || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation) && Properties.Settings.Default.C3_seconds_before_event > 0))
+                    {
+                        retval = true;
+                    }
+                    break;
+                case 3:
+                    if ((Properties.Settings.Default.C4_enable_event_recorder && Properties.Settings.Default.C4_event_record_time_before_event > 0)
+                        || ((Properties.Settings.Default.C4_enable_Human_sensor || Properties.Settings.Default.C4_enable_face_recognition || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation) && Properties.Settings.Default.C4_seconds_before_event > 0))
+                    {
+                        retval = true;
+                    }
+                    break;
             }
             return retval;
         }
@@ -289,43 +295,91 @@ namespace FaceDetection
 
         public void WindowSizeUpdate()
         {
-            //Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
             if (crossbar!=null)
             {
                 crossbar.SetWindowPosition(new System.Drawing.Size(this.Width, this.Height));
             }
         }
             
-        public void EventRecorderOn()
+        public void EventRecorderOn(int cameraIndex)
         {
+            int timeBeforeEvent = 0, timeAfterEvent = 0;
+            bool preeventRecording = false;
+
             PARAMETERS.PARAM.Clear();
 
-            if (crossbar.PREEVENT_RECORDING)
+            switch (cameraIndex)
+            {
+                case 0:
+                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C1_event_record_time_before_event);
+                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_event_record_time_after_event);
+                    preeventRecording = this.crossbar.PREEVENT_RECORDING;
+                    break;
+                case 1:
+                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C2_event_record_time_before_event);
+                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_event_record_time_after_event);
+                    preeventRecording = FormClass.GetSubForm.PreeventRecordingState(cameraIndex);
+                    break;
+                case 2:
+                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C3_event_record_time_before_event);
+                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_event_record_time_after_event);
+                    preeventRecording = FormClass.GetSubForm.PreeventRecordingState(cameraIndex);
+                    break;
+                case 3:
+                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C4_event_record_time_before_event);
+                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_event_record_time_after_event);
+                    preeventRecording = FormClass.GetSubForm.PreeventRecordingState(cameraIndex);
+                    break;
+            }
+
+            if (preeventRecording)
             {
                 if (Properties.Settings.Default.capture_method == 0)
                 {
-                    MainForm.GetMainForm.SET_REC_ICON();
+                    TaskManager.EventAppeared(RECORD_PATH.EVENT, cameraIndex+1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+                    if (cameraIndex == 0)
+                    {
+                        MainForm.GetMainForm.SET_REC_ICON();
+                        MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(timeAfterEvent);
+                        crossbar.SetIconTimer(timeAfterEvent);
+                    }
+                    else
+                    {
+                        //FormClass.GetSubForm.SetRecordIcon(cameraIndex, timeAfterEvent);
+                        MULTI_WINDOW.formList[cameraIndex-1].SetRecordIcon(cameraIndex, timeAfterEvent);
+                    }
                 }
-                TaskManager.EventAppeared(RECORD_PATH.EVENT, 1, decimal.ToInt32(Properties.Settings.Default.event_record_time_before_event), decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event), DateTime.Now);
-                MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.event_record_time_after_event));
             }
             else
             {
-                crossbar.Start(0, CAMERA_MODES.EVENT);
-                Logger.Add("TODO: start event recording now");
+                //crossbar.Start(cameraIndex, CAMERA_MODES.EVENT); 
+                //Logger.Add("TODO: start event recording now");
             }
-            crossbar.SetIconTimer(Properties.Settings.Default.event_record_time_after_event);
         }
 
-        public void EventRecorderOff()
+        public void EventRecorderOff(int cameraIndex)
         {
-            if(crossbar.PREEVENT_RECORDING)
+            bool preeventRecording = false;
+
+            switch (cameraIndex)
             {
-                // do nothing
+                case 0:
+                    preeventRecording = this.crossbar.PREEVENT_RECORDING;
+                    break;
+                case 1:
+                    preeventRecording = FormClass.GetSubForm.PreeventRecordingState(cameraIndex);
+                    break;
+                case 3:
+                    preeventRecording = FormClass.GetSubForm.PreeventRecordingState(cameraIndex);
+                    break;
+                case 4:
+                    preeventRecording = FormClass.GetSubForm.PreeventRecordingState(cameraIndex);
+                    break;
             }
-            else
+
+            if (!preeventRecording)
             {
-                crossbar.Start(0, CAMERA_MODES.PREVIEW);
+                crossbar.Start(cameraIndex, CAMERA_MODES.PREVIEW);  
             }
         }
             
@@ -334,21 +388,21 @@ namespace FaceDetection
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ToggleVideoRecording(object sender, EventArgs e)
+        public void ToggleVideoRecording(object sender, EventArgs e)
         {            
             Or_pb_recording.Image = Properties.Resources.player_record;
             MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-            //BackLight.ON();            
+                        
             try
             {                
                 if ((String)cameraButton.Tag == "play")
                 {
                     if (recordingInProgress == false)
                     {
-                SetRecordButtonState("rec", false);
-                crossbar.Start(0, CAMERA_MODES.MANUAL);                    
-                MainForm.GetMainForm.SET_REC_ICON();
-                }
+                        SetRecordButtonState("rec", false);
+                        crossbar.Start(0, CAMERA_MODES.MANUAL);                    
+                        MainForm.GetMainForm.SET_REC_ICON();
+                    }
                 }
                 else
                 {
@@ -360,7 +414,7 @@ namespace FaceDetection
                     Or_pb_recording.Visible = false;                        
                     MainForm.GetMainForm.recordingInProgress = false;
                     SetRecordButtonState("play", true);
-                    SetCameraToDefaultMode();
+                    SetCameraToDefaultMode(0);
                 }
             }
             catch (InvalidOperationException iox)
@@ -371,14 +425,12 @@ namespace FaceDetection
 
         public void SetRecordButtonState(string state, bool camnum_visible)
         {
-            //or_camera_num_txt.Visible = camnum_visible;
             cameraButton.Tag = state;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            StopAllTimers();
-            //backgroundWorkerMain.RunWorkerAsync();  
+            StopAllTimers(); 
         }
         
         private void MainForm_Load(object sender, EventArgs e)
@@ -411,9 +463,10 @@ namespace FaceDetection
             or_controlBut = controlButtons;
             Or_controlBut.Location = new Point(this.Width-335, this.Height-110);
             
-            this.WindowState = FormWindowState.Minimized; 
+            this.WindowState = FormWindowState.Minimized;
+            
+            crossbar.PreviewMode();
             AllChangesApply();
-            //WindowSizeUpdate();
             FillResolutionList();
             
             ///SET THE MAIN WINDOW ICONS AND BUTTON POSITIONS MANUALLY
@@ -427,17 +480,14 @@ namespace FaceDetection
         public void SET_REC_ICON()
         {
             Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon;
-            MainForm.GetMainForm.recordingInProgress = true;
+            recordingInProgress = true;
         }
 
         public static void AllChangesApply()
         {
-            if (Properties.Settings.Default.window_on_top)
-            {
-                MainForm.GetMainForm.FullScreen();
-            }
+            int cam_index = settingUI.Camera_index;
 
-            if (Properties.Settings.Default.enable_Human_sensor)
+            if (Properties.Settings.Default.C1_enable_Human_sensor || Properties.Settings.Default.C2_enable_Human_sensor || Properties.Settings.Default.C3_enable_Human_sensor || Properties.Settings.Default.C4_enable_Human_sensor)
             {
                 if (RSensor != null)
                 {
@@ -454,14 +504,12 @@ namespace FaceDetection
                 }
             }
 
-            if (Properties.Settings.Default.enable_face_recognition)
+            if (Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C4_enable_face_recognition)
             {
                 if (faceDetector != null)
                 {
                     FaceDetector.StopFaceTimer();
-                    //faceDetector.Destroy();
                 }
-                //faceDetector = new FaceDetector();
                 faceDetector.SetInterval();
                 faceDetector.StartFaceTimer();
             }
@@ -470,25 +518,70 @@ namespace FaceDetection
                 if (faceDetector != null)
                 {
                     FaceDetector.StopFaceTimer();
-                    //faceDetector.Destroy();
                 }
             }
 
-            if (Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+            if (Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation)
             {
                 Mklisteners.AddMouseAndKeyboardBack();
             }
 
-            //SCREEN PROPS
             SetMainScreenProperties();
             MULTI_WINDOW.formSettingsChanged();
 
             //CREATE MORE WINDOWS for more cameras
-            MULTI_WINDOW.CreateCameraWindows(decimal.ToInt32(Properties.Settings.Default.camera_count));
-
+            MULTI_WINDOW.CreateCameraWindows(decimal.ToInt32(Properties.Settings.Default.camera_count), cam_index);
 
             //Also must check if the PREEVENT mode is needed
-            SetCameraToDefaultMode();
+            SetCameraToDefaultMode(cam_index);
+
+            // Top most
+            if (Properties.Settings.Default.window_on_top)
+            {
+                if (cam_index == 0)
+                {
+                    MainForm.GetMainForm.TopMost = true;
+                    for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
+                    {
+                        MULTI_WINDOW.formList[i].TopMost = false;
+                    }
+                }
+                else
+                {
+                    if (MULTI_WINDOW.subCameraHasBeenDisplayed > 0)
+                    {
+                        MULTI_WINDOW.formList[cam_index - 1].TopMost = true;
+                    }
+                    MainForm.GetMainForm.TopMost = false;
+                    for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
+                    {
+                        if (i != (cam_index - 1))
+                        {
+                            MULTI_WINDOW.formList[i].TopMost = false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MainForm.GetMainForm.TopMost = false;
+                for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
+                {
+                    MULTI_WINDOW.formList[i].TopMost = false;
+                }
+
+                if (cam_index == 0)
+                {
+                    MainForm.GetMainForm.Activate();
+                }
+                else
+                {
+                    if (MULTI_WINDOW.subCameraHasBeenDisplayed > 0)
+                    {
+                        MULTI_WINDOW.formList[cam_index - 1].Activate();
+                    }
+                }
+            }
 
             if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
             {
@@ -531,6 +624,8 @@ namespace FaceDetection
 
         private static void SetMainScreenProperties()
         {
+            int cameraIndex = Setting_ui.Camera_index;
+
             if (Setting_ui == null)
             {
                 Or_pb_recording.Visible = false;
@@ -539,29 +634,64 @@ namespace FaceDetection
             }
 
             or_camera_num_txt.Visible = Properties.Settings.Default.show_camera_no;
-            or_camera_num_txt.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
-            MainForm.GetMainForm.TopMost = Properties.Settings.Default.window_on_top;
+            //or_camera_num_txt.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
+            //MainForm.GetMainForm.TopMost = Properties.Settings.Default.window_on_top;
             MainForm.GetMainForm.Location = new System.Drawing.Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
-            
             or_current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
 
             if (Properties.Settings.Default.main_window_full_screen)
             {
-                MainForm.GetMainForm.WindowState = FormWindowState.Maximized;
+                if (cameraIndex == 0)
+                {
+                    MainForm.GetMainForm.WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
+                    {
+                        if (i == cameraIndex - 1)
+                        {
+                            MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
+                        }
+                    }
+                }
             }
             else
             {
                 MainForm.GetMainForm.WindowState = FormWindowState.Normal;
+                for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
+                {
+                    if (i == cameraIndex - 1)
+                    {
+                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
+                    }
+                }
             }
+
+            if (cameraIndex != 0 && !Properties.Settings.Default.show_all_cams_simulteneously)
+            {
+                MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
+            }
+
             //Window pane
             if (Properties.Settings.Default.show_window_pane == true)
             {
                 or_mainForm.FormBorderStyle = FormBorderStyle.Sizable;
                 or_mainForm.ControlBox = true;
+
+                for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
+                {
+                    MULTI_WINDOW.formList[i].FormBorderStyle = FormBorderStyle.Sizable;
+                }
             }
             else
             {
                 or_mainForm.FormBorderStyle = FormBorderStyle.None;
+
+                for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
+                {
+                    MULTI_WINDOW.formList[i].FormBorderStyle = FormBorderStyle.None;
+                }
             }
 
             MainForm.GetMainForm.Width = Properties.Settings.Default.main_screen_size.Width;
@@ -569,16 +699,29 @@ namespace FaceDetection
             MainForm.GetMainForm.Location = new Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
         }
 
-        public static void SetCameraToDefaultMode()
+        public static void SetCameraToDefaultMode(int cameraindex)
         {
-            if (AtLeastOnePreEventTimeIsNotZero())
+            if (AtLeastOnePreEventTimeIsNotZero(cameraindex))
             {
-                //Logger.Add("DOING: " + this.CAMERA_MODES.PREEVENT);                
-                MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREEVENT);
+                if (cameraindex == 0)
+                {
+                    MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREEVENT);
+                }
+                else
+                {
+                    FormClass.GetSubForm.SetToPreeventMode(cameraindex);
+                }
             }
             else
             {
-                MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREVIEW);
+                if (cameraindex == 0)
+                {
+                    MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREVIEW);
+                }
+                else
+                {
+                    FormClass.GetSubForm.SetToPreviewMode(cameraindex);
+                }
             }
         }
 
@@ -662,20 +805,86 @@ namespace FaceDetection
 
         private void ClearCutFileTempFolder()
         {
-            string[] listFiles;
+            string[] listFiles1, listFiles2, listFiles3, listFiles4;
             List<string> listFilesToClear = new List<string>();
             try
             {
-                if (Directory.Exists(@"D:\TEMP\CutTemp"))
+                if (Directory.Exists(@"D:\TEMP\1\CutTemp"))
                 {
-                    listFiles = Directory.GetFiles(@"D:\TEMP\CutTemp");
+                    listFiles1 = Directory.GetFiles(@"D:\TEMP\1\CutTemp");
                 }
                 else
                 {
-                    listFiles = Directory.GetFiles(@"C:\TEMP\CutTemp");
+                    listFiles1 = Directory.GetFiles(@"C:\TEMP\1\CutTemp");
                 }
 
-                listFilesToClear = listFiles.ToList();
+                listFilesToClear = listFiles1.ToList();
+                for (int i = listFilesToClear.Count; i > 0; i--)
+                {
+                    File.SetAttributes(listFilesToClear.ElementAt(i - 1), FileAttributes.Normal); // Add in case of weird attribute on the file
+                    File.Delete(listFilesToClear.ElementAt(i - 1));
+                }
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(@" TEMP\1\CutTemp does not exist");
+            }
+
+            try
+            {
+                if (Directory.Exists(@"D:\TEMP\2\CutTemp"))
+                {
+                    listFiles2 = Directory.GetFiles(@"D:\TEMP\2\CutTemp");
+                }
+                else
+                {
+                    listFiles2 = Directory.GetFiles(@"C:\TEMP\2\CutTemp");
+                }
+                listFilesToClear = listFiles2.ToList();
+                for (int i = listFilesToClear.Count; i > 0; i--)
+                {
+                    File.SetAttributes(listFilesToClear.ElementAt(i - 1), FileAttributes.Normal); // Add in case of weird attribute on the file
+                    File.Delete(listFilesToClear.ElementAt(i - 1));
+                }
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(@" TEMP\2\CutTemp does not exist");
+            }
+
+            try
+            {
+                if (Directory.Exists(@"D:\TEMP\3\CutTemp"))
+                {
+                    listFiles3 = Directory.GetFiles(@"D:\TEMP\3\CutTemp");
+                }
+                else
+                {
+                    listFiles3 = Directory.GetFiles(@"C:\TEMP\3\CutTemp");
+                }
+                listFilesToClear = listFiles3.ToList();
+                for (int i = listFilesToClear.Count; i > 0; i--)
+                {
+                    File.SetAttributes(listFilesToClear.ElementAt(i - 1), FileAttributes.Normal); // Add in case of weird attribute on the file
+                    File.Delete(listFilesToClear.ElementAt(i - 1));
+                }
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(@" TEMP\3\CutTemp does not exist");
+            }
+
+            try
+            {
+                if (Directory.Exists(@"D:\TEMP\4\CutTemp"))
+                {
+                    listFiles4 = Directory.GetFiles(@"D:\TEMP\4\CutTemp");
+                }
+                else
+                {
+                    listFiles4 = Directory.GetFiles(@"C:\TEMP\4\CutTemp");
+                }
+                listFilesToClear = listFiles4.ToList();
                 for (int i = listFilesToClear.Count; i > 0; i--)
                 {
                     File.SetAttributes(listFilesToClear.ElementAt(i - 1), FileAttributes.Normal); // Add in case of weird attribute on the file
@@ -684,7 +893,7 @@ namespace FaceDetection
             }
             catch(Exception ex)
             {
-
+                //Console.WriteLine(@" TEMP\4\CutTemp does not exist");
             }
         }
 

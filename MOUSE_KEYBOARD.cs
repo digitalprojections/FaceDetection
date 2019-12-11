@@ -21,7 +21,10 @@ namespace FaceDetection
         public MOUSE_KEYBOARD()
         {
             START_CLICK_LISTENER();
-            if (Properties.Settings.Default.capture_operator || Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+            if ((Properties.Settings.Default.C1_enable_capture_operator || Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation)
+                    || (Properties.Settings.Default.C2_enable_capture_operator || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation)
+                    || (Properties.Settings.Default.C3_enable_capture_operator || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation)
+                    || (Properties.Settings.Default.C4_enable_capture_operator || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation))
             {                
                 Listen = true;
             }
@@ -60,51 +63,104 @@ namespace FaceDetection
             MouseKeyEventInit();
         }
         private void MouseKeyEventInit()
-        {            
-            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation && Listen && !MainForm.GetMainForm.crossbar.OPER_BAN)
-            {
-                Listen = false;
-                //↓20191107 Nagayama added↓
-                if (Properties.Settings.Default.capture_method <= 0)
-                {
-                    //↑20191107 Nagayama added↑
-                    if (MainForm.GetMainForm.crossbar.PREEVENT_RECORDING && Properties.Settings.Default.seconds_after_event > 0)
-                    {
-                        TaskManager.EventAppeared(RECORD_PATH.EVENT, 1,
-                            decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
-                            decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
-                            DateTime.Now);
-                        
-                        
-                            MainForm.GetMainForm.SET_REC_ICON();
-                        
-                        //↓20191107 Nagayama added↓
+        {
+            int camindex = Properties.Settings.Default.main_camera_index;
+            int timeBeforeEvent = 0, timeAfterEvent = 0;
+            bool captureOperatorEnabled = false, recordWhenOperation = false, preeventRecording = false;
 
+            try
+            {
+                switch (camindex)
+                {
+                    case 0:
+                        timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
+                        timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
+                        captureOperatorEnabled = Properties.Settings.Default.C1_enable_capture_operator;
+                        recordWhenOperation = Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
+                        preeventRecording = MainForm.GetMainForm.crossbar.PREEVENT_RECORDING;
+                        break;
+                    case 1:
+                        timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
+                        timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
+                        captureOperatorEnabled = Properties.Settings.Default.C2_enable_capture_operator;
+                        recordWhenOperation = Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation;
+                        preeventRecording = FormClass.crossbarList[0].PREEVENT_RECORDING;
+                        break;
+                    case 2:
+                        timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
+                        timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
+                        captureOperatorEnabled = Properties.Settings.Default.C3_enable_capture_operator;
+                        recordWhenOperation = Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation;
+                        preeventRecording = FormClass.crossbarList[1].PREEVENT_RECORDING;
+                        break;
+                    case 3:
+                        timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
+                        timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
+                        captureOperatorEnabled = Properties.Settings.Default.C4_enable_capture_operator;
+                        recordWhenOperation = Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation;
+                        preeventRecording = FormClass.crossbarList[2].PREEVENT_RECORDING;
+                        break;
+                }
+
+                if (captureOperatorEnabled && recordWhenOperation && Listen && !MainForm.GetMainForm.crossbar.OPER_BAN)
+                {
+                    Listen = false;
+                    if (Properties.Settings.Default.capture_method <= 0)
+                    {
+                        if (preeventRecording && timeAfterEvent > 0)
+                        {
+                            TaskManager.EventAppeared(RECORD_PATH.EVENT, camindex + 1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+
+                            if (camindex == 0)
+                            {
+                                MainForm.GetMainForm.crossbar.SetIconTimer(timeAfterEvent);
+                                MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(timeAfterEvent);
+                            }
+                            else
+                            {
+                                MULTI_WINDOW.formList[camindex - 1].SetRecordIcon(camindex, timeAfterEvent);
+                            }
+                        }
+                        else
+                        {
+                            if (camindex == 0)
+                            {
+                                MainForm.GetMainForm.crossbar.Start(camindex, CAMERA_MODES.OPERATOR);
+                            }
+                            else
+                            {
+                                FormClass.crossbarList[camindex - 1].Start(camindex, CAMERA_MODES.OPERATOR);
+                            }
+                        }
                     }
                     else
                     {
-                        MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);                                                                        
+                        SNAPSHOT_SAVER.TakeSnapShot(camindex, "event");
+
+                        if (camindex == 0)
+                        {
+                            MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
+                        }
+                        else
+                        {
+                            FormClass.crossbarList[camindex - 1].No_Cap_Timer_ON(0);
+                        }
                     }
-                    MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
-                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
-                    //↑20191107 Nagayama added↑
+
+                    MainForm.GetMainForm.BackLight.Restart();
                 }
                 else
                 {
-                    SNAPSHOT_SAVER.TakeSnapShot(0, "event");
-                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
+                    Listen = false;
                 }
-
-                MainForm.GetMainForm.BackLight.Restart();
-                
+                if (MainForm.GetMainForm != null)
+                {
+                    MainForm.GetMainForm.BackLight.Restart();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Listen = false;
-            }
-            if (MainForm.GetMainForm != null)
-            {
-                MainForm.GetMainForm.BackLight.Restart();
+                // listening closed form 
             }
         }
     }

@@ -67,7 +67,6 @@ namespace FaceDetection
             {
                 using (StreamWriter w = File.AppendText("log.txt"))
                 {
-
                     w.Write("\r\nLog Entry : ");
                     w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
                     w.WriteLine($"  : {message}");
@@ -76,14 +75,13 @@ namespace FaceDetection
             }
             catch (IOException iox)
             {
-                using (StreamWriter w = File.AppendText("log2.txt"))
-                {
-
-                    w.Write("\r\nLog Entry : ");
-                    w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
-                    w.WriteLine($"  : {message}");
-                    w.WriteLine("-------------------------------");
-                }
+                //using (StreamWriter w = File.AppendText("log2.txt"))
+                //{
+                //    w.Write("\r\nLog Entry : ");
+                //    w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
+                //    w.WriteLine($"  : {message}");
+                //    w.WriteLine("-------------------------------");
+                //}
                 // MessageBox.Show("Cannot access Log.txt file");
             }
 

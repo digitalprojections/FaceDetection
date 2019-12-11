@@ -20,7 +20,7 @@
     <Setting Name="enable_backlight_off_when_idle" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="enable_event_recorder" Type="System.Boolean" Scope="User">
+    <Setting Name="C1_enable_event_recorder" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="recording_while_face_recognition" Type="System.Boolean" Scope="User">
@@ -29,7 +29,7 @@
     <Setting Name="recording_on_start" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="interval_before_reinitiating_recording" Type="System.Decimal" Scope="User">
+    <Setting Name="C1_interval_before_reinitiating_recording" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">60</Value>
     </Setting>
     <Setting Name="show_all_cams_simulteneously" Type="System.Boolean" Scope="User">
@@ -38,7 +38,7 @@
     <Setting Name="current_camera_index" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="capture_operator" Type="System.Boolean" Scope="User">
+    <Setting Name="C1_enable_capture_operator" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="window_location" Type="System.Drawing.Point" Scope="User">
@@ -137,22 +137,22 @@
     <Setting Name="Recording_when_an_operator_senses" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="Recording_when_at_the_start_of_operation" Type="System.Boolean" Scope="User">
+    <Setting Name="C1_Recording_when_at_the_start_of_operation" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="camera_count" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="enable_face_recognition" Type="System.Boolean" Scope="User">
+    <Setting Name="C1_enable_face_recognition" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="backlight_on_upon_face_rec" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="seconds_before_event" Type="System.Decimal" Scope="User">
+    <Setting Name="C1_seconds_before_event" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
-    <Setting Name="seconds_after_event" Type="System.Decimal" Scope="User">
+    <Setting Name="C1_seconds_after_event" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
     <Setting Name="recording_length_seconds" Type="System.Decimal" Scope="User">
@@ -170,10 +170,10 @@
     <Setting Name="C1h" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">480</Value>
     </Setting>
-    <Setting Name="event_record_time_before_event" Type="System.Decimal" Scope="User">
+    <Setting Name="C1_event_record_time_before_event" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">300</Value>
     </Setting>
-    <Setting Name="event_record_time_after_event" Type="System.Decimal" Scope="User">
+    <Setting Name="C1_event_record_time_after_event" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">300</Value>
     </Setting>
     <Setting Name="face_record_time_before" Type="System.Decimal" Scope="User">
@@ -188,10 +188,10 @@
     <Setting Name="temp_folder" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\TEMP</Value>
     </Setting>
-    <Setting Name="face_rec_interval" Type="System.Decimal" Scope="User">
+    <Setting Name="C1_check_interval" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
-    <Setting Name="capture_type" Type="System.String" Scope="User">
+    <Setting Name="C1_capture_type" Type="System.String" Scope="User">
       <Value Profile="(Default)">Video</Value>
     </Setting>
     <Setting Name="C4w" Type="System.Decimal" Scope="User">
@@ -200,7 +200,7 @@
     <Setting Name="C4h" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">720</Value>
     </Setting>
-    <Setting Name="enable_Human_sensor" Type="System.Boolean" Scope="User">
+    <Setting Name="C1_enable_Human_sensor" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="manual_record_time" Type="System.Decimal" Scope="User">
@@ -211,6 +211,150 @@
     </Setting>
     <Setting Name="main_screen_size" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">640, 480</Value>
+    </Setting>
+    <Setting Name="C2_event_record_time_before_event" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="C3_event_record_time_before_event" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="C4_event_record_time_before_event" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="C2_event_record_time_after_event" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="C3_event_record_time_after_event" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="C4_event_record_time_after_event" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="C2_show_camera_number" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C3_show_camera_number" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C4_show_camera_number" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C2_show_record_icon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C3_show_record_icon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C4_show_record_icon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C2_window_location" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">32, 32</Value>
+    </Setting>
+    <Setting Name="C3_window_location" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">48, 48</Value>
+    </Setting>
+    <Setting Name="C4_window_location" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">64, 64</Value>
+    </Setting>
+    <Setting Name="C2_window_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">640, 480</Value>
+    </Setting>
+    <Setting Name="C3_window_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">640, 480</Value>
+    </Setting>
+    <Setting Name="C4_window_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">640, 480</Value>
+    </Setting>
+    <Setting Name="C2_enable_event_recorder" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="C3_enable_event_recorder" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="C4_enable_event_recorder" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="C2_enable_capture_operator" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="C3_enable_capture_operator" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="C4_enable_capture_operator" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="C2_seconds_before_event" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="C3_seconds_before_event" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="C4_seconds_before_event" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="C2_seconds_after_event" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="C3_seconds_after_event" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="C4_seconds_after_event" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="C2_enable_face_recognition" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C3_enable_face_recognition" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C4_enable_face_recognition" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C2_check_interval" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="C3_check_interval" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="C4_check_interval" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="C2_interval_before_reinitiating_recording" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="C3_interval_before_reinitiating_recording" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="C4_interval_before_reinitiating_recording" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="C2_enable_Human_sensor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C3_enable_Human_sensor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C4_enable_Human_sensor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C2_Recording_when_at_the_start_of_operation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C3_Recording_when_at_the_start_of_operation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C4_Recording_when_at_the_start_of_operation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="C2_capture_type" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Video</Value>
+    </Setting>
+    <Setting Name="C3_capture_type" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Video</Value>
+    </Setting>
+    <Setting Name="C4_capture_type" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Video</Value>
     </Setting>
   </Settings>
 </SettingsFile>

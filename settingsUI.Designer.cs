@@ -32,6 +32,8 @@
             System.Windows.Forms.TabPage tab_view_settings;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsUI));
             this.groupBox_viewSettings = new System.Windows.Forms.GroupBox();
+            this.labelCameraNumber = new System.Windows.Forms.Label();
+            this.labelcnum = new System.Windows.Forms.Label();
             this.bl_idling_time_label = new System.Windows.Forms.Label();
             this.numericUpDownBacklight = new System.Windows.Forms.NumericUpDown();
             this.nud_manual_record_time = new System.Windows.Forms.NumericUpDown();
@@ -152,6 +154,8 @@
             // 
             // groupBox_viewSettings
             // 
+            this.groupBox_viewSettings.Controls.Add(this.labelCameraNumber);
+            this.groupBox_viewSettings.Controls.Add(this.labelcnum);
             this.groupBox_viewSettings.Controls.Add(this.bl_idling_time_label);
             this.groupBox_viewSettings.Controls.Add(this.numericUpDownBacklight);
             this.groupBox_viewSettings.Controls.Add(this.nud_manual_record_time);
@@ -166,6 +170,16 @@
             resources.ApplyResources(this.groupBox_viewSettings, "groupBox_viewSettings");
             this.groupBox_viewSettings.Name = "groupBox_viewSettings";
             this.groupBox_viewSettings.TabStop = false;
+            // 
+            // labelCameraNumber
+            // 
+            resources.ApplyResources(this.labelCameraNumber, "labelCameraNumber");
+            this.labelCameraNumber.Name = "labelCameraNumber";
+            // 
+            // labelcnum
+            // 
+            resources.ApplyResources(this.labelcnum, "labelcnum");
+            this.labelcnum.Name = "labelcnum";
             // 
             // bl_idling_time_label
             // 
@@ -219,7 +233,7 @@
             // cb_event_recorder
             // 
             resources.ApplyResources(this.cb_event_recorder, "cb_event_recorder");
-            this.cb_event_recorder.Checked = global::FaceDetection.Properties.Settings.Default.enable_event_recorder;
+            this.cb_event_recorder.Checked = global::FaceDetection.Properties.Settings.Default.C1_enable_event_recorder;
             this.cb_event_recorder.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_event_recorder.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "enable_event_recorder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_event_recorder.Name = "cb_event_recorder";
@@ -248,7 +262,7 @@
             0,
             0});
             this.event_record_time_before_event.Name = "event_record_time_before_event";
-            this.event_record_time_before_event.Value = global::FaceDetection.Properties.Settings.Default.event_record_time_before_event;
+            this.event_record_time_before_event.Value = global::FaceDetection.Properties.Settings.Default.C1_event_record_time_before_event;
             // 
             // nud_event_record_after
             // 
@@ -265,7 +279,7 @@
             0,
             0});
             this.nud_event_record_after.Name = "nud_event_record_after";
-            this.nud_event_record_after.Value = global::FaceDetection.Properties.Settings.Default.event_record_time_after_event;
+            this.nud_event_record_after.Value = global::FaceDetection.Properties.Settings.Default.C1_event_record_time_after_event;
             // 
             // lb_post_event
             // 
@@ -339,7 +353,7 @@
             // cb_human_sensor
             // 
             resources.ApplyResources(this.cb_human_sensor, "cb_human_sensor");
-            this.cb_human_sensor.Checked = global::FaceDetection.Properties.Settings.Default.enable_Human_sensor;
+            this.cb_human_sensor.Checked = global::FaceDetection.Properties.Settings.Default.C1_enable_Human_sensor;
             this.cb_human_sensor.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "enable_Human_sensor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_human_sensor.Name = "cb_human_sensor";
             this.cb_human_sensor.Tag = "14";
@@ -361,12 +375,12 @@
             0,
             0});
             this.nud_seconds_after_event.Name = "nud_seconds_after_event";
-            this.nud_seconds_after_event.Value = global::FaceDetection.Properties.Settings.Default.seconds_after_event;
+            this.nud_seconds_after_event.Value = global::FaceDetection.Properties.Settings.Default.C1_seconds_after_event;
             // 
             // cb_face_recognition
             // 
             resources.ApplyResources(this.cb_face_recognition, "cb_face_recognition");
-            this.cb_face_recognition.Checked = global::FaceDetection.Properties.Settings.Default.enable_face_recognition;
+            this.cb_face_recognition.Checked = global::FaceDetection.Properties.Settings.Default.C1_enable_face_recognition;
             this.cb_face_recognition.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "enable_face_recognition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_face_recognition.Name = "cb_face_recognition";
             this.cb_face_recognition.Tag = "14";
@@ -383,7 +397,7 @@
             0,
             0});
             this.nud_seconds_before_event.Name = "nud_seconds_before_event";
-            this.nud_seconds_before_event.Value = global::FaceDetection.Properties.Settings.Default.seconds_before_event;
+            this.nud_seconds_before_event.Value = global::FaceDetection.Properties.Settings.Default.C1_seconds_before_event;
             this.nud_seconds_before_event.ValueChanged += new System.EventHandler(this.Nud_seconds_before_event_ValueChanged);
             // 
             // label11
@@ -426,13 +440,13 @@
             0,
             0});
             this.nud_reinitiation_interval.Name = "nud_reinitiation_interval";
-            this.nud_reinitiation_interval.Value = global::FaceDetection.Properties.Settings.Default.interval_before_reinitiating_recording;
+            this.nud_reinitiation_interval.Value = global::FaceDetection.Properties.Settings.Default.C1_interval_before_reinitiating_recording;
             this.nud_reinitiation_interval.ValueChanged += new System.EventHandler(this.Nud_reinitiation_interval_ValueChanged);
             // 
             // cm_capture_mode
             // 
             resources.ApplyResources(this.cm_capture_mode, "cm_capture_mode");
-            this.cm_capture_mode.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "capture_type", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            //this.cm_capture_mode.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "capture_type", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cm_capture_mode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cm_capture_mode.FormattingEnabled = true;
             this.cm_capture_mode.Items.AddRange(new object[] {
@@ -466,12 +480,12 @@
             0,
             0});
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Value = global::FaceDetection.Properties.Settings.Default.face_rec_interval;
+            this.numericUpDown2.Value = global::FaceDetection.Properties.Settings.Default.C1_check_interval;
             // 
             // cb_operator_capture
             // 
             resources.ApplyResources(this.cb_operator_capture, "cb_operator_capture");
-            this.cb_operator_capture.Checked = global::FaceDetection.Properties.Settings.Default.capture_operator;
+            this.cb_operator_capture.Checked = global::FaceDetection.Properties.Settings.Default.C1_enable_capture_operator;
             this.cb_operator_capture.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_operator_capture.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "capture_operator", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_operator_capture.Name = "cb_operator_capture";
@@ -492,7 +506,7 @@
             // cb_recording_operation
             // 
             resources.ApplyResources(this.cb_recording_operation, "cb_recording_operation");
-            this.cb_recording_operation.Checked = global::FaceDetection.Properties.Settings.Default.Recording_when_at_the_start_of_operation;
+            this.cb_recording_operation.Checked = global::FaceDetection.Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
             this.cb_recording_operation.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_recording_operation.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FaceDetection.Properties.Settings.Default, "Recording_when_at_the_start_of_operation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cb_recording_operation.Name = "cb_recording_operation";
@@ -928,7 +942,7 @@
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "SettingsUI";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CameraSettingsForm_FormClosing);
+            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CameraSettingsForm_FormClosing);
             this.Load += new System.EventHandler(this.SettingsUI_Load);
             this.Shown += new System.EventHandler(this.SettingsUI_Shown);
             tab_view_settings.ResumeLayout(false);
@@ -1054,5 +1068,7 @@
         private System.Windows.Forms.NumericUpDown nud_seconds_before_event;
         private System.Windows.Forms.NumericUpDown numericUpDownCamCount;
         private System.Windows.Forms.Label bl_idling_time_label;
+        private System.Windows.Forms.Label labelCameraNumber;
+        private System.Windows.Forms.Label labelcnum;
     }
 }

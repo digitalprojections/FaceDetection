@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,6 +15,7 @@ namespace FaceDetection
         static Encoder myEncoder;
         static EncoderParameter myEncoderParameter;
         static EncoderParameters myEncoderParameters;
+
         internal static void TakeSnapShot(int cameraIndex)
         {
             CameraIndex = cameraIndex;
@@ -35,14 +34,26 @@ namespace FaceDetection
             Bitmap bitmap = new Bitmap(1, 1);
             try
             {
-                bitmap = MainForm.GetMainForm.GetSnapShot();
+                if (cameraIndex == 0)
+                {
+                    bitmap = MainForm.GetMainForm.GetSnapShot();
+                }
+                else
+                {
+                    bitmap = FormClass.crossbarList[cameraIndex-1].GetBitmap();
+                }
+
                 if (bitmap != null)
+                {
                     bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
-            }catch(NullReferenceException nrx)
+                }
+            }
+            catch (NullReferenceException nrx)
             {
                 Logger.Add(nrx);
             }
         }
+
         internal static void TakeSnapShot(int cameraIndex, string ev)
         {
             CameraIndex = cameraIndex;
@@ -62,15 +73,26 @@ namespace FaceDetection
             Bitmap bitmap = new Bitmap(1, 1);
             try
             {
-                bitmap = MainForm.GetMainForm.GetSnapShot();
+                if (cameraIndex == 0)
+                {
+                    bitmap = MainForm.GetMainForm.GetSnapShot();
+                }
+                else
+                {
+                    bitmap = FormClass.crossbarList[cameraIndex-1].GetBitmap();
+                }
+
                 if (bitmap != null)
+                {
                     bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
+                }
             }
             catch (NullReferenceException nrx)
             {
                 Logger.Add(nrx);
             }
         }
+
         private static ImageCodecInfo GetEncoderInfo(String mimeType)
         {
             int j;
@@ -84,7 +106,7 @@ namespace FaceDetection
             return null;
         }
 
-        public static void TakeAsyncSnapShot(int cameraIndex)
+        public static void TakeAsyncSnapShot()
         {
             Thread newThread = new Thread(new ThreadStart(ThreadProc));
             newThread.Name = String.Format("Thread SNAPSHOT");
@@ -92,6 +114,7 @@ namespace FaceDetection
             newThread.Start();
             //ThreadProc();
         }
+
         private static void ThreadProc()
         {
             myImageCodecInfo = GetEncoderInfo("image/jpeg");
@@ -114,15 +137,24 @@ namespace FaceDetection
                     {
                         if (MainForm.GetMainForm.crossbar != null) // && MainForm.GetMainForm.crossbar.ANY_CAMERA_ON())
                         {
+                            CameraIndex = MainForm.Setting_ui.Camera_index;
                             Thread.Sleep(1000);
                             string picloc = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
                             picloc = Path.Combine(picloc, (CameraIndex + 1).ToString());
                             picloc = Path.Combine(picloc, "snapshot");
                             Directory.CreateDirectory(picloc);
                             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
-                            Bitmap bitmap = MainForm.GetMainForm.crossbar.GetBitmap();
+                            if (CameraIndex == 0)
+                            {
+                                Bitmap bitmap = MainForm.GetMainForm.crossbar.GetBitmap();
+                                bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
+                            }
+                            else
+                            {
+                                Bitmap bitmap = FormClass.crossbarList[CameraIndex-1].GetBitmap();
+                                bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
+                            }
 
-                            bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
                             snap = true;
 
                             PARAMETERS.PARAM.Clear();
