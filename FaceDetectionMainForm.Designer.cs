@@ -54,7 +54,7 @@
             this.controlButtons.Controls.Add(this.snapshotButton);
             this.controlButtons.Controls.Add(this.cameraButton);
             this.controlButtons.Controls.Add(this.closeButton);
-            this.controlButtons.Location = new System.Drawing.Point(340, 401);
+            this.controlButtons.Location = new System.Drawing.Point(336, 404);
             this.controlButtons.Name = "controlButtons";
             this.controlButtons.Size = new System.Drawing.Size(292, 59);
             this.controlButtons.TabIndex = 12;

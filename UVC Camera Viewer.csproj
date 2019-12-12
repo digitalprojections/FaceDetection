@@ -167,6 +167,9 @@
     <EmbeddedResource Include="FaceDetectionMainForm.resx">
       <DependentUpon>FaceDetectionMainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormClass.resx">
+      <DependentUpon>FormClass.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="settingsUI.ja-JP.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
       <SubType>Designer</SubType>

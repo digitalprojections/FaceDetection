@@ -26,11 +26,11 @@ namespace FaceDetection
         {
             if (Directory.Exists(@"D:\TEMP"))
             {
-                Directory.CreateDirectory(@"D:\TEMP\CutTemp");
+                Directory.CreateDirectory(@"D:\TEMP\" + numCamera + @"\CutTemp");
             }
             else
             {
-                Directory.CreateDirectory(@"C:\TEMP\CutTemp");
+                Directory.CreateDirectory(@"C:\TEMP\" + numCamera + @"\CutTemp");
             }
 
             if (Directory.Exists(@"ffmpeg-20191101-53c21c2-win32-static"))
@@ -40,7 +40,8 @@ namespace FaceDetection
                 DateTime dateTempVideo;
                 DateTime eventTime = triggerTime; // DateTime.Now;
 
-                Logger.Add("eventTime: " + eventTime);
+                Console.WriteLine("Event Appeared ! eventTime: " + eventTime);
+                Logger.Add("Event Appeared ! eventTime: " + eventTime);
 
                 timeSpanStart = new TimeSpan(0, 0, 0, timeBeforeEvent);
                 timeSpanEnd = new TimeSpan(0, 0, 0, timeAfterEvent);
@@ -51,7 +52,7 @@ namespace FaceDetection
                 taskTimer.Elapsed += OnTimerEvent;
                 taskTimer.AutoReset = false;
 
-                RefreshFilesInList(); // Looking for files in the TEMP folder and add them to the list files
+                RefreshFilesInList(numCamera); // Looking for files in the TEMP folder and add them to the list files
 
                 if (listRecordingFiles.Count == 1) // There is only one file in the TEMP folder. So we need this file and don't have to compare dates of files.
                 {
@@ -105,11 +106,11 @@ namespace FaceDetection
                 }
 
                 // Create event folder if it doesn't exist (ffmpeg can't create folder itself)
-                if (!Directory.Exists(Properties.Settings.Default.video_file_location + "/Camera/" + numCamera + "/" + path))
+                if (!Directory.Exists(Properties.Settings.Default.video_file_location + "/Camera/" + numCamera + @"/" + path))
                 {
                     try
                     {
-                        Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/" + numCamera + "/" + path);
+                        Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera/" + numCamera + @"/" + path);
                     }
                     catch (IOException iox)
                     {
@@ -133,7 +134,7 @@ namespace FaceDetection
 
             try
             {
-                RefreshFilesInList(); // Add the new files recorded since the event started in the list
+                RefreshFilesInList(listTask[listTask.Count-1].cameraNumber); // Add the new files recorded since the event started in the list (from the last task)
                 listRecordingFiles.Sort(); // If files are in wrong order (Touch panel issues), bring them back in a right order
 
                 // Check the date of the end of the event with the time of event + time after event in the task list to match which one we need to use
@@ -450,9 +451,9 @@ namespace FaceDetection
                 Logger.Add("postEventVideoFiles " + postEventVideoFiles);
                 if (preEventVideoFiles != "")
                 {
-                    DeleteCutFileFromTemp(preEventVideoFiles); // Delete file cut for the first part of the full video to not taking it in the next event 
+                    DeleteCutFileFromTemp(preEventVideoFiles, listTask[TaskIndex].cameraNumber); // Delete file cut for the first part of the full video to not taking it in the next event 
                 }
-                DeleteCutFileFromTemp(postEventVideoFiles); // Delete file cut for the last part of the full video to not taking it in the next event 
+                DeleteCutFileFromTemp(postEventVideoFiles, listTask[TaskIndex].cameraNumber); // Delete file cut for the last part of the full video to not taking it in the next event 
             }
             catch (Exception ex)
             {
@@ -484,18 +485,18 @@ namespace FaceDetection
         //    }
         //}
 
-        private static void RefreshFilesInList() // Add all files in the TEMP folder into the list
+        private static void RefreshFilesInList(int numCamera) // Add all files in the TEMP folder into the list
         {
             try
             {
                 if (Directory.Exists(@"D:\TEMP"))
                 {
-                    string[] list = Directory.GetFiles(@"D:\TEMP");
+                    string[] list = Directory.GetFiles(@"D:\TEMP\" + numCamera);
                     listRecordingFiles = list.ToList();
                 }
                 else
                 {
-                    string[] list = Directory.GetFiles(@"C:\TEMP");
+                    string[] list = Directory.GetFiles(@"C:\TEMP\" + numCamera);
                     listRecordingFiles = list.ToList();
                 }
             }
@@ -560,7 +561,7 @@ namespace FaceDetection
             return duration;
         }
 
-        private static void DeleteCutFileFromTemp(string videoFiles)
+        private static void DeleteCutFileFromTemp(string videoFiles, int numCamera)
         {
             System.Threading.Thread.Sleep(30000);
 
@@ -569,11 +570,11 @@ namespace FaceDetection
                 string file = videoFiles.Substring(videoFiles.Length - 18, 18);
                 if (Directory.Exists(@"D:\TEMP"))
                 {
-                    File.Delete(@"D:\TEMP\CutTemp\" + file);
+                    File.Delete(@"D:\TEMP\" + numCamera + @"\CutTemp\" + file);
                 }
                 else
                 {
-                    File.Delete(@"C:\TEMP\CutTemp\" + file);
+                    File.Delete(@"C:\TEMP\" + numCamera + @"\CutTemp\" + file);
                 }
             }
             catch (Exception ex)

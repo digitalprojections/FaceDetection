@@ -55,41 +55,42 @@ namespace FaceDetection
                 default: return new Point(16, 16);
             }
         }
-        public static void Set_Window_Size_From_Camera_Resolution(int cam_ind)
-        {
-            char[] vs = { 'x' };            
-            switch (cam_ind)
-            {
-                case 0:
+
+        //public static void Set_Window_Size_From_Camera_Resolution(int cam_ind)
+        //{
+        //    char[] vs = { 'x' };            
+        //    switch (cam_ind)
+        //    {
+        //        case 0:
                     
-                        Properties.Settings.Default.C1w = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[0]);
-                        Properties.Settings.Default.C1h = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[1]);                        
+        //                Properties.Settings.Default.C1w = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[0]);
+        //                Properties.Settings.Default.C1h = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[1]);                        
                     
-                    break;
-                case 1:
+        //            break;
+        //        case 1:
                     
-                        Properties.Settings.Default.C2w = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[0]);
-                        Properties.Settings.Default.C2h = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[1]);
+        //                Properties.Settings.Default.C2w = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[0]);
+        //                Properties.Settings.Default.C2h = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[1]);
                     
-                    break;
-                case 2:
+        //            break;
+        //        case 2:
                     
-                        Properties.Settings.Default.C3w = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[0]);
-                        Properties.Settings.Default.C3h = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[1]);                        
+        //                Properties.Settings.Default.C3w = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[0]);
+        //                Properties.Settings.Default.C3h = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[1]);                        
                     
-                    break;
-                case 3:
-                        Properties.Settings.Default.C4w = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[0]);
-                        Properties.Settings.Default.C4h = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[1]);                        
+        //            break;
+        //        case 3:
+        //                Properties.Settings.Default.C4w = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[0]);
+        //                Properties.Settings.Default.C4h = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[1]);                        
                     
-                    break;
-            }
-            if (resolution_changed)
-            {
-                MainForm.GetMainForm.crossbar.RESTART_CAMERA();
-                resolution_changed = false;
-            }
-        }
+        //            break;
+        //    }
+        //    if (resolution_changed)
+        //    {
+        //        MainForm.GetMainForm.crossbar.RESTART_CAMERA();
+        //        resolution_changed = false;
+        //    }
+        //}
         internal static bool Get_Rec_Icon(int cam_ind)
         {
             bool retval = false;
@@ -174,6 +175,7 @@ namespace FaceDetection
             }
             return size;
         }
+
         /// <summary>
         /// Set individual window sizes for each camera
         /// </summary>
@@ -184,30 +186,24 @@ namespace FaceDetection
             switch (cam_ind)
             {
                 case 0:
-
                     Properties.Settings.Default.C1w = Convert.ToDecimal(form.Width);
                     Properties.Settings.Default.C1h = Convert.ToDecimal(form.Height);
-
                     break;
                 case 1:
-
                     Properties.Settings.Default.C2w = Convert.ToDecimal(form.Width);
                     Properties.Settings.Default.C2h = Convert.ToDecimal(form.Height);
-
                     break;
                 case 2:
-
                     Properties.Settings.Default.C3w = Convert.ToDecimal(form.Width);
                     Properties.Settings.Default.C3h = Convert.ToDecimal(form.Height);
-
                     break;
                 case 3:
                     Properties.Settings.Default.C4w = Convert.ToDecimal(form.Width);
                     Properties.Settings.Default.C4h = Convert.ToDecimal(form.Height);
-
                     break;
             }
         }
+
         public static System.Drawing.Size Get_Stored_Resolution(int cam_ind)
         {
             System.Drawing.Size retval;
@@ -236,6 +232,7 @@ namespace FaceDetection
             }
             return retval;
         }
+
         public static int Get_FPS(int cam_ind)
         {
             int fps = 15;

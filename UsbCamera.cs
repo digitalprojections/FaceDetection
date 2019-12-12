@@ -16,7 +16,7 @@ namespace FaceDetectionX
         /// <summary>
         /// Camera Index
         /// </summary>
-        private int INDEX = 0;
+        //private int INDEX = 0;
         Form parentwindow = null;
         /// <summary>
         /// Camera ON
@@ -73,7 +73,6 @@ namespace FaceDetectionX
         /// </param>
         public UsbCamera(int cameraIndex, Form ptr)
         {
-            INDEX = cameraIndex;
             this.parentwindow = ptr;
             Size size = FaceDetection.PROPERTY_FUNCTIONS.Get_Stored_Resolution(0);
             int fps = FaceDetection.PROPERTY_FUNCTIONS.Get_FPS(0);
