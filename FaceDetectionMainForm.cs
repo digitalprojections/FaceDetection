@@ -74,7 +74,7 @@ namespace FaceDetection
             if (vs != null && vs.Count() > 0)
             {
                 PARAMETERS.HandleParameters(vs);
-                Logger.Add(vs.Count + "fff");
+                Logger.Add(vs.Count + "HandleParameters");
             }
             
             if(PARAMETERS.PARAM!=null)
@@ -399,7 +399,7 @@ namespace FaceDetection
                 {
                     if (recordingInProgress == false)
                     {
-                        SetRecordButtonState("rec", false);
+                        SetRecordButtonState("rec");
                         crossbar.Start(0, CAMERA_MODES.MANUAL);                    
                         MainForm.GetMainForm.SET_REC_ICON();
                     }
@@ -413,7 +413,7 @@ namespace FaceDetection
                         
                     Or_pb_recording.Visible = false;                        
                     MainForm.GetMainForm.recordingInProgress = false;
-                    SetRecordButtonState("play", true);
+                    SetRecordButtonState("play");
                     SetCameraToDefaultMode(0);
                 }
             }
@@ -423,7 +423,7 @@ namespace FaceDetection
             }
         }
 
-        public void SetRecordButtonState(string state, bool camnum_visible)
+        public void SetRecordButtonState(string state)
         {
             cameraButton.Tag = state;
         }
@@ -709,7 +709,10 @@ namespace FaceDetection
                 }
                 else
                 {
-                    FormClass.GetSubForm.SetToPreeventMode(cameraindex);
+                    if (MULTI_WINDOW.subCameraHasBeenDisplayed > 0)
+                    {
+                        FormClass.GetSubForm.SetToPreeventMode(cameraindex);
+                    }
                 }
             }
             else
@@ -720,7 +723,10 @@ namespace FaceDetection
                 }
                 else
                 {
-                    FormClass.GetSubForm.SetToPreviewMode(cameraindex);
+                    if (MULTI_WINDOW.subCameraHasBeenDisplayed > 0)
+                    {
+                        FormClass.GetSubForm.SetToPreviewMode(cameraindex);
+                    }
                 }
             }
         }

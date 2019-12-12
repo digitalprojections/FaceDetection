@@ -32,8 +32,7 @@ namespace FaceDetection
             }
             catch (IOException iox)
             {
-                //resetting the default folders to C
-                //hoping it exists
+                // There is no disk D, resetting the default folders to C
                 Properties.Settings.Default.video_file_location = @"C:\UVCCAMERA";
                 Properties.Settings.Default.temp_folder = @"C:\TEMP";
 
@@ -121,7 +120,7 @@ namespace FaceDetection
 
         private void CloseSettings(object sender, EventArgs e)
         {
-            Close();// Hide();
+            Hide();
             Properties.Settings.Default.Reload();
             Properties.Settings.Default.main_camera_index = MainCameraBeforeSettingsLoad;
         }
@@ -130,7 +129,7 @@ namespace FaceDetection
         {
             Properties.Settings.Default.Save();
             int cam_index = Camera_index;
-            Close();
+            Hide();
 
             if (Properties.Settings.Default.show_all_cams_simulteneously == false)
             {
@@ -299,7 +298,7 @@ namespace FaceDetection
             Camera.SetNumberOfCameras();
 
             int cam_index = Camera_index;
-            if(cam_index == 0)
+            if (cam_index == 0)
             { 
                 ChangeControlEnabled(this.groupBox_functionalitySettings, Properties.Settings.Default.C1_enable_capture_operator, cam_index);
             }
@@ -320,7 +319,7 @@ namespace FaceDetection
             this.MaximizeBox = false;
             this.TopMost = true;
 
-            if(MainForm.GetMainForm.recordingInProgress == true)
+            if (MainForm.GetMainForm.recordingInProgress == true)
             {
                 cm_camera_number.Enabled = false;
                 button_settings_save.Enabled = false;

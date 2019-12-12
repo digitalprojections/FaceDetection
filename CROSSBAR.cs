@@ -240,7 +240,7 @@ namespace FaceDetection
                 //We end the recording here
                 if (!PREEVENT_RECORDING)
                 {
-                    MainForm.GetMainForm.SetRecordButtonState("play", false);
+                    MainForm.GetMainForm.SetRecordButtonState("play");
                     Recording_is_on = false;
                     recorder.ReleaseInterfaces();
                     the_timer.Enabled = false;
@@ -271,7 +271,7 @@ namespace FaceDetection
                         manualRecording = false;
                         MainForm.Or_pb_recording.Visible = false;
                         MainForm.GetMainForm.recordingInProgress = false;
-                        MainForm.GetMainForm.SetRecordButtonState("play", false);
+                        MainForm.GetMainForm.SetRecordButtonState("play");
                     }
 
                     recorder.CAMERA_MODE = CAMERA_MODES.PREEVENT;

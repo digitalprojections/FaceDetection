@@ -126,7 +126,7 @@ namespace FaceDetection
                         {
                             if (MainForm.GetMainForm.recordingInProgress == false)
                             {
-                                TaskManager.EventAppeared(RECORD_PATH.EVENT, camindex, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+                                TaskManager.EventAppeared(RECORD_PATH.EVENT, camindex+1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
 
                                 if (camindex == 0)
                                 {
