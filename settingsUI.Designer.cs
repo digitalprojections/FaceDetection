@@ -446,7 +446,6 @@
             // cm_capture_mode
             // 
             resources.ApplyResources(this.cm_capture_mode, "cm_capture_mode");
-            //this.cm_capture_mode.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "capture_type", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cm_capture_mode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cm_capture_mode.FormattingEnabled = true;
             this.cm_capture_mode.Items.AddRange(new object[] {
@@ -660,6 +659,7 @@
             this.storePath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "video_file_location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.storePath.Name = "storePath";
             this.storePath.Text = global::FaceDetection.Properties.Settings.Default.video_file_location;
+            this.storePath.TextChanged += new System.EventHandler(this.StorePath_TextChanged);
             // 
             // tab_camera_and_window
             // 
@@ -942,7 +942,6 @@
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "SettingsUI";
-            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CameraSettingsForm_FormClosing);
             this.Load += new System.EventHandler(this.SettingsUI_Load);
             this.Shown += new System.EventHandler(this.SettingsUI_Shown);
             tab_view_settings.ResumeLayout(false);

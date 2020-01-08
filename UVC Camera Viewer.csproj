@@ -152,7 +152,6 @@
       <DependentUpon>FaceDetectionMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IRSensor.cs" />
-    <Compile Include="OperatorCapture.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="settingsUI.cs">

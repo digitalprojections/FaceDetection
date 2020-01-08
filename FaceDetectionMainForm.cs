@@ -592,11 +592,25 @@ namespace FaceDetection
 
                 if (PARAMETERS.isMinimized)
                 {
+                    if (cam_index == 0)
+                {
                     GetMainForm.WindowState = FormWindowState.Minimized;
                 }
                 else
                 {
+                        MULTI_WINDOW.formList[cam_index - 1].WindowState = FormWindowState.Minimized;
+                    }
+                }
+                else
+                {
+                    if (cam_index == 0)
+                    {
                     GetMainForm.WindowState = FormWindowState.Normal;
+                    }
+                    else
+                    {
+                        MULTI_WINDOW.formList[cam_index - 1].WindowState = FormWindowState.Normal;
+                    }
                 }
 
                 PARAMETERS.PARAM.Clear();

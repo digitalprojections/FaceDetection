@@ -9,9 +9,6 @@ namespace FaceDetection
     /// </summary>
     class MULTI_WINDOW
     {
-        //private static CROSSBAR crossbar;
-        //private static List<CROSSBAR> crossbarList = new List<CROSSBAR>();
-
         private static FormClass form;
         public static FormClass[] formList = new FormClass[3];
         public static int subCameraHasBeenDisplayed = 0;
@@ -49,10 +46,18 @@ namespace FaceDetection
             }
             else if ((numberCameraToDisplay - 1) < subCameraHasBeenDisplayed)
             {
+                try
+                {
                 for (int i = subCameraHasBeenDisplayed; i >= numberCameraToDisplay; i--)
                 {
+                        formList[i - 1].closeFromSettings = true;
                     formList[i-1].Close();
                     subCameraHasBeenDisplayed--;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Main camera has been disconnected while application was not running");
                 }
             }
             else

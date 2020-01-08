@@ -21,7 +21,7 @@ namespace FaceDetection
         Form parentwindow = null;
         
         public bool OPER_BAN = false;
-        private bool manualRecording; // Robin
+        private bool manualRecording;
         bool wait_interval_enabled = false;
         int duration = 0;
 
@@ -412,18 +412,6 @@ namespace FaceDetection
             }
             return bitmap;
         }
-
-        //internal void RESTART_CAMERA()
-        //{
-        //    if (Recording_is_on)
-        //    {
-        //        this.RecordingMode();
-        //    }
-        //    else
-        //    {
-        //        this.PreviewMode();
-        //    }
-        //}
 
         internal void PreviewMode()
         {

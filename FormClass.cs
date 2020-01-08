@@ -10,7 +10,7 @@ namespace FaceDetection
     {
         private System.ComponentModel.IContainer components = null;
         private Label camera_number;
-        //private Label dateTimeLabel;
+        private Label dateTimeLabel;
         private PictureBox rec_icon;
         private FlowLayoutPanel controlButtons;
         private Button folderButton;
@@ -20,12 +20,12 @@ namespace FaceDetection
         private Button closeButton;
         System.ComponentModel.ComponentResourceManager ressources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
         private ImageList imageList;
-        //private readonly System.Timers.Timer datetime_ui_updater_timer = new System.Timers.Timer();
         private System.Timers.Timer hideIconTimer = new System.Timers.Timer();
         private delegate void dHideRecIcon();
         private delegate void dDateTimerUpdater();
 
         public int CAMERA_INDEX = 0;
+        public bool closeFromSettings = false;
         public CROSSBAR crossbar;
         public static CROSSBAR[] crossbarList = new CROSSBAR[3];
         static FormClass or_subform;
@@ -39,7 +39,8 @@ namespace FaceDetection
             CAMERA_INDEX = camind;
 
             camera_number = new Label();
-            camera_number.Size = new Size(65, 65); camera_number.UseWaitCursor = false;
+            camera_number.Size = new Size(65, 65);
+            camera_number.UseWaitCursor = false;
             camera_number.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             camera_number.DataBindings.Add(new Binding("Visible", Properties.Settings.Default, "show_camera_no", true, DataSourceUpdateMode.OnPropertyChanged));
             camera_number.Text = (CAMERA_INDEX + 1).ToString();
@@ -59,25 +60,22 @@ namespace FaceDetection
             hideIconTimer.AutoReset = false;
             hideIconTimer.Elapsed += new System.Timers.ElapsedEventHandler(HideIcon_tick);
 
-            //dateTimeLabel = new Label();
-            //dateTimeLabel.Size = new Size(125, 30);
-            //dateTimeLabel.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
-            //dateTimeLabel.Text = "Date and time";
-            //dateTimeLabel.Font = new Font("MS UI Gothic", 14F);
-            //dateTimeLabel.AutoSize = true;
-            //dateTimeLabel.BackColor = Color.Black;
-            //dateTimeLabel.ForeColor = Color.White;
-            //dateTimeLabel.ImeMode = ImeMode.NoControl;
-            //dateTimeLabel.Padding = new Padding(3);
-            //dateTimeLabel.TabIndex = 13;
-            //dateTimeLabel.UseCompatibleTextRendering = true;
-            //this.Controls.Add(dateTimeLabel);
-            //dateTimeLabel.Location = new Point(12, 433);
-            //dateTimeLabel.Visible = true;
-            //datetime_ui_updater_timer.Interval = 1000;
-            //datetime_ui_updater_timer.AutoReset = true;
-            //datetime_ui_updater_timer.Enabled = true;
-            //datetime_ui_updater_timer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateDateTimeText);
+            dateTimeLabel = new Label();
+            dateTimeLabel.Name = "dateTimeLabel";
+            dateTimeLabel.Size = new Size(125, 30);
+            dateTimeLabel.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
+            dateTimeLabel.DataBindings.Add(new Binding("Visible", Properties.Settings.Default, "show_current_datetime", true, DataSourceUpdateMode.OnPropertyChanged));
+            dateTimeLabel.Text = "Date and time";
+            dateTimeLabel.Font = new Font("MS UI Gothic", 14F);
+            dateTimeLabel.AutoSize = true;
+            dateTimeLabel.BackColor = Color.Black;
+            dateTimeLabel.ForeColor = Color.White;
+            dateTimeLabel.ImeMode = ImeMode.NoControl;
+            dateTimeLabel.Padding = new Padding(3);
+            dateTimeLabel.TabIndex = 13;
+            dateTimeLabel.UseCompatibleTextRendering = true;
+            this.Controls.Add(dateTimeLabel);
+            dateTimeLabel.Location = new Point(12, this.Height - 80);
 
             SettingsButtonsDesigner();
             this.Controls.Add(this.controlButtons);
@@ -155,7 +153,7 @@ namespace FaceDetection
             HideIcon();
         }
 
-        private void HideIcon()
+        public void HideIcon()
         {
             if (rec_icon.InvokeRequired)
             {
@@ -164,6 +162,7 @@ namespace FaceDetection
             }
             else
             {
+                hideIconTimer.Enabled = false;
                 rec_icon.Visible = false;
                 MainForm.GetMainForm.recordingInProgress = false;
             }
@@ -177,11 +176,19 @@ namespace FaceDetection
 
         private void FormClass_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //datetime_ui_updater_timer.Stop();
             PROPERTY_FUNCTIONS.Set_Window_Location(CAMERA_INDEX, this);
             Properties.Settings.Default.Save();
             crossbar.ReleaseSecondaryCamera();
             crossbarList[CAMERA_INDEX - 1] = null;
+
+            if (closeFromSettings)
+        {
+                closeFromSettings = false;
+        }
+            else
+        {
+                Application.Exit();
+            }
 
             if (Properties.Settings.Default.main_camera_index == CAMERA_INDEX) // The form closed was the main camera selected
             {
@@ -239,7 +246,10 @@ namespace FaceDetection
             cameraSender = snd.TopLevelControl.ToString();
             cameraSender = cameraSender.Substring(cameraSender.Length - 1, 1);
 
+            if (MainForm.Setting_ui.Camera_index == Convert.ToInt32(cameraSender) - 1)
+            {
             SNAPSHOT_SAVER.TakeSnapShot(Convert.ToInt32(cameraSender) - 1);
+        }
         }
 
         private void ManualVideoRecording(object sender, EventArgs e)
@@ -337,30 +347,25 @@ namespace FaceDetection
             }
         }
 
-        //private void UpdateDateTimeText(object sender, System.Timers.ElapsedEventArgs eventArgs)
-        //{
-        //    DateTimeUpdater();
-        //}
-
-        //private void DateTimeUpdater()
-        //{
-        //    if (dateTimeLabel != null && dateTimeLabel.InvokeRequired)
-        //    {
-        //        var d = new dDateTimerUpdater(DateTimeUpdater);
-        //        dateTimeLabel.Invoke(d);
-        //    }
-        //    else
-        //    {
-        //        try
-        //        {
-        //            dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-        //        }
-        //        catch (NullReferenceException e)
-        //        {
-        //            Debug.WriteLine(e.Message + " DateTimeUpdater()");
-        //        }
-        //    }
-        //}
+        public void DateTimeUpdater()
+        {
+            if (dateTimeLabel != null && dateTimeLabel.InvokeRequired)
+            {
+                var d = new dDateTimerUpdater(DateTimeUpdater);
+                dateTimeLabel.Invoke(d);
+            }
+            else
+            {
+                try
+                {
+                    dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                }
+                catch (NullReferenceException e)
+                {
+                    Debug.WriteLine(e.Message + " DateTimeUpdater()");
+                }
+            }
+        }
 
         private void SettingsButtonsDesigner()
         {

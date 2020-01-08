@@ -238,6 +238,7 @@ namespace FaceDetection
             int camindex = Properties.Settings.Default.main_camera_index;
             int timeBeforeEvent = 0, timeAfterEvent = 0;
             bool preeventRecording = false;
+            string captureMethod = "";
 
             switch (camindex)
             {
@@ -245,21 +246,25 @@ namespace FaceDetection
                     timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
                     timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
                     preeventRecording = MainForm.GetMainForm.crossbar.PREEVENT_RECORDING;
+                    captureMethod = Properties.Settings.Default.C1_capture_type;
                     break;
                 case 1:
                     timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
                     timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
                     preeventRecording = FormClass.crossbarList[0].PREEVENT_RECORDING;
+                    captureMethod = Properties.Settings.Default.C2_capture_type;
                     break;
                 case 2:
                     timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
                     timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
                     preeventRecording = FormClass.crossbarList[1].PREEVENT_RECORDING;
+                    captureMethod = Properties.Settings.Default.C3_capture_type;
                     break;
                 case 3:
                     timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
                     timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
                     preeventRecording = FormClass.crossbarList[2].PREEVENT_RECORDING;
+                    captureMethod = Properties.Settings.Default.C4_capture_type;
                     break;
             }
 
@@ -272,7 +277,7 @@ namespace FaceDetection
             {
                 if (MainForm.GetMainForm.crossbar.OPER_BAN == false)
                 {
-                    if (Properties.Settings.Default.capture_method <= 0)
+                    if (captureMethod != "Snapshot") // Video
                     {
                         //initiate RECORD mode
                         if (MainForm.GetMainForm != null && preeventRecording)
@@ -305,7 +310,7 @@ namespace FaceDetection
                             }
                         }
                     }
-                    else
+                    else // Snapshot
                     {
                         SNAPSHOT_SAVER.TakeSnapShot(Properties.Settings.Default.main_camera_index, "event");
 

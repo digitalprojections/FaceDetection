@@ -65,6 +65,7 @@ namespace FaceDetection
         private void MouseKeyEventInit()
         {
             int camindex = Properties.Settings.Default.main_camera_index;
+            string captureMethod = "";
             int timeBeforeEvent = 0, timeAfterEvent = 0;
             bool captureOperatorEnabled = false, recordWhenOperation = false, preeventRecording = false;
 
@@ -78,6 +79,7 @@ namespace FaceDetection
                         captureOperatorEnabled = Properties.Settings.Default.C1_enable_capture_operator;
                         recordWhenOperation = Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
                         preeventRecording = MainForm.GetMainForm.crossbar.PREEVENT_RECORDING;
+                        captureMethod = Properties.Settings.Default.C1_capture_type;
                         break;
                     case 1:
                         timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
@@ -85,6 +87,7 @@ namespace FaceDetection
                         captureOperatorEnabled = Properties.Settings.Default.C2_enable_capture_operator;
                         recordWhenOperation = Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation;
                         preeventRecording = FormClass.crossbarList[0].PREEVENT_RECORDING;
+                        captureMethod = Properties.Settings.Default.C2_capture_type;
                         break;
                     case 2:
                         timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
@@ -92,6 +95,7 @@ namespace FaceDetection
                         captureOperatorEnabled = Properties.Settings.Default.C3_enable_capture_operator;
                         recordWhenOperation = Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation;
                         preeventRecording = FormClass.crossbarList[1].PREEVENT_RECORDING;
+                        captureMethod = Properties.Settings.Default.C3_capture_type;
                         break;
                     case 3:
                         timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
@@ -99,13 +103,14 @@ namespace FaceDetection
                         captureOperatorEnabled = Properties.Settings.Default.C4_enable_capture_operator;
                         recordWhenOperation = Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation;
                         preeventRecording = FormClass.crossbarList[2].PREEVENT_RECORDING;
+                        captureMethod = Properties.Settings.Default.C4_capture_type;
                         break;
                 }
 
                 if (captureOperatorEnabled && recordWhenOperation && Listen && !MainForm.GetMainForm.crossbar.OPER_BAN)
                 {
                     Listen = false;
-                    if (Properties.Settings.Default.capture_method <= 0)
+                    if (captureMethod != "Snapshot") // Video
                     {
                         if (preeventRecording && timeAfterEvent > 0)
                         {
@@ -133,7 +138,7 @@ namespace FaceDetection
                             }
                         }
                     }
-                    else
+                    else // Snapshot
                     {
                         SNAPSHOT_SAVER.TakeSnapShot(camindex, "event");
 
