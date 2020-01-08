@@ -232,8 +232,9 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.SizeChanged += new System.EventHandler(this.WindowSizeUpdate);
-            this.Click += new System.EventHandler(this.ShowButtons);
             this.DoubleClick += new System.EventHandler(this.FullScreen);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ShowButtons);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HideButtons);
             this.controlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).EndInit();
             this.ResumeLayout(false);

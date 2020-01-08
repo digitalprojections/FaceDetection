@@ -12,7 +12,7 @@ namespace FaceDetection
 
         }
 
-        public static void Add(Exception logMessage)
+        public static void Add(Exception logMessage, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string caller = null)
         {
 
             try
@@ -24,7 +24,7 @@ namespace FaceDetection
                     w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
                     w.WriteLine(" :}");
                     w.WriteLine($"  :{logMessage.Message}{logMessage.InnerException}");
-                    w.WriteLine($"  :{logMessage.Message}{logMessage.StackTrace}");
+                    w.WriteLine($"  :{logMessage.Message}{logMessage.StackTrace} at line { lineNumber} ({ caller})");
                     w.WriteLine("-------------------------------");
                 }
             }
@@ -34,7 +34,7 @@ namespace FaceDetection
             }
 
         }
-        public static void Add(Exception logMessage, string message)
+        public static void Add(Exception logMessage, string message, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string caller = null)
         {
 
 
@@ -47,7 +47,7 @@ namespace FaceDetection
                     w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
                     w.WriteLine($"  : {message}");
                     w.WriteLine($"  :{logMessage.Message}{logMessage.InnerException}");
-                    w.WriteLine($"  :{logMessage.Message}{logMessage.StackTrace}");
+                    w.WriteLine($"  :{logMessage.Message}{logMessage.StackTrace} at line { lineNumber} ({ caller})");
                     w.WriteLine("-------------------------------");
                 }
             }
@@ -69,7 +69,7 @@ namespace FaceDetection
                 {
                     w.Write("\r\nLog Entry : ");
                     w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
-                    w.WriteLine($"  : {message}");
+                    w.WriteLine($"  : {message} at line { lineNumber} ({ caller})");
                     w.WriteLine("-------------------------------");
                 }
             }

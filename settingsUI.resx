@@ -120,6 +120,10 @@
   <metadata name="tab_view_settings.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBox_viewSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="labelCameraNumber.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -128,8 +132,11 @@
   <data name="labelCameraNumber.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 14.25pt, style=Bold</value>
   </data>
+  <data name="labelCameraNumber.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelCameraNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 30</value>
+    <value>47, 30</value>
   </data>
   <data name="labelCameraNumber.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 19</value>
@@ -152,8 +159,11 @@
   <data name="labelcnum.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelcnum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelcnum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>224, 14</value>
+    <value>6, 14</value>
   </data>
   <data name="labelcnum.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 12</value>
@@ -179,15 +189,17 @@
   <data name="&gt;&gt;labelcnum.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="bl_idling_time_label.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="bl_idling_time_label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="bl_idling_time_label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="bl_idling_time_label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 104</value>
+    <value>455, 57</value>
   </data>
   <data name="bl_idling_time_label.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 12</value>
@@ -210,11 +222,14 @@
   <data name="&gt;&gt;bl_idling_time_label.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="numericUpDownBacklight.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="numericUpDownBacklight.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
   <data name="numericUpDownBacklight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 98</value>
+    <value>457, 72</value>
   </data>
   <data name="numericUpDownBacklight.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 23</value>
@@ -237,11 +252,14 @@
   <data name="&gt;&gt;numericUpDownBacklight.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="nud_manual_record_time.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="nud_manual_record_time.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
   <data name="nud_manual_record_time.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 29</value>
+    <value>457, 29</value>
   </data>
   <data name="nud_manual_record_time.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 23</value>
@@ -274,7 +292,7 @@
     <value>NoControl</value>
   </data>
   <data name="lb_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 35</value>
+    <value>524, 36</value>
   </data>
   <data name="lb_seconds.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -313,7 +331,7 @@
     <value>NoControl</value>
   </data>
   <data name="lb_manual_recording_time.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 14</value>
+    <value>455, 14</value>
   </data>
   <data name="lb_manual_recording_time.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -339,41 +357,17 @@
   <data name="&gt;&gt;lb_manual_recording_time.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="cb_event_recorder.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="cb_event_recorder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cb_event_recorder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 139</value>
-  </data>
-  <data name="cb_event_recorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 16</value>
-  </data>
-  <data name="cb_event_recorder.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="cb_event_recorder.Text" xml:space="preserve">
-    <value>Event recorder</value>
-  </data>
-  <data name="&gt;&gt;cb_event_recorder.Name" xml:space="preserve">
-    <value>cb_event_recorder</value>
-  </data>
-  <data name="&gt;&gt;cb_event_recorder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_event_recorder.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
-  <data name="&gt;&gt;cb_event_recorder.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="event_record_time_before_event.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="event_record_time_before_event.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
   <data name="event_record_time_before_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 37</value>
+    <value>451, 24</value>
   </data>
   <data name="event_record_time_before_event.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 23</value>
@@ -396,11 +390,14 @@
   <data name="&gt;&gt;event_record_time_before_event.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="nud_event_record_after.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="nud_event_record_after.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
   <data name="nud_event_record_after.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 37</value>
+    <value>451, 68</value>
   </data>
   <data name="nud_event_record_after.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 23</value>
@@ -436,7 +433,7 @@
     <value>NoControl</value>
   </data>
   <data name="lb_post_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 23</value>
+    <value>449, 50</value>
   </data>
   <data name="lb_post_event.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -475,7 +472,7 @@
     <value>NoControl</value>
   </data>
   <data name="lb_pre_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 23</value>
+    <value>449, 9</value>
   </data>
   <data name="lb_pre_event.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -511,7 +508,7 @@
     <value>NoControl</value>
   </data>
   <data name="label23_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 46</value>
+    <value>520, 73</value>
   </data>
   <data name="label23_seconds.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -547,7 +544,7 @@
     <value>NoControl</value>
   </data>
   <data name="label22_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 46</value>
+    <value>524, 32</value>
   </data>
   <data name="label22_seconds.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -573,11 +570,41 @@
   <data name="&gt;&gt;label22_seconds.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="cb_event_recorder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cb_event_recorder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cb_event_recorder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 4</value>
+  </data>
+  <data name="cb_event_recorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 16</value>
+  </data>
+  <data name="cb_event_recorder.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="cb_event_recorder.Text" xml:space="preserve">
+    <value>Event recorder</value>
+  </data>
+  <data name="&gt;&gt;cb_event_recorder.Name" xml:space="preserve">
+    <value>cb_event_recorder</value>
+  </data>
+  <data name="&gt;&gt;cb_event_recorder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cb_event_recorder.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;cb_event_recorder.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 143</value>
+    <value>6, 101</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 64</value>
+    <value>617, 97</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -592,7 +619,10 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
+  </data>
+  <data name="label20_minutes.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="label20_minutes.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -601,7 +631,7 @@
     <value>NoControl</value>
   </data>
   <data name="label20_minutes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 104</value>
+    <value>525, 78</value>
   </data>
   <data name="label20_minutes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -625,7 +655,7 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;label20_minutes.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="cb_backlight_off_idling.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -634,7 +664,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_backlight_off_idling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 77</value>
+    <value>4, 71</value>
   </data>
   <data name="cb_backlight_off_idling.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -658,7 +688,7 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;cb_backlight_off_idling.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="cb_backlight_on_recognition.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -670,7 +700,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_backlight_on_recognition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 57</value>
+    <value>4, 51</value>
   </data>
   <data name="cb_backlight_on_recognition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -694,7 +724,10 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;cb_backlight_on_recognition.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
+  </data>
+  <data name="groupBox_functionalitySettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="cb_human_sensor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -703,7 +736,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_human_sensor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 20</value>
+    <value>5, 27</value>
   </data>
   <data name="cb_human_sensor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -729,11 +762,14 @@
   <data name="&gt;&gt;cb_human_sensor.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="nud_seconds_after_event.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="nud_seconds_after_event.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
   <data name="nud_seconds_after_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 121</value>
+    <value>452, 181</value>
   </data>
   <data name="nud_seconds_after_event.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 23</value>
@@ -766,7 +802,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_face_recognition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 20</value>
+    <value>-45, 47</value>
   </data>
   <data name="cb_face_recognition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -792,11 +828,14 @@
   <data name="&gt;&gt;cb_face_recognition.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="nud_seconds_before_event.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="nud_seconds_before_event.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
   <data name="nud_seconds_before_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 121</value>
+    <value>452, 131</value>
   </data>
   <data name="nud_seconds_before_event.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 23</value>
@@ -832,7 +871,7 @@
     <value>NoControl</value>
   </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 106</value>
+    <value>452, 166</value>
   </data>
   <data name="label11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -871,7 +910,7 @@
     <value>NoControl</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 106</value>
+    <value>450, 116</value>
   </data>
   <data name="label12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -897,6 +936,9 @@
   <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="label17.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="label17.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -907,7 +949,7 @@
     <value>NoControl</value>
   </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 54</value>
+    <value>450, 15</value>
   </data>
   <data name="label17.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -943,7 +985,7 @@
     <value>NoControl</value>
   </data>
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 130</value>
+    <value>520, 188</value>
   </data>
   <data name="label13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -979,7 +1021,7 @@
     <value>NoControl</value>
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>76, 130</value>
+    <value>520, 140</value>
   </data>
   <data name="label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -1005,11 +1047,14 @@
   <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="nud_reinitiation_interval.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="nud_reinitiation_interval.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
   <data name="nud_reinitiation_interval.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 72</value>
+    <value>452, 29</value>
   </data>
   <data name="nud_reinitiation_interval.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1035,9 +1080,6 @@
   <data name="&gt;&gt;nud_reinitiation_interval.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="cm_capture_mode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
   <data name="cm_capture_mode.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
@@ -1048,7 +1090,7 @@
     <value>Snapshot</value>
   </data>
   <data name="cm_capture_mode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 72</value>
+    <value>3, 80</value>
   </data>
   <data name="cm_capture_mode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1071,6 +1113,9 @@
   <data name="&gt;&gt;cm_capture_mode.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="lb_seconds2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="lb_seconds2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1078,7 +1123,7 @@
     <value>NoControl</value>
   </data>
   <data name="lb_seconds2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 81</value>
+    <value>520, 35</value>
   </data>
   <data name="lb_seconds2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -1104,9 +1149,6 @@
   <data name="&gt;&gt;lb_seconds2.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="lb_capture_mode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
   <data name="lb_capture_mode.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1114,7 +1156,7 @@
     <value>NoControl</value>
   </data>
   <data name="lb_capture_mode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 54</value>
+    <value>1, 65</value>
   </data>
   <data name="lb_capture_mode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -1147,7 +1189,7 @@
     <value>MS UI Gothic, 12pt</value>
   </data>
   <data name="numericUpDown2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 169</value>
+    <value>452, 77</value>
   </data>
   <data name="numericUpDown2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1183,7 +1225,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_operator_capture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 0</value>
+    <value>9, 4</value>
   </data>
   <data name="cb_operator_capture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1222,7 +1264,7 @@
     <value>NoControl</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 175</value>
+    <value>450, 63</value>
   </data>
   <data name="label10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -1258,7 +1300,7 @@
     <value>NoControl</value>
   </data>
   <data name="lb_milliseconds1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 175</value>
+    <value>520, 83</value>
   </data>
   <data name="lb_milliseconds1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -1291,7 +1333,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_recording_operation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 149</value>
+    <value>5, 47</value>
   </data>
   <data name="cb_recording_operation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1318,10 +1360,10 @@
     <value>17</value>
   </data>
   <data name="groupBox_functionalitySettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>320, 3</value>
+    <value>5, 199</value>
   </data>
   <data name="groupBox_functionalitySettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 204</value>
+    <value>617, 218</value>
   </data>
   <data name="groupBox_functionalitySettings.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -1336,10 +1378,7 @@
     <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;groupBox_functionalitySettings.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="groupBox_viewSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+    <value>11</value>
   </data>
   <data name="groupBox_viewSettings.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 2</value>
@@ -1351,7 +1390,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="groupBox_viewSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>611, 211</value>
+    <value>628, 422</value>
   </data>
   <data name="groupBox_viewSettings.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1378,7 +1417,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="tab_view_settings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 211</value>
+    <value>632, 441</value>
   </data>
   <data name="tab_view_settings.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1398,11 +1437,14 @@
   <data name="&gt;&gt;tab_view_settings.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="numericUpDownCamCount.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
   <data name="numericUpDownCamCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 41</value>
+    <value>7, 31</value>
   </data>
   <data name="numericUpDownCamCount.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 23</value>
@@ -1432,7 +1474,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_all_cameras.Location" type="System.Drawing.Point, System.Drawing">
-    <value>170, 71</value>
+    <value>7, 59</value>
   </data>
   <data name="cb_all_cameras.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1465,7 +1507,7 @@
     <value>NoControl</value>
   </data>
   <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 26</value>
+    <value>5, 16</value>
   </data>
   <data name="label26.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -1491,9 +1533,6 @@
   <data name="&gt;&gt;label26.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="cm_language.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
   <data name="cm_language.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
@@ -1507,7 +1546,7 @@
     <value>日本語</value>
   </data>
   <data name="cm_language.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 40</value>
+    <value>7, 102</value>
   </data>
   <data name="cm_language.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1533,14 +1572,11 @@
   <data name="groupBox12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="nud_erase_old.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
   <data name="nud_erase_old.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
   <data name="nud_erase_old.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 33</value>
+    <value>5, 20</value>
   </data>
   <data name="nud_erase_old.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1566,9 +1602,6 @@
   <data name="&gt;&gt;nud_erase_old.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1579,7 +1612,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 38</value>
+    <value>3, 48</value>
   </data>
   <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -1612,7 +1645,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_delete_old.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 10</value>
+    <value>4, 0</value>
   </data>
   <data name="cb_delete_old.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1639,7 +1672,7 @@
     <value>2</value>
   </data>
   <data name="groupBox12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>382, 16</value>
+    <value>7, 130</value>
   </data>
   <data name="groupBox12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1648,7 +1681,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="groupBox12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 71</value>
+    <value>617, 174</value>
   </data>
   <data name="groupBox12.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1665,9 +1698,6 @@
   <data name="&gt;&gt;groupBox12.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1675,7 +1705,7 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 26</value>
+    <value>5, 88</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -1701,6 +1731,9 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="button_Browse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -1711,7 +1744,7 @@
     <value>NoControl</value>
   </data>
   <data name="button_Browse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>510, 65</value>
+    <value>524, 60</value>
   </data>
   <data name="button_Browse.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1750,7 +1783,7 @@
     <value>NoControl</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>507, 14</value>
+    <value>522, 14</value>
   </data>
   <data name="label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -1780,13 +1813,13 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="storePath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 37</value>
+    <value>3, 37</value>
   </data>
   <data name="storePath.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="storePath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>599, 19</value>
+    <value>614, 19</value>
   </data>
   <data name="storePath.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1803,11 +1836,8 @@
   <data name="&gt;&gt;storePath.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="groupBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 88</value>
+    <value>2, 308</value>
   </data>
   <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1816,7 +1846,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 117</value>
+    <value>621, 115</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1849,7 +1879,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="groupBox_Environment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>611, 207</value>
+    <value>628, 437</value>
   </data>
   <data name="groupBox_Environment.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1879,7 +1909,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="tab_environment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 211</value>
+    <value>632, 441</value>
   </data>
   <data name="tab_environment.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1899,6 +1929,9 @@
   <data name="&gt;&gt;tab_environment.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="cb_show_rec_icon.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1906,7 +1939,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_show_rec_icon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 175</value>
+    <value>8, 319</value>
   </data>
   <data name="cb_show_rec_icon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1939,7 +1972,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_show_camera_number.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 145</value>
+    <value>8, 289</value>
   </data>
   <data name="cb_show_camera_number.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1972,7 +2005,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_dateandtime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 114</value>
+    <value>8, 258</value>
   </data>
   <data name="cb_dateandtime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -2005,7 +2038,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_window_pane.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 84</value>
+    <value>8, 228</value>
   </data>
   <data name="cb_window_pane.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -2038,7 +2071,7 @@
     <value>NoControl</value>
   </data>
   <data name="cb_always_on_top.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 54</value>
+    <value>8, 198</value>
   </data>
   <data name="cb_always_on_top.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -2071,7 +2104,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkBox_full_screen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 23</value>
+    <value>8, 174</value>
   </data>
   <data name="checkBox_full_screen.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -2239,7 +2272,7 @@
     <value>3</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>147, 131</value>
+    <value>406, 66</value>
   </data>
   <data name="groupBox5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -2267,6 +2300,9 @@
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="groupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="numericUpDownY.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2407,7 +2443,7 @@
     <value>3</value>
   </data>
   <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 66</value>
+    <value>406, 15</value>
   </data>
   <data name="groupBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -2443,7 +2479,7 @@
     <value>NoControl</value>
   </data>
   <data name="label9_fps.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 143</value>
+    <value>84, 138</value>
   </data>
   <data name="label9_fps.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -2643,9 +2679,6 @@
   <data name="&gt;&gt;cm_camera_number.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="groupBox3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 2</value>
   </data>
@@ -2656,7 +2689,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>611, 207</value>
+    <value>626, 425</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -2686,7 +2719,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="tab_camera_and_window.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 211</value>
+    <value>632, 441</value>
   </data>
   <data name="tab_camera_and_window.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2706,9 +2739,6 @@
   <data name="&gt;&gt;tab_camera_and_window.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -2716,7 +2746,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>623, 237</value>
+    <value>640, 467</value>
   </data>
   <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2741,7 +2771,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADQ
-        HQAAAk1TRnQBSQFMAgEBAwEAAdgBCAHYAQgBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
+        HQAAAk1TRnQBSQFMAgEBAwEAAfgBCAH4AQgBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
         AwABGAMAAQEBAAEgBgABJC4AAw8BFAFYAlsBywEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8
         An8B/gEAAbwB+gH/AUACqAH9A0ABcRwAAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
         AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMB
@@ -2882,7 +2912,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA0
-        AQAAAk1TRnQBSQFMAgEBAgEAAXABBgFwAQYBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        AQAAAk1TRnQBSQFMAgEBAgEAAZABBgGQAQYBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEYBgABDBUALf8DAC3/YwAt/wMALf9jAC3/AwAt/2MALf8DAC3/YwAt/wMAD/8DHgPy
         GP9jAC3/AwAM/wMeBgADzxX/YwAt/wMACf8DDAMAA/UDDwMAFf9jAC3/AwAG/wNJAwAD5wb/A0ADAAPP
         D/9jAC3/AwAY/wMPAwAD8gz/YwAt/wMAG/8DPAMAA9cJ/2MALf8DAB7/AycDAAPeBv9jAC3/AwAh/wMw
@@ -2891,7 +2921,7 @@
 </value>
   </data>
   <data name="button_settings_cancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Top, Bottom, Right</value>
   </data>
   <data name="button_settings_cancel.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 13.8pt</value>
@@ -2900,13 +2930,13 @@
     <value>NoControl</value>
   </data>
   <data name="button_settings_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 237</value>
+    <value>547, 467</value>
   </data>
   <data name="button_settings_cancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="button_settings_cancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 52</value>
+    <value>75, 66</value>
   </data>
   <data name="button_settings_cancel.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -2927,7 +2957,7 @@
     <value>0</value>
   </data>
   <data name="button_settings_save.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Top, Bottom, Right</value>
   </data>
   <data name="button_settings_save.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 13.8pt</value>
@@ -2936,13 +2966,13 @@
     <value>NoControl</value>
   </data>
   <data name="button_settings_save.Location" type="System.Drawing.Point, System.Drawing">
-    <value>467, 237</value>
+    <value>467, 467</value>
   </data>
   <data name="button_settings_save.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="button_settings_save.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 52</value>
+    <value>75, 66</value>
   </data>
   <data name="button_settings_save.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -2969,7 +2999,7 @@
     <value>52</value>
   </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>623, 294</value>
+    <value>642, 527</value>
   </data>
   <data name="$this.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 16</value>

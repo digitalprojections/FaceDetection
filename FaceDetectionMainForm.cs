@@ -15,6 +15,7 @@ namespace FaceDetection
     {
         private delegate void dDateTimerUpdater();
         private delegate void dShowSettingsUI();
+        private delegate void dShowControlButtons();
 
         private static MOUSE_KEYBOARD mklisteners = null;
         public CROSSBAR crossbar = null;
@@ -153,23 +154,57 @@ namespace FaceDetection
                 }
             }
         }
-      
-        public void ShowButtons(object sender, EventArgs eventArgs)
+        
+        
+
+
+        private void ShowButtonsDelayed(object o, EventArgs ElapsedEventArgs)
         {
-            if (mouse_down_timer.Enabled == true)
+            ShowButtonsDelayed();
+        }
+        private void ShowButtonsDelayed()
+        {
+            if (or_controlBut.InvokeRequired)
             {
-                mouse_down_timer.Stop();
-                mouse_down_timer.Enabled = false;
+                var d = new dShowControlButtons(ShowButtonsDelayed);
+                or_controlBut.Invoke(d);
             }
-            
+            else
+            {
+                if (mouse_down_timer.Enabled == true)
+                {
+                    mouse_down_timer.Stop();
+                    Or_controlBut.Visible = true;
+                }
+            }
+        }
+
+        public void ShowButtons(object sender, EventArgs eventArgs)
+        {   
             if (folderButton.Visible == false)
             {
-                Or_controlBut.Visible = true;
+                mouse_down_timer.Start();                
             }
             else
             {
                 Or_controlBut.Visible = false;
             }
+        }
+
+        private void ShowButtons(object sender, MouseEventArgs e)
+        {
+            if (folderButton.Visible == false)
+            {
+                mouse_down_timer.Start();
+            }
+            else
+            {
+                Or_controlBut.Visible = false;                
+            }
+        }
+        private void HideButtons(object sender, MouseEventArgs e)
+        {
+            mouse_down_timer.Stop();
         }
 
         private void FullScreen(object sender, EventArgs eventArgs)
@@ -226,7 +261,7 @@ namespace FaceDetection
                 {
                     try
                     {
-                        Setting_ui.ShowDialog();
+                        Setting_ui.Show();
                     }
                     catch(InvalidOperationException invx)
                     {
@@ -448,7 +483,8 @@ namespace FaceDetection
             #endregion
 
             //Main window TIMERS
-            mouse_down_timer.Elapsed += ShowButtons;//制御ボタンの非/表示用クリックタイマー
+            mouse_down_timer.Elapsed += ShowButtonsDelayed;//制御ボタンの非/表示用クリックタイマー
+            mouse_down_timer.Interval = 1000;
             datetime_ui_updater_timer.Interval = 1000;
             datetime_ui_updater_timer.Start();
             datetime_ui_updater_timer.AutoReset = true;
@@ -919,7 +955,11 @@ namespace FaceDetection
 
         private void MainForm_ResizeEnd(object sender, EventArgs e)
         {
-            WindowSizeUpdate();
+            Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
+            Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
+            //Properties.Settings.Default.main_screen_size = new Size(this.Width, this.Height);
+            Properties.Settings.Default.Save();
+            //WindowSizeUpdate();
         }
 
         private void BackgroundWorkerMain_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -931,8 +971,7 @@ namespace FaceDetection
         {
             Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
             Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);
-            Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
-            Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
+            
             Properties.Settings.Default.Save();
 
             Application.Exit();
