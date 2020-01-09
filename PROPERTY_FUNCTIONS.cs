@@ -131,7 +131,7 @@ namespace FaceDetection
             }
         }
 
-        internal static void Set_Window_Location(int cam_ind, FormClass formClass)
+        internal static void Set_Window_Location(int cam_ind, CameraForm formClass)
         {
             switch (cam_ind)
             {

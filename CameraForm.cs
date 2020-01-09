@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace FaceDetection
 {
-    public class FormClass : Form
+    public class CameraForm : Form
     {
         private System.ComponentModel.IContainer components = null;
         private Label camera_number;
@@ -28,10 +28,10 @@ namespace FaceDetection
         public bool closeFromSettings = false;
         public CROSSBAR crossbar;
         public static CROSSBAR[] crossbarList = new CROSSBAR[3];
-        static FormClass or_subform;
-        public static FormClass GetSubForm => or_subform;
+        static CameraForm or_subform;
+        public static CameraForm GetSubForm => or_subform;
 
-        public FormClass(int camind)
+        public CameraForm(int camind)
         {
             or_subform = this;
 

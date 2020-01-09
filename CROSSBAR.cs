@@ -134,14 +134,14 @@ namespace FaceDetection
                 IRSensorEnabled = Properties.Settings.Default.C4_enable_Human_sensor;
             }
 
-            if (MainForm.Or_pb_recording.InvokeRequired)
+            if (MainForm.picbox_recording.InvokeRequired)
             {
                 var d = new dHideRecIcon(HideTheRecIcon);
-                MainForm.Or_pb_recording.Invoke(d);
+                MainForm.picbox_recording.Invoke(d);
             }
             else
             {
-                MainForm.Or_pb_recording.Visible = false;
+                MainForm.picbox_recording.Visible = false;
                 MainForm.GetMainForm.recordingInProgress = false;
                 icon_timer.Enabled = false;
                 if (captureOperatorEnabled && IRSensorEnabled)
@@ -269,7 +269,7 @@ namespace FaceDetection
                     if (manualRecording == true)
                     {
                         manualRecording = false;
-                        MainForm.Or_pb_recording.Visible = false;
+                        MainForm.picbox_recording.Visible = false;
                         MainForm.GetMainForm.recordingInProgress = false;
                         MainForm.GetMainForm.SetRecordButtonState("play");
                     }
@@ -417,7 +417,7 @@ namespace FaceDetection
         {
             //recording_permission = true;
             Recording_is_on = false;
-            MainForm.Or_pb_recording.Visible = false; // TODO: useless ?
+            MainForm.picbox_recording.Visible = false; // TODO: useless ?
             MainForm.GetMainForm.recordingInProgress = false;
             PREEVENT_RECORDING = false;
             if (MainForm.GetMainForm != null)

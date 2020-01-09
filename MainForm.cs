@@ -32,11 +32,11 @@ namespace FaceDetection
         internal bool EVENT_RECORDING_IN_PROGRESS = false;
         internal static int SELECTED_CAMERA = 0;
 
-        private static MainForm or_mainForm;
-        private static PictureBox or_pb_recording;
-        public static Label or_current_date_text;
-        private static Label or_camera_num_txt;
-        private static FlowLayoutPanel or_controlBut;
+        private static MainForm mainForm;
+        private static PictureBox pb_recording;
+        public static Label current_date_text;
+        private static Label camera_num_txt;
+        private static FlowLayoutPanel controlBut;
         public Button rec_button;
 
         private BackLightController backLight;
@@ -57,14 +57,14 @@ namespace FaceDetection
         private static List<string> vf_fps = new List<string>();
         //User actions end
         static SettingsUI settingUI;
-        static Form or_mainform;
+        static Form mainform;
 
-        public static MainForm GetMainForm => or_mainForm;
+        public static MainForm GetMainForm => mainForm;
         public static SettingsUI Setting_ui { get => settingUI; set => settingUI = value; }
         internal static IRSensor RSensor { get => rSensor; set => rSensor = value; }
         internal static FaceDetector FaceDetector { get => faceDetector; set => faceDetector = value; }
-        public static FlowLayoutPanel Or_controlBut { get => or_controlBut; set => or_controlBut = value; }
-        public static PictureBox Or_pb_recording { get => or_pb_recording; set => or_pb_recording = value; }
+        public static FlowLayoutPanel gbox_controlBut { get => controlBut; set => controlBut = value; }
+        public static PictureBox picbox_recording { get => pb_recording; set => pb_recording = value; }
         public BackLightController BackLight { get => backLight; set => backLight = value; }
         public static MOUSE_KEYBOARD Mklisteners { get => mklisteners; set => mklisteners = value; }
 
@@ -164,17 +164,17 @@ namespace FaceDetection
         }
         private void ShowButtonsDelayed()
         {
-            if (or_controlBut.InvokeRequired)
+            if (controlBut.InvokeRequired)
             {
                 var d = new dShowControlButtons(ShowButtonsDelayed);
-                or_controlBut.Invoke(d);
+                controlBut.Invoke(d);
             }
             else
             {
                 if (mouse_down_timer.Enabled == true)
                 {
                     mouse_down_timer.Stop();
-                    Or_controlBut.Visible = true;
+                    gbox_controlBut.Visible = true;
                 }
             }
         }
@@ -187,7 +187,7 @@ namespace FaceDetection
             }
             else
             {
-                Or_controlBut.Visible = false;
+                gbox_controlBut.Visible = false;
             }
         }
 
@@ -199,7 +199,7 @@ namespace FaceDetection
             }
             else
             {
-                Or_controlBut.Visible = false;                
+                gbox_controlBut.Visible = false;                
             }
         }
         private void HideButtons(object sender, MouseEventArgs e)
@@ -353,17 +353,17 @@ namespace FaceDetection
                 case 1:
                     timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C2_event_record_time_before_event);
                     timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_event_record_time_after_event);
-                    preeventRecording = FormClass.GetSubForm.PreeventRecordingState(cameraIndex);
+                    preeventRecording = CameraForm.GetSubForm.PreeventRecordingState(cameraIndex);
                     break;
                 case 2:
                     timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C3_event_record_time_before_event);
                     timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_event_record_time_after_event);
-                    preeventRecording = FormClass.GetSubForm.PreeventRecordingState(cameraIndex);
+                    preeventRecording = CameraForm.GetSubForm.PreeventRecordingState(cameraIndex);
                     break;
                 case 3:
                     timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C4_event_record_time_before_event);
                     timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_event_record_time_after_event);
-                    preeventRecording = FormClass.GetSubForm.PreeventRecordingState(cameraIndex);
+                    preeventRecording = CameraForm.GetSubForm.PreeventRecordingState(cameraIndex);
                     break;
             }
 
@@ -402,13 +402,13 @@ namespace FaceDetection
                     preeventRecording = this.crossbar.PREEVENT_RECORDING;
                     break;
                 case 1:
-                    preeventRecording = FormClass.GetSubForm.PreeventRecordingState(cameraIndex);
+                    preeventRecording = CameraForm.GetSubForm.PreeventRecordingState(cameraIndex);
                     break;
                 case 3:
-                    preeventRecording = FormClass.GetSubForm.PreeventRecordingState(cameraIndex);
+                    preeventRecording = CameraForm.GetSubForm.PreeventRecordingState(cameraIndex);
                     break;
                 case 4:
-                    preeventRecording = FormClass.GetSubForm.PreeventRecordingState(cameraIndex);
+                    preeventRecording = CameraForm.GetSubForm.PreeventRecordingState(cameraIndex);
                     break;
             }
 
@@ -425,7 +425,7 @@ namespace FaceDetection
         /// <param name="e"></param>
         public void ToggleVideoRecording(object sender, EventArgs e)
         {            
-            Or_pb_recording.Image = Properties.Resources.player_record;
+            picbox_recording.Image = Properties.Resources.player_record;
             MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                         
             try
@@ -446,7 +446,7 @@ namespace FaceDetection
                     //for now we can use this value as a test
                     //ONLY 0 index camera or the main camera is the one to be used to the manual recording?
                         
-                    Or_pb_recording.Visible = false;                        
+                    picbox_recording.Visible = false;                        
                     MainForm.GetMainForm.recordingInProgress = false;
                     SetRecordButtonState("play");
                     SetCameraToDefaultMode(0);
@@ -475,7 +475,7 @@ namespace FaceDetection
             settingUI = new SettingsUI();
             crossbar = new CROSSBAR(0, this);
             RSensor = new IRSensor();
-            FaceDetector = new FaceDetector();
+            //FaceDetector = new FaceDetector();
             //backLight = new BackLightController();
             BackLight.Start();
             Mklisteners = new MOUSE_KEYBOARD();
@@ -492,12 +492,12 @@ namespace FaceDetection
 
             //Object references
             rec_button = cameraButton;
-            or_camera_num_txt = camera_number_txt;
-            Or_pb_recording = pbRecording;            
-            or_mainForm = this;
-            or_current_date_text = or_dateTimeLabel;
-            or_controlBut = controlButtons;
-            Or_controlBut.Location = new Point(this.Width-335, this.Height-110);
+            camera_num_txt = camera_number_txt;
+            picbox_recording = pbRecording;            
+            mainForm = this;
+            current_date_text = or_dateTimeLabel;
+            controlBut = controlButtons;
+            gbox_controlBut.Location = new Point(this.Width-335, this.Height-110);
             
             this.WindowState = FormWindowState.Minimized;
             
@@ -507,7 +507,7 @@ namespace FaceDetection
             
             ///SET THE MAIN WINDOW ICONS AND BUTTON POSITIONS MANUALLY
             or_dateTimeLabel.Location = new Point(12, this.Height-80);
-            or_camera_num_txt.Location = new Point(this.Width - 90, 10);
+            camera_num_txt.Location = new Point(this.Width - 90, 10);
             ///////////////////////////////////////////////////////////
             
             ClearCutFileTempFolder();
@@ -515,7 +515,7 @@ namespace FaceDetection
 
         public void SET_REC_ICON()
         {
-            Or_pb_recording.Visible = Properties.Settings.Default.show_recording_icon;
+            picbox_recording.Visible = Properties.Settings.Default.show_recording_icon;
             recordingInProgress = true;
         }
 
@@ -678,16 +678,16 @@ namespace FaceDetection
 
             if (Setting_ui == null)
             {
-                Or_pb_recording.Visible = false;
+                picbox_recording.Visible = false;
                 MainForm.GetMainForm.recordingInProgress = false;
                 Setting_ui = new SettingsUI();
             }
 
-            or_camera_num_txt.Visible = Properties.Settings.Default.show_camera_no;
+            camera_num_txt.Visible = Properties.Settings.Default.show_camera_no;
             //or_camera_num_txt.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
             //MainForm.GetMainForm.TopMost = Properties.Settings.Default.window_on_top;
             MainForm.GetMainForm.Location = new System.Drawing.Point(decimal.ToInt32(Properties.Settings.Default.C1x), decimal.ToInt32(Properties.Settings.Default.C1y));
-            or_current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
+            current_date_text.Visible = Properties.Settings.Default.show_current_datetime;
 
             if (Properties.Settings.Default.main_window_full_screen)
             {
@@ -726,8 +726,8 @@ namespace FaceDetection
             //Window pane
             if (Properties.Settings.Default.show_window_pane == true)
             {
-                or_mainForm.FormBorderStyle = FormBorderStyle.Sizable;
-                or_mainForm.ControlBox = true;
+                mainForm.FormBorderStyle = FormBorderStyle.Sizable;
+                mainForm.ControlBox = true;
 
                 for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
                 {
@@ -736,7 +736,7 @@ namespace FaceDetection
             }
             else
             {
-                or_mainForm.FormBorderStyle = FormBorderStyle.None;
+                mainForm.FormBorderStyle = FormBorderStyle.None;
 
                 for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
                 {
@@ -761,7 +761,7 @@ namespace FaceDetection
                 {
                     if (MULTI_WINDOW.subCameraHasBeenDisplayed > 0)
                     {
-                        FormClass.GetSubForm.SetToPreeventMode(cameraindex);
+                        CameraForm.GetSubForm.SetToPreeventMode(cameraindex);
                     }
                 }
             }
@@ -775,7 +775,7 @@ namespace FaceDetection
                 {
                     if (MULTI_WINDOW.subCameraHasBeenDisplayed > 0)
                     {
-                        FormClass.GetSubForm.SetToPreviewMode(cameraindex);
+                        CameraForm.GetSubForm.SetToPreviewMode(cameraindex);
                     }
                 }
             }

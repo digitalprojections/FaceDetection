@@ -187,7 +187,7 @@ namespace FaceDetection
                                         }
                                         else
                                         {
-                                            FormClass.ParametersChangesApply(cameraIndex-1);
+                                            CameraForm.ParametersChangesApply(cameraIndex-1);
                                         }
                                     }
                                     else
@@ -200,7 +200,7 @@ namespace FaceDetection
                                         }
                                         else
                                         {
-                                            FormClass.ParametersChangesApply(cameraIndex-1);
+                                            CameraForm.ParametersChangesApply(cameraIndex-1);
                                         }
                                     }                                                                       
                                 }
@@ -261,7 +261,7 @@ namespace FaceDetection
                                         }
                                         else if (cameraIndex == 1)
                                         {
-                                            if (MainForm.FaceDetector != null && FormClass.crossbarList[0].Recording_is_on)
+                                            if (MainForm.FaceDetector != null && CameraForm.crossbarList[0].Recording_is_on)
                                             {
                                                 MainForm.GetMainForm.crossbar.PreviewMode();
                                                 MainForm.FaceDetector.StopFaceTimer();
@@ -270,7 +270,7 @@ namespace FaceDetection
                                         }
                                         else if (cameraIndex == 2)
                                         {
-                                            if (MainForm.FaceDetector != null && FormClass.crossbarList[1].Recording_is_on)
+                                            if (MainForm.FaceDetector != null && CameraForm.crossbarList[1].Recording_is_on)
                                             {
                                                 MainForm.GetMainForm.crossbar.PreviewMode();
                                                 MainForm.FaceDetector.StopFaceTimer();
@@ -279,7 +279,7 @@ namespace FaceDetection
                                         }
                                         else if (cameraIndex == 3)
                                         {
-                                            if (MainForm.FaceDetector != null && FormClass.crossbarList[2].Recording_is_on)
+                                            if (MainForm.FaceDetector != null && CameraForm.crossbarList[2].Recording_is_on)
                                             {
                                                 MainForm.GetMainForm.crossbar.PreviewMode();
                                                 MainForm.FaceDetector.StopFaceTimer();
@@ -512,7 +512,7 @@ namespace FaceDetection
                                     {
                                         if (cameraIndex == 0)
                                         {
-                                        MainForm.Or_pb_recording.Image = Properties.Resources.player_record;
+                                        MainForm.picbox_recording.Image = Properties.Resources.player_record;
                                         MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                                         MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.MANUAL);
                                             MainForm.GetMainForm.SET_REC_ICON();
@@ -520,14 +520,14 @@ namespace FaceDetection
                                         else
                                         {
                                             MULTI_WINDOW.formList[cameraIndex - 1].SetRecordIcon(cameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                                            FormClass.crossbarList[cameraIndex - 1].Start(cameraIndex, CAMERA_MODES.MANUAL);
+                                            CameraForm.crossbarList[cameraIndex - 1].Start(cameraIndex, CAMERA_MODES.MANUAL);
                                         }
                                     }
                                     else
                                     {
                                         if (cameraIndex == 0)
                                         {
-                                        MainForm.Or_pb_recording.Visible = false;
+                                        MainForm.picbox_recording.Visible = false;
                                         MainForm.GetMainForm.recordingInProgress = false;
                                         MainForm.SetCameraToDefaultMode(cameraIndex);
                                     }
@@ -538,14 +538,14 @@ namespace FaceDetection
                                             {
                                                 if (MULTI_WINDOW.subCameraHasBeenDisplayed > 0)
                                                 {
-                                                    FormClass.GetSubForm.SetToPreeventMode(cameraIndex);
+                                                    CameraForm.GetSubForm.SetToPreeventMode(cameraIndex);
                                                 }
                                             }
                                             else
                                             {
                                                 if (MULTI_WINDOW.subCameraHasBeenDisplayed > 0)
                                                 {
-                                                    FormClass.GetSubForm.SetToPreviewMode(cameraIndex-1);
+                                                    CameraForm.GetSubForm.SetToPreviewMode(cameraIndex-1);
                                                 }
                                             }
                                         }

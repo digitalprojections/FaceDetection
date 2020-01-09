@@ -9,8 +9,8 @@ namespace FaceDetection
     /// </summary>
     class MULTI_WINDOW
     {
-        private static FormClass form;
-        public static FormClass[] formList = new FormClass[3];
+        private static CameraForm form;
+        public static CameraForm[] formList = new CameraForm[3];
         public static int subCameraHasBeenDisplayed = 0;
                 
         public static void CreateCameraWindows(int numberCameraToDisplay, int cam_index)
@@ -21,7 +21,7 @@ namespace FaceDetection
                 {
                     if (formList[i-1].Text == "")
                     {
-                        form = new FormClass(i);
+                        form = new CameraForm(i);
                         form.Text = "UVC Camera Viewer - camera " + (i + 1);
                         form.Show();
                         if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
@@ -33,7 +33,7 @@ namespace FaceDetection
 
                 for (int i = subCameraHasBeenDisplayed + 1; i < numberCameraToDisplay; i++)
                 {
-                    form = new FormClass(i);
+                    form = new CameraForm(i);
                     formList[i-1] = form;
                     form.Text = "UVC Camera Viewer - camera " + (i + 1); //counting from the second camera
                     form.Show();
@@ -66,7 +66,7 @@ namespace FaceDetection
                 {
                     if(formList[i-1].Text == "")
                     {
-                        form = new FormClass(i);
+                        form = new CameraForm(i);
                         form.Text = "UVC Camera Viewer - camera " + (i + 1);
                         formList[i-1] = form;
                         form.Show();

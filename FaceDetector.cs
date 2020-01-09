@@ -144,7 +144,7 @@ namespace FaceDetection
                 }
                 else
                 {
-                    bitmap = FormClass.crossbarList[camindex - 1].GetBitmap();
+                    bitmap = CameraForm.crossbarList[camindex - 1].GetBitmap();
                 }
 
                 if (bitmap != null)
@@ -251,19 +251,19 @@ namespace FaceDetection
                 case 1:
                     timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
                     timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
-                    preeventRecording = FormClass.crossbarList[0].PREEVENT_RECORDING;
+                    preeventRecording = CameraForm.crossbarList[0].PREEVENT_RECORDING;
                     captureMethod = Properties.Settings.Default.C2_capture_type;
                     break;
                 case 2:
                     timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
                     timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
-                    preeventRecording = FormClass.crossbarList[1].PREEVENT_RECORDING;
+                    preeventRecording = CameraForm.crossbarList[1].PREEVENT_RECORDING;
                     captureMethod = Properties.Settings.Default.C3_capture_type;
                     break;
                 case 3:
                     timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
                     timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
-                    preeventRecording = FormClass.crossbarList[2].PREEVENT_RECORDING;
+                    preeventRecording = CameraForm.crossbarList[2].PREEVENT_RECORDING;
                     captureMethod = Properties.Settings.Default.C4_capture_type;
                     break;
             }
@@ -306,7 +306,7 @@ namespace FaceDetection
                             }
                             else
                             {
-                                FormClass.crossbarList[camindex - 1].Start(camindex, CAMERA_MODES.OPERATOR);
+                                CameraForm.crossbarList[camindex - 1].Start(camindex, CAMERA_MODES.OPERATOR);
                             }
                         }
                     }
@@ -320,7 +320,7 @@ namespace FaceDetection
                         }
                         else
                         {
-                            FormClass.crossbarList[camindex - 1].No_Cap_Timer_ON(0);
+                            CameraForm.crossbarList[camindex - 1].No_Cap_Timer_ON(0);
                         }
                     }  
 

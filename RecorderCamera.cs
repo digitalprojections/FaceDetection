@@ -326,7 +326,7 @@ namespace FaceDetection
                 }
                 else
                 {
-                    FormClass.GetSubForm.StarttheTimer(this.INDEX);
+                    CameraForm.GetSubForm.StarttheTimer(this.INDEX);
                 }
             }
             catch (COMException comx)

@@ -86,7 +86,7 @@ namespace FaceDetection
                         timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
                         captureOperatorEnabled = Properties.Settings.Default.C2_enable_capture_operator;
                         recordWhenOperation = Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation;
-                        preeventRecording = FormClass.crossbarList[0].PREEVENT_RECORDING;
+                        preeventRecording = CameraForm.crossbarList[0].PREEVENT_RECORDING;
                         captureMethod = Properties.Settings.Default.C2_capture_type;
                         break;
                     case 2:
@@ -94,7 +94,7 @@ namespace FaceDetection
                         timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
                         captureOperatorEnabled = Properties.Settings.Default.C3_enable_capture_operator;
                         recordWhenOperation = Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation;
-                        preeventRecording = FormClass.crossbarList[1].PREEVENT_RECORDING;
+                        preeventRecording = CameraForm.crossbarList[1].PREEVENT_RECORDING;
                         captureMethod = Properties.Settings.Default.C3_capture_type;
                         break;
                     case 3:
@@ -102,7 +102,7 @@ namespace FaceDetection
                         timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
                         captureOperatorEnabled = Properties.Settings.Default.C4_enable_capture_operator;
                         recordWhenOperation = Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation;
-                        preeventRecording = FormClass.crossbarList[2].PREEVENT_RECORDING;
+                        preeventRecording = CameraForm.crossbarList[2].PREEVENT_RECORDING;
                         captureMethod = Properties.Settings.Default.C4_capture_type;
                         break;
                 }
@@ -134,7 +134,7 @@ namespace FaceDetection
                             }
                             else
                             {
-                                FormClass.crossbarList[camindex - 1].Start(camindex, CAMERA_MODES.OPERATOR);
+                                CameraForm.crossbarList[camindex - 1].Start(camindex, CAMERA_MODES.OPERATOR);
                             }
                         }
                     }
@@ -148,7 +148,7 @@ namespace FaceDetection
                         }
                         else
                         {
-                            FormClass.crossbarList[camindex - 1].No_Cap_Timer_ON(0);
+                            CameraForm.crossbarList[camindex - 1].No_Cap_Timer_ON(0);
                         }
                     }
 

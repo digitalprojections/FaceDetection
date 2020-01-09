@@ -129,7 +129,7 @@
     <Compile Include="CAMERA_MODES.cs" />
     <Compile Include="CheckDiskSpace.cs" />
     <Compile Include="FaceDetector.cs" />
-    <Compile Include="FormClass.cs">
+    <Compile Include="CameraForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="KeyboardListener.cs" />
@@ -145,11 +145,11 @@
     <Compile Include="TaskManager.cs" />
     <Compile Include="CROSSBAR.cs" />
     <Compile Include="CustomMessage.cs" />
-    <Compile Include="FaceDetectionMainForm.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FaceDetectionMainForm.Designer.cs">
-      <DependentUpon>FaceDetectionMainForm.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IRSensor.cs" />
     <Compile Include="Program.cs" />
@@ -163,11 +163,11 @@
     <Compile Include="SNAPSHOT_SAVER.cs" />
     <Compile Include="UsbCamera.cs" />
     <Compile Include="WM.cs" />
-    <EmbeddedResource Include="FaceDetectionMainForm.resx">
-      <DependentUpon>FaceDetectionMainForm.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormClass.resx">
-      <DependentUpon>FormClass.cs</DependentUpon>
+    <EmbeddedResource Include="CameraForm.resx">
+      <DependentUpon>CameraForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="settingsUI.ja-JP.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>

@@ -182,7 +182,7 @@ namespace FaceDetection
             {
                 for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
                 {
-                    FormClass.GetSubForm.SetToPreviewMode(i);
+                    CameraForm.GetSubForm.SetToPreviewMode(i);
                 }
             }
             else
@@ -192,7 +192,7 @@ namespace FaceDetection
                 {
                     if (i != (cam_index - 1))
                     { 
-                        FormClass.GetSubForm.SetToPreviewMode(i);
+                        CameraForm.GetSubForm.SetToPreviewMode(i);
                     }
                 }
             }
@@ -863,6 +863,51 @@ namespace FaceDetection
                 storePath.SelectionStart = storePath.Text.Length;
             }
         }
+
+        /*
+        
+         * Checking full-width character is included in string.
+             * If full-width character is included in string,
+             * it will return true.
+             * If is not, it will return false.
+             * @param cmdl
+             * @return
+ 
+        public boolean isContainFullWidth(String cmdl)
+        {
+            boolean isFullWidth = false;
+            for (char c : cmdl.toCharArray())
+            {
+                if (!isHalfWidth(c))
+                {
+                    isFullWidth = true;
+                    break;
+                }
+            }
+
+            return isFullWidth;
+        }
+
+        /**
+         * Checking character is half-width or not.
+         * Unicode value of half-width range:
+         * '\u0000' - '\u00FF'
+         * '\uFF61' - '\uFFDC'
+         * '\uFFE8' - '\uFFEE'
+         * If unicode value of character is within this range,
+         * it will be half-width character.
+         * @param c
+         * @return
+         
+        public boolean isHalfWidth(char c)
+        {
+            return '\u0000' <= c && c <= '\u00FF'
+                || '\uFF61' <= c && c <= '\uFFDC'
+                || '\uFFE8' <= c && c <= '\uFFEE';
+        }
+
+             */
+
 
         #region DLLIMPORT
         [DllImport("olepro32.dll")]
