@@ -84,8 +84,9 @@ namespace FaceDetection
             this.Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CAMERA_INDEX);
 
             crossbar = new CROSSBAR(camind, this);
-            crossbarList[camind-1] = crossbar;
+            //crossbarList[camind-1] = crossbar;
             crossbar.PreviewMode();
+            
 
             this.FormClosed += FormClass_FormClosed;
             this.ResizeEnd += FormClass_ResizeEnd;
@@ -96,53 +97,65 @@ namespace FaceDetection
 
         public void SetToPreviewMode(int cam_index)
         {
-            if (crossbarList[cam_index] != null)
+            /*if (crossbarList[cam_index] != null)
             {
                 crossbarList[cam_index].Start(cam_index, CAMERA_MODES.PREVIEW);
             }
+            */
+            crossbar.Start(cam_index, CAMERA_MODES.PREVIEW);
         }
 
         public void SetToPreeventMode(int cam_index)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                if (crossbarList[i] != null)
-                {
-                    if (crossbarList[i].INDEX == cam_index)
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    if (crossbarList[i] != null)
+            //    {
+            //        if (crossbarList[i].INDEX == cam_index)
+            //        {
+            //            crossbarList[i].Start(cam_index, CAMERA_MODES.PREEVENT);
+            //        }
+            //    }
+            //}
+            if (crossbar.INDEX == cam_index)
                     {
-                        crossbarList[i].Start(cam_index, CAMERA_MODES.PREEVENT);
+                        crossbar.Start(cam_index, CAMERA_MODES.PREEVENT);
                     }
-                }
-            }
         }
 
         public void StarttheTimer(int cam_index)
         {
-            if (crossbarList[cam_index - 1] != null)
-            {
-                crossbarList[cam_index - 1].StartTimer();
-            }
+            //if (crossbarList[cam_index - 1] != null)
+            //{
+            //    crossbarList[cam_index - 1].StartTimer();
+            //}
+            crossbar.StartTimer();
         }
 
         public bool PreeventRecordingState (int cam_index)
         {
-            if (crossbarList[cam_index - 1] != null)
-            {
-                return crossbarList[cam_index - 1].PREEVENT_RECORDING;
-            }
-            else
-            {
-                return false;
-            }
+            //if (crossbarList[cam_index - 1] != null)
+            //{
+            //    return crossbarList[cam_index - 1].PREEVENT_RECORDING;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+            return crossbar.PREEVENT_RECORDING;
         }
 
         public void SetRecordIcon (int cam_index, int timeAfterEvent)
         {
             rec_icon.Visible = Properties.Settings.Default.show_recording_icon;
-            crossbarList[cam_index - 1].No_Cap_Timer_ON(timeAfterEvent);
-            crossbarList[cam_index - 1].icon_timer.Interval = decimal.ToInt32(timeAfterEvent) * 1000;
-            crossbarList[cam_index - 1].icon_timer.Enabled = true;
-            crossbarList[cam_index - 1].icon_timer.Start();
+            //crossbarList[cam_index - 1].No_Cap_Timer_ON(timeAfterEvent);
+            //crossbarList[cam_index - 1].icon_timer.Interval = decimal.ToInt32(timeAfterEvent) * 1000;
+            //crossbarList[cam_index - 1].icon_timer.Enabled = true;
+            //crossbarList[cam_index - 1].icon_timer.Start();
+            crossbar.No_Cap_Timer_ON(timeAfterEvent);
+            crossbar.icon_timer.Interval = decimal.ToInt32(timeAfterEvent) * 1000;
+            crossbar.icon_timer.Enabled = true;
+            crossbar.icon_timer.Start();
             hideIconTimer.Interval = timeAfterEvent * 1000;
             hideIconTimer.Start();
             MainForm.GetMainForm.recordingInProgress = true;
@@ -179,7 +192,7 @@ namespace FaceDetection
             PROPERTY_FUNCTIONS.Set_Window_Location(CAMERA_INDEX, this);
             Properties.Settings.Default.Save();
             crossbar.ReleaseSecondaryCamera();
-            crossbarList[CAMERA_INDEX - 1] = null;
+            crossbar = null;
 
             if (closeFromSettings)
         {

@@ -40,7 +40,7 @@ namespace FaceDetection
                 }
                 else
                 {
-                    bitmap = CameraForm.crossbarList[cameraIndex-1].GetBitmap();
+                    bitmap = null; //CameraForm.crossbarList[cameraIndex-1].GetBitmap();
                 }
 
                 if (bitmap != null)
@@ -79,7 +79,8 @@ namespace FaceDetection
                 }
                 else
                 {
-                    bitmap = CameraForm.crossbarList[cameraIndex-1].GetBitmap();
+                    bitmap = null;
+                        //CameraForm.crossbarList[cameraIndex-1].GetBitmap();
                 }
 
                 if (bitmap != null)
@@ -151,8 +152,8 @@ namespace FaceDetection
                             }
                             else
                             {
-                                Bitmap bitmap = CameraForm.crossbarList[CameraIndex-1].GetBitmap();
-                                bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
+                                //Bitmap bitmap = CameraForm.crossbarList[CameraIndex-1].GetBitmap();
+                                //bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
                             }
 
                             snap = true;

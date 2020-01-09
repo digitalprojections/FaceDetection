@@ -10,19 +10,19 @@ namespace FaceDetection
     class MULTI_WINDOW
     {
         private static CameraForm form;
-        public static CameraForm[] formList = new CameraForm[3];
+        public static CameraForm[] formList = new CameraForm[4];
         public static int subCameraHasBeenDisplayed = 0;
                 
         public static void CreateCameraWindows(int numberCameraToDisplay, int cam_index)
         {
-            if (subCameraHasBeenDisplayed < (numberCameraToDisplay - 1)) 
+            if (subCameraHasBeenDisplayed < (numberCameraToDisplay)) 
             {
-                for(int i = 1; i < subCameraHasBeenDisplayed + 1; i++)
+                for(int i = 1; i < subCameraHasBeenDisplayed; i++)
                 {
-                    if (formList[i-1].Text == "")
+                    if (formList[i].Text == "")
                     {
                         form = new CameraForm(i);
-                        form.Text = "UVC Camera Viewer - camera " + (i + 1);
+                        //form.Text = "UVC Camera Viewer - camera " + (i + 1);
                         form.Show();
                         if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
                         {
@@ -31,11 +31,11 @@ namespace FaceDetection
                     }
                 }
 
-                for (int i = subCameraHasBeenDisplayed + 1; i < numberCameraToDisplay; i++)
+                for (int i = subCameraHasBeenDisplayed; i < numberCameraToDisplay; i++)
                 {
                     form = new CameraForm(i);
-                    formList[i-1] = form;
-                    form.Text = "UVC Camera Viewer - camera " + (i + 1); //counting from the second camera
+                    formList[i] = form;
+                    //form.Text = "UVC Camera Viewer - camera " + (i + 1); //counting from the second camera
                     form.Show();
                     subCameraHasBeenDisplayed ++;
                     if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
@@ -44,14 +44,14 @@ namespace FaceDetection
                     }
                 }
             }
-            else if ((numberCameraToDisplay - 1) < subCameraHasBeenDisplayed)
+            else if ((numberCameraToDisplay) < subCameraHasBeenDisplayed)
             {
                 try
                 {
                 for (int i = subCameraHasBeenDisplayed; i >= numberCameraToDisplay; i--)
                 {
-                        formList[i - 1].closeFromSettings = true;
-                    formList[i-1].Close();
+                    formList[i].closeFromSettings = true;
+                    formList[i].Close();
                     subCameraHasBeenDisplayed--;
                     }
                 }
@@ -64,11 +64,11 @@ namespace FaceDetection
             {
                 for (int i = 1; i < numberCameraToDisplay; i++)
                 {
-                    if(formList[i-1].Text == "")
+                    if(formList[i].Text == "")
                     {
                         form = new CameraForm(i);
-                        form.Text = "UVC Camera Viewer - camera " + (i + 1);
-                        formList[i-1] = form;
+                        //form.Text = "UVC Camera Viewer - camera " + (i + 1);
+                        formList[i] = form;
                         form.Show();
                         if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
                         {

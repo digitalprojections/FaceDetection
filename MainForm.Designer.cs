@@ -39,8 +39,8 @@
             this.closeButton = new System.Windows.Forms.Button();
             this.or_dateTimeLabel = new System.Windows.Forms.Label();
             this.camera_number_txt = new System.Windows.Forms.Label();
-            this.pbRecording = new System.Windows.Forms.PictureBox();
             this.backgroundWorkerMain = new System.ComponentModel.BackgroundWorker();
+            this.pbRecording = new System.Windows.Forms.PictureBox();
             this.controlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRecording)).BeginInit();
             this.SuspendLayout();
@@ -195,6 +195,10 @@
             this.camera_number_txt.Text = "1";
             this.camera_number_txt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // backgroundWorkerMain
+            // 
+            this.backgroundWorkerMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorkerMain_DoWork);
+            // 
             // pbRecording
             // 
             this.pbRecording.BackColor = System.Drawing.Color.Transparent;
@@ -208,10 +212,6 @@
             this.pbRecording.TabIndex = 5;
             this.pbRecording.TabStop = false;
             this.pbRecording.Visible = false;
-            // 
-            // backgroundWorkerMain
-            // 
-            this.backgroundWorkerMain.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorkerMain_DoWork);
             // 
             // MainForm
             // 
@@ -244,8 +244,6 @@
 
         #endregion
 
-        
-        private System.Windows.Forms.PictureBox pbRecording;
         private System.Windows.Forms.FlowLayoutPanel controlButtons;
         private System.Windows.Forms.Button folderButton;
         private System.Windows.Forms.Button settingsButton;
@@ -256,5 +254,6 @@
         private System.Windows.Forms.Label or_dateTimeLabel;
         private System.Windows.Forms.Label camera_number_txt;
         private System.ComponentModel.BackgroundWorker backgroundWorkerMain;
+        private System.Windows.Forms.PictureBox pbRecording;
     }
 }

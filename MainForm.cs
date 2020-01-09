@@ -88,12 +88,12 @@ namespace FaceDetection
         
         /// <summary>
         /// Get the bitmap from the 
-        /// <see cref="CROSSBAR"/>
+        /// <see cref="crossbar/>
         /// </summary>
         /// <returns></returns>
         internal Bitmap GetSnapShot()
         {            
-            return  crossbar.GetBitmap();
+            return  crossbar?.GetBitmap();
         }
 
         /// <summary>
@@ -330,9 +330,9 @@ namespace FaceDetection
 
         public void WindowSizeUpdate()
         {
-            if (crossbar!=null)
+            if (crossbar==null)
             {
-                crossbar.SetWindowPosition(new System.Drawing.Size(this.Width, this.Height));
+                crossbar?.SetWindowPosition(new System.Drawing.Size(this.Width, this.Height));
             }
         }
             
@@ -375,8 +375,8 @@ namespace FaceDetection
                     if (cameraIndex == 0)
                     {
                         MainForm.GetMainForm.SET_REC_ICON();
-                        MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(timeAfterEvent);
-                        crossbar.SetIconTimer(timeAfterEvent);
+                        MainForm.GetMainForm.crossbar?.No_Cap_Timer_ON(timeAfterEvent);
+                        crossbar?.SetIconTimer(timeAfterEvent);
                     }
                     else
                     {
@@ -387,7 +387,7 @@ namespace FaceDetection
             }
             else
             {
-                //crossbar.Start(cameraIndex, CAMERA_MODES.EVENT); 
+                //crossbar?.Start(cameraIndex, CAMERA_MODES.EVENT); 
                 //Logger.Add("TODO: start event recording now");
             }
         }
@@ -414,7 +414,7 @@ namespace FaceDetection
 
             if (!preeventRecording)
             {
-                crossbar.Start(cameraIndex, CAMERA_MODES.PREVIEW);  
+                crossbar?.Start(cameraIndex, CAMERA_MODES.PREVIEW);  
             }
         }
             
@@ -426,7 +426,7 @@ namespace FaceDetection
         public void ToggleVideoRecording(object sender, EventArgs e)
         {            
             picbox_recording.Image = Properties.Resources.player_record;
-            MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+            MainForm.GetMainForm.crossbar?.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                         
             try
             {                
@@ -435,7 +435,7 @@ namespace FaceDetection
                     if (recordingInProgress == false)
                     {
                         SetRecordButtonState("rec");
-                        crossbar.Start(0, CAMERA_MODES.MANUAL);                    
+                        crossbar?.Start(0, CAMERA_MODES.MANUAL);                    
                         MainForm.GetMainForm.SET_REC_ICON();
                     }
                 }
@@ -473,7 +473,7 @@ namespace FaceDetection
             #region Instances
             ///////////////////////////////////////
             settingUI = new SettingsUI();
-            crossbar = new CROSSBAR(0, this);
+            //crossbar= new CROSSBAR(0, this);
             RSensor = new IRSensor();
             //FaceDetector = new FaceDetector();
             //backLight = new BackLightController();
@@ -501,7 +501,7 @@ namespace FaceDetection
             
             this.WindowState = FormWindowState.Minimized;
             
-            crossbar.PreviewMode();
+            //crossbar?.PreviewMode();
             AllChangesApply();
             FillResolutionList();
             
@@ -755,7 +755,7 @@ namespace FaceDetection
             {
                 if (cameraindex == 0)
                 {
-                    MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREEVENT);
+                    MainForm.GetMainForm.crossbar?.Start(0, CAMERA_MODES.PREEVENT);
                 }
                 else
                 {
@@ -769,7 +769,7 @@ namespace FaceDetection
             {
                 if (cameraindex == 0)
                 {
-                    MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREVIEW);
+                    MainForm.GetMainForm.crossbar?.Start(0, CAMERA_MODES.PREVIEW);
                 }
                 else
                 {
@@ -798,7 +798,7 @@ namespace FaceDetection
             {
                 Logger.Add(x);
             }            
-            crossbar.ReleaseCameras();
+            crossbar?.ReleaseCameras();
         }
 
         /// <summary>
