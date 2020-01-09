@@ -78,7 +78,7 @@ namespace FaceDetection
                         timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
                         captureOperatorEnabled = Properties.Settings.Default.C1_enable_capture_operator;
                         recordWhenOperation = Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
-                        preeventRecording = MainForm.GetMainForm.crossbar.PREEVENT_RECORDING;
+                        
                         captureMethod = Properties.Settings.Default.C1_capture_type;
                         break;
                     case 1:
@@ -86,7 +86,7 @@ namespace FaceDetection
                         timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
                         captureOperatorEnabled = Properties.Settings.Default.C2_enable_capture_operator;
                         recordWhenOperation = Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation;
-                        preeventRecording = CameraForm.crossbarList[0].PREEVENT_RECORDING;
+                        
                         captureMethod = Properties.Settings.Default.C2_capture_type;
                         break;
                     case 2:
@@ -94,7 +94,7 @@ namespace FaceDetection
                         timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
                         captureOperatorEnabled = Properties.Settings.Default.C3_enable_capture_operator;
                         recordWhenOperation = Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation;
-                        preeventRecording = CameraForm.crossbarList[1].PREEVENT_RECORDING;
+                        
                         captureMethod = Properties.Settings.Default.C3_capture_type;
                         break;
                     case 3:
@@ -102,11 +102,11 @@ namespace FaceDetection
                         timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
                         captureOperatorEnabled = Properties.Settings.Default.C4_enable_capture_operator;
                         recordWhenOperation = Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation;
-                        preeventRecording = CameraForm.crossbarList[2].PREEVENT_RECORDING;
+                        
                         captureMethod = Properties.Settings.Default.C4_capture_type;
                         break;
                 }
-
+                preeventRecording = MULTI_WINDOW.formList[camindex].crossbar.PREEVENT_RECORDING;
                 if (captureOperatorEnabled && recordWhenOperation && Listen && !MainForm.GetMainForm.crossbar.OPER_BAN)
                 {
                     Listen = false;
@@ -115,41 +115,20 @@ namespace FaceDetection
                         if (preeventRecording && timeAfterEvent > 0)
                         {
                             TaskManager.EventAppeared(RECORD_PATH.EVENT, camindex + 1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+                            MULTI_WINDOW.formList[camindex].crossbar.No_Cap_Timer_ON(timeAfterEvent);
+                            MULTI_WINDOW.formList[camindex].SetRecordIcon(camindex, timeAfterEvent);
 
-                            if (camindex == 0)
-                            {
-                                MainForm.GetMainForm.crossbar.SetIconTimer(timeAfterEvent);
-                                MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(timeAfterEvent);
-                            }
-                            else
-                            {
-                                MULTI_WINDOW.formList[camindex - 1].SetRecordIcon(camindex, timeAfterEvent);
-                            }
                         }
                         else
                         {
-                            if (camindex == 0)
-                            {
-                                MainForm.GetMainForm.crossbar.Start(camindex, CAMERA_MODES.OPERATOR);
-                            }
-                            else
-                            {
-                                CameraForm.crossbarList[camindex - 1].Start(camindex, CAMERA_MODES.OPERATOR);
-                            }
+                            MULTI_WINDOW.formList[camindex].crossbar.Start(camindex, CAMERA_MODES.OPERATOR);
                         }
                     }
                     else // Snapshot
                     {
                         SNAPSHOT_SAVER.TakeSnapShot(camindex, "event");
 
-                        if (camindex == 0)
-                        {
-                            MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
-                        }
-                        else
-                        {
-                            CameraForm.crossbarList[camindex - 1].No_Cap_Timer_ON(0);
-                        }
+                        MULTI_WINDOW.formList[camindex].crossbar.No_Cap_Timer_ON(0);
                     }
 
                     MainForm.GetMainForm.BackLight.Restart();

@@ -154,7 +154,7 @@ namespace FaceDetection
                 {
                     MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
                 }
-                for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
+                for (int i = 0; i < MULTI_WINDOW.DisplayedCameraCount; i++)
                 {
                     if (i != cam_index - 1)
                     {
@@ -165,7 +165,7 @@ namespace FaceDetection
             else
             {
                 MainForm.GetMainForm.WindowState = FormWindowState.Normal;
-                for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
+                for (int i = 0; i < MULTI_WINDOW.DisplayedCameraCount; i++)
                 {
                      MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
                 }
@@ -180,19 +180,19 @@ namespace FaceDetection
             // 4 Cameras: the selected camera became preevent mode (or preview), others became preview mode
             if (cam_index == 0)
             {
-                for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
+                for (int i = 0; i < MULTI_WINDOW.DisplayedCameraCount; i++)
                 {
-                    CameraForm.GetSubForm.SetToPreviewMode(i);
+                    MULTI_WINDOW.SetToPreviewMode(i);
                 }
             }
             else
             {
                 MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREVIEW);
-                for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
+                for (int i = 0; i < MULTI_WINDOW.DisplayedCameraCount; i++)
                 {
                     if (i != (cam_index - 1))
                     { 
-                        CameraForm.GetSubForm.SetToPreviewMode(i);
+                        MULTI_WINDOW.SetToPreviewMode(i);
                     }
                 }
             }
@@ -353,7 +353,7 @@ namespace FaceDetection
             this.MaximizeBox = false;
             this.TopMost = true;
 
-            if (MainForm.GetMainForm.recordingInProgress == true)
+            if (MainForm.GetMainForm.AnyRecordingInProgress == true)
             {
                 cm_camera_number.Enabled = false;
                 button_settings_save.Enabled = false;

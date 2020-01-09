@@ -34,15 +34,9 @@ namespace FaceDetection
             Bitmap bitmap = new Bitmap(1, 1);
             try
             {
-                if (cameraIndex == 0)
-                {
-                    bitmap = MainForm.GetMainForm.GetSnapShot();
-                }
-                else
-                {
-                    bitmap = null; //CameraForm.crossbarList[cameraIndex-1].GetBitmap();
-                }
-
+                
+                bitmap = MULTI_WINDOW.formList[cameraIndex].GetSnapShot();
+                
                 if (bitmap != null)
                 {
                     bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
@@ -73,15 +67,7 @@ namespace FaceDetection
             Bitmap bitmap = new Bitmap(1, 1);
             try
             {
-                if (cameraIndex == 0)
-                {
-                    bitmap = MainForm.GetMainForm.GetSnapShot();
-                }
-                else
-                {
-                    bitmap = null;
-                        //CameraForm.crossbarList[cameraIndex-1].GetBitmap();
-                }
+                bitmap = MULTI_WINDOW.formList[cameraIndex].GetSnapShot();
 
                 if (bitmap != null)
                 {

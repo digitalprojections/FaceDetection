@@ -22,7 +22,9 @@ namespace FaceDetection
         string targetPath = String.Empty;
         internal string ACTIVE_RECPATH = null;
         int INDEX = 0;
-        Form parentwindow = null; 
+        Form parentwindow = null;
+        private CROSSBAR crossbar;
+
         internal CAMERA_MODES CAMERA_MODE { get { return cAMERA_MODE; } set => cAMERA_MODE = value; }        
         public Action Stop { get; private set; }
         public Action Release { get; private set; }
@@ -89,10 +91,11 @@ namespace FaceDetection
             
         }
 
-        public RecorderCamera(int cameraIndex, Form pbx)
+        public RecorderCamera(int cameraIndex, Form pbx, CROSSBAR cb)
         {
             this.INDEX = cameraIndex;
             this.parentwindow = pbx;
+            crossbar = cb;
             sourcePath = Properties.Settings.Default.temp_folder + @"\" + (cameraIndex + 1);            
         }
 
@@ -320,14 +323,9 @@ namespace FaceDetection
                 Logger.Add(" running the recorder graph ");
                 ON = true;
 
-                if (this.INDEX == 0)
-                {
-                    MainForm.GetMainForm.crossbar.StartTimer();
-                }
-                else
-                {
-                    CameraForm.GetSubForm.StarttheTimer(this.INDEX);
-                }
+                
+                crossbar.StartTimer();
+                
             }
             catch (COMException comx)
             {

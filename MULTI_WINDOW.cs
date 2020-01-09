@@ -9,15 +9,17 @@ namespace FaceDetection
     /// </summary>
     class MULTI_WINDOW
     {
+        private delegate void dDateTimerUpdater();
+        
         private static CameraForm form;
         public static CameraForm[] formList = new CameraForm[4];
-        public static int subCameraHasBeenDisplayed = 0;
+        public static int DisplayedCameraCount = 0;
                 
         public static void CreateCameraWindows(int numberCameraToDisplay, int cam_index)
         {
-            if (subCameraHasBeenDisplayed < (numberCameraToDisplay)) 
+            if (DisplayedCameraCount < (numberCameraToDisplay)) 
             {
-                for(int i = 1; i < subCameraHasBeenDisplayed; i++)
+                for(int i = 1; i < DisplayedCameraCount; i++)
                 {
                     if (formList[i].Text == "")
                     {
@@ -31,28 +33,28 @@ namespace FaceDetection
                     }
                 }
 
-                for (int i = subCameraHasBeenDisplayed; i < numberCameraToDisplay; i++)
+                for (int i = DisplayedCameraCount; i < numberCameraToDisplay; i++)
                 {
                     form = new CameraForm(i);
                     formList[i] = form;
                     //form.Text = "UVC Camera Viewer - camera " + (i + 1); //counting from the second camera
                     form.Show();
-                    subCameraHasBeenDisplayed ++;
+                    DisplayedCameraCount ++;
                     if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
                     {
                         form.WindowState = FormWindowState.Minimized;
                     }
                 }
             }
-            else if ((numberCameraToDisplay) < subCameraHasBeenDisplayed)
+            else if ((numberCameraToDisplay) < DisplayedCameraCount)
             {
                 try
                 {
-                for (int i = subCameraHasBeenDisplayed; i >= numberCameraToDisplay; i--)
+                for (int i = DisplayedCameraCount; i >= numberCameraToDisplay; i--)
                 {
                     formList[i].closeFromSettings = true;
                     formList[i].Close();
-                    subCameraHasBeenDisplayed--;
+                    DisplayedCameraCount--;
                     }
                 }
                 catch (Exception ex)
@@ -78,11 +80,17 @@ namespace FaceDetection
                 }
             }
         }
-
+        
         public static void formSettingsChanged()
         {
-            for (int i = 0; i < subCameraHasBeenDisplayed; i++)
+            
+
+            for (int i = 0; i < DisplayedCameraCount; i++)
             {
+                formList[i].SetWindowProperties();
+                //Also must check if the PREEVENT mode is needed
+                formList[i].SetCameraToDefaultMode();
+
                 if (i == 0)
                 {
                     formList[0].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C2x), decimal.ToInt32(Properties.Settings.Default.C2y));
@@ -99,6 +107,46 @@ namespace FaceDetection
                     formList[2].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(3);
                 }
             }
+        }
+
+        internal static void EventRecorderOff(int cameraIndex)
+        {   
+            var preeventRecording = MULTI_WINDOW.PreeventRecordingState(cameraIndex);
+            
+            //SET it within each crossbar?
+            if (!preeventRecording)
+            {
+                formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.PREVIEW);
+            }
+        }
+        public static bool PreeventRecordingState(int cam_index)
+        {   
+            return formList[cam_index].crossbar.PREEVENT_RECORDING;
+        }
+
+        internal static void SET_REC_ICON(int cameraIndex)
+        {
+            formList[cameraIndex].SET_REC_ICON();            
+        }
+
+        internal static void SetToPreviewMode(int camind)
+        {            
+            formList[camind].SetToPreviewMode();            
+        }
+
+        public static bool RecordingIsOn()
+        {
+            var recmodeison = false;
+
+            for (int i = 0; i < DisplayedCameraCount; i++)
+            {
+                if (formList[i].crossbar.GetRecordingState())
+                {
+                    recmodeison = true;
+                }
+            }
+
+            return recmodeison;
         }
     }
 }
