@@ -187,7 +187,7 @@ namespace FaceDetection
                 controlButtons.Visible = false;
             }
         }
-        public void ParametersChangesApply()
+        public void ChangesFromParametersApply()
         {
             if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0)
             {
@@ -199,25 +199,24 @@ namespace FaceDetection
                 {
                     controlButtons.Visible = false;
                 }
-
                 PARAMETERS.PARAM.Clear();
             }
-            if (Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C4_enable_face_recognition)
-            {
-                if (faceDetector != null)
-                {
-                    FaceDetector.StopFaceTimer();
-                }
-                faceDetector.SetInterval();
-                faceDetector.StartFaceTimer();
-            }
-            else
-            {
-                if (faceDetector != null)
-                {
-                    FaceDetector.StopFaceTimer();
-                }
-            }
+            //if (Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C4_enable_face_recognition)
+            //{
+            //    if (faceDetector != null)
+            //    {
+            //        FaceDetector.StopFaceTimer();
+            //    }
+            //    faceDetector.SetInterval();
+            //    faceDetector.StartFaceTimer();
+            //}
+            //else
+            //{
+            //    if (faceDetector != null)
+            //    {
+            //        FaceDetector.StopFaceTimer();
+            //    }
+            //}
         }
 
         /// <summary>

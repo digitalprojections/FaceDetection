@@ -147,5 +147,13 @@ namespace FaceDetection
                 Console.WriteLine("Snapshot DONE! by " + Thread.CurrentThread.Name);
             }
         }
+
+        internal static void TakeSnapShotAll()
+        {
+            for (int i=0; i<MULTI_WINDOW.displayedCameraCount;i++)
+            {
+                TakeSnapShot(i, "event");
+            }
+        }
     }
 }

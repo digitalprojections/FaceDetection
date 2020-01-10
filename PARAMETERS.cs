@@ -50,10 +50,7 @@ namespace FaceDetection
                                     break;
                                 case "c":
                                     cameraIndex = Int32.Parse(elem.Substring(2)) - 1;                                    
-                                    if (cameraIndex == 8)
-                                    {
-                                        cameraIndex = Properties.Settings.Default.main_camera_index;
-                                    }
+                                    
                                     CameraIndex = cameraIndex;
                                     break;
                                 case "t":
@@ -99,7 +96,7 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "c":
+                        case "c"://Show Settings window
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
@@ -155,12 +152,16 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "s":
+                        case "s"://SNAPSHOT
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
+                                if (CheckCameraIndex(cameraIndex) && cameraIndex>4)
+                                {                                    
+                                    SNAPSHOT_SAVER.TakeSnapShotAll();
+                                }
+                                else if (CheckCameraIndex(cameraIndex) && cameraIndex < 8)
                                 {
-                                    SNAPSHOT_SAVER.TakeAsyncSnapShot();
+                                    SNAPSHOT_SAVER.TakeSnapShot(cameraIndex, "snapshot");
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)

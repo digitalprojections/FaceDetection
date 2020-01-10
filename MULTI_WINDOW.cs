@@ -115,7 +115,7 @@ namespace FaceDetection
                 //}
             }
         }
-
+        
         internal static void EventRecorderOff(int cameraIndex)
         {   
             var preeventRecording = MULTI_WINDOW.PreeventRecordingState(cameraIndex);
