@@ -13,18 +13,22 @@ namespace FaceDetection
         
         private static CameraForm form;
         public static CameraForm[] formList = new CameraForm[4];
-        public static int DisplayedCameraCount = 0;
+        public static int displayedCameraCount = 0;
                 
-        public static void CreateCameraWindows(int numberCameraToDisplay, int cam_index)
+        /// <summary>
+        /// by passing two important parameters.
+        /// </summary>
+        /// <param name="numberOfCamerasToDisplay"></param>
+        /// <param name="cam_index"></param>
+        public static void CreateCameraWindows(int numberOfCamerasToDisplay, int cam_index)
         {
-            if (DisplayedCameraCount < (numberCameraToDisplay)) 
+            if (displayedCameraCount < (numberOfCamerasToDisplay)) 
             {
-                for(int i = 1; i < DisplayedCameraCount; i++)
+                for(int i = 1; i < displayedCameraCount; i++)
                 {
                     if (formList[i].Text == "")
                     {
-                        form = new CameraForm(i);
-                        //form.Text = "UVC Camera Viewer - camera " + (i + 1);
+                        form = new CameraForm(i);                        
                         form.Show();
                         if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
                         {
@@ -33,28 +37,28 @@ namespace FaceDetection
                     }
                 }
 
-                for (int i = DisplayedCameraCount; i < numberCameraToDisplay; i++)
+                for (int i = displayedCameraCount; i < numberOfCamerasToDisplay; i++)
                 {
                     form = new CameraForm(i);
-                    formList[i] = form;
-                    //form.Text = "UVC Camera Viewer - camera " + (i + 1); //counting from the second camera
+                    formList[i] = form;                    
                     form.Show();
-                    DisplayedCameraCount ++;
+                    displayedCameraCount ++;
                     if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
                     {
                         form.WindowState = FormWindowState.Minimized;
                     }
                 }
             }
-            else if ((numberCameraToDisplay) < DisplayedCameraCount)
+            else if ((numberOfCamerasToDisplay) < displayedCameraCount)
             {
                 try
                 {
-                for (int i = DisplayedCameraCount; i >= numberCameraToDisplay; i--)
-                {
-                    formList[i].closeFromSettings = true;
-                    formList[i].Close();
-                    DisplayedCameraCount--;
+                    for (int i = displayedCameraCount; i >= numberOfCamerasToDisplay; i--)
+                    {
+                        formList[i].closeFromSettings = true;
+                        formList[i].Close();
+                        formList[i] = null;
+                        displayedCameraCount--;
                     }
                 }
                 catch (Exception ex)
@@ -64,7 +68,7 @@ namespace FaceDetection
             }
             else
             {
-                for (int i = 1; i < numberCameraToDisplay; i++)
+                for (int i = 1; i < numberOfCamerasToDisplay; i++)
                 {
                     if(formList[i].Text == "")
                     {
@@ -85,27 +89,29 @@ namespace FaceDetection
         {
             
 
-            for (int i = 0; i < DisplayedCameraCount; i++)
+            for (int i = 0; i < displayedCameraCount; i++)
             {
                 formList[i].SetWindowProperties();
                 //Also must check if the PREEVENT mode is needed
                 formList[i].SetCameraToDefaultMode();
 
-                if (i == 0)
-                {
-                    formList[0].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C2x), decimal.ToInt32(Properties.Settings.Default.C2y));
-                    formList[0].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(1);
-                }
-                else if (i == 1)
-                {
-                    formList[1].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C3x), decimal.ToInt32(Properties.Settings.Default.C3y));
-                    formList[1].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(2);
-                }
-                else if (i == 2)
-                {
-                    formList[2].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C4x), decimal.ToInt32(Properties.Settings.Default.C4y));
-                    formList[2].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(3);
-                }
+                //Commented out because, each form can do it by itself
+
+                //if (i == 0)
+                //{
+                //    formList[0].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C2x), decimal.ToInt32(Properties.Settings.Default.C2y));
+                //    formList[0].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(1);
+                //}
+                //else if (i == 1)
+                //{
+                //    formList[1].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C3x), decimal.ToInt32(Properties.Settings.Default.C3y));
+                //    formList[1].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(2);
+                //}
+                //else if (i == 2)
+                //{
+                //    formList[2].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C4x), decimal.ToInt32(Properties.Settings.Default.C4y));
+                //    formList[2].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(3);
+                //}
             }
         }
 
@@ -138,7 +144,7 @@ namespace FaceDetection
         {
             var recmodeison = false;
 
-            for (int i = 0; i < DisplayedCameraCount; i++)
+            for (int i = 0; i < displayedCameraCount; i++)
             {
                 if (formList[i].crossbar.GetRecordingState())
                 {

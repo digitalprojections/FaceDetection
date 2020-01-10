@@ -79,7 +79,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
-            this.SizeChanged += new System.EventHandler(this.WindowSizeUpdate);
+            
             this.ResumeLayout(false);
 
         }

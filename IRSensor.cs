@@ -4,7 +4,7 @@ using System.Timers;
 
 namespace FaceDetection
 {
-    class IRSensor
+    class IRSensor:IDisposable
     {
         private delegate void IRTimerTickDelegate();
         System.Timers.Timer SensorCheckTimer = new System.Timers.Timer();
@@ -123,7 +123,7 @@ namespace FaceDetection
             }
             else
             {
-                if (MainForm.GetMainForm.crossbar.OPER_BAN == false)
+                if (MULTI_WINDOW.formList[camindex].crossbar.OPER_BAN == false)
                 {
                     if (captureMethod != "Snapshot") // Video
                     {
@@ -136,12 +136,12 @@ namespace FaceDetection
 
                                 if (camindex == 0)
                                 {
-                                    MainForm.GetMainForm.crossbar.SetIconTimer(timeAfterEvent);
-                                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(timeAfterEvent);
+                                    MULTI_WINDOW.formList[camindex].crossbar.SetIconTimer(timeAfterEvent);
+                                    MULTI_WINDOW.formList[camindex].crossbar.No_Cap_Timer_ON(timeAfterEvent);
                                 }
                                 else
                                 {
-                                    MULTI_WINDOW.formList[camindex - 1].SetRecordIcon(camindex, timeAfterEvent);
+                                    MULTI_WINDOW.formList[camindex].SetRecordIcon(camindex, timeAfterEvent);
                                 }
                             }
                         }
@@ -180,7 +180,7 @@ namespace FaceDetection
         public void Destroy()
         {
             Stop_IR_Timer();
-            SensorCheckTimer.Dispose();
+            Dispose();
         }
 
         public void SetInterval()
@@ -287,6 +287,11 @@ namespace FaceDetection
         public static bool IsDllLoaded(string path)
         {
             return GetModuleHandle(path) != IntPtr.Zero;
+        }
+        
+        public void Dispose()
+        {
+            ((IDisposable)SensorCheckTimer).Dispose();
         }
     }
 }

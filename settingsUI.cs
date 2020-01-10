@@ -53,6 +53,9 @@ namespace FaceDetection
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
         }
 
+        /// <summary>
+        /// Get or set the MAIN CAMERA INDEX (Camera facing the user)
+        /// </summary>
         public int Camera_index
         {
             get
@@ -154,7 +157,7 @@ namespace FaceDetection
                 {
                     MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
                 }
-                for (int i = 0; i < MULTI_WINDOW.DisplayedCameraCount; i++)
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
                     if (i != cam_index - 1)
                     {
@@ -165,7 +168,7 @@ namespace FaceDetection
             else
             {
                 MainForm.GetMainForm.WindowState = FormWindowState.Normal;
-                for (int i = 0; i < MULTI_WINDOW.DisplayedCameraCount; i++)
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
                      MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
                 }
@@ -180,7 +183,7 @@ namespace FaceDetection
             // 4 Cameras: the selected camera became preevent mode (or preview), others became preview mode
             if (cam_index == 0)
             {
-                for (int i = 0; i < MULTI_WINDOW.DisplayedCameraCount; i++)
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
                     MULTI_WINDOW.SetToPreviewMode(i);
                 }
@@ -188,7 +191,7 @@ namespace FaceDetection
             else
             {
                 MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREVIEW);
-                for (int i = 0; i < MULTI_WINDOW.DisplayedCameraCount; i++)
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
                     if (i != (cam_index - 1))
                     { 

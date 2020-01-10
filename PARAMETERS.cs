@@ -478,16 +478,16 @@ namespace FaceDetection
                                     {
                                         
                                             MULTI_WINDOW.formList[cameraIndex].HideIcon();
-                                            if (MainForm.AtLeastOnePreEventTimeIsNotZero(cameraIndex))
+                                            if (PROPERTY_FUNCTIONS.CheckPreEventTimes(cameraIndex))
                                             {
-                                                if (MULTI_WINDOW.DisplayedCameraCount > 0)
+                                                if (MULTI_WINDOW.displayedCameraCount > 0)
                                                 {
                                                 MULTI_WINDOW.formList[cameraIndex].SetToPreeventMode();
                                                 }
                                             }
                                             else
                                             {
-                                                if (MULTI_WINDOW.DisplayedCameraCount > 0)
+                                                if (MULTI_WINDOW.displayedCameraCount > 0)
                                                 {
                                                 MULTI_WINDOW.formList[cameraIndex].SetToPreviewMode();
                                                 }
@@ -554,7 +554,7 @@ namespace FaceDetection
             //    return cameraIndex;
             //}
             //else if(cameraIndex >= 3)
-            if (cameraIndex >= MULTI_WINDOW.DisplayedCameraCount)
+            if (cameraIndex >= MULTI_WINDOW.displayedCameraCount)
             {
                 return 0;
             }

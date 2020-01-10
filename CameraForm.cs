@@ -48,7 +48,7 @@ namespace FaceDetection
         public int CAMERA_INDEX = 0;
         public bool closeFromSettings = false;
         public CROSSBAR crossbar;
-        public CROSSBAR[] crossbarList = new CROSSBAR[3];
+        //public CROSSBAR[] crossbarList = new CROSSBAR[3];
         CameraForm or_subform;
         public CameraForm GetSubForm => or_subform;
 
@@ -88,8 +88,24 @@ namespace FaceDetection
             this.FormClosed += FormClass_FormClosed;
             this.ResizeEnd += FormClass_ResizeEnd;
             this.Click += FormClass_Click;
-            this.DoubleClick += new EventHandler(this.FullScreen);
-            this.SizeChanged += new EventHandler(this.WindowSizeUpdate);
+            this.DoubleClick += FullScreen;
+            this.SizeChanged += WindowSizeUpdate;
+        }
+        /// <summary>
+        /// Call when closing the window
+        /// </summary>
+        public void Destroy()
+        {            
+            this.MouseDown -= HideButtons;
+            this.Load -= CameraForm_Load;
+            this.FormClosed -= FormClass_FormClosed;
+            this.ResizeEnd -= FormClass_ResizeEnd;
+            this.Click -= FormClass_Click;
+            this.DoubleClick -= FullScreen;
+            this.SizeChanged -= WindowSizeUpdate;
+
+            mouse_down_timer.Stop();
+            mouse_down_timer.Dispose();
         }
 
         private void CameraForm_Load(object sender, EventArgs e)
@@ -196,7 +212,7 @@ namespace FaceDetection
                 }
                 else
                 {
-                    for (int i = 0; i < MULTI_WINDOW.DisplayedCameraCount; i++)
+                    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                     {
                         if (i == cameraIndex - 1)
                         {
@@ -208,7 +224,7 @@ namespace FaceDetection
             else
             {
                 MainForm.GetMainForm.WindowState = FormWindowState.Normal;
-                for (int i = 0; i < MULTI_WINDOW.DisplayedCameraCount; i++)
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
                     if (i == cameraIndex - 1)
                     {
@@ -228,7 +244,7 @@ namespace FaceDetection
                 FormBorderStyle = FormBorderStyle.Sizable;
                 ControlBox = true;
 
-                for (int i = 0; i < MULTI_WINDOW.DisplayedCameraCount; i++)
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
                     MULTI_WINDOW.formList[i].FormBorderStyle = FormBorderStyle.Sizable;
                 }
@@ -237,7 +253,7 @@ namespace FaceDetection
             {
                 FormBorderStyle = FormBorderStyle.None;
 
-                for (int i = 0; i < MULTI_WINDOW.DisplayedCameraCount; i++)
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
                     MULTI_WINDOW.formList[i].FormBorderStyle = FormBorderStyle.None;
                 }
@@ -269,7 +285,7 @@ namespace FaceDetection
                     if (recordingInProgress == false)
                     {
                         SetRecordButtonState("rec");
-                        crossbar?.Start(0, CAMERA_MODES.MANUAL);
+                        crossbar?.Start(CAMERA_INDEX, CAMERA_MODES.MANUAL);
                         SET_REC_ICON();
                     }
                 }
@@ -384,18 +400,21 @@ namespace FaceDetection
             crossbar = null;
 
             if (closeFromSettings)
-        {
+            {
                 closeFromSettings = false;
-        }
+            }
             else
-        {
-                Application.Exit();
+            {
+                //Application.Exit();
             }
 
             if (Properties.Settings.Default.main_camera_index == CAMERA_INDEX) // The form closed was the main camera selected
             {
+                //Main camera closing means the following do not work
+                //operator capture: human sensor, keyboard and mouse events
                 Properties.Settings.Default.main_camera_index = 0;
             }
+            Destroy();
         }
 
         private void FullScreen(object sender, EventArgs eventArgs)
@@ -621,7 +640,7 @@ namespace FaceDetection
         }
         public void SetCameraToDefaultMode()
         {
-            if (MainForm.AtLeastOnePreEventTimeIsNotZero(CAMERA_INDEX))
+            if (PROPERTY_FUNCTIONS.CheckPreEventTimes(CAMERA_INDEX))
             {
                 if (CAMERA_INDEX == 0)
                 {
@@ -629,7 +648,7 @@ namespace FaceDetection
                 }
                 else
                 {
-                    if (MULTI_WINDOW.DisplayedCameraCount > 0)
+                    if (MULTI_WINDOW.displayedCameraCount > 0)
                     {
                         SetToPreeventMode();
                     }
@@ -643,7 +662,7 @@ namespace FaceDetection
                 }
                 else
                 {
-                    if (MULTI_WINDOW.DisplayedCameraCount > 0)
+                    if (MULTI_WINDOW.displayedCameraCount > 0)
                     {
                         SetToPreviewMode();
                     }

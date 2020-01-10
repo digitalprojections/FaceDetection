@@ -112,6 +112,43 @@ namespace FaceDetection
             return retval;
         }
 
+        internal static bool CheckPreEventTimes(int cameraindex)
+        {
+            var retval = false;
+            switch (cameraindex)
+            {
+                case 0:
+                    if ((Properties.Settings.Default.C1_enable_event_recorder && Properties.Settings.Default.C1_event_record_time_before_event > 0)
+                        || ((Properties.Settings.Default.C1_enable_Human_sensor || Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation) && Properties.Settings.Default.C1_seconds_before_event > 0))
+                    {
+                        retval = true;
+                    }
+                    break;
+                case 1:
+                    if ((Properties.Settings.Default.C2_enable_event_recorder && Properties.Settings.Default.C2_event_record_time_before_event > 0)
+                        || ((Properties.Settings.Default.C2_enable_Human_sensor || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation) && Properties.Settings.Default.C2_seconds_before_event > 0))
+                    {
+                        retval = true;
+                    }
+                    break;
+                case 2:
+                    if ((Properties.Settings.Default.C3_enable_event_recorder && Properties.Settings.Default.C3_event_record_time_before_event > 0)
+                        || ((Properties.Settings.Default.C3_enable_Human_sensor || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation) && Properties.Settings.Default.C3_seconds_before_event > 0))
+                    {
+                        retval = true;
+                    }
+                    break;
+                case 3:
+                    if ((Properties.Settings.Default.C4_enable_event_recorder && Properties.Settings.Default.C4_event_record_time_before_event > 0)
+                        || ((Properties.Settings.Default.C4_enable_Human_sensor || Properties.Settings.Default.C4_enable_face_recognition || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation) && Properties.Settings.Default.C4_seconds_before_event > 0))
+                    {
+                        retval = true;
+                    }
+                    break;
+            }
+            return retval;
+        }
+
         internal static void Set_Rec_Icon(int cam_ind, bool val)
         {            
             switch (cam_ind)
@@ -174,6 +211,36 @@ namespace FaceDetection
                     break;
             }
             return size;
+        }
+
+        internal static void GetPreAndPostEventTimes(int cameraIndex, out int timeBeforeEvent, out int timeAfterEvent)
+        {
+            switch (cameraIndex)
+            {
+                case 0:
+                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C1_event_record_time_before_event);
+                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_event_record_time_after_event);
+
+                    break;
+                case 1:
+                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C2_event_record_time_before_event);
+                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_event_record_time_after_event);
+
+                    break;
+                case 2:
+                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C3_event_record_time_before_event);
+                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_event_record_time_after_event);
+
+                    break;
+                case 3:
+                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C4_event_record_time_before_event);
+                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_event_record_time_after_event);
+                    break;
+                default: //default is set to 0 index simply to satisfy the function requirement. This point is never hit
+                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C1_event_record_time_before_event);
+                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_event_record_time_after_event);
+                    break;
+            }
         }
 
         /// <summary>
@@ -252,6 +319,31 @@ namespace FaceDetection
                     break;
             }
             return fps;
+        }        
+        /// <summary>
+        /// Is human sensor switch ON for the selected/MAIN camera?
+        /// </summary>
+        /// <param name="cam_ind"></param>
+        /// <returns></returns>
+            public static bool Get_Human_Sensor_Enabled(int cam_ind)
+        {
+            bool retval = false;
+            switch (cam_ind)
+            {
+                case 0:
+                    retval = Properties.Settings.Default.C1_enable_Human_sensor;
+                    break;
+                case 1:
+                    retval = Properties.Settings.Default.C2_enable_Human_sensor;
+                    break;
+                case 2:
+                    retval = Properties.Settings.Default.C3_enable_Human_sensor;
+                    break;
+                case 3:
+                    retval = Properties.Settings.Default.C4_enable_Human_sensor;
+                    break;
+            }
+            return retval;
         }
     }
 }
