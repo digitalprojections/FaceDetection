@@ -461,12 +461,12 @@ namespace FaceDetection
                 Task manual_rec_task = new Task(VideoRecordingEnd);
                 manual_rec_task.Start();
             }
-            //else if (camera != null && camera.Size.Width != PROPERTY_FUNCTIONS.GetCameraSize(0).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetCameraSize(0).Height)
-            //{
-            //    recorder.ReleaseInterfaces();
-            //    recorder = new RecorderCamera(this.INDEX, this.parentwindow);
-            //    recorder.StartRecorderCamera(index);
-            //}
+            else if (camera != null && camera.Size.Width != PROPERTY_FUNCTIONS.GetCameraSize(index).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetCameraSize(index).Height)
+            {
+                recorder.ReleaseInterfaces();
+                recorder = new RecorderCamera(index, this.parentwindow, this);
+                recorder.StartRecorderCamera(index);
+            }
             else
             {
                 recorder.StartRecorderCamera(index);
@@ -601,11 +601,11 @@ namespace FaceDetection
                         duration = 0;
                         the_timer.Stop();
                         recorder.ACTIVE_RECPATH = "";
-                        recorder.ReleaseInterfaces();
-                        if (this != null)
-                        {
-                            this.PreviewMode();
-                        }
+                        recorder.ReleaseInterfaces();                        
+                    }
+                    if (this != null)
+                    {
+                        this.PreviewMode();
                     }
                     break;
                 case CAMERA_MODES.PREEVENT:
@@ -619,10 +619,9 @@ namespace FaceDetection
                     the_timer.Enabled = true;
                     the_timer.Interval = duration;
                     //the_timer.Enabled = false;
-                    if (this != null)
-                    {
-                        this.RecordingMode(INDEX);
-                    }
+                    
+                    RecordingMode(INDEX);
+                    
                     break;
             }
         }

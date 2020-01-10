@@ -14,6 +14,7 @@ namespace FaceDetection
         static string param;
         public static bool isMinimized = false;
         public static bool isControlButtonVisible = true;
+        public static int CameraIndex = 0;
 
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
@@ -48,11 +49,12 @@ namespace FaceDetection
                                     switchOnOff = (elem.Substring(2) != "0");
                                     break;
                                 case "c":
-                                    cameraIndex = Int32.Parse(elem.Substring(2)) - 1;
+                                    cameraIndex = Int32.Parse(elem.Substring(2)) - 1;                                    
                                     if (cameraIndex == 8)
                                     {
                                         cameraIndex = Properties.Settings.Default.main_camera_index;
                                     }
+                                    CameraIndex = cameraIndex;
                                     break;
                                 case "t":
                                     time = Int32.Parse(elem.Substring(2));

@@ -222,48 +222,29 @@ namespace FaceDetection
             // Top most
             if (Properties.Settings.Default.window_on_top)
             {
-                if (cam_index == 0)
-                {
-                    //MainForm.GetMainForm.TopMost = true;
-                    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                    {
-                        MULTI_WINDOW.formList[i].TopMost = false;
-                    }
-                }
-                else
-                {
                     if (MULTI_WINDOW.displayedCameraCount > 0)
                     {
-                        MULTI_WINDOW.formList[cam_index - 1].TopMost = true;
+                        MULTI_WINDOW.formList[cam_index].TopMost = true;
                     }
-                    MainForm.GetMainForm.TopMost = false;
+                    //MainForm.GetMainForm.TopMost = false;
                     for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                     {
-                        if (i != (cam_index - 1))
+                        if (i != (cam_index))
                         {
                             MULTI_WINDOW.formList[i].TopMost = false;
                         }
                     }
-                }
             }
             else
             {
                 //MainForm.GetMainForm.TopMost = false;
                 for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
-                    MULTI_WINDOW.formList[i].TopMost = false;
+                    MULTI_WINDOW.formList[i].TopMost = false;                    
                 }
-
-                if (cam_index == 0)
+                if (MULTI_WINDOW.displayedCameraCount > 0)
                 {
-                    MainForm.GetMainForm.Activate();
-                }
-                else
-                {
-                    if (MULTI_WINDOW.displayedCameraCount > 0)
-                    {
-                        MULTI_WINDOW.formList[cam_index - 1].Activate();
-                    }
+                    MULTI_WINDOW.formList[cam_index].Activate();//MAIN CAMERA active
                 }
             }
 
@@ -276,18 +257,11 @@ namespace FaceDetection
 
                 if (PARAMETERS.isMinimized)
                 {
-                    if (cam_index == 0)
-                {
-                    GetMainForm.WindowState = FormWindowState.Minimized;
+                    MULTI_WINDOW.formList[PARAMETERS.CameraIndex].WindowState = FormWindowState.Minimized;
                 }
                 else
                 {
-                        MULTI_WINDOW.formList[cam_index - 1].WindowState = FormWindowState.Minimized;
-                    }
-                }
-                else
-                {
-                    MULTI_WINDOW.formList[cam_index - 1].WindowState = FormWindowState.Normal;
+                    MULTI_WINDOW.formList[PARAMETERS.CameraIndex].WindowState = FormWindowState.Normal;
                 }
 
                 PARAMETERS.PARAM.Clear();

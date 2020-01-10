@@ -16,6 +16,7 @@ namespace FaceDetection
         {
             rec_icon = this;
             rec_icon.Size = new Size(65, 65);
+            
             rec_icon.Image = Properties.Resources.player_record;
             rec_icon.SizeMode = PictureBoxSizeMode.Zoom;
             rec_icon.Location = new Point(12, 12);

@@ -301,6 +301,7 @@
             this.cb_event_recorder.Name = "cb_event_recorder";
             this.cb_event_recorder.Tag = "13";
             this.cb_event_recorder.UseVisualStyleBackColor = false;
+            this.cb_event_recorder.CheckStateChanged += new System.EventHandler(this.ResetPreeventTime);
             // 
             // label20_minutes
             // 

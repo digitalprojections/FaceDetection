@@ -15,10 +15,10 @@ namespace FaceDetection
 
         public bool recordingInProgress;
 
-        private PictureBox pb_recording;
+
         //private FlowLayoutPanel controlBut;
         //public FlowLayoutPanel gbox_controlBut { get => controlBut; set => controlBut = value; }
-        public PictureBox picbox_recording { get => pb_recording; set => pb_recording = value; }
+        public PictureBox picbox_recording { get => rec_icon; }
 
        
         /// <summary>
@@ -40,7 +40,9 @@ namespace FaceDetection
         private ImageList imageList;
         private System.Timers.Timer hideIconTimer = new System.Timers.Timer();
         private delegate void dHideRecIcon();
-        private delegate void dDateTimerUpdater();
+        //private delegate void dDateTimerUpdater();
+
+        private Timer datetimer = new Timer();
 
         
         internal FaceDetector FaceDetector { get => faceDetector; set => faceDetector = value; }
@@ -50,7 +52,7 @@ namespace FaceDetection
         public int CameraIndex = 0;
         public bool closeFromSettings = false;
         public CROSSBAR crossbar;
-        //public CROSSBAR[] crossbarList = new CROSSBAR[3];
+        
         CameraForm subform;
         public CameraForm GetSubForm => subform;
 
@@ -58,43 +60,27 @@ namespace FaceDetection
         {
             subform = this;            
 
-            this.Text = "UVC Camera Viewer - camera " + (camind + 1); //counting from the second camera       
             
-            
+                        
             CameraIndex = camind;
-            
-            
-
-            rec_icon = new RecIcon();
-            this.Controls.Add(rec_icon);
-
+                        
             hideIconTimer.AutoReset = false;
             hideIconTimer.Elapsed += new System.Timers.ElapsedEventHandler(HideIcon_tick);
-            
-            SettingsButtonsDesigner();
-            this.Controls.Add(this.controlButtons);
 
-            this.ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
-            this.Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
 
-            camera_number = new CameraNumberLabel(CameraIndex);
-            this.Controls.Add(camera_number);
-            dateTimeLabel = new DateTimeLabel(CameraIndex);
-            this.Controls.Add(dateTimeLabel);
 
-            crossbar = new CROSSBAR(CameraIndex, this);
-            //crossbarList[camind-1] = crossbar;
-            crossbar.PreviewMode();
 
-            
-            this.MouseDown += HideButtons;
+
             this.Load += CameraForm_Load;
-            this.FormClosed += FormClass_FormClosed;
-            this.ResizeEnd += FormClass_ResizeEnd;
-            this.Click += FormClass_Click;
-            this.DoubleClick += FullScreen;
-            this.SizeChanged += WindowSizeUpdate;
+
         }
+
+        private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            PROPERTY_FUNCTIONS.Set_Window_Location(CameraIndex, this);
+            Properties.Settings.Default.Save();
+        }
+
         /// <summary>
         /// Call when closing the window
         /// </summary>
@@ -102,6 +88,7 @@ namespace FaceDetection
         {            
             this.MouseDown -= HideButtons;
             this.Load -= CameraForm_Load;
+            this.FormClosing -= CameraForm_FormClosing;
             this.FormClosed -= FormClass_FormClosed;
             this.ResizeEnd -= FormClass_ResizeEnd;
             this.Click -= FormClass_Click;
@@ -110,19 +97,73 @@ namespace FaceDetection
 
             mouse_down_timer.Stop();
             mouse_down_timer.Dispose();
+
+            datetimer.Stop();
+            datetimer.Dispose();
         }
 
         private void CameraForm_Load(object sender, EventArgs e)
         {
+            
+            this.MouseDown += HideButtons;
+
+            this.FormClosing += CameraForm_FormClosing;
+            this.FormClosed += FormClass_FormClosed;
+            this.ResizeEnd += FormClass_ResizeEnd;
+            this.Click += FormClass_Click;
+            this.DoubleClick += FullScreen;
+            crossbar = new CROSSBAR(CameraIndex, this);
+            var mci = Properties.Settings.Default.main_camera_index;
+            if (CameraIndex == mci && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
+            {
+                this.Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";
+                crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
+            }
+            else
+            {
+                this.Text = "UVC Camera Viewer -  camera " + (CameraIndex + 1);
+                crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
+            }
+
+            this.SizeChanged += WindowSizeUpdate;
+
+            SettingsButtonsDesigner();
+            this.Controls.Add(this.controlButtons);
+
+            this.ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
+            this.Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
+
+            rec_icon = new RecIcon();
+            this.Controls.Add(rec_icon);
+            camera_number = new CameraNumberLabel(CameraIndex);
+            this.Controls.Add(camera_number);
+            dateTimeLabel = new DateTimeLabel(CameraIndex);
+            this.Controls.Add(dateTimeLabel);
+
             ///SET THE MAIN WINDOW ICONS AND BUTTON POSITIONS MANUALLY
             controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
             
             mouse_down_timer.Elapsed += ShowButtonsDelayed;//制御ボタンの非/表示用クリックタイマー
             mouse_down_timer.Interval = 1000;
 
-
+            datetimer.Interval = 1000;
+            datetimer.Tick += Datetimer_Tick;
+            datetimer.Start();
             ///////////////////////////////////////////////////////////
         }
+
+        private void Datetimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            }
+            catch (NullReferenceException ex)
+            {
+                Debug.WriteLine(ex.Message + " DateTimeUpdater()");
+            }
+        }
+
         public void ShowButtons(object sender, EventArgs eventArgs)
         {
             if (folderButton.Visible == false)
@@ -205,17 +246,12 @@ namespace FaceDetection
             camera_number.Visible = Properties.Settings.Default.show_camera_no;
             //or_camera_num_txt.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
             //MainForm.GetMainForm.TopMost = Properties.Settings.Default.window_on_top;
-            Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
+            //Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
             dateTimeLabel.Visible = Properties.Settings.Default.show_current_datetime;
 
             if (Properties.Settings.Default.main_window_full_screen)
             {
-                if (cameraIndex == 0)
-                {
-                    MainForm.GetMainForm.WindowState = FormWindowState.Maximized;
-                }
-                else
-                {
+                
                     for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                     {
                         if (i == cameraIndex - 1)
@@ -223,11 +259,11 @@ namespace FaceDetection
                             MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
                         }
                     }
-                }
+                
             }
             else
             {
-                MainForm.GetMainForm.WindowState = FormWindowState.Normal;
+                //MainForm.GetMainForm.WindowState = FormWindowState.Normal;
                 for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
                     if (i == cameraIndex - 1)
@@ -239,7 +275,7 @@ namespace FaceDetection
 
             if (cameraIndex != 0 && !Properties.Settings.Default.show_all_cams_simulteneously)
             {
-                MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
+                //MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
             }
 
             //Window pane
@@ -264,7 +300,7 @@ namespace FaceDetection
             }
 
             
-            Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
+            ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
             Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
         }
 
@@ -398,8 +434,7 @@ namespace FaceDetection
 
         private void FormClass_FormClosed(object sender, FormClosedEventArgs e)
         {
-            PROPERTY_FUNCTIONS.Set_Window_Location(CameraIndex, this);
-            Properties.Settings.Default.Save();
+            
             crossbar.ReleaseSecondaryCamera();
             crossbar = null;
 
@@ -471,10 +506,8 @@ namespace FaceDetection
             cameraSender = snd.TopLevelControl.ToString();
             cameraSender = cameraSender.Substring(cameraSender.Length - 1, 1);
 
-            if (MainForm.Setting_ui.Camera_index == Convert.ToInt32(cameraSender) - 1)
-            {
             SNAPSHOT_SAVER.TakeSnapShot(Convert.ToInt32(cameraSender) - 1);
-        }
+        
         }
 
         private void ManualVideoRecording(object sender, EventArgs e)
@@ -483,9 +516,7 @@ namespace FaceDetection
             Button snd = (Button)sender;
             cameraSender = snd.TopLevelControl.ToString();
             cameraSender = cameraSender.Substring(cameraSender.Length - 1, 1);
-
-            rec_icon.Image = Properties.Resources.player_record;
-            crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                        
 
             bool eventRecorderEnabled = false, IRSensorEnabled = false, faceRecognitionEnabled = false, recordingWhenOperationEnabled = false;
             int eventRecordTimeBeforeEvent = 0, secondBeforeOperationEvent = 0;
@@ -527,41 +558,43 @@ namespace FaceDetection
                 secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
             }
 
-            if (MainForm.Setting_ui.Camera_index == Convert.ToInt32(cameraSender)-1)
+            //if (MainForm.Setting_ui.Camera_index == Convert.ToInt32(cameraSender)-1)
+            //{
+            try
             {
-                try
+                if ((string)cameraButton.Tag == "play")
                 {
-                    if ((String)cameraButton.Tag == "play")
+                    if (recordingInProgress == false)
                     {
-                        if (recordingInProgress == false)
-                        {
                             cameraButton.Tag = "rec";
                             crossbar.Start(Convert.ToInt32(cameraSender) - 1, CAMERA_MODES.MANUAL);
                             rec_icon.Visible = Properties.Settings.Default.show_recording_icon;
                             recordingInProgress = true;
-                        }
+                        crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                        crossbar.SetIconTimer(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                    }
+                }
+                else
+                {
+                    rec_icon.Visible = false;
+                    recordingInProgress = false;
+                    cameraButton.Tag = "play";
+                    if ((eventRecorderEnabled && eventRecordTimeBeforeEvent > 0)
+                            || ((IRSensorEnabled || faceRecognitionEnabled || recordingWhenOperationEnabled) && secondBeforeOperationEvent > 0))
+                    {
+                        crossbar.Start(Convert.ToInt32(cameraSender) - 1, CAMERA_MODES.PREEVENT);
                     }
                     else
                     {
-                        rec_icon.Visible = false;
-                        recordingInProgress = false;
-                        cameraButton.Tag = "play";
-                        if ((eventRecorderEnabled && eventRecordTimeBeforeEvent > 0)
-                            || ((IRSensorEnabled || faceRecognitionEnabled || recordingWhenOperationEnabled) && secondBeforeOperationEvent > 0))
-                        {
-                            crossbar.Start(Convert.ToInt32(cameraSender) - 1, CAMERA_MODES.PREEVENT);
-                        }
-                        else
-                        {
-                            crossbar.Start(Convert.ToInt32(cameraSender) - 1, CAMERA_MODES.PREVIEW);
-                        }
+                        crossbar.Start(Convert.ToInt32(cameraSender) - 1, CAMERA_MODES.PREVIEW);
                     }
                 }
+            }
                 catch (InvalidOperationException iox)
                 {
                     Logger.Add(iox);
                 }
-            }
+            //}
         }
 
         public void ParametersChangesApply(int cam_index)
@@ -583,27 +616,28 @@ namespace FaceDetection
         /// <summary>
         /// One second timer to update UI datetime (it also deletes old files)
         /// </summary>
-        private void UpdateDateTimeText(object sender, System.Timers.ElapsedEventArgs eventArgs)
+        public void UpdateDateTimeText(object sender, EventArgs eventArgs)
         {
-            DateTimeUpdater();            
+            //DateTimeUpdater();            
+            
         }
         public void DateTimeUpdater()
         {
             if (dateTimeLabel != null && dateTimeLabel.InvokeRequired)
             {
-                var d = new dDateTimerUpdater(DateTimeUpdater);
-                dateTimeLabel.Invoke(d);
+                //var d = new dDateTimerUpdater(DateTimeUpdater);
+                //dateTimeLabel.Invoke(d);
             }
             else
             {
-                try
-                {
-                    dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                }
-                catch (NullReferenceException e)
-                {
-                    Debug.WriteLine(e.Message + " DateTimeUpdater()");
-                }
+                //try
+                //{
+                //    dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                //}
+                //catch (NullReferenceException e)
+                //{
+                //    Debug.WriteLine(e.Message + " DateTimeUpdater()");
+                //}
             }
         }
         public void StopAllTimers()

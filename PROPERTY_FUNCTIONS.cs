@@ -212,21 +212,21 @@ namespace FaceDetection
             }
         }
 
-        internal static void Set_Window_Location(int cam_ind, CameraForm formClass)
+        internal static void Set_Window_Location(int cam_ind, CameraForm subCamWindow)
         {
             switch (cam_ind)
             {
                 case 0:
-                    Properties.Settings.Default.window_location = formClass.Location;
+                    Properties.Settings.Default.window_location = subCamWindow.Location;
                     break;
                 case 1:
-                    Properties.Settings.Default.C2_window_location = formClass.Location;
+                    Properties.Settings.Default.C2_window_location = subCamWindow.Location;
                     break;
                 case 2:
-                    Properties.Settings.Default.C3_window_location = formClass.Location;
+                    Properties.Settings.Default.C3_window_location = subCamWindow.Location;
                     break;
                 case 3:
-                    Properties.Settings.Default.C4_window_location = formClass.Location;
+                    Properties.Settings.Default.C4_window_location = subCamWindow.Location;
                     break;
             }
         }

@@ -9,8 +9,9 @@ namespace FaceDetection
     /// </summary>
     class MULTI_WINDOW
     {
-        private delegate void dDateTimerUpdater();
+        //private delegate void dDateTimerUpdater();
         
+
         private static CameraForm form;
         public static CameraForm[] formList = new CameraForm[4];
         public static int displayedCameraCount = 0;

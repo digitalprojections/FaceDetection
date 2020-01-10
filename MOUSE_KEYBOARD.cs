@@ -75,8 +75,7 @@ namespace FaceDetection
             PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(CAMERA_INDEX, out captureOperatorEnabled);
             PROPERTY_FUNCTIONS.GetCaptureOnOperationStartSwitch(CAMERA_INDEX, out recordWhenOperation);
             try
-            {
-                
+            {                
                 preeventRecording = MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.PREEVENT_RECORDING;
                 if (captureOperatorEnabled && recordWhenOperation && Listen && !MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.OPER_BAN)
                 {
@@ -116,6 +115,7 @@ namespace FaceDetection
             catch (Exception ex)
             {
                 // listening closed form 
+                //Main camera down?
             }
         }
     }

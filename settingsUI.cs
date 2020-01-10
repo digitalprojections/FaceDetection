@@ -680,6 +680,13 @@ namespace FaceDetection
             }
         }
 
+        private void ResetPreeventTime(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            if (!checkBox.Checked)
+                event_record_time_before_event.Value = 0;
+        }
+
         private void DisableOperatorCaptureCheckBox_ifNeeded()
         {
             // CAMERA 1
@@ -844,10 +851,13 @@ namespace FaceDetection
                 }
             }
 
-            if(pathChanged == true)
+            if(pathChanged == true && Path.IsPathRooted(storePath.Text))
             {
                 storePath.Text = new string(characters);
                 storePath.SelectionStart = storePath.Text.Length;
+            }else if (pathChanged == true && !Path.IsPathRooted(storePath.Text))
+            {
+                MessageBox.Show("Wrong path!");
             }
         }
 
