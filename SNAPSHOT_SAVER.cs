@@ -15,6 +15,7 @@ namespace FaceDetection
         static Encoder myEncoder;
         static EncoderParameter myEncoderParameter;
         static EncoderParameters myEncoderParameters;
+        
 
         internal static void TakeSnapShot(int cameraIndex)
         {
@@ -122,7 +123,7 @@ namespace FaceDetection
                 {
                     if (MainForm.GetMainForm != null)
                     {
-                        if (MainForm.GetMainForm.crossbar != null) // && MainForm.GetMainForm.crossbar.ANY_CAMERA_ON())
+                        if (MULTI_WINDOW.formList[CameraIndex].crossbar != null) // && MainForm.GetMainForm.crossbar.ANY_CAMERA_ON())
                         {
                             CameraIndex = MainForm.Setting_ui.Camera_index;
                             Thread.Sleep(1000);
@@ -131,16 +132,10 @@ namespace FaceDetection
                             picloc = Path.Combine(picloc, "snapshot");
                             Directory.CreateDirectory(picloc);
                             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
-                            if (CameraIndex == 0)
-                            {
-                                Bitmap bitmap = MainForm.GetMainForm.crossbar.GetBitmap();
-                                bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
-                            }
-                            else
-                            {
-                                //Bitmap bitmap = CameraForm.crossbarList[CameraIndex-1].GetBitmap();
-                                //bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
-                            }
+                            
+                            Bitmap bitmap = MULTI_WINDOW.formList[CameraIndex].crossbar.GetBitmap();
+                            bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
+                            
 
                             snap = true;
 

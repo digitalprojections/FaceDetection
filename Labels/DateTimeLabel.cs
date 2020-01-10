@@ -6,7 +6,7 @@ namespace FaceDetection
     class DateTimeLabel:Label
     {
         Label dateTimeLabel;
-        public DateTimeLabel()
+        public DateTimeLabel(int camera_index)
         {
             dateTimeLabel = this;
 
@@ -23,7 +23,7 @@ namespace FaceDetection
             dateTimeLabel.Padding = new Padding(3);
             dateTimeLabel.TabIndex = 13;
             dateTimeLabel.UseCompatibleTextRendering = true;
-            dateTimeLabel.Location = new Point(12, this.Height - 80);            
+            dateTimeLabel.Location = new Point(12, PROPERTY_FUNCTIONS.Get_Camera_Window_Size(camera_index).Height - 80);            
         }
     }
 }

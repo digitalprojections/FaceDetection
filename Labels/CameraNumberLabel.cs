@@ -18,7 +18,7 @@ namespace FaceDetection
             camera_number.Text = (camera_index + 1).ToString();
             camera_number.Font = new Font("MS UI Gothic", 50);
             camera_number.TextAlign = ContentAlignment.MiddleCenter;
-            camera_number.Location = new Point(this.Width - 89, 12);            
+            camera_number.Location = new Point(PROPERTY_FUNCTIONS.Get_Camera_Window_Size(camera_index).Width - 89, 12);            
         }
     }
 }

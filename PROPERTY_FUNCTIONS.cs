@@ -56,33 +56,77 @@ namespace FaceDetection
             }
         }
 
+        internal static void GetCaptureOperatorSwitch(int camindex, out bool captureOperatorEnabled)
+        {
+            switch (camindex)
+            {
+                case 0:
+                    captureOperatorEnabled = Properties.Settings.Default.C1_enable_capture_operator;                    
+                    break;
+                case 1:
+                    captureOperatorEnabled = Properties.Settings.Default.C2_enable_capture_operator;                    
+                    break;
+                case 2:
+                    captureOperatorEnabled = Properties.Settings.Default.C3_enable_capture_operator;                    
+                    break;
+                case 3:
+                    captureOperatorEnabled = Properties.Settings.Default.C4_enable_capture_operator;                    
+                    break;
+                default:
+                    captureOperatorEnabled = Properties.Settings.Default.C1_enable_capture_operator;
+                    break;
+            }
+        }
+
+        internal static void GetCaptureOnOperationStartSwitch(int camindex, out bool recordWhenOperation)
+        {
+            switch (camindex)
+            {
+                case 0:
+                    recordWhenOperation = Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
+                    break;
+                case 1:
+                    recordWhenOperation = Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation;
+                    break;
+                case 2:
+                    recordWhenOperation = Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation;
+                    break;
+                case 3:
+                    recordWhenOperation = Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation;
+                    break;
+                default:
+                    recordWhenOperation = Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
+                    break;
+            }
+        }
+
         //public static void Set_Window_Size_From_Camera_Resolution(int cam_ind)
         //{
         //    char[] vs = { 'x' };            
         //    switch (cam_ind)
         //    {
         //        case 0:
-                    
+
         //                Properties.Settings.Default.C1w = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[0]);
         //                Properties.Settings.Default.C1h = decimal.Parse(Properties.Settings.Default.C1res.Split(vs)[1]);                        
-                    
+
         //            break;
         //        case 1:
-                    
+
         //                Properties.Settings.Default.C2w = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[0]);
         //                Properties.Settings.Default.C2h = decimal.Parse(Properties.Settings.Default.C2res.Split(vs)[1]);
-                    
+
         //            break;
         //        case 2:
-                    
+
         //                Properties.Settings.Default.C3w = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[0]);
         //                Properties.Settings.Default.C3h = decimal.Parse(Properties.Settings.Default.C3res.Split(vs)[1]);                        
-                    
+
         //            break;
         //        case 3:
         //                Properties.Settings.Default.C4w = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[0]);
         //                Properties.Settings.Default.C4h = decimal.Parse(Properties.Settings.Default.C4res.Split(vs)[1]);                        
-                    
+
         //            break;
         //    }
         //    if (resolution_changed)
@@ -239,6 +283,72 @@ namespace FaceDetection
                 default: //default is set to 0 index simply to satisfy the function requirement. This point is never hit
                     timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C1_event_record_time_before_event);
                     timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_event_record_time_after_event);
+                    break;
+            }
+        }
+
+        internal static void GetCaptureMethod(int camindex, out string captureMethod)
+        {
+            switch (camindex)
+            {
+                case 0:
+                    captureMethod = Properties.Settings.Default.C1_capture_type;
+                    break;
+                case 1:
+                    captureMethod = Properties.Settings.Default.C2_capture_type;
+                    break;
+                case 2:
+                    captureMethod = Properties.Settings.Default.C3_capture_type;
+                    break;
+                case 3:
+                    captureMethod = Properties.Settings.Default.C4_capture_type;
+                    break;
+                default:
+                    captureMethod = "Video";
+                    break;
+            }
+        }
+
+        internal static void GetInterval(int camindex, out int checkInterval)
+        {
+            switch (camindex)
+            {
+                case 0:
+                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C1_check_interval);
+                    break;
+                case 1:
+                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C2_check_interval);
+                    break;
+                case 2:
+                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C3_check_interval);
+                    break;
+                case 3:
+                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C4_check_interval);
+                    break;
+                default:
+                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C1_check_interval);
+                    break;
+            }
+        }
+
+        internal static void GetFaceRecognitionSwitch(int camindex, out bool faceRecognitionEnabled)
+        {
+            switch (camindex)
+            {
+                case 0:             
+                    faceRecognitionEnabled = Properties.Settings.Default.C1_enable_face_recognition;
+                    break;
+                case 1:             
+                    faceRecognitionEnabled = Properties.Settings.Default.C2_enable_face_recognition;
+                    break;
+                case 2:             
+                    faceRecognitionEnabled = Properties.Settings.Default.C3_enable_face_recognition;
+                    break;
+                case 3:             
+                    faceRecognitionEnabled = Properties.Settings.Default.C4_enable_face_recognition;
+                    break;
+                default:
+                    faceRecognitionEnabled = Properties.Settings.Default.C1_enable_face_recognition;
                     break;
             }
         }

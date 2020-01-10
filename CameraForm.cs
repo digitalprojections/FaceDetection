@@ -29,14 +29,14 @@ namespace FaceDetection
         private System.ComponentModel.IContainer components = null;
         private CameraNumberLabel camera_number;
         private DateTimeLabel dateTimeLabel;
-        private PictureBox rec_icon;
+        private RecIcon rec_icon;
         private FlowLayoutPanel controlButtons;
         private Button folderButton;
         private Button settingsButton;
         private Button snapshotButton;
         private Button cameraButton;
         private Button closeButton;
-        System.ComponentModel.ComponentResourceManager ressources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
         private ImageList imageList;
         private System.Timers.Timer hideIconTimer = new System.Timers.Timer();
         private delegate void dHideRecIcon();
@@ -44,41 +44,45 @@ namespace FaceDetection
 
         
         internal FaceDetector FaceDetector { get => faceDetector; set => faceDetector = value; }
-
-        public int CAMERA_INDEX = 0;
+        /// <summary>
+        /// Current camera index, not MAIN
+        /// </summary>
+        public int CameraIndex = 0;
         public bool closeFromSettings = false;
         public CROSSBAR crossbar;
         //public CROSSBAR[] crossbarList = new CROSSBAR[3];
-        CameraForm or_subform;
-        public CameraForm GetSubForm => or_subform;
+        CameraForm subform;
+        public CameraForm GetSubForm => subform;
 
         public CameraForm(int camind)
         {
-            or_subform = this;            
+            subform = this;            
 
-            this.Text = "UVC Camera Viewer - camera " + (camind + 1); //counting from the second camera            
-            CAMERA_INDEX = camind;
-            camera_number = new CameraNumberLabel(camind);            
-            this.Controls.Add(camera_number);
+            this.Text = "UVC Camera Viewer - camera " + (camind + 1); //counting from the second camera       
+            
+            
+            CameraIndex = camind;
+            
             
 
-            rec_icon = new PictureBox();
+            rec_icon = new RecIcon();
             this.Controls.Add(rec_icon);
 
             hideIconTimer.AutoReset = false;
             hideIconTimer.Elapsed += new System.Timers.ElapsedEventHandler(HideIcon_tick);
-
-            dateTimeLabel = new DateTimeLabel();
-            this.Controls.Add(dateTimeLabel);
             
-
             SettingsButtonsDesigner();
             this.Controls.Add(this.controlButtons);
 
-            this.ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CAMERA_INDEX);
-            this.Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CAMERA_INDEX);
+            this.ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
+            this.Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
 
-            crossbar = new CROSSBAR(camind, this);
+            camera_number = new CameraNumberLabel(CameraIndex);
+            this.Controls.Add(camera_number);
+            dateTimeLabel = new DateTimeLabel(CameraIndex);
+            this.Controls.Add(dateTimeLabel);
+
+            crossbar = new CROSSBAR(CameraIndex, this);
             //crossbarList[camind-1] = crossbar;
             crossbar.PreviewMode();
 
@@ -112,7 +116,7 @@ namespace FaceDetection
         {
             ///SET THE MAIN WINDOW ICONS AND BUTTON POSITIONS MANUALLY
             controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
-
+            
             mouse_down_timer.Elapsed += ShowButtonsDelayed;//制御ボタンの非/表示用クリックタイマー
             mouse_down_timer.Interval = 1000;
 
@@ -201,7 +205,7 @@ namespace FaceDetection
             camera_number.Visible = Properties.Settings.Default.show_camera_no;
             //or_camera_num_txt.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
             //MainForm.GetMainForm.TopMost = Properties.Settings.Default.window_on_top;
-            Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CAMERA_INDEX);
+            Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
             dateTimeLabel.Visible = Properties.Settings.Default.show_current_datetime;
 
             if (Properties.Settings.Default.main_window_full_screen)
@@ -260,8 +264,8 @@ namespace FaceDetection
             }
 
             
-            Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CAMERA_INDEX);
-            Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CAMERA_INDEX);
+            Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
+            Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
         }
 
         public void SetRecordButtonState(string state)
@@ -285,7 +289,7 @@ namespace FaceDetection
                     if (recordingInProgress == false)
                     {
                         SetRecordButtonState("rec");
-                        crossbar?.Start(CAMERA_INDEX, CAMERA_MODES.MANUAL);
+                        crossbar?.Start(CameraIndex, CAMERA_MODES.MANUAL);
                         SET_REC_ICON();
                     }
                 }
@@ -314,7 +318,7 @@ namespace FaceDetection
                 crossbarList[cam_index].Start(cam_index, CAMERA_MODES.PREVIEW);
             }
             */
-            crossbar.Start(CAMERA_INDEX, CAMERA_MODES.PREVIEW);
+            crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
         }
 
         public void SetToPreeventMode()
@@ -329,10 +333,10 @@ namespace FaceDetection
             //        }
             //    }
             //}
-            if (crossbar.INDEX == CAMERA_INDEX)
-                    {
-                        crossbar.Start(CAMERA_INDEX, CAMERA_MODES.PREEVENT);
-                    }
+            if (crossbar.INDEX == CameraIndex)
+            {
+                crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
+            }
         }
         public void SET_REC_ICON()
         {
@@ -388,13 +392,13 @@ namespace FaceDetection
 
         private void FormClass_ResizeEnd(object sender, EventArgs e)
         {
-            PROPERTY_FUNCTIONS.Set_Camera_Window_Size(CAMERA_INDEX, this);
+            PROPERTY_FUNCTIONS.Set_Camera_Window_Size(CameraIndex, this);
             crossbar.SetWindowPosition(this.Size);
         }
 
         private void FormClass_FormClosed(object sender, FormClosedEventArgs e)
         {
-            PROPERTY_FUNCTIONS.Set_Window_Location(CAMERA_INDEX, this);
+            PROPERTY_FUNCTIONS.Set_Window_Location(CameraIndex, this);
             Properties.Settings.Default.Save();
             crossbar.ReleaseSecondaryCamera();
             crossbar = null;
@@ -408,7 +412,7 @@ namespace FaceDetection
                 //Application.Exit();
             }
 
-            if (Properties.Settings.Default.main_camera_index == CAMERA_INDEX) // The form closed was the main camera selected
+            if (Properties.Settings.Default.main_camera_index == CameraIndex) // The form closed was the main camera selected
             {
                 //Main camera closing means the following do not work
                 //operator capture: human sensor, keyboard and mouse events
@@ -486,7 +490,16 @@ namespace FaceDetection
             bool eventRecorderEnabled = false, IRSensorEnabled = false, faceRecognitionEnabled = false, recordingWhenOperationEnabled = false;
             int eventRecordTimeBeforeEvent = 0, secondBeforeOperationEvent = 0;
 
-            if (cameraSender == "2")
+            if (cameraSender == "1")
+            {
+                eventRecorderEnabled = Properties.Settings.Default.C1_enable_event_recorder;
+                IRSensorEnabled = Properties.Settings.Default.C1_enable_Human_sensor;
+                faceRecognitionEnabled = Properties.Settings.Default.C1_enable_face_recognition;
+                recordingWhenOperationEnabled = Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
+                eventRecordTimeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C1_event_record_time_before_event);
+                secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
+            }
+            else if (cameraSender == "2")
             {
                 eventRecorderEnabled = Properties.Settings.Default.C2_enable_event_recorder;
                 IRSensorEnabled = Properties.Settings.Default.C2_enable_Human_sensor;
@@ -640,11 +653,11 @@ namespace FaceDetection
         }
         public void SetCameraToDefaultMode()
         {
-            if (PROPERTY_FUNCTIONS.CheckPreEventTimes(CAMERA_INDEX))
+            if (PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
             {
-                if (CAMERA_INDEX == 0)
+                if (CameraIndex == 0)
                 {
-                    MainForm.GetMainForm.crossbar?.Start(0, CAMERA_MODES.PREEVENT);
+                    MULTI_WINDOW.formList[CameraIndex].crossbar?.Start(0, CAMERA_MODES.PREEVENT);
                 }
                 else
                 {
@@ -655,18 +668,12 @@ namespace FaceDetection
                 }
             }
             else
-            {
-                if (CAMERA_INDEX == 0)
+            {   
+                if (MULTI_WINDOW.displayedCameraCount > 0)
                 {
-                    MainForm.GetMainForm.crossbar?.Start(0, CAMERA_MODES.PREVIEW);
-                }
-                else
-                {
-                    if (MULTI_WINDOW.displayedCameraCount > 0)
-                    {
-                        SetToPreviewMode();
-                    }
-                }
+                    MULTI_WINDOW.formList[CameraIndex].crossbar?.Start(0, CAMERA_MODES.PREVIEW);
+                    SetToPreviewMode();
+                }                
             }
         }
         private void SettingsButtonsDesigner()
@@ -712,7 +719,7 @@ namespace FaceDetection
             // 
             // imageList
             // 
-            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(ressources.GetObject("imageList1.ImageStream")));
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList.Images.SetKeyName(0, "camera-icon.png");
             this.imageList.Images.SetKeyName(1, "Configuration-icon.png");

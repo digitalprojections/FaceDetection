@@ -15,7 +15,7 @@ namespace FaceDetection
         private readonly KeyboardListener keyboardListener = new KeyboardListener();
         private readonly MouseListener mouseListener = new MouseListener();
         private static readonly MouseListener mouseListenerClick = new MouseListener();
-
+        private int CAMERA_INDEX = 0;
         public bool Listen { get => listen; set => listen = value; }
 
         public MOUSE_KEYBOARD()
@@ -28,7 +28,8 @@ namespace FaceDetection
             {                
                 Listen = true;
             }
-            
+
+            CAMERA_INDEX = Properties.Settings.Default.main_camera_index;
         }
         public void START_CLICK_LISTENER()
         {
@@ -64,71 +65,41 @@ namespace FaceDetection
         }
         private void MouseKeyEventInit()
         {
-            int camindex = Properties.Settings.Default.main_camera_index;
+            
             string captureMethod = "";
             int timeBeforeEvent = 0, timeAfterEvent = 0;
             bool captureOperatorEnabled = false, recordWhenOperation = false, preeventRecording = false;
 
+            PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(CAMERA_INDEX, out timeBeforeEvent, out timeAfterEvent);
+            PROPERTY_FUNCTIONS.GetCaptureMethod(CAMERA_INDEX, out captureMethod);
+            PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(CAMERA_INDEX, out captureOperatorEnabled);
+            PROPERTY_FUNCTIONS.GetCaptureOnOperationStartSwitch(CAMERA_INDEX, out recordWhenOperation);
             try
             {
-                switch (camindex)
-                {
-                    case 0:
-                        timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
-                        timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
-                        captureOperatorEnabled = Properties.Settings.Default.C1_enable_capture_operator;
-                        recordWhenOperation = Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
-                        
-                        captureMethod = Properties.Settings.Default.C1_capture_type;
-                        break;
-                    case 1:
-                        timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
-                        timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
-                        captureOperatorEnabled = Properties.Settings.Default.C2_enable_capture_operator;
-                        recordWhenOperation = Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation;
-                        
-                        captureMethod = Properties.Settings.Default.C2_capture_type;
-                        break;
-                    case 2:
-                        timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
-                        timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
-                        captureOperatorEnabled = Properties.Settings.Default.C3_enable_capture_operator;
-                        recordWhenOperation = Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation;
-                        
-                        captureMethod = Properties.Settings.Default.C3_capture_type;
-                        break;
-                    case 3:
-                        timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
-                        timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
-                        captureOperatorEnabled = Properties.Settings.Default.C4_enable_capture_operator;
-                        recordWhenOperation = Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation;
-                        
-                        captureMethod = Properties.Settings.Default.C4_capture_type;
-                        break;
-                }
-                preeventRecording = MULTI_WINDOW.formList[camindex].crossbar.PREEVENT_RECORDING;
-                if (captureOperatorEnabled && recordWhenOperation && Listen && !MainForm.GetMainForm.crossbar.OPER_BAN)
+                
+                preeventRecording = MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.PREEVENT_RECORDING;
+                if (captureOperatorEnabled && recordWhenOperation && Listen && !MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.OPER_BAN)
                 {
                     Listen = false;
                     if (captureMethod != "Snapshot") // Video
                     {
                         if (preeventRecording && timeAfterEvent > 0)
                         {
-                            TaskManager.EventAppeared(RECORD_PATH.EVENT, camindex + 1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
-                            MULTI_WINDOW.formList[camindex].crossbar.No_Cap_Timer_ON(timeAfterEvent);
-                            MULTI_WINDOW.formList[camindex].SetRecordIcon(camindex, timeAfterEvent);
+                            TaskManager.EventAppeared(RECORD_PATH.EVENT, CAMERA_INDEX + 1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+                            MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.No_Cap_Timer_ON(timeAfterEvent);
+                            MULTI_WINDOW.formList[CAMERA_INDEX].SetRecordIcon(CAMERA_INDEX, timeAfterEvent);
 
                         }
                         else
                         {
-                            MULTI_WINDOW.formList[camindex].crossbar.Start(camindex, CAMERA_MODES.OPERATOR);
+                            MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.Start(CAMERA_INDEX, CAMERA_MODES.OPERATOR);
                         }
                     }
                     else // Snapshot
                     {
-                        SNAPSHOT_SAVER.TakeSnapShot(camindex, "event");
+                        SNAPSHOT_SAVER.TakeSnapShot(CAMERA_INDEX, "event");
 
-                        MULTI_WINDOW.formList[camindex].crossbar.No_Cap_Timer_ON(0);
+                        MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.No_Cap_Timer_ON(0);
                     }
 
                     MainForm.GetMainForm.BackLight.Restart();

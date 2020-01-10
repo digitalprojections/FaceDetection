@@ -43,6 +43,7 @@ namespace FaceDetection
         //User actions end
         static SettingsUI settingUI;
         static Form mainForm;
+        public int CAMERA_INDEX = 0;
 
         static Stopwatch stopwatch = new Stopwatch();
 
@@ -60,7 +61,7 @@ namespace FaceDetection
             if (vs != null && vs.Count() > 0)
             {
                 PARAMETERS.HandleParameters(vs);
-                Logger.Add(vs.Count + "HandleParameters");
+                Logger.Add(vs.Count + " HandleParameters");
             }
             
             if(PARAMETERS.PARAM!=null)
@@ -153,8 +154,8 @@ namespace FaceDetection
         
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //StopAll(); 
-            RSensor.Destroy();            
+            //StopAll();             
+            RSensor?.Destroy();
             Application.Exit();
         }
         
@@ -193,19 +194,14 @@ namespace FaceDetection
 
             if (PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(cam_index))
             {
-                if (RSensor != null)
-                {
-                    RSensor.Stop_IR_Timer();
-                }
-                RSensor.SetInterval();
-                RSensor.Start_IR_Timer();
+                
+                RSensor?.Stop_IR_Timer();                
+                RSensor?.SetInterval();
+                RSensor?.Start_IR_Timer();
             }
             else
-            {
-                if (RSensor != null)
-                {
-                    RSensor.Stop_IR_Timer();
-                }
+            {                
+                RSensor?.Stop_IR_Timer();             
             }
 
             
@@ -228,7 +224,7 @@ namespace FaceDetection
             {
                 if (cam_index == 0)
                 {
-                    MainForm.GetMainForm.TopMost = true;
+                    //MainForm.GetMainForm.TopMost = true;
                     for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                     {
                         MULTI_WINDOW.formList[i].TopMost = false;
@@ -252,7 +248,7 @@ namespace FaceDetection
             }
             else
             {
-                MainForm.GetMainForm.TopMost = false;
+                //MainForm.GetMainForm.TopMost = false;
                 for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
                     MULTI_WINDOW.formList[i].TopMost = false;
@@ -291,14 +287,7 @@ namespace FaceDetection
                 }
                 else
                 {
-                    if (cam_index == 0)
-                    {
-                    GetMainForm.WindowState = FormWindowState.Normal;
-                    }
-                    else
-                    {
-                        MULTI_WINDOW.formList[cam_index - 1].WindowState = FormWindowState.Normal;
-                    }
+                    MULTI_WINDOW.formList[cam_index - 1].WindowState = FormWindowState.Normal;
                 }
 
                 PARAMETERS.PARAM.Clear();
@@ -489,14 +478,14 @@ namespace FaceDetection
             }
         }
 
-        private void MainForm_ResizeEnd(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
-            Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
-            //Properties.Settings.Default.main_screen_size = new Size(this.Width, this.Height);
-            Properties.Settings.Default.Save();
-            //WindowSizeUpdate();
-        }
+        //private void MainForm_ResizeEnd(object sender, EventArgs e)
+        //{
+        //    Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
+        //    Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
+        //    //Properties.Settings.Default.main_screen_size = new Size(this.Width, this.Height);
+        //    Properties.Settings.Default.Save();
+        //    //WindowSizeUpdate();
+        //}
 
         private void BackgroundWorkerMain_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
@@ -505,10 +494,9 @@ namespace FaceDetection
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
-            Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);
-            
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
+            //Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);            
+            //Properties.Settings.Default.Save();
 
             Application.Exit();
         }

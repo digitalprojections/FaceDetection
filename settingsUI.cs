@@ -148,26 +148,18 @@ namespace FaceDetection
         {
             Properties.Settings.Default.Save();
             Camera.CountCamera();
-            int cam_index = Camera_index;
+            
             Hide();
 
             if (Properties.Settings.Default.show_all_cams_simulteneously == false)
             {
-                if (cam_index != 0)
-                {
-                    MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
-                }
                 for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
-                    if (i != cam_index - 1)
-                    {
-                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
-                    }
+                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
                 }
             }
             else
             {
-                MainForm.GetMainForm.WindowState = FormWindowState.Normal;
                 for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
                      MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
@@ -176,29 +168,21 @@ namespace FaceDetection
 
             MainForm.AllChangesApply();
 
-            MainForm.GetMainForm.Width = decimal.ToInt32(Properties.Settings.Default.C1w);
-            MainForm.GetMainForm.Height = decimal.ToInt32(Properties.Settings.Default.C1h);
+            
             // this.Hide();
 
             // 4 Cameras: the selected camera became preevent mode (or preview), others became preview mode
-            if (cam_index == 0)
-            {
+            
+                MULTI_WINDOW.formList[Camera_index].crossbar.Start(Camera_index, CAMERA_MODES.PREVIEW);
                 for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
-                    MULTI_WINDOW.SetToPreviewMode(i);
-                }
-            }
-            else
-            {
-                MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREVIEW);
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    if (i != (cam_index - 1))
+                    if (i != Camera_index)
                     { 
                         MULTI_WINDOW.SetToPreviewMode(i);
                     }
-                }
+                MULTI_WINDOW.formList[i].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);                
             }
+            
         }        
 
         private void SetCameraPropertiesFromMemory()
