@@ -157,25 +157,18 @@ namespace FaceDetection
             #region Instances
             ///////////////////////////////////////
             settingUI = new SettingsUI();
-            //RSensor = new IRSensor();
-            
+            //RSensor = new IRSensor();            
             backLight = new BackLightController();
             BackLight.Start();
             Mklisteners = new MOUSE_KEYBOARD();
             ////////////////////////////////////////
             #endregion
-
-            //Main window TIMERS
-            
-            //Object references
-                    
-            mainForm = this;
-            
-            this.WindowState = FormWindowState.Minimized;
-            
-            AllChangesApply();
-            
-            //ClearCutFileTempFolder();
+            //Object references                    
+            mainForm = this;            
+            this.WindowState = FormWindowState.Minimized;            
+            AllChangesApply();            
+            ClearCutFileTempFolder();
+            ClearTempFolder();
         }
 
         public static void AllChangesApply()
@@ -359,6 +352,100 @@ namespace FaceDetection
             catch(Exception ex)
             {
                 //Console.WriteLine(@" TEMP\4\CutTemp does not exist");
+            }
+        }
+
+        private void ClearTempFolder()
+        {
+            string[] listFiles1, listFiles2, listFiles3, listFiles4;
+            List<string> listFilesToClear = new List<string>();
+            try
+            {
+                if (Directory.Exists(@"D:\TEMP\1"))
+                {
+                    listFiles1 = Directory.GetFiles(@"D:\TEMP\1");
+                }
+                else
+                {
+                    listFiles1 = Directory.GetFiles(@"C:\TEMP\1");
+                }
+
+                listFilesToClear = listFiles1.ToList();
+                for (int i = 0; i < listFilesToClear.Count; i++)
+                {
+                    File.SetAttributes(listFilesToClear.ElementAt(i), FileAttributes.Normal); // Add in case of weird attribute on the file
+                    File.Delete(listFilesToClear.ElementAt(i));
+                }
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(@" TEMP\1 does not exist");
+            }
+
+            try
+            {
+                if (Directory.Exists(@"D:\TEMP\2"))
+                {
+                    listFiles2 = Directory.GetFiles(@"D:\TEMP\2");
+                }
+                else
+                {
+                    listFiles2 = Directory.GetFiles(@"C:\TEMP\2");
+                }
+                listFilesToClear = listFiles2.ToList();
+                for (int i = 0; i < listFilesToClear.Count; i++)
+                {
+                    File.SetAttributes(listFilesToClear.ElementAt(i), FileAttributes.Normal); // Add in case of weird attribute on the file
+                    File.Delete(listFilesToClear.ElementAt(i));
+                }
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(@" TEMP\2 does not exist");
+            }
+
+            try
+            {
+                if (Directory.Exists(@"D:\TEMP\3"))
+                {
+                    listFiles3 = Directory.GetFiles(@"D:\TEMP\3");
+                }
+                else
+                {
+                    listFiles3 = Directory.GetFiles(@"C:\TEMP\3");
+                }
+                listFilesToClear = listFiles3.ToList();
+                for (int i = 0; i < listFilesToClear.Count; i++)
+                {
+                    File.SetAttributes(listFilesToClear.ElementAt(i), FileAttributes.Normal); // Add in case of weird attribute on the file
+                    File.Delete(listFilesToClear.ElementAt(i));
+                }
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(@" TEMP\3 does not exist");
+            }
+
+            try
+            {
+                if (Directory.Exists(@"D:\TEMP\4"))
+                {
+                    listFiles4 = Directory.GetFiles(@"D:\TEMP\4");
+                }
+                else
+                {
+                    listFiles4 = Directory.GetFiles(@"C:\TEMP\4");
+                }
+                listFilesToClear = listFiles4.ToList();
+                for (int i = 0; i < listFilesToClear.Count; i++)
+                {
+                    File.SetAttributes(listFilesToClear.ElementAt(i), FileAttributes.Normal); // Add in case of weird attribute on the file
+                    File.Delete(listFilesToClear.ElementAt(i));
+                }
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(@" TEMP\4 does not exist");
             }
         }
 
