@@ -82,7 +82,7 @@ namespace FaceDetection
                     // METHOD
                     switch (method)
                     {
-                        case "":
+                        case ""://No method?
                             if (CheckCameraIndex(cameraIndex))
                             {
                                 if(cameraIndex == 8)
@@ -170,7 +170,7 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "b":
+                        case "b"://
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
@@ -198,7 +198,7 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "d":
+                        case "d"://EnableDisable Face detection
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))

@@ -156,6 +156,7 @@ namespace FaceDetection
         
         public void SetIconTimer(decimal recording_length)
         {
+            Recording_is_on = true;
             window.SET_REC_ICON();
             icon_timer.Interval = decimal.ToInt32(recording_length) * 1000;
             icon_timer.Enabled = true;
@@ -450,7 +451,7 @@ namespace FaceDetection
 
         internal void RecordingMode(int index)
         {
-            Recording_is_on = true;
+            
             if (camera != null && camera.ON)
             {
                 camera.Release();                    
