@@ -8,7 +8,6 @@ namespace FaceDetection
 {
     public class CameraForm : Form
     {
-
         private delegate void dShowControlButtons();
 
         private readonly System.Timers.Timer mouse_down_timer = new System.Timers.Timer();
@@ -50,7 +49,7 @@ namespace FaceDetection
         /// Current camera index, not MAIN
         /// </summary>
         public int CameraIndex = 0;
-        public bool closeFromSettings = false;
+        //public bool closeFromSettings = false;
         public CROSSBAR crossbar;
         
         CameraForm subform;
@@ -58,17 +57,13 @@ namespace FaceDetection
 
         public CameraForm(int camind)
         {
-            subform = this;            
-
-            
-                        
+            subform = this;       
             CameraIndex = camind;
                         
             hideIconTimer.AutoReset = false;
             hideIconTimer.Elapsed += new System.Timers.ElapsedEventHandler(HideIcon_tick);
 
             this.Load += CameraForm_Load;
-
         }
 
         private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -187,6 +182,7 @@ namespace FaceDetection
                 controlButtons.Visible = false;
             }
         }
+
         public void ChangesFromParametersApply()
         {
             if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0)
@@ -228,8 +224,6 @@ namespace FaceDetection
         {
             return crossbar?.GetBitmap();
         }
-
-
 
         internal void SetWindowProperties()
         {
@@ -307,6 +301,7 @@ namespace FaceDetection
         {
             cameraButton.Tag = state;
         }
+
         /// <summary>
         /// Manual Start
         /// </summary>
@@ -346,6 +341,7 @@ namespace FaceDetection
                 Logger.Add(iox);
             }
         }
+
         public void SetToPreviewMode()
         {
             /*if (crossbarList[cam_index] != null)
@@ -373,11 +369,13 @@ namespace FaceDetection
                 crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
             }
         }
+
         public void SET_REC_ICON()
         {
             picbox_recording.Visible = Properties.Settings.Default.show_recording_icon;
             recordingInProgress = true;
         }
+
         public void StarttheTimer()
         {
             //if (crossbarList[cam_index - 1] != null)
@@ -386,8 +384,6 @@ namespace FaceDetection
             //}
             crossbar.StartTimer();
         }
-
-        
 
         public void SetRecordIcon (int cam_index, int timeAfterEvent)
         {
@@ -437,14 +433,14 @@ namespace FaceDetection
             crossbar.ReleaseSecondaryCamera();
             crossbar = null;
 
-            if (closeFromSettings)
-            {
-                closeFromSettings = false;
-            }
-            else
-            {
-                //Application.Exit();
-            }
+            //if (closeFromSettings)
+            //{
+            //    closeFromSettings = false;
+            //}
+            //else
+            //{
+            //    //Application.Exit();
+            //}
 
             if (Properties.Settings.Default.main_camera_index == CameraIndex) // The form closed was the main camera selected
             {
@@ -506,7 +502,6 @@ namespace FaceDetection
             cameraSender = cameraSender.Substring(cameraSender.Length - 1, 1);
 
             SNAPSHOT_SAVER.TakeSnapShot(Convert.ToInt32(cameraSender) - 1);
-        
         }
 
         private void ManualVideoRecording(object sender, EventArgs e)
@@ -589,10 +584,10 @@ namespace FaceDetection
                     }
                 }
             }
-                catch (InvalidOperationException iox)
-                {
-                    Logger.Add(iox);
-                }
+            catch (InvalidOperationException iox)
+            {
+                Logger.Add(iox);
+            }
             //}
         }
 
@@ -612,6 +607,7 @@ namespace FaceDetection
                 PARAMETERS.PARAM.Clear();
             }
         }
+
         /// <summary>
         /// One second timer to update UI datetime (it also deletes old files)
         /// </summary>
@@ -620,6 +616,7 @@ namespace FaceDetection
             //DateTimeUpdater();            
             
         }
+
         public void DateTimeUpdater()
         {
             if (dateTimeLabel != null && dateTimeLabel.InvokeRequired)
@@ -684,6 +681,7 @@ namespace FaceDetection
                 }
             }
         }
+
         public void SetCameraToDefaultMode()
         {
             if (CameraIndex == Properties.Settings.Default.main_camera_index && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
@@ -699,6 +697,7 @@ namespace FaceDetection
                 }
             }
         }
+
         private void SettingsButtonsDesigner()
         {
             this.components = new System.ComponentModel.Container();

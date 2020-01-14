@@ -70,10 +70,8 @@ namespace FaceDetection
             }
 
             backLight = new BackLightController();
-
             
             stopwatch.Start();
-            
         }        
         
         
@@ -180,13 +178,10 @@ namespace FaceDetection
             
             this.WindowState = FormWindowState.Minimized;
             
-            
             AllChangesApply();
             FillResolutionList();
             //ClearCutFileTempFolder();
         }
-
-        
 
         public static void AllChangesApply()
         {
@@ -194,7 +189,6 @@ namespace FaceDetection
 
             if (PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(cam_index))
             {
-                
                 RSensor?.Stop_IR_Timer();                
                 RSensor?.SetInterval();
                 RSensor?.Start_IR_Timer();
@@ -203,37 +197,25 @@ namespace FaceDetection
             {                
                 RSensor?.Stop_IR_Timer();             
             }
-
             
-
             if (Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation)
             {
                 Mklisteners.AddMouseAndKeyboardBack();
             }
-
             
             MULTI_WINDOW.formSettingsChanged();
 
             //CREATE CAMERA WINDOWS
             MULTI_WINDOW.CreateCameraWindows(decimal.ToInt32(Properties.Settings.Default.camera_count), cam_index);
 
-            
-
             // Top most
             if (Properties.Settings.Default.window_on_top)
             {
+
                     if (MULTI_WINDOW.displayedCameraCount > 0)
                     {
                     MULTI_WINDOW.formList[cam_index].Activate();
                     }
-                    //MainForm.GetMainForm.TopMost = false;
-                    //for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                    //{
-                    //    if (i != (cam_index))
-                    //    {
-                    //        MULTI_WINDOW.formList[i].TopMost = false;
-                    //    }
-                    //}
             }
             else
             {
@@ -272,33 +254,22 @@ namespace FaceDetection
             if (stopwatch.ElapsedMilliseconds>=3600000)
             {
                 stopwatch.Restart();
-                    CheckDiskSpace.DeleteOldFiles();
-                    //    freeDiskSpaceLeft = CheckDiskSpace.CheckDisk();
-                    //    if (freeDiskSpaceLeft < 2) // 2 Go
-                    //    {
-                    //        try
-                    //        {
-                    //            warningForm.Select(); // If the form already exist, put it on the front
-                    //        }
-                    //        catch (Exception ex) // If the form doesn't exist yet, create it
-                    //        {
-                    //            warningForm = new DiskSpaceWarning();
-                    //            warningForm.Show();
-                    //        }
-                    //    }
-                }
+                CheckDiskSpace.DeleteOldFiles();
+                //    freeDiskSpaceLeft = CheckDiskSpace.CheckDisk();
+                //    if (freeDiskSpaceLeft < 2) // 2 Go
+                //    {
+                //        try
+                //        {
+                //            warningForm.Select(); // If the form already exist, put it on the front
+                //        }
+                //        catch (Exception ex) // If the form doesn't exist yet, create it
+                //        {
+                //            warningForm = new DiskSpaceWarning();
+                //            warningForm.Show();
+                //        }
+                //    }
             }
-
-            
-        
-
-        
-
-        
-
-        
-
-        
+        }
 
         /// <summary>
         /// Loop through the camera properties to select all available resolutions and FPS
