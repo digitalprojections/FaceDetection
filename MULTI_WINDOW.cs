@@ -11,7 +11,6 @@ namespace FaceDetection
     {
         //private delegate void dDateTimerUpdater();
         
-
         private static CameraForm form;
         public static CameraForm[] formList = new CameraForm[4];
         public static int displayedCameraCount = 0;
@@ -55,7 +54,7 @@ namespace FaceDetection
             {
                 try
                 {
-                    for (int i = displayedCameraCount-1; i >= numberOfCamerasToDisplay; i--)
+                    for (int i = displayedCameraCount - 1; i >= numberOfCamerasToDisplay; i--)
                     {
                         //formList[i].closeFromSettings = true;
                         formList[i].Close();
@@ -94,7 +93,6 @@ namespace FaceDetection
 
         public static void formSettingsChanged()
         {            
-
             for (int i = 0; i < displayedCameraCount; i++)
             {
                 formList[i].SetWindowProperties();
@@ -131,6 +129,7 @@ namespace FaceDetection
                 formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.PREVIEW);
             }
         }
+
         public static bool PreeventRecordingState(int cam_index)
         {   
             return formList[cam_index].crossbar.PREEVENT_RECORDING;
