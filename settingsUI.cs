@@ -241,6 +241,7 @@ namespace FaceDetection
 
         public static void SetComboBoxFPSValues(List<string> vs)
         {
+            frame_rates_combo.Items.Clear();
             bool matching_fps_found = false;
             if (frame_rates_combo != null)
             {
@@ -264,6 +265,7 @@ namespace FaceDetection
         /// <param name="vs"></param>
         public static void SetComboBoxResolutionValues(List<string> vs)
         {
+            resolutions_combo.Items.Clear();
             if (resolutions_combo != null)
             {
                 resolutions_combo.Items.AddRange(vs.ToArray());
@@ -281,6 +283,7 @@ namespace FaceDetection
             Camera_index = comboBox.SelectedIndex;
             Properties.Settings.Default.main_camera_index = Camera_index;
             labelCameraNumber.Text = (Camera_index + 1).ToString();
+            MULTI_WINDOW.GetVideoFormatByCamera(Camera_index);
             SetCameraPropertiesFromMemory();
         }
 

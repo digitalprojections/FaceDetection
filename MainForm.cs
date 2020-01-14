@@ -34,12 +34,7 @@ namespace FaceDetection
         static IRSensor rSensor;
         internal static IRSensor RSensor { get => rSensor; set => rSensor = value; }
 
-        private static UsbCamera.VideoFormat[] videoFormat = UsbCamera.GetVideoFormat(0);
-        /// <summary>
-        /// SettingsUI resolutions data, generated each time. But set to the memory value
-        /// </summary>
-        private static List<string> vf_resolutions = new List<string>();
-        private static List<string> vf_fps = new List<string>();
+        
         //User actions end
         static SettingsUI settingUI;
         static Form mainForm;
@@ -179,7 +174,7 @@ namespace FaceDetection
             this.WindowState = FormWindowState.Minimized;
             
             AllChangesApply();
-            FillResolutionList();
+            
             //ClearCutFileTempFolder();
         }
 
@@ -206,7 +201,7 @@ namespace FaceDetection
             MULTI_WINDOW.formSettingsChanged();
 
             //CREATE CAMERA WINDOWS
-            MULTI_WINDOW.CreateCameraWindows(decimal.ToInt32(Properties.Settings.Default.camera_count), cam_index);
+            MULTI_WINDOW.CreateCameraWindows();
 
             // Top most
             if (Properties.Settings.Default.window_on_top)
@@ -271,63 +266,7 @@ namespace FaceDetection
             }
         }
 
-        /// <summary>
-        /// Loop through the camera properties to select all available resolutions and FPS
-        /// </summary>
-        private void FillResolutionList()
-        {
-            long FPS;
-            //////////////////////////////////////////////////////////////////
-            ///VIDEOFORMAT
-            //////////////////////////////////////////////////////////////////
-            //Showing video formats
-            for (int k = 0; k < videoFormat.Length; k++)
-            {
-                if (GetMainForm.UniqueVideoParameter(vf_resolutions, videoFormat[k].Size) != true)
-                {
-                    vf_resolutions.Add(videoFormat[k].Size.Width + "x" + videoFormat[k].Size.Height);                    
-                }
-                FPS = 10000000 / videoFormat[k].TimePerFrame;
-                if (GetMainForm.UniqueFPS(FPS) != true)
-                {
-                    vf_fps.Add(FPS.ToString());        
-                }
-            }
-            SettingsUI.SetComboBoxResolutionValues(vf_resolutions);
-            SettingsUI.SetComboBoxFPSValues(vf_fps);
-            //Logger.Add("UniqueVideoParameter " + vf_resolutions.Count);
-            //////////////////////////////////////////////////////////////////
-            ///VIDEOFORMAT
-            //////////////////////////////////////////////////////////////////            
-        }
-
-        private bool UniqueFPS(long fps)
-        {
-            bool retval = false;
-            for (int i = 0; i < vf_fps.Count; i++)
-            {
-                if (UInt32.Parse(vf_fps[i]) == fps)
-                {
-                    retval = true;
-                }
-            }
-            return retval;
-        }
-
-        private bool UniqueVideoParameter(List<string> vf, Size s)
-        {
-            bool retval = false;
-            string temp = s.Width + "x" + s.Height;
-            //
-            for (int i = 0; i < vf.Count; i++)
-            {
-                if (vf[i] == temp)
-                {
-                    retval = true;
-                }
-            }
-            return retval;
-        }
+        
 
         private void ClearCutFileTempFolder()
         {
