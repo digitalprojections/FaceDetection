@@ -20,6 +20,10 @@ namespace FaceDetection
         static string[] camera_names;
 
         private int MainCameraBeforeSettingsLoad;
+        private bool operatorCaptureCbStateC1, operatorCaptureCbStateC2, operatorCaptureCbStateC3, operatorCaptureCbStateC4;
+        private bool sensorEnabledCbStateC1, sensorEnabledCbStateC2, sensorEnabledCbStateC3, sensorEnabledCbStateC4;
+        private bool faceDetectionCbStateC1, faceDetectionCbStateC2, faceDetectionCbStateC3, faceDetectionCbStateC4;
+        private bool operatorActionCbStateC1, operatorActionCbStateC2, operatorActionCbStateC3, operatorActionCbStateC4;
 
         public SettingsUI()
         {
@@ -49,6 +53,9 @@ namespace FaceDetection
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
         }
 
+        /// <summary>
+        /// Get or set the MAIN CAMERA INDEX (Camera facing the user)
+        /// </summary>
         public int Camera_index
         {
             get
@@ -101,10 +108,6 @@ namespace FaceDetection
             }
         }
 
-        //private void CameraSettingsForm_FormClosing(object sender, FormClosingEventArgs e)
-        //{
-        //}
-
         private void OpenStoreLocation(object sender, EventArgs e)
         {
             try
@@ -123,32 +126,41 @@ namespace FaceDetection
             Hide();
             Properties.Settings.Default.Reload();
             Properties.Settings.Default.main_camera_index = MainCameraBeforeSettingsLoad;
+            Properties.Settings.Default.C1_enable_capture_operator = operatorCaptureCbStateC1;
+            Properties.Settings.Default.C1_enable_Human_sensor = sensorEnabledCbStateC1;
+            Properties.Settings.Default.C1_enable_face_recognition = faceDetectionCbStateC1;
+            Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation = operatorActionCbStateC1;
+            Properties.Settings.Default.C2_enable_capture_operator = operatorCaptureCbStateC2;
+            Properties.Settings.Default.C2_enable_Human_sensor = sensorEnabledCbStateC2;
+            Properties.Settings.Default.C2_enable_face_recognition = faceDetectionCbStateC2;
+            Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation = operatorActionCbStateC2;
+            Properties.Settings.Default.C3_enable_capture_operator = operatorCaptureCbStateC3;
+            Properties.Settings.Default.C3_enable_Human_sensor = sensorEnabledCbStateC3;
+            Properties.Settings.Default.C3_enable_face_recognition = faceDetectionCbStateC3;
+            Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation = operatorActionCbStateC3;
+            Properties.Settings.Default.C4_enable_capture_operator = operatorCaptureCbStateC4;
+            Properties.Settings.Default.C4_enable_Human_sensor = sensorEnabledCbStateC4;
+            Properties.Settings.Default.C4_enable_face_recognition = faceDetectionCbStateC4;
+            Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation = operatorActionCbStateC4;
         }
 
         private void Save_and_close(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save();
-            int cam_index = Camera_index;
+            Camera.CountCamera();
+            
             Hide();
 
             if (Properties.Settings.Default.show_all_cams_simulteneously == false)
             {
-                if (cam_index != 0)
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
-                    MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
-                }
-                for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
-                {
-                    if (i != cam_index - 1)
-                    {
-                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
-                    }
+                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
                 }
             }
             else
             {
-                MainForm.GetMainForm.WindowState = FormWindowState.Normal;
-                for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
                      MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
                 }
@@ -156,29 +168,21 @@ namespace FaceDetection
 
             MainForm.AllChangesApply();
 
-            MainForm.GetMainForm.Width = decimal.ToInt32(Properties.Settings.Default.C1w);
-            MainForm.GetMainForm.Height = decimal.ToInt32(Properties.Settings.Default.C1h);
+            
             // this.Hide();
 
             // 4 Cameras: the selected camera became preevent mode (or preview), others became preview mode
-            if (cam_index == 0)
-            {
-                for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
+            
+                MULTI_WINDOW.formList[Camera_index].crossbar.Start(Camera_index, CAMERA_MODES.PREVIEW);
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
-                    FormClass.GetSubForm.SetToPreviewMode(i);
-                }
-            }
-            else
-            {
-                MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.PREVIEW);
-                for (int i = 0; i < MULTI_WINDOW.subCameraHasBeenDisplayed; i++)
-                {
-                    if (i != (cam_index - 1))
+                    if (i != Camera_index)
                     { 
-                        FormClass.GetSubForm.SetToPreviewMode(i);
+                        MULTI_WINDOW.SetToPreviewMode(i);
                     }
-                }
+                MULTI_WINDOW.formList[i].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);                
             }
+            
         }        
 
         private void SetCameraPropertiesFromMemory()
@@ -221,6 +225,7 @@ namespace FaceDetection
             numericUpDownW.Enabled = !Properties.Settings.Default.main_window_full_screen;
             numericUpDownH.Enabled = !Properties.Settings.Default.main_window_full_screen;
 
+            cm_capture_mode.DataBindings.Add(new Binding("Text", Properties.Settings.Default, "C" + (Camera_index + 1) + "_capture_type", true, DataSourceUpdateMode.OnPropertyChanged));
             cb_event_recorder.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_event_recorder", true, DataSourceUpdateMode.OnPropertyChanged));
             event_record_time_before_event.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C"+ (Camera_index + 1) + "_event_record_time_before_event", true, DataSourceUpdateMode.OnPropertyChanged));
             nud_event_record_after.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (Camera_index + 1) + "_event_record_time_after_event", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -232,7 +237,6 @@ namespace FaceDetection
             cb_face_recognition.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_face_recognition", true, DataSourceUpdateMode.OnPropertyChanged));
             cb_human_sensor.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_Human_sensor", true, DataSourceUpdateMode.OnPropertyChanged));
             cb_recording_operation.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_Recording_when_at_the_start_of_operation", true, DataSourceUpdateMode.OnPropertyChanged));
-            cm_capture_mode.DataBindings.Add(new Binding("Text", Properties.Settings.Default, "C" + (Camera_index + 1) + "_capture_type", true, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         public static void SetComboBoxFPSValues(List<string> vs)
@@ -282,12 +286,29 @@ namespace FaceDetection
 
         private void SettingsUI_Load(object sender, EventArgs e)
         {
+            // Memorise in case of Cancel button 
             MainCameraBeforeSettingsLoad = Properties.Settings.Default.main_camera_index;
+            operatorCaptureCbStateC1 = Properties.Settings.Default.C1_enable_capture_operator;
+            sensorEnabledCbStateC1 = Properties.Settings.Default.C1_enable_Human_sensor;
+            faceDetectionCbStateC1 = Properties.Settings.Default.C1_enable_face_recognition;
+            operatorActionCbStateC1 = Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
+            operatorCaptureCbStateC2 = Properties.Settings.Default.C2_enable_capture_operator;
+            sensorEnabledCbStateC2 = Properties.Settings.Default.C2_enable_Human_sensor;
+            faceDetectionCbStateC2 = Properties.Settings.Default.C2_enable_face_recognition;
+            operatorActionCbStateC2 = Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation;
+            operatorCaptureCbStateC3 = Properties.Settings.Default.C3_enable_capture_operator;
+            sensorEnabledCbStateC3 = Properties.Settings.Default.C3_enable_Human_sensor;
+            faceDetectionCbStateC3 = Properties.Settings.Default.C3_enable_face_recognition;
+            operatorActionCbStateC3 = Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation;
+            operatorCaptureCbStateC4 = Properties.Settings.Default.C4_enable_capture_operator;
+            sensorEnabledCbStateC4 = Properties.Settings.Default.C4_enable_Human_sensor;
+            faceDetectionCbStateC4 = Properties.Settings.Default.C4_enable_face_recognition;
+            operatorActionCbStateC4 = Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation;
 
             if (cm_camera_number.Items.Count > 0)
             {
                 cm_camera_number.SelectedIndex = Properties.Settings.Default.main_camera_index <= 0 ? 0 : Properties.Settings.Default.main_camera_index;
-                cm_capture_mode.SelectedIndex = Properties.Settings.Default.capture_method <= 0 ? 0 : Properties.Settings.Default.capture_method;
+                //cm_capture_mode.SelectedIndex = Properties.Settings.Default.capture_method <= 0 ? 0 : Properties.Settings.Default.capture_method;
             }
 
             cm_language.SelectedItem = Properties.Settings.Default.language;
@@ -319,7 +340,7 @@ namespace FaceDetection
             this.MaximizeBox = false;
             this.TopMost = true;
 
-            if (MainForm.GetMainForm.recordingInProgress == true)
+            if (MainForm.GetMainForm.AnyRecordingInProgress == true)
             {
                 cm_camera_number.Enabled = false;
                 button_settings_save.Enabled = false;
@@ -339,11 +360,13 @@ namespace FaceDetection
                 {
                     Properties.Settings.Default.culture = "en-US";
                     Properties.Settings.Default.language = "English";
+                    this.Text = "Settings";
                 }
                 else
                 {
                     Properties.Settings.Default.culture = "ja-JP";
                     Properties.Settings.Default.language = "日本語";
+                    this.Text = "設定";
                 }
                 ChangeLanguage();
             }
@@ -368,7 +391,6 @@ namespace FaceDetection
         private void Cm_capture_mode_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Properties.Settings.Default.C1_capture_method = cm_capture_mode.SelectedIndex;
-            //Console.WriteLine(cm_capture_mode.SelectedIndex);
 
             if (cm_capture_mode.SelectedIndex == 1)
             {
@@ -630,6 +652,7 @@ namespace FaceDetection
                 nud_seconds_after_event.Enabled = false;
             }
         }
+
         private void Cb_recording_operation_CheckStateChanged(object sender, EventArgs e)
         {
             CheckBox check = (CheckBox)sender;
@@ -644,14 +667,24 @@ namespace FaceDetection
 
             if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked))
             {
+                if (cm_capture_mode.Text != "Snapshot")
+                {
                 nud_seconds_before_event.Enabled = true;
                 nud_seconds_after_event.Enabled = true;
+            }
             }
             else
             {
                 nud_seconds_before_event.Enabled = false;
                 nud_seconds_after_event.Enabled = false;
             }
+        }
+
+        private void ResetPreeventTime(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            if (!checkBox.Checked)
+                event_record_time_before_event.Value = 0;
         }
 
         private void DisableOperatorCaptureCheckBox_ifNeeded()
@@ -704,19 +737,41 @@ namespace FaceDetection
 
         private void Nud_reinitiation_interval_ValueChanged(object sender, EventArgs e)
         {
-            //check the other nud
             if (Properties.Settings.Default.C1_interval_before_reinitiating_recording < Properties.Settings.Default.C1_seconds_before_event)
             {
                 Properties.Settings.Default.C1_interval_before_reinitiating_recording = Properties.Settings.Default.C1_seconds_before_event;
+            }
+            if (Properties.Settings.Default.C2_interval_before_reinitiating_recording < Properties.Settings.Default.C2_seconds_before_event)
+            {
+                Properties.Settings.Default.C2_interval_before_reinitiating_recording = Properties.Settings.Default.C2_seconds_before_event;
+            }
+            if (Properties.Settings.Default.C3_interval_before_reinitiating_recording < Properties.Settings.Default.C3_seconds_before_event)
+            {
+                Properties.Settings.Default.C3_interval_before_reinitiating_recording = Properties.Settings.Default.C3_seconds_before_event;
+            }
+            if (Properties.Settings.Default.C4_interval_before_reinitiating_recording < Properties.Settings.Default.C4_seconds_before_event)
+            {
+                Properties.Settings.Default.C4_interval_before_reinitiating_recording = Properties.Settings.Default.C4_seconds_before_event;
             }
         }
 
         private void Nud_seconds_before_event_ValueChanged(object sender, EventArgs e)
         {
-            //check the other nud
             if (Properties.Settings.Default.C1_interval_before_reinitiating_recording < Properties.Settings.Default.C1_seconds_before_event)
             {
                 Properties.Settings.Default.C1_interval_before_reinitiating_recording = Properties.Settings.Default.C1_seconds_before_event;
+            }
+            if (Properties.Settings.Default.C2_interval_before_reinitiating_recording < Properties.Settings.Default.C2_seconds_before_event)
+            {
+                Properties.Settings.Default.C2_interval_before_reinitiating_recording = Properties.Settings.Default.C2_seconds_before_event;
+            }
+            if (Properties.Settings.Default.C3_interval_before_reinitiating_recording < Properties.Settings.Default.C3_seconds_before_event)
+            {
+                Properties.Settings.Default.C3_interval_before_reinitiating_recording = Properties.Settings.Default.C3_seconds_before_event;
+            }
+            if (Properties.Settings.Default.C4_interval_before_reinitiating_recording < Properties.Settings.Default.C4_seconds_before_event)
+            {
+                Properties.Settings.Default.C4_interval_before_reinitiating_recording = Properties.Settings.Default.C4_seconds_before_event;
             }
         }
 
@@ -777,6 +832,79 @@ namespace FaceDetection
                 numericUpDownH.Value = 0;
             }
         }
+
+        private void StorePath_TextChanged(object sender, EventArgs e)
+        {
+            bool pathChanged = false;
+            char[] invalidPathChars = {'*', '?', '!', '<','>','|'};
+
+            char[] characters = storePath.Text.ToCharArray();
+            for(int i=0; i< characters.Length; i++)
+            {
+                for (int j = 0; j < invalidPathChars.Length; j++)
+                {
+                    if(characters[i].Equals(invalidPathChars[j]))
+                    {
+                        characters[i] = '\0';
+                        pathChanged = true;
+                    }
+                }
+            }
+
+            if(pathChanged == true && Path.IsPathRooted(storePath.Text))
+            {
+                storePath.Text = new string(characters);
+                storePath.SelectionStart = storePath.Text.Length;
+            }else if (pathChanged == true && !Path.IsPathRooted(storePath.Text))
+            {
+                MessageBox.Show("Wrong path!");
+            }
+        }
+
+        /*
+        
+         * Checking full-width character is included in string.
+             * If full-width character is included in string,
+             * it will return true.
+             * If is not, it will return false.
+             * @param cmdl
+             * @return
+ 
+        public boolean isContainFullWidth(String cmdl)
+        {
+            boolean isFullWidth = false;
+            for (char c : cmdl.toCharArray())
+            {
+                if (!isHalfWidth(c))
+                {
+                    isFullWidth = true;
+                    break;
+                }
+            }
+
+            return isFullWidth;
+        }
+
+        /**
+         * Checking character is half-width or not.
+         * Unicode value of half-width range:
+         * '\u0000' - '\u00FF'
+         * '\uFF61' - '\uFFDC'
+         * '\uFFE8' - '\uFFEE'
+         * If unicode value of character is within this range,
+         * it will be half-width character.
+         * @param c
+         * @return
+         
+        public boolean isHalfWidth(char c)
+        {
+            return '\u0000' <= c && c <= '\u00FF'
+                || '\uFF61' <= c && c <= '\uFFDC'
+                || '\uFFE8' <= c && c <= '\uFFEE';
+        }
+
+             */
+
 
         #region DLLIMPORT
         [DllImport("olepro32.dll")]

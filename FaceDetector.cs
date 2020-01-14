@@ -140,11 +140,13 @@ namespace FaceDetection
             {
                 if (camindex == 0)
                 {
-                    bitmap = MainForm.GetMainForm.crossbar.GetBitmap();
+                    bitmap = MULTI_WINDOW.formList[camindex].crossbar.GetBitmap();
                 }
                 else
                 {
-                    bitmap = FormClass.crossbarList[camindex - 1].GetBitmap();
+                    //bitmap = CameraForm.crossbar.GetBitmap();
+                    //Access through MultiWindow
+                    bitmap = null;
                 }
 
                 if (bitmap != null)
@@ -238,30 +240,12 @@ namespace FaceDetection
             int camindex = Properties.Settings.Default.main_camera_index;
             int timeBeforeEvent = 0, timeAfterEvent = 0;
             bool preeventRecording = false;
+            string captureMethod = "";
 
-            switch (camindex)
-            {
-                case 0:
-                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
-                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
-                    preeventRecording = MainForm.GetMainForm.crossbar.PREEVENT_RECORDING;
-                    break;
-                case 1:
-                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
-                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
-                    preeventRecording = FormClass.crossbarList[0].PREEVENT_RECORDING;
-                    break;
-                case 2:
-                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
-                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
-                    preeventRecording = FormClass.crossbarList[1].PREEVENT_RECORDING;
-                    break;
-                case 3:
-                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
-                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
-                    preeventRecording = FormClass.crossbarList[2].PREEVENT_RECORDING;
-                    break;
-            }
+            PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(camindex, out timeBeforeEvent, out timeAfterEvent);
+
+            preeventRecording = MULTI_WINDOW.formList[camindex].crossbar.PREEVENT_RECORDING;
+            PROPERTY_FUNCTIONS.GetCaptureMethod(camindex, out captureMethod);
 
             if (MainForm.GetMainForm!=null && MainForm.GetMainForm.InvokeRequired)
             {
@@ -270,53 +254,31 @@ namespace FaceDetection
             }
             else
             {
-                if (MainForm.GetMainForm.crossbar.OPER_BAN == false)
+                if (MULTI_WINDOW.formList[camindex].crossbar.OPER_BAN == false)
                 {
-                    if (Properties.Settings.Default.capture_method <= 0)
+                    if (captureMethod != "Snapshot") // Video
                     {
                         //initiate RECORD mode
                         if (MainForm.GetMainForm != null && preeventRecording)
                         {
-                            if (MainForm.GetMainForm.recordingInProgress == false)
+                            if (MainForm.GetMainForm.AnyRecordingInProgress == false)
                             {
                                 TaskManager.EventAppeared(RECORD_PATH.EVENT, camindex+1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
-
-                                if (camindex == 0)
-                                {
-                                    MainForm.GetMainForm.crossbar.SetIconTimer(timeAfterEvent);
-                                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(timeAfterEvent);
-                                }
-                                else
-                                {
-                                    MULTI_WINDOW.formList[camindex - 1].SetRecordIcon(camindex, timeAfterEvent);
-                                }
+                                                                
+                                MULTI_WINDOW.formList[camindex].SetRecordIcon(camindex, timeAfterEvent);
+                                
                             }
                         }
                         else
                         {
                             //Direct recording
-                            if (camindex == 0)
-                            {
-                                MainForm.GetMainForm.crossbar.Start(camindex, CAMERA_MODES.OPERATOR);
-                            }
-                            else
-                            {
-                                FormClass.crossbarList[camindex - 1].Start(camindex, CAMERA_MODES.OPERATOR);
-                            }
+                            MULTI_WINDOW.formList[camindex].crossbar.Start(camindex, CAMERA_MODES.OPERATOR);                            
                         }
                     }
-                    else
+                    else // Snapshot
                     {
                         SNAPSHOT_SAVER.TakeSnapShot(Properties.Settings.Default.main_camera_index, "event");
-
-                        if (camindex == 0)
-                        {
-                            MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
-                        }
-                        else
-                        {
-                            FormClass.crossbarList[camindex - 1].No_Cap_Timer_ON(0);
-                        }
+                        MULTI_WINDOW.formList[camindex].crossbar.No_Cap_Timer_ON(camindex);
                     }  
 
                     if (Properties.Settings.Default.backlight_on_upon_face_rec)
@@ -332,21 +294,7 @@ namespace FaceDetection
             int camindex = Properties.Settings.Default.main_camera_index;
             int checkInterval = 0;
 
-            switch (camindex)
-            {
-                case 0:
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C1_check_interval);
-                    break;
-                case 1:
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C2_check_interval);
-                    break;
-                case 2:
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C3_check_interval);
-                    break;
-                case 3:
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C4_check_interval);
-                    break;
-            }
+            PROPERTY_FUNCTIONS.GetInterval(camindex, out checkInterval);
 
             face_check_timer.Enabled = true;
             face_check_timer.Interval = checkInterval;
@@ -365,25 +313,8 @@ namespace FaceDetection
             int checkInterval = 0;
             bool faceRecognitionEnabled = false;
 
-            switch (camindex)
-            {
-                case 0:
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C1_check_interval);
-                    faceRecognitionEnabled = Properties.Settings.Default.C1_enable_face_recognition;
-                    break;
-                case 1:
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C2_check_interval);
-                    faceRecognitionEnabled = Properties.Settings.Default.C2_enable_face_recognition;
-                    break;
-                case 2:
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C3_check_interval);
-                    faceRecognitionEnabled = Properties.Settings.Default.C3_enable_face_recognition;
-                    break;
-                case 3:
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C4_check_interval);
-                    faceRecognitionEnabled = Properties.Settings.Default.C4_enable_face_recognition;
-                    break;
-            }
+            PROPERTY_FUNCTIONS.GetInterval(camindex, out checkInterval);
+            PROPERTY_FUNCTIONS.GetFaceRecognitionSwitch(camindex, out faceRecognitionEnabled);
 
             Task task = new Task(() => {
                 if (first)
