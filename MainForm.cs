@@ -272,33 +272,23 @@ namespace FaceDetection
             if (stopwatch.ElapsedMilliseconds>=3600000)
             {
                 stopwatch.Restart();
-                    CheckDiskSpace.DeleteOldFiles();
-                    //    freeDiskSpaceLeft = CheckDiskSpace.CheckDisk();
-                    //    if (freeDiskSpaceLeft < 2) // 2 Go
-                    //    {
-                    //        try
-                    //        {
-                    //            warningForm.Select(); // If the form already exist, put it on the front
-                    //        }
-                    //        catch (Exception ex) // If the form doesn't exist yet, create it
-                    //        {
-                    //            warningForm = new DiskSpaceWarning();
-                    //            warningForm.Show();
-                    //        }
-                    //    }
-                }
+                CheckDiskSpace.DeleteOldFiles();
+                //    freeDiskSpaceLeft = CheckDiskSpace.CheckDisk();
+                //    if (freeDiskSpaceLeft < 2) // 2 Go
+                //    {
+                //        try
+                //        {
+                //            warningForm.Select(); // If the form already exist, put it on the front
+                //        }
+                //        catch (Exception ex) // If the form doesn't exist yet, create it
+                //        {
+                //            warningForm = new DiskSpaceWarning();
+                //            warningForm.Show();
+                //        }
+                //    }
             }
+        }
 
-            
-        
-
-        
-
-        
-
-        
-
-        
 
         /// <summary>
         /// Loop through the camera properties to select all available resolutions and FPS

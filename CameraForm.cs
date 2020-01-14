@@ -50,7 +50,7 @@ namespace FaceDetection
         /// Current camera index, not MAIN
         /// </summary>
         public int CameraIndex = 0;
-        public bool closeFromSettings = false;
+        //public bool closeFromSettings = false;
         public CROSSBAR crossbar;
         
         CameraForm subform;
@@ -58,27 +58,25 @@ namespace FaceDetection
 
         public CameraForm(int camind)
         {
-            subform = this;            
-
-            
-                        
+            subform = this;       
             CameraIndex = camind;
                         
             hideIconTimer.AutoReset = false;
             hideIconTimer.Elapsed += new System.Timers.ElapsedEventHandler(HideIcon_tick);
 
-
-
-
-
             this.Load += CameraForm_Load;
-
         }
 
         private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            MULTI_WINDOW.displayedCameraCount--;
             PROPERTY_FUNCTIONS.Set_Window_Location(CameraIndex, this);
             Properties.Settings.Default.Save();
+
+            if(MULTI_WINDOW.displayedCameraCount <= 0)
+            {
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -437,14 +435,14 @@ namespace FaceDetection
             crossbar.ReleaseSecondaryCamera();
             crossbar = null;
 
-            if (closeFromSettings)
-            {
-                closeFromSettings = false;
-            }
-            else
-            {
-                //Application.Exit();
-            }
+            //if (closeFromSettings)
+            //{
+            //    closeFromSettings = false;
+            //}
+            //else
+            //{
+            //    //Application.Exit();
+            //}
 
             if (Properties.Settings.Default.main_camera_index == CameraIndex) // The form closed was the main camera selected
             {

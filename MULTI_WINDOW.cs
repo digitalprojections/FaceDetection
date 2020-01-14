@@ -54,12 +54,12 @@ namespace FaceDetection
             {
                 try
                 {
-                    for (int i = displayedCameraCount; i >= numberOfCamerasToDisplay; i--)
+                    for (int i = displayedCameraCount - 1; i >= numberOfCamerasToDisplay; i--)
                     {
-                        formList[i].closeFromSettings = true;
+                        //formList[i].closeFromSettings = true;
                         formList[i].Close();
                         formList[i] = null;
-                        displayedCameraCount--;
+                        //displayedCameraCount--;
                     }
                 }
                 catch (Exception ex)
