@@ -154,7 +154,7 @@ namespace FaceDetection
             }
             else
             {
-                MessageBox.Show("No cameras have been detected \n\r カメラが検出されませんでした");                
+                MessageBox.Show("No cameras have been detected! \n\r カメラが検出されません");
             }
             
         }
