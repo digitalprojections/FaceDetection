@@ -177,7 +177,7 @@ namespace FaceDetection
                 { 
                     MULTI_WINDOW.SetToPreviewMode(i);
                 }
-            MULTI_WINDOW.formList[i].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);                
+                MULTI_WINDOW.formList[i].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);                
             }
         }        
 

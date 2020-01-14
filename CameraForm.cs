@@ -8,7 +8,6 @@ namespace FaceDetection
 {
     public class CameraForm : Form
     {
-
         private delegate void dShowControlButtons();
 
         private readonly System.Timers.Timer mouse_down_timer = new System.Timers.Timer();
@@ -185,6 +184,7 @@ namespace FaceDetection
                 controlButtons.Visible = false;
             }
         }
+
         public void ChangesFromParametersApply()
         {
             if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0)
@@ -226,8 +226,6 @@ namespace FaceDetection
         {
             return crossbar?.GetBitmap();
         }
-
-
 
         internal void SetWindowProperties()
         {
@@ -305,6 +303,7 @@ namespace FaceDetection
         {
             cameraButton.Tag = state;
         }
+
         /// <summary>
         /// Manual Start
         /// </summary>
@@ -344,6 +343,7 @@ namespace FaceDetection
                 Logger.Add(iox);
             }
         }
+
         public void SetToPreviewMode()
         {
             /*if (crossbarList[cam_index] != null)
@@ -371,11 +371,13 @@ namespace FaceDetection
                 crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
             }
         }
+
         public void SET_REC_ICON()
         {
             picbox_recording.Visible = Properties.Settings.Default.show_recording_icon;
             recordingInProgress = true;
         }
+
         public void StarttheTimer()
         {
             //if (crossbarList[cam_index - 1] != null)
@@ -384,8 +386,6 @@ namespace FaceDetection
             //}
             crossbar.StartTimer();
         }
-
-        
 
         public void SetRecordIcon (int cam_index, int timeAfterEvent)
         {
@@ -504,7 +504,6 @@ namespace FaceDetection
             cameraSender = cameraSender.Substring(cameraSender.Length - 1, 1);
 
             SNAPSHOT_SAVER.TakeSnapShot(Convert.ToInt32(cameraSender) - 1);
-        
         }
 
         private void ManualVideoRecording(object sender, EventArgs e)
@@ -587,10 +586,10 @@ namespace FaceDetection
                     }
                 }
             }
-                catch (InvalidOperationException iox)
-                {
-                    Logger.Add(iox);
-                }
+            catch (InvalidOperationException iox)
+            {
+                Logger.Add(iox);
+            }
             //}
         }
 
@@ -610,6 +609,7 @@ namespace FaceDetection
                 PARAMETERS.PARAM.Clear();
             }
         }
+
         /// <summary>
         /// One second timer to update UI datetime (it also deletes old files)
         /// </summary>
@@ -618,6 +618,7 @@ namespace FaceDetection
             //DateTimeUpdater();            
             
         }
+
         public void DateTimeUpdater()
         {
             if (dateTimeLabel != null && dateTimeLabel.InvokeRequired)
@@ -682,6 +683,7 @@ namespace FaceDetection
                 }
             }
         }
+
         public void SetCameraToDefaultMode()
         {
             if (PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
@@ -707,6 +709,7 @@ namespace FaceDetection
                 }                
             }
         }
+
         private void SettingsButtonsDesigner()
         {
             this.components = new System.ComponentModel.Container();
