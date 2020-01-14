@@ -14,7 +14,8 @@ namespace FaceDetection
         private static CameraForm form;
         public static CameraForm[] formList = new CameraForm[4];
         public static int displayedCameraCount = 0;
-                
+        public static bool[] formArray = new bool[3];
+
         /// <summary>
         /// by passing two important parameters.
         /// </summary>
@@ -25,9 +26,9 @@ namespace FaceDetection
 
             if (displayedCameraCount < numberOfCamerasToDisplay) 
             {
-                for(int i = 1; i < displayedCameraCount; i++)
+                for(int i = 0; i < displayedCameraCount; i++)
                 {
-                    if (formList[i].Text == "")
+                    if (formArray[i] == false)
                     {
                         form = new CameraForm(i);                        
                         form.Show();
@@ -35,6 +36,7 @@ namespace FaceDetection
                         {
                             form.WindowState = FormWindowState.Minimized;
                         }
+                        displayedCameraCount++;
                     }
                 }
 
@@ -151,9 +153,12 @@ namespace FaceDetection
 
             for (int i = 0; i < displayedCameraCount; i++)
             {
-                if (formList[i].crossbar.GetRecordingState())
+                if (!String.IsNullOrEmpty(formList[i].Text)) // Form is closed
                 {
-                    recmodeison = true;
+                    if (formList[i].crossbar.GetRecordingState())
+                    {
+                        recmodeison = true;
+                    }
                 }
             }
 
