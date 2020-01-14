@@ -22,7 +22,7 @@ namespace FaceDetection
         /// <param name="cam_index"></param>
         public static void CreateCameraWindows(int numberOfCamerasToDisplay, int cam_index)
         {
-            if (displayedCameraCount < (numberOfCamerasToDisplay)) 
+            if (displayedCameraCount < numberOfCamerasToDisplay) 
             {
                 for(int i = 1; i < displayedCameraCount; i++)
                 {
@@ -49,7 +49,7 @@ namespace FaceDetection
                     }
                 }
             }
-            else if ((numberOfCamerasToDisplay) < displayedCameraCount)
+            else
             {
                 try
                 {
@@ -66,27 +66,27 @@ namespace FaceDetection
                     Console.WriteLine("Main camera has been disconnected while application was not running");
                 }
             }
-            else
-            {
-                for (int i = 1; i < numberOfCamerasToDisplay; i++)
-                {
-                    if(formList[i].Text == "")
-                    {
-                        form = new CameraForm(i);
-                        //form.Text = "UVC Camera Viewer - camera " + (i + 1);
-                        formList[i] = form;
-                        form.Show();
-                        if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
-                        {
-                            form.WindowState = FormWindowState.Minimized;
-                        }
-                    }
-                }
-            }
+            //else
+            //{
+            //    for (int i = 1; i < numberOfCamerasToDisplay; i++)
+            //    {
+            //        if(formList[i].Text == "")
+            //        {
+            //            form = new CameraForm(i);
+            //            //form.Text = "UVC Camera Viewer - camera " + (i + 1);
+            //            formList[i] = form;
+            //            form.Show();
+            //            if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
+            //            {
+            //                form.WindowState = FormWindowState.Minimized;
+            //            }
+            //        }
+            //    }
+            //}
         }
         
         public static void formSettingsChanged()
-        {
+        {            
             for (int i = 0; i < displayedCameraCount; i++)
             {
                 formList[i].SetWindowProperties();

@@ -211,26 +211,19 @@ namespace FaceDetection
             // Top most
             if (Properties.Settings.Default.window_on_top)
             {
-                if (MULTI_WINDOW.displayedCameraCount > 0)
-                {
-                    MULTI_WINDOW.formList[cam_index].TopMost = true;
-                }
-                //MainForm.GetMainForm.TopMost = false;
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    if (i != (cam_index))
+
+                    if (MULTI_WINDOW.displayedCameraCount > 0)
                     {
-                        MULTI_WINDOW.formList[i].TopMost = false;
+                    MULTI_WINDOW.formList[cam_index].Activate();
                     }
-                }
             }
             else
             {
                 //MainForm.GetMainForm.TopMost = false;
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    MULTI_WINDOW.formList[i].TopMost = false;                    
-                }
+                //for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                //{
+                //    MULTI_WINDOW.formList[i].TopMost = false;                    
+                //}
                 if (MULTI_WINDOW.displayedCameraCount > 0)
                 {
                     MULTI_WINDOW.formList[cam_index].Activate();//MAIN CAMERA active

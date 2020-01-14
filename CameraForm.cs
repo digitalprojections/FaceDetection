@@ -72,10 +72,8 @@ namespace FaceDetection
             PROPERTY_FUNCTIONS.Set_Window_Location(CameraIndex, this);
             Properties.Settings.Default.Save();
 
-            if(MULTI_WINDOW.displayedCameraCount <= 0)
-            {
+            if (MULTI_WINDOW.displayedCameraCount <= 0)
                 Application.Exit();
-            }
         }
 
         /// <summary>
@@ -476,7 +474,7 @@ namespace FaceDetection
             {
                 Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
                 Process.Start(Properties.Settings.Default.video_file_location);
-                this.TopMost = false;
+                //this.TopMost = false;
             }
             catch (IOException ioe)
             {
@@ -686,27 +684,17 @@ namespace FaceDetection
 
         public void SetCameraToDefaultMode()
         {
-            if (PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
-            {
-                if (CameraIndex == 0)
+            if (CameraIndex == Properties.Settings.Default.main_camera_index && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
                 {
-                    MULTI_WINDOW.formList[CameraIndex].crossbar?.Start(0, CAMERA_MODES.PREEVENT);
+                    crossbar?.Start(CameraIndex, CAMERA_MODES.PREEVENT);
                 }
-                else
-                {
-                    if (MULTI_WINDOW.displayedCameraCount > 0)
-                    {
-                        SetToPreeventMode();
-                    }
-                }
-            }
             else
-            {   
+            {
                 if (MULTI_WINDOW.displayedCameraCount > 0)
                 {
-                    MULTI_WINDOW.formList[CameraIndex].crossbar?.Start(0, CAMERA_MODES.PREVIEW);
-                    SetToPreviewMode();
-                }                
+                    crossbar?.Start(CameraIndex, CAMERA_MODES.PREVIEW);
+                    //SetToPreviewMode();
+                }
             }
         }
 
