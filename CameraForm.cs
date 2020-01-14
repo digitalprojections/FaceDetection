@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using FaceDetectionX;
 
 namespace FaceDetection
 {
@@ -14,6 +16,13 @@ namespace FaceDetection
         private readonly System.Timers.Timer mouse_down_timer = new System.Timers.Timer();
 
         public bool recordingInProgress;
+
+        private UsbCamera.VideoFormat[] videoFormat;
+        /// <summary>
+        /// SettingsUI resolutions data, generated each time. But set to the memory value
+        /// </summary>
+        private List<string> vf_resolutions = new List<string>();
+        private List<string> vf_fps = new List<string>();
 
 
         //private FlowLayoutPanel controlBut;
@@ -58,17 +67,14 @@ namespace FaceDetection
 
         public CameraForm(int camind)
         {
-            subform = this;            
-
-            
-                        
+            subform = this;
             CameraIndex = camind;
                         
             hideIconTimer.AutoReset = false;
             hideIconTimer.Elapsed += new System.Timers.ElapsedEventHandler(HideIcon_tick);
-
+            videoFormat = UsbCamera.GetVideoFormat(camind);
             this.Load += CameraForm_Load;
-
+            
         }
 
         private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -91,7 +97,8 @@ namespace FaceDetection
             this.FormClosing -= CameraForm_FormClosing;
             this.FormClosed -= FormClass_FormClosed;
             this.ResizeEnd -= FormClass_ResizeEnd;
-            this.Click -= FormClass_Click;
+            this.MouseDown -= FormClass_Down;
+            this.MouseUp -= CameraForm_MouseUp;
             this.DoubleClick -= FullScreen;
             this.SizeChanged -= WindowSizeUpdate;
 
@@ -110,7 +117,8 @@ namespace FaceDetection
             this.FormClosing += CameraForm_FormClosing;
             this.FormClosed += FormClass_FormClosed;
             this.ResizeEnd += FormClass_ResizeEnd;
-            this.Click += FormClass_Click;
+            this.MouseDown += FormClass_Down;
+            this.MouseUp += CameraForm_MouseUp;
             this.DoubleClick += FullScreen;
             crossbar = new CROSSBAR(CameraIndex, this);
             var mci = Properties.Settings.Default.main_camera_index;
@@ -150,6 +158,75 @@ namespace FaceDetection
             datetimer.Tick += Datetimer_Tick;
             datetimer.Start();
             ///////////////////////////////////////////////////////////
+            
+            FillResolutionList();
+        }
+        /// <summary>
+        /// Loop through the camera properties to select all available resolutions and FPS
+        /// </summary>
+        private void FillResolutionList()
+        {
+            long FPS;
+            //////////////////////////////////////////////////////////////////
+            ///VIDEOFORMAT
+            //////////////////////////////////////////////////////////////////
+            //Showing video formats
+            for (int k = 0; k < videoFormat.Length; k++)
+            {
+                if (UniqueVideoParameter(vf_resolutions, videoFormat[k].Size) != true)
+                {
+                    vf_resolutions.Add(videoFormat[k].Size.Width + "x" + videoFormat[k].Size.Height);
+                }
+                FPS = 10000000 / videoFormat[k].TimePerFrame;
+                if (UniqueFPS(FPS) != true)
+                {
+                    vf_fps.Add(FPS.ToString());
+                }
+            }
+            
+            //Logger.Add("UniqueVideoParameter " + vf_resolutions.Count);
+            //////////////////////////////////////////////////////////////////
+            ///VIDEOFORMAT
+            //////////////////////////////////////////////////////////////////            
+        }
+
+        private bool UniqueFPS(long fps)
+        {
+            bool retval = false;
+            for (int i = 0; i < vf_fps.Count; i++)
+            {
+                if (UInt32.Parse(vf_fps[i]) == fps)
+                {
+                    retval = true;
+                }
+            }
+            return retval;
+        }
+
+        private bool UniqueVideoParameter(List<string> vf, Size s)
+        {
+            bool retval = false;
+            string temp = s.Width + "x" + s.Height;
+            //
+            for (int i = 0; i < vf.Count; i++)
+            {
+                if (vf[i] == temp)
+                {
+                    retval = true;
+                }
+            }
+            return retval;
+        }
+
+        public void GetVideoFormat()
+        {
+            SettingsUI.SetComboBoxResolutionValues(vf_resolutions);
+            SettingsUI.SetComboBoxFPSValues(vf_fps);
+        }
+
+        private void CameraForm_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouse_down_timer.Stop();
         }
 
         private void Datetimer_Tick(object sender, EventArgs e)
@@ -272,9 +349,14 @@ namespace FaceDetection
                 }
             }
 
-            if (cameraIndex != 0 && !Properties.Settings.Default.show_all_cams_simulteneously)
+            var mci = Properties.Settings.Default.main_camera_index;
+            if (CameraIndex == mci)
             {
-                //MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
+                this.Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";                
+            }
+            else
+            {
+                this.Text = "UVC Camera Viewer -  camera " + (CameraIndex + 1);                
             }
 
             //Window pane
@@ -486,15 +568,15 @@ namespace FaceDetection
             }
         }
 
-        private void FormClass_Click(object sender, EventArgs e)
+        private void FormClass_Down(object sender, EventArgs e)
         {
             if (this.controlButtons.Visible == false)
             {
-                this.controlButtons.Visible = true;
+                mouse_down_timer.Start();
             }
             else
             {
-                this.controlButtons.Visible = false;
+                
             }
         }
 

@@ -19,10 +19,11 @@ namespace FaceDetection
         /// <summary>
         /// by passing two important parameters.
         /// </summary>
-        /// <param name="numberOfCamerasToDisplay"></param>
-        /// <param name="cam_index"></param>
-        public static void CreateCameraWindows(int numberOfCamerasToDisplay, int cam_index)
+        public static void CreateCameraWindows()
         {
+            int numberOfCamerasToDisplay = decimal.ToInt32(Properties.Settings.Default.camera_count);
+            int cam_index = decimal.ToInt32(Properties.Settings.Default.main_camera_index);
+
             if (displayedCameraCount < numberOfCamerasToDisplay) 
             {
                 for(int i = 1; i < displayedCameraCount; i++)
@@ -85,7 +86,12 @@ namespace FaceDetection
             //    }
             //}
         }
-        
+
+        public static void GetVideoFormatByCamera(int ind)
+        {
+            formList[ind].GetVideoFormat();
+        }
+
         public static void formSettingsChanged()
         {            
 
