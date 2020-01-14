@@ -224,24 +224,24 @@ namespace FaceDetection
             {
                     if (MULTI_WINDOW.displayedCameraCount > 0)
                     {
-                        MULTI_WINDOW.formList[cam_index].TopMost = true;
+                    MULTI_WINDOW.formList[cam_index].Activate();
                     }
                     //MainForm.GetMainForm.TopMost = false;
-                    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                    {
-                        if (i != (cam_index))
-                        {
-                            MULTI_WINDOW.formList[i].TopMost = false;
-                        }
-                    }
+                    //for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                    //{
+                    //    if (i != (cam_index))
+                    //    {
+                    //        MULTI_WINDOW.formList[i].TopMost = false;
+                    //    }
+                    //}
             }
             else
             {
                 //MainForm.GetMainForm.TopMost = false;
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    MULTI_WINDOW.formList[i].TopMost = false;                    
-                }
+                //for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                //{
+                //    MULTI_WINDOW.formList[i].TopMost = false;                    
+                //}
                 if (MULTI_WINDOW.displayedCameraCount > 0)
                 {
                     MULTI_WINDOW.formList[cam_index].Activate();//MAIN CAMERA active

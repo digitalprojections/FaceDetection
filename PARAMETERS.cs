@@ -25,9 +25,9 @@ namespace FaceDetection
             param = String.Concat(parameters).ToLower();
             string elem;
             string method = "";
-            bool switchOnOff = false;
+            bool parameterOnOffSwitch = false;
             int cameraIndex = -1;
-            int time = 0;
+            int parameterTime = 0;
             /*
              Handle the initial start up CL parameters, if exist
             */
@@ -46,7 +46,7 @@ namespace FaceDetection
                                     method = elem.Substring(2);
                                     break;
                                 case "s":
-                                    switchOnOff = (elem.Substring(2) != "0");
+                                    parameterOnOffSwitch = (elem.Substring(2) != "0");
                                     break;
                                 case "c":
                                     cameraIndex = Int32.Parse(elem.Substring(2)) - 1;                                    
@@ -54,7 +54,7 @@ namespace FaceDetection
                                     CameraIndex = cameraIndex;
                                     break;
                                 case "t":
-                                    time = Int32.Parse(elem.Substring(2));
+                                    parameterTime = Int32.Parse(elem.Substring(2));
                                     break;
                             }
                         }
@@ -101,11 +101,11 @@ namespace FaceDetection
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
                                 {
-                                    if (switchOnOff)
+                                    if (parameterOnOffSwitch)
                                     {
                                         if (MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
                                         {
-                                            MainForm.GetMainForm.TopMost = false;
+                                            //MainForm.GetMainForm.TopMost = false;
                                             MainForm.Setting_ui.ShowDialog();
                                         }
                                     }
@@ -175,7 +175,7 @@ namespace FaceDetection
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
                                 {
-                                    if (switchOnOff)
+                                    if (parameterOnOffSwitch)
                                     {
                                         //SHOW CONTROL BUTTONS
                                         isControlButtonVisible = true;
@@ -203,7 +203,7 @@ namespace FaceDetection
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
                                 {
-                                    if (switchOnOff)
+                                    if (parameterOnOffSwitch)
                                     {
                                         if (MULTI_WINDOW.formList[cameraIndex].FaceDetector != null)
                                         {
@@ -248,7 +248,7 @@ namespace FaceDetection
                                         }
                                     }
 
-                                    CycleTime(cameraIndex, time);
+                                    CycleTime(cameraIndex, parameterTime);
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -262,7 +262,7 @@ namespace FaceDetection
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
                                 {
-                                    if (switchOnOff)
+                                    if (parameterOnOffSwitch)
                                     {
                                         if (cameraIndex == 0)
                                         {
@@ -315,7 +315,7 @@ namespace FaceDetection
                                         }
                                     }
                                     MainForm.AllChangesApply();
-                                    CycleTime(cameraIndex, time);
+                                    CycleTime(cameraIndex, parameterTime);
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -329,7 +329,7 @@ namespace FaceDetection
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
                                 {
-                                    if (switchOnOff)
+                                    if (parameterOnOffSwitch)
                                     {
                                         isMinimized = false;
                                         if (cameraIndex == 0)
@@ -369,7 +369,7 @@ namespace FaceDetection
                         case "l":
                             try
                             {
-                                if (switchOnOff)
+                                if (parameterOnOffSwitch)
                                 {
                                     MainForm.GetMainForm.BackLight.ON();
                                 }
@@ -389,16 +389,16 @@ namespace FaceDetection
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
                                 {
-                                    if (switchOnOff)
+                                    if (parameterOnOffSwitch)
                                     {
                                         MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
                                         Properties.Settings.Default.show_window_pane = true;
                                         Properties.Settings.Default.Save();
 
-                                        if (MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
-                                        {
-                                            MainForm.GetMainForm.TopMost = false;
-                                        }
+                                        //if (MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
+                                        //{
+                                        //    MainForm.GetMainForm.TopMost = false;
+                                        //}
                                     }
                                     else
                                     {
@@ -449,7 +449,7 @@ namespace FaceDetection
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
                                 {
-                                    if (switchOnOff && MainForm.GetMainForm.AnyRecordingInProgress == false)
+                                    if (parameterOnOffSwitch && MainForm.GetMainForm.AnyRecordingInProgress == false)
                                     {
                                         MainForm.GetMainForm.EventRecorderOn(cameraIndex);
                                     }
@@ -470,7 +470,7 @@ namespace FaceDetection
                             {
                                 if (cameraIndex == MainForm.Setting_ui.Camera_index)
                                 {
-                                    if (switchOnOff)
+                                    if (parameterOnOffSwitch)
                                     {
                                         
                                         MULTI_WINDOW.formList[cameraIndex].SetRecordIcon(cameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));

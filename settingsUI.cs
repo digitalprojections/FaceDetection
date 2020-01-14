@@ -112,7 +112,7 @@ namespace FaceDetection
         {
             try
             {
-                this.TopMost = false;
+                //this.TopMost = false;
                 ChangeStoreLocation(sender, e);
             }
             catch (IOException ioe)
@@ -148,7 +148,7 @@ namespace FaceDetection
         {
             Properties.Settings.Default.Save();
             Camera.CountCamera();
-            
+            Camera.SetNumberOfCameras();
             Hide();
 
             if (Properties.Settings.Default.show_all_cams_simulteneously == false)
@@ -173,15 +173,15 @@ namespace FaceDetection
 
             // 4 Cameras: the selected camera became preevent mode (or preview), others became preview mode
             
-                MULTI_WINDOW.formList[Camera_index].crossbar.Start(Camera_index, CAMERA_MODES.PREVIEW);
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    if (i != Camera_index)
-                    { 
-                        MULTI_WINDOW.SetToPreviewMode(i);
-                    }
-                MULTI_WINDOW.formList[i].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);                
-            }
+                //MULTI_WINDOW.formList[Camera_index].crossbar.Start(Camera_index, CAMERA_MODES.PREVIEW);
+            //    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+            //    {
+            //        if (i != Camera_index)
+            //        { 
+            //            MULTI_WINDOW.SetToPreviewMode(i);
+            //        }
+            //    MULTI_WINDOW.formList[i].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);                
+            //}
             
         }        
 
@@ -237,6 +237,8 @@ namespace FaceDetection
             cb_face_recognition.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_face_recognition", true, DataSourceUpdateMode.OnPropertyChanged));
             cb_human_sensor.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_Human_sensor", true, DataSourceUpdateMode.OnPropertyChanged));
             cb_recording_operation.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_Recording_when_at_the_start_of_operation", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            
         }
 
         public static void SetComboBoxFPSValues(List<string> vs)
@@ -338,7 +340,7 @@ namespace FaceDetection
 
             this.ControlBox = false;
             this.MaximizeBox = false;
-            this.TopMost = true;
+            //this.TopMost = true;
 
             if (MainForm.GetMainForm.AnyRecordingInProgress == true)
             {
