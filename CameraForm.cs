@@ -685,10 +685,10 @@ namespace FaceDetection
                 {
                     if (recordingInProgress == false)
                     {
-                            cameraButton.Tag = "rec";
-                            crossbar.Start(Convert.ToInt32(cameraSender) - 1, CAMERA_MODES.MANUAL);
-                            rec_icon.Visible = Properties.Settings.Default.show_recording_icon;
-                            recordingInProgress = true;
+                        cameraButton.Tag = "rec";
+                        crossbar.Start(Convert.ToInt32(cameraSender) - 1, CAMERA_MODES.MANUAL);
+                        rec_icon.Visible = Properties.Settings.Default.show_recording_icon;
+                        recordingInProgress = true;
                         crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                         crossbar.SetIconTimer(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                     }

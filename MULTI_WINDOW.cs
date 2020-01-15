@@ -22,7 +22,7 @@ namespace FaceDetection
         public static void CreateCameraWindows()
         {
             int numberOfCamerasToDisplay = decimal.ToInt32(Properties.Settings.Default.camera_count);
-            int cam_index = decimal.ToInt32(Properties.Settings.Default.main_camera_index);
+            int cameraIndex = decimal.ToInt32(Properties.Settings.Default.main_camera_index);
 
             if (displayedCameraCount < numberOfCamerasToDisplay) 
             {
@@ -32,7 +32,7 @@ namespace FaceDetection
                     {
                         form = new CameraForm(i);                        
                         form.Show();
-                        if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
+                        if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cameraIndex))
                         {
                             form.WindowState = FormWindowState.Minimized;
                         }
@@ -46,7 +46,7 @@ namespace FaceDetection
                     formList[i] = form;                    
                     form.Show();
                     displayedCameraCount ++;
-                    if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
+                    if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cameraIndex))
                     {
                         form.WindowState = FormWindowState.Minimized;
                     }
@@ -88,9 +88,9 @@ namespace FaceDetection
             //}
         }
 
-        public static void GetVideoFormatByCamera(int ind)
+        public static void GetVideoFormatByCamera(int cameraIndex)
         {
-            formList[ind].GetVideoFormat();
+            formList[cameraIndex].GetVideoFormat();
         }
 
         public static void formSettingsChanged()
@@ -132,9 +132,9 @@ namespace FaceDetection
             }
         }
 
-        public static bool PreeventRecordingState(int cam_index)
+        public static bool PreeventRecordingState(int cameraIndex)
         {   
-            return formList[cam_index].crossbar.PREEVENT_RECORDING;
+            return formList[cameraIndex].crossbar.PREEVENT_RECORDING;
         }
 
         internal static void SET_REC_ICON(int cameraIndex)
@@ -142,10 +142,10 @@ namespace FaceDetection
             formList[cameraIndex].SET_REC_ICON();            
         }
 
-        internal static void SetToPreviewMode(int camind)
-        {            
-            formList[camind].SetToPreviewMode();            
-        }
+        //internal static void SetToPreviewMode(int camind)
+        //{            
+        //    formList[camind].SetToPreviewMode();            
+        //}
 
         public static bool RecordingIsOn()
         {
