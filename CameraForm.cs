@@ -128,7 +128,7 @@ namespace FaceDetection
             this.DoubleClick += FullScreen;
             crossbar = new CROSSBAR(CameraIndex, this);
             var mci = Properties.Settings.Default.main_camera_index;
-            if (CameraIndex == mci && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
+            if (CameraIndex == mci)// && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
             {
                 this.Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";
                 crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
@@ -271,37 +271,37 @@ namespace FaceDetection
             }
         }
 
-        public void ChangesFromParametersApply()
-        {
-            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0)
-            {
-                if (PARAMETERS.isControlButtonVisible)
-                {
-                    controlButtons.Visible = true;
-                }
-                else
-                {
-                    controlButtons.Visible = false;
-                }
-                PARAMETERS.PARAM.Clear();
-            }
-            //if (Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C4_enable_face_recognition)
-            //{
-            //    if (faceDetector != null)
-            //    {
-            //        FaceDetector.StopFaceTimer();
-            //    }
-            //    faceDetector.SetInterval();
-            //    faceDetector.StartFaceTimer();
-            //}
-            //else
-            //{
-            //    if (faceDetector != null)
-            //    {
-            //        FaceDetector.StopFaceTimer();
-            //    }
-            //}
-        }
+        //public void ChangesFromParametersApply()
+        //{
+        //    if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0)
+        //    {
+        //        if (PARAMETERS.isControlButtonVisible)
+        //        {
+        //            controlButtons.Visible = true;
+        //        }
+        //        else
+        //        {
+        //            controlButtons.Visible = false;
+        //        }
+        //        PARAMETERS.PARAM.Clear();
+        //    }
+        //    //if (Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C4_enable_face_recognition)
+        //    //{
+        //    //    if (faceDetector != null)
+        //    //    {
+        //    //        FaceDetector.StopFaceTimer();
+        //    //    }
+        //    //    faceDetector.SetInterval();
+        //    //    faceDetector.StartFaceTimer();
+        //    //}
+        //    //else
+        //    //{
+        //    //    if (faceDetector != null)
+        //    //    {
+        //    //        FaceDetector.StopFaceTimer();
+        //    //    }
+        //    //}
+        //}
 
         /// <summary>
         /// Get the bitmap from the 
