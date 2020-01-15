@@ -387,28 +387,19 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "q"://Close window
+                        case "q"://Close a window or all (exit app)
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex))
                                 {
-                                    //if (cameraIndex == 0)
-                                    //{
-                                    //    MULTI_WINDOW.formList[0].Close();
-                                    //}
-                                    //else if (cameraIndex == 1)
-                                    //{
-                                    //    MULTI_WINDOW.formList[1].Close();
-                                    //}
-                                    //else if (cameraIndex == 2)
-                                    //{
-                                    //    
-                                    //}
-                                    //else
-                                    //{
-                                    MULTI_WINDOW.formList[cameraIndex].Close();
-                                    //Application.Exit();
-                                    //}
+                                    if (cameraIndex >= 0 && cameraIndex<4)
+                                    {
+                                        MULTI_WINDOW.formList[cameraIndex].Close();
+                                    }
+                                    else if (cameraIndex == 8)
+                                    {                                        
+                                        Application.Exit();
+                                    }
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
