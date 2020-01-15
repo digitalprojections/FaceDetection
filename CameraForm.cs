@@ -99,6 +99,7 @@ namespace FaceDetection
                 }
                 else
                 {
+                    this.TopMost = true;
                     DialogResult dr = MessageBox.Show("指定カメラのビューアーを閉じると、アプリケーションが終了します。\n処理を続行しますか？", "アプリケーションを終了する ?", MessageBoxButtons.OKCancel);
                     switch (dr)
                     {
