@@ -78,6 +78,11 @@ namespace FaceDetection
 
         private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Properties.Settings.Default.main_camera_index == CameraIndex) // The form closed was the main camera selected
+            {
+                Properties.Settings.Default.main_camera_index = 0;
+            }
+
             MULTI_WINDOW.displayedCameraCount--;
             PROPERTY_FUNCTIONS.Set_Window_Location(CameraIndex, this);
             Properties.Settings.Default.Save();
@@ -114,9 +119,7 @@ namespace FaceDetection
 
         private void CameraForm_Load(object sender, EventArgs e)
         {
-            
             this.MouseDown += HideButtons;
-
             this.FormClosing += CameraForm_FormClosing;
             this.FormClosed += FormClass_FormClosed;
             this.ResizeEnd += FormClass_ResizeEnd;
@@ -125,7 +128,7 @@ namespace FaceDetection
             this.DoubleClick += FullScreen;
             crossbar = new CROSSBAR(CameraIndex, this);
             var mci = Properties.Settings.Default.main_camera_index;
-            if (CameraIndex == mci && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
+            if (CameraIndex == mci)// && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
             {
                 this.Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";
                 crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
@@ -268,37 +271,37 @@ namespace FaceDetection
             }
         }
 
-        public void ChangesFromParametersApply()
-        {
-            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0)
-            {
-                if (PARAMETERS.isControlButtonVisible)
-                {
-                    controlButtons.Visible = true;
-                }
-                else
-                {
-                    controlButtons.Visible = false;
-                }
-                PARAMETERS.PARAM.Clear();
-            }
-            //if (Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C4_enable_face_recognition)
-            //{
-            //    if (faceDetector != null)
-            //    {
-            //        FaceDetector.StopFaceTimer();
-            //    }
-            //    faceDetector.SetInterval();
-            //    faceDetector.StartFaceTimer();
-            //}
-            //else
-            //{
-            //    if (faceDetector != null)
-            //    {
-            //        FaceDetector.StopFaceTimer();
-            //    }
-            //}
-        }
+        //public void ChangesFromParametersApply()
+        //{
+        //    if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0)
+        //    {
+        //        if (PARAMETERS.isControlButtonVisible)
+        //        {
+        //            controlButtons.Visible = true;
+        //        }
+        //        else
+        //        {
+        //            controlButtons.Visible = false;
+        //        }
+        //        PARAMETERS.PARAM.Clear();
+        //    }
+        //    //if (Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C4_enable_face_recognition)
+        //    //{
+        //    //    if (faceDetector != null)
+        //    //    {
+        //    //        FaceDetector.StopFaceTimer();
+        //    //    }
+        //    //    faceDetector.SetInterval();
+        //    //    faceDetector.StartFaceTimer();
+        //    //}
+        //    //else
+        //    //{
+        //    //    if (faceDetector != null)
+        //    //    {
+        //    //        FaceDetector.StopFaceTimer();
+        //    //    }
+        //    //}
+        //}
 
         /// <summary>
         /// Get the bitmap from the 

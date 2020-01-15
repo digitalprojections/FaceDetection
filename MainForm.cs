@@ -197,14 +197,29 @@ namespace FaceDetection
             //CREATE CAMERA WINDOWS
             MULTI_WINDOW.CreateCameraWindows();
 
+            // Full screen
+            if (Properties.Settings.Default.main_window_full_screen)
+            {
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                {
+                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                {
+                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
+                }
+            }
+
             // Top most
             if (Properties.Settings.Default.window_on_top)
             {
-
-                    if (MULTI_WINDOW.displayedCameraCount > 0)
-                    {
+                if (MULTI_WINDOW.displayedCameraCount > 1)
+                {
                     MULTI_WINDOW.formList[cam_index].Activate();
-                    }
+                }
             }
             else
             {
@@ -213,7 +228,7 @@ namespace FaceDetection
                 //{
                 //    MULTI_WINDOW.formList[i].TopMost = false;                    
                 //}
-                if (MULTI_WINDOW.displayedCameraCount > 0)
+                if (MULTI_WINDOW.displayedCameraCount > 1)
                 {
                     MULTI_WINDOW.formList[cam_index].Activate();//MAIN CAMERA active
                 }
