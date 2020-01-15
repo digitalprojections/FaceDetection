@@ -49,8 +49,7 @@ namespace FaceDetection
                                     parameterOnOffSwitch = (elem.Substring(2) != "0");
                                     break;
                                 case "c":
-                                    cameraIndex = Int32.Parse(elem.Substring(2)) - 1;                                    
-                                    
+                                    cameraIndex = Int32.Parse(elem.Substring(2)) - 1;
                                     CameraIndex = cameraIndex;
                                     break;
                                 case "t":
@@ -156,11 +155,11 @@ namespace FaceDetection
                         case "s"://SNAPSHOT
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && cameraIndex>4)
+                                if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
                                 {                                    
                                     SNAPSHOT_SAVER.TakeSnapShotAll();
                                 }
-                                else if (CheckCameraIndex(cameraIndex) && cameraIndex < 8)
+                                else if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
                                 {
                                     SNAPSHOT_SAVER.TakeSnapShot(cameraIndex, "snapshot");
                                 }
