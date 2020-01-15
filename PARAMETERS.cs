@@ -330,30 +330,30 @@ namespace FaceDetection
                                     if (parameterOnOffSwitch)
                                     {
                                         isMinimized = false;
-                                        if (cameraIndex == 0)
-                                        {
-                                            MainForm.GetMainForm.WindowState = FormWindowState.Normal;
-                                            MainForm.GetMainForm.Show();
-                                            MainForm.GetMainForm.Activate();
-                                        }
-                                        else
-                                        {
+                                        //if (cameraIndex == 0)
+                                        //{
+                                        //    MainForm.GetMainForm.WindowState = FormWindowState.Normal;
+                                        //    MainForm.GetMainForm.Show();
+                                        //    MainForm.GetMainForm.Activate();
+                                        //}
+                                        //else
+                                        //{
                                             MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Normal;
                                             MULTI_WINDOW.formList[cameraIndex].Show();
                                             MULTI_WINDOW.formList[cameraIndex].Activate();
-                                        }
+                                        //}
                                     }
                                     else
                                     {
                                         isMinimized = true;
-                                        if (cameraIndex == 0)
-                                        {
-                                            MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
-                                        }
-                                        else
-                                        {
+                                        //if (cameraIndex == 0)
+                                        //{
+                                        //    MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
+                                        //}
+                                        //else
+                                        //{
                                             MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
-                                        }
+                                        //}
                                     }
                                 }
                                 PARAMETERS.PARAM.Clear();
