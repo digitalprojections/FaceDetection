@@ -506,6 +506,29 @@ namespace FaceDetection
             return retval;
         }
 
+        internal static void GetSecondsBeforeEvent(int camsen, out int secondBeforeOperationEvent)
+        {
+
+            switch (camsen)
+            {
+                case 0:
+                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
+                    break;
+                case 1:
+                secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
+                    break;
+                case 2:
+                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
+                    break;
+                case 3:
+                secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
+                    break;
+                default:
+                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
+                    break;
+            }
+        }
+
         public static int Get_FPS(int cam_ind)
         {
             int fps = 15;

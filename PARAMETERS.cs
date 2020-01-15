@@ -365,8 +365,6 @@ namespace FaceDetection
                                     {
                                         //MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
                                         Properties.Settings.Default.show_window_pane = true;
-                                        Properties.Settings.Default.Save();
-
                                         //if (MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
                                         //{
                                         //    MainForm.GetMainForm.TopMost = false;
@@ -374,9 +372,9 @@ namespace FaceDetection
                                     }
                                     else
                                     {
-                                        Properties.Settings.Default.show_window_pane = false;
-                                        Properties.Settings.Default.Save();
+                                        Properties.Settings.Default.show_window_pane = false;                                        
                                     }
+                                    Properties.Settings.Default.Save();
                                     MainForm.AllChangesApply();
                                 }
                                 PARAMETERS.PARAM.Clear();
