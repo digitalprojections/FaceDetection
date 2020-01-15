@@ -157,7 +157,7 @@ namespace FaceDetection
             #region Instances
             ///////////////////////////////////////
             settingUI = new SettingsUI();
-            //RSensor = new IRSensor();            
+            RSensor = new IRSensor();            
             backLight = new BackLightController();
             BackLight.Start();
             Mklisteners = new MOUSE_KEYBOARD();
@@ -174,8 +174,9 @@ namespace FaceDetection
         public static void AllChangesApply()
         {
             int cam_index = settingUI.Camera_index;//MAIN CAMERA INDEX
+            PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(cam_index, out bool irsensorOn);
 
-            if (PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(cam_index))
+            if (irsensorOn)
             {
                 RSensor?.Stop_IR_Timer();                
                 RSensor?.SetInterval();
@@ -223,15 +224,21 @@ namespace FaceDetection
                 PARAMETERS.PARAM.Reverse();
                 PARAMETERS.PARAM.Add("uvccameraviewer.exe");
                 PARAMETERS.PARAM.Reverse();
+                PARAMETERS.wakeUpCall = true;
                 PARAMETERS.HandleParameters(PARAMETERS.PARAM);
+                
+
+                
 
                 if (PARAMETERS.isMinimized)
                 {
-                    MULTI_WINDOW.formList[PARAMETERS.CameraIndex].WindowState = FormWindowState.Minimized;
+                    if (PARAMETERS.CameraIndex >= 0 && PARAMETERS.CameraIndex < 4)
+                        MULTI_WINDOW.formList[PARAMETERS.CameraIndex].WindowState = FormWindowState.Minimized;
                 }
                 else
                 {
-                    MULTI_WINDOW.formList[PARAMETERS.CameraIndex].WindowState = FormWindowState.Normal;
+                    if (PARAMETERS.CameraIndex >= 0 && PARAMETERS.CameraIndex < 4)
+                        MULTI_WINDOW.formList[PARAMETERS.CameraIndex].WindowState = FormWindowState.Normal;
                 }
 
                 PARAMETERS.PARAM.Clear();

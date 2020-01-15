@@ -15,6 +15,8 @@ namespace FaceDetection
         public static bool isMinimized = false;
         public static bool isControlButtonVisible = true;
         public static int CameraIndex = 0;
+        private static bool snapshotRequested;
+        public static bool wakeUpCall;
 
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
@@ -46,7 +48,7 @@ namespace FaceDetection
                                     method = elem.Substring(2);
                                     break;
                                 case "s":
-                                    parameterOnOffSwitch = (elem.Substring(2) != "0");
+                                    parameterOnOffSwitch = (elem.Substring(2) != "0");                                    
                                     break;
                                 case "c":
                                     cameraIndex = Int32.Parse(elem.Substring(2)) - 1;
@@ -155,14 +157,35 @@ namespace FaceDetection
                         case "s"://SNAPSHOT
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
-                                {                                    
-                                    SNAPSHOT_SAVER.TakeSnapShotAll();
-                                }
-                                else if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
+                                if (wakeUpCall)
                                 {
-                                    SNAPSHOT_SAVER.TakeSnapShot(cameraIndex, "snapshot");
+                                    snapshotRequested = true;
+                                    wakeUpCall = false;
+                                    if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                                    {
+                                        SNAPSHOT_SAVER.TakeAsyncSnapShot(true, cameraIndex, "event");
+                                    }
+                                    else if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
+                                    {
+                                        SNAPSHOT_SAVER.TakeAsyncSnapShot(false, cameraIndex, "event");
+                                    }
                                 }
+                                else
+                                {
+                                    if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                                    {
+                                        SNAPSHOT_SAVER.TakeSnapShotAll();
+
+                                    }
+                                    else if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
+                                    {
+                                        SNAPSHOT_SAVER.TakeSnapShot(cameraIndex, "event");
+                                        //SNAPSHOT_SAVER.TakeAsyncSnapShot();
+
+                                    }
+                                }
+
+                                
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
@@ -193,41 +216,17 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "d"://EnableDisable Face detection
+                        case "d"://Enable/Disable Face detection
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
                                 {
                                     if (parameterOnOffSwitch)
-                                    {
+                                    {                                        
+                                        PROPERTY_FUNCTIONS.Set_OPCAP_IRSensor_FD_Switch(cameraIndex, true, false, true);
                                         if (MULTI_WINDOW.formList[cameraIndex].FaceDetector != null)
                                         {
                                             MULTI_WINDOW.formList[cameraIndex].FaceDetector.StartFaceTimer();
-                                        }
-
-                                        if (cameraIndex == 0)
-                                        {
-                                            Properties.Settings.Default.C1_enable_face_recognition = true;
-                                            Properties.Settings.Default.C1_enable_Human_sensor = false;
-                                            Properties.Settings.Default.C1_enable_capture_operator = true;
-                                        }
-                                        else if (cameraIndex == 1)
-                                        {
-                                            Properties.Settings.Default.C2_enable_face_recognition = true;
-                                            Properties.Settings.Default.C2_enable_Human_sensor = false;
-                                            Properties.Settings.Default.C2_enable_capture_operator = true;
-                                        }
-                                        else if (cameraIndex == 2)
-                                        {
-                                            Properties.Settings.Default.C3_enable_face_recognition = true;
-                                            Properties.Settings.Default.C3_enable_Human_sensor = false;
-                                            Properties.Settings.Default.C3_enable_capture_operator = true;
-                                        }
-                                        else if (cameraIndex == 3)
-                                        {
-                                            Properties.Settings.Default.C4_enable_face_recognition = true;
-                                            Properties.Settings.Default.C4_enable_Human_sensor = false;
-                                            Properties.Settings.Default.C4_enable_capture_operator = true;
                                         }
                                     }
                                     else
@@ -259,30 +258,7 @@ namespace FaceDetection
                                 {
                                     if (parameterOnOffSwitch)
                                     {
-                                        if (cameraIndex == 0)
-                                        {
-                                            Properties.Settings.Default.C1_enable_capture_operator = true;
-                                            Properties.Settings.Default.C1_enable_Human_sensor = true;
-                                            Properties.Settings.Default.C1_enable_face_recognition = false;
-                                        }
-                                        else if (cameraIndex == 1)
-                                        {
-                                            Properties.Settings.Default.C2_enable_capture_operator = true;
-                                            Properties.Settings.Default.C2_enable_Human_sensor = true;
-                                            Properties.Settings.Default.C2_enable_face_recognition = false;
-                                        }
-                                        else if (cameraIndex == 2)
-                                        {
-                                            Properties.Settings.Default.C3_enable_capture_operator = true;
-                                            Properties.Settings.Default.C3_enable_Human_sensor = true;
-                                            Properties.Settings.Default.C3_enable_face_recognition = false;
-                                        }
-                                        else if (cameraIndex == 3)
-                                        {
-                                            Properties.Settings.Default.C4_enable_capture_operator = true;
-                                            Properties.Settings.Default.C4_enable_Human_sensor = true;
-                                            Properties.Settings.Default.C4_enable_face_recognition = false;
-                                        }
+                                        PROPERTY_FUNCTIONS.Set_OPCAP_IRSensor_FD_Switch(cameraIndex, true, true, false);
                                     }
                                     else
                                     {
