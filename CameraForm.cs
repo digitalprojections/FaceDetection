@@ -60,6 +60,7 @@ namespace FaceDetection
         public int CameraIndex = 0;
         //public bool closeFromSettings = false;
         public CROSSBAR crossbar;
+        private bool applicationExit = false;
 
         CameraForm subform;
         public CameraForm GetSubForm => subform;
@@ -78,19 +79,46 @@ namespace FaceDetection
 
         private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Properties.Settings.Default.main_camera_index == CameraIndex) // The form closed was the main camera selected
+            if (Properties.Settings.Default.main_camera_index == CameraIndex && applicationExit == false) // The form closed was the main camera selected
             {
-                Properties.Settings.Default.main_camera_index = 0;
+                if (Properties.Settings.Default.language == "English")
+                {
+                    DialogResult dr = MessageBox.Show("Closing the viewer for the specified camera will close the application.\nDo you want to continue ?", "Exit application ?", MessageBoxButtons.OKCancel);
+                    switch (dr)
+                    {
+                        case DialogResult.OK:
+                            applicationExit = true;
+                            Application.Exit();
+                            break;
+                        case DialogResult.Cancel:
+                            e.Cancel = true;
+                            break;
+                    }
+                }
+                else
+                {
+                    DialogResult dr = MessageBox.Show("指定カメラのビューアーを閉じると、アプリケーションが終了します。\n処理を続行しますか？", "アプリケーションを終了する ?", MessageBoxButtons.OKCancel);
+                    switch (dr)
+                    {
+                        case DialogResult.OK:
+                            applicationExit = true;
+                            Application.Exit();
+                            break;
+                        case DialogResult.Cancel:
+                            e.Cancel = true;
+                            break;
+                    }
+                }
             }
 
             MULTI_WINDOW.displayedCameraCount--;
             PROPERTY_FUNCTIONS.Set_Window_Location(CameraIndex, this);
             Properties.Settings.Default.Save();
 
-            if (MULTI_WINDOW.displayedCameraCount <= 0)
-            {
-                Application.Exit();
-            }
+            //if (MULTI_WINDOW.displayedCameraCount <= 0)
+            //{
+            //    Application.Exit();
+            //}
 
             MULTI_WINDOW.formArray[CameraIndex] = false;
         }
