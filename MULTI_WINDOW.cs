@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace FaceDetection
@@ -68,24 +67,7 @@ namespace FaceDetection
                 {
                     Console.WriteLine("Main camera has been disconnected while application was not running");
                 }
-            }
-            //else
-            //{
-            //    for (int i = 1; i < numberOfCamerasToDisplay; i++)
-            //    {
-            //        if(formList[i].Text == "")
-            //        {
-            //            form = new CameraForm(i);
-            //            //form.Text = "UVC Camera Viewer - camera " + (i + 1);
-            //            formList[i] = form;
-            //            form.Show();
-            //            if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
-            //            {
-            //                form.WindowState = FormWindowState.Minimized;
-            //            }
-            //        }
-            //    }
-            //}
+            }            
         }
 
         public static void GetVideoFormatByCamera(int ind)
@@ -101,24 +83,6 @@ namespace FaceDetection
                 formList[i].SetWindowProperties();
                 //Also must check if the PREEVENT mode is needed
                 formList[i].SetCameraToDefaultMode();
-
-                //Commented out because, each form can do it by itself
-
-                //if (i == 0)
-                //{
-                //    formList[0].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C2x), decimal.ToInt32(Properties.Settings.Default.C2y));
-                //    formList[0].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(1);
-                //}
-                //else if (i == 1)
-                //{
-                //    formList[1].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C3x), decimal.ToInt32(Properties.Settings.Default.C3y));
-                //    formList[1].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(2);
-                //}
-                //else if (i == 2)
-                //{
-                //    formList[2].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C4x), decimal.ToInt32(Properties.Settings.Default.C4y));
-                //    formList[2].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(3);
-                //}
             }
         }
         public static void EventRecorderOn(int cameraIndex)
