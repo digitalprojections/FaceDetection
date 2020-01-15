@@ -144,9 +144,7 @@ namespace FaceDetection
                                     MULTI_WINDOW.formList[cameraIndex].Activate();
                                     if (!Properties.Settings.Default.show_all_cams_simulteneously)
                                     {
-                                        
                                         MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
-                                        
                                     }
                                 //}
                                 PARAMETERS.PARAM.Clear();
@@ -471,10 +469,8 @@ namespace FaceDetection
                                 {
                                     if (parameterOnOffSwitch)
                                     {
-                                        
                                         MULTI_WINDOW.formList[cameraIndex].SetRecordIcon(cameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                                         MULTI_WINDOW.formList[cameraIndex].crossbar.Start(cameraIndex, CAMERA_MODES.MANUAL);
-                                        
                                     }
                                     else
                                     {
@@ -483,14 +479,14 @@ namespace FaceDetection
                                         {
                                             if (MULTI_WINDOW.displayedCameraCount > 0)
                                             {
-                                            MULTI_WINDOW.formList[cameraIndex].SetToPreeventMode();
+                                                MULTI_WINDOW.formList[cameraIndex].SetToPreeventMode();
                                             }
                                         }
                                         else
                                         {
                                             if (MULTI_WINDOW.displayedCameraCount > 0)
                                             {
-                                            MULTI_WINDOW.formList[cameraIndex].SetToPreviewMode();
+                                                MULTI_WINDOW.formList[cameraIndex].SetToPreviewMode();
                                             }
                                         }
                                     }

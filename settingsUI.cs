@@ -146,6 +146,19 @@ namespace FaceDetection
 
         private void Save_and_close(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(storePath.Text))
+            {
+                if (Directory.Exists(@"D:\TEMP"))
+                {
+                    storePath.Text = @"D:\UVCCAMERA";
+                }
+                else
+                {
+                    storePath.Text = @"C:\UVCCAMERA";
+                }
+                storePath.SelectionStart = storePath.Text.Length;
+            }
+
             Properties.Settings.Default.Save();
             Camera.CountCamera();
             Camera.SetNumberOfCameras();
@@ -844,8 +857,37 @@ namespace FaceDetection
             char[] characters = storePath.Text.ToCharArray();
             for(int i=0; i< characters.Length; i++)
             {
-                if (i != 1) // This character should be ":"
+                if (i == 0) // First character must be a letter (disk name), so if not, back to D
                 {
+                    if (characters[i] != 'A' && characters[i] != 'B' && characters[i] != 'C' && characters[i] != 'D' && characters[i] != 'E' && characters[i] != 'F'
+                        && characters[i] != 'G' && characters[i] != 'H' && characters[i] != 'I' && characters[i] != 'J' && characters[i] != 'K' && characters[i] != 'L'
+                        && characters[i] != 'M' && characters[i] != 'N' && characters[i] != 'O' && characters[i] != 'P' && characters[i] != 'Q' && characters[i] != 'R'
+                        && characters[i] != 'S' && characters[i] != 'T' && characters[i] != 'U' && characters[i] != 'V' && characters[i] != 'W' && characters[i] != 'X'
+                        && characters[i] != 'Y' && characters[i] != 'Z')
+                    {
+                        if (Directory.Exists(@"D:\TEMP"))
+                        {
+                            characters[i] = 'D';
+                        }
+                        else
+                        {
+                            characters[i] = 'C';
+                        }
+                        pathChanged = true;
+                    }
+                }
+                else if (i == 1) // This character must be ":"
+                {
+                    characters[i] = ':';
+                    pathChanged = true;
+                }
+                else if (i == 2) // This character must be "\"
+                {
+                    characters[i] = '\\';
+                    pathChanged = true;
+                }
+                else
+                { 
                     for (int j = 0; j < invalidPathChars.Length; j++)
                     {
                         if (characters[i].Equals(invalidPathChars[j]))
