@@ -68,22 +68,8 @@ namespace FaceDetection
             window = window_ptr;
 
             int intervalBeforeReinitiating = 0;
-            if (cameraindex == 0)
-            {
-                intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C1_interval_before_reinitiating_recording);
-            }
-            else if (cameraindex == 1)
-            {
-                intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C2_interval_before_reinitiating_recording);
-            }
-            else if (cameraindex == 2)
-            {
-                intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C3_interval_before_reinitiating_recording);
-            }
-            else if (cameraindex == 3)
-            {
-                intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C4_interval_before_reinitiating_recording);
-            }
+
+            PROPERTY_FUNCTIONS.GetReInitiationInterval(cameraindex, out intervalBeforeReinitiating);
 
             this.no_opcap_timer.AutoReset = false;
             this.no_opcap_timer.Elapsed += No_opcap_timer_Elapsed;
@@ -116,27 +102,9 @@ namespace FaceDetection
         {
             bool captureOperatorEnabled = false, IRSensorEnabled = false;
 
-            if(this.INDEX == 0)
-            {
-                captureOperatorEnabled = Properties.Settings.Default.C1_enable_capture_operator;
-                IRSensorEnabled = Properties.Settings.Default.C1_enable_Human_sensor;
-            }
-            else if (this.INDEX == 1)
-            {
-                captureOperatorEnabled = Properties.Settings.Default.C2_enable_capture_operator;
-                IRSensorEnabled = Properties.Settings.Default.C2_enable_Human_sensor;
-            }
-            else if (this.INDEX == 2)
-            {
-                captureOperatorEnabled = Properties.Settings.Default.C3_enable_capture_operator;
-                IRSensorEnabled = Properties.Settings.Default.C3_enable_Human_sensor;
-            }
-            else if (this.INDEX == 3)
-            {
-                captureOperatorEnabled = Properties.Settings.Default.C4_enable_capture_operator;
-                IRSensorEnabled = Properties.Settings.Default.C4_enable_Human_sensor;
-            }
-
+            PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(INDEX, out captureOperatorEnabled);
+            PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(INDEX, out IRSensorEnabled);
+            
             if (window.picbox_recording.InvokeRequired)
             {
                 var d = new dHideRecIcon(HideTheRecIcon);
@@ -196,23 +164,8 @@ namespace FaceDetection
         public void No_Cap_Timer_ON(int vidlen)
         {
             int intervalBeforeReinitiating = 0;
-            if(this.INDEX == 0)
-            {
-                intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C1_interval_before_reinitiating_recording);
-            }
-            else if (this.INDEX == 1)
-            {
-                intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C2_interval_before_reinitiating_recording);
-            }
-            else if (this.INDEX == 2)
-            {
-                intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C3_interval_before_reinitiating_recording);
-            }
-            else if (this.INDEX == 3)
-            {
-                intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C4_interval_before_reinitiating_recording);
-            }
 
+            PROPERTY_FUNCTIONS.GetReInitiationInterval(INDEX, out intervalBeforeReinitiating);
 
             wait_interval_enabled = true;            
             int intt = (intervalBeforeReinitiating + vidlen) * 1000;
@@ -287,7 +240,7 @@ namespace FaceDetection
                     recorder.RESET_FILE_PATH();
                     try
                     {
-                        Task task = Task.Factory.StartNew(() => {
+                        Task task = Task.Run(() => {
                             if (Directory.Exists(@"D:\TEMP\"))
                             {
                                 TaskManager.DeleteOldFiles(@"D:\TEMP\" + (INDEX + 1));

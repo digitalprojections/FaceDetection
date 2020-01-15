@@ -27,33 +27,10 @@ namespace FaceDetection
         private void Init_IR_Timer()
         {
             int cameraIndex = MainForm.Setting_ui.Camera_index;
-            bool operatorCaptureEnabled = false, IRSensorEnabled = false;
-            int checkInterval = 0;
-
-            switch (cameraIndex)
-            {
-                case 0:
-                    operatorCaptureEnabled = Properties.Settings.Default.C1_enable_capture_operator;
-                    IRSensorEnabled = Properties.Settings.Default.C1_enable_Human_sensor;
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C1_check_interval);
-                    break;
-                case 1:
-                    operatorCaptureEnabled = Properties.Settings.Default.C2_enable_capture_operator;
-                    IRSensorEnabled = Properties.Settings.Default.C2_enable_Human_sensor;
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C2_check_interval);
-                    break;
-                case 2:
-                    operatorCaptureEnabled = Properties.Settings.Default.C3_enable_capture_operator;
-                    IRSensorEnabled = Properties.Settings.Default.C3_enable_Human_sensor;
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C3_check_interval);
-                    break;
-                case 3:
-                    operatorCaptureEnabled = Properties.Settings.Default.C4_enable_capture_operator;
-                    IRSensorEnabled = Properties.Settings.Default.C4_enable_Human_sensor;
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C4_check_interval);
-                    break;
-            }
-
+            PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(cameraIndex, out bool operatorCaptureEnabled);
+            PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(cameraIndex, out bool IRSensorEnabled);
+            PROPERTY_FUNCTIONS.GetInterval(cameraIndex, out int checkInterval);
+            
             if (operatorCaptureEnabled && IRSensorEnabled && checkInterval > 0)
             {
                 SensorCheckTimer.Interval = checkInterval;
@@ -82,39 +59,14 @@ namespace FaceDetection
 
         private void MotionDetected()
         {
-            int camindex = Properties.Settings.Default.main_camera_index;
+            int INDEX = Properties.Settings.Default.main_camera_index;
             int timeBeforeEvent = 0, timeAfterEvent = 0;
             bool preeventRecording = false;
             string captureMethod = "";
 
-            switch (camindex)
-            {
-                case 0:
-                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
-                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
-                    
-                    captureMethod = Properties.Settings.Default.C1_capture_type;
-                    break;
-                case 1:
-                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
-                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
-                    
-                    captureMethod = Properties.Settings.Default.C2_capture_type;
-                    break;
-                case 2:
-                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
-                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
-                    
-                    captureMethod = Properties.Settings.Default.C3_capture_type;
-                    break;
-                case 3:
-                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
-                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
-                    
-                    captureMethod = Properties.Settings.Default.C4_capture_type;
-                    break;
-            }
-            preeventRecording = MULTI_WINDOW.formList[camindex].crossbar.PREEVENT_RECORDING;
+            PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(INDEX, out timeBeforeEvent, out timeAfterEvent);
+
+            preeventRecording = MULTI_WINDOW.formList[INDEX].crossbar.PREEVENT_RECORDING;
 
             if (MainForm.GetMainForm.InvokeRequired)
             {
@@ -123,7 +75,7 @@ namespace FaceDetection
             }
             else
             {
-                if (MULTI_WINDOW.formList[camindex].crossbar.OPER_BAN == false)
+                if (MULTI_WINDOW.formList[INDEX].crossbar.OPER_BAN == false)
                 {
                     if (captureMethod != "Snapshot") // Video
                     {
@@ -132,29 +84,30 @@ namespace FaceDetection
                         {
                             if (MainForm.GetMainForm.AnyRecordingInProgress == false)
                             {
-                                TaskManager.EventAppeared(RECORD_PATH.EVENT, camindex+1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+                                TaskManager.EventAppeared(RECORD_PATH.EVENT, INDEX+1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
 
-                                if (camindex == 0)
+                                if (INDEX == Properties.Settings.Default.main_camera_index)
                                 {
-                                    MULTI_WINDOW.formList[camindex].crossbar.SetIconTimer(timeAfterEvent);
-                                    MULTI_WINDOW.formList[camindex].crossbar.No_Cap_Timer_ON(timeAfterEvent);
+                                    MULTI_WINDOW.formList[INDEX].crossbar.SetIconTimer(timeAfterEvent);
+                                    MULTI_WINDOW.formList[INDEX].crossbar.No_Cap_Timer_ON(timeAfterEvent);
                                 }
                                 else
                                 {
-                                    MULTI_WINDOW.formList[camindex].SetRecordIcon(camindex, timeAfterEvent);
+                                    MULTI_WINDOW.formList[INDEX].SetRecordIcon(INDEX, timeAfterEvent); //SHOULD NOT BE HIT. REMOVE THIS LINE
                                 }
                             }
                         }
                         else
                         {
-                            MULTI_WINDOW.formList[camindex].crossbar.Start(camindex, CAMERA_MODES.OPERATOR);
+                            MULTI_WINDOW.formList[INDEX].crossbar.Start(INDEX, CAMERA_MODES.OPERATOR);
+                            MULTI_WINDOW.formList[INDEX].crossbar.SetIconTimer(timeAfterEvent);
+                            MULTI_WINDOW.formList[INDEX].crossbar.No_Cap_Timer_ON(timeAfterEvent);
                         }
                     }
                     else // Snapshot
                     {
-                        SNAPSHOT_SAVER.TakeSnapShot(camindex, "event");
-
-                        MULTI_WINDOW.formList[camindex].crossbar.No_Cap_Timer_ON(0);
+                        SNAPSHOT_SAVER.TakeSnapShot(INDEX, "event");
+                        MULTI_WINDOW.formList[INDEX].crossbar.No_Cap_Timer_ON(0);//Only the no-capture switch is enough
                     }
 
                     Logger.Add("IR SENSOR: Motion detected");
@@ -186,23 +139,8 @@ namespace FaceDetection
         public void SetInterval()
         {
             int camindex = Properties.Settings.Default.main_camera_index;
-            int checkInterval = 0;
 
-            switch (camindex)
-            {
-                case 0:
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C1_check_interval);
-                    break;
-                case 1:
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C2_check_interval);
-                    break;
-                case 2:
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C3_check_interval);
-                    break;
-                case 3:
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C4_check_interval);
-                    break;
-            }
+            PROPERTY_FUNCTIONS.GetInterval(camindex, out int checkInterval);
 
             SensorCheckTimer.Enabled = true;
             SensorCheckTimer.Interval = checkInterval;

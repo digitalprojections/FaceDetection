@@ -78,6 +78,28 @@ namespace FaceDetection
             }
         }
 
+        internal static void GetReInitiationInterval(int cameraindex, out int intervalBeforeReinitiating)
+        {
+            switch (cameraindex)
+            {
+                case 0:
+                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C1_interval_before_reinitiating_recording);
+                    break;
+                case 1:
+                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C2_interval_before_reinitiating_recording);
+                    break;
+                case 2:
+                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C3_interval_before_reinitiating_recording);
+                    break;
+                case 3:
+                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C4_interval_before_reinitiating_recording);
+                    break;
+                default:
+                    intervalBeforeReinitiating = 0;
+                    break;
+            }
+        }
+
         internal static void GetCaptureOnOperationStartSwitch(int camindex, out bool recordWhenOperation)
         {
             switch (camindex)
@@ -287,6 +309,36 @@ namespace FaceDetection
             }
         }
 
+        internal static void Set_OPCAP_IRSensor_FD_Switch(int cameraIndex, bool OperCapSwitch, bool IRSensorSwitch, bool faceSwitch)
+        {
+            if (cameraIndex == 0)
+            {
+                Properties.Settings.Default.C1_enable_capture_operator = OperCapSwitch;
+                Properties.Settings.Default.C1_enable_Human_sensor = IRSensorSwitch;
+                Properties.Settings.Default.C1_enable_face_recognition = faceSwitch;
+            }
+            else if (cameraIndex == 1)
+            {
+                Properties.Settings.Default.C2_enable_capture_operator = OperCapSwitch;
+                Properties.Settings.Default.C2_enable_Human_sensor = IRSensorSwitch;
+                Properties.Settings.Default.C2_enable_face_recognition = faceSwitch;
+            }
+            else if (cameraIndex == 2)
+            {
+                Properties.Settings.Default.C3_enable_capture_operator = OperCapSwitch;
+                Properties.Settings.Default.C3_enable_Human_sensor = IRSensorSwitch;
+                Properties.Settings.Default.C3_enable_face_recognition = faceSwitch;
+            }
+            else if (cameraIndex == 3)
+            {
+                Properties.Settings.Default.C4_enable_capture_operator = OperCapSwitch;
+                Properties.Settings.Default.C4_enable_Human_sensor = IRSensorSwitch;
+                Properties.Settings.Default.C4_enable_face_recognition = faceSwitch;
+            }
+
+            Properties.Settings.Default.Save();
+        }
+
         internal static void GetCaptureMethod(int camindex, out string captureMethod)
         {
             switch (camindex)
@@ -435,25 +487,26 @@ namespace FaceDetection
         /// </summary>
         /// <param name="cam_ind"></param>
         /// <returns></returns>
-            public static bool Get_Human_Sensor_Enabled(int cam_ind)
+            public static void Get_Human_Sensor_Enabled(int cam_ind, out bool iRSensorEnabled)
         {
-            bool retval = false;
             switch (cam_ind)
             {
                 case 0:
-                    retval = Properties.Settings.Default.C1_enable_Human_sensor;
+                    iRSensorEnabled = Properties.Settings.Default.C1_enable_Human_sensor;
                     break;
                 case 1:
-                    retval = Properties.Settings.Default.C2_enable_Human_sensor;
+                    iRSensorEnabled = Properties.Settings.Default.C2_enable_Human_sensor;
                     break;
                 case 2:
-                    retval = Properties.Settings.Default.C3_enable_Human_sensor;
+                    iRSensorEnabled = Properties.Settings.Default.C3_enable_Human_sensor;
                     break;
                 case 3:
-                    retval = Properties.Settings.Default.C4_enable_Human_sensor;
+                    iRSensorEnabled = Properties.Settings.Default.C4_enable_Human_sensor;
+                    break;
+                default:
+                    iRSensorEnabled = false;
                     break;
             }
-            return retval;
         }
     }
 }

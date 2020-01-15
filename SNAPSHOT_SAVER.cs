@@ -94,16 +94,16 @@ namespace FaceDetection
             return null;
         }
 
-        public static void TakeAsyncSnapShot()
+        public static void TakeAsyncSnapShot(bool allcam, int cameraIndex, string v)
         {
-            Thread newThread = new Thread(new ThreadStart(ThreadProc));
+            Thread newThread = new Thread(() => ThreadProc(allcam, cameraIndex, v));
             newThread.Name = String.Format("Thread SNAPSHOT");
             newThread.IsBackground = true;
             newThread.Start();
             //ThreadProc();
         }
 
-        private static void ThreadProc()
+        private static void ThreadProc(bool allcam, int cameraIndex, string v)
         {
             myImageCodecInfo = GetEncoderInfo("image/jpeg");
             myEncoder = Encoder.Quality;
@@ -113,7 +113,7 @@ namespace FaceDetection
 
             if (MainForm.GetMainForm.InvokeRequired)
             {                
-                var d = new dTakeAsyncSnapShot(ThreadProc);                
+                var d = new dTakeAsyncSnapShot(() => ThreadProc(allcam, cameraIndex, v));
                 if(MainForm.GetMainForm!=null)
                     MainForm.GetMainForm.Invoke(d);
             }
@@ -121,28 +121,43 @@ namespace FaceDetection
                 bool snap = false;
                 while (snap == false)
                 {
-                    if (MainForm.GetMainForm != null)
+                    if (MainForm.GetMainForm != null && (cameraIndex >= 0 && cameraIndex < 4))
                     {
-                        if (MULTI_WINDOW.formList[CameraIndex].crossbar != null) // && MainForm.GetMainForm.crossbar.ANY_CAMERA_ON())
+                        if (MULTI_WINDOW.formList[cameraIndex].crossbar != null) // && MainForm.GetMainForm.crossbar.ANY_CAMERA_ON())
                         {
-                            CameraIndex = MainForm.Setting_ui.Camera_index;
-                            Thread.Sleep(1000);
+                            //Thread.Sleep(1000);
+                            
                             string picloc = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
-                            picloc = Path.Combine(picloc, (CameraIndex + 1).ToString());
-                            picloc = Path.Combine(picloc, "snapshot");
+                            picloc = Path.Combine(picloc, (cameraIndex + 1).ToString());
+                            picloc = Path.Combine(picloc, v);
                             Directory.CreateDirectory(picloc);
                             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
                             
-                            Bitmap bitmap = MULTI_WINDOW.formList[CameraIndex].crossbar.GetBitmap();
+                            Bitmap bitmap = MULTI_WINDOW.formList[cameraIndex].crossbar.GetBitmap();
                             bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
                             
-
-                            snap = true;
-
-                            PARAMETERS.PARAM.Clear();
+                            //TakeSnapShot(cameraIndex);
+                            
                         }
 
+                    }else if(cameraIndex==8)
+                    {
+                        Thread.Sleep(1000);
+                        for(int i = 0; i<MULTI_WINDOW.displayedCameraCount;i++)
+                        {
+                            string picloc = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
+                            picloc = Path.Combine(picloc, (i + 1).ToString());
+                            picloc = Path.Combine(picloc, v);
+                            Directory.CreateDirectory(picloc);
+                            var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
+
+                            Bitmap bitmap = MULTI_WINDOW.formList[i].crossbar.GetBitmap();
+                            bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
+                        }                        
                     }
+
+                    snap = true;
+                    PARAMETERS.PARAM.Clear();
                 }
                 Console.WriteLine("Snapshot DONE! by " + Thread.CurrentThread.Name);
             }
@@ -154,6 +169,11 @@ namespace FaceDetection
             {
                 TakeSnapShot(i, "event");
             }
+        }
+
+        internal static void TakeAsyncSnapShotAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }
