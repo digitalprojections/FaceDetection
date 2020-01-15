@@ -389,7 +389,7 @@ namespace FaceDetection
                                 {
                                     if (parameterOnOffSwitch)
                                     {
-                                        MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
+                                        //MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
                                         Properties.Settings.Default.show_window_pane = true;
                                         Properties.Settings.Default.Save();
 
@@ -405,6 +405,7 @@ namespace FaceDetection
                                     }
                                     MainForm.AllChangesApply();
                                 }
+                                PARAMETERS.PARAM.Clear();
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
