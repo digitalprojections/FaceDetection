@@ -60,7 +60,7 @@ namespace FaceDetection
         public int CameraIndex = 0;
         //public bool closeFromSettings = false;
         public CROSSBAR crossbar;
-        
+
         CameraForm subform;
         public CameraForm GetSubForm => subform;
 
@@ -73,6 +73,7 @@ namespace FaceDetection
             hideIconTimer.Elapsed += new System.Timers.ElapsedEventHandler(HideIcon_tick);
             videoFormat = UsbCamera.GetVideoFormat(camind);
             this.Load += CameraForm_Load;
+            MULTI_WINDOW.formArray[camind] = true;
         }
 
         private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -82,7 +83,11 @@ namespace FaceDetection
             Properties.Settings.Default.Save();
 
             if (MULTI_WINDOW.displayedCameraCount <= 0)
+            {
                 Application.Exit();
+            }
+
+            MULTI_WINDOW.formArray[CameraIndex] = false;
         }
 
         /// <summary>
@@ -514,7 +519,6 @@ namespace FaceDetection
 
         private void FormClass_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
             crossbar.ReleaseSecondaryCamera();
             crossbar = null;
 
@@ -533,6 +537,7 @@ namespace FaceDetection
                 //operator capture: human sensor, keyboard and mouse events
                 Properties.Settings.Default.main_camera_index = 0;
             }
+
             Destroy();
         }
 
