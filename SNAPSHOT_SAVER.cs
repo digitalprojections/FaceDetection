@@ -10,49 +10,47 @@ namespace FaceDetection
     class SNAPSHOT_SAVER
     {
         private delegate void dTakeAsyncSnapShot();
-        static int CameraIndex = 0;
+        //static int CameraIndex = 0;
         static ImageCodecInfo myImageCodecInfo;
         static Encoder myEncoder;
         static EncoderParameter myEncoderParameter;
         static EncoderParameters myEncoderParameters;
         
 
-        internal static void TakeSnapShot(int cameraIndex)
-        {
-            CameraIndex = cameraIndex;
-            myImageCodecInfo = GetEncoderInfo("image/jpeg");
-            myEncoder = Encoder.Quality;
-            myEncoderParameters = new EncoderParameters(1);
-            myEncoderParameter = new EncoderParameter(myEncoder, 80L);
-            myEncoderParameters.Param[0] = myEncoderParameter;
+        //internal static void TakeSnapShot(int cameraIndex)
+        //{
+        //    CameraIndex = cameraIndex;
+        //    myImageCodecInfo = GetEncoderInfo("image/jpeg");
+        //    myEncoder = Encoder.Quality;
+        //    myEncoderParameters = new EncoderParameters(1);
+        //    myEncoderParameter = new EncoderParameter(myEncoder, 80L);
+        //    myEncoderParameters.Param[0] = myEncoderParameter;
 
-            string picloc = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
-            picloc = Path.Combine(picloc, (CameraIndex + 1).ToString());
-            picloc = Path.Combine(picloc, "snapshot");
-            Directory.CreateDirectory(picloc);
-            var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
+        //    string picloc = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
+        //    picloc = Path.Combine(picloc, (CameraIndex + 1).ToString());
+        //    picloc = Path.Combine(picloc, "snapshot");
+        //    Directory.CreateDirectory(picloc);
+        //    var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
 
-            Bitmap bitmap = new Bitmap(1, 1);
-            try
-            {
+        //    Bitmap bitmap = new Bitmap(1, 1);
+        //    try
+        //    {
                 
-                bitmap = MULTI_WINDOW.formList[cameraIndex].GetSnapShot();
+        //        bitmap = MULTI_WINDOW.formList[cameraIndex].GetSnapShot();
                 
-                if (bitmap != null)
-                {
-                    bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
-                }
-            }
-            catch (NullReferenceException nrx)
-            {
-                Logger.Add(nrx);
-            }
-        }
+        //        if (bitmap != null)
+        //        {
+        //            bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
+        //        }
+        //    }
+        //    catch (NullReferenceException nrx)
+        //    {
+        //        Logger.Add(nrx);
+        //    }
+        //}
 
         internal static void TakeSnapShot(int cameraIndex, string ev)
         {
-            CameraIndex = cameraIndex;
-
             myImageCodecInfo = GetEncoderInfo("image/jpeg");
             myEncoder = Encoder.Quality;
             myEncoderParameters = new EncoderParameters(1);
@@ -60,7 +58,7 @@ namespace FaceDetection
             myEncoderParameters.Param[0] = myEncoderParameter;
 
             string picloc = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
-            picloc = Path.Combine(picloc, (CameraIndex + 1).ToString());
+            picloc = Path.Combine(picloc, (cameraIndex + 1).ToString());
             picloc = Path.Combine(picloc, ev);
             Directory.CreateDirectory(picloc);
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
@@ -169,11 +167,6 @@ namespace FaceDetection
             {
                 TakeSnapShot(i, "event");
             }
-        }
-
-        internal static void TakeAsyncSnapShotAll()
-        {
-            throw new NotImplementedException();
         }
     }
 }

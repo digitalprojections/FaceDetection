@@ -594,7 +594,7 @@ namespace FaceDetection
             cameraSender = snd.TopLevelControl.ToString();
             cameraSender = cameraSender.Substring(cameraSender.Length - 1, 1);
 
-            SNAPSHOT_SAVER.TakeSnapShot(Convert.ToInt32(cameraSender) - 1);
+            SNAPSHOT_SAVER.TakeSnapShot(Convert.ToInt32(cameraSender) - 1, "snapshot");
         }
 
         private void ManualVideoRecording(object sender, EventArgs e)
