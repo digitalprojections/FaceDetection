@@ -83,6 +83,7 @@ namespace FaceDetection
             {
                 if (Properties.Settings.Default.language == "English")
                 {
+                    this.TopMost = true;
                     DialogResult dr = MessageBox.Show("Closing the viewer for the specified camera will close the application.\nDo you want to continue ?", "Exit application ?", MessageBoxButtons.OKCancel);
                     switch (dr)
                     {
@@ -92,6 +93,7 @@ namespace FaceDetection
                             break;
                         case DialogResult.Cancel:
                             e.Cancel = true;
+                            this.TopMost = false;
                             break;
                     }
                 }
