@@ -431,6 +431,7 @@ namespace FaceDetection
                                         MULTI_WINDOW.EventRecorderOff(cameraIndex);
                                     }
                                 }
+                                //All camera event recorder needed?
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
