@@ -852,7 +852,7 @@ namespace FaceDetection
         private void StorePath_TextChanged(object sender, EventArgs e)
         {
             bool pathChanged = false;
-            char[] invalidPathChars = {'\"', '*', '?', '!', '<', '>', '|', ':'};
+            char[] invalidPathChars = {'\"', '*', '?', '!', '<', '>', '|', ':', '.'};
 
             char[] characters = storePath.Text.ToCharArray();
             for(int i=0; i< characters.Length; i++)
