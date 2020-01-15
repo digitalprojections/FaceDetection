@@ -196,6 +196,22 @@ namespace FaceDetection
             //CREATE CAMERA WINDOWS
             MULTI_WINDOW.CreateCameraWindows();
 
+            // Full screen
+            if (Properties.Settings.Default.main_window_full_screen)
+            {
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                {
+                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                {
+                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
+                }
+            }
+
             // Top most
             if (Properties.Settings.Default.window_on_top)
             {
