@@ -78,6 +78,11 @@ namespace FaceDetection
 
         private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Properties.Settings.Default.main_camera_index == CameraIndex) // The form closed was the main camera selected
+            {
+                Properties.Settings.Default.main_camera_index = 0;
+            }
+
             MULTI_WINDOW.displayedCameraCount--;
             PROPERTY_FUNCTIONS.Set_Window_Location(CameraIndex, this);
             Properties.Settings.Default.Save();
@@ -114,9 +119,7 @@ namespace FaceDetection
 
         private void CameraForm_Load(object sender, EventArgs e)
         {
-            
             this.MouseDown += HideButtons;
-
             this.FormClosing += CameraForm_FormClosing;
             this.FormClosed += FormClass_FormClosed;
             this.ResizeEnd += FormClass_ResizeEnd;

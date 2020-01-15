@@ -199,11 +199,10 @@ namespace FaceDetection
             // Top most
             if (Properties.Settings.Default.window_on_top)
             {
-
-                    if (MULTI_WINDOW.displayedCameraCount > 0)
-                    {
+                if (MULTI_WINDOW.displayedCameraCount > 1)
+                {
                     MULTI_WINDOW.formList[cam_index].Activate();
-                    }
+                }
             }
             else
             {
@@ -212,7 +211,7 @@ namespace FaceDetection
                 //{
                 //    MULTI_WINDOW.formList[i].TopMost = false;                    
                 //}
-                if (MULTI_WINDOW.displayedCameraCount > 0)
+                if (MULTI_WINDOW.displayedCameraCount > 1)
                 {
                     MULTI_WINDOW.formList[cam_index].Activate();//MAIN CAMERA active
                 }
