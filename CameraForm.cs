@@ -104,12 +104,10 @@ namespace FaceDetection
                     {
                         case DialogResult.OK:
                             applicationExit = true;
-                            applicationExit = true;
                             Application.Exit();
                             break;
                         case DialogResult.Cancel:
                             e.Cancel = true;
-                            this.TopMost = false;
                             break;
                     }
                 }
