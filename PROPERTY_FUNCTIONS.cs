@@ -339,6 +339,50 @@ namespace FaceDetection
             Properties.Settings.Default.Save();
         }
 
+        internal static void GetSecondsAfterEvent(int index, out int secondsAfterEvent)
+        {
+            switch (index)
+            {
+                case 0:                
+                secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
+                    break;
+                case 1:
+                secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
+                    break;
+                case 2:
+                secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
+                    break;
+                case 3:
+                secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
+                    break;
+                default:
+                    secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
+                    break;
+            }
+
+        }
+
+        internal static void GetEventRecorderSwitch(int index, out bool eventRecorderEnabled)
+        {
+            switch (index)
+            {
+                case 0:
+                    eventRecorderEnabled = Properties.Settings.Default.C1_enable_event_recorder;
+                    break;
+                case 1:
+                    eventRecorderEnabled = Properties.Settings.Default.C2_enable_event_recorder;
+                    break;
+                case 2:
+                    eventRecorderEnabled = Properties.Settings.Default.C3_enable_event_recorder;
+                    break;
+                case 3:
+                    eventRecorderEnabled = Properties.Settings.Default.C4_enable_event_recorder;
+                    break;
+                default:
+                    eventRecorderEnabled = Properties.Settings.Default.C1_enable_event_recorder;
+                    break;
+            }
+        }
         internal static void GetCaptureMethod(int camindex, out string captureMethod)
         {
             switch (camindex)

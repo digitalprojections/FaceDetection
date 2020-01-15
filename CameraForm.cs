@@ -315,13 +315,13 @@ namespace FaceDetection
 
         internal void SetWindowProperties()
         {
-            int cameraIndex = MainForm.Setting_ui.Camera_index;
+            int cameraIndex = MainForm.Settingui.Camera_index;
 
-            if (MainForm.Setting_ui == null)
+            if (MainForm.Settingui == null)
             {
                 picbox_recording.Visible = false;
                 recordingInProgress = false;
-                MainForm.Setting_ui = new SettingsUI();
+                MainForm.Settingui = new SettingsUI();
             }
 
             camera_number.Visible = Properties.Settings.Default.show_camera_no;

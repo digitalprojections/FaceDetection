@@ -26,7 +26,7 @@ namespace FaceDetection
         
         private void Init_IR_Timer()
         {
-            int cameraIndex = MainForm.Setting_ui.Camera_index;
+            int cameraIndex = MainForm.Settingui.Camera_index;
             PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(cameraIndex, out bool operatorCaptureEnabled);
             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(cameraIndex, out bool IRSensorEnabled);
             PROPERTY_FUNCTIONS.GetInterval(cameraIndex, out int checkInterval);

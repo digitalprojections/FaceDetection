@@ -297,32 +297,9 @@ namespace FaceDetection
 
         private void AllowOperCap()
         {
-            bool recordingWhenOperation = false, IRSensorEnabled = false, faceDetectorEnabled = false;
-
-            if (this.INDEX == 0)
-            {
-                recordingWhenOperation = Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
-                IRSensorEnabled = Properties.Settings.Default.C1_enable_Human_sensor;
-                faceDetectorEnabled = Properties.Settings.Default.C1_enable_face_recognition;
-            }
-            else if (this.INDEX == 1)
-            {
-                recordingWhenOperation = Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation;
-                IRSensorEnabled = Properties.Settings.Default.C2_enable_Human_sensor;
-                faceDetectorEnabled = Properties.Settings.Default.C2_enable_face_recognition;
-            }
-            else if (this.INDEX == 2)
-            {
-                recordingWhenOperation = Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation;
-                IRSensorEnabled = Properties.Settings.Default.C3_enable_Human_sensor;
-                faceDetectorEnabled = Properties.Settings.Default.C3_enable_face_recognition;
-            }
-            else if (this.INDEX == 3)
-            {
-                recordingWhenOperation = Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation;
-                IRSensorEnabled = Properties.Settings.Default.C4_enable_Human_sensor;
-                faceDetectorEnabled = Properties.Settings.Default.C4_enable_face_recognition;
-            }
+            PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(INDEX, out bool IRSensorEnabled);
+            PROPERTY_FUNCTIONS.GetFaceRecognitionSwitch(INDEX, out bool faceDetectorEnabled);
+            PROPERTY_FUNCTIONS.GetCaptureOnOperationStartSwitch(INDEX, out bool recordingWhenOperation);            
 
             OPER_BAN = false;
             Logger.Add("No_opcap_timer_Elapsed, OPER_BAN (operator capture ban) set " + OPER_BAN);
@@ -445,37 +422,11 @@ namespace FaceDetection
         {
             Logger.Add(mode.ToString());
             int duration = 0;
-            bool eventRecorderEnabled = false, operatorCaptureEnabled = false;
-            int timeAfterEventForEventRecorder = 0, secondsAfterEvent = 0;
 
-            if (index == 0)
-            {
-                eventRecorderEnabled = Properties.Settings.Default.C1_enable_event_recorder;
-                timeAfterEventForEventRecorder = decimal.ToInt32(Properties.Settings.Default.C1_event_record_time_after_event);
-                operatorCaptureEnabled = Properties.Settings.Default.C1_enable_capture_operator;
-                secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
-            }
-            else if (index == 1)
-            {
-                eventRecorderEnabled = Properties.Settings.Default.C2_enable_event_recorder;
-                timeAfterEventForEventRecorder = decimal.ToInt32(Properties.Settings.Default.C2_event_record_time_after_event);
-                operatorCaptureEnabled = Properties.Settings.Default.C2_enable_capture_operator;
-                secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
-            }
-            else if (index == 2)
-            {
-                eventRecorderEnabled = Properties.Settings.Default.C3_enable_event_recorder;
-                timeAfterEventForEventRecorder = decimal.ToInt32(Properties.Settings.Default.C3_event_record_time_after_event);
-                operatorCaptureEnabled = Properties.Settings.Default.C3_enable_capture_operator;
-                secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
-            }
-            else if (index == 3)
-            {
-                eventRecorderEnabled = Properties.Settings.Default.C4_enable_event_recorder;
-                timeAfterEventForEventRecorder = decimal.ToInt32(Properties.Settings.Default.C4_event_record_time_after_event);
-                operatorCaptureEnabled = Properties.Settings.Default.C4_enable_capture_operator;
-                secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
-            }
+            PROPERTY_FUNCTIONS.GetEventRecorderSwitch(index, out bool eventRecorderEnabled);
+            PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(index, out int beforeevent, out int timeAfterEventForEventRecorder);
+            PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(index, out bool operatorCaptureEnabled);
+            PROPERTY_FUNCTIONS.GetSecondsAfterEvent(index, out int secondsAfterEvent);            
 
             switch (mode)
             {
@@ -572,10 +523,8 @@ namespace FaceDetection
                     recorder.CAMERA_MODE = CAMERA_MODES.PREEVENT;
                     the_timer.Enabled = true;
                     the_timer.Interval = duration;
-                    //the_timer.Enabled = false;
-                    
-                    RecordingMode(INDEX);
-                    
+                    //the_timer.Enabled = false;                    
+                    RecordingMode(INDEX);                    
                     break;
             }
         }

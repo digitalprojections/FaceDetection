@@ -94,9 +94,10 @@ namespace FaceDetection
         }
 
         public static void formSettingsChanged()
-        {            
+        {
             for (int i = 0; i < displayedCameraCount; i++)
             {
+                
                 formList[i].SetWindowProperties();
                 //Also must check if the PREEVENT mode is needed
                 formList[i].SetCameraToDefaultMode();
@@ -120,7 +121,33 @@ namespace FaceDetection
                 //}
             }
         }
-        
+        public static void EventRecorderOn(int cameraIndex)
+        {
+            int timeBeforeEvent = 0, timeAfterEvent = 0;
+            bool preeventRecording = false;
+
+            PARAMETERS.PARAM.Clear();
+
+            PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(cameraIndex, out timeBeforeEvent, out timeAfterEvent);
+
+            preeventRecording = PreeventRecordingState(cameraIndex);
+
+            if (preeventRecording)
+            {
+                if (Properties.Settings.Default.capture_method == 0)
+                {
+                    TaskManager.EventAppeared(RECORD_PATH.EVENT, cameraIndex + 1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+
+                    SET_REC_ICON(cameraIndex);
+                    formList[cameraIndex].SetRecordIcon(cameraIndex, timeAfterEvent);
+                }
+            }
+            else
+            {
+                formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.EVENT);
+                Logger.Add("EVENT RECORDING STARTS (console call using parameters)");
+            }
+        }
         internal static void EventRecorderOff(int cameraIndex)
         {   
             var preeventRecording = MULTI_WINDOW.PreeventRecordingState(cameraIndex);

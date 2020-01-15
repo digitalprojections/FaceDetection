@@ -43,11 +43,11 @@ namespace FaceDetection
         static Stopwatch stopwatch = new Stopwatch();
 
         public static MainForm GetMainForm => (MainForm) mainForm;
-        public static SettingsUI Setting_ui { get => settingUI; set => settingUI = value; }
+        public static SettingsUI Settingui { get => settingUI; set => settingUI = value; }
         
         public BackLightController BackLight { get => backLight; set => backLight = value; }
         public static MOUSE_KEYBOARD Mklisteners { get => mklisteners; set => mklisteners = value; }
-        public bool AnyRecordingInProgress { get => MULTI_WINDOW.RecordingIsOn();}
+        public static bool AnyRecordingInProgress { get => MULTI_WINDOW.RecordingIsOn();}
 
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
@@ -77,22 +77,22 @@ namespace FaceDetection
 
         private void ShowSettingsDialogAsync()
         {
-            if (Setting_ui.InvokeRequired)
+            if (Settingui.InvokeRequired)
             {
                 var d = new dShowSettingsUI(ShowSettingsDialogAsync);
-                Setting_ui.Invoke(d);
+                Settingui.Invoke(d);
             }
             else
             {
-                if (Setting_ui.Visible == false)
+                if (Settingui.Visible == false)
                 {
                     try
                     {
-                        Setting_ui.Show();
+                        Settingui.Show();
                     }
                     catch (InvalidOperationException invx)
                     {
-                        Setting_ui = new SettingsUI();
+                        Settingui = new SettingsUI();
                     }
                 }
             }
@@ -112,33 +112,7 @@ namespace FaceDetection
         //    }
         //}
             
-        public void EventRecorderOn(int cameraIndex)
-        {
-            int timeBeforeEvent = 0, timeAfterEvent = 0;
-            bool preeventRecording = false;
-
-            PARAMETERS.PARAM.Clear();
-
-            PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(cameraIndex, out timeBeforeEvent, out timeAfterEvent);
-            
-            preeventRecording = MULTI_WINDOW.PreeventRecordingState(cameraIndex);
-
-            if (preeventRecording)
-            {
-                if (Properties.Settings.Default.capture_method == 0)
-                {
-                    TaskManager.EventAppeared(RECORD_PATH.EVENT, cameraIndex+1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
-                    
-                    MULTI_WINDOW.SET_REC_ICON(cameraIndex);                                        
-                    MULTI_WINDOW.formList[cameraIndex].SetRecordIcon(cameraIndex, timeAfterEvent);                    
-                }
-            }
-            else
-            {
-                MULTI_WINDOW.formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.EVENT); 
-                Logger.Add("EVENT RECORDING STARTS (console call using parameters)");
-            }
-        }
+        
 
         public void EventRecorderOff(int cameraIndex)
         {           
@@ -241,9 +215,6 @@ namespace FaceDetection
                 PARAMETERS.PARAM.Reverse();
                 PARAMETERS.wakeUpCall = true;
                 PARAMETERS.HandleParameters(PARAMETERS.PARAM);
-                
-
-                
 
                 if (PARAMETERS.isMinimized)
                 {
