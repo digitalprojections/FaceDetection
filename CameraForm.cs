@@ -109,6 +109,7 @@ namespace FaceDetection
                             break;
                         case DialogResult.Cancel:
                             e.Cancel = true;
+                            this.TopMost = false;
                             break;
                     }
                 }
