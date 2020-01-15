@@ -839,12 +839,12 @@ namespace FaceDetection
         private void StorePath_TextChanged(object sender, EventArgs e)
         {
             bool pathChanged = false;
-            char[] invalidPathChars = {'*', '?', '!', '<', '>', '|', ':'};
+            char[] invalidPathChars = {'\"', '*', '?', '!', '<', '>', '|', ':'};
 
             char[] characters = storePath.Text.ToCharArray();
             for(int i=0; i< characters.Length; i++)
             {
-                if (i != 1) // This should be ":"
+                if (i != 1) // This character should be ":"
                 {
                     for (int j = 0; j < invalidPathChars.Length; j++)
                     {
@@ -857,13 +857,10 @@ namespace FaceDetection
                 }
             }
 
-            if(pathChanged == true && Path.IsPathRooted(storePath.Text))
+            if (pathChanged == true)
             {
                 storePath.Text = new string(characters);
                 storePath.SelectionStart = storePath.Text.Length;
-            }else if (pathChanged == true && !Path.IsPathRooted(storePath.Text))
-            {
-                MessageBox.Show("Wrong path!");
             }
         }
 
