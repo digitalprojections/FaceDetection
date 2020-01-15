@@ -123,39 +123,40 @@ namespace FaceDetection
             // Get the collection of video devices
             var capDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
 
-            if (Properties.Settings.Default.camera_count > 0)
+            if (capDevices.Length > 0)
             {
-                MainForm.Setting_ui.ArrangeCameraNames(Decimal.ToInt32(Properties.Settings.Default.camera_count));
-                //if (capDevices.Length > Properties.Settings.Default.camera_count && capDevices.Length<5)
-                //{
-                //    //MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
-                //    MainForm.Setting_ui.ArrangeCameraNames(capDevices.Length);
-                //}
-                //else
-                //{
-                //    //settings are missing
-                //    MainForm.Setting_ui.ArrangeCameraNames(4);
-                //    //Properties.Settings.Default.camera_count = 4;
-                //    //Logger.Add("There are more than 4 cameras");
-                //}
-            }
-            else
-            {
-                //Camera count was never set
-                //set defaults
-                if (capDevices.Length > 0)
+                if (Properties.Settings.Default.camera_count > 0)
                 {
+                    MainForm.Setting_ui.ArrangeCameraNames(Decimal.ToInt32(Properties.Settings.Default.camera_count));
+                    //if (capDevices.Length > Properties.Settings.Default.camera_count && capDevices.Length<5)
+                    //{
+                    //    //MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
+                    //    MainForm.Setting_ui.ArrangeCameraNames(capDevices.Length);
+                    //}
+                    //else
+                    //{
+                    //    //settings are missing
+                    //    MainForm.Setting_ui.ArrangeCameraNames(4);
+                    //    //Properties.Settings.Default.camera_count = 4;
+                    //    //Logger.Add("There are more than 4 cameras");
+                    //}
+                }
+                else
+                {
+                    //Camera count was never set
+                    //set defaults
                     if (capDevices.Length < 5)
                         Properties.Settings.Default.camera_count = capDevices.Length;
                     else
                         Properties.Settings.Default.camera_count = 4;
                 }
-                else
-                {
-                    MessageBox.Show("No cameras found!");
-                }
+                Properties.Settings.Default.Save();
             }
-            Properties.Settings.Default.Save();
+            else
+            {
+                MessageBox.Show("No cameras have been detected! \n\r カメラが検出されません");
+            }
+            
         }
 
         static void BuildGraph(IGraphBuilder pGraph)
