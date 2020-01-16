@@ -359,15 +359,15 @@ namespace FaceDetection
                 }
             }
 
-            var mci = Properties.Settings.Default.main_camera_index;
-            if (CameraIndex == mci)
-            {
-                this.Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";                
-            }
-            else
-            {
-                this.Text = "UVC Camera Viewer -  camera " + (CameraIndex + 1);                
-            }
+            //var mci = Properties.Settings.Default.main_camera_index;
+            //if (CameraIndex == mci)
+            //{
+            //    this.Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";
+            //}
+            //else
+            //{
+            //    this.Text = "UVC Camera Viewer -  camera " + (CameraIndex + 1);
+            //}
 
             //Window pane
             if (Properties.Settings.Default.show_window_pane == true)
