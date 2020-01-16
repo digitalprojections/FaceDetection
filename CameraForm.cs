@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using FaceDetectionX;
@@ -75,16 +76,16 @@ namespace FaceDetection
             videoFormat = UsbCamera.GetVideoFormat(camind);
             this.Load += CameraForm_Load;
             MULTI_WINDOW.formArray[camind] = true;
+            
         }
 
         private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Properties.Settings.Default.main_camera_index == CameraIndex && applicationExit == false) // The form closed was the main camera selected
             {
-                if (Properties.Settings.Default.language == "English")
-                {
+                
                     this.TopMost = true;
-                    DialogResult dr = MessageBox.Show("Closing the viewer for the specified camera will close the application.\nDo you want to continue ?", "Exit application ?", MessageBoxButtons.OKCancel);
+                    DialogResult dr = MessageBox.Show(Resource.main_window_close_warning, Resource.ask_exit_application, MessageBoxButtons.OKCancel);
                     switch (dr)
                     {
                         case DialogResult.OK:
@@ -96,35 +97,7 @@ namespace FaceDetection
                             this.TopMost = false;
                             break;
                     }
-                }
-                else
-                {
-                    this.TopMost = true;
-                    DialogResult dr = MessageBox.Show("指定カメラのビューアーを閉じると、アプリケーションが終了します。\n処理を続行しますか？", "アプリケーションを終了する ?", MessageBoxButtons.OKCancel);
-                    switch (dr)
-                    {
-                        case DialogResult.OK:
-                            applicationExit = true;
-                            Application.Exit();
-                            break;
-                        case DialogResult.Cancel:
-                            e.Cancel = true;
-                            this.TopMost = false;
-                            break;
-                    }
-                }
             }
-
-            MULTI_WINDOW.displayedCameraCount--;
-            PROPERTY_FUNCTIONS.Set_Window_Location(CameraIndex, this);
-            Properties.Settings.Default.Save();
-
-            //if (MULTI_WINDOW.displayedCameraCount <= 0)
-            //{
-            //    Application.Exit();
-            //}
-
-            MULTI_WINDOW.formArray[CameraIndex] = false;
         }
 
         /// <summary>
@@ -572,7 +545,16 @@ namespace FaceDetection
                 //operator capture: human sensor, keyboard and mouse events
                 Properties.Settings.Default.main_camera_index = 0;
             }
+            MULTI_WINDOW.displayedCameraCount--;
+            PROPERTY_FUNCTIONS.Set_Window_Location(CameraIndex, this);
+            Properties.Settings.Default.Save();
 
+            //if (MULTI_WINDOW.displayedCameraCount <= 0)
+            //{
+            //    Application.Exit();
+            //}
+
+            MULTI_WINDOW.formArray[CameraIndex] = false;
             Destroy();
         }
 
