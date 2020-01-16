@@ -13,7 +13,7 @@ namespace FaceDetection
         private static CameraForm form;
         public static CameraForm[] formList = new CameraForm[4];
         public static int displayedCameraCount = 0;
-        public static bool[] formArray = new bool[3];
+        public static bool[] formArray = new bool[4];
 
         /// <summary>
         /// by passing two important parameters.
@@ -21,7 +21,7 @@ namespace FaceDetection
         public static void CreateCameraWindows()
         {
             int numberOfCamerasToDisplay = decimal.ToInt32(Properties.Settings.Default.camera_count);
-            int cam_index = decimal.ToInt32(Properties.Settings.Default.main_camera_index);
+            int cameraIndex = decimal.ToInt32(Properties.Settings.Default.main_camera_index);
 
             if (displayedCameraCount < numberOfCamerasToDisplay) 
             {
@@ -29,9 +29,10 @@ namespace FaceDetection
                 {
                     if (formArray[i] == false)
                     {
-                        form = new CameraForm(i);                        
+                        form = new CameraForm(i);
+                        formList[i] = form;
                         form.Show();
-                        if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
+                        if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cameraIndex))
                         {
                             form.WindowState = FormWindowState.Minimized;
                         }
@@ -45,7 +46,7 @@ namespace FaceDetection
                     formList[i] = form;                    
                     form.Show();
                     displayedCameraCount ++;
-                    if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
+                    if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cameraIndex))
                     {
                         form.WindowState = FormWindowState.Minimized;
                     }
@@ -65,14 +66,14 @@ namespace FaceDetection
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Main camera has been disconnected while application was not running");
+                    Logger.Add("Failed on close form");
                 }
             }            
         }
 
-        public static void GetVideoFormatByCamera(int ind)
+        public static void GetVideoFormatByCamera(int cameraIndex)
         {
-            formList[ind].GetVideoFormat();
+            formList[cameraIndex].GetVideoFormat();
         }
 
         public static void formSettingsChanged()
@@ -123,9 +124,9 @@ namespace FaceDetection
             }
         }
 
-        public static bool PreeventRecordingState(int cam_index)
+        public static bool PreeventRecordingState(int cameraIndex)
         {   
-            return formList[cam_index].crossbar.PREEVENT_RECORDING;
+            return formList[cameraIndex].crossbar.PREEVENT_RECORDING;
         }
 
         internal static void SET_REC_ICON(int cameraIndex)
@@ -133,10 +134,10 @@ namespace FaceDetection
             formList[cameraIndex].SET_REC_ICON();            
         }
 
-        internal static void SetToPreviewMode(int camind)
-        {            
-            formList[camind].SetToPreviewMode();            
-        }
+        //internal static void SetToPreviewMode(int camind)
+        //{            
+        //    formList[camind].SetToPreviewMode();            
+        //}
 
         public static bool RecordingIsOn()
         {
