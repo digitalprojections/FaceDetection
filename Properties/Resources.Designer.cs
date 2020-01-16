@@ -61,6 +61,15 @@ namespace FaceDetection.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exit application?.
+        /// </summary>
+        internal static string ask_exit_application {
+            get {
+                return ResourceManager.GetString("ask_exit_application", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap camera_icon {
@@ -117,6 +126,15 @@ namespace FaceDetection.Properties {
             get {
                 object obj = ResourceManager.GetObject("ic_settings_48px-128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Closing the viewer for the specified camera will close the application.\nDo you want to continue?.
+        /// </summary>
+        internal static string main_window_close_warning {
+            get {
+                return ResourceManager.GetString("main_window_close_warning", resourceCulture);
             }
         }
         
