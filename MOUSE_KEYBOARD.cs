@@ -86,14 +86,13 @@ namespace FaceDetection
                         if (preeventRecording && timeAfterEvent > 0)
                         {
                             TaskManager.EventAppeared(RECORD_PATH.EVENT, CAMERA_INDEX + 1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
-                            MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.No_Cap_Timer_ON(timeAfterEvent);
-                            MULTI_WINDOW.formList[CAMERA_INDEX].SetRecordIcon(CAMERA_INDEX, timeAfterEvent);
-
                         }
                         else
                         {
                             MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.Start(CAMERA_INDEX, CAMERA_MODES.OPERATOR);
                         }
+                        MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.No_Cap_Timer_ON(timeAfterEvent);
+                        MULTI_WINDOW.formList[CAMERA_INDEX].SetRecordIcon(CAMERA_INDEX, timeAfterEvent);
                     }
                     else // Snapshot
                     {

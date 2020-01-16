@@ -588,14 +588,7 @@ namespace FaceDetection
 
         private void FormClass_Down(object sender, EventArgs e)
         {
-            if (this.controlButtons.Visible == false)
-            {
-                mouse_down_timer.Start();
-            }
-            else
-            {
-                
-            }
+            mouse_down_timer.Start();
         }
 
         private void SnapShot (object sender, EventArgs e)
@@ -700,7 +693,10 @@ namespace FaceDetection
                 if (mouse_down_timer.Enabled == true)
                 {
                     mouse_down_timer.Stop();
-                    controlButtons.Visible = true;
+                    if (controlButtons.Visible)
+                        controlButtons.Visible = false;
+                    else
+                        controlButtons.Visible = true;
                 }
             }
         }
