@@ -73,7 +73,7 @@ namespace FaceDetection
 
         public static void GetVideoFormatByCamera(int cameraIndex)
         {
-            formList[cameraIndex].GetVideoFormat();
+            formList[cameraIndex]?.GetVideoFormat();
         }
 
         public static void formSettingsChanged()

@@ -384,8 +384,9 @@ namespace FaceDetection
                     Properties.Settings.Default.language = "日本語";
                     this.Text = "設定";
                 }
+                System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Properties.Settings.Default.culture);
                 ChangeLanguage();
-            }
+            }            
         }
 
         private void ChangeLanguage()

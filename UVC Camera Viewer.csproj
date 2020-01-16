@@ -156,6 +156,11 @@
     <Compile Include="PROPERTY_FUNCTIONS.cs" />
     <Compile Include="RecorderCamera.cs" />
     <Compile Include="RECORD_PATH.cs" />
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="TaskManager.cs" />
     <Compile Include="CROSSBAR.cs" />
     <Compile Include="CustomMessage.cs" />
@@ -182,6 +187,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CameraForm.resx">
       <DependentUpon>CameraForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource.ja-JP.resx" />
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="settingsUI.ja-JP.resx">
       <DependentUpon>settingsUI.cs</DependentUpon>
