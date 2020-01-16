@@ -147,8 +147,8 @@
             // 
             // tab_view_settings
             // 
-            tab_view_settings.Controls.Add(this.groupBox_viewSettings);
             resources.ApplyResources(tab_view_settings, "tab_view_settings");
+            tab_view_settings.Controls.Add(this.groupBox_viewSettings);
             tab_view_settings.Name = "tab_view_settings";
             tab_view_settings.UseVisualStyleBackColor = true;
             // 
@@ -447,8 +447,8 @@
             // 
             // cm_capture_mode
             // 
-            this.cm_capture_mode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cm_capture_mode, "cm_capture_mode");
+            this.cm_capture_mode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cm_capture_mode.FormattingEnabled = true;
             this.cm_capture_mode.Items.AddRange(new object[] {
             resources.GetString("cm_capture_mode.Items"),
@@ -527,13 +527,14 @@
             // 
             // tab_environment
             // 
-            this.tab_environment.Controls.Add(this.groupBox_Environment);
             resources.ApplyResources(this.tab_environment, "tab_environment");
+            this.tab_environment.Controls.Add(this.groupBox_Environment);
             this.tab_environment.Name = "tab_environment";
             this.tab_environment.UseVisualStyleBackColor = true;
             // 
             // groupBox_Environment
             // 
+            resources.ApplyResources(this.groupBox_Environment, "groupBox_Environment");
             this.groupBox_Environment.Controls.Add(this.numericUpDownCamCount);
             this.groupBox_Environment.Controls.Add(this.cb_all_cameras);
             this.groupBox_Environment.Controls.Add(this.label26);
@@ -541,14 +542,13 @@
             this.groupBox_Environment.Controls.Add(this.groupBox12);
             this.groupBox_Environment.Controls.Add(this.label1);
             this.groupBox_Environment.Controls.Add(this.groupBox2);
-            resources.ApplyResources(this.groupBox_Environment, "groupBox_Environment");
             this.groupBox_Environment.Name = "groupBox_Environment";
             this.groupBox_Environment.TabStop = false;
             // 
             // numericUpDownCamCount
             // 
-            this.numericUpDownCamCount.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "camera_count", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             resources.ApplyResources(this.numericUpDownCamCount, "numericUpDownCamCount");
+            this.numericUpDownCamCount.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "camera_count", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.numericUpDownCamCount.Maximum = new decimal(new int[] {
             4,
             0,
@@ -578,10 +578,10 @@
             // 
             // cm_language
             // 
+            resources.ApplyResources(this.cm_language, "cm_language");
             this.cm_language.BackColor = System.Drawing.SystemColors.Window;
             this.cm_language.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cm_language.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.cm_language, "cm_language");
             this.cm_language.FormattingEnabled = true;
             this.cm_language.Items.AddRange(new object[] {
             resources.GetString("cm_language.Items"),
@@ -601,8 +601,8 @@
             // 
             // nud_erase_old
             // 
-            this.nud_erase_old.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "keep_old_files_days", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             resources.ApplyResources(this.nud_erase_old, "nud_erase_old");
+            this.nud_erase_old.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::FaceDetection.Properties.Settings.Default, "keep_old_files_days", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nud_erase_old.Maximum = new decimal(new int[] {
             365,
             0,
@@ -660,15 +660,19 @@
             // storePath
             // 
             resources.ApplyResources(this.storePath, "storePath");
+            this.storePath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.storePath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.storePath.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.storePath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "video_file_location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.storePath.Name = "storePath";
             this.storePath.Text = global::FaceDetection.Properties.Settings.Default.video_file_location;
+            this.storePath.UseWaitCursor = true;
             this.storePath.TextChanged += new System.EventHandler(this.StorePath_TextChanged);
             // 
             // tab_camera_and_window
             // 
-            this.tab_camera_and_window.Controls.Add(this.groupBox3);
             resources.ApplyResources(this.tab_camera_and_window, "tab_camera_and_window");
+            this.tab_camera_and_window.Controls.Add(this.groupBox3);
             this.tab_camera_and_window.Name = "tab_camera_and_window";
             this.tab_camera_and_window.UseVisualStyleBackColor = true;
             // 
@@ -804,6 +808,7 @@
             0,
             0});
             this.numericUpDownW.ValueChanged += new System.EventHandler(this.NumericUpDownW_ValueChanged);
+            this.numericUpDownW.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // label6
             // 
@@ -884,32 +889,32 @@
             // 
             // comboBoxResolutions
             // 
+            resources.ApplyResources(this.comboBoxResolutions, "comboBoxResolutions");
             this.comboBoxResolutions.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "current_camera_index", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, null, "N0"));
             this.comboBoxResolutions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.comboBoxResolutions, "comboBoxResolutions");
             this.comboBoxResolutions.FormattingEnabled = true;
             this.comboBoxResolutions.Name = "comboBoxResolutions";
             this.comboBoxResolutions.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxResolutions_SelectedIndexChanged);
             // 
             // comboBoxFPS
             // 
-            this.comboBoxFPS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.comboBoxFPS, "comboBoxFPS");
+            this.comboBoxFPS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFPS.FormattingEnabled = true;
             this.comboBoxFPS.Name = "comboBoxFPS";
             // 
             // button_cameraProperties
             // 
-            this.button_cameraProperties.Image = global::FaceDetection.Properties.Resources.setting_5121;
             resources.ApplyResources(this.button_cameraProperties, "button_cameraProperties");
+            this.button_cameraProperties.Image = global::FaceDetection.Properties.Resources.setting_5121;
             this.button_cameraProperties.Name = "button_cameraProperties";
             this.button_cameraProperties.UseVisualStyleBackColor = true;
             this.button_cameraProperties.Click += new System.EventHandler(this.Button_cameraProperties_Click);
             // 
             // cm_camera_number
             // 
-            this.cm_camera_number.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cm_camera_number, "cm_camera_number");
+            this.cm_camera_number.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cm_camera_number.FormattingEnabled = true;
             this.cm_camera_number.Name = "cm_camera_number";
             this.cm_camera_number.SelectedValueChanged += new System.EventHandler(this.CameraSelected);
@@ -921,6 +926,10 @@
             this.imageList1.Images.SetKeyName(0, "Settings-2-icon.png");
             this.imageList1.Images.SetKeyName(1, "Settings_black-512.png");
             this.imageList1.Images.SetKeyName(2, "setting-512.png");
+            // 
+            // folderBrowserDialogStoreFolder
+            // 
+            resources.ApplyResources(this.folderBrowserDialogStoreFolder, "folderBrowserDialogStoreFolder");
             // 
             // check_state_images
             // 
@@ -940,6 +949,7 @@
             // button_settings_save
             // 
             resources.ApplyResources(this.button_settings_save, "button_settings_save");
+            this.button_settings_save.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button_settings_save.Name = "button_settings_save";
             this.button_settings_save.UseVisualStyleBackColor = true;
             this.button_settings_save.Click += new System.EventHandler(this.Save_and_close);
@@ -947,9 +957,9 @@
             // SettingsUI
             // 
             this.AcceptButton = this.button_settings_save;
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.button_settings_cancel;
-            resources.ApplyResources(this, "$this");
             this.ControlBox = false;
             this.Controls.Add(this.button_settings_cancel);
             this.Controls.Add(this.button_settings_save);
