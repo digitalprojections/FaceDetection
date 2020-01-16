@@ -347,13 +347,13 @@ namespace FaceDetection
 
         internal void SetWindowProperties()
         {
-            int cameraIndex = MainForm.Setting_ui.Camera_index;
+            int cameraIndex = MainForm.Settingui.Camera_index;
 
-            if (MainForm.Setting_ui == null)
+            if (MainForm.Settingui == null)
             {
                 picbox_recording.Visible = false;
                 recordingInProgress = false;
-                MainForm.Setting_ui = new SettingsUI();
+                MainForm.Settingui = new SettingsUI();
             }
 
             camera_number.Visible = Properties.Settings.Default.show_camera_no;
@@ -626,7 +626,7 @@ namespace FaceDetection
             cameraSender = snd.TopLevelControl.ToString();
             cameraSender = cameraSender.Substring(cameraSender.Length - 1, 1);
 
-            SNAPSHOT_SAVER.TakeSnapShot(Convert.ToInt32(cameraSender) - 1);
+            SNAPSHOT_SAVER.TakeSnapShot(Convert.ToInt32(cameraSender) - 1, "snapshot");
         }
 
         private void ManualVideoRecording(object sender, EventArgs e)
@@ -635,47 +635,14 @@ namespace FaceDetection
             Button snd = (Button)sender;
             cameraSender = snd.TopLevelControl.ToString();
             cameraSender = cameraSender.Substring(cameraSender.Length - 1, 1);
-                        
+            int camsen = int.Parse(cameraSender) - 1;
+            PROPERTY_FUNCTIONS.GetEventRecorderSwitch(camsen, out bool eventRecorderEnabled);
+            PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(camsen, out bool IRSensorEnabled);
+            PROPERTY_FUNCTIONS.GetFaceRecognitionSwitch(camsen, out bool faceRecognitionEnabled);
+            PROPERTY_FUNCTIONS.GetCaptureOnOperationStartSwitch(camsen, out bool recordingWhenOperationEnabled);
+            PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(camsen, out int eventRecordTimeBeforeEvent, out int nouse);
+            PROPERTY_FUNCTIONS.GetSecondsBeforeEvent(camsen, out int secondBeforeOperationEvent);
 
-            bool eventRecorderEnabled = false, IRSensorEnabled = false, faceRecognitionEnabled = false, recordingWhenOperationEnabled = false;
-            int eventRecordTimeBeforeEvent = 0, secondBeforeOperationEvent = 0;
-
-            if (cameraSender == "1")
-            {
-                eventRecorderEnabled = Properties.Settings.Default.C1_enable_event_recorder;
-                IRSensorEnabled = Properties.Settings.Default.C1_enable_Human_sensor;
-                faceRecognitionEnabled = Properties.Settings.Default.C1_enable_face_recognition;
-                recordingWhenOperationEnabled = Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
-                eventRecordTimeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C1_event_record_time_before_event);
-                secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
-            }
-            else if (cameraSender == "2")
-            {
-                eventRecorderEnabled = Properties.Settings.Default.C2_enable_event_recorder;
-                IRSensorEnabled = Properties.Settings.Default.C2_enable_Human_sensor;
-                faceRecognitionEnabled = Properties.Settings.Default.C2_enable_face_recognition;
-                recordingWhenOperationEnabled = Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation;
-                eventRecordTimeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C2_event_record_time_before_event);
-                secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
-            }
-            else if (cameraSender == "3")
-            {
-                eventRecorderEnabled = Properties.Settings.Default.C3_enable_event_recorder;
-                IRSensorEnabled = Properties.Settings.Default.C3_enable_Human_sensor;
-                faceRecognitionEnabled = Properties.Settings.Default.C3_enable_face_recognition;
-                recordingWhenOperationEnabled = Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation;
-                eventRecordTimeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C3_event_record_time_before_event);
-                secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
-            }
-            else if (cameraSender == "4")
-            {
-                eventRecorderEnabled = Properties.Settings.Default.C4_enable_event_recorder;
-                IRSensorEnabled = Properties.Settings.Default.C4_enable_Human_sensor;
-                faceRecognitionEnabled = Properties.Settings.Default.C4_enable_face_recognition;
-                recordingWhenOperationEnabled = Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation;
-                eventRecordTimeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C4_event_record_time_before_event);
-                secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
-            }
 
             //if (MainForm.Setting_ui.Camera_index == Convert.ToInt32(cameraSender)-1)
             //{
@@ -733,58 +700,10 @@ namespace FaceDetection
             }
         }
 
-        /// <summary>
-        /// One second timer to update UI datetime (it also deletes old files)
-        /// </summary>
-        public void UpdateDateTimeText(object sender, EventArgs eventArgs)
-        {
-            //DateTimeUpdater();            
-            
-        }
-
-        public void DateTimeUpdater()
-        {
-            if (dateTimeLabel != null && dateTimeLabel.InvokeRequired)
-            {
-                //var d = new dDateTimerUpdater(DateTimeUpdater);
-                //dateTimeLabel.Invoke(d);
-            }
-            else
-            {
-                //try
-                //{
-                //    dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                //}
-                //catch (NullReferenceException e)
-                //{
-                //    Debug.WriteLine(e.Message + " DateTimeUpdater()");
-                //}
-            }
-        }
-        public void StopAllTimers()
-        {
-            mouse_down_timer.Stop();
-            
-            if (FaceDetector != null)
-                FaceDetector.Destroy();
-            //if (RSensor != null)
-            //    RSensor.Destroy();
-            try
-            {
-                mouse_down_timer.Dispose();                
-            }
-            catch (Exception x)
-            {
-                Logger.Add(x);
-            }
-            crossbar?.ReleaseCameras();
-        }
-
         private void HideButtons(object sender, MouseEventArgs e)
         {
             mouse_down_timer.Stop();
         }
-
 
         private void ShowButtonsDelayed(object o, EventArgs ElapsedEventArgs)
         {

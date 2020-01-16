@@ -261,7 +261,7 @@ namespace FaceDetection
                         //initiate RECORD mode
                         if (MainForm.GetMainForm != null && preeventRecording)
                         {
-                            if (MainForm.GetMainForm.AnyRecordingInProgress == false)
+                            if (MainForm.AnyRecordingInProgress == false)
                             {
                                 TaskManager.EventAppeared(RECORD_PATH.EVENT, camindex+1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
                                                                 

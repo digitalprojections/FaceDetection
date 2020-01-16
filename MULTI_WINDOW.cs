@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace FaceDetection
@@ -69,24 +68,7 @@ namespace FaceDetection
                 {
                     Logger.Add("Failed on close form");
                 }
-            }
-            //else
-            //{
-            //    for (int i = 1; i < numberOfCamerasToDisplay; i++)
-            //    {
-            //        if(formList[i].Text == "")
-            //        {
-            //            form = new CameraForm(i);
-            //            //form.Text = "UVC Camera Viewer - camera " + (i + 1);
-            //            formList[i] = form;
-            //            form.Show();
-            //            if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cam_index))
-            //            {
-            //                form.WindowState = FormWindowState.Minimized;
-            //            }
-            //        }
-            //    }
-            //}
+            }            
         }
 
         public static void GetVideoFormatByCamera(int cameraIndex)
@@ -95,33 +77,42 @@ namespace FaceDetection
         }
 
         public static void formSettingsChanged()
-        {            
+        {
             for (int i = 0; i < displayedCameraCount; i++)
             {
+                
                 formList[i].SetWindowProperties();
                 //Also must check if the PREEVENT mode is needed
                 formList[i].SetCameraToDefaultMode();
-
-                //Commented out because, each form can do it by itself
-
-                //if (i == 0)
-                //{
-                //    formList[0].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C2x), decimal.ToInt32(Properties.Settings.Default.C2y));
-                //    formList[0].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(1);
-                //}
-                //else if (i == 1)
-                //{
-                //    formList[1].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C3x), decimal.ToInt32(Properties.Settings.Default.C3y));
-                //    formList[1].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(2);
-                //}
-                //else if (i == 2)
-                //{
-                //    formList[2].Location = new Point(decimal.ToInt32(Properties.Settings.Default.C4x), decimal.ToInt32(Properties.Settings.Default.C4y));
-                //    formList[2].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(3);
-                //}
             }
         }
-        
+        public static void EventRecorderOn(int cameraIndex)
+        {
+            int timeBeforeEvent = 0, timeAfterEvent = 0;
+            bool preeventRecording = false;
+
+            PARAMETERS.PARAM.Clear();
+
+            PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(cameraIndex, out timeBeforeEvent, out timeAfterEvent);
+
+            preeventRecording = PreeventRecordingState(cameraIndex);
+
+            if (preeventRecording)
+            {
+                if (Properties.Settings.Default.capture_method == 0)
+                {
+                    TaskManager.EventAppeared(RECORD_PATH.EVENT, cameraIndex + 1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+
+                    SET_REC_ICON(cameraIndex);
+                    formList[cameraIndex].SetRecordIcon(cameraIndex, timeAfterEvent);
+                }
+            }
+            else
+            {
+                formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.EVENT);
+                Logger.Add("EVENT RECORDING STARTS (console call using parameters)");
+            }
+        }
         internal static void EventRecorderOff(int cameraIndex)
         {   
             var preeventRecording = MULTI_WINDOW.PreeventRecordingState(cameraIndex);
