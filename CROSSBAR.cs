@@ -392,12 +392,6 @@ namespace FaceDetection
                 Task manual_rec_task = new Task(VideoRecordingEnd);
                 manual_rec_task.Start();
             }
-            else if (camera != null && camera.Size.Width != PROPERTY_FUNCTIONS.GetCameraSize(index).Width && camera.Size.Height != PROPERTY_FUNCTIONS.GetCameraSize(index).Height)
-            {
-                recorder.ReleaseInterfaces();
-                recorder = new RecorderCamera(index, this.parentwindow, this);
-                recorder.StartRecorderCamera(index);
-            }
             else
             {
                 recorder.StartRecorderCamera(index);
@@ -420,7 +414,7 @@ namespace FaceDetection
 
         public void Start(int index, CAMERA_MODES mode)
         {
-            Logger.Add(mode.ToString());
+            Logger.Add("Start camera index " + index.ToString() + " " + mode.ToString());
             int duration = 0;
 
             PROPERTY_FUNCTIONS.GetEventRecorderSwitch(index, out bool eventRecorderEnabled);
