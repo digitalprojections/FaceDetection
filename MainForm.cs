@@ -171,6 +171,18 @@ namespace FaceDetection
             //CREATE CAMERA WINDOWS
             MULTI_WINDOW.CreateCameraWindows();
 
+            for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+            {
+                if (i == cam_index)
+                {
+                    MULTI_WINDOW.formList[i].Text = $"UVC Camera Viewer - MAIN CAMERA {(i + 1)}";
+                }
+                else
+                {
+                    MULTI_WINDOW.formList[i].Text = "UVC Camera Viewer -  camera " + (i + 1);
+                }
+            }
+
             // Full screen
             if (Properties.Settings.Default.main_window_full_screen)
             {
