@@ -14,7 +14,7 @@ namespace FaceDetection
         private static CameraForm form;
         public static CameraForm[] formList = new CameraForm[4];
         public static int displayedCameraCount = 0;
-        public static bool[] formArray = new bool[3];
+        public static bool[] formArray = new bool[4];
 
         /// <summary>
         /// by passing two important parameters.
@@ -30,7 +30,8 @@ namespace FaceDetection
                 {
                     if (formArray[i] == false)
                     {
-                        form = new CameraForm(i);                        
+                        form = new CameraForm(i);
+                        formList[i] = form;
                         form.Show();
                         if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cameraIndex))
                         {
@@ -66,7 +67,7 @@ namespace FaceDetection
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Main camera has been disconnected while application was not running");
+                    Logger.Add("Failed on close form");
                 }
             }
             //else
