@@ -356,7 +356,7 @@ namespace FaceDetection
             this.MaximizeBox = false;
             //this.TopMost = true;
 
-            if (MainForm.GetMainForm.AnyRecordingInProgress == true)
+            if (MainForm.AnyRecordingInProgress == true)
             {
                 cm_camera_number.Enabled = false;
                 button_settings_save.Enabled = false;

@@ -100,19 +100,19 @@ namespace FaceDetection
                         case "c"://Show Settings window
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
                                 {
                                     if (parameterOnOffSwitch)
                                     {
-                                        if (MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
+                                        if (MainForm.Settingui != null && MainForm.Settingui.Visible == false)
                                         {
                                             //MainForm.GetMainForm.TopMost = false;
-                                            MainForm.Setting_ui.ShowDialog();
+                                            MainForm.Settingui.ShowDialog();
                                         }
                                     }
                                     else
                                     {
-                                        MainForm.Setting_ui.Hide();
+                                        MainForm.Settingui.Hide();
                                     }
                                 }
                             }
@@ -197,7 +197,7 @@ namespace FaceDetection
                         case "b"://SHOW / HIDE CONTROL BUTTONS
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
                                 {
                                     if (parameterOnOffSwitch)
                                     {
@@ -220,7 +220,7 @@ namespace FaceDetection
                         case "d"://Enable/Disable Face detection
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
                                 {
                                     if (parameterOnOffSwitch)
                                     {                                        
@@ -255,7 +255,7 @@ namespace FaceDetection
                         case "h"://IR Sensor
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
                                 {
                                     if (parameterOnOffSwitch)
                                     {
@@ -299,7 +299,7 @@ namespace FaceDetection
                         case "v"://Visible
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
                                 {
                                     if (parameterOnOffSwitch)
                                     {
@@ -359,14 +359,12 @@ namespace FaceDetection
                         case "w"://Window pane
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
                                 {
                                     if (parameterOnOffSwitch)
                                     {
                                         //MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
                                         Properties.Settings.Default.show_window_pane = true;
-                                        Properties.Settings.Default.Save();
-
                                         //if (MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
                                         //{
                                         //    MainForm.GetMainForm.TopMost = false;
@@ -374,9 +372,9 @@ namespace FaceDetection
                                     }
                                     else
                                     {
-                                        Properties.Settings.Default.show_window_pane = false;
-                                        Properties.Settings.Default.Save();
+                                        Properties.Settings.Default.show_window_pane = false;                                        
                                     }
+                                    Properties.Settings.Default.Save();
                                     MainForm.AllChangesApply();
                                 }
                                 PARAMETERS.PARAM.Clear();
@@ -387,28 +385,19 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "q"://Close window
+                        case "q"://Close a window or all (exit app)
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex))
                                 {
-                                    //if (cameraIndex == 0)
-                                    //{
-                                    //    MULTI_WINDOW.formList[0].Close();
-                                    //}
-                                    //else if (cameraIndex == 1)
-                                    //{
-                                    //    MULTI_WINDOW.formList[1].Close();
-                                    //}
-                                    //else if (cameraIndex == 2)
-                                    //{
-                                    //    
-                                    //}
-                                    //else
-                                    //{
-                                    MULTI_WINDOW.formList[cameraIndex].Close();
-                                    //Application.Exit();
-                                    //}
+                                    if (cameraIndex >= 0 && cameraIndex<4)
+                                    {
+                                        MULTI_WINDOW.formList[cameraIndex].Close();
+                                    }
+                                    else if (cameraIndex == 8)
+                                    {                                        
+                                        Application.Exit();
+                                    }
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -420,17 +409,18 @@ namespace FaceDetection
                         case "e"://Event recorder
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Setting_ui.Camera_index))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex<4))
                                 {
-                                    if (parameterOnOffSwitch && MainForm.GetMainForm.AnyRecordingInProgress == false)
+                                    if (parameterOnOffSwitch && MainForm.AnyRecordingInProgress == false)
                                     {
-                                        MainForm.GetMainForm.EventRecorderOn(cameraIndex);
+                                        MULTI_WINDOW.EventRecorderOn(cameraIndex);
                                     }
                                     else
                                     {
                                         MULTI_WINDOW.EventRecorderOff(cameraIndex);
                                     }
                                 }
+                                //All camera event recorder needed?
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
@@ -441,7 +431,7 @@ namespace FaceDetection
                         case "r"://Manual recording
                             try
                             {
-                                if (cameraIndex == MainForm.Setting_ui.Camera_index)
+                                if (cameraIndex == MainForm.Settingui.Camera_index)
                                 {
                                     if (parameterOnOffSwitch)
                                     {
