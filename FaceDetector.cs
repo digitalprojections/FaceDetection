@@ -242,7 +242,8 @@ namespace FaceDetection
             bool preeventRecording = false;
             string captureMethod = "";
 
-            PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(camindex, out timeBeforeEvent, out timeAfterEvent);
+            PROPERTY_FUNCTIONS.GetSecondsBeforeEvent(camindex, out timeBeforeEvent);
+            PROPERTY_FUNCTIONS.GetSecondsAfterEvent(camindex, out timeAfterEvent);
 
             preeventRecording = MULTI_WINDOW.formList[camindex].crossbar.PREEVENT_RECORDING;
             PROPERTY_FUNCTIONS.GetCaptureMethod(camindex, out captureMethod);
