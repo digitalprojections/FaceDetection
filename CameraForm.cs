@@ -133,16 +133,16 @@ namespace FaceDetection
             this.DoubleClick += FullScreen;
             crossbar = new CROSSBAR(CameraIndex, this);
             var mci = Properties.Settings.Default.main_camera_index;
-            if (CameraIndex == mci)// && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
-            {
-                this.Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";
-                crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
-            }
-            else
-            {
+            //if (CameraIndex == mci)// && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
+            //{
+            //    this.Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";
+            //    crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
+            //}
+            //else
+            //{
                 this.Text = "UVC Camera Viewer -  camera " + (CameraIndex + 1);
                 crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
-            }
+            //}
 
             this.SizeChanged += WindowSizeUpdate;
 
@@ -337,15 +337,13 @@ namespace FaceDetection
 
             if (Properties.Settings.Default.main_window_full_screen)
             {
-                
-                    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                {
+                    if (i == cameraIndex - 1)
                     {
-                        if (i == cameraIndex - 1)
-                        {
-                            MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
-                        }
+                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
                     }
-                
+                }
             }
             else
             {
@@ -389,7 +387,6 @@ namespace FaceDetection
                     MULTI_WINDOW.formList[i].FormBorderStyle = FormBorderStyle.None;
                 }
             }
-
             
             ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
             Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
@@ -527,7 +524,7 @@ namespace FaceDetection
 
         private void FormClass_FormClosed(object sender, FormClosedEventArgs e)
         {
-            crossbar.ReleaseSecondaryCamera();
+            crossbar.ReleaseCamera();
             crossbar = null;
 
             //if (closeFromSettings)
@@ -711,16 +708,16 @@ namespace FaceDetection
         public void SetCameraToDefaultMode()
         {
             if (CameraIndex == Properties.Settings.Default.main_camera_index && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
-                {
-                    crossbar?.Start(CameraIndex, CAMERA_MODES.PREEVENT);
-                }
+            {
+                crossbar?.Start(CameraIndex, CAMERA_MODES.PREEVENT);
+            }
             else
             {
-                if (MULTI_WINDOW.displayedCameraCount > 0)
-                {
+                //if (MULTI_WINDOW.displayedCameraCount > 0)
+                //{
                     crossbar?.Start(CameraIndex, CAMERA_MODES.PREVIEW);
                     //SetToPreviewMode();
-                }
+                //}
             }
         }
 

@@ -181,6 +181,8 @@ namespace FaceDetection
                 {
                     MULTI_WINDOW.formList[i].Text = "UVC Camera Viewer -  camera " + (i + 1);
                 }
+                // Check if the PREEVENT mode is needed
+                MULTI_WINDOW.formList[i].SetCameraToDefaultMode();
             }
 
             // Full screen

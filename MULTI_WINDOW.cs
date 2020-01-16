@@ -80,10 +80,9 @@ namespace FaceDetection
         {
             for (int i = 0; i < displayedCameraCount; i++)
             {
-                
                 formList[i].SetWindowProperties();
                 //Also must check if the PREEVENT mode is needed
-                formList[i].SetCameraToDefaultMode();
+                //formList[i].SetCameraToDefaultMode();
             }
         }
         public static void EventRecorderOn(int cameraIndex)
