@@ -704,6 +704,30 @@ namespace FaceDetection
                 event_record_time_before_event.Value = 0;
         }
 
+        private void numericUpDownW_KeyDown(object sender, KeyEventArgs e)
+        {
+            Console.WriteLine(e.KeyValue);
+            if (BloskedKeys(e.KeyValue))
+            {
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        bool BloskedKeys(int key)
+        {
+            var retval = false;
+            int [] blockedKeys = { 188, 190, 110, 189, 109 };
+
+            foreach (int x in blockedKeys)
+            {
+                if (x==key)
+                {
+                    retval = true;
+                }
+            }
+            return retval;
+        }
+
         private void DisableOperatorCaptureCheckBox_ifNeeded()
         {
             // CAMERA 1

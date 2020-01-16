@@ -25,7 +25,7 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("English")]
         public string language {
             get {
                 return ((string)(this["language"]));
