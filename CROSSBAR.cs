@@ -548,7 +548,7 @@ namespace FaceDetection
             }
         }
 
-        internal void ReleaseCameras()
+        internal void ReleaseCamera()
         {
             Logger.Add("Release camera");
             try
@@ -565,17 +565,17 @@ namespace FaceDetection
             }
         }
 
-        internal void ReleaseSecondaryCamera()
-        {
-            Logger.Add("Release secondary camera");
-            try
-            {
-                camera.Release();
-            }
-            catch (Exception x)
-            {
-                Logger.Add(x);
-            }
-        }
+        //internal void ReleaseSecondaryCamera()
+        //{
+        //    Logger.Add("Release secondary camera");
+        //    try
+        //    {
+        //        camera.Release();
+        //    }
+        //    catch (Exception x)
+        //    {
+        //        Logger.Add(x);
+        //    }
+        //}
     }
 }

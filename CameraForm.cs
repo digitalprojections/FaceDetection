@@ -554,7 +554,7 @@ namespace FaceDetection
 
         private void FormClass_FormClosed(object sender, FormClosedEventArgs e)
         {
-            crossbar.ReleaseSecondaryCamera();
+            crossbar.ReleaseCamera();
             crossbar = null;
 
             //if (closeFromSettings)
@@ -729,16 +729,16 @@ namespace FaceDetection
         public void SetCameraToDefaultMode()
         {
             if (CameraIndex == Properties.Settings.Default.main_camera_index && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
-                {
+            {
                     crossbar?.Start(CameraIndex, CAMERA_MODES.PREEVENT);
-                }
+            }
             else
             {
-                if (MULTI_WINDOW.displayedCameraCount > 0)
-                {
+                //if (MULTI_WINDOW.displayedCameraCount > 0)
+                //{
                     crossbar?.Start(CameraIndex, CAMERA_MODES.PREVIEW);
                     //SetToPreviewMode();
-                }
+                //}
             }
         }
 
