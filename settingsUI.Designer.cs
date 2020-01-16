@@ -662,11 +662,9 @@
             resources.ApplyResources(this.storePath, "storePath");
             this.storePath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.storePath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.storePath.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.storePath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FaceDetection.Properties.Settings.Default, "video_file_location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.storePath.Name = "storePath";
-            this.storePath.Text = global::FaceDetection.Properties.Settings.Default.video_file_location;
-            this.storePath.UseWaitCursor = true;
+            this.storePath.Text = global::FaceDetection.Properties.Settings.Default.video_file_location;            
             this.storePath.TextChanged += new System.EventHandler(this.StorePath_TextChanged);
             // 
             // tab_camera_and_window
