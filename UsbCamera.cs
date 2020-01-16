@@ -626,7 +626,7 @@ namespace FaceDetectionX
             {
                 // directionを確認。
                 if (info.dir != direction) return false;
-
+                    
                 // indexは最後にチェック。
                 return (index == curr_index++);
             });

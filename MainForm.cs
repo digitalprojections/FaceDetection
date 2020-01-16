@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -124,7 +125,7 @@ namespace FaceDetection
         }
         
         private void MainForm_Load(object sender, EventArgs e)
-        {
+        {            
             #region Instances
             ///////////////////////////////////////
             settingUI = new SettingsUI();
@@ -136,7 +137,8 @@ namespace FaceDetection
             #endregion
             //Object references                    
             mainForm = this;            
-            this.WindowState = FormWindowState.Minimized;            
+            this.WindowState = FormWindowState.Minimized;
+            Camera.SetNumberOfCameras();
             AllChangesApply();            
             ClearCutFileTempFolder();
             ClearTempFolder();
@@ -144,6 +146,7 @@ namespace FaceDetection
 
         public static void AllChangesApply()
         {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Properties.Settings.Default.culture);
             int cam_index = settingUI.Camera_index;//MAIN CAMERA INDEX
             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(cam_index, out bool irsensorOn);
 

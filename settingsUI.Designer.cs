@@ -767,7 +767,12 @@
             // 
             resources.ApplyResources(this.numericUpDownH, "numericUpDownH");
             this.numericUpDownH.Maximum = new decimal(new int[] {
-            10000,
+            4096,
+            0,
+            0,
+            0});
+            this.numericUpDownH.Minimum = new decimal(new int[] {
+            80,
             0,
             0,
             0});
@@ -783,7 +788,12 @@
             // 
             resources.ApplyResources(this.numericUpDownW, "numericUpDownW");
             this.numericUpDownW.Maximum = new decimal(new int[] {
-            10000,
+            4096,
+            0,
+            0,
+            0});
+            this.numericUpDownW.Minimum = new decimal(new int[] {
+            345,
             0,
             0,
             0});

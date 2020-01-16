@@ -124,10 +124,10 @@ namespace FaceDetection
             var capDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
 
             if (capDevices.Length > 0)
-            {
-                if (Properties.Settings.Default.camera_count > 0)
+            {                
+                if (Properties.Settings.Default.camera_count == 0 || Properties.Settings.Default.camera_count > capDevices.Length)
                 {
-                    MainForm.Settingui.ArrangeCameraNames(Decimal.ToInt32(Properties.Settings.Default.camera_count));
+                    Properties.Settings.Default.camera_count = capDevices.Length;                 
                     //if (capDevices.Length > Properties.Settings.Default.camera_count && capDevices.Length<5)
                     //{
                     //    //MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
@@ -141,15 +141,7 @@ namespace FaceDetection
                     //    //Logger.Add("There are more than 4 cameras");
                     //}
                 }
-                else
-                {
-                    //Camera count was never set
-                    //set defaults
-                    if (capDevices.Length < 5)
-                        Properties.Settings.Default.camera_count = capDevices.Length;
-                    else
-                        Properties.Settings.Default.camera_count = 4;
-                }
+                MainForm.Settingui.ArrangeCameraNames(Decimal.ToInt32(Properties.Settings.Default.camera_count));
                 Properties.Settings.Default.Save();
             }
             else
