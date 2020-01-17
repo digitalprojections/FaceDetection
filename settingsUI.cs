@@ -698,9 +698,9 @@ namespace FaceDetection
             {
                 if (cm_capture_mode.Text != "Snapshot")
                 {
-                nud_seconds_before_event.Enabled = true;
-                nud_seconds_after_event.Enabled = true;
-            }
+                    nud_seconds_before_event.Enabled = true;
+                    nud_seconds_after_event.Enabled = true;
+                }
             }
             else
             {
@@ -713,7 +713,9 @@ namespace FaceDetection
         {
             CheckBox checkBox = (CheckBox)sender;
             if (!checkBox.Checked)
+            {
                 event_record_time_before_event.Value = 0;
+            }
         }
 
         private void numericUpDownW_KeyDown(object sender, KeyEventArgs e)

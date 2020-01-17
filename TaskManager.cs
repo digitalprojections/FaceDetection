@@ -561,7 +561,7 @@ namespace FaceDetection
             return duration;
         }
 
-        private static void DeleteCutFileFromTemp(string videoFiles, int numCamera)
+        private static void DeleteCutFileFromTemp(string videoFiles, int numCamera) // Delete files in cutTemp folder after using
         {
             System.Threading.Thread.Sleep(30000);
 

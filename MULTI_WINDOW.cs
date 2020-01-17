@@ -85,6 +85,7 @@ namespace FaceDetection
                 //formList[i].SetCameraToDefaultMode();
             }
         }
+
         public static void EventRecorderOn(int cameraIndex)
         {
             int timeBeforeEvent = 0, timeAfterEvent = 0;
@@ -112,6 +113,7 @@ namespace FaceDetection
                 Logger.Add("EVENT RECORDING STARTS (console call using parameters)");
             }
         }
+
         internal static void EventRecorderOff(int cameraIndex)
         {   
             var preeventRecording = MULTI_WINDOW.PreeventRecordingState(cameraIndex);

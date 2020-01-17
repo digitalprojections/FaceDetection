@@ -168,6 +168,7 @@ namespace FaceDetection
             
             FillResolutionList();
         }
+
         /// <summary>
         /// Loop through the camera properties to select all available resolutions and FPS
         /// </summary>
