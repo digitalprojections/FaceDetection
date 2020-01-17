@@ -390,40 +390,40 @@ namespace FaceDetection
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void ToggleVideoRecording(object sender, EventArgs e)
-        {
-            picbox_recording.Image = Properties.Resources.player_record;
-            crossbar?.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+        //public void ToggleVideoRecording(object sender, EventArgs e)
+        //{
+        //    picbox_recording.Image = Properties.Resources.player_record;
+        //    crossbar?.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
 
-            try
-            {
-                if ((String)cameraButton.Tag == "play")
-                {
-                    if (recordingInProgress == false)
-                    {
-                        SetRecordButtonState("rec");
-                        crossbar?.Start(CameraIndex, CAMERA_MODES.MANUAL);
-                        SET_REC_ICON();
-                    }
-                }
-                else
-                {
-                    //it really depends if we shoul PREVIEW or PREEVENT
-                    //set the deciding factors
-                    //for now we can use this value as a test
-                    //ONLY 0 index camera or the main camera is the one to be used to the manual recording?
+        //    try
+        //    {
+        //        if ((String)cameraButton.Tag == "play")
+        //        {
+        //            if (recordingInProgress == false)
+        //            {
+        //                SetRecordButtonState("rec");
+        //                crossbar?.Start(CameraIndex, CAMERA_MODES.MANUAL);
+        //                SET_REC_ICON();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            //it really depends if we shoul PREVIEW or PREEVENT
+        //            //set the deciding factors
+        //            //for now we can use this value as a test
+        //            //ONLY 0 index camera or the main camera is the one to be used to the manual recording?
 
-                    picbox_recording.Visible = false;
-                    recordingInProgress = false;
-                    SetRecordButtonState("play");
-                    SetCameraToDefaultMode();
-                }
-            }
-            catch (InvalidOperationException iox)
-            {
-                Logger.Add(iox);
-            }
-        }
+        //            picbox_recording.Visible = false;
+        //            recordingInProgress = false;
+        //            SetRecordButtonState("play");
+        //            SetCameraToDefaultMode();
+        //        }
+        //    }
+        //    catch (InvalidOperationException iox)
+        //    {
+        //        Logger.Add(iox);
+        //    }
+        //}
 
         public void SetToPreviewMode()
         {
@@ -459,14 +459,14 @@ namespace FaceDetection
             recordingInProgress = true;
         }
 
-        public void StarttheTimer()
-        {
-            //if (crossbarList[cam_index - 1] != null)
-            //{
-            //    crossbarList[cam_index - 1].StartTimer();
-            //}
-            crossbar.StartTimer();
-        }
+        //public void StarttheTimer()
+        //{
+        //    //if (crossbarList[cam_index - 1] != null)
+        //    //{
+        //    //    crossbarList[cam_index - 1].StartTimer();
+        //    //}
+        //    crossbar.StartTimer();
+        //}
 
         public void SetRecordIcon (int cam_index, int timeAfterEvent)
         {
@@ -676,6 +676,7 @@ namespace FaceDetection
         {
             ShowButtonsDelayed();
         }
+
         private void ShowButtonsDelayed()
         {
             if (controlButtons.InvokeRequired)

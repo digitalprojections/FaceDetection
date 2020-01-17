@@ -232,7 +232,7 @@ namespace FaceDetection
                                     }
                                     else
                                     {
-                                        if (cameraIndex >= 0 && cameraIndex <4)
+                                        if (cameraIndex >= 0 && cameraIndex < 4)
                                         {
                                             if (MULTI_WINDOW.formList[cameraIndex].FaceDetector != null && MULTI_WINDOW.formList[cameraIndex].crossbar.Recording_is_on)
                                             {
@@ -272,7 +272,6 @@ namespace FaceDetection
                                         {
                                             Properties.Settings.Default.C1_enable_Human_sensor = false;
                                         } 
-                                        //IS THIS PART EVENT VALID??? THERE IS ONLY 1 HUMAN SENSOR
                                         else if (cameraIndex == 1)
                                         {
                                             Properties.Settings.Default.C2_enable_Human_sensor = false;

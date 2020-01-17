@@ -131,35 +131,35 @@ namespace FaceDetection
             icon_timer.Start();            
         }
 
-        internal bool ANY_CAMERA_ON()
-        {
-            bool rv = false;
-            if (recorder != null)
-            {
-                try
-                {
-                    if (recorder.ON)
-                        rv = true;                    
-                }
-                catch (NullReferenceException nrx)
-                {
-                    Logger.Add(nrx);
-                }
+        //internal bool ANY_CAMERA_ON()
+        //{
+        //    bool rv = false;
+        //    if (recorder != null)
+        //    {
+        //        try
+        //        {
+        //            if (recorder.ON)
+        //                rv = true;                    
+        //        }
+        //        catch (NullReferenceException nrx)
+        //        {
+        //            Logger.Add(nrx);
+        //        }
 
-            }else if (camera!=null)
-            {
-                try
-                {
-                    if (camera.ON)
-                        rv = true;
-                }
-                catch (NullReferenceException nrx)
-                {
-                    Logger.Add(nrx);
-                }
-            }
-            return rv;
-        }
+        //    }else if (camera!=null)
+        //    {
+        //        try
+        //        {
+        //            if (camera.ON)
+        //                rv = true;
+        //        }
+        //        catch (NullReferenceException nrx)
+        //        {
+        //            Logger.Add(nrx);
+        //        }
+        //    }
+        //    return rv;
+        //}
 
         public void No_Cap_Timer_ON(int vidlen)
         {

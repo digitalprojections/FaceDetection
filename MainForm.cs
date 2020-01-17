@@ -110,20 +110,18 @@ namespace FaceDetection
         //        MessageBox.Show(ioe.Message + " line OpenStoreLocation");
         //    }
         //}
-            
-        
 
-        public void EventRecorderOff(int cameraIndex)
-        {           
-            MULTI_WINDOW.EventRecorderOff(cameraIndex);
-        }
+        //public void EventRecorderOff(int cameraIndex)
+        //{           
+        //    MULTI_WINDOW.EventRecorderOff(cameraIndex);
+        //}
         
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //StopAll();             
-            RSensor?.Destroy();
-            Application.Exit();
-        }
+        //private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    //StopAll();             
+        //    RSensor?.Destroy();
+        //    Application.Exit();
+        //}
         
         private void MainForm_Load(object sender, EventArgs e)
         {            
@@ -266,8 +264,6 @@ namespace FaceDetection
                 //    }
             }
         }
-
-        
 
         private void ClearCutFileTempFolder()
         {
@@ -471,14 +467,14 @@ namespace FaceDetection
             
         }
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            //Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
-            //Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);            
-            //Properties.Settings.Default.Save();
+        //private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        //{
+        //    //Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
+        //    //Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);            
+        //    //Properties.Settings.Default.Save();
 
-            Application.Exit();
-        }
+        //    Application.Exit();
+        //}
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         private static extern IntPtr SendMessageTimeout(

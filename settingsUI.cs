@@ -69,10 +69,10 @@ namespace FaceDetection
             }
         }
 
-        public int getCameraIndexSelected()
-        {
-            return selected_camera_combo.SelectedIndex;
-        }
+        //public int getCameraIndexSelected()
+        //{
+        //    return selected_camera_combo.SelectedIndex;
+        //}
 
         public void ArrangeCameraNames(int len)
         {
@@ -248,8 +248,6 @@ namespace FaceDetection
             cb_face_recognition.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_face_recognition", true, DataSourceUpdateMode.OnPropertyChanged));
             cb_human_sensor.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_Human_sensor", true, DataSourceUpdateMode.OnPropertyChanged));
             cb_recording_operation.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_Recording_when_at_the_start_of_operation", true, DataSourceUpdateMode.OnPropertyChanged));
-
-            
         }
 
         public static void SetComboBoxFPSValues(List<string> vs)
