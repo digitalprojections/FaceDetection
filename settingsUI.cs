@@ -168,7 +168,10 @@ namespace FaceDetection
             {
                 for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
-                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
+                    if (i != Properties.Settings.Default.main_camera_index)
+                    {
+                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
+                    }
                 }
             }
             else

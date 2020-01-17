@@ -322,6 +322,7 @@ namespace FaceDetection
                 Text = "UVC Camera Viewer -  camera " + (CameraIndex + 1);
             }
             
+            // Full screen
             if (Properties.Settings.Default.main_window_full_screen)
             {
                 for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
@@ -364,11 +365,6 @@ namespace FaceDetection
                     MULTI_WINDOW.formList[i].FormBorderStyle = FormBorderStyle.None;
                 }
             }
-            // Full screen
-            if (Properties.Settings.Default.main_window_full_screen)
-                WindowState = FormWindowState.Maximized;
-            else
-                WindowState = FormWindowState.Normal;
 
             ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
             Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
