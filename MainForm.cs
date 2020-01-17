@@ -73,6 +73,7 @@ namespace FaceDetection
                     try
                     {
                         Settingui.Show();
+                        settingUI.DisabledButtonWhenRecording();
                     }
                     catch (InvalidOperationException invx)
                     {
@@ -164,8 +165,6 @@ namespace FaceDetection
                 //    }
             }
         }
-
-        
 
         private void ClearCutFileTempFolder()
         {

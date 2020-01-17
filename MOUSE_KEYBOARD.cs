@@ -31,6 +31,7 @@ namespace FaceDetection
 
             CAMERA_INDEX = Properties.Settings.Default.main_camera_index;
         }
+
         public void START_CLICK_LISTENER()
         {
             Task.Run(() => {
@@ -40,6 +41,7 @@ namespace FaceDetection
                 mouseListenerClick.MouseMove += MouseListener_MouseMove;
             });
             }
+
         private void KeyboardListener_KeyUpAll(object sender, KeyEventArgs e)
         {
             if (MainForm.GetMainForm != null)
@@ -48,6 +50,7 @@ namespace FaceDetection
             }
             MouseKeyEventInit();
         }
+
         private void MouseListener_MouseLeftDown(object sender, MouseEventArgs e)
         {
             if (MainForm.GetMainForm != null)
@@ -55,17 +58,19 @@ namespace FaceDetection
                 MainForm.GetMainForm.BackLight.Restart();
             }
         }
+
         public void AddMouseAndKeyboardBack()
         {
             Listen = true;
         }
+
         private void MouseListener_MouseMove(object sender, MouseEventArgs e)
         {
             MouseKeyEventInit();
         }
+
         private void MouseKeyEventInit()
         {
-            
             string captureMethod = "";
             int timeBeforeEvent = 0, timeAfterEvent = 0;
             bool captureOperatorEnabled = false, recordWhenOperation = false, preeventRecording = false;
