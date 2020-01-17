@@ -131,14 +131,14 @@ namespace FaceDetection
             this.DoubleClick += FullScreen;
             crossbar = new CROSSBAR(CameraIndex, this);
             var mci = Properties.Settings.Default.main_camera_index;
-            if (CameraIndex == mci)// && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
-            {
-                this.Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";
-            }
-            else
-            {
-                this.Text = "UVC Camera Viewer -  camera " + (CameraIndex + 1);
-            }
+            //if (CameraIndex == mci)// && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
+            //{
+            //    this.Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";                
+            //}
+            //else
+            //{
+            //    this.Text = "UVC Camera Viewer -  camera " + (CameraIndex + 1);                
+            //}
             crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
 
             this.SizeChanged += WindowSizeUpdate;
@@ -173,7 +173,7 @@ namespace FaceDetection
             //    WindowState = FormWindowState.Maximized;
             //else
             //    WindowState = FormWindowState.Normal;
-
+            SetWindowProperties();
             FillResolutionList();
         }
 
@@ -320,55 +320,31 @@ namespace FaceDetection
             else
             {
                 Text = "UVC Camera Viewer -  camera " + (CameraIndex + 1);
-            }
+            }           
             
-            // Full screen
-            if (Properties.Settings.Default.main_window_full_screen)
-            {
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    if (i == cameraIndex - 1)
-                    {
-                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
-                    }
-                }
-            }
-            else
-            {
-                //MainForm.GetMainForm.WindowState = FormWindowState.Normal;
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    if (i == cameraIndex - 1)
-                    {
-                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
-                    }
-                }
-            }
 
             //Window pane
             if (Properties.Settings.Default.show_window_pane == true)
             {
                 FormBorderStyle = FormBorderStyle.Sizable;
-                ControlBox = true;
-
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    MULTI_WINDOW.formList[i].FormBorderStyle = FormBorderStyle.Sizable;
-                }
+                ControlBox = true;                
             }
             else
             {
                 FormBorderStyle = FormBorderStyle.None;
-
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    MULTI_WINDOW.formList[i].FormBorderStyle = FormBorderStyle.None;
-                }
             }
+            // Full screen
+            if (Properties.Settings.Default.main_window_full_screen)
+                WindowState = FormWindowState.Maximized;
+            else
+                WindowState = FormWindowState.Normal;
+            
 
-            ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
+            //ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
             Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
             // Check if the PREEVENT mode is needed
+            //controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
+            Refresh();
             SetCameraToDefaultMode();
 
         }

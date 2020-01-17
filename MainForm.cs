@@ -25,7 +25,7 @@ namespace FaceDetection
         //User actions end
         static SettingsUI settingUI;
         static Form mainForm;
-        public int CAMERA_INDEX = 0;
+        public static int CAMERA_INDEX = 0;
         static Stopwatch stopwatch = new Stopwatch();
         public static MainForm GetMainForm => (MainForm) mainForm;
         public static SettingsUI Settingui { get => settingUI; set => settingUI = value; }        
@@ -113,8 +113,9 @@ namespace FaceDetection
         public static void AllChangesApply()
         {
             System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Properties.Settings.Default.culture);
-            int cam_index = settingUI.Camera_index;//MAIN CAMERA INDEX
-            PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(cam_index, out bool irsensorOn);
+            
+            CAMERA_INDEX = Properties.Settings.Default.main_camera_index;//MAIN CAMERA INDEX
+            PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CAMERA_INDEX, out bool irsensorOn);
             if (Settingui == null)
             {                
                 Settingui = new SettingsUI();
@@ -131,7 +132,7 @@ namespace FaceDetection
                 RSensor?.Stop_IR_Timer();             
             }
 
-            PROPERTY_FUNCTIONS.GetCaptureOnOperationStartSwitch(cam_index, out bool spymode);
+            PROPERTY_FUNCTIONS.GetCaptureOnOperationStartSwitch(CAMERA_INDEX, out bool spymode);
             if (spymode)
             {
                 Mklisteners.AddMouseAndKeyboardBack();
