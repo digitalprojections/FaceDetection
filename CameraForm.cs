@@ -79,20 +79,18 @@ namespace FaceDetection
         {
             if (Properties.Settings.Default.main_camera_index == CameraIndex && applicationExit == false) // The form closed was the main camera selected
             {
-                
-                    //this.TopMost = true;
-                    DialogResult dr = MessageBox.Show(Resource.main_window_close_warning, Resource.ask_exit_application, MessageBoxButtons.OKCancel);
-                    switch (dr)
-                    {
-                        case DialogResult.OK:
-                            applicationExit = true;
-                            Application.Exit();
-                            break;
-                        case DialogResult.Cancel:
-                            e.Cancel = true;
-                            //this.TopMost = false;
-                            break;
-                    }
+                DialogResult dr = MessageBox.Show(Resource.main_window_close_warning, Resource.ask_exit_application, MessageBoxButtons.OKCancel);
+                switch (dr)
+                {
+                    case DialogResult.OK:
+                        applicationExit = true;
+                        Application.Exit();
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        this.TopMost = false;
+                        break;
+                }
             }
         }
 
@@ -304,11 +302,17 @@ namespace FaceDetection
             //MainForm.GetMainForm.TopMost = Properties.Settings.Default.window_on_top;
             //Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
             dateTimeLabel.Visible = Properties.Settings.Default.show_current_datetime;
-            // Window set active / similar to on top
+            
+            // Window on top
             if (Properties.Settings.Default.window_on_top)
             {
-                Activate();
+                this.TopMost = true;
             }
+            else
+            {
+                this.TopMost = false;
+            }
+
             if (CameraIndex == Properties.Settings.Default.main_camera_index)
             {
                 Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";
@@ -449,20 +453,28 @@ namespace FaceDetection
 
         private void FormClass_FormClosed(object sender, FormClosedEventArgs e)
         {
+            int deb = Properties.Settings.Default.main_camera_index;
             crossbar.ReleaseCamera();
             crossbar = null;
 
             if (Properties.Settings.Default.main_camera_index == CameraIndex) // The form closed was the main camera selected
             {
-                //Main camera closing means the following do not work
-                //operator capture: human sensor, keyboard and mouse events
+                for(int i=0; i < 4; i++)
+                {
+                    if(MULTI_WINDOW.formArray[i] == true)
+                    {
+                        Properties.Settings.Default.main_camera_index = i;
+                        break;
+                    }
+                }
                 Properties.Settings.Default.main_camera_index = 0;
             }
-            MULTI_WINDOW.displayedCameraCount--;
+
             PROPERTY_FUNCTIONS.Set_Window_Location(CameraIndex, this);
             Properties.Settings.Default.Save();
             MULTI_WINDOW.formArray[CameraIndex] = false;
             Destroy();
+            MULTI_WINDOW.displayedCameraCount--;
         }
 
         private void FullScreen(object sender, EventArgs eventArgs)
