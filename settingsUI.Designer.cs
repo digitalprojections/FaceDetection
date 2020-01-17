@@ -201,6 +201,7 @@
             0});
             this.numericUpDownBacklight.Name = "numericUpDownBacklight";
             this.numericUpDownBacklight.Value = global::FaceDetection.Properties.Settings.Default.backlight_offset_mins;
+            this.numericUpDownBacklight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // nud_manual_record_time
             // 
@@ -218,6 +219,7 @@
             0});
             this.nud_manual_record_time.Name = "nud_manual_record_time";
             this.nud_manual_record_time.Value = global::FaceDetection.Properties.Settings.Default.manual_record_time;
+            this.nud_manual_record_time.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // lb_seconds
             // 
@@ -253,6 +255,7 @@
             0});
             this.event_record_time_before_event.Name = "event_record_time_before_event";
             this.event_record_time_before_event.Value = global::FaceDetection.Properties.Settings.Default.C1_event_record_time_before_event;
+            this.event_record_time_before_event.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // nud_event_record_after
             // 
@@ -270,6 +273,7 @@
             0});
             this.nud_event_record_after.Name = "nud_event_record_after";
             this.nud_event_record_after.Value = global::FaceDetection.Properties.Settings.Default.C1_event_record_time_after_event;
+            this.nud_event_record_after.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // lb_post_event
             // 
@@ -378,6 +382,7 @@
             0});
             this.nud_seconds_after_event.Name = "nud_seconds_after_event";
             this.nud_seconds_after_event.Value = global::FaceDetection.Properties.Settings.Default.C1_seconds_after_event;
+            this.nud_seconds_after_event.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // cb_face_recognition
             // 
@@ -401,6 +406,7 @@
             this.nud_seconds_before_event.Name = "nud_seconds_before_event";
             this.nud_seconds_before_event.Value = global::FaceDetection.Properties.Settings.Default.C1_seconds_before_event;
             this.nud_seconds_before_event.ValueChanged += new System.EventHandler(this.Nud_seconds_before_event_ValueChanged);
+            this.nud_seconds_before_event.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // label11
             // 
@@ -444,6 +450,7 @@
             this.nud_reinitiation_interval.Name = "nud_reinitiation_interval";
             this.nud_reinitiation_interval.Value = global::FaceDetection.Properties.Settings.Default.C1_interval_before_reinitiating_recording;
             this.nud_reinitiation_interval.ValueChanged += new System.EventHandler(this.Nud_reinitiation_interval_ValueChanged);
+            this.nud_reinitiation_interval.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // cm_capture_mode
             // 
@@ -482,6 +489,7 @@
             0});
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Value = global::FaceDetection.Properties.Settings.Default.C1_check_interval;
+            this.numericUpDown2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // cb_operator_capture
             // 
@@ -518,10 +526,10 @@
             // 
             // tabControl1
             // 
-            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.tab_environment);
             this.tabControl1.Controls.Add(this.tab_camera_and_window);
             this.tabControl1.Controls.Add(tab_view_settings);
+            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
@@ -561,6 +569,7 @@
             0});
             this.numericUpDownCamCount.Name = "numericUpDownCamCount";
             this.numericUpDownCamCount.Value = global::FaceDetection.Properties.Settings.Default.camera_count;
+            this.numericUpDownCamCount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // cb_all_cameras
             // 
@@ -615,6 +624,7 @@
             0});
             this.nud_erase_old.Name = "nud_erase_old";
             this.nud_erase_old.Value = global::FaceDetection.Properties.Settings.Default.keep_old_files_days;
+            this.nud_erase_old.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // label3
             // 
@@ -666,6 +676,7 @@
             this.storePath.Name = "storePath";
             this.storePath.Text = global::FaceDetection.Properties.Settings.Default.video_file_location;
             this.storePath.TextChanged += new System.EventHandler(this.StorePath_TextChanged);
+            this.storePath.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // tab_camera_and_window
             // 
@@ -785,6 +796,7 @@
             0,
             0});
             this.numericUpDownH.ValueChanged += new System.EventHandler(this.NumericUpDownH_ValueChanged);
+            this.numericUpDownH.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // numericUpDownW
             // 
@@ -843,6 +855,7 @@
             0,
             0});
             this.numericUpDownY.ValueChanged += new System.EventHandler(this.NumericUpDownY_ValueChanged);
+            this.numericUpDownY.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // numericUpDownX
             // 
@@ -859,6 +872,7 @@
             0,
             0});
             this.numericUpDownX.ValueChanged += new System.EventHandler(this.NumericUpDownX_ValueChanged);
+            this.numericUpDownX.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
             // 
             // label5
             // 
@@ -903,10 +917,11 @@
             // 
             // button_cameraProperties
             // 
+            this.button_cameraProperties.BackColor = System.Drawing.Color.Transparent;
             this.button_cameraProperties.Image = global::FaceDetection.Properties.Resources.setting_5121;
             resources.ApplyResources(this.button_cameraProperties, "button_cameraProperties");
             this.button_cameraProperties.Name = "button_cameraProperties";
-            this.button_cameraProperties.UseVisualStyleBackColor = true;
+            this.button_cameraProperties.UseVisualStyleBackColor = false;
             this.button_cameraProperties.Click += new System.EventHandler(this.Button_cameraProperties_Click);
             // 
             // cm_camera_number
