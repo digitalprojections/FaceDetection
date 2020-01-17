@@ -69,6 +69,8 @@ namespace FaceDetection
                         if(MainForm.GetMainForm == null)
                         {
                             cameraIndex = 0;
+                            Properties.Settings.Default.main_camera_index = 0;
+                            Properties.Settings.Default.camera_count = 1;
                         }
                         //else if(method == "n")
                         //{

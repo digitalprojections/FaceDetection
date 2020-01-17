@@ -130,6 +130,9 @@
     <value>指定カメラのビューアーを閉じると、アプリケーションが終了します。
 処理を続行しますか？</value>
   </data>
+  <data name="no_camera_found" xml:space="preserve">
+    <value>カメラが検出されません</value>
+  </data>
   <data name="store_location_description" xml:space="preserve">
     <value>撮影ファイルの保存先を選んでください</value>
   </data>

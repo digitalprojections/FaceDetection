@@ -306,11 +306,11 @@ namespace FaceDetection
             // Window on top
             if (Properties.Settings.Default.window_on_top)
             {
-                this.TopMost = true;
+                Activate();
             }
             else
             {
-                this.TopMost = false;
+                //this.TopMost = false;
             }
 
             if (CameraIndex == Properties.Settings.Default.main_camera_index)
@@ -344,7 +344,7 @@ namespace FaceDetection
             Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
             // Check if the PREEVENT mode is needed
             //controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
-            Refresh();
+            
             SetCameraToDefaultMode();
 
         }

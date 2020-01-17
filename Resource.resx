@@ -130,6 +130,9 @@
     <value>Closing the viewer for the specified camera will close the application.
 Do you want to continue?</value>
   </data>
+  <data name="no_camera_found" xml:space="preserve">
+    <value>No cameras have been detected!</value>
+  </data>
   <data name="store_location_description" xml:space="preserve">
     <value>Please, select the output folder</value>
   </data>

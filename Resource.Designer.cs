@@ -98,6 +98,15 @@ namespace FaceDetection {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No cameras have been detected!.
+        /// </summary>
+        internal static string no_camera_found {
+            get {
+                return ResourceManager.GetString("no_camera_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please, select the output folder.
         /// </summary>
         internal static string store_location_description {
