@@ -149,8 +149,9 @@ namespace FaceDetection
             //}
 
             this.SizeChanged += WindowSizeUpdate;
-            picbox_recording.Visible = false;
+            
             SettingsButtonsDesigner();
+            
             this.Controls.Add(this.controlButtons);
 
             this.ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
