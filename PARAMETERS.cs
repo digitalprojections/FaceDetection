@@ -190,12 +190,12 @@ namespace FaceDetection
                                     if (parameterOnOffSwitch)
                                     {
                                         isControlButtonVisible = true;
-                                        MULTI_WINDOW.formList[cameraIndex].ParametersChangesApply(cameraIndex);
+                                        MULTI_WINDOW.formList[cameraIndex].SettingChangesApply(cameraIndex);
                                     }
                                     else
                                     {
                                         isControlButtonVisible = false;
-                                        MULTI_WINDOW.formList[cameraIndex].ParametersChangesApply(cameraIndex);
+                                        MULTI_WINDOW.formList[cameraIndex].SettingChangesApply(cameraIndex);
                                     }                                                                       
                                 }
                             }
@@ -286,6 +286,24 @@ namespace FaceDetection
                                     {
                                         isMinimized = true;
                                         MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
+                                    }
+                                }
+                                else if (CheckCameraIndex(cameraIndex) && cameraIndex==8)
+                                {
+                                    for (int i=0;i<MULTI_WINDOW.displayedCameraCount;i++)
+                                    {
+                                        if (parameterOnOffSwitch)
+                                        {
+                                            isMinimized = false;
+                                            MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
+                                            MULTI_WINDOW.formList[i].Show();
+                                            MULTI_WINDOW.formList[i].Activate();
+                                        }
+                                        else
+                                        {
+                                            isMinimized = true;
+                                            MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
+                                        }
                                     }
                                 }
                                 PARAMETERS.PARAM.Clear();
@@ -430,6 +448,31 @@ namespace FaceDetection
                             break;
                     }
                 }
+            }
+        }
+
+        internal static void HandleWakeUpParameters()
+        {
+            if (PARAM != null && PARAM.Count > 0 && !PARAM.Contains("uvccameraviewer.exe"))
+            {
+                PARAM.Reverse();
+                PARAM.Add("uvccameraviewer.exe");
+                PARAM.Reverse();
+                wakeUpCall = true;
+                HandleParameters(PARAM);
+
+                if (isMinimized)
+                {
+                    if (CameraIndex >= 0 && CameraIndex < 4)
+                        MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Minimized;
+                }
+                else
+                {
+                    if (CameraIndex >= 0 && CameraIndex < 4)
+                        MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Normal;
+                }
+
+                PARAM.Clear();
             }
         }
 

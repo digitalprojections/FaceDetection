@@ -120,6 +120,12 @@
   <data name="ask_exit_application" xml:space="preserve">
     <value>アプリケーションを終了する？</value>
   </data>
+  <data name="event_recording_starts" xml:space="preserve">
+    <value>イベントレコーダーがパラメーターにて開始しました</value>
+  </data>
+  <data name="form_closing_failure" xml:space="preserve">
+    <value>ウィンドーを閉じるに失敗した</value>
+  </data>
   <data name="main_window_close_warning" xml:space="preserve">
     <value>指定カメラのビューアーを閉じると、アプリケーションが終了します。
 処理を続行しますか？</value>

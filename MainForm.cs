@@ -12,37 +12,23 @@ namespace FaceDetection
     public partial class MainForm : Form
     {
         private delegate void dShowSettingsUI();
-
         private static MOUSE_KEYBOARD mklisteners = null;
-                
-        //private int timeForDeleteOldFiles;
-        //private int freeDiskSpaceLeft;
-        //private DiskSpaceWarning warningForm;
-
-        
         internal bool OPERATOR_CAPTURE_ALLOWED = false;
         internal bool EVENT_RECORDING_IN_PROGRESS = false;
-        internal static int SELECTED_CAMERA = 0;
-
-        
+        internal static int SELECTED_CAMERA = 0;        
         private BackLightController backLight;
         /// <summary>
         /// IR Sensor 人感センサー
         /// </summary>
         static IRSensor rSensor;
-        internal static IRSensor RSensor { get => rSensor; set => rSensor = value; }
-
-        
+        internal static IRSensor RSensor { get => rSensor; set => rSensor = value; }        
         //User actions end
         static SettingsUI settingUI;
         static Form mainForm;
         public int CAMERA_INDEX = 0;
-
         static Stopwatch stopwatch = new Stopwatch();
-
         public static MainForm GetMainForm => (MainForm) mainForm;
-        public static SettingsUI Settingui { get => settingUI; set => settingUI = value; }
-        
+        public static SettingsUI Settingui { get => settingUI; set => settingUI = value; }        
         public BackLightController BackLight { get => backLight; set => backLight = value; }
         public static MOUSE_KEYBOARD Mklisteners { get => mklisteners; set => mklisteners = value; }
         public static bool AnyRecordingInProgress { get => MULTI_WINDOW.RecordingIsOn();}
@@ -95,28 +81,7 @@ namespace FaceDetection
                 }
             }
         }
-
-        //private void OpenStoreLocation(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        Directory.CreateDirectory(Properties.Settings.Default.video_file_location);
-        //        Process.Start(Properties.Settings.Default.video_file_location);
-        //        this.TopMost = false;
-        //    }
-        //    catch (IOException ioe)
-        //    {
-        //        MessageBox.Show(ioe.Message + " line OpenStoreLocation");
-        //    }
-        //}
-            
-        
-
-        public void EventRecorderOff(int cameraIndex)
-        {           
-            MULTI_WINDOW.EventRecorderOff(cameraIndex);
-        }
-        
+                
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             //StopAll();             
@@ -149,6 +114,10 @@ namespace FaceDetection
             System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Properties.Settings.Default.culture);
             int cam_index = settingUI.Camera_index;//MAIN CAMERA INDEX
             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(cam_index, out bool irsensorOn);
+            if (Settingui == null)
+            {                
+                Settingui = new SettingsUI();
+            }
 
             if (irsensorOn)
             {
@@ -160,8 +129,9 @@ namespace FaceDetection
             {                
                 RSensor?.Stop_IR_Timer();             
             }
-            
-            if (Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation)
+
+            PROPERTY_FUNCTIONS.GetCaptureOnOperationStartSwitch(cam_index, out bool spymode);
+            if (spymode)
             {
                 Mklisteners.AddMouseAndKeyboardBack();
             }
@@ -171,78 +141,7 @@ namespace FaceDetection
             //CREATE CAMERA WINDOWS
             MULTI_WINDOW.CreateCameraWindows();
 
-            for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-            {
-                if (i == cam_index)
-                {
-                    MULTI_WINDOW.formList[i].Text = $"UVC Camera Viewer - MAIN CAMERA {(i + 1)}";
-                }
-                else
-                {
-                    MULTI_WINDOW.formList[i].Text = "UVC Camera Viewer -  camera " + (i + 1);
-                }
-                // Check if the PREEVENT mode is needed
-                MULTI_WINDOW.formList[i].SetCameraToDefaultMode();
-            }
-
-            // Full screen
-            if (Properties.Settings.Default.main_window_full_screen)
-            {
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
-                }
-            }
-
-            // Top most
-            if (Properties.Settings.Default.window_on_top)
-            {
-                if (MULTI_WINDOW.displayedCameraCount > 1)
-                {
-                    MULTI_WINDOW.formList[cam_index].Activate();
-                }
-            }
-            else
-            {
-                //MainForm.GetMainForm.TopMost = false;
-                //for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                //{
-                //    MULTI_WINDOW.formList[i].TopMost = false;                    
-                //}
-                if (MULTI_WINDOW.displayedCameraCount > 1)
-                {
-                    MULTI_WINDOW.formList[cam_index].Activate();//MAIN CAMERA active
-                }
-            }
-
-            if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0 && !PARAMETERS.PARAM.Contains("uvccameraviewer.exe"))
-            {
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.PARAM.Add("uvccameraviewer.exe");
-                PARAMETERS.PARAM.Reverse();
-                PARAMETERS.wakeUpCall = true;
-                PARAMETERS.HandleParameters(PARAMETERS.PARAM);
-
-                if (PARAMETERS.isMinimized)
-                {
-                    if (PARAMETERS.CameraIndex >= 0 && PARAMETERS.CameraIndex < 4)
-                        MULTI_WINDOW.formList[PARAMETERS.CameraIndex].WindowState = FormWindowState.Minimized;
-                }
-                else
-                {
-                    if (PARAMETERS.CameraIndex >= 0 && PARAMETERS.CameraIndex < 4)
-                        MULTI_WINDOW.formList[PARAMETERS.CameraIndex].WindowState = FormWindowState.Normal;
-                }
-
-                PARAMETERS.PARAM.Clear();
-            }
+            PARAMETERS.HandleWakeUpParameters();            
 
             GC.Collect();
 
@@ -455,16 +354,6 @@ namespace FaceDetection
                 //Console.WriteLine(@" TEMP\4 does not exist");
             }
         }
-
-        //private void MainForm_ResizeEnd(object sender, EventArgs e)
-        //{
-        //    Properties.Settings.Default.C1w = Convert.ToDecimal(this.Width);
-        //    Properties.Settings.Default.C1h = Convert.ToDecimal(this.Height);
-        //    //Properties.Settings.Default.main_screen_size = new Size(this.Width, this.Height);
-        //    Properties.Settings.Default.Save();
-        //    //WindowSizeUpdate();
-        //}
-
         private void BackgroundWorkerMain_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             
@@ -472,10 +361,6 @@ namespace FaceDetection
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //Properties.Settings.Default.C1x = Convert.ToDecimal(this.Location.X);
-            //Properties.Settings.Default.C1y = Convert.ToDecimal(this.Location.Y);            
-            //Properties.Settings.Default.Save();
-
             Application.Exit();
         }
 

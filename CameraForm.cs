@@ -121,7 +121,11 @@ namespace FaceDetection
             datetimer.Stop();
             datetimer.Dispose();
         }
-
+        /// <summary>
+        /// LOAD elements in precise order. changing the order will cause issues
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CameraForm_Load(object sender, EventArgs e)
         {
             this.MouseDown += HideButtons;
@@ -145,7 +149,7 @@ namespace FaceDetection
             //}
 
             this.SizeChanged += WindowSizeUpdate;
-
+            picbox_recording.Visible = false;
             SettingsButtonsDesigner();
             this.Controls.Add(this.controlButtons);
 
@@ -169,7 +173,13 @@ namespace FaceDetection
             datetimer.Tick += Datetimer_Tick;
             datetimer.Start();
             ///////////////////////////////////////////////////////////
-            
+
+            //// Full screen
+            //if (Properties.Settings.Default.main_window_full_screen)
+            //    WindowState = FormWindowState.Maximized;
+            //else
+            //    WindowState = FormWindowState.Normal;
+
             FillResolutionList();
         }
         /// <summary>
@@ -276,38 +286,6 @@ namespace FaceDetection
             }
         }
 
-        //public void ChangesFromParametersApply()
-        //{
-        //    if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0)
-        //    {
-        //        if (PARAMETERS.isControlButtonVisible)
-        //        {
-        //            controlButtons.Visible = true;
-        //        }
-        //        else
-        //        {
-        //            controlButtons.Visible = false;
-        //        }
-        //        PARAMETERS.PARAM.Clear();
-        //    }
-        //    //if (Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C4_enable_face_recognition)
-        //    //{
-        //    //    if (faceDetector != null)
-        //    //    {
-        //    //        FaceDetector.StopFaceTimer();
-        //    //    }
-        //    //    faceDetector.SetInterval();
-        //    //    faceDetector.StartFaceTimer();
-        //    //}
-        //    //else
-        //    //{
-        //    //    if (faceDetector != null)
-        //    //    {
-        //    //        FaceDetector.StopFaceTimer();
-        //    //    }
-        //    //}
-        //}
-
         /// <summary>
         /// Get the bitmap from the 
         /// <see cref="crossbar/>
@@ -320,21 +298,28 @@ namespace FaceDetection
 
         internal void SetWindowProperties()
         {
-            int cameraIndex = MainForm.Settingui.Camera_index;
-
-            if (MainForm.Settingui == null)
-            {
-                picbox_recording.Visible = false;
-                recordingInProgress = false;
-                MainForm.Settingui = new SettingsUI();
-            }
-
+            int cameraIndex = Properties.Settings.Default.main_camera_index;
+            //picbox_recording.Visible = false;
+            //recordingInProgress = false;
             camera_number.Visible = Properties.Settings.Default.show_camera_no;
             //or_camera_num_txt.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
             //MainForm.GetMainForm.TopMost = Properties.Settings.Default.window_on_top;
             //Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
             dateTimeLabel.Visible = Properties.Settings.Default.show_current_datetime;
-
+            // Window set active / similar to on top
+            if (Properties.Settings.Default.window_on_top)
+            {
+                Activate();
+            }
+            if (CameraIndex == Properties.Settings.Default.main_camera_index)
+            {
+                Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";
+            }
+            else
+            {
+                Text = "UVC Camera Viewer -  camera " + (CameraIndex + 1);
+            }
+            
             if (Properties.Settings.Default.main_window_full_screen)
             {
                 for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
@@ -357,16 +342,6 @@ namespace FaceDetection
                 }
             }
 
-            //var mci = Properties.Settings.Default.main_camera_index;
-            //if (CameraIndex == mci)
-            //{
-            //    this.Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";
-            //}
-            //else
-            //{
-            //    this.Text = "UVC Camera Viewer -  camera " + (CameraIndex + 1);
-            //}
-
             //Window pane
             if (Properties.Settings.Default.show_window_pane == true)
             {
@@ -387,9 +362,17 @@ namespace FaceDetection
                     MULTI_WINDOW.formList[i].FormBorderStyle = FormBorderStyle.None;
                 }
             }
-            
+            // Full screen
+            if (Properties.Settings.Default.main_window_full_screen)
+                WindowState = FormWindowState.Maximized;
+            else
+                WindowState = FormWindowState.Normal;
+
             ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
             Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
+            // Check if the PREEVENT mode is needed
+            SetCameraToDefaultMode();
+
         }
 
         public void SetRecordButtonState(string state)
@@ -439,26 +422,11 @@ namespace FaceDetection
 
         public void SetToPreviewMode()
         {
-            /*if (crossbarList[cam_index] != null)
-            {
-                crossbarList[cam_index].Start(cam_index, CAMERA_MODES.PREVIEW);
-            }
-            */
             crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
         }
 
         public void SetToPreeventMode()
         {
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    if (crossbarList[i] != null)
-            //    {
-            //        if (crossbarList[i].INDEX == cam_index)
-            //        {
-            //            crossbarList[i].Start(cam_index, CAMERA_MODES.PREEVENT);
-            //        }
-            //    }
-            //}
             if (crossbar.INDEX == CameraIndex)
             {
                 crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
@@ -471,22 +439,9 @@ namespace FaceDetection
             recordingInProgress = true;
         }
 
-        public void StarttheTimer()
-        {
-            //if (crossbarList[cam_index - 1] != null)
-            //{
-            //    crossbarList[cam_index - 1].StartTimer();
-            //}
-            crossbar.StartTimer();
-        }
-
         public void SetRecordIcon (int cam_index, int timeAfterEvent)
         {
             rec_icon.Visible = Properties.Settings.Default.show_recording_icon;
-            //crossbarList[cam_index - 1].No_Cap_Timer_ON(timeAfterEvent);
-            //crossbarList[cam_index - 1].icon_timer.Interval = decimal.ToInt32(timeAfterEvent) * 1000;
-            //crossbarList[cam_index - 1].icon_timer.Enabled = true;
-            //crossbarList[cam_index - 1].icon_timer.Start();
             crossbar.No_Cap_Timer_ON(timeAfterEvent);
             crossbar.icon_timer.Interval = decimal.ToInt32(timeAfterEvent) * 1000;
             crossbar.icon_timer.Enabled = true;
@@ -527,15 +482,6 @@ namespace FaceDetection
             crossbar.ReleaseCamera();
             crossbar = null;
 
-            //if (closeFromSettings)
-            //{
-            //    closeFromSettings = false;
-            //}
-            //else
-            //{
-            //    //Application.Exit();
-            //}
-
             if (Properties.Settings.Default.main_camera_index == CameraIndex) // The form closed was the main camera selected
             {
                 //Main camera closing means the following do not work
@@ -545,12 +491,6 @@ namespace FaceDetection
             MULTI_WINDOW.displayedCameraCount--;
             PROPERTY_FUNCTIONS.Set_Window_Location(CameraIndex, this);
             Properties.Settings.Default.Save();
-
-            //if (MULTI_WINDOW.displayedCameraCount <= 0)
-            //{
-            //    Application.Exit();
-            //}
-
             MULTI_WINDOW.formArray[CameraIndex] = false;
             Destroy();
         }
@@ -654,8 +594,11 @@ namespace FaceDetection
             }
             //}
         }
-
-        public void ParametersChangesApply(int cam_index)
+        /// <summary>
+        /// Apply setting changes immediately
+        /// </summary>
+        /// <param name="cam_index"></param>
+        public void SettingChangesApply(int cam_index)
         {
             if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0)
             {

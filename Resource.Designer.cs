@@ -70,6 +70,24 @@ namespace FaceDetection {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to EVENT RECORDING STARTS (console call using parameters).
+        /// </summary>
+        internal static string event_recording_starts {
+            get {
+                return ResourceManager.GetString("event_recording_starts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to close a form.
+        /// </summary>
+        internal static string form_closing_failure {
+            get {
+                return ResourceManager.GetString("form_closing_failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Closing the viewer for the specified camera will close the application.
         ///Do you want to continue?.
         /// </summary>

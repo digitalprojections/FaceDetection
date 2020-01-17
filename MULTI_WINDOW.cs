@@ -66,7 +66,7 @@ namespace FaceDetection
                 }
                 catch (Exception ex)
                 {
-                    Logger.Add("Failed on close form");
+                    Logger.Add(Resource.form_closing_failure);
                 }
             }            
         }
@@ -109,7 +109,7 @@ namespace FaceDetection
             else
             {
                 formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.EVENT);
-                Logger.Add("EVENT RECORDING STARTS (console call using parameters)");
+                Logger.Add(Resource.event_recording_starts);
             }
         }
         internal static void EventRecorderOff(int cameraIndex)

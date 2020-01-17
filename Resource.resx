@@ -120,6 +120,12 @@
   <data name="ask_exit_application" xml:space="preserve">
     <value>Exit application?</value>
   </data>
+  <data name="event_recording_starts" xml:space="preserve">
+    <value>EVENT RECORDING STARTS (console call using parameters)</value>
+  </data>
+  <data name="form_closing_failure" xml:space="preserve">
+    <value>Failed to close a form</value>
+  </data>
   <data name="main_window_close_warning" xml:space="preserve">
     <value>Closing the viewer for the specified camera will close the application.
 Do you want to continue?</value>
