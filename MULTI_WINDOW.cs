@@ -152,8 +152,28 @@ namespace FaceDetection
                     }
                 }
             }
-
             return recmodeison;
+        }
+
+        internal static void EventRecorderOnOFFAll(bool status)
+        {
+            for(int i = 0; i< formList.Length; i++)
+            {
+                if (!String.IsNullOrEmpty(formList[i].Text)) // Form is closed
+                {
+                    if (formList[i].crossbar.GetRecordingState())
+                    {
+                        if (status)
+                        {
+                            EventRecorderOn(i);
+                        }
+                        else
+                        {
+                            EventRecorderOff(i);
+                        }                        
+                    }
+                }
+            }
         }
     }
 }

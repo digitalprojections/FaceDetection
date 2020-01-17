@@ -96,7 +96,7 @@ namespace FaceDetection
         private void ChangeStoreLocation(object sender, EventArgs e)
         {
             folderBrowserDialogStoreFolder.ShowNewFolderButton = true;
-            folderBrowserDialogStoreFolder.Description = Properties.Settings.Default.store_location_description;
+            folderBrowserDialogStoreFolder.Description = Resource.store_location_description;
             folderBrowserDialogStoreFolder.SelectedPath = Properties.Settings.Default.video_file_location;
             // Show the FolderBrowserDialog.  
             DialogResult result = folderBrowserDialogStoreFolder.ShowDialog();

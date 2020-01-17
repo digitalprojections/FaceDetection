@@ -278,30 +278,14 @@ namespace FaceDetection
                                     if (parameterOnOffSwitch)
                                     {
                                         isMinimized = false;
-                                        //if (cameraIndex == 0)
-                                        //{
-                                        //    MainForm.GetMainForm.WindowState = FormWindowState.Normal;
-                                        //    MainForm.GetMainForm.Show();
-                                        //    MainForm.GetMainForm.Activate();
-                                        //}
-                                        //else
-                                        //{
-                                            MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Normal;
-                                            MULTI_WINDOW.formList[cameraIndex].Show();
-                                            MULTI_WINDOW.formList[cameraIndex].Activate();
-                                        //}
+                                        MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Normal;
+                                        MULTI_WINDOW.formList[cameraIndex].Show();
+                                        MULTI_WINDOW.formList[cameraIndex].Activate();
                                     }
                                     else
                                     {
                                         isMinimized = true;
-                                        //if (cameraIndex == 0)
-                                        //{
-                                        //    MainForm.GetMainForm.WindowState = FormWindowState.Minimized;
-                                        //}
-                                        //else
-                                        //{
-                                            MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
-                                        //}
+                                        MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
                                     }
                                 }
                                 PARAMETERS.PARAM.Clear();
@@ -337,12 +321,7 @@ namespace FaceDetection
                                 {
                                     if (parameterOnOffSwitch)
                                     {
-                                        //MainForm.GetMainForm.FormBorderStyle = FormBorderStyle.Sizable;
                                         Properties.Settings.Default.show_window_pane = true;
-                                        //if (MainForm.Setting_ui != null && MainForm.Setting_ui.Visible == false)
-                                        //{
-                                        //    MainForm.GetMainForm.TopMost = false;
-                                        //}
                                     }
                                     else
                                     {
@@ -394,7 +373,19 @@ namespace FaceDetection
                                         MULTI_WINDOW.EventRecorderOff(cameraIndex);
                                     }
                                 }
-                                //All camera event recorder needed?
+                                else if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)                                
+                                {
+                                    //All camera event recorder needed?
+                                    if (parameterOnOffSwitch)
+                                    {
+                                        MULTI_WINDOW.EventRecorderOnOFFAll(true);
+                                    }
+                                    else
+                                    {
+                                        MULTI_WINDOW.EventRecorderOnOFFAll(false);
+                                    }
+                                }
+
                             }
                             catch (ArgumentOutOfRangeException e)
                             {

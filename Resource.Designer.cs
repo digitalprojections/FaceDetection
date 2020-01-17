@@ -78,5 +78,14 @@ namespace FaceDetection {
                 return ResourceManager.GetString("main_window_close_warning", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please, select the output folder.
+        /// </summary>
+        internal static string store_location_description {
+            get {
+                return ResourceManager.GetString("store_location_description", resourceCulture);
+            }
+        }
     }
 }
