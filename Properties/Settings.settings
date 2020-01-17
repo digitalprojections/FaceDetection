@@ -122,9 +122,6 @@
     <Setting Name="camera_index" Type="System.String" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="store_location_description" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Please, select the location to store videos</Value>
-    </Setting>
     <Setting Name="main_window_full_screen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>

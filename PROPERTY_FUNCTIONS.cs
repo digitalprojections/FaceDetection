@@ -34,7 +34,28 @@ namespace FaceDetection
             }
 
         }
-
+        internal static void SetCycleTime(int cameraIndex, int time)
+        {
+            if (time >= 500 && time <= 1000)
+            {
+                if (cameraIndex == 0)
+                {
+                    Properties.Settings.Default.C1_check_interval = time;
+                }
+                else if (cameraIndex == 1)
+                {
+                    Properties.Settings.Default.C2_check_interval = time;
+                }
+                else if (cameraIndex == 2)
+                {
+                    Properties.Settings.Default.C3_check_interval = time;
+                }
+                else if (cameraIndex == 3)
+                {
+                    Properties.Settings.Default.C4_check_interval = time;
+                }
+            }
+        }
         internal static Point Get_Camera_Window_Location(int cam_ind)
         {
             Point retval;
@@ -76,6 +97,55 @@ namespace FaceDetection
                     captureOperatorEnabled = Properties.Settings.Default.C1_enable_capture_operator;
                     break;
             }
+        }
+        /// <summary>
+        /// Check all sensor switches and set the operator capture for the selected camera
+        /// </summary>        
+        internal static void SetCaptureOperatorSwitchImplicitly(int camindex)
+        {
+            Get_Human_Sensor_Enabled(camindex, out bool IRSENSOR);
+            GetCaptureOnOperationStartSwitch(camindex, out bool OPERSTART);
+            GetFaceRecognitionSwitch(camindex, out bool FACECHECK);
+            
+                switch (camindex)
+                {
+                    case 0:
+                        Properties.Settings.Default.C1_enable_capture_operator = (IRSENSOR || OPERSTART || FACECHECK);
+                        break;
+                    case 1:
+                        Properties.Settings.Default.C2_enable_capture_operator = (IRSENSOR || OPERSTART || FACECHECK);
+                        break;
+                    case 2:
+                        Properties.Settings.Default.C3_enable_capture_operator = (IRSENSOR || OPERSTART || FACECHECK);
+                        break;
+                    case 3:
+                        Properties.Settings.Default.C4_enable_capture_operator = (IRSENSOR || OPERSTART || FACECHECK);
+                        break;
+                }
+            Properties.Settings.Default.Save();
+        }
+        /// <summary>
+        /// Set CAPTURE OPERATOR directly
+        /// </summary>
+        /// <param name="camindex"></param>
+        internal static void SetCaptureOperatorSwitchDirectly(int camindex, bool value)
+        {
+            switch (camindex)
+            {
+                case 0:
+                    Properties.Settings.Default.C1_enable_capture_operator = value;
+                    break;
+                case 1:
+                    Properties.Settings.Default.C2_enable_capture_operator = value;
+                    break;
+                case 2:
+                    Properties.Settings.Default.C3_enable_capture_operator = value;
+                    break;
+                case 3:
+                    Properties.Settings.Default.C4_enable_capture_operator = value;
+                    break;
+            }
+            Properties.Settings.Default.Save();
         }
 
         internal static void GetReInitiationInterval(int cameraindex, out int intervalBeforeReinitiating)
@@ -309,34 +379,49 @@ namespace FaceDetection
             }
         }
 
-        internal static void Set_OPCAP_IRSensor_FD_Switch(int cameraIndex, bool OperCapSwitch, bool IRSensorSwitch, bool faceSwitch)
+        internal static void Set_Human_Sensor(int cameraIndex, bool v)
         {
             if (cameraIndex == 0)
             {
-                Properties.Settings.Default.C1_enable_capture_operator = OperCapSwitch;
-                Properties.Settings.Default.C1_enable_Human_sensor = IRSensorSwitch;
+                Properties.Settings.Default.C1_enable_Human_sensor = v;
+            }
+            //IS THIS PART EVENT VALID??? THERE IS ONLY 1 HUMAN SENSOR
+            else if (cameraIndex == 1)
+            {
+                Properties.Settings.Default.C2_enable_Human_sensor = v;
+            }
+            else if (cameraIndex == 2)
+            {
+                Properties.Settings.Default.C3_enable_Human_sensor = v;
+            }
+            else if (cameraIndex == 3)
+            {
+                Properties.Settings.Default.C4_enable_Human_sensor = v;
+            }
+            SetCaptureOperatorSwitchImplicitly(cameraIndex);
+        }
+        
+
+        internal static void Set_Face_Switch(int cameraIndex, bool faceSwitch)
+        {
+            if (cameraIndex == 0)
+            {
                 Properties.Settings.Default.C1_enable_face_recognition = faceSwitch;
             }
             else if (cameraIndex == 1)
             {
-                Properties.Settings.Default.C2_enable_capture_operator = OperCapSwitch;
-                Properties.Settings.Default.C2_enable_Human_sensor = IRSensorSwitch;
                 Properties.Settings.Default.C2_enable_face_recognition = faceSwitch;
             }
             else if (cameraIndex == 2)
             {
-                Properties.Settings.Default.C3_enable_capture_operator = OperCapSwitch;
-                Properties.Settings.Default.C3_enable_Human_sensor = IRSensorSwitch;
                 Properties.Settings.Default.C3_enable_face_recognition = faceSwitch;
             }
             else if (cameraIndex == 3)
             {
-                Properties.Settings.Default.C4_enable_capture_operator = OperCapSwitch;
-                Properties.Settings.Default.C4_enable_Human_sensor = IRSensorSwitch;
                 Properties.Settings.Default.C4_enable_face_recognition = faceSwitch;
             }
 
-            Properties.Settings.Default.Save();
+            SetCaptureOperatorSwitchImplicitly(cameraIndex);
         }
 
         internal static void GetSecondsAfterEvent(int index, out int secondsAfterEvent)

@@ -66,7 +66,7 @@ namespace FaceDetection
                 }
                 catch (Exception ex)
                 {
-                    Logger.Add("Failed on close form");
+                    Logger.Add(Resource.form_closing_failure);
                 }
             }            
         }
@@ -110,7 +110,7 @@ namespace FaceDetection
             else
             {
                 formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.EVENT);
-                Logger.Add("EVENT RECORDING STARTS (console call using parameters)");
+                Logger.Add(Resource.event_recording_starts);
             }
         }
 
@@ -154,8 +154,28 @@ namespace FaceDetection
                     }
                 }
             }
-
             return recmodeison;
+        }
+
+        internal static void EventRecorderOnOFFAll(bool status)
+        {
+            for(int i = 0; i< formList.Length; i++)
+            {
+                if (!String.IsNullOrEmpty(formList[i].Text)) // Form is closed
+                {
+                    if (formList[i].crossbar.GetRecordingState())
+                    {
+                        if (status)
+                        {
+                            EventRecorderOn(i);
+                        }
+                        else
+                        {
+                            EventRecorderOff(i);
+                        }                        
+                    }
+                }
+            }
         }
     }
 }

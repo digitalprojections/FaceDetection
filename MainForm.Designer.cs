@@ -73,6 +73,8 @@
             this.ClientSize = global::FaceDetection.Properties.Settings.Default.main_screen_size;
             this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::FaceDetection.Properties.Settings.Default, "main_screen_size", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Name = "MainForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
