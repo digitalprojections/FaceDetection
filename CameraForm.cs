@@ -115,6 +115,7 @@ namespace FaceDetection
             datetimer.Stop();
             datetimer.Dispose();
         }
+
         /// <summary>
         /// LOAD elements in precise order. changing the order will cause issues
         /// </summary>
@@ -306,11 +307,7 @@ namespace FaceDetection
             // Window on top
             if (Properties.Settings.Default.window_on_top)
             {
-                this.TopMost = true;
-            }
-            else
-            {
-                this.TopMost = false;
+                this.Activate();
             }
 
             if (CameraIndex == Properties.Settings.Default.main_camera_index)
@@ -333,20 +330,35 @@ namespace FaceDetection
             {
                 FormBorderStyle = FormBorderStyle.None;
             }
+
             // Full screen
             if (Properties.Settings.Default.main_window_full_screen)
-                WindowState = FormWindowState.Maximized;
+            {
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                {
+                    if (i == cameraIndex)
+                    {
+                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
+                    }
+                }
+            }
             else
-                WindowState = FormWindowState.Normal;
-            
+            {
+                //MainForm.GetMainForm.WindowState = FormWindowState.Normal;
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                {
+                    if (i == cameraIndex)
+                    {
+                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
+                    }
+                }
+            }
 
             //ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
             Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
             // Check if the PREEVENT mode is needed
             //controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
-            Refresh();
             SetCameraToDefaultMode();
-
         }
 
         public void SetRecordButtonState(string state)
@@ -453,7 +465,6 @@ namespace FaceDetection
 
         private void FormClass_FormClosed(object sender, FormClosedEventArgs e)
         {
-            int deb = Properties.Settings.Default.main_camera_index;
             crossbar.ReleaseCamera();
             crossbar = null;
 
