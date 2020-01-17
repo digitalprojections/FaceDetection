@@ -69,10 +69,10 @@ namespace FaceDetection
             }
         }
 
-        public int getCameraIndexSelected()
-        {
-            return selected_camera_combo.SelectedIndex;
-        }
+        //public int getCameraIndexSelected()
+        //{
+        //    return selected_camera_combo.SelectedIndex;
+        //}
 
         public void ArrangeCameraNames(int len)
         {
@@ -248,8 +248,6 @@ namespace FaceDetection
             cb_face_recognition.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_face_recognition", true, DataSourceUpdateMode.OnPropertyChanged));
             cb_human_sensor.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_Human_sensor", true, DataSourceUpdateMode.OnPropertyChanged));
             cb_recording_operation.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_Recording_when_at_the_start_of_operation", true, DataSourceUpdateMode.OnPropertyChanged));
-
-            
         }
 
         public static void SetComboBoxFPSValues(List<string> vs)
@@ -356,6 +354,20 @@ namespace FaceDetection
             this.MaximizeBox = false;
             //this.TopMost = true;
 
+            if (MainForm.AnyRecordingInProgress == true)
+            {
+                cm_camera_number.Enabled = false;
+                button_settings_save.Enabled = false;
+            }
+            else
+            {
+                cm_camera_number.Enabled = true;
+                button_settings_save.Enabled = true;
+            }
+        }
+
+        public void DisabledButtonWhenRecording()
+        {
             if (MainForm.AnyRecordingInProgress == true)
             {
                 cm_camera_number.Enabled = false;
@@ -686,9 +698,9 @@ namespace FaceDetection
             {
                 if (cm_capture_mode.Text != "Snapshot")
                 {
-                nud_seconds_before_event.Enabled = true;
-                nud_seconds_after_event.Enabled = true;
-            }
+                    nud_seconds_before_event.Enabled = true;
+                    nud_seconds_after_event.Enabled = true;
+                }
             }
             else
             {
@@ -701,7 +713,9 @@ namespace FaceDetection
         {
             CheckBox checkBox = (CheckBox)sender;
             if (!checkBox.Checked)
+            {
                 event_record_time_before_event.Value = 0;
+            }
         }
 
         private void numericUpDownW_KeyDown(object sender, KeyEventArgs e)

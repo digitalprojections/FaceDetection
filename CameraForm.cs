@@ -29,10 +29,6 @@ namespace FaceDetection
         //public FlowLayoutPanel gbox_controlBut { get => controlBut; set => controlBut = value; }
         public PictureBox picbox_recording { get => rec_icon; }
 
-       
-        /// <summary>
-        /// FACEDETECTOR
-        /// </summary>
         FaceDetector faceDetector;
 
         private System.ComponentModel.IContainer components = null;
@@ -63,12 +59,12 @@ namespace FaceDetection
         public CROSSBAR crossbar;
         private bool applicationExit = false;
 
-        CameraForm subform;
-        public CameraForm GetSubForm => subform;
+        //CameraForm subform;
+        //public CameraForm GetSubForm => subform;
 
         public CameraForm(int camind)
         {
-            subform = this;       
+            //subform = this;       
             CameraIndex = camind;
                         
             hideIconTimer.AutoReset = false;
@@ -182,6 +178,7 @@ namespace FaceDetection
             SetWindowProperties();
             FillResolutionList();
         }
+
         /// <summary>
         /// Loop through the camera properties to select all available resolutions and FPS
         /// </summary>
@@ -286,6 +283,7 @@ namespace FaceDetection
             }
         }
 
+
         /// <summary>
         /// Get the bitmap from the 
         /// <see cref="crossbar/>
@@ -357,40 +355,40 @@ namespace FaceDetection
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void ToggleVideoRecording(object sender, EventArgs e)
-        {
-            picbox_recording.Image = Properties.Resources.player_record;
-            crossbar?.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+        //public void ToggleVideoRecording(object sender, EventArgs e)
+        //{
+        //    picbox_recording.Image = Properties.Resources.player_record;
+        //    crossbar?.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
 
-            try
-            {
-                if ((String)cameraButton.Tag == "play")
-                {
-                    if (recordingInProgress == false)
-                    {
-                        SetRecordButtonState("rec");
-                        crossbar?.Start(CameraIndex, CAMERA_MODES.MANUAL);
-                        SET_REC_ICON();
-                    }
-                }
-                else
-                {
-                    //it really depends if we shoul PREVIEW or PREEVENT
-                    //set the deciding factors
-                    //for now we can use this value as a test
-                    //ONLY 0 index camera or the main camera is the one to be used to the manual recording?
+        //    try
+        //    {
+        //        if ((String)cameraButton.Tag == "play")
+        //        {
+        //            if (recordingInProgress == false)
+        //            {
+        //                SetRecordButtonState("rec");
+        //                crossbar?.Start(CameraIndex, CAMERA_MODES.MANUAL);
+        //                SET_REC_ICON();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            //it really depends if we shoul PREVIEW or PREEVENT
+        //            //set the deciding factors
+        //            //for now we can use this value as a test
+        //            //ONLY 0 index camera or the main camera is the one to be used to the manual recording?
 
-                    picbox_recording.Visible = false;
-                    recordingInProgress = false;
-                    SetRecordButtonState("play");
-                    SetCameraToDefaultMode();
-                }
-            }
-            catch (InvalidOperationException iox)
-            {
-                Logger.Add(iox);
-            }
-        }
+        //            picbox_recording.Visible = false;
+        //            recordingInProgress = false;
+        //            SetRecordButtonState("play");
+        //            SetCameraToDefaultMode();
+        //        }
+        //    }
+        //    catch (InvalidOperationException iox)
+        //    {
+        //        Logger.Add(iox);
+        //    }
+        //}
 
         public void SetToPreviewMode()
         {
@@ -596,6 +594,7 @@ namespace FaceDetection
         {
             ShowButtonsDelayed();
         }
+
         private void ShowButtonsDelayed()
         {
             if (controlButtons.InvokeRequired)

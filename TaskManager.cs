@@ -512,7 +512,7 @@ namespace FaceDetection
             DirectoryInfo dir;
             string fileName;
             DateTime fileDate;
-            TimeSpan tsTimeMaxToKeep = new TimeSpan(0, 0, 15, 0);
+            TimeSpan tsTimeMaxToKeep = new TimeSpan(0, 0, 6, 0);
 
             try
             {
@@ -561,7 +561,7 @@ namespace FaceDetection
             return duration;
         }
 
-        private static void DeleteCutFileFromTemp(string videoFiles, int numCamera)
+        private static void DeleteCutFileFromTemp(string videoFiles, int numCamera) // Delete files in cutTemp folder after using
         {
             System.Threading.Thread.Sleep(30000);
 

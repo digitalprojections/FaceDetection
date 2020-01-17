@@ -221,7 +221,7 @@ namespace FaceDetection
                                     }
                                     else
                                     {
-                                        if (cameraIndex >= 0 && cameraIndex <4)
+                                        if (cameraIndex >= 0 && cameraIndex < 4)
                                         {
                                             if (MULTI_WINDOW.formList[cameraIndex].FaceDetector != null && MULTI_WINDOW.formList[cameraIndex].crossbar.Recording_is_on)
                                             {
