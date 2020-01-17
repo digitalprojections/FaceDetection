@@ -400,7 +400,7 @@ namespace FaceDetection
 
         public bool GetRecordingState()
         {
-            return Recording_is_on;
+            return window.recordingInProgress; // Recording_is_on;
         }
             
         public void StartTimer()

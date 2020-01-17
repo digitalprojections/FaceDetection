@@ -264,18 +264,6 @@ namespace FaceDetection
             }
         }
 
-        private void ShowButtons(object sender, MouseEventArgs e)
-        {
-            if (folderButton.Visible == false)
-            {
-                mouse_down_timer.Start();
-            }
-            else
-            {
-                controlButtons.Visible = false;
-            }
-        }
-
         //public void ChangesFromParametersApply()
         //{
         //    if (PARAMETERS.PARAM != null && PARAMETERS.PARAM.Count > 0)

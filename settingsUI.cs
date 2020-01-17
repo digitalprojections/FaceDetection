@@ -367,6 +367,20 @@ namespace FaceDetection
                 button_settings_save.Enabled = true;
             }
         }
+
+        public void DisabledButtonWhenRecording()
+        {
+            if (MainForm.AnyRecordingInProgress == true)
+            {
+                cm_camera_number.Enabled = false;
+                button_settings_save.Enabled = false;
+            }
+            else
+            {
+                cm_camera_number.Enabled = true;
+                button_settings_save.Enabled = true;
+            }
+        }
                  
         private void Cm_language_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -87,6 +87,7 @@ namespace FaceDetection
                     try
                     {
                         Settingui.Show();
+                        settingUI.DisabledButtonWhenRecording();
                     }
                     catch (InvalidOperationException invx)
                     {
