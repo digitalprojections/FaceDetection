@@ -29,10 +29,6 @@ namespace FaceDetection
         //public FlowLayoutPanel gbox_controlBut { get => controlBut; set => controlBut = value; }
         public PictureBox picbox_recording { get => rec_icon; }
 
-       
-        /// <summary>
-        /// FACEDETECTOR
-        /// </summary>
         FaceDetector faceDetector;
 
         private System.ComponentModel.IContainer components = null;
@@ -63,12 +59,12 @@ namespace FaceDetection
         public CROSSBAR crossbar;
         private bool applicationExit = false;
 
-        CameraForm subform;
-        public CameraForm GetSubForm => subform;
+        //CameraForm subform;
+        //public CameraForm GetSubForm => subform;
 
         public CameraForm(int camind)
         {
-            subform = this;       
+            //subform = this;       
             CameraIndex = camind;
                         
             hideIconTimer.AutoReset = false;
