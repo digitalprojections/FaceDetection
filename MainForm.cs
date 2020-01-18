@@ -138,10 +138,11 @@ namespace FaceDetection
                 Mklisteners.AddMouseAndKeyboardBack();
             }
             
-            MULTI_WINDOW.formSettingsChanged();
+            
 
             //CREATE CAMERA WINDOWS
             MULTI_WINDOW.CreateCameraWindows();
+            MULTI_WINDOW.formSettingsChanged();
 
             PARAMETERS.HandleWakeUpParameters();            
 

@@ -279,7 +279,7 @@ namespace FaceDetection
                     else // Snapshot
                     {
                         SNAPSHOT_SAVER.TakeSnapShot(Properties.Settings.Default.main_camera_index, "event");
-                        MULTI_WINDOW.formList[camindex].crossbar.No_Cap_Timer_ON(camindex);
+                        MULTI_WINDOW.formList[camindex].crossbar.NoCapTimerON(camindex);
                     }  
 
                     if (Properties.Settings.Default.backlight_on_upon_face_rec)

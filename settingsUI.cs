@@ -164,23 +164,23 @@ namespace FaceDetection
             Camera.SetNumberOfCameras();
             Hide();
 
-            if (Properties.Settings.Default.show_all_cams_simulteneously == false)
-            {
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    if (i != Properties.Settings.Default.main_camera_index)
-                    {
-                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
-                    }
-                }
-            }
-            else
-            {
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                     MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
-                }
-            }
+            //if (Properties.Settings.Default.show_all_cams_simulteneously == false)
+            //{
+            //    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+            //    {
+            //        if (i != Properties.Settings.Default.main_camera_index)
+            //        {
+            //            MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+            //    {
+            //         MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
+            //    }
+            //}
 
             MainForm.AllChangesApply();
 
@@ -375,6 +375,11 @@ namespace FaceDetection
             {
                 cm_camera_number.Enabled = false;
                 button_settings_save.Enabled = false;
+                if (cb_operator_capture.CheckState == CheckState.Unchecked && cb_event_recorder.CheckState==CheckState.Unchecked)
+                {
+                    //User wants to stop recordings and set the app to no buffer mode. Simply allow OK button
+                    button_settings_save.Enabled = true;
+                }
             }
             else
             {
@@ -603,6 +608,8 @@ namespace FaceDetection
                 nud_seconds_before_event.Enabled = false;
                 nud_seconds_after_event.Enabled = false;
             }
+
+            DisabledButtonWhenRecording();
         }
         
         private void Cb_human_sensor_CheckedChanged(object sender, EventArgs e)
@@ -718,6 +725,7 @@ namespace FaceDetection
             if (!checkBox.Checked)
             {
                 event_record_time_before_event.Value = 0;
+                DisabledButtonWhenRecording();
             }
         }
 
@@ -743,6 +751,16 @@ namespace FaceDetection
                 }
             }
             return retval;
+        }
+
+        private void numericUpDownCamCount_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown cameracount_nud = (NumericUpDown)sender;
+            if (Properties.Settings.Default.main_camera_index + 1 == cameracount_nud.Value) 
+                // The number of cameras explude the current MAIN CAMERA index
+            {
+                Properties.Settings.Default.main_camera_index = 0;
+            }
         }
 
         private void DisableOperatorCaptureCheckBox_ifNeeded()

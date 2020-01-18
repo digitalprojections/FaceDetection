@@ -15,7 +15,6 @@ namespace FaceDetection
         public static bool isMinimized = false;
         public static bool isControlButtonVisible = true;
         public static int CameraIndex = 0;
-        private static bool snapshotRequested;
         public static bool wakeUpCall;
 
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
@@ -150,30 +149,30 @@ namespace FaceDetection
                             {
                                 if (wakeUpCall)
                                 {
-                                    snapshotRequested = true;
                                     wakeUpCall = false;
-                                    if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
-                                    {
-                                        SNAPSHOT_SAVER.TakeAsyncSnapShot(true, cameraIndex, "event");
-                                    }
-                                    else if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
+                                    //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                                    //{
+                                    //    SNAPSHOT_SAVER.TakeAsyncSnapShot(true, cameraIndex, "event");
+                                    //}
+                                    //else 
+                                    if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
                                     {
                                         SNAPSHOT_SAVER.TakeAsyncSnapShot(false, cameraIndex, "event");
                                     }
                                 }
                                 else
                                 {
-                                    if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
-                                    {
-                                        SNAPSHOT_SAVER.TakeSnapShotAll();
+                                    //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                                    //{
+                                    //    SNAPSHOT_SAVER.TakeSnapShotAll();
 
-                                    }
-                                    else if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
-                                    {
-                                        SNAPSHOT_SAVER.TakeSnapShot(cameraIndex, "event");
-                                        //SNAPSHOT_SAVER.TakeAsyncSnapShot();
+                                    //}
+                                    //else if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
+                                    //{
+                                    //    SNAPSHOT_SAVER.TakeSnapShot(cameraIndex, "event");
+                                    //    //SNAPSHOT_SAVER.TakeAsyncSnapShot();
 
-                                    }
+                                    //}
                                 }
 
                                 

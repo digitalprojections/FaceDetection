@@ -107,6 +107,15 @@ namespace FaceDetection {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PREVIEW MODE.
+        /// </summary>
+        internal static string preview_mode {
+            get {
+                return ResourceManager.GetString("preview_mode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please, select the output folder.
         /// </summary>
         internal static string store_location_description {
