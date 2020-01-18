@@ -70,6 +70,24 @@ namespace FaceDetection {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to C:\UVCCAMERA.
+        /// </summary>
+        internal static string c_drive_location {
+            get {
+                return ResourceManager.GetString("c_drive_location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D:\UVCCAMERA.
+        /// </summary>
+        internal static string d_drive_location {
+            get {
+                return ResourceManager.GetString("d_drive_location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EVENT RECORDING STARTS (console call using parameters).
         /// </summary>
         internal static string event_recording_starts {
