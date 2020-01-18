@@ -128,7 +128,7 @@ namespace FaceDetection
                         case "n":
                             if (CheckCameraIndex(cameraIndex))
                             {
-                                if (MULTI_WINDOW.formList[cameraIndex]?.DISPLAYED == true)
+                                if (MULTI_WINDOW.formList[cameraIndex]?.DISPLAYED == true && cameraIndex < 4)
                                 {
                                     //MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].Text = "UVC Camera Viewer -  camera " + (Properties.Settings.Default.main_camera_index + 1);
                                     //MULTI_WINDOW.formList[cameraIndex].Text = $"UVC Camera Viewer - MAIN CAMERA {(cameraIndex + 1)}";
