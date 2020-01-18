@@ -128,17 +128,20 @@ namespace FaceDetection
                         case "n":
                             if (CheckCameraIndex(cameraIndex))
                             {
-                                //cameraIndex = GetNextCameraIndex(cameraIndex);
-                                MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].Text = "UVC Camera Viewer -  camera " + (Properties.Settings.Default.main_camera_index + 1);
-                                MULTI_WINDOW.formList[cameraIndex].Text = $"UVC Camera Viewer - MAIN CAMERA {(cameraIndex + 1)}";
-                                Properties.Settings.Default.main_camera_index = cameraIndex;
+                                //MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].Text = "UVC Camera Viewer -  camera " + (Properties.Settings.Default.main_camera_index + 1);
+                                //MULTI_WINDOW.formList[cameraIndex].Text = $"UVC Camera Viewer - MAIN CAMERA {(cameraIndex + 1)}";
+                                //Properties.Settings.Default.main_camera_index = cameraIndex;
 
-                                MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Normal;
-                                MULTI_WINDOW.formList[cameraIndex].Activate();
-                                if (!Properties.Settings.Default.show_all_cams_simulteneously)
-                                {
-                                    MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
-                                }
+                                //MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Normal;
+                                //MULTI_WINDOW.formList[cameraIndex].Activate();
+                                //if (!Properties.Settings.Default.show_all_cams_simulteneously)
+                                //{
+                                //    MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
+                                //}
+                                Properties.Settings.Default.main_camera_index = cameraIndex;
+                                Properties.Settings.Default.Save();
+                                MULTI_WINDOW.formSettingsChanged();
+
                                 PARAMETERS.PARAM.Clear();
                             }
                             break;

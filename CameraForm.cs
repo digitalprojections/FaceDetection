@@ -27,7 +27,6 @@ namespace FaceDetection
         //private FlowLayoutPanel controlBut;
         //public FlowLayoutPanel gbox_controlBut { get => controlBut; set => controlBut = value; }
         public PictureBox picbox_recording { get => rec_icon; }
-        FaceDetector faceDetector;
         private System.ComponentModel.IContainer components = null;
         private CameraNumberLabel camera_number;
         private DateTimeLabel dateTimeLabel;
@@ -45,9 +44,7 @@ namespace FaceDetection
         //private delegate void dDateTimerUpdater();
 
         private Timer datetimer = new Timer();
-
         
-        internal FaceDetector FaceDetector { get => faceDetector; set => faceDetector = value; }
         /// <summary>
         /// Current camera index, not MAIN
         /// </summary>
@@ -322,7 +319,6 @@ namespace FaceDetection
             {
                 Text = "UVC Camera Viewer -  camera " + (CameraIndex + 1);
             }           
-            
 
             //Window pane
             if (Properties.Settings.Default.show_window_pane == true)
@@ -335,12 +331,10 @@ namespace FaceDetection
                 FormBorderStyle = FormBorderStyle.None;
             }
 
-
             //ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
             Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
             // Check if the PREEVENT mode is needed
             //controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
-            
             
 
             if (!Properties.Settings.Default.show_all_cams_simulteneously &&                  
@@ -352,9 +346,9 @@ namespace FaceDetection
             {
                 this.WindowState = FormWindowState.Normal;
             }
+
             if (CameraIndex == Properties.Settings.Default.main_camera_index)
             {
-                
                 this.cameraButton.Enabled = true;                
                 this.snapshotButton.Enabled = true;
                 // Full screen
@@ -362,6 +356,11 @@ namespace FaceDetection
                     this.WindowState = FormWindowState.Maximized;
                 else
                     this.WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.cameraButton.Enabled = false;
+                this.snapshotButton.Enabled = false;
             }
             SetCameraToDefaultMode();
         }

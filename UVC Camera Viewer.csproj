@@ -139,7 +139,6 @@
     <Compile Include="Labels\DateTimeLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FaceDetector.cs" />
     <Compile Include="CameraForm.cs">
       <SubType>Form</SubType>
     </Compile>
