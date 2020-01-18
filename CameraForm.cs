@@ -112,6 +112,7 @@ namespace FaceDetection
             datetimer.Stop();
             datetimer.Dispose();
         }
+
         /// <summary>
         /// LOAD elements in precise order. changing the order will cause issues
         /// </summary>
@@ -333,8 +334,7 @@ namespace FaceDetection
             {
                 FormBorderStyle = FormBorderStyle.None;
             }
-            
-            
+
 
             //ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
             Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
@@ -363,7 +363,6 @@ namespace FaceDetection
                 else
                     this.WindowState = FormWindowState.Normal;
             }
-            
             SetCameraToDefaultMode();
         }
 
@@ -432,7 +431,6 @@ namespace FaceDetection
 
         private void FormClass_FormClosed(object sender, FormClosedEventArgs e)
         {
-            int deb = Properties.Settings.Default.main_camera_index;
             crossbar.ReleaseCamera();
             crossbar = null;
 

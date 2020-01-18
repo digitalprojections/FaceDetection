@@ -141,7 +141,8 @@ namespace FaceDetection
                     //    //Properties.Settings.Default.camera_count = 4;
                     //    //Logger.Add("There are more than 4 cameras");
                     //}
-                }else if(Properties.Settings.Default.camera_count < capDevices.Length && Properties.Settings.Default.main_camera_index>= Properties.Settings.Default.camera_count)
+                }
+                else if(Properties.Settings.Default.camera_count < capDevices.Length && Properties.Settings.Default.main_camera_index>= Properties.Settings.Default.camera_count)
                 {
                     Properties.Settings.Default.main_camera_index = 0;
                 }
