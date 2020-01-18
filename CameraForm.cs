@@ -27,7 +27,7 @@ namespace FaceDetection
         //private FlowLayoutPanel controlBut;
         //public FlowLayoutPanel gbox_controlBut { get => controlBut; set => controlBut = value; }
         public PictureBox picbox_recording { get => rec_icon; }
-        FaceDetector faceDetector;
+        
         private System.ComponentModel.IContainer components = null;
         private CameraNumberLabel camera_number;
         private DateTimeLabel dateTimeLabel;
@@ -47,7 +47,6 @@ namespace FaceDetection
         private Timer datetimer = new Timer();
 
         
-        internal FaceDetector FaceDetector { get => faceDetector; set => faceDetector = value; }
         /// <summary>
         /// Current camera index, not MAIN
         /// </summary>
@@ -362,6 +361,11 @@ namespace FaceDetection
                     this.WindowState = FormWindowState.Maximized;
                 else
                     this.WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.cameraButton.Enabled = false;
+                this.snapshotButton.Enabled = false;
             }
             SetCameraToDefaultMode();
         }
