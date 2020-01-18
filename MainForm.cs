@@ -100,6 +100,11 @@ namespace FaceDetection
             BackLight.Start();
             Mklisteners = new MOUSE_KEYBOARD();
             ////////////////////////////////////////
+            if (IsTouchEnabled())
+            {
+                MessageBox.Show("You are using a device supports touch screen");
+            }
+
             #endregion
             //Object references                    
             mainForm = this;            
@@ -364,7 +369,8 @@ namespace FaceDetection
         {
             Application.Exit();
         }
-
+        
+        
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         private static extern IntPtr SendMessageTimeout(
             IntPtr hWnd,
@@ -374,7 +380,16 @@ namespace FaceDetection
             SendMessageTimeoutFlags fuFlags,
             uint uTimeout,
             out UIntPtr lpdwResult);
+        [DllImport("user32.dll")]
+        private static extern int GetSystemMetrics(int nIndex);
 
+        private static bool IsTouchEnabled()
+        {
+            int MAXTOUCHES_INDEX = 0x95;
+            int maxTouches = GetSystemMetrics(MAXTOUCHES_INDEX);
+
+            return maxTouches > 0;
+        }
         [Flags]
         enum SendMessageTimeoutFlags : uint
         {
@@ -384,5 +399,6 @@ namespace FaceDetection
             SMTO_NOTIMEOUTIFNOTHUNG = 0x8,
             SMTO_ERRORONEXIT = 0x20
         }
+
     }
 }

@@ -150,11 +150,11 @@ namespace FaceDetection
             {
                 if (Directory.Exists(@"D:\TEMP"))
                 {
-                    storePath.Text = @"D:\UVCCAMERA";
+                    storePath.Text = @Resource.d_drive_location;
                 }
                 else
                 {
-                    storePath.Text = @"C:\UVCCAMERA";
+                    storePath.Text = @Resource.c_drive_location;
                 }
                 storePath.SelectionStart = storePath.Text.Length;
             }

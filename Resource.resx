@@ -120,6 +120,12 @@
   <data name="ask_exit_application" xml:space="preserve">
     <value>Exit application?</value>
   </data>
+  <data name="c_drive_location" xml:space="preserve">
+    <value>C:\UVCCAMERA</value>
+  </data>
+  <data name="d_drive_location" xml:space="preserve">
+    <value>D:\UVCCAMERA</value>
+  </data>
   <data name="event_recording_starts" xml:space="preserve">
     <value>EVENT RECORDING STARTS (console call using parameters)</value>
   </data>
