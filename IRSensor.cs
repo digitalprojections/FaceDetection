@@ -90,7 +90,7 @@ namespace FaceDetection
                                 if (INDEX == Properties.Settings.Default.main_camera_index)
                                 {
                                     MULTI_WINDOW.formList[INDEX].crossbar.SetIconTimer(timeAfterEvent);
-                                    MULTI_WINDOW.formList[INDEX].crossbar.No_Cap_Timer_ON(timeAfterEvent);
+                                    MULTI_WINDOW.formList[INDEX].crossbar.NoCapTimerON(timeAfterEvent);
                                 }
                                 else
                                 {
@@ -102,13 +102,13 @@ namespace FaceDetection
                         {
                             MULTI_WINDOW.formList[INDEX].crossbar.Start(INDEX, CAMERA_MODES.OPERATOR);
                             MULTI_WINDOW.formList[INDEX].crossbar.SetIconTimer(timeAfterEvent);
-                            MULTI_WINDOW.formList[INDEX].crossbar.No_Cap_Timer_ON(timeAfterEvent);
+                            MULTI_WINDOW.formList[INDEX].crossbar.NoCapTimerON(timeAfterEvent);
                         }
                     }
                     else // Snapshot
                     {
                         SNAPSHOT_SAVER.TakeSnapShot(INDEX, "event");
-                        MULTI_WINDOW.formList[INDEX].crossbar.No_Cap_Timer_ON(0);//Only the no-capture switch is enough
+                        MULTI_WINDOW.formList[INDEX].crossbar.NoCapTimerON(0);//Only the no-capture switch is enough
                     }
 
                     Logger.Add("IR SENSOR: Motion detected");

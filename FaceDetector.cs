@@ -11,7 +11,7 @@ namespace FaceDetection
     {
         public FaceDetector()
         {
-            
+
         }
     }
 }

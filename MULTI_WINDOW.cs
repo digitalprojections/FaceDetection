@@ -13,7 +13,7 @@ namespace FaceDetection
         private static CameraForm form;
         public static CameraForm[] formList = new CameraForm[4];
         public static int displayedCameraCount = 0;
-        public static bool[] formArray = new bool[4];
+        //public static bool[] formArray = new bool[4];
 
         /// <summary>
         /// by passing two important parameters.
@@ -27,16 +27,12 @@ namespace FaceDetection
             {
                 for(int i = 0; i < displayedCameraCount; i++)
                 {
-                    if (formArray[i] == false)
+                    if (formList[i]?.DISPLAYED==false)
                     {
                         form = new CameraForm(i);
                         formList[i] = form;
-                        form.Show();
-                        if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cameraIndex))
-                        {
-                            form.WindowState = FormWindowState.Minimized;
-                        }
-                        displayedCameraCount++;
+                        form.Show();                        
+                        displayedCameraCount++;                        
                     }
                 }
 
@@ -45,11 +41,7 @@ namespace FaceDetection
                     form = new CameraForm(i);
                     formList[i] = form;                    
                     form.Show();
-                    displayedCameraCount ++;
-                    if (!Properties.Settings.Default.show_all_cams_simulteneously && (i != cameraIndex))
-                    {
-                        form.WindowState = FormWindowState.Minimized;
-                    }
+                    displayedCameraCount ++;                    
                 }
             }
             else
@@ -61,7 +53,7 @@ namespace FaceDetection
                         //formList[i].closeFromSettings = true;
                         formList[i].Close();
                         formList[i] = null;
-                        //displayedCameraCount--;
+                        //displayedCameraCount--; //DONE within the form
                     }
                 }
                 catch (Exception ex)

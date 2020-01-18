@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace FaceDetection
 {
-    public class CROSSBAR
+    public class CROSSBAR:IDisposable
     {
         private delegate void dHideRecIcon();
         private delegate void dStopVideoNow();
@@ -122,11 +122,11 @@ namespace FaceDetection
             }
         }
         
-        public void SetIconTimer(decimal recording_length)
+        public void SetIconTimer(decimal recordingLength)
         {
             Recording_is_on = true;
             window.SET_REC_ICON();
-            icon_timer.Interval = decimal.ToInt32(recording_length) * 1000;
+            icon_timer.Interval = decimal.ToInt32(recordingLength) * 1000;
             icon_timer.Enabled = true;
             icon_timer.Start();            
         }
@@ -161,7 +161,7 @@ namespace FaceDetection
         //    return rv;
         //}
 
-        public void No_Cap_Timer_ON(int vidlen)
+        public void NoCapTimerON(int vidlen)
         {
             int intervalBeforeReinitiating = 0;
 
@@ -352,7 +352,7 @@ namespace FaceDetection
             PREEVENT_RECORDING = false;
             if (MainForm.GetMainForm != null)
             {
-                Logger.Add("PREVIEW MODE");
+                Logger.Add(Resource.preview_mode);
                 if (recorder != null && recorder.ON)
                 {
                     recorder.ReleaseInterfaces();
@@ -554,6 +554,42 @@ namespace FaceDetection
                 Logger.Add(x);
             }
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~CROSSBAR()
+        // {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        void IDisposable.Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
 
         //internal void ReleaseSecondaryCamera()
         //{

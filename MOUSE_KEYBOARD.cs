@@ -96,14 +96,14 @@ namespace FaceDetection
                         {
                             MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.Start(CAMERA_INDEX, CAMERA_MODES.OPERATOR);
                         }
-                        MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.No_Cap_Timer_ON(timeAfterEvent);
+                        MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.NoCapTimerON(timeAfterEvent);
                         MULTI_WINDOW.formList[CAMERA_INDEX].SetRecordIcon(CAMERA_INDEX, timeAfterEvent);
                     }
                     else // Snapshot
                     {
                         SNAPSHOT_SAVER.TakeSnapShot(CAMERA_INDEX, "event");
 
-                        MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.No_Cap_Timer_ON(0);
+                        MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.NoCapTimerON(0);
                     }
 
                     MainForm.GetMainForm.BackLight.Restart();
