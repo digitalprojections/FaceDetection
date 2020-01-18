@@ -171,6 +171,7 @@ namespace FaceDetection
                                     //{
                                     //    SNAPSHOT_SAVER.TakeSnapShotAll();
 
+
                                     //}
                                     //else 
                                     if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
