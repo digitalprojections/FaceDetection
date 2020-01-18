@@ -316,10 +316,6 @@ namespace FaceDetection
                 {
                     MainForm.RSensor.Start_IR_Timer();
                 }
-                else if (faceDetectorEnabled)
-                {
-                    window.FaceDetector.StartFaceTimer();
-                }
             }
         }
 

@@ -207,32 +207,7 @@ namespace FaceDetection
                         case "d":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
-                                {
-                                    if (parameterOnOffSwitch)
-                                    {                                        
-                                        PROPERTY_FUNCTIONS.Set_Face_Switch(cameraIndex, true);
-                                        PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(cameraIndex, true);
-                                        if (MULTI_WINDOW.formList[cameraIndex].FaceDetector != null)
-                                        {
-                                            MULTI_WINDOW.formList[cameraIndex].FaceDetector.StartFaceTimer();
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (cameraIndex >= 0 && cameraIndex < 4)
-                                        {
-                                            if (MULTI_WINDOW.formList[cameraIndex].FaceDetector != null && MULTI_WINDOW.formList[cameraIndex].crossbar.Recording_is_on)
-                                            {
-                                                MULTI_WINDOW.formList[cameraIndex].crossbar.PreviewMode();
-                                                MULTI_WINDOW.formList[cameraIndex].FaceDetector.StopFaceTimer();
-                                            }
-                                            Properties.Settings.Default.C4_enable_face_recognition = false;
-                                        }
-                                    }
-
-                                    PROPERTY_FUNCTIONS.SetCycleTime(cameraIndex, parameterTime);
-                                }
+                                
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
