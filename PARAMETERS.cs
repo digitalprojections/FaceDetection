@@ -15,7 +15,6 @@ namespace FaceDetection
         public static bool isMinimized = false;
         public static bool isControlButtonVisible = true;
         public static int CameraIndex = 0;
-        private static bool snapshotRequested;
         public static bool wakeUpCall;
 
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
@@ -97,7 +96,8 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "c"://Show Settings window
+                        //Show Settings window
+                        case "c":
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
@@ -122,6 +122,7 @@ namespace FaceDetection
                             }
                             break;
 
+                            // Change main camera
                         case "n":
                             if (CheckCameraIndex(cameraIndex) && (cameraIndex == Properties.Settings.Default.main_camera_index))
                             {
@@ -143,38 +144,37 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "s"://SNAPSHOT
+                        //SNAPSHOT
+                        case "s":
                             try
                             {
                                 if (wakeUpCall)
                                 {
-                                    snapshotRequested = true;
                                     wakeUpCall = false;
-                                    if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
-                                    {
-                                        SNAPSHOT_SAVER.TakeAsyncSnapShot(true, cameraIndex, "event");
-                                    }
-                                    else if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
+                                    //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                                    //{
+                                    //    SNAPSHOT_SAVER.TakeAsyncSnapShot(true, cameraIndex, "event");
+                                    //}
+                                    //else 
+                                    if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
                                     {
                                         SNAPSHOT_SAVER.TakeAsyncSnapShot(false, cameraIndex, "event");
                                     }
                                 }
                                 else
                                 {
-                                    if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
-                                    {
-                                        SNAPSHOT_SAVER.TakeSnapShotAll();
+                                    //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                                    //{
+                                    //    SNAPSHOT_SAVER.TakeSnapShotAll();
 
-                                    }
-                                    else if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
+                                    //}
+                                    //else 
+                                    if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
                                     {
                                         SNAPSHOT_SAVER.TakeSnapShot(cameraIndex, "event");
                                         //SNAPSHOT_SAVER.TakeAsyncSnapShot();
-
                                     }
                                 }
-
-                                
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
@@ -182,7 +182,8 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "b"://SHOW / HIDE CONTROL BUTTONS
+                        //SHOW / HIDE CONTROL BUTTONS
+                        case "b":
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
@@ -205,7 +206,8 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "d"://Enable/Disable Face detection
+                        //Enable/Disable Face detection
+                        case "d":
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
@@ -241,7 +243,8 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "h"://IR Sensor
+                        //IR Sensor
+                        case "h":
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
@@ -270,7 +273,8 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "v"://Visible - Active
+                        //Visible - Active
+                        case "v":
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
@@ -314,7 +318,8 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "l"://Backlight
+                        //Backlight
+                        case "l":
                             try
                             {
                                 if (parameterOnOffSwitch)
@@ -332,7 +337,8 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "w"://Window pane
+                        //Window pane
+                        case "w":
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
@@ -356,7 +362,8 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "q"://Close a window or all (exit app)
+                        //Close a window or all (exit app)
+                        case "q":
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex))
@@ -377,7 +384,8 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "e"://Event recorder
+                        //Event recorder
+                        case "e":
                             try
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex<4))
@@ -411,7 +419,8 @@ namespace FaceDetection
                             }
                             break;
 
-                        case "r"://Manual recording
+                        //Manual recording
+                        case "r":
                             try
                             {
                                 if (cameraIndex == MainForm.Settingui.Camera_index)
