@@ -96,7 +96,7 @@ namespace FaceDetection
                             }
                             break;
 
-                        //Show Settings window
+                        // Show Settings window
                         case "c":
                             try
                             {
@@ -122,11 +122,12 @@ namespace FaceDetection
                             }
                             break;
 
-                            // Change main camera
+                        // Change main camera
                         case "n":
-                            if (CheckCameraIndex(cameraIndex) && (cameraIndex == Properties.Settings.Default.main_camera_index))
+                            if (CheckCameraIndex(cameraIndex))
                             {
                                 //cameraIndex = GetNextCameraIndex(cameraIndex);
+                                MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].Text = "UVC Camera Viewer -  camera " + (Properties.Settings.Default.main_camera_index + 1);
                                 MULTI_WINDOW.formList[cameraIndex].Text = $"UVC Camera Viewer - MAIN CAMERA {(cameraIndex + 1)}";
                                 Properties.Settings.Default.main_camera_index = cameraIndex;
 
@@ -136,15 +137,11 @@ namespace FaceDetection
                                 {
                                     MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
                                 }
-                                PARAMETERS.PARAM.Clear();                                
-                            }
-                            else if(CheckCameraIndex(cameraIndex) && cameraIndex!=8)
-                            {
-                                MULTI_WINDOW.formList[cameraIndex].Text = "UVC Camera Viewer -  camera " + (cameraIndex + 1);
+                                PARAMETERS.PARAM.Clear();
                             }
                             break;
 
-                        //SNAPSHOT
+                        // SNAPSHOT
                         case "s":
                             try
                             {
@@ -156,7 +153,7 @@ namespace FaceDetection
                                     //    SNAPSHOT_SAVER.TakeAsyncSnapShot(true, cameraIndex, "event");
                                     //}
                                     //else 
-                                    if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
+                                    if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
                                     {
                                         SNAPSHOT_SAVER.TakeAsyncSnapShot(false, cameraIndex, "event");
                                     }
@@ -169,7 +166,7 @@ namespace FaceDetection
 
                                     //}
                                     //else 
-                                    if (CheckCameraIndex(cameraIndex) && cameraIndex < 4)
+                                    if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
                                     {
                                         SNAPSHOT_SAVER.TakeSnapShot(cameraIndex, "event");
                                         //SNAPSHOT_SAVER.TakeAsyncSnapShot();
@@ -182,7 +179,7 @@ namespace FaceDetection
                             }
                             break;
 
-                        //SHOW / HIDE CONTROL BUTTONS
+                        // SHOW / HIDE CONTROL BUTTONS
                         case "b":
                             try
                             {
@@ -206,7 +203,7 @@ namespace FaceDetection
                             }
                             break;
 
-                        //Enable/Disable Face detection
+                        // Enable/Disable Face detection
                         case "d":
                             try
                             {
@@ -243,7 +240,7 @@ namespace FaceDetection
                             }
                             break;
 
-                        //IR Sensor
+                        // IR Sensor
                         case "h":
                             try
                             {
@@ -273,7 +270,7 @@ namespace FaceDetection
                             }
                             break;
 
-                        //Visible - Active
+                        // Visible - Active
                         case "v":
                             try
                             {
@@ -318,7 +315,7 @@ namespace FaceDetection
                             }
                             break;
 
-                        //Backlight
+                        // Backlight
                         case "l":
                             try
                             {
@@ -337,7 +334,7 @@ namespace FaceDetection
                             }
                             break;
 
-                        //Window pane
+                        // Window pane
                         case "w":
                             try
                             {
@@ -362,7 +359,7 @@ namespace FaceDetection
                             }
                             break;
 
-                        //Close a window or all (exit app)
+                        // Close a window or all (exit app)
                         case "q":
                             try
                             {
@@ -384,7 +381,7 @@ namespace FaceDetection
                             }
                             break;
 
-                        //Event recorder
+                        // Event recorder
                         case "e":
                             try
                             {
@@ -419,7 +416,7 @@ namespace FaceDetection
                             }
                             break;
 
-                        //Manual recording
+                        // Manual recording
                         case "r":
                             try
                             {
