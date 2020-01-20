@@ -424,10 +424,6 @@ namespace FaceDetection
 
                     if (Properties.Settings.Default.manual_record_time > 0)
                     {
-                        if (index == 0)
-                        {
-                            window.SET_REC_ICON();
-                        }
                         //decimal mrm = Properties.Settings.Default.manual_record_time;
                         //This does not check if the recording is on, as it prioritizes the manual recording
                         recorder.ReleaseInterfaces();
