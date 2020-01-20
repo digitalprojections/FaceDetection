@@ -231,18 +231,6 @@ namespace FaceDetection
             mouse_down_timer.Stop();
         }
 
-        //private void Datetimer_Tick(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-        //    }
-        //    catch (NullReferenceException ex)
-        //    {
-        //        Debug.WriteLine(ex.Message + " DateTimeUpdater()");
-        //    }
-        //}
-
         public void ShowButtons(object sender, EventArgs eventArgs)
         {
             if (folderButton.Visible == false)
@@ -255,18 +243,17 @@ namespace FaceDetection
             }
         }
 
-        private void ShowButtons(object sender, MouseEventArgs e)
-        {
-            if (folderButton.Visible == false)
-            {
-                mouse_down_timer.Start();
-            }
-            else
-            {
-                controlButtons.Visible = false;
-            }
-        }
-
+        //private void ShowButtons(object sender, MouseEventArgs e)
+        //{
+        //    if (folderButton.Visible == false)
+        //    {
+        //        mouse_down_timer.Start();
+        //    }
+        //    else
+        //    {
+        //        controlButtons.Visible = false;
+        //    }
+        //}
 
         /// <summary>
         /// Get the bitmap from the 
@@ -351,7 +338,6 @@ namespace FaceDetection
         {
             cameraButton.Tag = state;
         }
-
         
         public void SetToPreviewMode()
         {
