@@ -41,7 +41,7 @@ namespace FaceDetection
         private ImageList imageList;
         private System.Timers.Timer hideIconTimer = new System.Timers.Timer();
         private delegate void dHideRecIcon();
-        private delegate void dDateTimerUpdater();
+
         
         /// <summary>
         /// Current camera index, not MAIN
