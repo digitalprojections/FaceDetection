@@ -698,7 +698,7 @@ namespace FaceDetection
             this.snapshotButton.Size = new System.Drawing.Size(52, 52);
             this.snapshotButton.TabIndex = 3;
             this.snapshotButton.UseVisualStyleBackColor = false;
-            this.snapshotButton.Enabled = false;
+            
             this.snapshotButton.Click += new System.EventHandler(SnapShot);
             // 
             // cameraButton
@@ -716,7 +716,7 @@ namespace FaceDetection
             this.cameraButton.TabIndex = 3;
             this.cameraButton.Tag = "play";
             this.cameraButton.UseVisualStyleBackColor = false;
-            this.cameraButton.Enabled = false;
+            
             this.cameraButton.Click += new System.EventHandler(ManualVideoRecording);
             
             // 
