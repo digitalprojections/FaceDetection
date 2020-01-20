@@ -84,25 +84,15 @@ namespace FaceDetection
                     // METHOD
                     switch (method)
                     {
-                        case ""://No method?
-                            if (CheckCameraIndex(cameraIndex))
-                            {
-                                if(cameraIndex == 8)
-                                {
-                                    //Start all cameras
-                                }
-                                else
-                                {
-
-                                }
-                            }
+                        //No method
+                        case "": 
                             break;
 
                         // Show Settings window
                         case "c":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
                                 {
                                     if (parameterOnOffSwitch)
                                     {
@@ -126,9 +116,9 @@ namespace FaceDetection
 
                         // Change main camera
                         case "n":
-                            if (CheckCameraIndex(cameraIndex))
+                            if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
                             {
-                                if (MULTI_WINDOW.formList[cameraIndex]?.DISPLAYED == true && cameraIndex < 4)
+                                if (MULTI_WINDOW.formList[cameraIndex]?.DISPLAYED == true)
                                 {
                                     //MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].Text = "UVC Camera Viewer -  camera " + (Properties.Settings.Default.main_camera_index + 1);
                                     //MULTI_WINDOW.formList[cameraIndex].Text = $"UVC Camera Viewer - MAIN CAMERA {(cameraIndex + 1)}";
@@ -160,7 +150,7 @@ namespace FaceDetection
                                     //    SNAPSHOT_SAVER.TakeAsyncSnapShot(true, cameraIndex, "event");
                                     //}
                                     //else 
-                                    if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
+                                    if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
                                     {
                                         SNAPSHOT_SAVER.TakeAsyncSnapShot(false, cameraIndex, "event");
                                     }
@@ -170,11 +160,9 @@ namespace FaceDetection
                                     //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
                                     //{
                                     //    SNAPSHOT_SAVER.TakeSnapShotAll();
-
-
                                     //}
                                     //else 
-                                    if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
+                                    if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
                                     {
                                         SNAPSHOT_SAVER.TakeSnapShot(cameraIndex, "event");
                                         //SNAPSHOT_SAVER.TakeAsyncSnapShot();
@@ -191,7 +179,7 @@ namespace FaceDetection
                         case "b":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
                                 {
                                     if (parameterOnOffSwitch)
                                     {
@@ -212,22 +200,22 @@ namespace FaceDetection
                             break;
 
                         // Enable/Disable Face detection
-                        case "d":
-                            try
-                            {
+                        //case "d":
+                        //    try
+                        //    {
                                 
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in method d");
-                            }
-                            break;
+                        //    }
+                        //    catch (ArgumentOutOfRangeException e)
+                        //    {
+                        //        Debug.WriteLine(e.ToString() + " in method d");
+                        //    }
+                        //    break;
 
                         // IR Sensor
                         case "h":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
                                 {
                                     if (parameterOnOffSwitch)
                                     {
@@ -257,7 +245,7 @@ namespace FaceDetection
                         case "v":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
+                                if (CheckCameraIndex(cameraIndex))
                                 {
                                     if (parameterOnOffSwitch)
                                     {
@@ -321,7 +309,7 @@ namespace FaceDetection
                         case "w":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == MainForm.Settingui.Camera_index))
+                                if (CheckCameraIndex(cameraIndex))
                                 {
                                     if (parameterOnOffSwitch)
                                     {
@@ -368,7 +356,7 @@ namespace FaceDetection
                         case "e":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex<4))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == Properties.Settings.Default.main_camera_index)) // Main camera
                                 {
                                     if (parameterOnOffSwitch && MainForm.AnyRecordingInProgress == false)
                                     {
@@ -379,19 +367,21 @@ namespace FaceDetection
                                         MULTI_WINDOW.EventRecorderOff(cameraIndex);
                                     }
                                 }
-                                else if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)                                
+                                else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))  // Not main camera                              
                                 {
-                                    //All camera event recorder needed?
                                     if (parameterOnOffSwitch)
                                     {
-                                        MULTI_WINDOW.EventRecorderOnOFFAll(true);
+                                        MULTI_WINDOW.formList[cameraIndex].crossbar.recordFromParamNotMain = true;
+                                        MULTI_WINDOW.formList[cameraIndex].SetRecordIcon(cameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                                        MULTI_WINDOW.formList[cameraIndex].crossbar.Start(cameraIndex, CAMERA_MODES.MANUAL);
                                     }
                                     else
                                     {
-                                        MULTI_WINDOW.EventRecorderOnOFFAll(false);
+                                        MULTI_WINDOW.formList[cameraIndex].HideIcon();
+                                        MULTI_WINDOW.formList[cameraIndex].SetToPreviewMode();
                                     }
                                 }
-
+                                PARAMETERS.PARAM.Clear();
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
@@ -403,7 +393,7 @@ namespace FaceDetection
                         case "r":
                             try
                             {
-                                if (cameraIndex == MainForm.Settingui.Camera_index)
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
                                 {
                                     if (parameterOnOffSwitch)
                                     {
@@ -429,6 +419,7 @@ namespace FaceDetection
                                         }
                                     }
                                 }
+                                PARAMETERS.PARAM.Clear();
                             }
                             catch (ArgumentOutOfRangeException e)
                             {

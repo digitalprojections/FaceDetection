@@ -41,8 +41,8 @@ namespace FaceDetection
         private ImageList imageList;
         private System.Timers.Timer hideIconTimer = new System.Timers.Timer();
         private delegate void dHideRecIcon();
+        private delegate void dDateTimerUpdater();
 
-        
         /// <summary>
         /// Current camera index, not MAIN
         /// </summary>
@@ -51,16 +51,13 @@ namespace FaceDetection
         private bool applicationExit = false;
 
         public CameraForm(int camind)
-        {
-            //subform = this;       
+        {      
             CameraIndex = camind;
                         
             hideIconTimer.AutoReset = false;
             hideIconTimer.Elapsed += new System.Timers.ElapsedEventHandler(HideIcon_tick);
             videoFormat = UsbCamera.GetVideoFormat(camind);
             this.Load += CameraForm_Load;
-            
-            
         }
 
         private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -234,18 +231,6 @@ namespace FaceDetection
             mouse_down_timer.Stop();
         }
 
-        //private void Datetimer_Tick(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-        //    }
-        //    catch (NullReferenceException ex)
-        //    {
-        //        Debug.WriteLine(ex.Message + " DateTimeUpdater()");
-        //    }
-        //}
-
         public void ShowButtons(object sender, EventArgs eventArgs)
         {
             if (folderButton.Visible == false)
@@ -258,18 +243,17 @@ namespace FaceDetection
             }
         }
 
-        private void ShowButtons(object sender, MouseEventArgs e)
-        {
-            if (folderButton.Visible == false)
-            {
-                mouse_down_timer.Start();
-            }
-            else
-            {
-                controlButtons.Visible = false;
-            }
-        }
-
+        //private void ShowButtons(object sender, MouseEventArgs e)
+        //{
+        //    if (folderButton.Visible == false)
+        //    {
+        //        mouse_down_timer.Start();
+        //    }
+        //    else
+        //    {
+        //        controlButtons.Visible = false;
+        //    }
+        //}
 
         /// <summary>
         /// Get the bitmap from the 
@@ -338,20 +322,14 @@ namespace FaceDetection
                 this.WindowState = FormWindowState.Normal;
             }
 
-            if (CameraIndex == Properties.Settings.Default.main_camera_index)
+            // Full screen
+            if (Properties.Settings.Default.main_window_full_screen)
             {
-                this.cameraButton.Enabled = true;                
-                this.snapshotButton.Enabled = true;
-                // Full screen
-                if (Properties.Settings.Default.main_window_full_screen)
-                    this.WindowState = FormWindowState.Maximized;
-                else
-                    this.WindowState = FormWindowState.Normal;
+                this.WindowState = FormWindowState.Maximized;
             }
             else
             {
-                this.cameraButton.Enabled = false;
-                this.snapshotButton.Enabled = false;
+                this.WindowState = FormWindowState.Normal;
             }
             SetCameraToDefaultMode();
         }
@@ -360,7 +338,6 @@ namespace FaceDetection
         {
             cameraButton.Tag = state;
         }
-
         
         public void SetToPreviewMode()
         {
@@ -504,43 +481,39 @@ namespace FaceDetection
             PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(CameraIndex, out int eventRecordTimeBeforeEvent, out int nouse);
             PROPERTY_FUNCTIONS.GetSecondsBeforeEvent(CameraIndex, out int secondBeforeOperationEvent);
 
-
-            if (CameraIndex == Properties.Settings.Default.main_camera_index)
+            try
             {
-                try
+                if ((string)cameraButton.Tag == "play")
                 {
-                    if ((string)cameraButton.Tag == "play")
+                    if (recordingInProgress == false)
                     {
-                        if (recordingInProgress == false)
-                        {
-                            cameraButton.Tag = "rec";
-                            crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
-                            rec_icon.Visible = Properties.Settings.Default.show_recording_icon;
-                            recordingInProgress = true;
-                            crossbar.NoCapTimerON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                            crossbar.SetIconTimer(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                        }
+                        cameraButton.Tag = "rec";
+                        crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
+                        rec_icon.Visible = Properties.Settings.Default.show_recording_icon;
+                        recordingInProgress = true;
+                        crossbar.NoCapTimerON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                        crossbar.SetIconTimer(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                    }
+                }
+                else
+                {
+                    rec_icon.Visible = false;
+                    recordingInProgress = false;
+                    cameraButton.Tag = "play";
+                    if ((eventRecorderEnabled && eventRecordTimeBeforeEvent > 0)
+                            || ((IRSensorEnabled || faceRecognitionEnabled || recordingWhenOperationEnabled) && secondBeforeOperationEvent > 0))
+                    {
+                        crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
                     }
                     else
                     {
-                        rec_icon.Visible = false;
-                        recordingInProgress = false;
-                        cameraButton.Tag = "play";
-                        if ((eventRecorderEnabled && eventRecordTimeBeforeEvent > 0)
-                                || ((IRSensorEnabled || faceRecognitionEnabled || recordingWhenOperationEnabled) && secondBeforeOperationEvent > 0))
-                        {
-                            crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
-                        }
-                        else
-                        {
-                            crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
-                        }
+                        crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
                     }
                 }
-                catch (InvalidOperationException iox)
-                {
-                    Logger.Add(iox);
-                }
+            }
+            catch (InvalidOperationException iox)
+            {
+                Logger.Add(iox);
             }
         }
         /// <summary>
