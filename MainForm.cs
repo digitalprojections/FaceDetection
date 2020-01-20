@@ -33,6 +33,8 @@ namespace FaceDetection
         public static MOUSE_KEYBOARD Mklisteners { get => mklisteners; set => mklisteners = value; }
         public static bool AnyRecordingInProgress { get => MULTI_WINDOW.RecordingIsOn();}
 
+        private readonly System.Timers.Timer datetime_timer = new System.Timers.Timer();
+
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             InitializeComponent();
@@ -113,6 +115,11 @@ namespace FaceDetection
             AllChangesApply();            
             ClearCutFileTempFolder();
             ClearTempFolder();
+
+            datetime_timer.Interval = 1000;
+            datetime_timer.Start();
+            datetime_timer.AutoReset = true;
+            datetime_timer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateDateTimeText);
         }
 
         public static void AllChangesApply()
@@ -360,6 +367,15 @@ namespace FaceDetection
                 //Console.WriteLine(@" TEMP\4 does not exist");
             }
         }
+
+        private void UpdateDateTimeText(object sender, System.Timers.ElapsedEventArgs eventArgs)
+        {
+            for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+            {
+                MULTI_WINDOW.formList[i].DateTimeUpdater();
+            }
+        }
+
         private void BackgroundWorkerMain_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             
