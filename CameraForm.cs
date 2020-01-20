@@ -335,20 +335,14 @@ namespace FaceDetection
                 this.WindowState = FormWindowState.Normal;
             }
 
-            if (CameraIndex == Properties.Settings.Default.main_camera_index)
+            // Full screen
+            if (Properties.Settings.Default.main_window_full_screen)
             {
-                this.cameraButton.Enabled = true;                
-                this.snapshotButton.Enabled = true;
-                // Full screen
-                if (Properties.Settings.Default.main_window_full_screen)
-                    this.WindowState = FormWindowState.Maximized;
-                else
-                    this.WindowState = FormWindowState.Normal;
+                this.WindowState = FormWindowState.Maximized;
             }
             else
             {
-                this.cameraButton.Enabled = false;
-                this.snapshotButton.Enabled = false;
+                this.WindowState = FormWindowState.Normal;
             }
             SetCameraToDefaultMode();
         }
