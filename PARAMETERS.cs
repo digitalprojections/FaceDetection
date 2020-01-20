@@ -356,7 +356,7 @@ namespace FaceDetection
                         case "e":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == Properties.Settings.Default.main_camera_index))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == Properties.Settings.Default.main_camera_index)) // Main camera
                                 {
                                     if (parameterOnOffSwitch && MainForm.AnyRecordingInProgress == false)
                                     {
@@ -367,20 +367,21 @@ namespace FaceDetection
                                         MULTI_WINDOW.EventRecorderOff(cameraIndex);
                                     }
                                 }
-                                else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))                                
+                                else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))  // Not main camera                              
                                 {
                                     if (parameterOnOffSwitch)
                                     {
-                                        
-
-
+                                        MULTI_WINDOW.formList[cameraIndex].crossbar.recordFromParamNotMain = true;
+                                        MULTI_WINDOW.formList[cameraIndex].SetRecordIcon(cameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                                        MULTI_WINDOW.formList[cameraIndex].crossbar.Start(cameraIndex, CAMERA_MODES.MANUAL);
                                     }
                                     else
                                     {
-                                        
+                                        MULTI_WINDOW.formList[cameraIndex].HideIcon();
+                                        MULTI_WINDOW.formList[cameraIndex].SetToPreviewMode();
                                     }
                                 }
-
+                                PARAMETERS.PARAM.Clear();
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
@@ -418,6 +419,7 @@ namespace FaceDetection
                                         }
                                     }
                                 }
+                                PARAMETERS.PARAM.Clear();
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
