@@ -41,8 +41,8 @@ namespace FaceDetection
         private ImageList imageList;
         private System.Timers.Timer hideIconTimer = new System.Timers.Timer();
         private delegate void dHideRecIcon();
+        private delegate void dDateTimerUpdater();
 
-        
         /// <summary>
         /// Current camera index, not MAIN
         /// </summary>
@@ -51,16 +51,13 @@ namespace FaceDetection
         private bool applicationExit = false;
 
         public CameraForm(int camind)
-        {
-            //subform = this;       
+        {      
             CameraIndex = camind;
                         
             hideIconTimer.AutoReset = false;
             hideIconTimer.Elapsed += new System.Timers.ElapsedEventHandler(HideIcon_tick);
             videoFormat = UsbCamera.GetVideoFormat(camind);
             this.Load += CameraForm_Load;
-            
-            
         }
 
         private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -504,43 +501,39 @@ namespace FaceDetection
             PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(CameraIndex, out int eventRecordTimeBeforeEvent, out int nouse);
             PROPERTY_FUNCTIONS.GetSecondsBeforeEvent(CameraIndex, out int secondBeforeOperationEvent);
 
-
-            if (CameraIndex == Properties.Settings.Default.main_camera_index)
+            try
             {
-                try
+                if ((string)cameraButton.Tag == "play")
                 {
-                    if ((string)cameraButton.Tag == "play")
+                    if (recordingInProgress == false)
                     {
-                        if (recordingInProgress == false)
-                        {
-                            cameraButton.Tag = "rec";
-                            crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
-                            rec_icon.Visible = Properties.Settings.Default.show_recording_icon;
-                            recordingInProgress = true;
-                            crossbar.NoCapTimerON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                            crossbar.SetIconTimer(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                        }
+                        cameraButton.Tag = "rec";
+                        crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
+                        rec_icon.Visible = Properties.Settings.Default.show_recording_icon;
+                        recordingInProgress = true;
+                        crossbar.NoCapTimerON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                        crossbar.SetIconTimer(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                    }
+                }
+                else
+                {
+                    rec_icon.Visible = false;
+                    recordingInProgress = false;
+                    cameraButton.Tag = "play";
+                    if ((eventRecorderEnabled && eventRecordTimeBeforeEvent > 0)
+                            || ((IRSensorEnabled || faceRecognitionEnabled || recordingWhenOperationEnabled) && secondBeforeOperationEvent > 0))
+                    {
+                        crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
                     }
                     else
                     {
-                        rec_icon.Visible = false;
-                        recordingInProgress = false;
-                        cameraButton.Tag = "play";
-                        if ((eventRecorderEnabled && eventRecordTimeBeforeEvent > 0)
-                                || ((IRSensorEnabled || faceRecognitionEnabled || recordingWhenOperationEnabled) && secondBeforeOperationEvent > 0))
-                        {
-                            crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
-                        }
-                        else
-                        {
-                            crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
-                        }
+                        crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
                     }
                 }
-                catch (InvalidOperationException iox)
-                {
-                    Logger.Add(iox);
-                }
+            }
+            catch (InvalidOperationException iox)
+            {
+                Logger.Add(iox);
             }
         }
         /// <summary>
