@@ -41,20 +41,14 @@ namespace FaceDetection
         private ImageList imageList;
         private System.Timers.Timer hideIconTimer = new System.Timers.Timer();
         private delegate void dHideRecIcon();
-        //private delegate void dDateTimerUpdater();
 
-        private Timer datetimer = new Timer();
         
         /// <summary>
         /// Current camera index, not MAIN
         /// </summary>
         public int CameraIndex = 0;
-        //public bool closeFromSettings = false;
         public CROSSBAR crossbar;
         private bool applicationExit = false;
-
-        //CameraForm subform;
-        //public CameraForm GetSubForm => subform;
 
         public CameraForm(int camind)
         {
@@ -105,9 +99,6 @@ namespace FaceDetection
 
             mouse_down_timer.Stop();
             mouse_down_timer.Dispose();
-
-            datetimer.Stop();
-            datetimer.Dispose();
         }
 
         /// <summary>
@@ -159,9 +150,9 @@ namespace FaceDetection
             mouse_down_timer.Elapsed += ShowButtonsDelayed;//制御ボタンの非/表示用クリックタイマー
             mouse_down_timer.Interval = 1000;
 
-            datetimer.Interval = 1000;
-            datetimer.Tick += Datetimer_Tick;
-            datetimer.Start();
+            //datetimer.Interval = 1000;
+            //datetimer.Tick += Datetimer_Tick;
+            //datetimer.Start();
             ///////////////////////////////////////////////////////////
 
             //// Full screen
@@ -243,17 +234,17 @@ namespace FaceDetection
             mouse_down_timer.Stop();
         }
 
-        private void Datetimer_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-            }
-            catch (NullReferenceException ex)
-            {
-                Debug.WriteLine(ex.Message + " DateTimeUpdater()");
-            }
-        }
+        //private void Datetimer_Tick(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+        //    }
+        //    catch (NullReferenceException ex)
+        //    {
+        //        Debug.WriteLine(ex.Message + " DateTimeUpdater()");
+        //    }
+        //}
 
         public void ShowButtons(object sender, EventArgs eventArgs)
         {
@@ -517,39 +508,39 @@ namespace FaceDetection
             if (CameraIndex == Properties.Settings.Default.main_camera_index)
             {
                 try
-            {
-                if ((string)cameraButton.Tag == "play")
                 {
-                    if (recordingInProgress == false)
+                    if ((string)cameraButton.Tag == "play")
                     {
-                        cameraButton.Tag = "rec";
-                        crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
-                        rec_icon.Visible = Properties.Settings.Default.show_recording_icon;
-                        recordingInProgress = true;
-                        crossbar.NoCapTimerON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                        crossbar.SetIconTimer(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                    }
-                }
-                else
-                {
-                    rec_icon.Visible = false;
-                    recordingInProgress = false;
-                    cameraButton.Tag = "play";
-                    if ((eventRecorderEnabled && eventRecordTimeBeforeEvent > 0)
-                            || ((IRSensorEnabled || faceRecognitionEnabled || recordingWhenOperationEnabled) && secondBeforeOperationEvent > 0))
-                    {
-                        crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
+                        if (recordingInProgress == false)
+                        {
+                            cameraButton.Tag = "rec";
+                            crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
+                            rec_icon.Visible = Properties.Settings.Default.show_recording_icon;
+                            recordingInProgress = true;
+                            crossbar.NoCapTimerON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                            crossbar.SetIconTimer(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                        }
                     }
                     else
                     {
-                        crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
+                        rec_icon.Visible = false;
+                        recordingInProgress = false;
+                        cameraButton.Tag = "play";
+                        if ((eventRecorderEnabled && eventRecordTimeBeforeEvent > 0)
+                                || ((IRSensorEnabled || faceRecognitionEnabled || recordingWhenOperationEnabled) && secondBeforeOperationEvent > 0))
+                        {
+                            crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
+                        }
+                        else
+                        {
+                            crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
+                        }
                     }
                 }
-            }
-            catch (InvalidOperationException iox)
-            {
-                Logger.Add(iox);
-            }
+                catch (InvalidOperationException iox)
+                {
+                    Logger.Add(iox);
+                }
             }
         }
         /// <summary>
@@ -616,6 +607,26 @@ namespace FaceDetection
                     crossbar?.Start(CameraIndex, CAMERA_MODES.PREVIEW);
                     //SetToPreviewMode();
                 //}
+            }
+        }
+
+        public void DateTimeUpdater()
+        {
+            if (dateTimeLabel != null && dateTimeLabel.InvokeRequired)
+            {
+                var d = new dDateTimerUpdater(DateTimeUpdater);
+                dateTimeLabel.Invoke(d);
+            }
+            else
+            {
+                try
+                {
+                    dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                }
+                catch (NullReferenceException e)
+                {
+                    Debug.WriteLine(e.Message + " DateTimeUpdater()");
+                }
             }
         }
 
