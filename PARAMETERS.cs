@@ -119,7 +119,7 @@ namespace FaceDetection
                         case "n":
                             if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
                             {
-                                if (MULTI_WINDOW.formList[cameraIndex]?.DISPLAYED == true)
+                                if (MULTI_WINDOW.formList[cameraIndex]?.DISPLAYED == true && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
                                 {
                                     //MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].Text = "UVC Camera Viewer -  camera " + (Properties.Settings.Default.main_camera_index + 1);
                                     //MULTI_WINDOW.formList[cameraIndex].Text = $"UVC Camera Viewer - MAIN CAMERA {(cameraIndex + 1)}";
@@ -157,7 +157,15 @@ namespace FaceDetection
                                         SNAPSHOT_SAVER.TakeAsyncSnapShot(false, cameraIndex, "event");
 
                                     }
-                                    else
+                                }
+                                else
+                                {
+                                    //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                                    //{
+                                    //    SNAPSHOT_SAVER.TakeSnapShotAll();
+                                    //}
+                                    //else 
+                                    if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
                                     {
                                         //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
                                         //{
@@ -217,7 +225,7 @@ namespace FaceDetection
                         case "h":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
                                 {
                                     if (parameterOnOffSwitch)
                                     {
@@ -358,7 +366,7 @@ namespace FaceDetection
                         case "e":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == Properties.Settings.Default.main_camera_index)) // Main camera
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == Properties.Settings.Default.main_camera_index) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false) // Main camera
                                 {
                                     if (parameterOnOffSwitch && MainForm.AnyRecordingInProgress == false)
                                     {
@@ -369,7 +377,7 @@ namespace FaceDetection
                                         MULTI_WINDOW.EventRecorderOff(cameraIndex);
                                     }
                                 }
-                                else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))  // Not main camera                              
+                                else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)  // Not main camera                              
                                 {
                                     if (parameterOnOffSwitch)
                                     {
@@ -395,7 +403,7 @@ namespace FaceDetection
                         case "r":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
                                 {
                                     if (parameterOnOffSwitch)
                                     {

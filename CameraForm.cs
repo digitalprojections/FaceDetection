@@ -368,6 +368,8 @@ namespace FaceDetection
             hideIconTimer.Interval = timeAfterEvent * 1000;
             hideIconTimer.Start();
             recordingInProgress = true;
+            this.cameraButton.Enabled = false;
+            this.snapshotButton.Enabled = false;
         }
 
         private void HideIcon_tick (object sender, EventArgs e) 
@@ -387,6 +389,8 @@ namespace FaceDetection
                 hideIconTimer.Enabled = false;
                 rec_icon.Visible = false;
                 recordingInProgress = false;
+                this.cameraButton.Enabled = true;
+                this.snapshotButton.Enabled = true;
             }
         }
 
@@ -698,7 +702,6 @@ namespace FaceDetection
             this.snapshotButton.Size = new System.Drawing.Size(52, 52);
             this.snapshotButton.TabIndex = 3;
             this.snapshotButton.UseVisualStyleBackColor = false;
-            
             this.snapshotButton.Click += new System.EventHandler(SnapShot);
             // 
             // cameraButton
@@ -716,7 +719,6 @@ namespace FaceDetection
             this.cameraButton.TabIndex = 3;
             this.cameraButton.Tag = "play";
             this.cameraButton.UseVisualStyleBackColor = false;
-            
             this.cameraButton.Click += new System.EventHandler(ManualVideoRecording);
             
             // 
