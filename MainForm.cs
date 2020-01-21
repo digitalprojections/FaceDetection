@@ -23,11 +23,13 @@ namespace FaceDetection
         static IRSensor rSensor;
         internal static IRSensor RSensor { get => rSensor; set => rSensor = value; }        
         //User actions end
-        static SettingsUI settingUI;
+        
         static Form mainForm;
         public static int CAMERA_INDEX = 0;
         static Stopwatch stopwatch = new Stopwatch();
         public static MainForm GetMainForm => (MainForm) mainForm;
+        
+        static SettingsUI settingUI;
         public static SettingsUI Settingui { get => settingUI; set => settingUI = value; }        
         public BackLightController BackLight { get => backLight; set => backLight = value; }
         public static MOUSE_KEYBOARD Mklisteners { get => mklisteners; set => mklisteners = value; }

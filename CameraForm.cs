@@ -131,7 +131,7 @@ namespace FaceDetection
             this.Controls.Add(this.controlButtons);
 
             this.ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
-            this.Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
+            this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
 
             rec_icon = new RecIcon();
             this.Controls.Add(rec_icon);
@@ -307,7 +307,7 @@ namespace FaceDetection
             }
 
             //ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
-            Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
+            Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
             // Check if the PREEVENT mode is needed
             //controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
             

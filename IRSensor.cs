@@ -29,7 +29,7 @@ namespace FaceDetection
             int cameraIndex = MainForm.Settingui.Camera_index;
             PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(cameraIndex, out bool operatorCaptureEnabled);
             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(cameraIndex, out bool IRSensorEnabled);
-            PROPERTY_FUNCTIONS.GetInterval(cameraIndex, out int checkInterval);
+            PROPERTY_FUNCTIONS.GetSensorCheckInterval(cameraIndex, out int checkInterval);
             
             if (operatorCaptureEnabled && IRSensorEnabled && checkInterval > 0)
             {
@@ -141,7 +141,7 @@ namespace FaceDetection
         {
             int camindex = Properties.Settings.Default.main_camera_index;
 
-            PROPERTY_FUNCTIONS.GetInterval(camindex, out int checkInterval);
+            PROPERTY_FUNCTIONS.GetSensorCheckInterval(camindex, out int checkInterval);
 
             SensorCheckTimer.Enabled = true;
             SensorCheckTimer.Interval = checkInterval;
