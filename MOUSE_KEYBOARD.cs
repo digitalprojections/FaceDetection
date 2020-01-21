@@ -15,18 +15,23 @@ namespace FaceDetection
         private readonly KeyboardListener keyboardListener = new KeyboardListener();
         private readonly MouseListener mouseListener = new MouseListener();
         private static readonly MouseListener mouseListenerClick = new MouseListener();
-
+        private int CAMERA_INDEX = 0;
         public bool Listen { get => listen; set => listen = value; }
 
         public MOUSE_KEYBOARD()
         {
             START_CLICK_LISTENER();
-            if (Properties.Settings.Default.capture_operator || Properties.Settings.Default.Recording_when_at_the_start_of_operation)
+            if ((Properties.Settings.Default.C1_enable_capture_operator || Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation)
+                    || (Properties.Settings.Default.C2_enable_capture_operator || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation)
+                    || (Properties.Settings.Default.C3_enable_capture_operator || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation)
+                    || (Properties.Settings.Default.C4_enable_capture_operator || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation))
             {                
                 Listen = true;
             }
-            
+
+            CAMERA_INDEX = Properties.Settings.Default.main_camera_index;
         }
+
         public void START_CLICK_LISTENER()
         {
             Task.Run(() => {
@@ -36,6 +41,7 @@ namespace FaceDetection
                 mouseListenerClick.MouseMove += MouseListener_MouseMove;
             });
             }
+
         private void KeyboardListener_KeyUpAll(object sender, KeyEventArgs e)
         {
             if (MainForm.GetMainForm != null)
@@ -44,6 +50,7 @@ namespace FaceDetection
             }
             MouseKeyEventInit();
         }
+
         private void MouseListener_MouseLeftDown(object sender, MouseEventArgs e)
         {
             if (MainForm.GetMainForm != null)
@@ -51,60 +58,69 @@ namespace FaceDetection
                 MainForm.GetMainForm.BackLight.Restart();
             }
         }
+
         public void AddMouseAndKeyboardBack()
         {
             Listen = true;
         }
+
         private void MouseListener_MouseMove(object sender, MouseEventArgs e)
         {
             MouseKeyEventInit();
         }
-        private void MouseKeyEventInit()
-        {            
-            if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.Recording_when_at_the_start_of_operation && Listen && !MainForm.GetMainForm.crossbar.OPER_BAN)
-            {
-                Listen = false;
-                //↓20191107 Nagayama added↓
-                if (Properties.Settings.Default.capture_method <= 0)
-                {
-                    //↑20191107 Nagayama added↑
-                    if (MainForm.GetMainForm.crossbar.PREEVENT_RECORDING && Properties.Settings.Default.seconds_after_event > 0)
-                    {
-                        TaskManager.EventAppeared(RECORD_PATH.EVENT, 1,
-                            decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
-                            decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
-                            DateTime.Now);
-                        
-                        
-                            MainForm.GetMainForm.SET_REC_ICON();
-                        
-                        //↓20191107 Nagayama added↓
 
-                    }
-                    else
+        private void MouseKeyEventInit()
+        {
+            string captureMethod = "";
+            int timeBeforeEvent = 0, timeAfterEvent = 0;
+            bool captureOperatorEnabled = false, recordWhenOperation = false, preeventRecording = false;
+
+            PROPERTY_FUNCTIONS.GetSecondsBeforeEvent(CAMERA_INDEX, out timeBeforeEvent);
+            PROPERTY_FUNCTIONS.GetSecondsAfterEvent(CAMERA_INDEX, out timeAfterEvent);
+            PROPERTY_FUNCTIONS.GetCaptureMethod(CAMERA_INDEX, out captureMethod);
+            PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(CAMERA_INDEX, out captureOperatorEnabled);
+            PROPERTY_FUNCTIONS.GetOnOperationStartSwitch(CAMERA_INDEX, out recordWhenOperation);
+            try
+            {                
+                preeventRecording = MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.PREEVENT_RECORDING;
+                if (captureOperatorEnabled && recordWhenOperation && Listen && !MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.OPER_BAN)
+                {
+                    Listen = false;
+                    if (captureMethod != "Snapshot") // Video
                     {
-                        MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);                                                                        
+                        if (preeventRecording && timeAfterEvent > 0)
+                        {
+                            TaskManager.EventAppeared(RECORD_PATH.EVENT, CAMERA_INDEX + 1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+                        }
+                        else
+                        {
+                            MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.Start(CAMERA_INDEX, CAMERA_MODES.OPERATOR);
+                        }
+                        MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.NoCapTimerON(timeAfterEvent);
+                        MULTI_WINDOW.formList[CAMERA_INDEX].SetRecordIcon(CAMERA_INDEX, timeAfterEvent);
                     }
-                    MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
-                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
-                    //↑20191107 Nagayama added↑
+                    else // Snapshot
+                    {
+                        SNAPSHOT_SAVER.TakeSnapShot(CAMERA_INDEX, "event");
+
+                        MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.NoCapTimerON(0);
+                    }
+
+                    MainForm.GetMainForm.BackLight.Restart();
                 }
                 else
                 {
-                    SNAPSHOT_SAVER.TakeSnapShot(0, "event");
-                    MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
+                    Listen = false;
                 }
-
-                MainForm.GetMainForm.BackLight.Restart();
-                
+                if (MainForm.GetMainForm != null)
+                {
+                    MainForm.GetMainForm.BackLight.Restart();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Listen = false;
-            }
-            if (MainForm.GetMainForm != null)
-            {
-                MainForm.GetMainForm.BackLight.Restart();
+                // listening closed form 
+                //Main camera down?
             }
         }
     }

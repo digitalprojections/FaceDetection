@@ -4,7 +4,7 @@ using System.Timers;
 
 namespace FaceDetection
 {
-    class IRSensor
+    class IRSensor:IDisposable
     {
         private delegate void IRTimerTickDelegate();
         System.Timers.Timer SensorCheckTimer = new System.Timers.Timer();
@@ -26,11 +26,14 @@ namespace FaceDetection
         
         private void Init_IR_Timer()
         {
-           if (Properties.Settings.Default.capture_operator && Properties.Settings.Default.enable_Human_sensor && decimal.ToInt32(Properties.Settings.Default.face_rec_interval)>0)
-           {
-                //SensorCheckTimer.Tick += IR_Timer_Tick;
-                
-                SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
+            int cameraIndex = MainForm.Settingui.Camera_index;
+            PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(cameraIndex, out bool operatorCaptureEnabled);
+            PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(cameraIndex, out bool IRSensorEnabled);
+            PROPERTY_FUNCTIONS.GetSensorCheckInterval(cameraIndex, out int checkInterval);
+            
+            if (operatorCaptureEnabled && IRSensorEnabled && checkInterval > 0)
+            {
+                SensorCheckTimer.Interval = checkInterval;
             }
             else
             {
@@ -56,40 +59,56 @@ namespace FaceDetection
 
         private void MotionDetected()
         {
+            int INDEX = Properties.Settings.Default.main_camera_index;
+            int timeBeforeEvent = 0, timeAfterEvent = 0;
+            bool preeventRecording = false;
+            string captureMethod = "";
+
+            PROPERTY_FUNCTIONS.GetSecondsBeforeEvent(INDEX, out timeBeforeEvent);
+            PROPERTY_FUNCTIONS.GetSecondsAfterEvent(INDEX, out timeAfterEvent);
+
+            preeventRecording = MULTI_WINDOW.formList[INDEX].crossbar.PREEVENT_RECORDING;
+
             if (MainForm.GetMainForm.InvokeRequired)
             {
                 var d = new IRTimerTickDelegate(MotionDetected);
                 MainForm.GetMainForm.Invoke(d);
             }
-                else
+            else
             {
-                if (!MainForm.GetMainForm.crossbar.OPER_BAN)
+                if (MULTI_WINDOW.formList[INDEX].crossbar.OPER_BAN == false)
                 {
-                    if (Properties.Settings.Default.capture_method <= 0)
+                    if (captureMethod != "Snapshot") // Video
                     {
                         //initiate RECORD mode
-                        if (MainForm.GetMainForm != null && MainForm.GetMainForm.crossbar.PREEVENT_RECORDING)
+                        if (MainForm.GetMainForm != null && preeventRecording)
                         {
-                            TaskManager.EventAppeared(RECORD_PATH.EVENT,
-                                1,
-                                decimal.ToInt32(Properties.Settings.Default.seconds_before_event),
-                                decimal.ToInt32(Properties.Settings.Default.seconds_after_event),
-                                DateTime.Now);
-                            
-                                MainForm.GetMainForm.SET_REC_ICON();
-                            
+                            if (MainForm.AnyRecordingInProgress == false)
+                            {
+                                TaskManager.EventAppeared(RECORD_PATH.EVENT, INDEX+1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+
+                                if (INDEX == Properties.Settings.Default.main_camera_index)
+                                {
+                                    MULTI_WINDOW.formList[INDEX].crossbar.SetIconTimer(timeAfterEvent);
+                                    MULTI_WINDOW.formList[INDEX].crossbar.NoCapTimerON(timeAfterEvent);
+                                }
+                                else
+                                {
+                                    MULTI_WINDOW.formList[INDEX].SetRecordIcon(INDEX, timeAfterEvent); //SHOULD NOT BE HIT. REMOVE THIS LINE
+                                }
+                            }
                         }
                         else
                         {
-                            MainForm.GetMainForm.crossbar.Start(0, CAMERA_MODES.OPERATOR);
+                            MULTI_WINDOW.formList[INDEX].crossbar.Start(INDEX, CAMERA_MODES.OPERATOR);
+                            MULTI_WINDOW.formList[INDEX].crossbar.SetIconTimer(timeAfterEvent);
+                            MULTI_WINDOW.formList[INDEX].crossbar.NoCapTimerON(timeAfterEvent);
                         }
-                        MainForm.GetMainForm.crossbar.SetIconTimer(Properties.Settings.Default.seconds_after_event);
-                        MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(decimal.ToInt32(Properties.Settings.Default.seconds_after_event));
                     }
-                    else
+                    else // Snapshot
                     {
-                        SNAPSHOT_SAVER.TakeSnapShot(0, "event");
-                        MainForm.GetMainForm.crossbar.No_Cap_Timer_ON(0);
+                        SNAPSHOT_SAVER.TakeSnapShot(INDEX, "event");
+                        MULTI_WINDOW.formList[INDEX].crossbar.NoCapTimerON(0);//Only the no-capture switch is enough
                     }
 
                     Logger.Add("IR SENSOR: Motion detected");
@@ -97,7 +116,6 @@ namespace FaceDetection
                     {
                         MainForm.GetMainForm.BackLight.ON();
                     }
-                    
                 }                
             }
         }
@@ -108,26 +126,28 @@ namespace FaceDetection
             SensorCheckTimer.Start();
         }
         
-
         public void Stop_IR_Timer()
-        {            
-            //SensorCheckTimer.Enabled = false;
-            //SensorCheckTimer.Stop();
+        {
             bIsIRCheckExec = false;
-
         }
+
         public void Destroy()
         {
             Stop_IR_Timer();
-            SensorCheckTimer.Dispose();
+            Dispose();
         }
 
         public void SetInterval()
         {
+            int camindex = Properties.Settings.Default.main_camera_index;
+
+            PROPERTY_FUNCTIONS.GetSensorCheckInterval(camindex, out int checkInterval);
+
             SensorCheckTimer.Enabled = true;
-            SensorCheckTimer.Interval = decimal.ToInt32(Properties.Settings.Default.face_rec_interval);
+            SensorCheckTimer.Interval = checkInterval;
             SensorCheckTimer.Enabled = false;
         }
+
         public uint CheckSensor()
         {
             bool ret = false;
@@ -207,7 +227,10 @@ namespace FaceDetection
         {
             return GetModuleHandle(path) != IntPtr.Zero;
         }
-
         
+        public void Dispose()
+        {
+            ((IDisposable)SensorCheckTimer).Dispose();
+        }
     }
 }

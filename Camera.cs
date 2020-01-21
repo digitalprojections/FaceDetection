@@ -102,44 +102,58 @@ namespace FaceDetection
             return retval;
         }
 
+        public static void CountCamera ()
+        {
+            var capDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
+
+            if (Properties.Settings.Default.main_camera_index >= capDevices.Length)
+            {
+                Properties.Settings.Default.main_camera_index = 0;
+                Properties.Settings.Default.camera_count = capDevices.Length;
+            }
+            else if (Properties.Settings.Default.camera_count > capDevices.Length)
+            {
+                Properties.Settings.Default.camera_count = capDevices.Length;
+            }
+        }
+
+
         public static void SetNumberOfCameras()
         {
             // Get the collection of video devices
             var capDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
 
-            if (Properties.Settings.Default.camera_count > 0)
-            {
-                if (capDevices.Length > Properties.Settings.Default.camera_count && capDevices.Length<5)
+            if (capDevices.Length > 0)
+            {                
+                if (Properties.Settings.Default.camera_count == 0 || Properties.Settings.Default.camera_count > capDevices.Length)
                 {
-                    //MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
-                    //SettingsUI.ArrangeCameraNames(capDevices.Length);
-                    MainForm.Setting_ui.ArrangeCameraNames(capDevices.Length);
+                    Properties.Settings.Default.camera_count = capDevices.Length;
+                    Properties.Settings.Default.main_camera_index = 0;
+                    //if (capDevices.Length > Properties.Settings.Default.camera_count && capDevices.Length<5)
+                    //{
+                    //    //MessageBox.Show("The settings do not allow more than " + numericUpDownCamCount.Value + " cameras");
+                    //    MainForm.Setting_ui.ArrangeCameraNames(capDevices.Length);
+                    //}
+                    //else
+                    //{
+                    //    //settings are missing
+                    //    MainForm.Setting_ui.ArrangeCameraNames(4);
+                    //    //Properties.Settings.Default.camera_count = 4;
+                    //    //Logger.Add("There are more than 4 cameras");
+                    //}
                 }
-                else
+                else if(Properties.Settings.Default.camera_count < capDevices.Length && Properties.Settings.Default.main_camera_index>= Properties.Settings.Default.camera_count)
                 {
-                    //settings are missing
-                    MainForm.Setting_ui.ArrangeCameraNames(4);
-                    //Properties.Settings.Default.camera_count = 4;
-                    Logger.Add("There are more than 4 cameras");
+                    Properties.Settings.Default.main_camera_index = 0;
                 }
+                MainForm.Settingui.ArrangeCameraNames(Decimal.ToInt32(Properties.Settings.Default.camera_count));
+                Properties.Settings.Default.Save();
             }
             else
             {
-                //Camera count was never set
-                //set defaults
-                if (capDevices.Length > 0)
-                {
-                    if (capDevices.Length < 5)
-                        Properties.Settings.Default.camera_count = capDevices.Length;
-                    else
-                        Properties.Settings.Default.camera_count = 4;
-                }
-                else
-                {
-                    MessageBox.Show("No cameras found!");
-                }
+                MessageBox.Show(Resource.no_camera_found);
             }
-            Properties.Settings.Default.Save();
+            
         }
 
         static void BuildGraph(IGraphBuilder pGraph)

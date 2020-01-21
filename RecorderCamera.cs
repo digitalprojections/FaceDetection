@@ -22,7 +22,9 @@ namespace FaceDetection
         string targetPath = String.Empty;
         internal string ACTIVE_RECPATH = null;
         int INDEX = 0;
-        Form parentwindow = null; 
+        Form parentwindow = null;
+        private CROSSBAR crossbar;
+
         internal CAMERA_MODES CAMERA_MODE { get { return cAMERA_MODE; } set => cAMERA_MODE = value; }        
         public Action Stop { get; private set; }
         public Action Release { get; private set; }
@@ -46,11 +48,11 @@ namespace FaceDetection
         private IBaseFilter renderFilter = null;
         static Guid CLSID_NullRenderer = new Guid("{C1F400A4-3F08-11D3-9F0B-006008039E37}"); //qedit.dll 
         IBaseFilter pNullRenderer = (IBaseFilter)Activator.CreateInstance(Type.GetTypeFromCLSID(CLSID_NullRenderer));
-        //private IAMStreamConfig streamConfig = null;
+        private IAMStreamConfig streamConfig = null;
         private SampleGrabber pSampleGrabber = null;
         private IFileSinkFilter pFilewriter_sink;
-        //private VideoInfoHeader format = null;
-        //private AMMediaType pmt = null;
+        private VideoInfoHeader format = null;
+        private AMMediaType pmt = null;
         private ISampleGrabber i_grabber = null;
         //private delegate IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
@@ -87,13 +89,14 @@ namespace FaceDetection
             DsUtils.FreeAMMediaType(mt);
 
             
-    }
+        }
 
-        public RecorderCamera(int cameraIndex, Form pbx)
+        public RecorderCamera(int cameraIndex, Form pbx, CROSSBAR cb)
         {
             this.INDEX = cameraIndex;
             this.parentwindow = pbx;
-            sourcePath = Properties.Settings.Default.temp_folder;            
+            crossbar = cb;
+            sourcePath = Properties.Settings.Default.temp_folder + @"\" + (cameraIndex + 1);            
         }
 
         private void WndProc(ref System.Windows.Forms.Message m)
@@ -134,40 +137,37 @@ namespace FaceDetection
         /// <param name="size"></param>
         /// <param name="fps"></param>
         /// <param name="pbx">Control to display the video</param>        
-        public void StartRecorderCamera()
+        public void StartRecorderCamera(int index)
         {
-            
-            Size size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(INDEX);
-            int fps = PROPERTY_FUNCTIONS.Get_FPS(INDEX);
+            Size size = PROPERTY_FUNCTIONS.Get_Stored_Resolution(index);
+            int fps = PROPERTY_FUNCTIONS.Get_FPS(index);
             //IntPtr pbx = MainForm.GetMainForm.Handle;
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
-            //Logger.Add(CAMERA_MODE + " 1");
-            //Logger.Add(CAMERA_MODE + " 2");
-            Logger.Add(ACTIVE_RECPATH + " 3");
+            Logger.Add(ACTIVE_RECPATH);
             //REGULAR 0 PREEVENT
             if (CAMERA_MODE != CAMERA_MODES.PREEVENT)
             {
                 string str = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
-                str = Path.Combine(str, (INDEX + 1).ToString());
+                str = Path.Combine(str, (index + 1).ToString());
                 if (ACTIVE_RECPATH != null)
+                {
                     str = Path.Combine(str, ACTIVE_RECPATH);
+                }
                 targetPath = str + "/" + dstFileName;
-                 Directory.CreateDirectory(str);
+                Directory.CreateDirectory(str);
             }
             else
             {
                 //PREEVENT EXISTS. PERMANENT RECORDING MODE
-                targetPath = Path.Combine(sourcePath, (INDEX+1).ToString()) + "/" + dstFileName;
+                targetPath = sourcePath + "/" + dstFileName;
                 Logger.Add(targetPath + " target path");
                 try
                 {
                     Directory.CreateDirectory(sourcePath);
-                }catch(IOException iox)
+                }
+                catch (IOException iox)
                 {
-                    //WE HAVE TO ADD CAMERA NUMBER HERE IN THIS PATH TOO
-                    //var str = Path.Combine(sourcePath, (INDEX + 1).ToString());
-                    //
-                    sourcePath = @"C:\TEMP"+ "/" + (INDEX + 1);
+                    sourcePath = @"C:\TEMP\" + index;
                     targetPath = sourcePath + "/" + dstFileName;
                     Directory.CreateDirectory(sourcePath);
                     Logger.Add(iox);
@@ -322,13 +322,17 @@ namespace FaceDetection
                 checkHR(hr, "Can't run the graph");
                 Logger.Add(" running the recorder graph ");
                 ON = true;
-                MainForm.GetMainForm.crossbar.StartTimer();
+
+                
+                crossbar.StartTimer();
+                
             }
             catch (COMException comx)
             {
-                Logger.Add(comx);                
+                Logger.Add("Can not start the camera");
             }
         }
+
         public void SET_FILE_PATH_TO_MANUAL()
         {
             //PREEVENT EXISTS. PERMANENT RECORDING MODE
@@ -336,9 +340,11 @@ namespace FaceDetection
             string str = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
             str = Path.Combine(str, (INDEX + 1).ToString());
             if (ACTIVE_RECPATH != null)
+            {
                 str = Path.Combine(str, ACTIVE_RECPATH);
+            }
             targetPath = str + "/" + dstFileName;
-
+            
             
             try
             {
@@ -355,11 +361,12 @@ namespace FaceDetection
             mediaControl.Run();
             checkHR(hr, "Can't run the graph");
         }
+
         public void RESET_FILE_PATH()
         {
             //PREEVENT EXISTS. PERMANENT RECORDING MODE
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
-            targetPath = sourcePath + "/" + (INDEX + 1).ToString() + "/" + dstFileName;
+            targetPath = sourcePath + "/" + dstFileName;
             Logger.Add(targetPath + " target path");
             try
             {
@@ -368,7 +375,7 @@ namespace FaceDetection
             catch (IOException iox)
             {
                 sourcePath = @"C:\TEMP";
-                targetPath = sourcePath + "/" + (INDEX + 1).ToString() + "/" + dstFileName;
+                targetPath = sourcePath + "/" + dstFileName;
                 Directory.CreateDirectory(sourcePath);
                 Logger.Add(iox);
 
@@ -379,6 +386,7 @@ namespace FaceDetection
             mediaControl.Run();
             checkHR(hr, "Can't run the graph");
         }
+
         private Bitmap GetBitmapMain(ISampleGrabber i_grabber, int width, int height, int stride)
         {
             try
@@ -396,6 +404,7 @@ namespace FaceDetection
                 throw;
             }
         }
+
         private Bitmap GetBitmapMainMain(ISampleGrabber i_grabber, int width, int height, int stride)
         {
             int sz = 0;
@@ -427,6 +436,7 @@ namespace FaceDetection
             }
             return result;
         }
+
         public void SetWindowPosition(Size size)
         {
             int hr = 0;
@@ -444,7 +454,7 @@ namespace FaceDetection
         private int m_videoWidth = 1280;
         private int m_videoHeight = 720;
         private int m_videoBitCount = 24;
-        //private volatile bool m_bWantOneFrame = false;
+        private volatile bool m_bWantOneFrame = false;
         private CAMERA_MODES cAMERA_MODE;
 
         public IntPtr GetNextFrame()
@@ -461,13 +471,14 @@ namespace FaceDetection
 
             {
 
-                if (System.Environment.TickCount - dwStartTime > 1000) break; //1000 milliseconds 
+                if (System.Environment.TickCount - dwStartTime > 1000) break; //1000 milliseconds
 
             }
 
             // Got one
             return m_ipBuffer;
         }
+
         void checkHR(int hr, string msg)
         {
             if (hr < 0)
@@ -567,6 +578,7 @@ namespace FaceDetection
             //we can now select cameras
             return (IBaseFilter)devs[0];
         }
+
         //カメラのPINにアクセス
         static IPin GetPin(IBaseFilter filter, string pinname)
         {
@@ -645,6 +657,7 @@ namespace FaceDetection
                 // Insert event processing code here, if desired (see http://msdn2.microsoft.com/en-us/library/ms783649.aspx)
             }
         }
+
         private IBaseFilter CreateVideoCaptureSource(int index, Size size, double fps)
         {
             var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, index);
@@ -803,7 +816,7 @@ namespace FaceDetection
             // フォーマットを選択
             int hr = config.SetFormat(mt);
 
-            Logger.Add("SETTINGS OK ????????????????????" + hr);
+            Logger.Add("SETTINGS OK ?" + hr);
 
 
             // 解放

@@ -11,13 +11,12 @@ using System.Windows.Forms;
 
 namespace FaceDetectionX
 {
-
      public class UsbCamera
     {
         /// <summary>
         /// Camera Index
         /// </summary>
-        private int INDEX = 0;
+        //private int INDEX = 0;
         Form parentwindow = null;
         /// <summary>
         /// Camera ON
@@ -74,14 +73,16 @@ namespace FaceDetectionX
         /// </param>
         public UsbCamera(int cameraIndex, Form ptr)
         {
-            INDEX = cameraIndex;
             this.parentwindow = ptr;
             Size size = FaceDetection.PROPERTY_FUNCTIONS.Get_Stored_Resolution(0);
             int fps = FaceDetection.PROPERTY_FUNCTIONS.Get_FPS(0);
             var camera_list = FindDevices();
-            //if (cameraIndex >= camera_list.Length) throw new ArgumentException("USB camera is not available.", "index");
-            Init(cameraIndex, size, fps, parentwindow.Handle);
+            if (cameraIndex < camera_list.Length)
+            {
+                Init(cameraIndex, size, fps, parentwindow.Handle);
+            }
         }
+
         static void checkHR(int hr, string msg)
         {
             if (hr < 0)
@@ -90,10 +91,6 @@ namespace FaceDetectionX
                 DirectShow.DsError.ThrowExceptionForHR(hr);
             }
         }
-
-        
-
-
 
         private void Init(int index, Size size, double fps, IntPtr pbx)
         {
@@ -321,13 +318,10 @@ namespace FaceDetectionX
                 throw new Exception("IAMStreamConfigインタフェースを取得できません。");
             }
 
-           
             var result = new VideoFormat[cap_count];
-
-            
             var cap_data = Marshal.AllocHGlobal(cap_size);
 
-                        for (int i = 0; i < cap_count; i++)
+            for (int i = 0; i < cap_count; i++)
             {
                 var entry = new VideoFormat();
 
@@ -335,8 +329,7 @@ namespace FaceDetectionX
                 DirectShow.AM_MEDIA_TYPE mt = null;
                 config.GetStreamCaps(i, ref mt, cap_data);
                 entry.Caps = PtrToStructure<DirectShow.VIDEO_STREAM_CONFIG_CAPS>(cap_data);
-
-                                 entry.MajorType = DirectShow.DsGuid.GetNickname(mt.MajorType);
+                entry.MajorType = DirectShow.DsGuid.GetNickname(mt.MajorType);
                 entry.SubType = DirectShow.DsGuid.GetNickname(mt.SubType);
 
                 if (mt.FormatType == DirectShow.DsGuid.FORMAT_VideoInfo)
@@ -352,33 +345,33 @@ namespace FaceDetectionX
                     entry.TimePerFrame = vinfo.AvgTimePerFrame;
                 }
 
-                                 DirectShow.DeleteMediaType(ref mt);
+                DirectShow.DeleteMediaType(ref mt);
 
                 result[i] = entry;
             }
 
-                         Marshal.FreeHGlobal(cap_data);
+            Marshal.FreeHGlobal(cap_data);
 
             return result;
         }
         private static void SetVideoOutputFormat(DirectShow.IPin pin, int index, Size size, double fps)
         {
-                         var config = pin as DirectShow.IAMStreamConfig;
+            var config = pin as DirectShow.IAMStreamConfig;
             if (config == null)
             {
                 throw new Exception("ピンはIAMStreamConfigインタフェースを公開しません。");
             }
 
-                         int cap_count = 0, cap_size = 0;
+            int cap_count = 0, cap_size = 0;
             config.GetNumberOfCapabilities(ref cap_count, ref cap_size);
             if (cap_size != Marshal.SizeOf(typeof(DirectShow.VIDEO_STREAM_CONFIG_CAPS)))
             {
                 throw new Exception("VIDEO_STREAM_CONFIG_CAPSを取得できません。");
             }
 
-                         var cap_data = Marshal.AllocHGlobal(cap_size);
+            var cap_data = Marshal.AllocHGlobal(cap_size);
 
-                         DirectShow.AM_MEDIA_TYPE mt = null;
+            DirectShow.AM_MEDIA_TYPE mt = null;
             config.GetStreamCaps(index, ref mt, cap_data);
             var cap = PtrToStructure<DirectShow.VIDEO_STREAM_CONFIG_CAPS>(cap_data);
             if (mt.FormatType == DirectShow.DsGuid.FORMAT_VideoInfo)
@@ -528,22 +521,29 @@ namespace FaceDetectionX
             IBaseFilter result = null;
 
             int curr_index = 0;
-            EnumMonikers(category, (moniker, prop) =>
+            try
             {
+                EnumMonikers(category, (moniker, prop) =>
+                {
                 // 指定indexになるまで継続。
                 if (index != curr_index++) return false;
 
                 // フィルタのインスタンス作成して返す。
                 {
-                    object value = null;
-                    Guid guid = DirectShow.DsGuid.IID_IBaseFilter;
-                    moniker.BindToObject(null, null, ref guid, out value);
-                    result = value as IBaseFilter;
-                    return true;
-                }
-            });
+                        object value = null;
+                        Guid guid = DirectShow.DsGuid.IID_IBaseFilter;
+                        moniker.BindToObject(null, null, ref guid, out value);
+                        result = value as IBaseFilter;
+                        return true;
+                    }
+                });
+            }
+            catch(COMException comex)
+            {
+                Console.WriteLine(comex);
+            }
 
-            if (result == null) throw new Exception("can't create filter.");
+            //if (result == null) throw new Exception("can't create filter");
             return result;
         }
 
@@ -626,7 +626,7 @@ namespace FaceDetectionX
             {
                 // directionを確認。
                 if (info.dir != direction) return false;
-
+                    
                 // indexは最後にチェック。
                 return (index == curr_index++);
             });

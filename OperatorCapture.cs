@@ -23,7 +23,7 @@ namespace FaceDetection
             if (!timeOut || !recording)
             {
                 SetupTimer();
-                if(Properties.Settings.Default.capture_type == "Video")
+                if(Properties.Settings.Default.C1_capture_type == "Video")
                 {
                     //Initiate video
                     //var status = Camera.CheckCamera(0);
@@ -48,7 +48,7 @@ namespace FaceDetection
         public static void SetupTimer()
         {
             record_length_timer.Interval = Convert.ToInt32(Properties.Settings.Default.recording_length_seconds);
-            interval_timer.Interval = Convert.ToInt32(Properties.Settings.Default.interval_before_reinitiating_recording);
+            interval_timer.Interval = Convert.ToInt32(Properties.Settings.Default.C1_interval_before_reinitiating_recording);
 
             record_length_timer.Tick += Record_length_timer_Tick;
             interval_timer.Tick += Interval_timer_Tick;

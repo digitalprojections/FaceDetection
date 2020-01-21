@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FaceDetection
@@ -12,37 +8,167 @@ namespace FaceDetection
     /// </summary>
     class MULTI_WINDOW
     {
-        //private static CROSSBAR crossbar;
-        //private static List<CROSSBAR> crosbarList = new List<CROSSBAR>();
+        //private delegate void dDateTimerUpdater();
+        
+        private static CameraForm form;
+        public static CameraForm[] formList = new CameraForm[4];
+        public static int displayedCameraCount = 0;
+        //public static bool[] formArray = new bool[4];
 
-        private static FormClass form;
-        private static List<FormClass> formList = new List<FormClass>();
-                
         /// <summary>
-        /// MULTI-CAMERA
+        /// by passing two important parameters.
         /// </summary>
-        /// <param name="camera_count"></param>
-        public static void CreateCameraWindows(int camera_count)
+        public static void CreateCameraWindows()
         {
-            if(Properties.Settings.Default.show_all_cams_simulteneously && formList.Count==0)
+            int numberOfCamerasToDisplay = decimal.ToInt32(Properties.Settings.Default.camera_count);
+            int cameraIndex = decimal.ToInt32(Properties.Settings.Default.main_camera_index);
+
+            if (displayedCameraCount < numberOfCamerasToDisplay) 
             {
-                for (int i = 1; i < camera_count; i++)
+                for(int i = 0; i < displayedCameraCount; i++)
                 {
-                    //WINDOW
-                    form = new FormClass(i);
-                    formList.Add(form);                    
+                    if (formList[i]?.DISPLAYED==false)
+                    {
+                        form = new CameraForm(i);
+                        formList[i] = form;
+                        form.Show();                        
+                        displayedCameraCount++;                        
+                    }
+                }
+
+                for (int i = displayedCameraCount; i < numberOfCamerasToDisplay; i++)
+                {
+                    form = new CameraForm(i);
+                    formList[i] = form;                    
                     form.Show();
-                    form.ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);                                        
+                    displayedCameraCount ++;                    
+                }
+            }
+            else
+            {
+                try
+                {
+                    for (int i = displayedCameraCount - 1; i >= numberOfCamerasToDisplay; i--)
+                    {
+                        //formList[i].closeFromSettings = true;
+                        formList[i].Close();
+                        formList[i] = null;
+                        //displayedCameraCount--; //DONE within the form
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Add(Resource.form_closing_failure);
                 }
             }            
         }
 
-        internal static void START_FACE_TIMERS()
+        public static void GetVideoFormatByCamera(int cameraIndex)
         {
-            for (int i=0; i<formList.Count; i++)
+            formList[cameraIndex]?.GetVideoFormat();
+        }
+
+        public static void formSettingsChanged()
+        {
+            for (int i = 0; i < displayedCameraCount; i++)
             {
-                formList[i].faceDetector.StartFaceTimer();
+                formList[i].SetWindowProperties();
+                formList[i].MainCameraDisplay(i);
+                //Also must check if the PREEVENT mode is needed
+                //formList[i].SetCameraToDefaultMode();
             }
         }
+
+        public static void EventRecorderOn(int cameraIndex)
+        {
+            int timeBeforeEvent = 0, timeAfterEvent = 0;
+            bool preeventRecording = false;
+
+            PARAMETERS.PARAM.Clear();
+
+            PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(cameraIndex, out timeBeforeEvent, out timeAfterEvent);
+
+            preeventRecording = PreeventRecordingState(cameraIndex);
+
+            if (preeventRecording)
+            {
+                if (Properties.Settings.Default.capture_method == 0)
+                {
+                    TaskManager.EventAppeared(RECORD_PATH.EVENT, cameraIndex + 1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+
+                    SET_REC_ICON(cameraIndex);
+                    formList[cameraIndex].SetRecordIcon(cameraIndex, timeAfterEvent);
+                }
+            }
+            else
+            {
+                formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.EVENT);
+                Logger.Add(Resource.event_recording_starts);
+            }
+        }
+
+        internal static void EventRecorderOff(int cameraIndex)
+        {   
+            var preeventRecording = MULTI_WINDOW.PreeventRecordingState(cameraIndex);
+            
+            //SET it within each crossbar?
+            if (!preeventRecording)
+            {
+                formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.PREVIEW);
+            }
+        }
+
+        public static bool PreeventRecordingState(int cameraIndex)
+        {   
+            return formList[cameraIndex].crossbar.PREEVENT_RECORDING;
+        }
+
+        internal static void SET_REC_ICON(int cameraIndex)
+        {
+            formList[cameraIndex].SET_REC_ICON();            
+        }
+
+        //internal static void SetToPreviewMode(int camind)
+        //{            
+        //    formList[camind].SetToPreviewMode();            
+        //}
+
+        public static bool RecordingIsOn()
+        {
+            var recmodeison = false;
+
+            for (int i = 0; i < displayedCameraCount; i++)
+            {
+                if (!String.IsNullOrEmpty(formList[i].Text)) // Form is closed
+                {
+                    if (formList[i].crossbar.GetRecordingState())
+                    {
+                        recmodeison = true;
+                    }
+                }
+            }
+            return recmodeison;
+        }
+
+        //internal static void EventRecorderOnOFFAll(bool status)
+        //{
+        //    for(int i = 0; i< formList.Length; i++)
+        //    {
+        //        if (!String.IsNullOrEmpty(formList[i].Text)) // Form is closed
+        //        {
+        //            if (formList[i].crossbar.GetRecordingState())
+        //            {
+        //                if (status)
+        //                {
+        //                    EventRecorderOn(i);
+        //                }
+        //                else
+        //                {
+        //                    EventRecorderOff(i);
+        //                }                        
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

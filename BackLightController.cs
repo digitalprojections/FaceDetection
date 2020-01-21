@@ -80,7 +80,7 @@ namespace FaceDetection
             }
             else
             {
-                MessageBox.Show("backlight_offset is 0");
+                //MessageBox.Show("backlight_offset is 0");
             }
         }
 
