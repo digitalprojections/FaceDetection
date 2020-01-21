@@ -99,8 +99,8 @@ namespace FaceDetection
                                         if (MainForm.Settingui != null && MainForm.Settingui.Visible == false)
                                         {
                                             //MainForm.GetMainForm.TopMost = false;
-                                            
-                                            MainForm.Settingui.ShowDialog();
+
+                                            MainForm.Settingui.ShowSettings(cameraIndex);
                                         }
                                     }
                                     else
@@ -323,11 +323,11 @@ namespace FaceDetection
                                 {
                                     if (parameterOnOffSwitch)
                                     {
-                                        Properties.Settings.Default.show_window_pane = true;
+                                        PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(cameraIndex, true);
                                     }
                                     else
                                     {
-                                        Properties.Settings.Default.show_window_pane = false;                                        
+                                        PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(cameraIndex, false);
                                     }
                                     Properties.Settings.Default.Save();
                                     MainForm.AllChangesApply();

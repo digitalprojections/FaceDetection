@@ -13,7 +13,7 @@ namespace FaceDetection
             dateTimeLabel.Name = "dateTimeLabel";
             dateTimeLabel.Size = new Size(125, 30);
             dateTimeLabel.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
-            dateTimeLabel.DataBindings.Add(new Binding("Visible", Properties.Settings.Default, "show_current_datetime", true, DataSourceUpdateMode.OnPropertyChanged));
+            //dateTimeLabel.DataBindings.Add(new Binding("Visible", Properties.Settings.Default, "show_current_datetime", true, DataSourceUpdateMode.OnPropertyChanged));
             dateTimeLabel.Text = "";
             dateTimeLabel.Font = new Font("MS UI Gothic", 14F);
             dateTimeLabel.AutoSize = true;

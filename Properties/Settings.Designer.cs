@@ -157,18 +157,6 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int current_camera_index {
-            get {
-                return ((int)(this["current_camera_index"]));
-            }
-            set {
-                this["current_camera_index"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool C1_enable_capture_operator {
             get {
@@ -181,49 +169,25 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10, 10")]
-        public global::System.Drawing.Point window_location {
+        [global::System.Configuration.DefaultSettingValueAttribute("16, 16")]
+        public global::System.Drawing.Point C1_window_location {
             get {
-                return ((global::System.Drawing.Point)(this["window_location"]));
+                return ((global::System.Drawing.Point)(this["C1_window_location"]));
             }
             set {
-                this["window_location"] = value;
+                this["C1_window_location"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool window_on_top {
+        public bool C1_window_on_top {
             get {
-                return ((bool)(this["window_on_top"]));
+                return ((bool)(this["C1_window_on_top"]));
             }
             set {
-                this["window_on_top"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool show_current_datetime {
-            get {
-                return ((bool)(this["show_current_datetime"]));
-            }
-            set {
-                this["show_current_datetime"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool show_recording_icon {
-            get {
-                return ((bool)(this["show_recording_icon"]));
-            }
-            set {
-                this["show_recording_icon"] = value;
+                this["C1_window_on_top"] = value;
             }
         }
         
@@ -493,30 +457,6 @@ namespace FaceDetection.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public string camera_index {
-            get {
-                return ((string)(this["camera_index"]));
-            }
-            set {
-                this["camera_index"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool main_window_full_screen {
-            get {
-                return ((bool)(this["main_window_full_screen"]));
-            }
-            set {
-                this["main_window_full_screen"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool use_ir_sensor {
             get {
@@ -632,30 +572,6 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["recording_length_seconds"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool show_window_pane {
-            get {
-                return ((bool)(this["show_window_pane"]));
-            }
-            set {
-                this["show_window_pane"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool show_camera_no {
-            get {
-                return ((bool)(this["show_camera_no"]));
-            }
-            set {
-                this["show_camera_no"] = value;
             }
         }
         
@@ -824,30 +740,6 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["manual_record_time"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("15")]
-        public string main_camera_fps {
-            get {
-                return ((string)(this["main_camera_fps"]));
-            }
-            set {
-                this["main_camera_fps"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("640, 480")]
-        public global::System.Drawing.Size main_screen_size {
-            get {
-                return ((global::System.Drawing.Size)(this["main_screen_size"]));
-            }
-            set {
-                this["main_screen_size"] = value;
             }
         }
         
@@ -1424,6 +1316,222 @@ namespace FaceDetection.Properties {
             }
             set {
                 this["C4_capture_type"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C1_show_window_pane {
+            get {
+                return ((bool)(this["C1_show_window_pane"]));
+            }
+            set {
+                this["C1_show_window_pane"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C2_show_window_pane {
+            get {
+                return ((bool)(this["C2_show_window_pane"]));
+            }
+            set {
+                this["C2_show_window_pane"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C3_show_window_pane {
+            get {
+                return ((bool)(this["C3_show_window_pane"]));
+            }
+            set {
+                this["C3_show_window_pane"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C4_show_window_pane {
+            get {
+                return ((bool)(this["C4_show_window_pane"]));
+            }
+            set {
+                this["C4_show_window_pane"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C1_full_screen {
+            get {
+                return ((bool)(this["C1_full_screen"]));
+            }
+            set {
+                this["C1_full_screen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C2_full_screen {
+            get {
+                return ((bool)(this["C2_full_screen"]));
+            }
+            set {
+                this["C2_full_screen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C3_full_screen {
+            get {
+                return ((bool)(this["C3_full_screen"]));
+            }
+            set {
+                this["C3_full_screen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C4_full_screen {
+            get {
+                return ((bool)(this["C4_full_screen"]));
+            }
+            set {
+                this["C4_full_screen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C2_window_on_top {
+            get {
+                return ((bool)(this["C2_window_on_top"]));
+            }
+            set {
+                this["C2_window_on_top"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C3_window_on_top {
+            get {
+                return ((bool)(this["C3_window_on_top"]));
+            }
+            set {
+                this["C3_window_on_top"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C4_window_on_top {
+            get {
+                return ((bool)(this["C4_window_on_top"]));
+            }
+            set {
+                this["C4_window_on_top"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C1_show_date_time {
+            get {
+                return ((bool)(this["C1_show_date_time"]));
+            }
+            set {
+                this["C1_show_date_time"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C2_show_date_time {
+            get {
+                return ((bool)(this["C2_show_date_time"]));
+            }
+            set {
+                this["C2_show_date_time"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C3_show_date_time {
+            get {
+                return ((bool)(this["C3_show_date_time"]));
+            }
+            set {
+                this["C3_show_date_time"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C4_show_date_time {
+            get {
+                return ((bool)(this["C4_show_date_time"]));
+            }
+            set {
+                this["C4_show_date_time"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool C1_show_camera_number {
+            get {
+                return ((bool)(this["C1_show_camera_number"]));
+            }
+            set {
+                this["C1_show_camera_number"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("640, 480")]
+        public global::System.Drawing.Size C1_window_size {
+            get {
+                return ((global::System.Drawing.Size)(this["C1_window_size"]));
+            }
+            set {
+                this["C1_window_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool C1_show_record_icon {
+            get {
+                return ((bool)(this["C1_show_record_icon"]));
+            }
+            set {
+                this["C1_show_record_icon"] = value;
             }
         }
     }

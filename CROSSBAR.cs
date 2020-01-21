@@ -300,7 +300,7 @@ namespace FaceDetection
         {
             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(INDEX, out bool IRSensorEnabled);
             PROPERTY_FUNCTIONS.GetFaceRecognitionSwitch(INDEX, out bool faceDetectorEnabled);
-            PROPERTY_FUNCTIONS.GetCaptureOnOperationStartSwitch(INDEX, out bool recordingWhenOperation);            
+            PROPERTY_FUNCTIONS.GetOnOperationStartSwitch(INDEX, out bool recordingWhenOperation);            
 
             OPER_BAN = false;
             Logger.Add("No_opcap_timer_Elapsed, OPER_BAN (operator capture ban) set " + OPER_BAN);
