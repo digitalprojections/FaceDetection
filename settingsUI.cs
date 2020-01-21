@@ -217,6 +217,21 @@ namespace FaceDetection
             cb_human_sensor.DataBindings.Clear();
             cb_recording_operation.DataBindings.Clear();
             cm_capture_mode.DataBindings.Clear();
+            checkBox_full_screen.DataBindings.Clear();
+            cb_always_on_top.DataBindings.Clear();
+            cb_dateandtime.DataBindings.Clear();
+            cb_window_pane.DataBindings.Clear();
+            cb_show_camera_number.DataBindings.Clear();
+            cb_show_rec_icon.DataBindings.Clear();
+
+            //checkBox_full_screen;
+            //cb_always_on_top;
+            //cb_dateandtime;
+            //cb_window_pane;
+            //cb_show_camera_number;
+            //cb_show_rec_icon;
+
+            
 
             string camX = "C" + (Camera_index + 1) + "x";
             string camY = "C" + (Camera_index + 1) + "y";
@@ -224,6 +239,12 @@ namespace FaceDetection
             string camH = "C" + (Camera_index + 1) + "h";
             string camF = "C" + (Camera_index + 1) + "f";
             string camRes = "C" + (Camera_index + 1) + "res";
+            string win_full_screen = "C" + "winFullScreen";
+            string win_on_top = "C" + "winFullScreen";
+            string win_date_time = "C" + "winFullScreen";
+            string win_pane = "C" + "winFullScreen";
+            string win_cam_num = "C" + "winFullScreen";
+            string win_rec_icon = "C" + "winFullScreen";
 
             numericUpDownX.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camX, true, DataSourceUpdateMode.OnPropertyChanged));
             numericUpDownY.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camY, true, DataSourceUpdateMode.OnPropertyChanged));

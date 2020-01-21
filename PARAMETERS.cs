@@ -99,6 +99,7 @@ namespace FaceDetection
                                         if (MainForm.Settingui != null && MainForm.Settingui.Visible == false)
                                         {
                                             //MainForm.GetMainForm.TopMost = false;
+                                            
                                             MainForm.Settingui.ShowDialog();
                                         }
                                     }
@@ -142,17 +143,19 @@ namespace FaceDetection
                         case "s":
                             try
                             {
-                                if (wakeUpCall)
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
                                 {
-                                    wakeUpCall = false;
-                                    //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
-                                    //{
-                                    //    SNAPSHOT_SAVER.TakeAsyncSnapShot(true, cameraIndex, "event");
-                                    //}
-                                    //else 
-                                    if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
+                                    if (wakeUpCall)
                                     {
+                                        wakeUpCall = false;
+                                        //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                                        //{
+                                        //    SNAPSHOT_SAVER.TakeAsyncSnapShot(true, cameraIndex, "event");
+                                        //}
+                                        //else 
+
                                         SNAPSHOT_SAVER.TakeAsyncSnapShot(false, cameraIndex, "event");
+
                                     }
                                 }
                                 else
@@ -164,10 +167,17 @@ namespace FaceDetection
                                     //else 
                                     if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
                                     {
+                                        //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                                        //{
+                                        //    SNAPSHOT_SAVER.TakeSnapShotAll();
+                                        //}
+                                        //else 
+
                                         SNAPSHOT_SAVER.TakeSnapShot(cameraIndex, "event");
                                         //SNAPSHOT_SAVER.TakeAsyncSnapShot();
                                     }
                                 }
+                            
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
