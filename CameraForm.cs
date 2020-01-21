@@ -160,7 +160,11 @@ namespace FaceDetection
             //SetWindowProperties();
             FillResolutionList();
             DISPLAYED = true;
-            
+
+            if (CameraIndex == Properties.Settings.Default.main_camera_index)
+            {
+                camera_number.ForeColor = Color.Red;
+            }
         }
 
         /// <summary>
@@ -607,9 +611,17 @@ namespace FaceDetection
             }
         }
 
-       
-
-        
+        public void MainCameraDisplay (int cameraIndex)
+        {
+            if (cameraIndex == Properties.Settings.Default.main_camera_index)
+            {
+                camera_number.ForeColor = Color.Red;
+            }
+            else
+            {
+                camera_number.ForeColor = Color.Black;
+            }
+        }
 
         private void SettingsButtonsDesigner()
         {

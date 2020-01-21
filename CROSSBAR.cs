@@ -348,7 +348,6 @@ namespace FaceDetection
         {
             //recording_permission = true;
             Recording_is_on = false;
-            //window.picbox_recording.Visible = false; // TODO: useless ?
             window.recordingInProgress = false;
             PREEVENT_RECORDING = false;
             if (MainForm.GetMainForm != null)
