@@ -24,6 +24,10 @@ namespace FaceDetection
         private bool sensorEnabledCbStateC1, sensorEnabledCbStateC2, sensorEnabledCbStateC3, sensorEnabledCbStateC4;
         private bool faceDetectionCbStateC1, faceDetectionCbStateC2, faceDetectionCbStateC3, faceDetectionCbStateC4;
         private bool operatorActionCbStateC1, operatorActionCbStateC2, operatorActionCbStateC3, operatorActionCbStateC4;
+        /// <summary>
+        /// current camera, not the Main Camera
+        /// </summary>
+        private int cameraIndex;
 
         public SettingsUI()
         {
@@ -108,6 +112,13 @@ namespace FaceDetection
             }
         }
 
+        internal void ShowSettings(int cameraIndex)
+        {
+            this.cameraIndex = cameraIndex;
+            Location = PROPERTY_FUNCTIONS.Get_Window_Location(cameraIndex);
+            ShowDialog();
+        }
+
         private void OpenStoreLocation(object sender, EventArgs e)
         {
             try
@@ -123,25 +134,27 @@ namespace FaceDetection
 
         private void CloseSettings(object sender, EventArgs e)
         {
-            Hide();
             Properties.Settings.Default.Reload();
-            Properties.Settings.Default.main_camera_index = MainCameraBeforeSettingsLoad;
-            Properties.Settings.Default.C1_enable_capture_operator = operatorCaptureCbStateC1;
-            Properties.Settings.Default.C1_enable_Human_sensor = sensorEnabledCbStateC1;
-            Properties.Settings.Default.C1_enable_face_recognition = faceDetectionCbStateC1;
-            Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation = operatorActionCbStateC1;
-            Properties.Settings.Default.C2_enable_capture_operator = operatorCaptureCbStateC2;
-            Properties.Settings.Default.C2_enable_Human_sensor = sensorEnabledCbStateC2;
-            Properties.Settings.Default.C2_enable_face_recognition = faceDetectionCbStateC2;
-            Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation = operatorActionCbStateC2;
-            Properties.Settings.Default.C3_enable_capture_operator = operatorCaptureCbStateC3;
-            Properties.Settings.Default.C3_enable_Human_sensor = sensorEnabledCbStateC3;
-            Properties.Settings.Default.C3_enable_face_recognition = faceDetectionCbStateC3;
-            Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation = operatorActionCbStateC3;
-            Properties.Settings.Default.C4_enable_capture_operator = operatorCaptureCbStateC4;
-            Properties.Settings.Default.C4_enable_Human_sensor = sensorEnabledCbStateC4;
-            Properties.Settings.Default.C4_enable_face_recognition = faceDetectionCbStateC4;
-            Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation = operatorActionCbStateC4;
+            Hide();
+            //No need for these lines. Reload does the job
+
+            //Properties.Settings.Default.main_camera_index = MainCameraBeforeSettingsLoad;
+            //Properties.Settings.Default.C1_enable_capture_operator = operatorCaptureCbStateC1;
+            //Properties.Settings.Default.C1_enable_Human_sensor = sensorEnabledCbStateC1;
+            //Properties.Settings.Default.C1_enable_face_recognition = faceDetectionCbStateC1;
+            //Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation = operatorActionCbStateC1;
+            //Properties.Settings.Default.C2_enable_capture_operator = operatorCaptureCbStateC2;
+            //Properties.Settings.Default.C2_enable_Human_sensor = sensorEnabledCbStateC2;
+            //Properties.Settings.Default.C2_enable_face_recognition = faceDetectionCbStateC2;
+            //Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation = operatorActionCbStateC2;
+            //Properties.Settings.Default.C3_enable_capture_operator = operatorCaptureCbStateC3;
+            //Properties.Settings.Default.C3_enable_Human_sensor = sensorEnabledCbStateC3;
+            //Properties.Settings.Default.C3_enable_face_recognition = faceDetectionCbStateC3;
+            //Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation = operatorActionCbStateC3;
+            //Properties.Settings.Default.C4_enable_capture_operator = operatorCaptureCbStateC4;
+            //Properties.Settings.Default.C4_enable_Human_sensor = sensorEnabledCbStateC4;
+            //Properties.Settings.Default.C4_enable_face_recognition = faceDetectionCbStateC4;
+            //Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation = operatorActionCbStateC4;
         }
 
         private void Save_and_close(object sender, EventArgs e)
@@ -230,8 +243,8 @@ namespace FaceDetection
             //cb_window_pane;
             //cb_show_camera_number;
             //cb_show_rec_icon;
-
             
+
 
             string camX = "C" + (Camera_index + 1) + "x";
             string camY = "C" + (Camera_index + 1) + "y";
@@ -239,12 +252,12 @@ namespace FaceDetection
             string camH = "C" + (Camera_index + 1) + "h";
             string camF = "C" + (Camera_index + 1) + "f";
             string camRes = "C" + (Camera_index + 1) + "res";
-            string win_full_screen = "C" + "winFullScreen";
-            string win_on_top = "C" + "winFullScreen";
-            string win_date_time = "C" + "winFullScreen";
-            string win_pane = "C" + "winFullScreen";
-            string win_cam_num = "C" + "winFullScreen";
-            string win_rec_icon = "C" + "winFullScreen";
+            string camFullScreen = "C" + (Camera_index + 1) + "_full_screen";
+            string camOnTop = "C" + (Camera_index + 1) + "_window_on_top";
+            string camDateTime = "C" + (Camera_index + 1) + "_show_date_time";
+            string camWindowPane = "C" + (Camera_index + 1) + "_show_window_pane";
+            string camNumber = "C" + (Camera_index + 1) + "_show_camera_number";
+            string camRecordIcon = "C" + (Camera_index + 1) + "_show_record_icon";
 
             numericUpDownX.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camX, true, DataSourceUpdateMode.OnPropertyChanged));
             numericUpDownY.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camY, true, DataSourceUpdateMode.OnPropertyChanged));
@@ -252,11 +265,16 @@ namespace FaceDetection
             numericUpDownH.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camH, true, DataSourceUpdateMode.OnPropertyChanged));
             comboBoxFPS.DataBindings.Add(new Binding("Text", Properties.Settings.Default, camF, true, DataSourceUpdateMode.OnPropertyChanged));
             comboBoxResolutions.DataBindings.Add(new Binding("Text", Properties.Settings.Default, camRes, true, DataSourceUpdateMode.OnPropertyChanged));
-            
-            numericUpDownX.Enabled = !Properties.Settings.Default.main_window_full_screen;
-            numericUpDownY.Enabled = !Properties.Settings.Default.main_window_full_screen;
-            numericUpDownW.Enabled = !Properties.Settings.Default.main_window_full_screen;
-            numericUpDownH.Enabled = !Properties.Settings.Default.main_window_full_screen;
+            checkBox_full_screen.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camFullScreen, true, DataSourceUpdateMode.OnPropertyChanged));
+            cb_always_on_top.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camOnTop, true, DataSourceUpdateMode.OnPropertyChanged));
+            cb_dateandtime.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camDateTime, true, DataSourceUpdateMode.OnPropertyChanged));
+            cb_window_pane.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camWindowPane, true, DataSourceUpdateMode.OnPropertyChanged));
+            cb_show_camera_number.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camNumber, true, DataSourceUpdateMode.OnPropertyChanged));
+            cb_show_rec_icon.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camRecordIcon, true, DataSourceUpdateMode.OnPropertyChanged));
+
+            bool fs = !PROPERTY_FUNCTIONS.CheckFullScreenByIndex(Camera_index);
+            gbWindowPosition.Enabled = fs;
+            gbWindowSize.Enabled = fs;
 
             cm_capture_mode.DataBindings.Add(new Binding("Text", Properties.Settings.Default, "C" + (Camera_index + 1) + "_capture_type", true, DataSourceUpdateMode.OnPropertyChanged));
             cb_event_recorder.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_event_recorder", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -272,7 +290,7 @@ namespace FaceDetection
             cb_recording_operation.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_Recording_when_at_the_start_of_operation", true, DataSourceUpdateMode.OnPropertyChanged));
         }
 
-        public static void SetComboBoxFPSValues(List<string> vs)
+        public static void SetComboBoxFPSValues(List<string> vs, int cameraIndex)
         {
             frame_rates_combo.Items.Clear();
             bool matching_fps_found = false;
@@ -281,14 +299,14 @@ namespace FaceDetection
                 frame_rates_combo.Items.AddRange(vs.ToArray());
                 for (int i=0; i<vs.Count; i++)
                 {
-                    if (vs[i] == Properties.Settings.Default.main_camera_fps)
+                    if (vs[i] == PROPERTY_FUNCTIONS.Get_FPS(cameraIndex).ToString())
                     {
                         matching_fps_found = true;
                         break;
                     }
                 }
             }
-            Properties.Settings.Default.main_camera_fps = matching_fps_found ? Properties.Settings.Default.main_camera_fps : vs[0];
+            PROPERTY_FUNCTIONS.SetFPS(cameraIndex, matching_fps_found ? PROPERTY_FUNCTIONS.Get_FPS(cameraIndex).ToString() : vs[0]);
         }
 
         /// <summary>
@@ -296,7 +314,7 @@ namespace FaceDetection
         /// This method uses the Equals method to determine equality.
         /// </summary>
         /// <param name="vs"></param>
-        public static void SetComboBoxResolutionValues(List<string> vs)
+        public static void SetComboBoxResolutionValues(List<string> vs, int cameraIndex)
         {
             resolutions_combo.Items.Clear();
             if (resolutions_combo != null)
@@ -351,60 +369,49 @@ namespace FaceDetection
             CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture(Properties.Settings.Default.culture);
             ChangeLanguage();
             Debug.WriteLine(CultureInfo.CurrentCulture + " current culture");
-            SetCameraPropertiesFromMemory();
+            this.Text = Resource.settingsWindowTitle;
+            //No need to call now, as there is a call from button press
+            //SetCameraPropertiesFromMemory();
             Camera.SetNumberOfCameras();
 
-            int cam_index = Camera_index;
-            if (cam_index == 0)
+            if (Camera_index == 0)
             { 
-                ChangeControlEnabled(this.groupBox_functionalitySettings, Properties.Settings.Default.C1_enable_capture_operator, cam_index);
+                ChangeControlEnabled(this.groupBox_functionalitySettings, Properties.Settings.Default.C1_enable_capture_operator, Camera_index);
             }
-            else if (cam_index == 1)
+            else if (Camera_index == 1)
             {
-                ChangeControlEnabled(this.groupBox_functionalitySettings, Properties.Settings.Default.C2_enable_capture_operator, cam_index);
+                ChangeControlEnabled(this.groupBox_functionalitySettings, Properties.Settings.Default.C2_enable_capture_operator, Camera_index);
             }
-            else if (cam_index == 2)
+            else if (Camera_index == 2)
             {
-                ChangeControlEnabled(this.groupBox_functionalitySettings, Properties.Settings.Default.C3_enable_capture_operator, cam_index);
+                ChangeControlEnabled(this.groupBox_functionalitySettings, Properties.Settings.Default.C3_enable_capture_operator, Camera_index);
             }
-            else if (cam_index == 3)
+            else if (Camera_index == 3)
             {
-                ChangeControlEnabled(this.groupBox_functionalitySettings, Properties.Settings.Default.C4_enable_capture_operator, cam_index);
+                ChangeControlEnabled(this.groupBox_functionalitySettings, Properties.Settings.Default.C4_enable_capture_operator, Camera_index);
             }
 
             this.ControlBox = false;
             this.MaximizeBox = false;
             //this.TopMost = true;
 
-            if (MainForm.AnyRecordingInProgress == true)
-            {
-                cm_camera_number.Enabled = false;
-                button_settings_save.Enabled = false;
-            }
-            else
-            {
-                cm_camera_number.Enabled = true;
-                button_settings_save.Enabled = true;
-            }
+            bool rip = MainForm.AnyRecordingInProgress;
+            cm_camera_number.Enabled = !rip;
+            button_settings_save.Enabled = !rip;
+            
         }
 
         public void DisabledButtonWhenRecording()
         {
-            if (MainForm.AnyRecordingInProgress == true)
+            bool rip = MainForm.AnyRecordingInProgress;
+            
+            cm_camera_number.Enabled = !rip;
+            button_settings_save.Enabled = !rip;
+            if (cb_operator_capture.CheckState == CheckState.Unchecked && cb_event_recorder.CheckState==CheckState.Unchecked)
             {
-                cm_camera_number.Enabled = false;
-                button_settings_save.Enabled = false;
-                if (cb_operator_capture.CheckState == CheckState.Unchecked && cb_event_recorder.CheckState==CheckState.Unchecked)
-                {
-                    //User wants to stop recordings and set the app to no buffer mode. Simply allow OK button
-                    button_settings_save.Enabled = true;
-                }
-            }
-            else
-            {
-                cm_camera_number.Enabled = true;
+                //User wants to stop recordings and set the app to no buffer mode. Simply allow OK button
                 button_settings_save.Enabled = true;
-            }
+            }            
         }
                  
         private void Cm_language_SelectedIndexChanged(object sender, EventArgs e)
@@ -414,15 +421,14 @@ namespace FaceDetection
                 if (cm_language.SelectedItem.ToString() == "English")
                 {
                     Properties.Settings.Default.culture = "en-US";
-                    Properties.Settings.Default.language = "English";
-                    this.Text = "Settings";
+                    Properties.Settings.Default.language = "English";                    
                 }
                 else
                 {
                     Properties.Settings.Default.culture = "ja-JP";
-                    Properties.Settings.Default.language = "日本語";
-                    this.Text = "設定";
+                    Properties.Settings.Default.language = "日本語";                    
                 }
+                this.Text = Resource.settingsWindowTitle;
                 System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Properties.Settings.Default.culture);
                 ChangeLanguage();
             }            
@@ -571,43 +577,17 @@ namespace FaceDetection
                 }
             }
 
-            if (!enabled)
-            {
-                if (cam_index == 0)
-                {
-                    Properties.Settings.Default.C1_enable_Human_sensor = false;
-                    Properties.Settings.Default.C1_enable_face_recognition = false;
-                    Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation = false;
-                }
-                else if (cam_index == 1)
-                {
-                    Properties.Settings.Default.C2_enable_Human_sensor = false;
-                    Properties.Settings.Default.C2_enable_face_recognition = false;
-                    Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation = false;
-                }
-                else if (cam_index == 2)
-                {
-                    Properties.Settings.Default.C3_enable_Human_sensor = false;
-                    Properties.Settings.Default.C3_enable_face_recognition = false;
-                    Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation = false;
-                }
-                else if (cam_index == 3)
-                {
-                    Properties.Settings.Default.C4_enable_Human_sensor = false;
-                    Properties.Settings.Default.C4_enable_face_recognition = false;
-                    Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation = false;
-                }
-            }
+            PROPERTY_FUNCTIONS.Set_Human_Sensor(cam_index, enabled);
+            PROPERTY_FUNCTIONS.Set_Face_Switch(cam_index, enabled);
+            PROPERTY_FUNCTIONS.SetOnOperationStartSwitch(cam_index, enabled);
         }
 
         private void CheckBox_full_screen_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox cbx = (CheckBox)sender;
 
-            numericUpDownX.Enabled = !cbx.Checked;
-            numericUpDownY.Enabled = !cbx.Checked;
-            numericUpDownW.Enabled = !cbx.Checked;
-            numericUpDownH.Enabled = !cbx.Checked;
+            gbWindowPosition.Enabled = !cbx.Checked;
+            gbWindowSize.Enabled = !cbx.Checked;
         }
 
         private void Cb_CheckStateChanged(object sender, EventArgs e)
@@ -782,6 +762,16 @@ namespace FaceDetection
             }
         }
 
+        private void cb_always_on_top_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cb_window_pane_CheckedChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(sender);
+        }
+
         private void DisableOperatorCaptureCheckBox_ifNeeded()
         {
             // CAMERA 1
@@ -870,9 +860,18 @@ namespace FaceDetection
             }
         }
 
+        /// <summary>
+        /// Visibility changed event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SettingsUI_Shown(object sender, EventArgs e)
-        {
-            DisableOperatorCaptureCheckBox_ifNeeded();
+        {            
+            if (this.Visible)
+            {
+                DisableOperatorCaptureCheckBox_ifNeeded();
+                cm_camera_number.SelectedIndex = cameraIndex;
+            }            
         }
 
         private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)

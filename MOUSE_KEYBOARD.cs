@@ -79,7 +79,7 @@ namespace FaceDetection
             PROPERTY_FUNCTIONS.GetSecondsAfterEvent(CAMERA_INDEX, out timeAfterEvent);
             PROPERTY_FUNCTIONS.GetCaptureMethod(CAMERA_INDEX, out captureMethod);
             PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(CAMERA_INDEX, out captureOperatorEnabled);
-            PROPERTY_FUNCTIONS.GetCaptureOnOperationStartSwitch(CAMERA_INDEX, out recordWhenOperation);
+            PROPERTY_FUNCTIONS.GetOnOperationStartSwitch(CAMERA_INDEX, out recordWhenOperation);
             try
             {                
                 preeventRecording = MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.PREEVENT_RECORDING;

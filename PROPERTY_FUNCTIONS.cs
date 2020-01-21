@@ -85,7 +85,7 @@ namespace FaceDetection
         internal static void SetCaptureOperatorSwitchImplicitly(int camindex)
         {
             Get_Human_Sensor_Enabled(camindex, out bool IRSENSOR);
-            GetCaptureOnOperationStartSwitch(camindex, out bool OPERSTART);
+            GetOnOperationStartSwitch(camindex, out bool OPERSTART);
             GetFaceRecognitionSwitch(camindex, out bool FACECHECK);
             
                 switch (camindex)
@@ -103,7 +103,7 @@ namespace FaceDetection
                         Properties.Settings.Default.C4_enable_capture_operator = (IRSENSOR || OPERSTART || FACECHECK);
                         break;
                 }
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.Save();
         }
         /// <summary>
         /// Set CAPTURE OPERATOR directly
@@ -126,12 +126,52 @@ namespace FaceDetection
                     Properties.Settings.Default.C4_enable_capture_operator = value;
                     break;
             }
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.Save();
         }
 
-        
-
-        internal static void GetCaptureOnOperationStartSwitch(int camindex, out bool recordWhenOperation)
+        internal static void GetFaceRecognitionSwitch(int camindex, out bool faceRecognitionEnabled)
+        {
+            switch (camindex)
+            {
+                case 0:
+                    faceRecognitionEnabled = Properties.Settings.Default.C1_enable_face_recognition;
+                    break;
+                case 1:
+                    faceRecognitionEnabled = Properties.Settings.Default.C2_enable_face_recognition;
+                    break;
+                case 2:
+                    faceRecognitionEnabled = Properties.Settings.Default.C3_enable_face_recognition;
+                    break;
+                case 3:
+                    faceRecognitionEnabled = Properties.Settings.Default.C4_enable_face_recognition;
+                    break;
+                default:
+                    faceRecognitionEnabled = Properties.Settings.Default.C1_enable_face_recognition;
+                    break;
+            }
+        }
+        internal static void SetOnOperationStartSwitch(int camindex, bool recordWhenOperation)
+        {
+            switch (camindex)
+            {
+                case 0:
+                    Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation = recordWhenOperation;
+                    break;
+                case 1:
+                    Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation = recordWhenOperation;
+                    break;
+                case 2:
+                    Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation = recordWhenOperation;
+                    break;
+                case 3:
+                    Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation = recordWhenOperation;
+                    break;
+                default:
+                    Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation = recordWhenOperation;
+                    break;
+            }
+        }
+        internal static void GetOnOperationStartSwitch(int camindex, out bool recordWhenOperation)
         {
             switch (camindex)
             {
@@ -246,12 +286,96 @@ namespace FaceDetection
             return retval;
         }
 
+        internal static bool GetShowDateTimeSwitch(int cameraIndex)
+        {
+            switch (cameraIndex)
+            {
+                case 0:
+                    return Properties.Settings.Default.C1_show_date_time;
+                case 1:
+                    return Properties.Settings.Default.C2_show_date_time;
+                case 2:
+                    return Properties.Settings.Default.C3_show_date_time;
+                case 3:
+                    return Properties.Settings.Default.C4_show_date_time;
+                default:
+                    return false;
+            }
+        }
+
+        internal static void SetShowWindowPaneSwitch(int cameraIndex, bool v)
+        {
+            switch (cameraIndex)
+            {
+                case 0:
+                    Properties.Settings.Default.C1_show_window_pane = v;
+                    break;
+                case 1:
+                    Properties.Settings.Default.C2_show_window_pane = v;
+                    break;
+                case 2:
+                    Properties.Settings.Default.C3_show_window_pane = v;
+                    break;
+                case 3:
+                    Properties.Settings.Default.C4_show_window_pane = v;
+                    break;
+            }
+        }
+        internal static bool GetShowWindowPaneSwitch(int cameraIndex)
+        {
+            switch (cameraIndex)
+            {
+                case 0:
+                    return Properties.Settings.Default.C1_show_window_pane;
+                case 1:
+                    return Properties.Settings.Default.C2_show_window_pane;
+                case 2:
+                    return Properties.Settings.Default.C3_show_window_pane;
+                case 3:
+                    return Properties.Settings.Default.C4_show_window_pane;
+                default:
+                    return false;
+            }
+        }
+
+        internal static bool GetShowCameraNumberSwitch(int cameraIndex)
+        {
+            switch (cameraIndex)
+            {
+                case 0:
+                    return Properties.Settings.Default.C1_show_camera_number;
+                case 1:
+                    return Properties.Settings.Default.C2_show_camera_number;
+                case 2:
+                    return Properties.Settings.Default.C3_show_camera_number;
+                case 3:
+                    return Properties.Settings.Default.C4_show_camera_number;
+                default:
+                    return false;
+            }
+        }
+        internal static bool GetRecordingIconSwitch(int cameraIndex)
+        {
+            switch (cameraIndex)
+            {
+                case 0:
+                    return Properties.Settings.Default.C1_show_record_icon;
+                case 1:
+                    return Properties.Settings.Default.C2_show_record_icon;
+                case 2:
+                    return Properties.Settings.Default.C3_show_record_icon;
+                case 3:
+                    return Properties.Settings.Default.C4_show_record_icon;
+                default:
+                    return false;
+            }
+        }
         internal static void Set_Rec_Icon(int cam_ind, bool val)
         {            
             switch (cam_ind)
             {
                 case 0:
-                    Properties.Settings.Default.show_recording_icon = val;
+                    Properties.Settings.Default.C1_show_record_icon = val;
                     break;
                 case 1:
                     Properties.Settings.Default.C2_show_record_icon = val;
@@ -270,7 +394,7 @@ namespace FaceDetection
             switch (cam_ind)
             {
                 case 0:
-                    retval = Properties.Settings.Default.window_location;
+                    retval = Properties.Settings.Default.C1_window_location;
                     return retval;
                 case 1:
                     retval = Properties.Settings.Default.C2_window_location;
@@ -289,19 +413,49 @@ namespace FaceDetection
             switch (cam_ind)
             {
                 case 0:
-                    Properties.Settings.Default.window_location = subCamWindow.Location;
+                    Properties.Settings.Default.C1_window_location = subCamWindow.Location;
+                    Properties.Settings.Default.C1x = subCamWindow.Location.X;
+                    Properties.Settings.Default.C1y = subCamWindow.Location.Y;
                     break;
                 case 1:
                     Properties.Settings.Default.C2_window_location = subCamWindow.Location;
+                    Properties.Settings.Default.C2x = subCamWindow.Location.X;
+                    Properties.Settings.Default.C2y = subCamWindow.Location.Y;
                     break;
                 case 2:
                     Properties.Settings.Default.C3_window_location = subCamWindow.Location;
+                    Properties.Settings.Default.C3x = subCamWindow.Location.X;
+                    Properties.Settings.Default.C3y = subCamWindow.Location.Y;
                     break;
                 case 3:
                     Properties.Settings.Default.C4_window_location = subCamWindow.Location;
+                    Properties.Settings.Default.C4x = subCamWindow.Location.X;
+                    Properties.Settings.Default.C4y = subCamWindow.Location.Y;
                     break;
             }
         }
+
+        
+
+        internal static bool CheckFullScreenByIndex(int camera_index)
+        {
+            switch (camera_index)
+            {
+                case 0:
+                    return Properties.Settings.Default.C1_full_screen;
+                case 1:
+                    return Properties.Settings.Default.C2_full_screen;
+                case 2:
+                    return Properties.Settings.Default.C3_full_screen;
+                case 3:
+                    return Properties.Settings.Default.C4_full_screen;
+                default:
+                    return false;
+            }
+        }
+
+        
+
         /// <summary>
         /// Settings UI has variable window size values stored as per camera index.
         /// You can get those values by camera index
@@ -328,6 +482,9 @@ namespace FaceDetection
             }
             return size;
         }
+
+        
+
         /// <summary>
         /// Set individual window sizes for each camera
         /// </summary>
@@ -558,28 +715,7 @@ namespace FaceDetection
                     break;
             }
         }
-
-        internal static void GetFaceRecognitionSwitch(int camindex, out bool faceRecognitionEnabled)
-        {
-            switch (camindex)
-            {
-                case 0:             
-                    faceRecognitionEnabled = Properties.Settings.Default.C1_enable_face_recognition;
-                    break;
-                case 1:             
-                    faceRecognitionEnabled = Properties.Settings.Default.C2_enable_face_recognition;
-                    break;
-                case 2:             
-                    faceRecognitionEnabled = Properties.Settings.Default.C3_enable_face_recognition;
-                    break;
-                case 3:             
-                    faceRecognitionEnabled = Properties.Settings.Default.C4_enable_face_recognition;
-                    break;
-                default:
-                    faceRecognitionEnabled = Properties.Settings.Default.C1_enable_face_recognition;
-                    break;
-            }
-        }
+        
 
         
 
@@ -612,7 +748,24 @@ namespace FaceDetection
             return retval;
         }
 
-        
+        internal static void SetFPS(int cameraIndex, string v)
+        {
+            switch (cameraIndex)
+            {
+                case 0:
+                    Properties.Settings.Default.C1f = v;
+                    break;
+                case 1:
+                    Properties.Settings.Default.C2f = v;
+                    break;
+                case 2:
+                    Properties.Settings.Default.C3f = v;
+                    break;
+                case 3:
+                    Properties.Settings.Default.C4f = v;
+                    break;
+            }
+        }
 
         public static int Get_FPS(int cam_ind)
         {

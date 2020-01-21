@@ -58,34 +58,7 @@ namespace FaceDetection
         }        
         
         
-        public async void ShowSettings(object sender, EventArgs e)
-        {
-            ShowSettingsDialogAsync();
-        }
-
-        private void ShowSettingsDialogAsync()
-        {
-            if (Settingui.InvokeRequired)
-            {
-                var d = new dShowSettingsUI(ShowSettingsDialogAsync);
-                Settingui.Invoke(d);
-            }
-            else
-            {
-                if (Settingui.Visible == false)
-                {
-                    try
-                    {
-                        Settingui.Show();
-                        settingUI.DisabledButtonWhenRecording();
-                    }
-                    catch (InvalidOperationException invx)
-                    {
-                        Settingui = new SettingsUI();
-                    }
-                }
-            }
-        }
+        
                 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -146,7 +119,7 @@ namespace FaceDetection
                 RSensor?.Stop_IR_Timer();             
             }
 
-            PROPERTY_FUNCTIONS.GetCaptureOnOperationStartSwitch(CAMERA_INDEX, out bool spymode);
+            PROPERTY_FUNCTIONS.GetOnOperationStartSwitch(CAMERA_INDEX, out bool spymode);
             if (spymode)
             {
                 Mklisteners.AddMouseAndKeyboardBack();
@@ -181,7 +154,37 @@ namespace FaceDetection
                 //    }
             }
         }
-
+        public async void ShowSettings(object sender, EventArgs e)
+        {
+            if(sender != null)
+            {
+                Button settings_button = (Button)sender;
+                ShowSettingsDialogAsync(int.Parse(settings_button.Tag.ToString()));
+            }            
+        }
+        private void ShowSettingsDialogAsync(int cameraIndex)
+        {
+            if (Settingui.InvokeRequired)
+            {
+                var d = new dShowSettingsUI(() => ShowSettingsDialogAsync(cameraIndex));
+                Settingui.Invoke(d);
+            }
+            else
+            {
+                if (Settingui.Visible == false)
+                {
+                    try
+                    {
+                        Settingui.ShowSettings(cameraIndex);
+                        settingUI.DisabledButtonWhenRecording();
+                    }
+                    catch (InvalidOperationException invx)
+                    {
+                        Settingui = new SettingsUI();
+                    }
+                }
+            }
+        }
         private void ClearCutFileTempFolder()
         {
             string[] listFiles1, listFiles2, listFiles3, listFiles4;

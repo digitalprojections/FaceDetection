@@ -122,7 +122,7 @@ namespace FaceDetection
             //{
             //    this.Text = "UVC Camera Viewer -  camera " + (CameraIndex + 1);                
             //}
-            crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
+            //crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
 
             this.SizeChanged += WindowSizeUpdate;
             
@@ -226,8 +226,8 @@ namespace FaceDetection
 
         public void GetVideoFormat()
         {
-            SettingsUI.SetComboBoxResolutionValues(vf_resolutions);
-            SettingsUI.SetComboBoxFPSValues(vf_fps);
+            SettingsUI.SetComboBoxResolutionValues(vf_resolutions, CameraIndex);
+            SettingsUI.SetComboBoxFPSValues(vf_fps, CameraIndex);
         }
 
         private void CameraForm_MouseUp(object sender, MouseEventArgs e)
@@ -274,14 +274,14 @@ namespace FaceDetection
             //int cameraIndex = Properties.Settings.Default.main_camera_index;
             //picbox_recording.Visible = false;
             //recordingInProgress = false;
-            camera_number.Visible = Properties.Settings.Default.show_camera_no;
+            camera_number.Visible = PROPERTY_FUNCTIONS.GetShowCameraNumberSwitch(CameraIndex);
             //or_camera_num_txt.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
             //MainForm.GetMainForm.TopMost = Properties.Settings.Default.window_on_top;
             //Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
-            dateTimeLabel.Visible = Properties.Settings.Default.show_current_datetime;
+            dateTimeLabel.Visible = PROPERTY_FUNCTIONS.GetShowDateTimeSwitch(CameraIndex);
             
             // Window on top
-            if (Properties.Settings.Default.window_on_top)
+            if (Properties.Settings.Default.C1_window_on_top)
             {
                 Activate();
             }
@@ -300,7 +300,7 @@ namespace FaceDetection
             }           
 
             //Window pane
-            if (Properties.Settings.Default.show_window_pane == true)
+            if (PROPERTY_FUNCTIONS.GetShowWindowPaneSwitch(CameraIndex) == true)
             {
                 FormBorderStyle = FormBorderStyle.Sizable;
                 ControlBox = true;                
@@ -327,7 +327,7 @@ namespace FaceDetection
             }
 
             // Full screen
-            if (Properties.Settings.Default.main_window_full_screen)
+            if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(CameraIndex))
             {
                 this.WindowState = FormWindowState.Maximized;
             }
@@ -358,13 +358,13 @@ namespace FaceDetection
 
         public void SET_REC_ICON()
         {
-            picbox_recording.Visible = Properties.Settings.Default.show_recording_icon;
+            picbox_recording.Visible = PROPERTY_FUNCTIONS.GetRecordingIconSwitch(CameraIndex);
             recordingInProgress = true;
         }
 
         public void SetRecordIcon (int cam_index, int timeAfterEvent)
         {
-            rec_icon.Visible = Properties.Settings.Default.show_recording_icon;
+            rec_icon.Visible = PROPERTY_FUNCTIONS.GetRecordingIconSwitch(CameraIndex);
             crossbar.NoCapTimerON(timeAfterEvent);
             crossbar.icon_timer.Interval = decimal.ToInt32(timeAfterEvent) * 1000;
             crossbar.icon_timer.Enabled = true;
@@ -485,7 +485,7 @@ namespace FaceDetection
             PROPERTY_FUNCTIONS.GetEventRecorderSwitch(CameraIndex, out bool eventRecorderEnabled);
             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CameraIndex, out bool IRSensorEnabled);
             PROPERTY_FUNCTIONS.GetFaceRecognitionSwitch(CameraIndex, out bool faceRecognitionEnabled);
-            PROPERTY_FUNCTIONS.GetCaptureOnOperationStartSwitch(CameraIndex, out bool recordingWhenOperationEnabled);
+            PROPERTY_FUNCTIONS.GetOnOperationStartSwitch(CameraIndex, out bool recordingWhenOperationEnabled);
             PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(CameraIndex, out int eventRecordTimeBeforeEvent, out int nouse);
             PROPERTY_FUNCTIONS.GetSecondsBeforeEvent(CameraIndex, out int secondBeforeOperationEvent);
 
@@ -497,7 +497,7 @@ namespace FaceDetection
                     {
                         cameraButton.Tag = "rec";
                         crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
-                        rec_icon.Visible = Properties.Settings.Default.show_recording_icon;
+                        rec_icon.Visible = PROPERTY_FUNCTIONS.GetRecordingIconSwitch(CameraIndex);
                         recordingInProgress = true;
                         crossbar.NoCapTimerON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                         crossbar.SetIconTimer(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
@@ -703,6 +703,7 @@ namespace FaceDetection
             this.settingsButton.Size = new System.Drawing.Size(52, 52);
             this.settingsButton.TabIndex = 3;
             this.settingsButton.UseVisualStyleBackColor = false;
+            this.settingsButton.Tag = CameraIndex.ToString();
             this.settingsButton.Click += new System.EventHandler(MainForm.GetMainForm.ShowSettings);
             // 
             // snapshotButton

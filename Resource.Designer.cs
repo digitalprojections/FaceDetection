@@ -134,6 +134,15 @@ namespace FaceDetection {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string settingsWindowTitle {
+            get {
+                return ResourceManager.GetString("settingsWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please, select the output folder.
         /// </summary>
         internal static string store_location_description {
