@@ -185,9 +185,7 @@ namespace FaceDetection
             MainForm.AllChangesApply();
 
             // 4 Cameras: the selected camera became preevent mode (or preview), others became preview mode
-            
-
-                //MULTI_WINDOW.formList[Camera_index].crossbar.Start(Camera_index, CAMERA_MODES.PREVIEW);
+            //MULTI_WINDOW.formList[Camera_index].crossbar.Start(Camera_index, CAMERA_MODES.PREVIEW);
             //    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
             //    {
             //        if (i != Camera_index)

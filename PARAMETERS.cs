@@ -358,7 +358,7 @@ namespace FaceDetection
                             {
                                 if (CheckCameraIndex(cameraIndex) && (cameraIndex == Properties.Settings.Default.main_camera_index) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false) // Main camera
                                 {
-                                    if (parameterOnOffSwitch && MainForm.AnyRecordingInProgress == false)
+                                    if (parameterOnOffSwitch)
                                     {
                                         MULTI_WINDOW.EventRecorderOn(cameraIndex);
                                     }
@@ -444,12 +444,16 @@ namespace FaceDetection
                 if (isMinimized)
                 {
                     if (CameraIndex >= 0 && CameraIndex < 4)
+                    {
                         MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Minimized;
+                    }
                 }
                 else
                 {
                     if (CameraIndex >= 0 && CameraIndex < 4)
+                    {
                         MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Normal;
+                    }
                 }
 
                 PARAM.Clear();
@@ -465,33 +469,31 @@ namespace FaceDetection
         {
             bool retval = false;
 
-            if (cameraIndex ==8 || cameraIndex >=0 && cameraIndex<4)
+            if ((cameraIndex == 8 || (cameraIndex >= 0 && cameraIndex < 4)) && MULTI_WINDOW.formList[cameraIndex]?.DISPLAYED == true)
             {                
                 retval = true;                
             }
             return retval;
         }
 
-        
-
-        private static int GetNextCameraIndex(int cameraIndex)
-        {
-            //if(cameraIndex == 8)
-            //{
-            //    //すべてのカメラ指定時
-            //    //1から始まって9なので、0から始まると8になる
-            //    return cameraIndex;
-            //}
-            //else if(cameraIndex >= 3)
-            if (cameraIndex >= MULTI_WINDOW.displayedCameraCount)
-            {
-                return 0;
-            }
-            else
-            {
-                return cameraIndex + 1;
-            }
-        }
+        //private static int GetNextCameraIndex(int cameraIndex)
+        //{
+        //    //if(cameraIndex == 8)
+        //    //{
+        //    //    //すべてのカメラ指定時
+        //    //    //1から始まって9なので、0から始まると8になる
+        //    //    return cameraIndex;
+        //    //}
+        //    //else if(cameraIndex >= 3)
+        //    if (cameraIndex >= MULTI_WINDOW.displayedCameraCount)
+        //    {
+        //        return 0;
+        //    }
+        //    else
+        //    {
+        //        return cameraIndex + 1;
+        //    }
+        //}
         
         #region DLL IMPORTS
         [DllImport("user32.dll")]
