@@ -210,13 +210,13 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="C2_show_record_icon" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="C3_show_record_icon" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="C4_show_record_icon" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="C2_window_location" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">32, 32</Value>
@@ -360,16 +360,16 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="C1_show_date_time" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="C2_show_date_time" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="C3_show_date_time" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="C4_show_date_time" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="C1_show_camera_number" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
