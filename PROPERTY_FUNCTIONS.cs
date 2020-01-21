@@ -56,26 +56,7 @@ namespace FaceDetection
                 }
             }
         }
-        internal static Point Get_Camera_Window_Location(int cam_ind)
-        {
-            Point retval;
-            switch (cam_ind)
-            {
-                case 0:
-                    retval = Properties.Settings.Default.window_location;
-                    return retval;
-                case 1:
-                    retval = Properties.Settings.Default.C2_window_location;
-                    return retval;
-                case 2:
-                    retval = Properties.Settings.Default.C3_window_location;
-                    return retval;
-                case 3:
-                    retval = Properties.Settings.Default.C4_window_location;
-                    return retval;
-                default: return new Point(16, 16);
-            }
-        }
+        
 
         internal static void GetCaptureOperatorSwitch(int camindex, out bool captureOperatorEnabled)
         {
@@ -148,27 +129,7 @@ namespace FaceDetection
             Properties.Settings.Default.Save();
         }
 
-        internal static void GetReInitiationInterval(int cameraindex, out int intervalBeforeReinitiating)
-        {
-            switch (cameraindex)
-            {
-                case 0:
-                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C1_interval_before_reinitiating_recording);
-                    break;
-                case 1:
-                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C2_interval_before_reinitiating_recording);
-                    break;
-                case 2:
-                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C3_interval_before_reinitiating_recording);
-                    break;
-                case 3:
-                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C4_interval_before_reinitiating_recording);
-                    break;
-                default:
-                    intervalBeforeReinitiating = 0;
-                    break;
-            }
-        }
+        
 
         internal static void GetCaptureOnOperationStartSwitch(int camindex, out bool recordWhenOperation)
         {
@@ -227,26 +188,26 @@ namespace FaceDetection
         //        resolution_changed = false;
         //    }
         //}
-        internal static bool Get_Rec_Icon(int cam_ind)
-        {
-            bool retval = false;
-            switch (cam_ind)
-            {
-                case 0:
-                    retval = Properties.Settings.Default.show_recording_icon;
-                    break;
-                case 1:
-                    retval = Properties.Settings.Default.C2_show_record_icon;
-                    break;
-                case 2:
-                    retval = Properties.Settings.Default.C3_show_record_icon;
-                    break;
-                case 3:
-                    retval = Properties.Settings.Default.C4_show_record_icon;
-                    break;
-            }
-            return retval;
-        }
+        //internal static bool Get_Rec_Icon(int cam_ind)
+        //{
+        //    bool retval = false;
+        //    switch (cam_ind)
+        //    {
+        //        case 0:
+        //            retval = Properties.Settings.Default.show_recording_icon;
+        //            break;
+        //        case 1:
+        //            retval = Properties.Settings.Default.C2_show_record_icon;
+        //            break;
+        //        case 2:
+        //            retval = Properties.Settings.Default.C3_show_record_icon;
+        //            break;
+        //        case 3:
+        //            retval = Properties.Settings.Default.C4_show_record_icon;
+        //            break;
+        //    }
+        //    return retval;
+        //}
 
         internal static bool CheckPreEventTimes(int cameraindex)
         {
@@ -303,7 +264,26 @@ namespace FaceDetection
                     break;
             }
         }
-
+        internal static Point Get_Window_Location(int cam_ind)
+        {
+            Point retval;
+            switch (cam_ind)
+            {
+                case 0:
+                    retval = Properties.Settings.Default.window_location;
+                    return retval;
+                case 1:
+                    retval = Properties.Settings.Default.C2_window_location;
+                    return retval;
+                case 2:
+                    retval = Properties.Settings.Default.C3_window_location;
+                    return retval;
+                case 3:
+                    retval = Properties.Settings.Default.C4_window_location;
+                    return retval;
+                default: return new Point(16, 16);
+            }
+        }
         internal static void Set_Window_Location(int cam_ind, CameraForm subCamWindow)
         {
             switch (cam_ind)
@@ -348,7 +328,33 @@ namespace FaceDetection
             }
             return size;
         }
-
+        /// <summary>
+        /// Set individual window sizes for each camera
+        /// </summary>
+        /// <param name="cam_ind"></param>
+        /// <returns></returns>
+        public static void Set_Camera_Window_Size(int cam_ind, Form form)
+        {
+            switch (cam_ind)
+            {
+                case 0:
+                    Properties.Settings.Default.C1w = Convert.ToDecimal(form.Width);
+                    Properties.Settings.Default.C1h = Convert.ToDecimal(form.Height);
+                    break;
+                case 1:
+                    Properties.Settings.Default.C2w = Convert.ToDecimal(form.Width);
+                    Properties.Settings.Default.C2h = Convert.ToDecimal(form.Height);
+                    break;
+                case 2:
+                    Properties.Settings.Default.C3w = Convert.ToDecimal(form.Width);
+                    Properties.Settings.Default.C3h = Convert.ToDecimal(form.Height);
+                    break;
+                case 3:
+                    Properties.Settings.Default.C4w = Convert.ToDecimal(form.Width);
+                    Properties.Settings.Default.C4h = Convert.ToDecimal(form.Height);
+                    break;
+            }
+        }
         internal static void GetPreAndPostEventTimes(int cameraIndex, out int timeBeforeEvent, out int timeAfterEvent)
         {
             switch (cameraIndex)
@@ -423,7 +429,28 @@ namespace FaceDetection
 
             SetCaptureOperatorSwitchImplicitly(cameraIndex);
         }
+        internal static void GetSecondsBeforeEvent(int camsen, out int secondBeforeOperationEvent)
+        {
 
+            switch (camsen)
+            {
+                case 0:
+                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
+                    break;
+                case 1:
+                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
+                    break;
+                case 2:
+                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
+                    break;
+                case 3:
+                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
+                    break;
+                default:
+                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
+                    break;
+            }
+        }
         internal static void GetSecondsAfterEvent(int index, out int secondsAfterEvent)
         {
             switch (index)
@@ -489,8 +516,28 @@ namespace FaceDetection
                     break;
             }
         }
-
-        internal static void GetInterval(int camindex, out int checkInterval)
+        internal static void GetReInitiationInterval(int cameraindex, out int intervalBeforeReinitiating)
+        {
+            switch (cameraindex)
+            {
+                case 0:
+                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C1_interval_before_reinitiating_recording);
+                    break;
+                case 1:
+                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C2_interval_before_reinitiating_recording);
+                    break;
+                case 2:
+                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C3_interval_before_reinitiating_recording);
+                    break;
+                case 3:
+                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C4_interval_before_reinitiating_recording);
+                    break;
+                default:
+                    intervalBeforeReinitiating = 0;
+                    break;
+            }
+        }
+        internal static void GetSensorCheckInterval(int camindex, out int checkInterval)
         {
             switch (camindex)
             {
@@ -507,7 +554,7 @@ namespace FaceDetection
                     checkInterval = decimal.ToInt32(Properties.Settings.Default.C4_check_interval);
                     break;
                 default:
-                    checkInterval = decimal.ToInt32(Properties.Settings.Default.C1_check_interval);
+                    checkInterval = 0;
                     break;
             }
         }
@@ -534,33 +581,7 @@ namespace FaceDetection
             }
         }
 
-        /// <summary>
-        /// Set individual window sizes for each camera
-        /// </summary>
-        /// <param name="cam_ind"></param>
-        /// <returns></returns>
-        public static void Set_Camera_Window_Size(int cam_ind, Form form)
-        {            
-            switch (cam_ind)
-            {
-                case 0:
-                    Properties.Settings.Default.C1w = Convert.ToDecimal(form.Width);
-                    Properties.Settings.Default.C1h = Convert.ToDecimal(form.Height);
-                    break;
-                case 1:
-                    Properties.Settings.Default.C2w = Convert.ToDecimal(form.Width);
-                    Properties.Settings.Default.C2h = Convert.ToDecimal(form.Height);
-                    break;
-                case 2:
-                    Properties.Settings.Default.C3w = Convert.ToDecimal(form.Width);
-                    Properties.Settings.Default.C3h = Convert.ToDecimal(form.Height);
-                    break;
-                case 3:
-                    Properties.Settings.Default.C4w = Convert.ToDecimal(form.Width);
-                    Properties.Settings.Default.C4h = Convert.ToDecimal(form.Height);
-                    break;
-            }
-        }
+        
 
         public static System.Drawing.Size Get_Stored_Resolution(int cam_ind)
         {
@@ -591,28 +612,7 @@ namespace FaceDetection
             return retval;
         }
 
-        internal static void GetSecondsBeforeEvent(int camsen, out int secondBeforeOperationEvent)
-        {
-
-            switch (camsen)
-            {
-                case 0:
-                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
-                    break;
-                case 1:
-                secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
-                    break;
-                case 2:
-                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
-                    break;
-                case 3:
-                secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
-                    break;
-                default:
-                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
-                    break;
-            }
-        }
+        
 
         public static int Get_FPS(int cam_ind)
         {
