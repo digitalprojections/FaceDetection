@@ -77,7 +77,7 @@ namespace FaceDetection
                         break;
                 }
             }
-        }
+        } //Test
 
         /// <summary>
         /// Call when closing the window
