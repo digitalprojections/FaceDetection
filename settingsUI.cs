@@ -198,9 +198,7 @@ namespace FaceDetection
             MainForm.AllChangesApply();
 
             // 4 Cameras: the selected camera became preevent mode (or preview), others became preview mode
-            
-
-                //MULTI_WINDOW.formList[Camera_index].crossbar.Start(Camera_index, CAMERA_MODES.PREVIEW);
+            //MULTI_WINDOW.formList[Camera_index].crossbar.Start(Camera_index, CAMERA_MODES.PREVIEW);
             //    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
             //    {
             //        if (i != Camera_index)
@@ -245,8 +243,6 @@ namespace FaceDetection
             //cb_window_pane;
             //cb_show_camera_number;
             //cb_show_rec_icon;
-            
-
 
             string camX = "C" + (Camera_index + 1) + "x";
             string camY = "C" + (Camera_index + 1) + "y";
@@ -430,8 +426,9 @@ namespace FaceDetection
                     Properties.Settings.Default.culture = "ja-JP";
                     Properties.Settings.Default.language = "日本語";                    
                 }
-                this.Text = Resource.settingsWindowTitle;
+
                 System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Properties.Settings.Default.culture);
+                this.Text = Resource.settingsWindowTitle;
                 ChangeLanguage();
             }            
         }
@@ -540,7 +537,6 @@ namespace FaceDetection
                 IAMVfwCompressDialogs compressDialog = dev as IAMVfwCompressDialogs;
                 if (compressDialog != null)
                 {
-
                     hr = compressDialog.ShowDialog(VfwCompressDialogs.Config, IntPtr.Zero);
                     DsError.ThrowExceptionForHR(hr);
                 }

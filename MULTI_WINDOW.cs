@@ -73,6 +73,7 @@ namespace FaceDetection
             for (int i = 0; i < displayedCameraCount; i++)
             {
                 formList[i].SetWindowProperties();
+                formList[i].MainCameraDisplay(i);
                 //Also must check if the PREEVENT mode is needed
                 //formList[i].SetCameraToDefaultMode();
             }
