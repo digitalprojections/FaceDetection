@@ -575,9 +575,12 @@ namespace FaceDetection
                 }
             }
 
-            PROPERTY_FUNCTIONS.Set_Human_Sensor(cam_index, enabled);
-            PROPERTY_FUNCTIONS.Set_Face_Switch(cam_index, enabled);
-            PROPERTY_FUNCTIONS.SetOnOperationStartSwitch(cam_index, enabled);
+            if (!enabled)
+            {
+                PROPERTY_FUNCTIONS.Set_Human_Sensor(cam_index, false);
+                PROPERTY_FUNCTIONS.Set_Face_Switch(cam_index, false);
+                PROPERTY_FUNCTIONS.SetOnOperationStartSwitch(cam_index, false);
+            }
         }
 
         private void CheckBox_full_screen_CheckedChanged(object sender, EventArgs e)
@@ -827,6 +830,7 @@ namespace FaceDetection
         {
             SetMinMaxValues();
         }
+
         private void Nud_seconds_before_event_ValueChanged(object sender, EventArgs e)
         {            
             SetMinMaxValues();
