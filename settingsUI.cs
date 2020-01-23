@@ -614,23 +614,23 @@ namespace FaceDetection
             CheckBox check = (CheckBox)sender;
             if(check.Checked)
             {
-                cb_human_sensor.Checked = !check.Checked;
-                //if(Properties.Settings.Default.C1_enable_Human_sensor == true)
-                //{
-                //    Properties.Settings.Default.C1_enable_face_recognition = false;
-                //}
-                //if (Properties.Settings.Default.C2_enable_Human_sensor == true)
-                //{
-                //    Properties.Settings.Default.C2_enable_face_recognition = false;
-                //}
-                //if (Properties.Settings.Default.C3_enable_Human_sensor == true)
-                //{
-                //    Properties.Settings.Default.C3_enable_face_recognition = false;
-                //}
-                //if (Properties.Settings.Default.C4_enable_Human_sensor == true)
-                //{
-                //    Properties.Settings.Default.C4_enable_face_recognition = false;
-                //}
+                //cb_face_recognition.Checked = !check.Checked;
+                if (Properties.Settings.Default.C1_enable_Human_sensor == true)
+                {
+                    Properties.Settings.Default.C1_enable_face_recognition = false;
+                }
+                if (Properties.Settings.Default.C2_enable_Human_sensor == true)
+                {
+                    Properties.Settings.Default.C2_enable_face_recognition = false;
+                }
+                if (Properties.Settings.Default.C3_enable_Human_sensor == true)
+                {
+                    Properties.Settings.Default.C3_enable_face_recognition = false;
+                }
+                if (Properties.Settings.Default.C4_enable_Human_sensor == true)
+                {
+                    Properties.Settings.Default.C4_enable_face_recognition = false;
+                }
             }
             else
             {
@@ -654,7 +654,7 @@ namespace FaceDetection
             CheckBox check = (CheckBox)sender;
             if (check.Checked)
             {
-                cb_face_recognition.Checked = !check.Checked;
+                //cb_human_sensor.Checked = !check.Checked;
                 if (Properties.Settings.Default.C1_enable_face_recognition == true)
                 {
                     Properties.Settings.Default.C1_enable_Human_sensor = false;
