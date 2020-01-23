@@ -125,6 +125,15 @@ namespace FaceDetection {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PARAMETER execution failure:.
+        /// </summary>
+        internal static string parameter_execution_failure {
+            get {
+                return ResourceManager.GetString("parameter_execution_failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PREVIEW MODE.
         /// </summary>
         internal static string preview_mode {

@@ -58,7 +58,12 @@ namespace FaceDetection
 
 
         }
-
+        /// <summary>
+        /// Log text will automatically include the linenumber and function name
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="lineNumber"></param>
+        /// <param name="caller"></param>
         public static void Add(string message, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string caller = null)
         {
 

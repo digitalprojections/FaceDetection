@@ -55,6 +55,7 @@ namespace FaceDetection
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowOnly;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            SetMinMaxValues();
         }
 
         /// <summary>
@@ -430,8 +431,9 @@ namespace FaceDetection
                     Properties.Settings.Default.culture = "ja-JP";
                     Properties.Settings.Default.language = "日本語";                    
                 }
-                this.Text = Resource.settingsWindowTitle;
+                
                 System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Properties.Settings.Default.culture);
+                this.Text = Resource.settingsWindowTitle;
                 ChangeLanguage();
             }            
         }
@@ -733,13 +735,13 @@ namespace FaceDetection
         private void numericUpDownW_KeyDown(object sender, KeyEventArgs e)
         {
             Console.WriteLine(e.KeyValue);
-            if (BloskedKeys(e.KeyValue))
+            if (BlockedKeys(e.KeyValue))
             {
                 e.SuppressKeyPress = true;
             }
         }
 
-        bool BloskedKeys(int key)
+        bool BlockedKeys(int key)
         {
             var retval = false;
             int [] blockedKeys = { 188, 190, 110, 189, 109 };
@@ -816,33 +818,54 @@ namespace FaceDetection
                 Properties.Settings.Default.C4_enable_capture_operator = false; //All three are off. Disable
             }
         }
-
         private void Cb_backlight_off_idling_CheckStateChanged(object sender, EventArgs e)
         {
             numericUpDownBacklight.Enabled = cb_backlight_off_idling.Checked;
-        }
-
+        }        
         private void Nud_reinitiation_interval_ValueChanged(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.C1_interval_before_reinitiating_recording < Properties.Settings.Default.C1_seconds_before_event)
+            SetMaxValues();
+            //SetMaxValues(GetTheMaxValue());
+        }
+        private void event_record_time_before_event_ValueChanged(object sender, EventArgs e)
+        {
+            SetMinMaxValues();
+        }
+        private void Nud_seconds_before_event_ValueChanged(object sender, EventArgs e)
+        {            
+            SetMinMaxValues();
+        }
+        /// <summary>
+        /// Call to these function must not change the 
+        /// </summary>
+        void SetMaxValues()
+        {
+            decimal iv = nud_reinitiation_interval.Value;
+            if (nud_reinitiation_interval.Value >= GetTheMaxValue() && iv > 5)
             {
-                Properties.Settings.Default.C1_interval_before_reinitiating_recording = Properties.Settings.Default.C1_seconds_before_event;
-            }
-            if (Properties.Settings.Default.C2_interval_before_reinitiating_recording < Properties.Settings.Default.C2_seconds_before_event)
-            {
-                Properties.Settings.Default.C2_interval_before_reinitiating_recording = Properties.Settings.Default.C2_seconds_before_event;
-            }
-            if (Properties.Settings.Default.C3_interval_before_reinitiating_recording < Properties.Settings.Default.C3_seconds_before_event)
-            {
-                Properties.Settings.Default.C3_interval_before_reinitiating_recording = Properties.Settings.Default.C3_seconds_before_event;
-            }
-            if (Properties.Settings.Default.C4_interval_before_reinitiating_recording < Properties.Settings.Default.C4_seconds_before_event)
-            {
-                Properties.Settings.Default.C4_interval_before_reinitiating_recording = Properties.Settings.Default.C4_seconds_before_event;
+                nud_seconds_before_event.Maximum = iv;
+                event_record_time_before_event.Maximum = iv;
             }
         }
-
-        private void Nud_seconds_before_event_ValueChanged(object sender, EventArgs e)
+        void SetMinMaxValues()
+        {
+            decimal val = GetTheMaxValue();
+            decimal iv = nud_reinitiation_interval.Value;
+            //if (nud_reinitiation_interval.Minimum < val)
+                nud_reinitiation_interval.Minimum = val;
+            //else if (nud_reinitiation_interval.Minimum > val)
+            nud_seconds_before_event.Maximum = iv;
+            event_record_time_before_event.Maximum = iv;
+            if (nud_reinitiation_interval.Minimum < 5)
+            {
+                nud_reinitiation_interval.Minimum = 5;
+            }
+        }
+        decimal GetTheMaxValue()
+        {
+            return Math.Max(event_record_time_before_event.Value, nud_seconds_before_event.Value);
+        }
+        void SetIntervalProps()
         {
             if (Properties.Settings.Default.C1_interval_before_reinitiating_recording < Properties.Settings.Default.C1_seconds_before_event)
             {

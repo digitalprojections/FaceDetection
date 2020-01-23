@@ -133,6 +133,12 @@
   <data name="no_camera_found" xml:space="preserve">
     <value>カメラが検出されません</value>
   </data>
+  <data name="parameter_execution_failure" xml:space="preserve">
+    <value>パラメーターの実行が失敗しました：</value>
+  </data>
+  <data name="preview_mode" xml:space="preserve">
+    <value>表示モード</value>
+  </data>
   <data name="settingsWindowTitle" xml:space="preserve">
     <value>設定</value>
   </data>
