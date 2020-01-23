@@ -763,11 +763,11 @@ namespace FaceDetection
                 Properties.Settings.Default.main_camera_index = 0;
             }
         }
-        private void cb_always_on_top_CheckedChanged(object sender, EventArgs e)
+        private void CBAlwaysOnTopCheckedChanged(object sender, EventArgs e)
         {
 
         }
-        private void cb_window_pane_CheckedChanged(object sender, EventArgs e)
+        private void cbWindowPaneCheckedChanged(object sender, EventArgs e)
         {
             Console.WriteLine(sender);
         }

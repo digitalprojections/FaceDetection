@@ -757,7 +757,7 @@
             this.cb_window_pane.Name = "cb_window_pane";
             this.cb_window_pane.Tag = "5";
             this.cb_window_pane.UseVisualStyleBackColor = true;
-            this.cb_window_pane.CheckedChanged += new System.EventHandler(this.cb_window_pane_CheckedChanged);
+            this.cb_window_pane.CheckedChanged += new System.EventHandler(this.cbWindowPaneCheckedChanged);
             // 
             // cb_always_on_top
             // 
@@ -767,7 +767,7 @@
             this.cb_always_on_top.Name = "cb_always_on_top";
             this.cb_always_on_top.Tag = "4";
             this.cb_always_on_top.UseVisualStyleBackColor = true;
-            this.cb_always_on_top.CheckedChanged += new System.EventHandler(this.cb_always_on_top_CheckedChanged);
+            this.cb_always_on_top.CheckedChanged += new System.EventHandler(this.CBAlwaysOnTopCheckedChanged);
             // 
             // checkBox_full_screen
             // 

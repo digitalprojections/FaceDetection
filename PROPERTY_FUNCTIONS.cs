@@ -75,7 +75,7 @@ namespace FaceDetection
                     captureOperatorEnabled = Properties.Settings.Default.C4_enable_capture_operator;                    
                     break;
                 default:
-                    captureOperatorEnabled = Properties.Settings.Default.C1_enable_capture_operator;
+                    captureOperatorEnabled = true;
                     break;
             }
         }
@@ -146,7 +146,7 @@ namespace FaceDetection
                     faceRecognitionEnabled = Properties.Settings.Default.C4_enable_face_recognition;
                     break;
                 default:
-                    faceRecognitionEnabled = Properties.Settings.Default.C1_enable_face_recognition;
+                    faceRecognitionEnabled = false;
                     break;
             }
         }
@@ -188,7 +188,7 @@ namespace FaceDetection
                     recordWhenOperation = Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation;
                     break;
                 default:
-                    recordWhenOperation = Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
+                    recordWhenOperation = true;
                     break;
             }
         }
@@ -299,7 +299,7 @@ namespace FaceDetection
                 case 3:
                     return Properties.Settings.Default.C4_show_date_time;
                 default:
-                    return false;
+                    return true;
             }
         }
 
@@ -351,7 +351,7 @@ namespace FaceDetection
                 case 3:
                     return Properties.Settings.Default.C4_show_camera_number;
                 default:
-                    return false;
+                    return true;
             }
         }
         internal static bool GetRecordingIconSwitch(int cameraIndex)
@@ -367,7 +367,7 @@ namespace FaceDetection
                 case 3:
                     return Properties.Settings.Default.C4_show_record_icon;
                 default:
-                    return false;
+                    return true;
             }
         }
         internal static void Set_Rec_Icon(int cam_ind, bool val)
@@ -450,7 +450,7 @@ namespace FaceDetection
                 case 3:
                     return Properties.Settings.Default.C4_full_screen;
                 default:
-                    return false;
+                    return true;
             }
         }
 
@@ -464,7 +464,7 @@ namespace FaceDetection
         /// <returns></returns>
         public static Size Get_Camera_Window_Size(int cam_ind)
         {
-            Size size = new Size(100,100);
+            Size size = new Size(640,480);
             switch (cam_ind)
             {
                 case 0:
@@ -535,9 +535,9 @@ namespace FaceDetection
                     timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C4_event_record_time_before_event);
                     timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_event_record_time_after_event);
                     break;
-                default: //default is set to 0 index simply to satisfy the function requirement. This point is never hit
-                    timeBeforeEvent = decimal.ToInt32(Properties.Settings.Default.C1_event_record_time_before_event);
-                    timeAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_event_record_time_after_event);
+                default: //default is set to 0 simply to satisfy the function requirement. This point is never hit
+                    timeBeforeEvent = 0;
+                    timeAfterEvent = 0;
                     break;
             }
         }
@@ -604,7 +604,7 @@ namespace FaceDetection
                     secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
                     break;
                 default:
-                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
+                    secondBeforeOperationEvent = 300;
                     break;
             }
         }
@@ -625,7 +625,7 @@ namespace FaceDetection
                 secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
                     break;
                 default:
-                    secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
+                    secondsAfterEvent = 300;
                     break;
             }
 
@@ -648,7 +648,7 @@ namespace FaceDetection
                     eventRecorderEnabled = Properties.Settings.Default.C4_enable_event_recorder;
                     break;
                 default:
-                    eventRecorderEnabled = Properties.Settings.Default.C1_enable_event_recorder;
+                    eventRecorderEnabled = true;
                     break;
             }
         }
@@ -690,7 +690,7 @@ namespace FaceDetection
                     intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C4_interval_before_reinitiating_recording);
                     break;
                 default:
-                    intervalBeforeReinitiating = 0;
+                    intervalBeforeReinitiating = 60;
                     break;
             }
         }
@@ -711,7 +711,7 @@ namespace FaceDetection
                     checkInterval = decimal.ToInt32(Properties.Settings.Default.C4_check_interval);
                     break;
                 default:
-                    checkInterval = 0;
+                    checkInterval = 500;
                     break;
             }
         }
