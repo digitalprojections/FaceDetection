@@ -116,7 +116,9 @@ namespace FaceDetection
         internal void ShowSettings(int cameraIndex)
         {
             this.cameraIndex = cameraIndex;
-            Location = PROPERTY_FUNCTIONS.Get_Window_Location(cameraIndex);
+
+            PROPERTY_FUNCTIONS.Set_Window_Location(cameraIndex, MULTI_WINDOW.formList[cameraIndex]);
+            this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(cameraIndex);
             ShowDialog();
         }
 
@@ -574,10 +576,13 @@ namespace FaceDetection
                     c.Enabled = enabled;                    
                 }
             }
-
-            PROPERTY_FUNCTIONS.Set_Human_Sensor(cam_index, enabled);
-            PROPERTY_FUNCTIONS.Set_Face_Switch(cam_index, enabled);
-            PROPERTY_FUNCTIONS.SetOnOperationStartSwitch(cam_index, enabled);
+            if (!enabled)
+            {
+                PROPERTY_FUNCTIONS.Set_Human_Sensor(cam_index, enabled);
+                PROPERTY_FUNCTIONS.Set_Face_Switch(cam_index, enabled);
+                PROPERTY_FUNCTIONS.SetOnOperationStartSwitch(cam_index, enabled);
+            }
+            
         }
 
         private void CheckBox_full_screen_CheckedChanged(object sender, EventArgs e)

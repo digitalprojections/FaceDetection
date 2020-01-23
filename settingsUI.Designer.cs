@@ -502,7 +502,7 @@
             this.cb_operator_capture.Name = "cb_operator_capture";
             this.cb_operator_capture.Tag = "11";
             this.cb_operator_capture.UseVisualStyleBackColor = false;
-            this.cb_operator_capture.CheckStateChanged += new System.EventHandler(this.Cb_recording_operation_CheckStateChanged);
+            this.cb_operator_capture.CheckStateChanged += new System.EventHandler(this.Cb_CheckStateChanged);
             // 
             // label10
             // 
