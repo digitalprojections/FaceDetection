@@ -749,7 +749,6 @@ namespace FaceDetection
             }
             return retval;
         }
-
         private void numericUpDownCamCount_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown cameracount_nud = (NumericUpDown)sender;
@@ -759,21 +758,17 @@ namespace FaceDetection
                 Properties.Settings.Default.main_camera_index = 0;
             }
         }
-
         private void cb_always_on_top_CheckedChanged(object sender, EventArgs e)
         {
 
         }
-
         private void cb_window_pane_CheckedChanged(object sender, EventArgs e)
         {
             Console.WriteLine(sender);
         }
-
         private void DisableOperatorCaptureCheckBox_ifNeeded()
         {
-            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchImplicitly(cameraIndex);
-            
+            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchImplicitly(cameraIndex);            
             //// CAMERA 1
             //if (Properties.Settings.Default.C1_enable_Human_sensor || Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation)
             //{                
@@ -783,7 +778,6 @@ namespace FaceDetection
             //{
             //    Properties.Settings.Default.C1_enable_capture_operator = false; //All three are off. Disable
             //}
-
             //// CAMERA 2
             //if (Properties.Settings.Default.C2_enable_Human_sensor || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation)
             //{
