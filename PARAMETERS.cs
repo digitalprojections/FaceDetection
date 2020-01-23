@@ -135,7 +135,11 @@ namespace FaceDetection
                                     Properties.Settings.Default.Save();
                                     MULTI_WINDOW.formSettingsChanged();
                                 }
-                                PARAMETERS.PARAM.Clear();
+                                else
+                                {
+                                    Logger.Add(Resource.parameter_execution_failure + " m=" + method + ", c=" + cameraIndex);
+                                }
+                                PARAM.Clear();
                             }
                             break;
 
@@ -481,8 +485,8 @@ namespace FaceDetection
 
             if ((cameraIndex == 8 || (cameraIndex >= 0 && cameraIndex < 4)) && MULTI_WINDOW.formList[cameraIndex]?.DISPLAYED == true)
             {                
-                retval = true;                
-            }
+                retval = true;
+            }            
             return retval;
         }
 

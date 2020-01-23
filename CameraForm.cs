@@ -324,6 +324,7 @@ namespace FaceDetection
             else
             {
                 this.WindowState = FormWindowState.Normal;
+                this.Activate();
             }
 
             // Full screen
