@@ -64,6 +64,7 @@ namespace FaceDetection
         {
             if (Properties.Settings.Default.main_camera_index == CameraIndex && applicationExit == false) // The form closed was the main camera selected
             {
+                this.Activate();
                 DialogResult dr = MessageBox.Show(Resource.main_window_close_warning, Resource.ask_exit_application, MessageBoxButtons.OKCancel);
                 switch (dr)
                 {
@@ -73,7 +74,6 @@ namespace FaceDetection
                         break;
                     case DialogResult.Cancel:
                         e.Cancel = true;
-                        this.TopMost = false;
                         break;
                 }
             }
@@ -160,7 +160,11 @@ namespace FaceDetection
             //SetWindowProperties();
             FillResolutionList();
             DISPLAYED = true;
-            
+
+            if (CameraIndex == Properties.Settings.Default.main_camera_index)
+            {
+                camera_number.ForeColor = Color.Red;
+            }
         }
 
         /// <summary>
@@ -608,9 +612,17 @@ namespace FaceDetection
             }
         }
 
-       
-
-        
+        public void MainCameraDisplay (int cameraIndex)
+        {
+            if (cameraIndex == Properties.Settings.Default.main_camera_index)
+            {
+                camera_number.ForeColor = Color.Red;
+            }
+            else
+            {
+                camera_number.ForeColor = Color.Black;
+            }
+        }
 
         private void SettingsButtonsDesigner()
         {

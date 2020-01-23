@@ -35,43 +35,6 @@ namespace FaceDetection
 
         public CheckDiskSpace() { }
 
-        // Return the free space in the disk
-        //public static int CheckDisk()
-        //{
-        //    string freeSpace;
-        //    int returnValue = 0;
-
-        //    try
-        //    {
-        //        DriveInfo[] drives = DriveInfo.GetDrives();
-        //        //Console.WriteLine("checking drives..." + drives.Length);
-
-        //        foreach (DriveInfo drive in drives)
-        //        {
-        //            if (drive.IsReady == true)
-        //            {
-        //                StringBuilder stringBuilder = new StringBuilder();
-        //                stringBuilder.Append(Math.Round(drive.AvailableFreeSpace / 1e+9, 0));
-        //                freeSpace = stringBuilder.ToString();
-        //                try
-        //                {
-        //                    returnValue = int.Parse(freeSpace);
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    Console.WriteLine(ex.ToString());
-        //                    returnValue = 0;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (IOException iox)
-        //    {
-        //        Console.WriteLine(iox.Message);
-        //    }
-        //    return returnValue;
-        //}
-
         /// Delete too old files (according to parameters)
         public static void DeleteOldFiles()
         {
