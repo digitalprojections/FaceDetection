@@ -614,23 +614,23 @@ namespace FaceDetection
             CheckBox check = (CheckBox)sender;
             if(check.Checked)
             {
-                //cb_face_recognition.Checked = !check.Checked;
-                if(Properties.Settings.Default.C1_enable_Human_sensor == true)
-                {
-                    Properties.Settings.Default.C1_enable_face_recognition = false;
-                }
-                if (Properties.Settings.Default.C2_enable_Human_sensor == true)
-                {
-                    Properties.Settings.Default.C2_enable_face_recognition = false;
-                }
-                if (Properties.Settings.Default.C3_enable_Human_sensor == true)
-                {
-                    Properties.Settings.Default.C3_enable_face_recognition = false;
-                }
-                if (Properties.Settings.Default.C4_enable_Human_sensor == true)
-                {
-                    Properties.Settings.Default.C4_enable_face_recognition = false;
-                }
+                cb_human_sensor.Checked = !check.Checked;
+                //if(Properties.Settings.Default.C1_enable_Human_sensor == true)
+                //{
+                //    Properties.Settings.Default.C1_enable_face_recognition = false;
+                //}
+                //if (Properties.Settings.Default.C2_enable_Human_sensor == true)
+                //{
+                //    Properties.Settings.Default.C2_enable_face_recognition = false;
+                //}
+                //if (Properties.Settings.Default.C3_enable_Human_sensor == true)
+                //{
+                //    Properties.Settings.Default.C3_enable_face_recognition = false;
+                //}
+                //if (Properties.Settings.Default.C4_enable_Human_sensor == true)
+                //{
+                //    Properties.Settings.Default.C4_enable_face_recognition = false;
+                //}
             }
             else
             {
@@ -654,23 +654,23 @@ namespace FaceDetection
             CheckBox check = (CheckBox)sender;
             if (check.Checked)
             {
-                //cb_human_sensor.Checked = !check.Checked;
-                if (Properties.Settings.Default.C1_enable_face_recognition == true)
-                {
-                    Properties.Settings.Default.C1_enable_Human_sensor = false;
-                }
-                if (Properties.Settings.Default.C2_enable_face_recognition == true)
-                {
-                    Properties.Settings.Default.C2_enable_Human_sensor = false;
-                }
-                if (Properties.Settings.Default.C3_enable_face_recognition == true)
-                {
-                    Properties.Settings.Default.C3_enable_Human_sensor = false;
-                }
-                if (Properties.Settings.Default.C4_enable_face_recognition == true)
-                {
-                    Properties.Settings.Default.C4_enable_Human_sensor = false;
-                }
+                cb_face_recognition.Checked = !check.Checked;
+                //if (Properties.Settings.Default.C1_enable_face_recognition == true)
+                //{
+                //    Properties.Settings.Default.C1_enable_Human_sensor = false;
+                //}
+                //if (Properties.Settings.Default.C2_enable_face_recognition == true)
+                //{
+                //    Properties.Settings.Default.C2_enable_Human_sensor = false;
+                //}
+                //if (Properties.Settings.Default.C3_enable_face_recognition == true)
+                //{
+                //    Properties.Settings.Default.C3_enable_Human_sensor = false;
+                //}
+                //if (Properties.Settings.Default.C4_enable_face_recognition == true)
+                //{
+                //    Properties.Settings.Default.C4_enable_Human_sensor = false;
+                //}
             }
             else
             {
@@ -772,45 +772,47 @@ namespace FaceDetection
 
         private void DisableOperatorCaptureCheckBox_ifNeeded()
         {
-            // CAMERA 1
-            if (Properties.Settings.Default.C1_enable_Human_sensor || Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation)
-            {                
-                Properties.Settings.Default.C1_enable_capture_operator = true;
-            }
-            else
-            {
-                Properties.Settings.Default.C1_enable_capture_operator = false; //All three are off. Disable
-            }
+            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchImplicitly(cameraIndex);
+            
+            //// CAMERA 1
+            //if (Properties.Settings.Default.C1_enable_Human_sensor || Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation)
+            //{                
+            //    Properties.Settings.Default.C1_enable_capture_operator = true;
+            //}
+            //else
+            //{
+            //    Properties.Settings.Default.C1_enable_capture_operator = false; //All three are off. Disable
+            //}
 
-            // CAMERA 2
-            if (Properties.Settings.Default.C2_enable_Human_sensor || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation)
-            {
-                Properties.Settings.Default.C2_enable_capture_operator = true;
-            }
-            else
-            {
-                Properties.Settings.Default.C2_enable_capture_operator = false; //All three are off. Disable
-            }
+            //// CAMERA 2
+            //if (Properties.Settings.Default.C2_enable_Human_sensor || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation)
+            //{
+            //    Properties.Settings.Default.C2_enable_capture_operator = true;
+            //}
+            //else
+            //{
+            //    Properties.Settings.Default.C2_enable_capture_operator = false; //All three are off. Disable
+            //}
 
-            // CAMERA 3
-            if (Properties.Settings.Default.C3_enable_Human_sensor || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation)
-            {
-                Properties.Settings.Default.C3_enable_capture_operator = true;
-            }
-            else
-            {
-                Properties.Settings.Default.C3_enable_capture_operator = false; //All three are off. Disable
-            }
+            //// CAMERA 3
+            //if (Properties.Settings.Default.C3_enable_Human_sensor || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation)
+            //{
+            //    Properties.Settings.Default.C3_enable_capture_operator = true;
+            //}
+            //else
+            //{
+            //    Properties.Settings.Default.C3_enable_capture_operator = false; //All three are off. Disable
+            //}
 
-            // CAMERA 4
-            if (Properties.Settings.Default.C4_enable_Human_sensor || Properties.Settings.Default.C4_enable_face_recognition || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation)
-            {
-                Properties.Settings.Default.C4_enable_capture_operator = true;
-            }
-            else
-            {
-                Properties.Settings.Default.C4_enable_capture_operator = false; //All three are off. Disable
-            }
+            //// CAMERA 4
+            //if (Properties.Settings.Default.C4_enable_Human_sensor || Properties.Settings.Default.C4_enable_face_recognition || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation)
+            //{
+            //    Properties.Settings.Default.C4_enable_capture_operator = true;
+            //}
+            //else
+            //{
+            //    Properties.Settings.Default.C4_enable_capture_operator = false; //All three are off. Disable
+            //}
         }
         private void Cb_backlight_off_idling_CheckStateChanged(object sender, EventArgs e)
         {
@@ -859,25 +861,25 @@ namespace FaceDetection
         {
             return Math.Max(event_record_time_before_event.Value, nud_seconds_before_event.Value);
         }
-        void SetIntervalProps()
-        {
-            if (Properties.Settings.Default.C1_interval_before_reinitiating_recording < Properties.Settings.Default.C1_seconds_before_event)
-            {
-                Properties.Settings.Default.C1_interval_before_reinitiating_recording = Properties.Settings.Default.C1_seconds_before_event;
-            }
-            if (Properties.Settings.Default.C2_interval_before_reinitiating_recording < Properties.Settings.Default.C2_seconds_before_event)
-            {
-                Properties.Settings.Default.C2_interval_before_reinitiating_recording = Properties.Settings.Default.C2_seconds_before_event;
-            }
-            if (Properties.Settings.Default.C3_interval_before_reinitiating_recording < Properties.Settings.Default.C3_seconds_before_event)
-            {
-                Properties.Settings.Default.C3_interval_before_reinitiating_recording = Properties.Settings.Default.C3_seconds_before_event;
-            }
-            if (Properties.Settings.Default.C4_interval_before_reinitiating_recording < Properties.Settings.Default.C4_seconds_before_event)
-            {
-                Properties.Settings.Default.C4_interval_before_reinitiating_recording = Properties.Settings.Default.C4_seconds_before_event;
-            }
-        }
+        //void SetIntervalProps()
+        //{
+        //    if (Properties.Settings.Default.C1_interval_before_reinitiating_recording < Properties.Settings.Default.C1_seconds_before_event)
+        //    {
+        //        Properties.Settings.Default.C1_interval_before_reinitiating_recording = Properties.Settings.Default.C1_seconds_before_event;
+        //    }
+        //    if (Properties.Settings.Default.C2_interval_before_reinitiating_recording < Properties.Settings.Default.C2_seconds_before_event)
+        //    {
+        //        Properties.Settings.Default.C2_interval_before_reinitiating_recording = Properties.Settings.Default.C2_seconds_before_event;
+        //    }
+        //    if (Properties.Settings.Default.C3_interval_before_reinitiating_recording < Properties.Settings.Default.C3_seconds_before_event)
+        //    {
+        //        Properties.Settings.Default.C3_interval_before_reinitiating_recording = Properties.Settings.Default.C3_seconds_before_event;
+        //    }
+        //    if (Properties.Settings.Default.C4_interval_before_reinitiating_recording < Properties.Settings.Default.C4_seconds_before_event)
+        //    {
+        //        Properties.Settings.Default.C4_interval_before_reinitiating_recording = Properties.Settings.Default.C4_seconds_before_event;
+        //    }
+        //}
 
         /// <summary>
         /// Visibility changed event handler
@@ -948,6 +950,7 @@ namespace FaceDetection
 
         private void StorePath_TextChanged(object sender, EventArgs e)
         {
+            //Console.WriteLine(Path.IsPathRooted(storePath.Text) + " - path rooted. " + Path.GetFullPath(storePath.Text) + " " + Path.GetPathRoot(storePath.Text));
             bool pathChanged = false;
             char[] invalidPathChars = {'\"', '*', '?', '!', '<', '>', '|', ':', '.'};
 
@@ -955,7 +958,7 @@ namespace FaceDetection
             for(int i=0; i< characters.Length; i++)
             {
                 if (i == 0) // First character must be a letter (disk name), so if not, back to D
-                {
+                {   
                     if (characters[i] != 'A' && characters[i] != 'B' && characters[i] != 'C' && characters[i] != 'D' && characters[i] != 'E' && characters[i] != 'F'
                         && characters[i] != 'G' && characters[i] != 'H' && characters[i] != 'I' && characters[i] != 'J' && characters[i] != 'K' && characters[i] != 'L'
                         && characters[i] != 'M' && characters[i] != 'N' && characters[i] != 'O' && characters[i] != 'P' && characters[i] != 'Q' && characters[i] != 'R'

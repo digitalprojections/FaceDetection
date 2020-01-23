@@ -85,16 +85,19 @@ namespace FaceDetection
             #endregion
             //Object references                    
             mainForm = this;            
-            this.WindowState = FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Minimized;            
             Camera.SetNumberOfCameras();
-            AllChangesApply();            
-            ClearCutFileTempFolder();
-            ClearTempFolder();
+            if (Camera.GetCameraCount().Length > 0)
+            {
+                AllChangesApply();
+                ClearCutFileTempFolder();
+                ClearTempFolder();
 
-            datetime_timer.Interval = 1000;
-            datetime_timer.Start();
-            datetime_timer.AutoReset = true;
-            datetime_timer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateDateTimeText);
+                datetime_timer.Interval = 1000;
+                datetime_timer.Start();
+                datetime_timer.AutoReset = true;
+                datetime_timer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateDateTimeText);
+            }            
         }
 
         public static void AllChangesApply()

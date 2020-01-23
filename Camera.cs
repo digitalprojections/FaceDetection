@@ -152,6 +152,7 @@ namespace FaceDetection
             else
             {
                 MessageBox.Show(Resource.no_camera_found);
+                Application.Exit();
             }
             
         }
