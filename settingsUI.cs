@@ -243,8 +243,6 @@ namespace FaceDetection
             //cb_window_pane;
             //cb_show_camera_number;
             //cb_show_rec_icon;
-            
-
 
             string camX = "C" + (Camera_index + 1) + "x";
             string camY = "C" + (Camera_index + 1) + "y";
@@ -428,8 +426,9 @@ namespace FaceDetection
                     Properties.Settings.Default.culture = "ja-JP";
                     Properties.Settings.Default.language = "日本語";                    
                 }
-                this.Text = Resource.settingsWindowTitle;
+
                 System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Properties.Settings.Default.culture);
+                this.Text = Resource.settingsWindowTitle;
                 ChangeLanguage();
             }            
         }
@@ -538,7 +537,6 @@ namespace FaceDetection
                 IAMVfwCompressDialogs compressDialog = dev as IAMVfwCompressDialogs;
                 if (compressDialog != null)
                 {
-
                     hr = compressDialog.ShowDialog(VfwCompressDialogs.Config, IntPtr.Zero);
                     DsError.ThrowExceptionForHR(hr);
                 }

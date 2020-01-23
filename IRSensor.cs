@@ -92,10 +92,6 @@ namespace FaceDetection
                                     MULTI_WINDOW.formList[INDEX].crossbar.SetIconTimer(timeAfterEvent);
                                     MULTI_WINDOW.formList[INDEX].crossbar.NoCapTimerON(timeAfterEvent);
                                 }
-                                else
-                                {
-                                    MULTI_WINDOW.formList[INDEX].SetRecordIcon(INDEX, timeAfterEvent); //SHOULD NOT BE HIT. REMOVE THIS LINE
-                                }
                             }
                         }
                         else
