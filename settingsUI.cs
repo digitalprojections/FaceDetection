@@ -763,14 +763,6 @@ namespace FaceDetection
                 Properties.Settings.Default.main_camera_index = 0;
             }
         }
-        private void CBAlwaysOnTopCheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void cbWindowPaneCheckedChanged(object sender, EventArgs e)
-        {
-            Console.WriteLine(sender);
-        }
         private void DisableOperatorCaptureCheckBox_ifNeeded()
         {
             PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchImplicitly(cameraIndex);            
