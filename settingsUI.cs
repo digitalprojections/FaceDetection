@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FaceDetection
@@ -217,86 +218,98 @@ namespace FaceDetection
             //    MULTI_WINDOW.formList[i].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);                
             //}
 
-        }        
+        }
+
+        private delegate void dSettingFromProperties();
 
         private void SetCameraPropertiesFromMemory()
         {
-            numericUpDownX.DataBindings.Clear();
-            numericUpDownY.DataBindings.Clear();
-            numericUpDownW.DataBindings.Clear();
-            numericUpDownH.DataBindings.Clear();
-            comboBoxFPS.DataBindings.Clear();
-            comboBoxResolutions.DataBindings.Clear();
-            cb_event_recorder.DataBindings.Clear();
-            event_record_time_before_event.DataBindings.Clear();
-            nud_event_record_after.DataBindings.Clear();
-            cb_operator_capture.DataBindings.Clear();
-            nud_seconds_before_event.DataBindings.Clear();
-            nud_seconds_after_event.DataBindings.Clear();
-            numericUpDown2.DataBindings.Clear();
-            nud_reinitiation_interval.DataBindings.Clear();
-            cb_face_recognition.DataBindings.Clear();
-            cb_human_sensor.DataBindings.Clear();
-            cb_recording_operation.DataBindings.Clear();
-            cm_capture_mode.DataBindings.Clear();
-            checkBox_full_screen.DataBindings.Clear();
-            cb_always_on_top.DataBindings.Clear();
-            cb_dateandtime.DataBindings.Clear();
-            cb_window_pane.DataBindings.Clear();
-            cb_show_camera_number.DataBindings.Clear();
-            cb_show_rec_icon.DataBindings.Clear();
+            if (this.InvokeRequired)
+            {
+                var d = new dSettingFromProperties(SetCameraPropertiesFromMemory);
+                this.Invoke(d);
+            }
+            else
+            {
+                numericUpDownX.DataBindings.Clear();
+                numericUpDownY.DataBindings.Clear();
+                numericUpDownW.DataBindings.Clear();
+                numericUpDownH.DataBindings.Clear();
+                comboBoxFPS.DataBindings.Clear();
+                comboBoxResolutions.DataBindings.Clear();
+                cb_event_recorder.DataBindings.Clear();
+                event_record_time_before_event.DataBindings.Clear();
+                nud_event_record_after.DataBindings.Clear();
+                cb_operator_capture.DataBindings.Clear();
+                nud_seconds_before_event.DataBindings.Clear();
+                nud_seconds_after_event.DataBindings.Clear();
+                numericUpDown2.DataBindings.Clear();
+                nud_reinitiation_interval.DataBindings.Clear();
+                cb_face_recognition.DataBindings.Clear();
+                cb_human_sensor.DataBindings.Clear();
+                cb_recording_operation.DataBindings.Clear();
+                cm_capture_mode.DataBindings.Clear();
+                checkBox_full_screen.DataBindings.Clear();
+                cb_always_on_top.DataBindings.Clear();
+                cb_dateandtime.DataBindings.Clear();
+                cb_window_pane.DataBindings.Clear();
+                cb_show_camera_number.DataBindings.Clear();
+                cb_show_rec_icon.DataBindings.Clear();
 
-            //checkBox_full_screen;
-            //cb_always_on_top;
-            //cb_dateandtime;
-            //cb_window_pane;
-            //cb_show_camera_number;
-            //cb_show_rec_icon;
+                //checkBox_full_screen;
+                //cb_always_on_top;
+                //cb_dateandtime;
+                //cb_window_pane;
+                //cb_show_camera_number;
+                //cb_show_rec_icon;
 
-            string camX = "C" + (Camera_index + 1) + "x";
-            string camY = "C" + (Camera_index + 1) + "y";
-            string camW = "C" + (Camera_index + 1) + "w";
-            string camH = "C" + (Camera_index + 1) + "h";
-            string camF = "C" + (Camera_index + 1) + "f";
-            string camRes = "C" + (Camera_index + 1) + "res";
-            string camFullScreen = "C" + (Camera_index + 1) + "_full_screen";
-            string camOnTop = "C" + (Camera_index + 1) + "_window_on_top";
-            string camDateTime = "C" + (Camera_index + 1) + "_show_date_time";
-            string camWindowPane = "C" + (Camera_index + 1) + "_show_window_pane";
-            string camNumber = "C" + (Camera_index + 1) + "_show_camera_number";
-            string camRecordIcon = "C" + (Camera_index + 1) + "_show_record_icon";
+                string camX = "C" + (cameraIndex + 1) + "x";
+                string camY = "C" + (cameraIndex + 1) + "y";
+                string camW = "C" + (cameraIndex + 1) + "w";
+                string camH = "C" + (cameraIndex + 1) + "h";
+                string camF = "C" + (cameraIndex + 1) + "f";
+                string camRes = "C" + (cameraIndex + 1) + "res";
+                string camFullScreen = "C" + (cameraIndex + 1) + "_full_screen";
+                string camOnTop = "C" + (cameraIndex + 1) + "_window_on_top";
+                string camDateTime = "C" + (cameraIndex + 1) + "_show_date_time";
+                string camWindowPane = "C" + (cameraIndex + 1) + "_show_window_pane";
+                string camNumber = "C" + (cameraIndex + 1) + "_show_camera_number";
+                string camRecordIcon = "C" + (cameraIndex + 1) + "_show_record_icon";
 
-            numericUpDownX.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camX, true, DataSourceUpdateMode.OnPropertyChanged));
-            numericUpDownY.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camY, true, DataSourceUpdateMode.OnPropertyChanged));
-            numericUpDownW.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camW, true, DataSourceUpdateMode.OnPropertyChanged));
-            numericUpDownH.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camH, true, DataSourceUpdateMode.OnPropertyChanged));
-            comboBoxFPS.DataBindings.Add(new Binding("Text", Properties.Settings.Default, camF, true, DataSourceUpdateMode.OnPropertyChanged));
-            comboBoxResolutions.DataBindings.Add(new Binding("Text", Properties.Settings.Default, camRes, true, DataSourceUpdateMode.OnPropertyChanged));
-            checkBox_full_screen.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camFullScreen, true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_always_on_top.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camOnTop, true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_dateandtime.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camDateTime, true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_window_pane.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camWindowPane, true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_show_camera_number.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camNumber, true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_show_rec_icon.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camRecordIcon, true, DataSourceUpdateMode.OnPropertyChanged));
+                numericUpDownX.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camX, true, DataSourceUpdateMode.OnPropertyChanged));
+                numericUpDownY.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camY, true, DataSourceUpdateMode.OnPropertyChanged));
+                numericUpDownW.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camW, true, DataSourceUpdateMode.OnPropertyChanged));
+                numericUpDownH.DataBindings.Add(new Binding("Value", Properties.Settings.Default, camH, true, DataSourceUpdateMode.OnPropertyChanged));
+                comboBoxFPS.DataBindings.Add(new Binding("Text", Properties.Settings.Default, camF, true, DataSourceUpdateMode.OnPropertyChanged));
+                comboBoxResolutions.DataBindings.Add(new Binding("Text", Properties.Settings.Default, camRes, true, DataSourceUpdateMode.OnPropertyChanged));
+                checkBox_full_screen.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camFullScreen, true, DataSourceUpdateMode.OnPropertyChanged));
+                cb_always_on_top.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camOnTop, true, DataSourceUpdateMode.OnPropertyChanged));
+                cb_dateandtime.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camDateTime, true, DataSourceUpdateMode.OnPropertyChanged));
+                cb_window_pane.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camWindowPane, true, DataSourceUpdateMode.OnPropertyChanged));
+                cb_show_camera_number.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camNumber, true, DataSourceUpdateMode.OnPropertyChanged));
+                cb_show_rec_icon.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, camRecordIcon, true, DataSourceUpdateMode.OnPropertyChanged));
 
-            bool fs = !PROPERTY_FUNCTIONS.CheckFullScreenByIndex(Camera_index);
-            gbWindowPosition.Enabled = fs;
-            gbWindowSize.Enabled = fs;
+                bool fs = !PROPERTY_FUNCTIONS.CheckFullScreenByIndex(cameraIndex);
+                gbWindowPosition.Enabled = fs;
+                gbWindowSize.Enabled = fs;
 
-            cm_capture_mode.DataBindings.Add(new Binding("Text", Properties.Settings.Default, "C" + (Camera_index + 1) + "_capture_type", true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_event_recorder.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_event_recorder", true, DataSourceUpdateMode.OnPropertyChanged));
-            event_record_time_before_event.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C"+ (Camera_index + 1) + "_event_record_time_before_event", true, DataSourceUpdateMode.OnPropertyChanged));
-            nud_event_record_after.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (Camera_index + 1) + "_event_record_time_after_event", true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_operator_capture.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_capture_operator", true, DataSourceUpdateMode.OnPropertyChanged));
-            nud_seconds_before_event.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (Camera_index + 1) + "_seconds_before_event", true, DataSourceUpdateMode.OnPropertyChanged));
-            nud_seconds_after_event.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (Camera_index + 1) + "_seconds_after_event", true, DataSourceUpdateMode.OnPropertyChanged));
-            numericUpDown2.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (Camera_index + 1) + "_check_interval", true, DataSourceUpdateMode.OnPropertyChanged));
-            nud_reinitiation_interval.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (Camera_index + 1) + "_interval_before_reinitiating_recording", true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_face_recognition.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_face_recognition", true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_human_sensor.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_Human_sensor", true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_recording_operation.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_Recording_when_at_the_start_of_operation", true, DataSourceUpdateMode.OnPropertyChanged));
+                cm_capture_mode.DataBindings.Add(new Binding("Text", Properties.Settings.Default, "C" + (cameraIndex + 1) + "_capture_type", true, DataSourceUpdateMode.OnPropertyChanged));
+                cb_event_recorder.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (cameraIndex + 1) + "_enable_event_recorder", true, DataSourceUpdateMode.OnPropertyChanged));
+                event_record_time_before_event.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (cameraIndex + 1) + "_event_record_time_before_event", true, DataSourceUpdateMode.OnPropertyChanged));
+                nud_event_record_after.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (cameraIndex + 1) + "_event_record_time_after_event", true, DataSourceUpdateMode.OnPropertyChanged));
+                cb_operator_capture.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (cameraIndex + 1) + "_enable_capture_operator", true, DataSourceUpdateMode.OnPropertyChanged));
+                nud_seconds_before_event.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (cameraIndex + 1) + "_seconds_before_event", true, DataSourceUpdateMode.OnPropertyChanged));
+                nud_seconds_after_event.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (cameraIndex + 1) + "_seconds_after_event", true, DataSourceUpdateMode.OnPropertyChanged));
+                numericUpDown2.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (cameraIndex + 1) + "_check_interval", true, DataSourceUpdateMode.OnPropertyChanged));
+                nud_reinitiation_interval.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (cameraIndex + 1) + "_interval_before_reinitiating_recording", true, DataSourceUpdateMode.OnPropertyChanged));
+                cb_face_recognition.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (cameraIndex + 1) + "_enable_face_recognition", true, DataSourceUpdateMode.OnPropertyChanged));
+                cb_human_sensor.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (cameraIndex + 1) + "_enable_Human_sensor", true, DataSourceUpdateMode.OnPropertyChanged));
+                cb_recording_operation.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (cameraIndex + 1) + "_Recording_when_at_the_start_of_operation", true, DataSourceUpdateMode.OnPropertyChanged));
 
-            
+            }
+
+
+
         }
 
         public static void SetComboBoxFPSValues(List<string> vs, int cameraIndex)
@@ -331,8 +344,8 @@ namespace FaceDetection
                 resolutions_combo.Items.AddRange(vs.ToArray());
                 if (resolutions_combo.Items.Count > 0)
                 {
-                    Console.WriteLine(Properties.Settings.Default.C1res);
-                    resolutions_combo.SelectedItem = Properties.Settings.Default.C1res;
+                    //Console.WriteLine(Properties.Settings.Default.C1res);
+                    resolutions_combo.SelectedItem = PROPERTY_FUNCTIONS.GetResolution(cameraIndex);
                 }
             }
         }
@@ -355,8 +368,15 @@ namespace FaceDetection
             CBSetAsMainCam.Checked = (Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
             CBSetAsMainCam.Enabled = !CBSetAsMainCam.Checked;
 
-            MULTI_WINDOW.GetVideoFormatByCamera(Camera_index);
-            SetCameraPropertiesFromMemory();
+            cameraIndex = comboBox.SelectedIndex;
+            MULTI_WINDOW.GetVideoFormatByCamera(cameraIndex);
+
+
+            backgroundWorkerSetFromMemory.RunWorkerAsync();
+
+            //(SetCameraPropertiesFromMemory);
+            
+                            
         }
 
         private void SettingsUI_Load(object sender, EventArgs e)
@@ -839,6 +859,21 @@ namespace FaceDetection
         private void event_record_time_before_event_ValueChanged(object sender, EventArgs e)
         {
             SetMinMaxValues();
+        }
+
+        private void LoadSettingsFromMemory(object sender, DoWorkEventArgs e)
+        {
+            
+        }
+
+        private void LoadingComplete(object sender, ProgressChangedEventArgs e)
+        {
+            
+        }
+
+        private void WorkCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            SetCameraPropertiesFromMemory();
         }
 
         private void Nud_seconds_before_event_ValueChanged(object sender, EventArgs e)

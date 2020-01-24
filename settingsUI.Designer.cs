@@ -116,6 +116,7 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.folderBrowserDialogStoreFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.check_state_images = new System.Windows.Forms.ImageList(this.components);
+            this.backgroundWorkerSetFromMemory = new System.ComponentModel.BackgroundWorker();
             tab_view_settings = new System.Windows.Forms.TabPage();
             tab_view_settings.SuspendLayout();
             this.groupBox_viewSettings.SuspendLayout();
@@ -967,6 +968,13 @@
             this.check_state_images.Images.SetKeyName(0, "unchecked");
             this.check_state_images.Images.SetKeyName(1, "checked");
             // 
+            // backgroundWorkerSetFromMemory
+            // 
+            this.backgroundWorkerSetFromMemory.WorkerReportsProgress = true;
+            this.backgroundWorkerSetFromMemory.DoWork += new System.ComponentModel.DoWorkEventHandler(this.LoadSettingsFromMemory);
+            this.backgroundWorkerSetFromMemory.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.LoadingComplete);
+            this.backgroundWorkerSetFromMemory.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.WorkCompleted);
+            // 
             // SettingsUI
             // 
             this.AcceptButton = this.button_settings_save;
@@ -1108,5 +1116,6 @@
         private System.Windows.Forms.Label labelCameraNumber;
         private System.Windows.Forms.Label labelcnum;
         private System.Windows.Forms.CheckBox CBSetAsMainCam;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerSetFromMemory;
     }
 }
