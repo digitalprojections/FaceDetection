@@ -315,18 +315,6 @@ namespace FaceDetection
             // Check if the PREEVENT mode is needed
             //controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
             
-
-            if (!Properties.Settings.Default.show_all_cams_simulteneously &&                  
-                CameraIndex!=Properties.Settings.Default.main_camera_index)
-            {
-                this.WindowState = FormWindowState.Minimized;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Normal;
-                this.Activate();
-            }
-
             // Full screen
             if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(CameraIndex))
             {
@@ -336,6 +324,32 @@ namespace FaceDetection
             {
                 this.WindowState = FormWindowState.Normal;
             }
+
+            // Minimized sub if "all display" is not checked
+            if (!Properties.Settings.Default.show_all_cams_simulteneously &&                  
+                CameraIndex!=Properties.Settings.Default.main_camera_index)
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
+
+            // Bring main to the front
+            if (CameraIndex == Properties.Settings.Default.main_camera_index)
+            {
+                this.Activate();
+            }
+            else if(PROPERTY_FUNCTIONS.CheckOnTopByIndex(CameraIndex)) // Bring sub to the front if "on top" is selected
+            {
+                if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(CameraIndex))
+                {
+                    this.WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    this.WindowState = FormWindowState.Normal;
+                }
+                this.Activate();
+            }
+
             SetCameraToDefaultMode();
         }
 

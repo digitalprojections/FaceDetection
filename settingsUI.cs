@@ -123,9 +123,14 @@ namespace FaceDetection
         internal void ShowSettings(int cameraIndex)
         {
             this.currentCameraIndex = cameraIndex;
-
-            PROPERTY_FUNCTIONS.Set_Window_Location(cameraIndex, MULTI_WINDOW.formList[cameraIndex]);
-            this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(cameraIndex);
+            for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+            {
+                if (MULTI_WINDOW.formList[i].DISPLAYED == true)
+                {
+                    PROPERTY_FUNCTIONS.Set_Window_Location(i, MULTI_WINDOW.formList[i]);
+                }
+            }
+            this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(currentCameraIndex);
             MainCameraBeforeSettingsLoad = Properties.Settings.Default.main_camera_index;
             ShowDialog();
         }

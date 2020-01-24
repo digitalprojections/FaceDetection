@@ -435,7 +435,22 @@ namespace FaceDetection
             }
         }
 
-        
+        internal static bool CheckOnTopByIndex(int camera_index)
+        {
+            switch (camera_index)
+            {
+                case 0:
+                    return Properties.Settings.Default.C1_window_on_top;
+                case 1:
+                    return Properties.Settings.Default.C2_window_on_top;
+                case 2:
+                    return Properties.Settings.Default.C3_window_on_top;
+                case 3:
+                    return Properties.Settings.Default.C4_window_on_top;
+                default:
+                    return true;
+            }
+        }
 
         internal static bool CheckFullScreenByIndex(int camera_index)
         {
