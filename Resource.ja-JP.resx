@@ -139,6 +139,9 @@
   <data name="preview_mode" xml:space="preserve">
     <value>表示モード</value>
   </data>
+  <data name="setAsMainCam" xml:space="preserve">
+    <value>メインカメラとして使用する</value>
+  </data>
   <data name="settingsWindowTitle" xml:space="preserve">
     <value>設定</value>
   </data>

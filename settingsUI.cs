@@ -28,6 +28,10 @@ namespace FaceDetection
         /// current camera, not the Main Camera
         /// </summary>
         private int cameraIndex;
+        /// <summary>
+        /// private field MAIN Camera
+        /// </summary>
+        private int cameraindex;
 
         public SettingsUI()
         {
@@ -59,7 +63,7 @@ namespace FaceDetection
         }
 
         /// <summary>
-        /// Get or set the MAIN CAMERA INDEX (Camera facing the user)
+        /// Get from properties or set the MAIN CAMERA INDEX (Camera facing the user)
         /// </summary>
         public int Camera_index
         {
@@ -70,7 +74,8 @@ namespace FaceDetection
             private set
             {
                 Properties.Settings.Default.main_camera_index = value;
-                Properties.Settings.Default.Save();
+                //Properties.Settings.Default.Save();
+                //cameraindex = value;
             }
         }
 
@@ -119,6 +124,7 @@ namespace FaceDetection
 
             PROPERTY_FUNCTIONS.Set_Window_Location(cameraIndex, MULTI_WINDOW.formList[cameraIndex]);
             this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(cameraIndex);
+            MainCameraBeforeSettingsLoad = Properties.Settings.Default.main_camera_index;
             ShowDialog();
         }
 
@@ -289,6 +295,8 @@ namespace FaceDetection
             cb_face_recognition.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_face_recognition", true, DataSourceUpdateMode.OnPropertyChanged));
             cb_human_sensor.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_enable_Human_sensor", true, DataSourceUpdateMode.OnPropertyChanged));
             cb_recording_operation.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (Camera_index + 1) + "_Recording_when_at_the_start_of_operation", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            
         }
 
         public static void SetComboBoxFPSValues(List<string> vs, int cameraIndex)
@@ -328,13 +336,25 @@ namespace FaceDetection
                 }
             }
         }
-
+        void CameraSetAsMain(object sender, EventArgs e)
+        {
+            if (CBSetAsMainCam.Checked && Properties.Settings.Default.main_camera_index != cm_camera_number.SelectedIndex)
+            {
+                Camera_index = cm_camera_number.SelectedIndex;                
+            }
+            else
+            {
+                Camera_index = MainCameraBeforeSettingsLoad;
+            }
+            labelCameraNumber.Text = (Camera_index + 1).ToString();
+        }
         private void CameraSelected(object sender, EventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
-            Camera_index = comboBox.SelectedIndex;
-            Properties.Settings.Default.main_camera_index = Camera_index;
-            labelCameraNumber.Text = (Camera_index + 1).ToString();
+                        
+            CBSetAsMainCam.Checked = (Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
+            CBSetAsMainCam.Enabled = !CBSetAsMainCam.Checked;
+
             MULTI_WINDOW.GetVideoFormatByCamera(Camera_index);
             SetCameraPropertiesFromMemory();
         }
@@ -368,6 +388,7 @@ namespace FaceDetection
 
             cm_language.SelectedItem = Properties.Settings.Default.language;
             CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture(Properties.Settings.Default.culture);
+            CBSetAsMainCam.Text = Resource.setAsMainCam;
             ChangeLanguage();
             Debug.WriteLine(CultureInfo.CurrentCulture + " current culture");
             this.Text = Resource.settingsWindowTitle;
@@ -407,6 +428,7 @@ namespace FaceDetection
             bool rip = MainForm.AnyRecordingInProgress;
             
             cm_camera_number.Enabled = !rip;
+            CBSetAsMainCam.Enabled = !rip;
             button_settings_save.Enabled = !rip;
             if (cb_operator_capture.CheckState == CheckState.Unchecked && cb_event_recorder.CheckState==CheckState.Unchecked)
             {

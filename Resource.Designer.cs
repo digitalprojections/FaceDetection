@@ -143,6 +143,15 @@ namespace FaceDetection {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set as the MAIN CAMERA.
+        /// </summary>
+        internal static string setAsMainCam {
+            get {
+                return ResourceManager.GetString("setAsMainCam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         internal static string settingsWindowTitle {
