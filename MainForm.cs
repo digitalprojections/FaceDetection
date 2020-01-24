@@ -68,7 +68,8 @@ namespace FaceDetection
         }
         
         private void MainForm_Load(object sender, EventArgs e)
-        {            
+        {
+            Camera.SetNumberOfCameras();
             #region Instances
             ///////////////////////////////////////
             settingUI = new SettingsUI();
@@ -85,8 +86,8 @@ namespace FaceDetection
             #endregion
             //Object references                    
             mainForm = this;            
-            this.WindowState = FormWindowState.Minimized;            
-            Camera.SetNumberOfCameras();
+            this.WindowState = FormWindowState.Minimized;                        
+            
             if (Camera.GetCameraCount().Length > 0)
             {
                 AllChangesApply();

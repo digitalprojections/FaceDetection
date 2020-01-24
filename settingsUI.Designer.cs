@@ -116,7 +116,6 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.folderBrowserDialogStoreFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.check_state_images = new System.Windows.Forms.ImageList(this.components);
-            this.backgroundWorkerSetFromMemory = new System.ComponentModel.BackgroundWorker();
             tab_view_settings = new System.Windows.Forms.TabPage();
             tab_view_settings.SuspendLayout();
             this.groupBox_viewSettings.SuspendLayout();
@@ -533,7 +532,7 @@
             this.button_settings_save.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button_settings_save.Name = "button_settings_save";
             this.button_settings_save.UseVisualStyleBackColor = true;
-            this.button_settings_save.Click += new System.EventHandler(this.Save_and_close);
+            this.button_settings_save.Click += new System.EventHandler(this.SaveAndClose);
             // 
             // button_settings_cancel
             // 
@@ -927,7 +926,7 @@
             resources.ApplyResources(this.comboBoxResolutions, "comboBoxResolutions");
             this.comboBoxResolutions.FormattingEnabled = true;
             this.comboBoxResolutions.Name = "comboBoxResolutions";
-            this.comboBoxResolutions.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxResolutions_SelectedIndexChanged);
+            this.comboBoxResolutions.SelectedIndexChanged += new System.EventHandler(this.ComboBoxResolutions_SelectedIndexChanged);
             // 
             // comboBoxFPS
             // 
@@ -952,6 +951,10 @@
             this.cm_camera_number.FormattingEnabled = true;
             this.cm_camera_number.Name = "cm_camera_number";
             this.cm_camera_number.SelectedValueChanged += new System.EventHandler(this.CameraSelected);
+            
+            this.cm_camera_number.MouseLeave += new System.EventHandler(this.cm_camera_number_MouseLeave);
+            this.cm_camera_number.MouseHover += new System.EventHandler(this.cm_camera_number_MouseHover);
+            
             // 
             // imageList1
             // 
@@ -967,13 +970,6 @@
             this.check_state_images.TransparentColor = System.Drawing.Color.Transparent;
             this.check_state_images.Images.SetKeyName(0, "unchecked");
             this.check_state_images.Images.SetKeyName(1, "checked");
-            // 
-            // backgroundWorkerSetFromMemory
-            // 
-            this.backgroundWorkerSetFromMemory.WorkerReportsProgress = true;
-            this.backgroundWorkerSetFromMemory.DoWork += new System.ComponentModel.DoWorkEventHandler(this.LoadSettingsFromMemory);
-            this.backgroundWorkerSetFromMemory.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.LoadingComplete);
-            this.backgroundWorkerSetFromMemory.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.WorkCompleted);
             // 
             // SettingsUI
             // 
@@ -1116,6 +1112,5 @@
         private System.Windows.Forms.Label labelCameraNumber;
         private System.Windows.Forms.Label labelcnum;
         private System.Windows.Forms.CheckBox CBSetAsMainCam;
-        private System.ComponentModel.BackgroundWorker backgroundWorkerSetFromMemory;
     }
 }

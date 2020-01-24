@@ -141,13 +141,17 @@ namespace FaceDetection
                     //    //Properties.Settings.Default.camera_count = 4;
                     //    //Logger.Add("There are more than 4 cameras");
                     //}
+                    //MainForm.Settingui.ArrangeCameraNames(Decimal.ToInt32(Properties.Settings.Default.camera_count));
                 }
                 else if(Properties.Settings.Default.camera_count < capDevices.Length && Properties.Settings.Default.main_camera_index>= Properties.Settings.Default.camera_count)
                 {
                     Properties.Settings.Default.main_camera_index = 0;
+                    //MainForm.Settingui.ArrangeCameraNames(Decimal.ToInt32(Properties.Settings.Default.camera_count));
                 }
-                MainForm.Settingui.ArrangeCameraNames(Decimal.ToInt32(Properties.Settings.Default.camera_count));
                 Properties.Settings.Default.Save();
+                
+                MainForm.Settingui?.ArrangeCameraNames(Decimal.ToInt32(Properties.Settings.Default.camera_count));
+
             }
             else
             {

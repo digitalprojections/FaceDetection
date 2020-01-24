@@ -28,11 +28,12 @@ namespace FaceDetection
         /// <summary>
         /// current camera, not the Main Camera
         /// </summary>
-        private int currentCameraIndex;
+        private int currentCameraIndex = 0;
         /// <summary>
         /// private field MAIN Camera
         /// </summary>
         private int cameraindex;
+        private bool cameraSelectedManually;
 
         public SettingsUI()
         {
@@ -86,7 +87,7 @@ namespace FaceDetection
         //}
 
         public void ArrangeCameraNames(int len)
-        {
+        {            
             selected_camera_combo.Items.Clear();
             camera_names = new string[len];
             
@@ -96,11 +97,11 @@ namespace FaceDetection
             }
             if (Properties.Settings.Default.main_camera_index>=0 && selected_camera_combo.Items.Count >= Properties.Settings.Default.main_camera_index)
             {                  
-                selected_camera_combo.SelectedIndex = Properties.Settings.Default.main_camera_index <=0 ? 0 : Properties.Settings.Default.main_camera_index;
+                selected_camera_combo.SelectedIndex = Properties.Settings.Default.main_camera_index <=0 ? 0 : currentCameraIndex;
             }
             else
             {
-                Properties.Settings.Default.main_camera_index = 0;
+                //Properties.Settings.Default.main_camera_index = 0;
             }
         }
 
@@ -167,7 +168,7 @@ namespace FaceDetection
             //Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation = operatorActionCbStateC4;
         }
 
-        private void Save_and_close(object sender, EventArgs e)
+        private void SaveAndClose(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(storePath.Text))
             {
@@ -182,9 +183,9 @@ namespace FaceDetection
                 storePath.SelectionStart = storePath.Text.Length;
             }
 
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.Save();
             Camera.CountCamera();
-            Camera.SetNumberOfCameras();
+            //Camera.SetNumberOfCameras();
             Hide();
 
             //if (Properties.Settings.Default.show_all_cams_simulteneously == false)
@@ -344,7 +345,7 @@ namespace FaceDetection
                 resolutions_combo.Items.AddRange(vs.ToArray());
                 if (resolutions_combo.Items.Count > 0)
                 {
-                    //Console.WriteLine(Properties.Settings.Default.C1res);
+                    Console.WriteLine(PROPERTY_FUNCTIONS.GetResolution(cameraIndex));
                     resolutions_combo.SelectedItem = PROPERTY_FUNCTIONS.GetResolution(cameraIndex);
                 }
             }
@@ -368,13 +369,12 @@ namespace FaceDetection
             CBSetAsMainCam.Checked = (Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
             CBSetAsMainCam.Enabled = !CBSetAsMainCam.Checked;
 
-            currentCameraIndex = comboBox.SelectedIndex;
+            if(cameraSelectedManually)
+                currentCameraIndex = comboBox.SelectedIndex;
             MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);
-
-
-            backgroundWorkerSetFromMemory.RunWorkerAsync();
-
-            //(SetCameraPropertiesFromMemory);
+            
+            SetCameraPropertiesFromMemory();
+            //cameraSelectedManually = false;
             
                             
         }
@@ -798,7 +798,7 @@ namespace FaceDetection
         private void numericUpDownCamCount_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown cameracount_nud = (NumericUpDown)sender;
-            if (Properties.Settings.Default.main_camera_index + 1 == cameracount_nud.Value) 
+            if (Properties.Settings.Default.main_camera_index + 1 > cameracount_nud.Value) 
                 // The number of cameras explude the current MAIN CAMERA index
             {
                 Properties.Settings.Default.main_camera_index = 0;
@@ -858,21 +858,6 @@ namespace FaceDetection
         private void event_record_time_before_event_ValueChanged(object sender, EventArgs e)
         {
             SetMinMaxValues();
-        }
-
-        private void LoadSettingsFromMemory(object sender, DoWorkEventArgs e)
-        {
-            
-        }
-
-        private void LoadingComplete(object sender, ProgressChangedEventArgs e)
-        {
-            
-        }
-
-        private void WorkCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            SetCameraPropertiesFromMemory();
         }
 
         private void Nud_seconds_before_event_ValueChanged(object sender, EventArgs e)
@@ -946,6 +931,9 @@ namespace FaceDetection
         private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
         {
             PROPERTY_FUNCTIONS.resolution_changed = true;
+            PROPERTY_FUNCTIONS.SetResolution(currentCameraIndex, comboBoxResolutions.SelectedItem.ToString());
+            Console.WriteLine(comboBoxResolutions.SelectedItem.ToString());
+
         }
 
         private void NumericUpDownX_ValueChanged(object sender, EventArgs e)
@@ -1116,5 +1104,16 @@ namespace FaceDetection
             IntPtr lpvReserved);
         #endregion
 
+        
+
+        private void cm_camera_number_MouseHover(object sender, EventArgs e)
+        {
+            cameraSelectedManually = true;
+        }
+
+        private void cm_camera_number_MouseLeave(object sender, EventArgs e)
+        {
+            cameraSelectedManually = false;
+        }
     }
 }

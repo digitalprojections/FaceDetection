@@ -737,6 +737,26 @@ namespace FaceDetection
             return res;
         }
         
+        public static void SetResolution(int cam_ind, string val)
+        {
+            switch (cam_ind)
+            {
+                case 0:
+                    Properties.Settings.Default.C1res = val;
+                    break;
+                case 1:
+                    Properties.Settings.Default.C2res = val;
+                    break;
+                case 2:
+                    Properties.Settings.Default.C3res = val;
+                    break;
+                case 3:
+                    Properties.Settings.Default.C4res = val;
+                    break;
+            }
+            Properties.Settings.Default.Save();
+        }
+        
 
         public static System.Drawing.Size Get_Stored_Resolution(int cam_ind)
         {

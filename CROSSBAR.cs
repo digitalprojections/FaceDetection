@@ -260,23 +260,8 @@ namespace FaceDetection
                 if (wait_interval_enabled)
                 {
                     int intt = 0;
-                    
-                    if (this.INDEX == 0)
-                    {
-                        intt = decimal.ToInt32(Properties.Settings.Default.C1_interval_before_reinitiating_recording) * 1000;
-                    }
-                    else if (this.INDEX == 1)
-                    {
-                        intt = decimal.ToInt32(Properties.Settings.Default.C2_interval_before_reinitiating_recording) * 1000;
-                    }
-                    else if (this.INDEX == 2)
-                    {
-                        intt = decimal.ToInt32(Properties.Settings.Default.C3_interval_before_reinitiating_recording) * 1000;
-                    }
-                    else if(this.INDEX == 3)
-                    {
-                        intt = decimal.ToInt32(Properties.Settings.Default.C4_interval_before_reinitiating_recording) * 1000;
-                    }
+
+                    PROPERTY_FUNCTIONS.GetReInitiationInterval(INDEX, out intt);
 
                     //Run the timer
                     if (intt >= 500)

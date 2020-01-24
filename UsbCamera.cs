@@ -74,8 +74,8 @@ namespace FaceDetectionX
         public UsbCamera(int cameraIndex, Form ptr)
         {
             this.parentwindow = ptr;
-            Size size = FaceDetection.PROPERTY_FUNCTIONS.Get_Stored_Resolution(0);
-            int fps = FaceDetection.PROPERTY_FUNCTIONS.Get_FPS(0);
+            Size size = FaceDetection.PROPERTY_FUNCTIONS.Get_Stored_Resolution(cameraIndex);
+            int fps = FaceDetection.PROPERTY_FUNCTIONS.Get_FPS(cameraIndex);
             var camera_list = FindDevices();
             if (cameraIndex < camera_list.Length)
             {
