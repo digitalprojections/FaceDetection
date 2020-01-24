@@ -936,8 +936,11 @@ namespace FaceDetection
         private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
         {
             PROPERTY_FUNCTIONS.resolution_changed = true;
-            PROPERTY_FUNCTIONS.SetResolution(currentCameraIndex, comboBoxResolutions.SelectedItem.ToString());
-            Console.WriteLine(comboBoxResolutions.SelectedItem.ToString());
+            if (comboBoxResolutions.SelectedItem != null)
+            {
+                PROPERTY_FUNCTIONS.SetResolution(currentCameraIndex, comboBoxResolutions.SelectedItem.ToString());
+                Console.WriteLine(comboBoxResolutions.SelectedItem.ToString());
+            }
 
         }
 
