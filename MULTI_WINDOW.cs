@@ -8,8 +8,6 @@ namespace FaceDetection
     /// </summary>
     class MULTI_WINDOW
     {
-        //private delegate void dDateTimerUpdater();
-        
         private static CameraForm form;
         public static CameraForm[] formList = new CameraForm[4];
         public static int displayedCameraCount = 0;
@@ -80,12 +78,7 @@ namespace FaceDetection
 
         public static void EventRecorderOn(int cameraIndex)
         {
-
-
-            PARAMETERS.PARAM.Clear();
-
             PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(cameraIndex, out int timeBeforeEvent, out int timeAfterEvent);
-
             bool preeventRecording = PreeventRecordingState(cameraIndex);
 
             if (preeventRecording)
