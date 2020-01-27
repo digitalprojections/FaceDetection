@@ -66,7 +66,7 @@ namespace FaceDetection
         {
             //StopAll();             
             RSensor?.Destroy();
-            Application.Exit();
+            //Application.Exit();
         }
         
         private void MainForm_Load(object sender, EventArgs e)
@@ -83,9 +83,9 @@ namespace FaceDetection
                 BackLight.Start();
                 Mklisteners = new MOUSE_KEYBOARD();
                 ////////////////////////////////////////
-                if (IsTouchEnabled())
+                if (PINVOKES.IsTouchEnabled())
                 {
-                    MessageBox.Show("You are using a device supports touch screen");
+                    Logger.Add("********** You are using a device supports touch screen **********");
                 }
 
                 #endregion
@@ -398,10 +398,20 @@ namespace FaceDetection
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Dispose();
             Application.Exit();
         }
-        
-        
+
+        private new void Dispose()
+        {
+            datetime_timer.Dispose();
+            backLight.Dispose();
+        }
+    }
+
+    class PINVOKES
+    {
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         private static extern IntPtr SendMessageTimeout(
             IntPtr hWnd,
@@ -414,7 +424,7 @@ namespace FaceDetection
         [DllImport("user32.dll")]
         private static extern int GetSystemMetrics(int nIndex);
 
-        private static bool IsTouchEnabled()
+        public static bool IsTouchEnabled()
         {
             int MAXTOUCHES_INDEX = 0x95;
             int maxTouches = GetSystemMetrics(MAXTOUCHES_INDEX);
@@ -430,6 +440,5 @@ namespace FaceDetection
             SMTO_NOTIMEOUTIFNOTHUNG = 0x8,
             SMTO_ERRORONEXIT = 0x20
         }
-
     }
 }

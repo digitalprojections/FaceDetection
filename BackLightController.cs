@@ -75,7 +75,8 @@ namespace FaceDetection
         {            
             if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
             {
-                SendMessage(0xFFFF, 0x112, 0xF170, (int)MonitorState.MonitorStateOff);
+                int hr = SendMessage(0xFFFF, 0x112, 0xF170, (int)MonitorState.MonitorStateOff);
+
             }
             else
             {
@@ -191,7 +192,7 @@ namespace FaceDetection
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
             // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this);
         }
         #endregion
     }    

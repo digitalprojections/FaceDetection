@@ -154,8 +154,10 @@ namespace FaceDetection
             Properties.Settings.Default.Reload();
             Hide();
             //No need for these lines. Reload does the job
+            if(currentCameraIndex!=MainCameraBeforeSettingsLoad)
+                CBSetAsMainCam.Checked = false;
+            CameraSetAsMain();
 
-            //Properties.Settings.Default.main_camera_index = MainCameraBeforeSettingsLoad;
             //Properties.Settings.Default.C1_enable_capture_operator = operatorCaptureCbStateC1;
             //Properties.Settings.Default.C1_enable_Human_sensor = sensorEnabledCbStateC1;
             //Properties.Settings.Default.C1_enable_face_recognition = faceDetectionCbStateC1;
@@ -359,12 +361,18 @@ namespace FaceDetection
         }
         void CameraSetAsMain(object sender, EventArgs e)
         {
+            CameraSetAsMain();
+        }
+
+        void CameraSetAsMain() { 
             if (CBSetAsMainCam.Checked && Properties.Settings.Default.main_camera_index != cm_camera_number.SelectedIndex)
             {
-                Camera_index = cm_camera_number.SelectedIndex;                
+                Camera_index = cm_camera_number.SelectedIndex;
+                cm_camera_number.Enabled = false;
             }
             else
             {
+                cm_camera_number.Enabled = true;
                 Camera_index = MainCameraBeforeSettingsLoad;
             }
             labelCameraNumber.Text = (Camera_index + 1).ToString();
@@ -372,7 +380,8 @@ namespace FaceDetection
         private void CameraSelected(object sender, EventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
-                        
+
+            
             CBSetAsMainCam.Checked = (Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
             CBSetAsMainCam.Enabled = !(Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
 
@@ -459,7 +468,7 @@ namespace FaceDetection
             bool rip = MainForm.AnyRecordingInProgress;
             
             cm_camera_number.Enabled = !rip;
-            CBSetAsMainCam.Enabled = !rip;
+            //CBSetAsMainCam.Enabled = !rip;
             button_settings_save.Enabled = !rip;
             if (cb_operator_capture.CheckState == CheckState.Unchecked && cb_event_recorder.CheckState==CheckState.Unchecked)
             {
@@ -513,7 +522,7 @@ namespace FaceDetection
                 nud_seconds_after_event.Enabled = false;
                 nud_seconds_before_event.Enabled = false;
             }
-            else if (cb_operator_capture.Checked == true)
+            else if (cb_operator_capture.Checked == true && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked))
             {
                 if (cm_capture_mode.SelectedIndex == 0)
                 {
@@ -651,8 +660,8 @@ namespace FaceDetection
             bool chk = chb.Checked;
             
             ChangeControlEnabled(this.groupBox_functionalitySettings, chk, currentCameraIndex);
-
-            if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked))
+            PROPERTY_FUNCTIONS.GetCaptureMethod(currentCameraIndex, out string capturemethod);
+            if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked) && capturemethod=="Video")
             {
                 nud_seconds_before_event.Enabled = true;
                 nud_seconds_after_event.Enabled = true;
@@ -778,7 +787,7 @@ namespace FaceDetection
             CheckBox checkBox = (CheckBox)sender;
             if (!checkBox.Checked)
             {
-                event_record_time_before_event.Value = 0;
+                //event_record_time_before_event.Value = 0;
                 DisabledButtonWhenRecording();
             }
         }
@@ -1075,6 +1084,12 @@ namespace FaceDetection
         private void cm_camera_number_MouseLeave(object sender, EventArgs e)
         {
             cameraSelectedManually = false;
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+
+            cm_camera_number.Enabled = !(e.TabPageIndex == 1 && CBSetAsMainCam.Checked);
         }
     }
 }

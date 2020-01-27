@@ -19,7 +19,7 @@ namespace FaceDetection
         /// SettingsUI resolutions data, generated each time. But set to the memory value
         /// </summary>
         private List<string> vf_resolutions = new List<string>();
-        private List<string> vf_fps = new List<string>();
+        private readonly List<string> vf_fps = new List<string>();
 
         private bool displayed = false;
         public bool DISPLAYED { get => displayed; set => displayed = value; }
@@ -27,6 +27,8 @@ namespace FaceDetection
         //private FlowLayoutPanel controlBut;
         //public FlowLayoutPanel gbox_controlBut { get => controlBut; set => controlBut = value; }
         public PictureBox picbox_recording { get => rec_icon; }
+        public List<string> Vf_resolutions { get => vf_resolutions; set => vf_resolutions = value; }
+
         private System.ComponentModel.IContainer components = null;
         private CameraNumberLabel camera_number;
         private DateTimeLabel dateTimeLabel;
@@ -179,9 +181,9 @@ namespace FaceDetection
             //Showing video formats
             for (int k = 0; k < videoFormat.Length; k++)
             {
-                if (UniqueVideoParameter(vf_resolutions, videoFormat[k].Size) != true)
+                if (UniqueVideoParameter(Vf_resolutions, videoFormat[k].Size) != true)
                 {
-                    vf_resolutions.Add(videoFormat[k].Size.Width + "x" + videoFormat[k].Size.Height);
+                    Vf_resolutions.Add(videoFormat[k].Size.Width + "x" + videoFormat[k].Size.Height);
                 }
                 FPS = 10000000 / videoFormat[k].TimePerFrame;
                 if (UniqueFPS(FPS) != true)

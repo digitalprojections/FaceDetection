@@ -54,8 +54,7 @@ namespace FaceDetection
 
         //System.Timers.Timer icon_timer = new System.Timers.Timer();
         public System.Timers.Timer icon_timer;
-
-        CameraForm window;
+        readonly CameraForm window;
 
         public bool Recording_is_on { get => recording_is_on; set => recording_is_on = value; }
                         
@@ -581,7 +580,7 @@ namespace FaceDetection
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
             // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this);
         }
         #endregion
 

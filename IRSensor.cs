@@ -125,6 +125,7 @@ namespace FaceDetection
         public void Stop_IR_Timer()
         {
             bIsIRCheckExec = false;
+            SensorCheckTimer.Stop();
         }
 
         public void Destroy()
