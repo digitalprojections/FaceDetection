@@ -350,8 +350,9 @@ namespace FaceDetection
                 resolutions_combo.Items.AddRange(vs.ToArray());
                 if (resolutions_combo.Items.Count > 0)
                 {
-                    Console.WriteLine(PROPERTY_FUNCTIONS.GetResolution(cameraIndex));
-                    resolutions_combo.SelectedItem = PROPERTY_FUNCTIONS.GetResolution(cameraIndex);
+                    
+                    if(PROPERTY_FUNCTIONS.GetResolution(cameraIndex)!=null)
+                        resolutions_combo.SelectedItem = PROPERTY_FUNCTIONS.GetResolution(cameraIndex);
                 }
             }
         }
@@ -376,9 +377,10 @@ namespace FaceDetection
 
             if (cameraSelectedManually)
                 currentCameraIndex = comboBox.SelectedIndex;
+            SetCameraPropertiesFromMemory();
             MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);
             
-            SetCameraPropertiesFromMemory();
+            
             //cameraSelectedManually = false;
             
                             
@@ -815,44 +817,7 @@ namespace FaceDetection
         private void DisableOperatorCaptureCheckBox_ifNeeded()
         {
             PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchImplicitly(currentCameraIndex);            
-            //// CAMERA 1
-            //if (Properties.Settings.Default.C1_enable_Human_sensor || Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation)
-            //{                
-            //    Properties.Settings.Default.C1_enable_capture_operator = true;
-            //}
-            //else
-            //{
-            //    Properties.Settings.Default.C1_enable_capture_operator = false; //All three are off. Disable
-            //}
-            //// CAMERA 2
-            //if (Properties.Settings.Default.C2_enable_Human_sensor || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation)
-            //{
-            //    Properties.Settings.Default.C2_enable_capture_operator = true;
-            //}
-            //else
-            //{
-            //    Properties.Settings.Default.C2_enable_capture_operator = false; //All three are off. Disable
-            //}
-
-            //// CAMERA 3
-            //if (Properties.Settings.Default.C3_enable_Human_sensor || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation)
-            //{
-            //    Properties.Settings.Default.C3_enable_capture_operator = true;
-            //}
-            //else
-            //{
-            //    Properties.Settings.Default.C3_enable_capture_operator = false; //All three are off. Disable
-            //}
-
-            //// CAMERA 4
-            //if (Properties.Settings.Default.C4_enable_Human_sensor || Properties.Settings.Default.C4_enable_face_recognition || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation)
-            //{
-            //    Properties.Settings.Default.C4_enable_capture_operator = true;
-            //}
-            //else
-            //{
-            //    Properties.Settings.Default.C4_enable_capture_operator = false; //All three are off. Disable
-            //}
+            
         }
         private void Cb_backlight_off_idling_CheckStateChanged(object sender, EventArgs e)
         {
@@ -865,7 +830,7 @@ namespace FaceDetection
         }
         private void event_record_time_before_event_ValueChanged(object sender, EventArgs e)
         {
-            SetMinMaxValues();
+            //SetMinMaxValues();
         }
 
         private void Nud_seconds_before_event_ValueChanged(object sender, EventArgs e)
@@ -877,26 +842,11 @@ namespace FaceDetection
         /// </summary>
         void SetMaxValues()
         {
-            decimal iv = nud_reinitiation_interval.Value;
-            if (nud_reinitiation_interval.Value >= GetTheMaxValue() && iv > 5)
-            {
-                nud_seconds_before_event.Maximum = iv;
-                event_record_time_before_event.Maximum = iv;
-            }
         }
         void SetMinMaxValues()
         {
-            decimal val = GetTheMaxValue();
-            decimal iv = nud_reinitiation_interval.Value;
-            //if (nud_reinitiation_interval.Minimum < val)
-                nud_reinitiation_interval.Minimum = val;
-            //else if (nud_reinitiation_interval.Minimum > val)
-            nud_seconds_before_event.Maximum = iv;
-            event_record_time_before_event.Maximum = iv;
-            if (nud_reinitiation_interval.Minimum < 5)
-            {
-                nud_reinitiation_interval.Minimum = 5;
-            }
+            nud_reinitiation_interval.Minimum = nud_seconds_before_event.Value;
+            
         }
         decimal GetTheMaxValue()
         {

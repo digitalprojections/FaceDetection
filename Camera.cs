@@ -155,6 +155,7 @@ namespace FaceDetection
             }
             else
             {
+                Properties.Settings.Default.main_camera_index = 0;
                 MessageBox.Show(Resource.no_camera_found);
                 Application.Exit();
             }

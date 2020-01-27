@@ -40,21 +40,23 @@ namespace FaceDetection
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             InitializeComponent();
-            
-            if (vs != null && vs.Count() > 0)
+            if (Camera.GetCameraCount().Length > 0)
             {
-                PARAMETERS.HandleParameters(vs);
-                Logger.Add(vs.Count + " HandleParameters");
-            }
-            
-            if(PARAMETERS.PARAM!=null)
-            {
-                Logger.Add(String.Concat(PARAMETERS.PARAM));
-            }
+                if (vs != null && vs.Count() > 0)
+                {
+                    PARAMETERS.HandleParameters(vs);
+                    Logger.Add(vs.Count + " HandleParameters");
+                }
 
-            backLight = new BackLightController();
-            
-            stopwatch.Start();
+                if (PARAMETERS.PARAM != null)
+                {
+                    Logger.Add(String.Concat(PARAMETERS.PARAM));
+                }
+
+                backLight = new BackLightController();
+
+                stopwatch.Start();
+            }
         }        
         
         
@@ -70,35 +72,39 @@ namespace FaceDetection
         private void MainForm_Load(object sender, EventArgs e)
         {
             Camera.SetNumberOfCameras();
-            #region Instances
-            ///////////////////////////////////////
-            settingUI = new SettingsUI();
-            RSensor = new IRSensor();            
-            backLight = new BackLightController();
-            BackLight.Start();
-            Mklisteners = new MOUSE_KEYBOARD();
-            ////////////////////////////////////////
-            if (IsTouchEnabled())
-            {
-                MessageBox.Show("You are using a device supports touch screen");
-            }
-
-            #endregion
-            //Object references                    
-            mainForm = this;            
-            this.WindowState = FormWindowState.Minimized;                        
-            
             if (Camera.GetCameraCount().Length > 0)
             {
-                AllChangesApply();
-                ClearCutFileTempFolder();
-                ClearTempFolder();
 
-                datetime_timer.Interval = 1000;
-                datetime_timer.Start();
-                datetime_timer.AutoReset = true;
-                datetime_timer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateDateTimeText);
-            }            
+                #region Instances
+                ///////////////////////////////////////
+                settingUI = new SettingsUI();
+                RSensor = new IRSensor();
+                backLight = new BackLightController();
+                BackLight.Start();
+                Mklisteners = new MOUSE_KEYBOARD();
+                ////////////////////////////////////////
+                if (IsTouchEnabled())
+                {
+                    MessageBox.Show("You are using a device supports touch screen");
+                }
+
+                #endregion
+                //Object references                    
+                mainForm = this;
+                this.WindowState = FormWindowState.Minimized;
+
+                if (Camera.GetCameraCount().Length > 0)
+                {
+                    AllChangesApply();
+                    ClearCutFileTempFolder();
+                    ClearTempFolder();
+
+                    datetime_timer.Interval = 1000;
+                    datetime_timer.Start();
+                    datetime_timer.AutoReset = true;
+                    datetime_timer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateDateTimeText);
+                }
+            }
         }
 
         public static void AllChangesApply()
