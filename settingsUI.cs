@@ -263,6 +263,13 @@ namespace FaceDetection
                 cb_show_camera_number.DataBindings.Clear();
                 cb_show_rec_icon.DataBindings.Clear();
 
+                //checkBox_full_screen;
+                //cb_always_on_top;
+                //cb_dateandtime;
+                //cb_window_pane;
+                //cb_show_camera_number;
+                //cb_show_rec_icon;
+
                 string camX = "C" + (currentCameraIndex + 1) + "x";
                 string camY = "C" + (currentCameraIndex + 1) + "y";
                 string camW = "C" + (currentCameraIndex + 1) + "w";
@@ -305,7 +312,11 @@ namespace FaceDetection
                 cb_face_recognition.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_enable_face_recognition", true, DataSourceUpdateMode.OnPropertyChanged));
                 cb_human_sensor.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_enable_Human_sensor", true, DataSourceUpdateMode.OnPropertyChanged));
                 cb_recording_operation.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_Recording_when_at_the_start_of_operation", true, DataSourceUpdateMode.OnPropertyChanged));
+
             }
+
+
+
         }
 
         public static void SetComboBoxFPSValues(List<string> vs, int cameraIndex)
@@ -366,22 +377,14 @@ namespace FaceDetection
             CBSetAsMainCam.Enabled = !(Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
 
             if (cameraSelectedManually)
-            {
                 currentCameraIndex = comboBox.SelectedIndex;
-            }
             SetCameraPropertiesFromMemory();
             MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);
-
-            if (cm_capture_mode.SelectedIndex == 1) // SNAPSHOT
-            {
-                nud_seconds_after_event.Enabled = false;
-                nud_seconds_before_event.Enabled = false;
-            }
-            else
-            {
-                nud_seconds_after_event.Enabled = true;
-                nud_seconds_before_event.Enabled = true;
-            }
+            
+            
+            //cameraSelectedManually = false;
+            
+                            
         }
 
         private void SettingsUI_Load(object sender, EventArgs e)
