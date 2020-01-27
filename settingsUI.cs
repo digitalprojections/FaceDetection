@@ -132,7 +132,8 @@ namespace FaceDetection
             }
             this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(currentCameraIndex);
             MainCameraBeforeSettingsLoad = Properties.Settings.Default.main_camera_index;
-            ShowDialog();
+            //ShowDialog();
+            Show(MULTI_WINDOW.formList[currentCameraIndex]);
         }
 
         private void OpenStoreLocation(object sender, EventArgs e)
@@ -534,38 +535,38 @@ namespace FaceDetection
             }
         }
 
-        private bool CheckOnKids(Control control, string type, PictureBox picbox)
-        {
-            CheckBox checkBox;
-            bool ret = false;
-            foreach (Control c in control.Controls)
-            {
-                if (c.GetType().ToString() == type && c.Tag == picbox.Tag)
-                {
-                    //we found the control and the tag we need
-                    //set the values eg: CheckBox checked state                    
-                    checkBox = c as CheckBox;
-                    if (checkBox.Checked)
-                    {
-                        checkBox.Checked = false;
-                        picbox.Image = check_state_images.Images[0];
-                    }
-                    else
-                    {
-                        checkBox.Checked = true;
-                        picbox.Image = check_state_images.Images[1];
-                    }
-                    ret = checkBox.Checked;
-                    //Console.WriteLine(checkBox.Checked + " is +++++ " + checkBox.Text);
-                }
+        //private bool CheckOnKids(Control control, string type, PictureBox picbox)
+        //{
+        //    CheckBox checkBox;
+        //    bool ret = false;
+        //    foreach (Control c in control.Controls)
+        //    {
+        //        if (c.GetType().ToString() == type && c.Tag == picbox.Tag)
+        //        {
+        //            //we found the control and the tag we need
+        //            //set the values eg: CheckBox checked state                    
+        //            checkBox = c as CheckBox;
+        //            if (checkBox.Checked)
+        //            {
+        //                checkBox.Checked = false;
+        //                picbox.Image = check_state_images.Images[0];
+        //            }
+        //            else
+        //            {
+        //                checkBox.Checked = true;
+        //                picbox.Image = check_state_images.Images[1];
+        //            }
+        //            ret = checkBox.Checked;
+        //            //Console.WriteLine(checkBox.Checked + " is +++++ " + checkBox.Text);
+        //        }
 
-                if (c.GetType().ToString() == "System.Windows.Forms.GroupBox")
-                {
-                    ret = CheckOnKids(c, type, picbox);
-                }
-            }
-            return ret;
-        }
+        //        if (c.GetType().ToString() == "System.Windows.Forms.GroupBox")
+        //        {
+        //            ret = CheckOnKids(c, type, picbox);
+        //        }
+        //    }
+        //    return ret;
+        //}
 
         private void Button_cameraProperties_Click(object sender, EventArgs e)
         {
@@ -670,23 +671,23 @@ namespace FaceDetection
             CheckBox check = (CheckBox)sender;
             if(check.Checked)
             {
-                //cb_face_recognition.Checked = !check.Checked;
-                if (Properties.Settings.Default.C1_enable_Human_sensor == true)
-                {
-                    Properties.Settings.Default.C1_enable_face_recognition = false;
-                }
-                if (Properties.Settings.Default.C2_enable_Human_sensor == true)
-                {
-                    Properties.Settings.Default.C2_enable_face_recognition = false;
-                }
-                if (Properties.Settings.Default.C3_enable_Human_sensor == true)
-                {
-                    Properties.Settings.Default.C3_enable_face_recognition = false;
-                }
-                if (Properties.Settings.Default.C4_enable_Human_sensor == true)
-                {
-                    Properties.Settings.Default.C4_enable_face_recognition = false;
-                }
+                cb_face_recognition.Checked = !check.Checked;
+                //if (Properties.Settings.Default.C1_enable_Human_sensor == true)
+                //{
+                //    Properties.Settings.Default.C1_enable_face_recognition = false;
+                //}
+                //if (Properties.Settings.Default.C2_enable_Human_sensor == true)
+                //{
+                //    Properties.Settings.Default.C2_enable_face_recognition = false;
+                //}
+                //if (Properties.Settings.Default.C3_enable_Human_sensor == true)
+                //{
+                //    Properties.Settings.Default.C3_enable_face_recognition = false;
+                //}
+                //if (Properties.Settings.Default.C4_enable_Human_sensor == true)
+                //{
+                //    Properties.Settings.Default.C4_enable_face_recognition = false;
+                //}
             }
             else
             {
@@ -710,23 +711,23 @@ namespace FaceDetection
             CheckBox check = (CheckBox)sender;
             if (check.Checked)
             {
-                //cb_human_sensor.Checked = !check.Checked;
-                if (Properties.Settings.Default.C1_enable_face_recognition == true)
-                {
-                    Properties.Settings.Default.C1_enable_Human_sensor = false;
-                }
-                if (Properties.Settings.Default.C2_enable_face_recognition == true)
-                {
-                    Properties.Settings.Default.C2_enable_Human_sensor = false;
-                }
-                if (Properties.Settings.Default.C3_enable_face_recognition == true)
-                {
-                    Properties.Settings.Default.C3_enable_Human_sensor = false;
-                }
-                if (Properties.Settings.Default.C4_enable_face_recognition == true)
-                {
-                    Properties.Settings.Default.C4_enable_Human_sensor = false;
-                }
+                cb_human_sensor.Checked = !check.Checked;
+                //if (Properties.Settings.Default.C1_enable_face_recognition == true)
+                //{
+                //    Properties.Settings.Default.C1_enable_Human_sensor = false;
+                //}
+                //if (Properties.Settings.Default.C2_enable_face_recognition == true)
+                //{
+                //    Properties.Settings.Default.C2_enable_Human_sensor = false;
+                //}
+                //if (Properties.Settings.Default.C3_enable_face_recognition == true)
+                //{
+                //    Properties.Settings.Default.C3_enable_Human_sensor = false;
+                //}
+                //if (Properties.Settings.Default.C4_enable_face_recognition == true)
+                //{
+                //    Properties.Settings.Default.C4_enable_Human_sensor = false;
+                //}
             }
             else
             {
