@@ -314,11 +314,7 @@ namespace FaceDetection
                 cb_face_recognition.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_enable_face_recognition", true, DataSourceUpdateMode.OnPropertyChanged));
                 cb_human_sensor.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_enable_Human_sensor", true, DataSourceUpdateMode.OnPropertyChanged));
                 cb_recording_operation.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_Recording_when_at_the_start_of_operation", true, DataSourceUpdateMode.OnPropertyChanged));
-
             }
-
-
-
         }
 
         public static void SetComboBoxFPSValues(List<string> vs, int cameraIndex)
@@ -359,6 +355,7 @@ namespace FaceDetection
                 }
             }
         }
+
         void CameraSetAsMain(object sender, EventArgs e)
         {
             CameraSetAsMain();
@@ -377,6 +374,7 @@ namespace FaceDetection
             }
             labelCameraNumber.Text = (Camera_index + 1).ToString();
         }
+
         private void CameraSelected(object sender, EventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
@@ -386,14 +384,11 @@ namespace FaceDetection
             CBSetAsMainCam.Enabled = !(Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
 
             if (cameraSelectedManually)
+            {
                 currentCameraIndex = comboBox.SelectedIndex;
+            }
             SetCameraPropertiesFromMemory();
-            MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);
-            
-            
-            //cameraSelectedManually = false;
-            
-                            
+            MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);                 
         }
 
         private void SettingsUI_Load(object sender, EventArgs e)
@@ -954,6 +949,21 @@ namespace FaceDetection
             }
         }
 
+        private void cm_camera_number_MouseHover(object sender, EventArgs e)
+        {
+            cameraSelectedManually = true;
+        }
+
+        private void cm_camera_number_MouseLeave(object sender, EventArgs e)
+        {
+            cameraSelectedManually = false;
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            cm_camera_number.Enabled = !(e.TabPageIndex == 1 && CBSetAsMainCam.Checked);
+        }
+
         private void StorePath_TextChanged(object sender, EventArgs e)
         {
             //Console.WriteLine(Path.IsPathRooted(storePath.Text) + " - path rooted. " + Path.GetFullPath(storePath.Text) + " " + Path.GetPathRoot(storePath.Text));
@@ -1074,22 +1084,5 @@ namespace FaceDetection
             IntPtr lpvReserved);
         #endregion
 
-        
-
-        private void cm_camera_number_MouseHover(object sender, EventArgs e)
-        {
-            cameraSelectedManually = true;
-        }
-
-        private void cm_camera_number_MouseLeave(object sender, EventArgs e)
-        {
-            cameraSelectedManually = false;
-        }
-
-        private void tabControl1_Selected(object sender, TabControlEventArgs e)
-        {
-
-            cm_camera_number.Enabled = !(e.TabPageIndex == 1 && CBSetAsMainCam.Checked);
-        }
     }
 }
