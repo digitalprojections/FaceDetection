@@ -951,10 +951,8 @@
             this.cm_camera_number.FormattingEnabled = true;
             this.cm_camera_number.Name = "cm_camera_number";
             this.cm_camera_number.SelectedValueChanged += new System.EventHandler(this.CameraSelected);
-            
             this.cm_camera_number.MouseLeave += new System.EventHandler(this.cm_camera_number_MouseLeave);
             this.cm_camera_number.MouseHover += new System.EventHandler(this.cm_camera_number_MouseHover);
-            
             // 
             // imageList1
             // 

@@ -143,6 +143,15 @@ namespace FaceDetection {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Release camera.
+        /// </summary>
+        internal static string releaseCamera {
+            get {
+                return ResourceManager.GetString("releaseCamera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set as the MAIN CAMERA.
         /// </summary>
         internal static string setAsMainCam {

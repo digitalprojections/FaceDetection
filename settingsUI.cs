@@ -372,9 +372,9 @@ namespace FaceDetection
             ComboBox comboBox = (ComboBox)sender;
                         
             CBSetAsMainCam.Checked = (Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
-            CBSetAsMainCam.Enabled = !CBSetAsMainCam.Checked;
+            CBSetAsMainCam.Enabled = !(Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
 
-            if(cameraSelectedManually)
+            if (cameraSelectedManually)
                 currentCameraIndex = comboBox.SelectedIndex;
             MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);
             
@@ -417,6 +417,9 @@ namespace FaceDetection
             ChangeLanguage();
             Debug.WriteLine(CultureInfo.CurrentCulture + " current culture");
             this.Text = Resource.settingsWindowTitle;
+
+            //numericUpDownCamCount.Maximum = Camera.GetCameraCount().Length;
+
             //No need to call now, as there is a call from button press
             //SetCameraPropertiesFromMemory();
             Camera.SetNumberOfCameras();

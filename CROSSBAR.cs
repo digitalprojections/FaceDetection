@@ -465,7 +465,7 @@ namespace FaceDetection
                         the_timer.Enabled = true;
                         the_timer.Interval = duration + 3;
                         the_timer.Enabled = false;
-                        Logger.Add(no_opcap_timer.Interval.ToString());
+                        Logger.Add("No operator capture timer interval: " + no_opcap_timer.Interval.ToString());
                         if (this != null)
                         {
                             recorder.ACTIVE_RECPATH = RECORD_PATH.EVENT;
@@ -529,18 +529,18 @@ namespace FaceDetection
 
         internal void ReleaseCamera()
         {
-            Logger.Add("Release camera");
+            Logger.Add(Resource.releaseCamera);
             try
-            {
+            {                
                 the_timer.Dispose();
                 no_opcap_timer.Dispose();
                 icon_timer.Dispose();
                 camera.Release();
                 recorder.ReleaseInterfaces();
             }
-            catch (Exception x)
+            catch (NullReferenceException nrx)
             {
-                Logger.Add(x);
+                Logger.Add(nrx);
             }
         }
 
@@ -554,7 +554,12 @@ namespace FaceDetection
                 if (disposing)
                 {
                     // TODO: dispose managed state (managed objects).
+                    parentwindow.Dispose();
+                    icon_timer.Dispose();
+                    the_timer.Dispose();
+                    no_opcap_timer.Dispose();
                 }
+                
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
                 // TODO: set large fields to null.

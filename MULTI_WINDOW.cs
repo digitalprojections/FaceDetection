@@ -20,8 +20,7 @@ namespace FaceDetection
         /// </summary>
         public static void CreateCameraWindows()
         {
-            int numberOfCamerasToDisplay = decimal.ToInt32(Properties.Settings.Default.camera_count);
-            int cameraIndex = decimal.ToInt32(Properties.Settings.Default.main_camera_index);
+            int numberOfCamerasToDisplay = decimal.ToInt32(Properties.Settings.Default.camera_count);            
 
             if (displayedCameraCount < numberOfCamerasToDisplay) 
             {
@@ -56,9 +55,9 @@ namespace FaceDetection
                         //displayedCameraCount--; //DONE within the form
                     }
                 }
-                catch (Exception ex)
+                catch (NullReferenceException nrx)
                 {
-                    Logger.Add(Resource.form_closing_failure);
+                    Logger.Add(Resource.form_closing_failure + " " + nrx.Message);
                 }
             }            
         }
@@ -68,7 +67,7 @@ namespace FaceDetection
             formList[cameraIndex]?.GetVideoFormat();
         }
 
-        public static void formSettingsChanged()
+        public static void FormSettingsChanged()
         {
             for (int i = 0; i < displayedCameraCount; i++)
             {
@@ -81,14 +80,13 @@ namespace FaceDetection
 
         public static void EventRecorderOn(int cameraIndex)
         {
-            int timeBeforeEvent = 0, timeAfterEvent = 0;
-            bool preeventRecording = false;
+
 
             PARAMETERS.PARAM.Clear();
 
-            PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(cameraIndex, out timeBeforeEvent, out timeAfterEvent);
+            PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(cameraIndex, out int timeBeforeEvent, out int timeAfterEvent);
 
-            preeventRecording = PreeventRecordingState(cameraIndex);
+            bool preeventRecording = PreeventRecordingState(cameraIndex);
 
             if (preeventRecording)
             {

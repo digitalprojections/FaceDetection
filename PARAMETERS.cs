@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace FaceDetection
 {
-    public class PARAMETERS
+    public static class PARAMETERS
     {
         public static List<string> PARAM;
         static string param;
@@ -133,7 +133,7 @@ namespace FaceDetection
                                     //}
                                     Properties.Settings.Default.main_camera_index = cameraIndex;
                                     Properties.Settings.Default.Save();
-                                    MULTI_WINDOW.formSettingsChanged();
+                                    MULTI_WINDOW.FormSettingsChanged();
                                 }
                                 else
                                 {

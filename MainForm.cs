@@ -133,7 +133,7 @@ namespace FaceDetection
 
             //CREATE CAMERA WINDOWS
             MULTI_WINDOW.CreateCameraWindows();
-            MULTI_WINDOW.formSettingsChanged();
+            MULTI_WINDOW.FormSettingsChanged();
 
             PARAMETERS.HandleWakeUpParameters();            
 
@@ -158,13 +158,13 @@ namespace FaceDetection
                 //    }
             }
         }
-        public async void ShowSettings(object sender, EventArgs e)
+        public void ShowSettings(object sender, EventArgs e)
         {
-            if(sender != null)
+            if (sender != null)
             {
                 Button settings_button = (Button)sender;
                 ShowSettingsDialogAsync(int.Parse(settings_button.Tag.ToString()));
-            }            
+            }
         }
         private void ShowSettingsDialogAsync(int cameraIndex)
         {
