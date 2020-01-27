@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace FaceDetection
 {
-    class PARAMETERS
+    public class PARAMETERS
     {
         public static List<string> PARAM;
         static string param;
