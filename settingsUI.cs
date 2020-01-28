@@ -37,6 +37,7 @@ namespace FaceDetection
         /// Only set true when the camera number is selected manually
         /// </summary>
         //private bool cameraSelectedManually;
+        private delegate void dSettingFromProperties();
 
         public SettingsUI()
         {
@@ -195,6 +196,14 @@ namespace FaceDetection
             }
 
             Properties.Settings.Default.main_camera_index = cm_camera_number.SelectedIndex;
+            for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+            {
+                if (MULTI_WINDOW.formList[i].DISPLAYED == true)
+                {
+                    PROPERTY_FUNCTIONS.Set_Window_Location_Set(i, MULTI_WINDOW.formList[i]);
+                    PROPERTY_FUNCTIONS.GetCameraSize(i);
+                }
+            }
 
             //Properties.Settings.Default.Save();
             Camera.CountCamera();
@@ -234,8 +243,6 @@ namespace FaceDetection
 
         }
 
-        private delegate void dSettingFromProperties();
-
         private void SetCameraPropertiesFromMemory()
         {
             if (this.InvokeRequired)
@@ -269,13 +276,6 @@ namespace FaceDetection
                 cb_window_pane.DataBindings.Clear();
                 cb_show_camera_number.DataBindings.Clear();
                 cb_show_rec_icon.DataBindings.Clear();
-
-                //checkBox_full_screen;
-                //cb_always_on_top;
-                //cb_dateandtime;
-                //cb_window_pane;
-                //cb_show_camera_number;
-                //cb_show_rec_icon;
 
                 string camX = "C" + (currentCameraIndex + 1) + "x";
                 string camY = "C" + (currentCameraIndex + 1) + "y";
@@ -391,7 +391,7 @@ namespace FaceDetection
 
             //if (cameraSelectedManually)
             //{
-            //    currentCameraIndex = comboBox.SelectedIndex;
+                currentCameraIndex = comboBox.SelectedIndex;
             //}
             labelCameraNumber.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
             SetCameraPropertiesFromMemory();

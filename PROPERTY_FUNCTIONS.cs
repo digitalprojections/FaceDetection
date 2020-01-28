@@ -408,6 +408,7 @@ namespace FaceDetection
                 default: return new Point(16, 16);
             }
         }
+
         internal static void Set_Window_Location(int cam_ind, CameraForm subCamWindow)
         {
             switch (cam_ind)
@@ -431,6 +432,29 @@ namespace FaceDetection
                     Properties.Settings.Default.C4_window_location = subCamWindow.Location;
                     Properties.Settings.Default.C4x = subCamWindow.Location.X;
                     Properties.Settings.Default.C4y = subCamWindow.Location.Y;
+                    break;
+            }
+        }
+
+        internal static void Set_Window_Location_Set(int cam_ind, CameraForm subCamWindow)
+        {
+            switch (cam_ind)
+            {
+                case 0:
+                    subCamWindow.Location = new Point (Decimal.ToInt32(Properties.Settings.Default.C1x), Decimal.ToInt32(Properties.Settings.Default.C1y));
+                    Properties.Settings.Default.C1_window_location = subCamWindow.Location;
+                    break;
+                case 1:
+                    subCamWindow.Location = new Point(Decimal.ToInt32(Properties.Settings.Default.C2x), Decimal.ToInt32(Properties.Settings.Default.C2y));
+                    Properties.Settings.Default.C2_window_location = subCamWindow.Location;
+                    break;
+                case 2:
+                    subCamWindow.Location = new Point(Decimal.ToInt32(Properties.Settings.Default.C3x), Decimal.ToInt32(Properties.Settings.Default.C3y));
+                    Properties.Settings.Default.C3_window_location = subCamWindow.Location;
+                    break;
+                case 3:
+                    subCamWindow.Location = new Point(Decimal.ToInt32(Properties.Settings.Default.C4x), Decimal.ToInt32(Properties.Settings.Default.C4y));
+                    Properties.Settings.Default.C4_window_location = subCamWindow.Location;
                     break;
             }
         }

@@ -611,21 +611,28 @@ namespace FaceDetection
 
         public void DateTimeUpdater()
         {
-            if (dateTimeLabel != null && dateTimeLabel.InvokeRequired)
+            try
             {
-                var d = new dDateTimerUpdater(DateTimeUpdater);
-                dateTimeLabel.Invoke(d);
+                if (dateTimeLabel != null && dateTimeLabel.InvokeRequired)
+                {
+                    var d = new dDateTimerUpdater(DateTimeUpdater);
+                    dateTimeLabel.Invoke(d);
+                }
+                else
+                {
+                    try
+                    {
+                        dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                    }
+                    catch (NullReferenceException e)
+                    {
+                        Debug.WriteLine(e.Message + " DateTimeUpdater()");
+                    }
+                }
             }
-            else
+            catch (ObjectDisposedException ODEx)
             {
-                try
-                {
-                    dateTimeLabel.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                }
-                catch (NullReferenceException e)
-                {
-                    Debug.WriteLine(e.Message + " DateTimeUpdater()");
-                }
+                Debug.WriteLine(ODEx.Message + " DateTimeUpdater()");
             }
         }
 
