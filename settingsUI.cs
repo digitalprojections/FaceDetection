@@ -194,6 +194,8 @@ namespace FaceDetection
                 storePath.SelectionStart = storePath.Text.Length;
             }
 
+            Properties.Settings.Default.main_camera_index = cm_camera_number.SelectedIndex;
+
             //Properties.Settings.Default.Save();
             Camera.CountCamera();
             //Camera.SetNumberOfCameras();
@@ -391,7 +393,7 @@ namespace FaceDetection
             //{
             //    currentCameraIndex = comboBox.SelectedIndex;
             //}
-            Properties.Settings.Default.main_camera_index = comboBox.SelectedIndex;
+            labelCameraNumber.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
             SetCameraPropertiesFromMemory();
             MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);                 
         }
