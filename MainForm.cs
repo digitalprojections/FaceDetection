@@ -385,9 +385,15 @@ namespace FaceDetection
 
         private void UpdateDateTimeText(object sender, System.Timers.ElapsedEventArgs eventArgs)
         {
-            for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+            for (int i = 0; i < 4; i++)
             {
-                MULTI_WINDOW.formList[i].DateTimeUpdater();
+                if (MULTI_WINDOW.formList[i] != null)
+                {
+                    if (MULTI_WINDOW.formList[i].DISPLAYED == true)
+                    {
+                        MULTI_WINDOW.formList[i].DateTimeUpdater();
+                    }
+                }
             }
         }
 
