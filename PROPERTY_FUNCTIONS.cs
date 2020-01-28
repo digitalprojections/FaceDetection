@@ -32,8 +32,8 @@ namespace FaceDetection
                 default: return new Size(640, 480);
 
             }
-
         }
+
         internal static void SetCycleTime(int cameraIndex, int time)
         {
             if (time >= 500 && time <= 1000)
@@ -79,6 +79,7 @@ namespace FaceDetection
                     break;
             }
         }
+
         /// <summary>
         /// Check all sensor switches and set the operator capture for the selected camera
         /// </summary>        
@@ -105,6 +106,7 @@ namespace FaceDetection
                 }
             //Properties.Settings.Default.Save();
         }
+
         /// <summary>
         /// Set CAPTURE OPERATOR directly
         /// </summary>
@@ -150,6 +152,7 @@ namespace FaceDetection
                     break;
             }
         }
+
         internal static void SetOnOperationStartSwitch(int camindex, bool recordWhenOperation)
         {
             switch (camindex)
@@ -171,6 +174,7 @@ namespace FaceDetection
                     break;
             }
         }
+
         internal static void GetOnOperationStartSwitch(int camindex, out bool recordWhenOperation)
         {
             switch (camindex)
@@ -321,6 +325,7 @@ namespace FaceDetection
                     break;
             }
         }
+
         internal static bool GetShowWindowPaneSwitch(int cameraIndex)
         {
             switch (cameraIndex)
@@ -354,6 +359,7 @@ namespace FaceDetection
                     return true;
             }
         }
+
         internal static bool GetRecordingIconSwitch(int cameraIndex)
         {
             switch (cameraIndex)
@@ -370,24 +376,26 @@ namespace FaceDetection
                     return true;
             }
         }
-        internal static void Set_Rec_Icon(int cam_ind, bool val)
-        {            
-            switch (cam_ind)
-            {
-                case 0:
-                    Properties.Settings.Default.C1_show_record_icon = val;
-                    break;
-                case 1:
-                    Properties.Settings.Default.C2_show_record_icon = val;
-                    break;
-                case 2:
-                    Properties.Settings.Default.C3_show_record_icon = val;
-                    break;
-                case 3:
-                    Properties.Settings.Default.C4_show_record_icon = val;
-                    break;
-            }
-        }
+
+        //internal static void Set_Rec_Icon(int cam_ind, bool val)
+        //{            
+        //    switch (cam_ind)
+        //    {
+        //        case 0:
+        //            Properties.Settings.Default.C1_show_record_icon = val;
+        //            break;
+        //        case 1:
+        //            Properties.Settings.Default.C2_show_record_icon = val;
+        //            break;
+        //        case 2:
+        //            Properties.Settings.Default.C3_show_record_icon = val;
+        //            break;
+        //        case 3:
+        //            Properties.Settings.Default.C4_show_record_icon = val;
+        //            break;
+        //    }
+        //}
+
         internal static Point Get_Window_Location(int cam_ind)
         {
             Point retval;
@@ -493,8 +501,6 @@ namespace FaceDetection
             }
         }
 
-        
-
         /// <summary>
         /// Settings UI has variable window size values stored as per camera index.
         /// You can get those values by camera index
@@ -521,8 +527,6 @@ namespace FaceDetection
             }
             return size;
         }
-
-        
 
         /// <summary>
         /// Set individual window sizes for each camera
@@ -603,7 +607,6 @@ namespace FaceDetection
             }
             SetCaptureOperatorSwitchImplicitly(cameraIndex);
         }
-        
 
         internal static void Set_Face_Switch(int cameraIndex, bool faceSwitch)
         {
@@ -626,6 +629,7 @@ namespace FaceDetection
 
             SetCaptureOperatorSwitchImplicitly(cameraIndex);
         }
+
         internal static void GetSecondsBeforeEvent(int camsen, out int secondBeforeOperationEvent)
         {
 
@@ -648,6 +652,7 @@ namespace FaceDetection
                     break;
             }
         }
+
         internal static void GetSecondsAfterEvent(int index, out int secondsAfterEvent)
         {
             switch (index)
@@ -668,7 +673,6 @@ namespace FaceDetection
                     secondsAfterEvent = 300;
                     break;
             }
-
         }
 
         internal static void GetEventRecorderSwitch(int index, out bool eventRecorderEnabled)
@@ -692,6 +696,7 @@ namespace FaceDetection
                     break;
             }
         }
+
         internal static void GetCaptureMethod(int camindex, out string captureMethod)
         {
             switch (camindex)
@@ -713,6 +718,7 @@ namespace FaceDetection
                     break;
             }
         }
+
         internal static void GetReInitiationInterval(int cameraindex, out int intervalBeforeReinitiating)
         {
             switch (cameraindex)
@@ -734,6 +740,7 @@ namespace FaceDetection
                     break;
             }
         }
+
         internal static void GetSensorCheckInterval(int camindex, out int checkInterval)
         {
             switch (camindex)
@@ -796,7 +803,6 @@ namespace FaceDetection
             }
             Properties.Settings.Default.Save();
         }
-        
 
         public static System.Drawing.Size Get_Stored_Resolution(int cam_ind)
         {
@@ -865,13 +871,14 @@ namespace FaceDetection
                     break;
             }
             return fps;
-        }        
+        }   
+        
         /// <summary>
         /// Is human sensor switch ON for the selected/MAIN camera?
         /// </summary>
         /// <param name="cam_ind"></param>
         /// <returns></returns>
-            public static void Get_Human_Sensor_Enabled(int cam_ind, out bool iRSensorEnabled)
+        public static void Get_Human_Sensor_Enabled(int cam_ind, out bool iRSensorEnabled)
         {
             switch (cam_ind)
             {

@@ -57,11 +57,8 @@ namespace FaceDetection
 
                 stopwatch.Start();
             }
-        }        
+        }
         
-        
-        
-                
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             //StopAll();             
@@ -135,8 +132,6 @@ namespace FaceDetection
                 Mklisteners.AddMouseAndKeyboardBack();
             }
             
-            
-
             //CREATE CAMERA WINDOWS
             MULTI_WINDOW.CreateCameraWindows();
             MULTI_WINDOW.FormSettingsChanged();
@@ -149,21 +144,9 @@ namespace FaceDetection
             {
                 stopwatch.Restart();
                 CheckDiskSpace.DeleteOldFiles();
-                //    freeDiskSpaceLeft = CheckDiskSpace.CheckDisk();
-                //    if (freeDiskSpaceLeft < 2) // 2 Go
-                //    {
-                //        try
-                //        {
-                //            warningForm.Select(); // If the form already exist, put it on the front
-                //        }
-                //        catch (Exception ex) // If the form doesn't exist yet, create it
-                //        {
-                //            warningForm = new DiskSpaceWarning();
-                //            warningForm.Show();
-                //        }
-                //    }
             }
         }
+
         public void ShowSettings(object sender, EventArgs e)
         {
             if (sender != null)
@@ -172,6 +155,7 @@ namespace FaceDetection
                 ShowSettingsDialogAsync(int.Parse(settings_button.Tag.ToString()));
             }
         }
+
         private void ShowSettingsDialogAsync(int cameraIndex)
         {
             if (Settingui.InvokeRequired)
@@ -195,6 +179,7 @@ namespace FaceDetection
                 }
             }
         }
+
         private void ClearCutFileTempFolder()
         {
             string[] listFiles1, listFiles2, listFiles3, listFiles4;

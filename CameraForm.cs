@@ -542,6 +542,7 @@ namespace FaceDetection
                 Logger.Add(iox);
             }
         }
+
         /// <summary>
         /// Apply setting changes immediately
         /// </summary>
