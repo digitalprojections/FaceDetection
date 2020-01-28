@@ -383,14 +383,15 @@ namespace FaceDetection
         {
             ComboBox comboBox = (ComboBox)sender;
 
-            
+
             //CBSetAsMainCam.Checked = (Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
             //CBSetAsMainCam.Enabled = !(Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
 
-            if (cameraSelectedManually)
-            {
-                currentCameraIndex = comboBox.SelectedIndex;
-            }
+            //if (cameraSelectedManually)
+            //{
+            //    currentCameraIndex = comboBox.SelectedIndex;
+            //}
+            Properties.Settings.Default.main_camera_index = comboBox.SelectedIndex;
             SetCameraPropertiesFromMemory();
             MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);                 
         }
