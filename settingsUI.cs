@@ -201,7 +201,7 @@ namespace FaceDetection
                 if (MULTI_WINDOW.formList[i].DISPLAYED == true)
                 {
                     PROPERTY_FUNCTIONS.Set_Window_Location_Set(i, MULTI_WINDOW.formList[i]);
-                    PROPERTY_FUNCTIONS.GetCameraSize(i);
+                    MULTI_WINDOW.formList[i].ClientSize = PROPERTY_FUNCTIONS.GetCameraSize(i);
                 }
             }
 

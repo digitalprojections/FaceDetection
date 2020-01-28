@@ -551,6 +551,7 @@ namespace FaceDetection
                     break;
             }
         }
+
         internal static void GetPreAndPostEventTimes(int cameraIndex, out int timeBeforeEvent, out int timeAfterEvent)
         {
             switch (cameraIndex)
