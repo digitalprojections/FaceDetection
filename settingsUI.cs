@@ -389,7 +389,7 @@ namespace FaceDetection
 
             //if (cameraSelectedManually)
             //{
-            //    currentCameraIndex = comboBox.SelectedIndex;
+            currentCameraIndex = comboBox.SelectedIndex;
             //}
             Properties.Settings.Default.main_camera_index = comboBox.SelectedIndex;
             SetCameraPropertiesFromMemory();
