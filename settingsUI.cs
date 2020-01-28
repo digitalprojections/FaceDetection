@@ -33,6 +33,9 @@ namespace FaceDetection
         /// private field MAIN Camera
         /// </summary>
         private int cameraindex;
+        /// <summary>
+        /// Only set true when the camera number is selected manually
+        /// </summary>
         private bool cameraSelectedManually;
 
         public SettingsUI()
@@ -330,14 +333,15 @@ namespace FaceDetection
                 frame_rates_combo.Items.AddRange(vs.ToArray());
                 for (int i=0; i<vs.Count; i++)
                 {
-                    if (vs[i] == PROPERTY_FUNCTIONS.Get_FPS(cameraIndex).ToString())
+                    if (vs[i] == PROPERTY_FUNCTIONS.GetFPS(cameraIndex).ToString())
                     {
                         matching_fps_found = true;
                         break;
                     }
                 }
             }
-            PROPERTY_FUNCTIONS.SetFPS(cameraIndex, matching_fps_found ? PROPERTY_FUNCTIONS.Get_FPS(cameraIndex).ToString() : vs[0]);
+            if(!matching_fps_found)
+                PROPERTY_FUNCTIONS.SetFPS(cameraIndex, vs[0]);
         }
 
         /// <summary>
@@ -618,7 +622,7 @@ namespace FaceDetection
 
             //Create and display the OlePropertyFrame
             object oDevice = (object)dev;
-            hr = OleCreatePropertyFrame(this.Handle, 0, 0, filterInfo.achName, 1, ref oDevice, caGUID.cElems, caGUID.pElems, 0, 0, IntPtr.Zero);
+            hr = DLLIMPORT.OleCreatePropertyFrame(this.Handle, 0, 0, filterInfo.achName, 1, ref oDevice, caGUID.cElems, caGUID.pElems, 0, 0, IntPtr.Zero);
             DsError.ThrowExceptionForHR(hr);
 
             // Release COM objects
@@ -1057,22 +1061,6 @@ namespace FaceDetection
              */
 
 
-        #region DLLIMPORT
-        [DllImport("olepro32.dll")]
-        public static extern int OleCreatePropertyFrame(
-            IntPtr hwndOwner,
-            int x,
-            int y,
-            [MarshalAs(UnmanagedType.LPWStr)] string lpszCaption,
-            int cObjects,
-            [MarshalAs(UnmanagedType.Interface, ArraySubType=UnmanagedType.IUnknown)]
-           ref object ppUnk,
-            int cPages,
-            IntPtr lpPageClsID,
-            int lcid,
-            int dwReserved,
-            IntPtr lpvReserved);
-        #endregion
 
         
 
@@ -1091,5 +1079,25 @@ namespace FaceDetection
 
             cm_camera_number.Enabled = !(e.TabPageIndex == 1 && CBSetAsMainCam.Checked);
         }
+    }
+    class DLLIMPORT
+    {
+
+        #region DLLIMPORT
+        [DllImport("olepro32.dll")]
+        public static extern int OleCreatePropertyFrame(
+            IntPtr hwndOwner,
+            int x,
+            int y,
+            [MarshalAs(UnmanagedType.LPWStr)] string lpszCaption,
+            int cObjects,
+            [MarshalAs(UnmanagedType.Interface, ArraySubType=UnmanagedType.IUnknown)]
+           ref object ppUnk,
+            int cPages,
+            IntPtr lpPageClsID,
+            int lcid,
+            int dwReserved,
+            IntPtr lpvReserved);
+        #endregion
     }
 }

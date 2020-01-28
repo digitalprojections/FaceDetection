@@ -821,7 +821,7 @@ namespace FaceDetection
             }
         }
 
-        public static int Get_FPS(int cam_ind)
+        public static int GetFPS(int cam_ind)
         {
             int fps = 15;
             switch (cam_ind)

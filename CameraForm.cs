@@ -179,18 +179,19 @@ namespace FaceDetection
             ///VIDEOFORMAT
             //////////////////////////////////////////////////////////////////
             //Showing video formats
-            for (int k = 0; k < videoFormat.Length; k++)
-            {
-                if (UniqueVideoParameter(Vf_resolutions, videoFormat[k].Size) != true)
+            
+                for (int k = 0; k < videoFormat.Length; k++)
                 {
-                    Vf_resolutions.Add(videoFormat[k].Size.Width + "x" + videoFormat[k].Size.Height);
+                    if (UniqueVideoParameter(Vf_resolutions, videoFormat[k].Size) != true)
+                    {
+                        Vf_resolutions.Add(videoFormat[k].Size.Width + "x" + videoFormat[k].Size.Height);
+                    }
+                    FPS = 10000000 / videoFormat[k].TimePerFrame;
+                    if (UniqueFPS(FPS) != true)
+                    {
+                        vf_fps.Add(FPS.ToString());
+                    }
                 }
-                FPS = 10000000 / videoFormat[k].TimePerFrame;
-                if (UniqueFPS(FPS) != true)
-                {
-                    vf_fps.Add(FPS.ToString());
-                }
-            }
             
             //Logger.Add("UniqueVideoParameter " + vf_resolutions.Count);
             //////////////////////////////////////////////////////////////////
@@ -228,7 +229,7 @@ namespace FaceDetection
 
         public void GetVideoFormat()
         {
-            SettingsUI.SetComboBoxResolutionValues(vf_resolutions, CameraIndex);
+            SettingsUI.SetComboBoxResolutionValues(Vf_resolutions, CameraIndex);
             SettingsUI.SetComboBoxFPSValues(vf_fps, CameraIndex);
         }
 
