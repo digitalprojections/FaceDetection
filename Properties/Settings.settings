@@ -339,7 +339,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="C1_full_screen" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="C2_full_screen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
