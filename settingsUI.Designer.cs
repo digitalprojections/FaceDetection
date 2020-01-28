@@ -89,7 +89,6 @@
             this.storePath = new System.Windows.Forms.TextBox();
             this.tab_camera_and_window = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.CBSetAsMainCam = new System.Windows.Forms.CheckBox();
             this.cb_show_rec_icon = new System.Windows.Forms.CheckBox();
             this.cb_show_camera_number = new System.Windows.Forms.CheckBox();
             this.cb_dateandtime = new System.Windows.Forms.CheckBox();
@@ -550,7 +549,7 @@
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
+            //this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
             // tab_environment
             // 
@@ -708,7 +707,6 @@
             // groupBox3
             // 
             resources.ApplyResources(this.groupBox3, "groupBox3");
-            this.groupBox3.Controls.Add(this.CBSetAsMainCam);
             this.groupBox3.Controls.Add(this.cb_show_rec_icon);
             this.groupBox3.Controls.Add(this.cb_show_camera_number);
             this.groupBox3.Controls.Add(this.cb_dateandtime);
@@ -726,13 +724,6 @@
             this.groupBox3.Controls.Add(this.cm_camera_number);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
-            // 
-            // CBSetAsMainCam
-            // 
-            resources.ApplyResources(this.CBSetAsMainCam, "CBSetAsMainCam");
-            this.CBSetAsMainCam.Name = "CBSetAsMainCam";
-            this.CBSetAsMainCam.UseVisualStyleBackColor = true;
-            this.CBSetAsMainCam.CheckedChanged += new System.EventHandler(this.CameraSetAsMain);
             // 
             // cb_show_rec_icon
             // 
@@ -1110,6 +1101,5 @@
         private System.Windows.Forms.Label bl_idling_time_label;
         private System.Windows.Forms.Label labelCameraNumber;
         private System.Windows.Forms.Label labelcnum;
-        private System.Windows.Forms.CheckBox CBSetAsMainCam;
     }
 }

@@ -2007,33 +2007,6 @@
   <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="CBSetAsMainCam.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="CBSetAsMainCam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 47</value>
-  </data>
-  <data name="CBSetAsMainCam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 16</value>
-  </data>
-  <data name="CBSetAsMainCam.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="CBSetAsMainCam.Text" xml:space="preserve">
-    <value>Set as the MAIN CAMERA</value>
-  </data>
-  <data name="&gt;&gt;CBSetAsMainCam.Name" xml:space="preserve">
-    <value>CBSetAsMainCam</value>
-  </data>
-  <data name="&gt;&gt;CBSetAsMainCam.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CBSetAsMainCam.Parent" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;CBSetAsMainCam.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="cb_show_rec_icon.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2065,7 +2038,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;cb_show_rec_icon.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="cb_show_camera_number.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2098,7 +2071,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;cb_show_camera_number.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="cb_dateandtime.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2131,7 +2104,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;cb_dateandtime.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="cb_window_pane.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2164,7 +2137,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;cb_window_pane.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="cb_always_on_top.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2197,7 +2170,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;cb_always_on_top.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="checkBox_full_screen.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2230,7 +2203,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;checkBox_full_screen.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="gbWindowSize.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2404,7 +2377,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;gbWindowSize.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="gbWindowPosition.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2575,7 +2548,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;gbWindowPosition.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="label9_fps.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2608,7 +2581,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;label9_fps.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2641,7 +2614,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2674,7 +2647,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="comboBoxResolutions.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
@@ -2701,7 +2674,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;comboBoxResolutions.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="comboBoxFPS.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
@@ -2728,7 +2701,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;comboBoxFPS.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="button_cameraProperties.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2755,7 +2728,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;button_cameraProperties.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="cm_camera_number.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 14.25pt</value>
@@ -2782,7 +2755,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;cm_camera_number.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 2</value>
@@ -2879,7 +2852,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADQ
-        HQAAAk1TRnQBSQFMAgEBAwEAASgBCgEoAQoBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
+        HQAAAk1TRnQBSQFMAgEBAwEAATABCgEwAQoBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
         AwABGAMAAQEBAAEgBgABJC4AAw8BFAFYAlsBywEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8
         An8B/gEAAbwB+gH/AUACqAH9A0ABcRwAAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
         AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMB
@@ -3020,7 +2993,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA0
-        AQAAAk1TRnQBSQFMAgEBAgEAAcABBwHAAQcBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        AQAAAk1TRnQBSQFMAgEBAgEAAcgBBwHIAQcBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEYBgABDBUALf8DAC3/YwAt/wMALf9jAC3/AwAt/2MALf8DAC3/YwAt/wMAD/8DHgPy
         GP9jAC3/AwAM/wMeBgADzxX/YwAt/wMACf8DDAMAA/UDDwMAFf9jAC3/AwAG/wNJAwAD5wb/A0ADAAPP
         D/9jAC3/AwAY/wMPAwAD8gz/YwAt/wMAG/8DPAMAA9cJ/2MALf8DAB7/AycDAAPeBv9jAC3/AwAh/wMw
