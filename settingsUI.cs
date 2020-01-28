@@ -334,12 +334,15 @@ namespace FaceDetection
                     if (vs[i] == PROPERTY_FUNCTIONS.GetFPS(cameraIndex).ToString())
                     {
                         matching_fps_found = true;
+                        frame_rates_combo.SelectedItem = PROPERTY_FUNCTIONS.GetFPS(cameraIndex);
                         break;
                     }
                 }
             }
-            if(!matching_fps_found)
+            if (!matching_fps_found)
                 PROPERTY_FUNCTIONS.SetFPS(cameraIndex, vs[0]);
+            
+                
         }
 
         /// <summary>
@@ -360,6 +363,10 @@ namespace FaceDetection
                         resolutions_combo.SelectedItem = PROPERTY_FUNCTIONS.GetResolution(cameraIndex);
                 }
             }
+        }
+        private void comboBoxFPS_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(comboBoxFPS.SelectedItem);
         }
 
         //void CameraSetAsMain(object sender, EventArgs e)
@@ -1028,6 +1035,8 @@ namespace FaceDetection
                 storePath.SelectionStart = storePath.Text.Length;
             }
         }
+
+        
 
         /*
         

@@ -140,7 +140,7 @@ namespace FaceDetection
         public void StartRecorderCamera(int index)
         {
             Size size = PROPERTY_FUNCTIONS.Get_Stored_Resolution(index);
-            int fps = PROPERTY_FUNCTIONS.GetFPS(index);
+            int fps = Int32.Parse(PROPERTY_FUNCTIONS.GetFPS(index));
             //IntPtr pbx = MainForm.GetMainForm.Handle;
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
             Logger.Add(ACTIVE_RECPATH);

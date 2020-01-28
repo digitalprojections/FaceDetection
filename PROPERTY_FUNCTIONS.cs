@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace FaceDetection
 {
-    class PROPERTY_FUNCTIONS
+    public static class PROPERTY_FUNCTIONS
     {
         public static bool resolution_changed { get; set; }
 
@@ -33,6 +33,10 @@ namespace FaceDetection
 
             }
 
+        }
+        public static int GetMainCamera()
+        {
+            return Properties.Settings.Default.main_camera_index;
         }
         internal static void SetCycleTime(int cameraIndex, int time)
         {
@@ -821,22 +825,22 @@ namespace FaceDetection
             }
         }
 
-        public static int GetFPS(int cam_ind)
+        public static string GetFPS(int cam_ind)
         {
-            int fps = 15;
+            string fps = "15";
             switch (cam_ind)
             {
                 case 0:
-                    fps = Int32.Parse(Properties.Settings.Default.C1f);
+                    fps = Properties.Settings.Default.C1f;
                     break;
                 case 1:
-                    fps = Int32.Parse(Properties.Settings.Default.C2f);
+                    fps = Properties.Settings.Default.C2f;
                     break;
                 case 2:
-                    fps = Int32.Parse(Properties.Settings.Default.C3f);
+                    fps = Properties.Settings.Default.C3f;
                     break;
                 case 3:
-                    fps = Int32.Parse(Properties.Settings.Default.C4f);
+                    fps = Properties.Settings.Default.C4f;
                     break;
             }
             return fps;

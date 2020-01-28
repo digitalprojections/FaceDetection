@@ -14,8 +14,24 @@ namespace FaceDetection
         static string param;
         public static bool isMinimized = false;
         public static bool isControlButtonVisible = true;
+        /// <summary>
+        /// currentl index, not MAIN
+        /// </summary>
         public static int CameraIndex = 0;
         public static bool wakeUpCall;
+        /// <summary>
+        /// Important for UNIT TEST Only variable. Ignore
+        /// </summary>
+        public static string WhichCase = "";
+        /// <summary>
+        /// Method name
+        /// </summary>
+        public static string MethodName = "";
+
+        /// <summary>
+        /// Switch parameter is present in a parameter call, where it is required
+        /// </summary>
+        public static bool SwitchParameterPresent = false;
 
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
@@ -25,8 +41,9 @@ namespace FaceDetection
 
             param = String.Concat(parameters).ToLower();
             string elem;
-            string method = "";
+            MethodName = "";
             bool parameterOnOffSwitch = false;
+            SwitchParameterPresent = false;
             int cameraIndex = -1;
             int parameterTime = 0;
             /*
@@ -34,8 +51,9 @@ namespace FaceDetection
             */
             if (param.Contains("uvccameraviewer"))
             {
-                if (parameters.Count > 0)
+                if (parameters.Count > 1)
                 {
+                    //WhichCase = param;
                     for (int i = 1; i < parameters.Count; i++)
                     {
                         elem = parameters.ElementAt(i).ToLower();
@@ -44,25 +62,106 @@ namespace FaceDetection
                             switch (elem.Substring(0, 1))
                             {
                                 case "m":
-                                    method = elem.Substring(2);
+                                    MethodName = elem.Substring(2);
                                     break;
-                                case "s":
-                                    parameterOnOffSwitch = (elem.Substring(2) != "0");                                    
+                                case "s":                                    
+                                    try
+                                    {                                        
+                                        int sw = Int32.Parse(elem.Substring(2));
+                                        parameterOnOffSwitch = (sw!=0);
+                                        SwitchParameterPresent = true;
+                                        WhichCase = elem.Substring(2) + " switch value";
+                                        //cameraIndex = -2;
+
+                                    }
+                                    catch (ArgumentNullException anx)
+                                    {
+                                        MethodName = "";
+                                        WhichCase = anx.Message;
+                                        i = parameters.Count;
+                                    }
+                                    catch (FormatException fx)
+                                    {
+                                        MethodName = "";
+                                        WhichCase = "S " + parameterOnOffSwitch + " " + fx.Message;
+                                        i = parameters.Count;
+                                    }
+                                    catch (OverflowException ofx)
+                                    {
+                                        MethodName = "";
+                                        WhichCase = ofx.Message;
+                                        i = parameters.Count;
+                                    }
                                     break;
                                 case "c":
-                                    cameraIndex = Int32.Parse(elem.Substring(2)) - 1;
-                                    CameraIndex = cameraIndex;
+                                    //in this case any non digit value for the c parameter will turn to 0                                    
+                                    //cameraIndex = Int32.Parse(elem.Substring(2)) - 1;
+                                    //fixing it:
+                                    try
+                                    {
+                                        
+                                        int ci = Int32.Parse(elem.Substring(2));
+                                        cameraIndex = ci-1;
+                                        WhichCase = cameraIndex + " camera index";
+                                        //cameraIndex = -2;                                        
+                                        CameraIndex = cameraIndex;
+                                    }
+                                    catch (ArgumentNullException anx)
+                                    {
+                                        MethodName = "";
+                                        WhichCase = anx.Message;
+                                        i = parameters.Count;
+                                    }
+                                    catch (FormatException fx)
+                                    {
+                                        MethodName = "";
+                                        WhichCase = "C " + fx.Message;
+                                        i = parameters.Count;
+                                    }
+                                    catch(OverflowException ofx)
+                                    {
+                                        MethodName = "";
+                                        WhichCase = ofx.Message;
+                                        i = parameters.Count;
+                                    }
                                     break;
-                                case "t":
-                                    parameterTime = Int32.Parse(elem.Substring(2));
+                                case "t":                                    
+                                    try
+                                    {
+                                        parameterTime = Int32.Parse(elem.Substring(2));
+                                        WhichCase = parameterTime + " time parameter";
+                                        CameraIndex = -1;
+                                    }
+                                    catch (ArgumentNullException anx)
+                                    {
+                                        MethodName = "";
+                                        WhichCase = anx.Message;
+                                        i = parameters.Count;
+                                    }
+                                    catch (FormatException fx)
+                                    {
+                                        MethodName = "";
+                                        WhichCase = "C " + fx.Message;
+                                        i = parameters.Count;
+                                    }
+                                    catch (OverflowException ofx)
+                                    {
+                                        MethodName = "";
+                                        WhichCase = ofx.Message;
+                                        i = parameters.Count;
+                                    }
                                     break;
-                            }
+                                
+                            }                            
                         }
                         catch (Exception e) 
                         {
+                            WhichCase = "Exception";
                             Debug.WriteLine(e.Message + " parameters in the command were sent with unexpected values");
                         }
-                    }
+                        //WhichCase = elem;
+                    }                    
+
                     if(cameraIndex == -1)//カメラ番号が未入力の場合
                     {
                         if(MainForm.GetMainForm == null)
@@ -82,7 +181,7 @@ namespace FaceDetection
                     }
 
                     // METHOD
-                    switch (method)
+                    switch (MethodName)
                     {
                         //No method
                         case "": 
@@ -92,25 +191,32 @@ namespace FaceDetection
                         case "c":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && SwitchParameterPresent)
                                 {
                                     if (parameterOnOffSwitch)
                                     {
+                                        WhichCase = "Showing Settings window";
                                         if (MainForm.Settingui != null && MainForm.Settingui.Visible == false)
                                         {
                                             //MainForm.GetMainForm.TopMost = false;
-
+                                            //WhichCase = "Showing Settings window";
                                             MainForm.Settingui.ShowSettings(cameraIndex);
                                         }
                                     }
                                     else
                                     {
-                                        MainForm.Settingui.Hide();
+                                        WhichCase = "Hiding Settings window " + cameraIndex;                                        
+                                        MainForm.Settingui?.Hide();
                                     }
+                                }
+                                else
+                                {
+                                    WhichCase = "missing switch parameter or wrong index";
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
+                                WhichCase = "FAILURE";
                                 Trace.WriteLine(e.ToString() + " in method c");
                             }
                             break;
@@ -137,10 +243,15 @@ namespace FaceDetection
                                 }
                                 else
                                 {
-                                    Logger.Add(Resource.parameter_execution_failure + " m=" + method + ", c=" + cameraIndex);
+                                    Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + cameraIndex);
                                 }
+                                WhichCase = "N case, camera index conditions passed";
                                 PARAM.Clear();
                             }
+                            else
+                            {
+                                WhichCase = "N case, conditions faled " + cameraIndex + " " + CheckCameraIndex(cameraIndex) + " " + (cameraIndex >= 0 && cameraIndex < 4);
+                            }                            
                             break;
 
                         // SNAPSHOT
@@ -229,7 +340,7 @@ namespace FaceDetection
                         case "h":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex]?.recordingInProgress == false)
                                 {
                                     if (parameterOnOffSwitch)
                                     {
@@ -248,6 +359,7 @@ namespace FaceDetection
                                     MainForm.AllChangesApply();
                                     PROPERTY_FUNCTIONS.SetCycleTime(cameraIndex, parameterTime);
                                 }
+                                WhichCase = "Human Sensor " + parameterOnOffSwitch;
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
@@ -257,47 +369,67 @@ namespace FaceDetection
 
                         // Visible - Active
                         case "v":
-                            try
-                            {
-                                if (CheckCameraIndex(cameraIndex))
+                                if (CheckCameraIndex(cameraIndex) && cameraIndex == 8 && SwitchParameterPresent)
                                 {
-                                    if (parameterOnOffSwitch)
-                                    {
-                                        isMinimized = false;
-                                        MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Normal;
-                                        MULTI_WINDOW.formList[cameraIndex].Show();
-                                        MULTI_WINDOW.formList[cameraIndex].Activate();
-                                    }
-                                    else
-                                    {
-                                        isMinimized = true;
-                                        MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
-                                    }
-                                }
-                                else if (CheckCameraIndex(cameraIndex) && cameraIndex==8)
-                                {
-                                    for (int i=0;i<MULTI_WINDOW.displayedCameraCount;i++)
+                                    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                                     {
                                         if (parameterOnOffSwitch)
                                         {
+                                            WhichCase = "Show all windows";
                                             isMinimized = false;
-                                            MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
-                                            MULTI_WINDOW.formList[i].Show();
-                                            MULTI_WINDOW.formList[i].Activate();
+                                            try
+                                            {
+                                                MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
+                                                MULTI_WINDOW.formList[i].Show();
+                                                MULTI_WINDOW.formList[i].Activate();
+                                            }
+                                            catch (ArgumentOutOfRangeException)
+                                            {
+
+                                            }                                            
                                         }
                                         else
                                         {
+                                            WhichCase = "Hiding all windows";
                                             isMinimized = true;
                                             MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
                                         }
                                     }
+                                WhichCase = "Show all windows";
                                 }
-                                PARAMETERS.PARAM.Clear();
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in method v");
-                            }
+                                else if (CheckCameraIndex(cameraIndex))
+                                {
+                                    if (parameterOnOffSwitch)
+                                    {
+                                        WhichCase = "Show 1 window";
+                                        isMinimized = false;
+                                        try
+                                        {
+                                            MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Normal;
+                                            MULTI_WINDOW.formList[cameraIndex]?.Show();
+                                            MULTI_WINDOW.formList[cameraIndex]?.Activate();
+                                        }
+                                        catch (NullReferenceException)
+                                        {
+                                            
+                                        }
+                                    }
+                                    else
+                                    {
+                                        WhichCase = "Hiding 1 window";
+                                        isMinimized = true;
+                                        try
+                                        {
+                                            MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
+                                        }
+                                        catch (NullReferenceException)
+                                        {
+
+                                        }                                        
+                                    }                                
+                                }
+                                
+                                PARAMETERS.PARAM.Clear();  
                             break;
 
                         // Backlight
@@ -440,17 +572,28 @@ namespace FaceDetection
                                 Debug.WriteLine(e.ToString() + " in method r");
                             }
                             break;
+                        default:
+                            throw new Exception("Wrong Method Name");
+                            break;
                     }
                 }
+                else
+                {
+                    WhichCase = "parameters missing";
+                }
+            }
+            else
+            {
+                WhichCase = "App Name missing";
             }
         }
 
         internal static void HandleWakeUpParameters()
         {
-            if (PARAM != null && PARAM.Count > 0 && !PARAM.Contains("uvccameraviewer.exe"))
+            if (PARAM != null && PARAM.Count > 0 && !PARAM.Contains("uvccameraviewer"))
             {
                 PARAM.Reverse();
-                PARAM.Add("uvccameraviewer.exe");
+                PARAM.Add("uvccameraviewer");
                 PARAM.Reverse();
                 wakeUpCall = true;
                 HandleParameters(PARAM);
@@ -483,7 +626,7 @@ namespace FaceDetection
         {
             bool retval = false;
 
-            if ((cameraIndex == 8 || (cameraIndex >= 0 && cameraIndex < 4)) && MULTI_WINDOW.formList[cameraIndex]?.DISPLAYED == true)
+            if ((cameraIndex == 8 || (cameraIndex >= 0 && cameraIndex < 4)))
             {                
                 retval = true;
             }            
