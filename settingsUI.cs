@@ -36,7 +36,7 @@ namespace FaceDetection
         /// <summary>
         /// Only set true when the camera number is selected manually
         /// </summary>
-        private bool cameraSelectedManually;
+        //private bool cameraSelectedManually;
 
         public SettingsUI()
         {
@@ -899,7 +899,7 @@ namespace FaceDetection
         private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
         {
             PROPERTY_FUNCTIONS.resolution_changed = true;
-            if (comboBoxResolutions.SelectedItem != null && cameraSelectedManually)
+            if (comboBoxResolutions.SelectedItem != null) // && cameraSelectedManually)
             {                
                 PROPERTY_FUNCTIONS.SetResolution(currentCameraIndex, comboBoxResolutions.SelectedItem.ToString());                
             }
@@ -956,12 +956,12 @@ namespace FaceDetection
 
         private void cm_camera_number_MouseHover(object sender, EventArgs e)
         {
-            cameraSelectedManually = true;
+            //cameraSelectedManually = true;
         }
 
         private void cm_camera_number_MouseLeave(object sender, EventArgs e)
         {
-            cameraSelectedManually = false;
+            //cameraSelectedManually = false;
         }
 
         //private void tabControl1_Selected(object sender, TabControlEventArgs e)
