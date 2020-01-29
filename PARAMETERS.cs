@@ -41,7 +41,7 @@ namespace FaceDetection
 
             param = String.Concat(parameters).ToLower();
             string elem;
-            MethodName = "";
+            MethodName = " ";
             bool parameterOnOffSwitch = false;
             SwitchParameterPresent = false;
             int cameraIndex = -1;
@@ -76,19 +76,19 @@ namespace FaceDetection
                                     }
                                     catch (ArgumentNullException anx)
                                     {
-                                        MethodName = "";
+                                        MethodName = " ";
                                         CurrentTestResult = anx.Message;
                                         i = parameters.Count;
                                     }
                                     catch (FormatException fx)
                                     {
-                                        MethodName = "";
+                                        //MethodName = "";
                                         CurrentTestResult = "S " + parameterOnOffSwitch + " " + fx.Message;
-                                        i = parameters.Count;
+                                        //i = parameters.Count;
                                     }
                                     catch (OverflowException ofx)
                                     {
-                                        MethodName = "";
+                                        MethodName = " ";
                                         CurrentTestResult = ofx.Message;
                                         i = parameters.Count;
                                     }
@@ -107,19 +107,19 @@ namespace FaceDetection
                                     }
                                     catch (ArgumentNullException anx)
                                     {
-                                        MethodName = "";
+                                        MethodName = " ";
                                         CurrentTestResult = anx.Message;
                                         i = parameters.Count;
                                     }
                                     catch (FormatException fx)
-                                    {
-                                        MethodName = "";
+                                    {                                        
+                                        //MethodName = " ";
                                         CurrentTestResult = "C " + fx.Message;
                                         i = parameters.Count;
                                     }
                                     catch(OverflowException ofx)
                                     {
-                                        MethodName = "";
+                                        MethodName = " ";
                                         CurrentTestResult = ofx.Message;
                                         i = parameters.Count;
                                     }
@@ -133,19 +133,19 @@ namespace FaceDetection
                                     }
                                     catch (ArgumentNullException anx)
                                     {
-                                        MethodName = "";
+                                        MethodName = " ";
                                         CurrentTestResult = anx.Message;
                                         i = parameters.Count;
                                     }
                                     catch (FormatException fx)
                                     {
-                                        MethodName = "";
+                                        //MethodName = " ";
                                         CurrentTestResult = "T " + fx.Message;
                                         i = parameters.Count;
                                     }
                                     catch (OverflowException ofx)
                                     {
-                                        MethodName = "";
+                                        MethodName = " ";
                                         CurrentTestResult = ofx.Message;
                                         i = parameters.Count;
                                     }
@@ -217,7 +217,7 @@ namespace FaceDetection
                                 }
                                 else
                                 {
-                                    CurrentTestResult = "missing switch parameter or wrong index";
+                                    CurrentTestResult = "C missing switch parameter or wrong index";
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -582,7 +582,8 @@ namespace FaceDetection
                             }
                             break;
                         default:
-                            throw new Exception("Wrong Method Name");                            
+                            //throw new Exception("Wrong Method Name");                            
+                            CurrentTestResult = "Wrong Method Name";
                             break;
                     }
                 }
