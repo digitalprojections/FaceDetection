@@ -29,6 +29,7 @@ namespace FaceDetection
         /// current camera, not the Main Camera
         /// </summary>
         private int currentCameraIndex = 0;
+        private int formWhereSettingsWasOpened = 0;
         /// <summary>
         /// private field MAIN Camera
         /// </summary>
@@ -36,7 +37,7 @@ namespace FaceDetection
         /// <summary>
         /// Only set true when the camera number is selected manually
         /// </summary>
-        private bool cameraSelectedManually;
+        //private bool cameraSelectedManually;
         private delegate void dSettingFromProperties();
 
         public SettingsUI()
@@ -871,7 +872,7 @@ namespace FaceDetection
             //if (cameraSelectedManually)
             //{
                 currentCameraIndex = comboBox.SelectedIndex;
-                cameraSelectedManually = false;
+                //cameraSelectedManually = false;
             //}
             labelCameraNumber.Text = (currentCameraIndex + 1).ToString(); // (Properties.Settings.Default.main_camera_index + 1).ToString();
             SetCameraPropertiesFromMemory();
@@ -884,17 +885,17 @@ namespace FaceDetection
         /// <param name="e"></param>
         private void SettingsUI_Shown(object sender, EventArgs e)
         {
-            this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(currentCameraIndex);
+            this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(formWhereSettingsWasOpened);
             if (this.Visible)
             {
                 DisableOperatorCaptureCheckBox_ifNeeded();
-                cm_camera_number.SelectedIndex = currentCameraIndex;
+                cm_camera_number.SelectedIndex = formWhereSettingsWasOpened;
             }            
         }
 
         internal void ShowSettings(int cameraIndex)
         {
-            currentCameraIndex = cameraIndex;
+            formWhereSettingsWasOpened = cameraIndex;
             for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
             {
                 if (MULTI_WINDOW.formList[i].DISPLAYED == true)
@@ -905,13 +906,13 @@ namespace FaceDetection
 
             MainCameraBeforeSettingsLoad = Properties.Settings.Default.main_camera_index;
             //ShowDialog();
-            ShowDialog(MULTI_WINDOW.formList[cameraIndex]);
+            ShowDialog(MULTI_WINDOW.formList[formWhereSettingsWasOpened]);
         }
 
         private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
         {
             PROPERTY_FUNCTIONS.resolution_changed = true;
-            if (comboBoxResolutions.SelectedItem != null) // && cameraSelectedManually)
+            if (comboBoxResolutions.SelectedItem != null)
             {                
                 PROPERTY_FUNCTIONS.SetResolution(currentCameraIndex, comboBoxResolutions.SelectedItem.ToString());                
             }
@@ -967,7 +968,7 @@ namespace FaceDetection
 
         private void cm_camera_number_MouseHover(object sender, EventArgs e)
         {
-            cameraSelectedManually = true;
+            //cameraSelectedManually = true;
         }
 
         private void cm_camera_number_MouseLeave(object sender, EventArgs e)
