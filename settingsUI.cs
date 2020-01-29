@@ -906,6 +906,7 @@ namespace FaceDetection
             //ShowDialog();
             ShowDialog(MULTI_WINDOW.formList[cameraIndex]);
         }
+
         private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
         {
             PROPERTY_FUNCTIONS.resolution_changed = true;
@@ -913,7 +914,6 @@ namespace FaceDetection
             {                
                 PROPERTY_FUNCTIONS.SetResolution(currentCameraIndex, comboBoxResolutions.SelectedItem.ToString());                
             }
-
         }
 
         private void NumericUpDownX_ValueChanged(object sender, EventArgs e)
