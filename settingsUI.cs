@@ -619,9 +619,10 @@ namespace FaceDetection
 
             if (!enabled)
             {
-                PROPERTY_FUNCTIONS.Set_Human_Sensor(cam_index, false);
-                PROPERTY_FUNCTIONS.Set_Face_Switch(cam_index, false);
-                PROPERTY_FUNCTIONS.SetOnOperationStartSwitch(cam_index, false);
+                //PROPERTY_FUNCTIONS.Set_Human_Sensor(cam_index, false);
+                //PROPERTY_FUNCTIONS.Set_Face_Switch(cam_index, false);
+                //PROPERTY_FUNCTIONS.SetOnOperationStartSwitch(cam_index, false);
+                PROPERTY_FUNCTIONS.DisableOperatorCaptureCheckBoxIfNeeded();
             }
         }
 
@@ -867,11 +868,11 @@ namespace FaceDetection
             //CBSetAsMainCam.Checked = (Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
             //CBSetAsMainCam.Enabled = !(Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
 
-            if (cameraSelectedManually)
-            {
+            //if (cameraSelectedManually)
+            //{
                 currentCameraIndex = comboBox.SelectedIndex;
                 cameraSelectedManually = false;
-            }
+            //}
             labelCameraNumber.Text = (currentCameraIndex + 1).ToString(); // (Properties.Settings.Default.main_camera_index + 1).ToString();
             SetCameraPropertiesFromMemory();
             MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);

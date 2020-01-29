@@ -592,7 +592,6 @@ namespace FaceDetection
             {
                 Properties.Settings.Default.C1_enable_Human_sensor = v;
             }
-            //IS THIS PART EVENT VALID??? THERE IS ONLY 1 HUMAN SENSOR
             else if (cameraIndex == 1)
             {
                 Properties.Settings.Default.C2_enable_Human_sensor = v;
@@ -897,6 +896,50 @@ namespace FaceDetection
                 default:
                     iRSensorEnabled = false;
                     break;
+            }
+        }
+
+
+        public static void DisableOperatorCaptureCheckBoxIfNeeded()
+        {
+            // CAMERA 1
+            if (Properties.Settings.Default.C1_enable_Human_sensor || Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation)
+            {
+                Properties.Settings.Default.C1_enable_capture_operator = true;
+            }
+            else
+            {
+                Properties.Settings.Default.C1_enable_capture_operator = false; //All three are off. Disable
+            }
+
+            // CAMERA 2
+            if (Properties.Settings.Default.C2_enable_Human_sensor || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation)
+            {
+                Properties.Settings.Default.C2_enable_capture_operator = true;
+            }
+            else
+            {
+                Properties.Settings.Default.C2_enable_capture_operator = false; //All three are off. Disable
+            }
+
+            // CAMERA 3
+            if (Properties.Settings.Default.C3_enable_Human_sensor || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation)
+            {
+                Properties.Settings.Default.C3_enable_capture_operator = true;
+            }
+            else
+            {
+                Properties.Settings.Default.C3_enable_capture_operator = false; //All three are off. Disable
+            }
+
+            // CAMERA 4
+            if (Properties.Settings.Default.C4_enable_Human_sensor || Properties.Settings.Default.C4_enable_face_recognition || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation)
+            {
+                Properties.Settings.Default.C4_enable_capture_operator = true;
+            }
+            else
+            {
+                Properties.Settings.Default.C4_enable_capture_operator = false; //All three are off. Disable
             }
         }
     }
