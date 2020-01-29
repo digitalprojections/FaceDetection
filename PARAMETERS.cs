@@ -499,26 +499,27 @@ namespace FaceDetection
                         case "e":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == Properties.Settings.Default.main_camera_index) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false) // Main camera
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == Properties.Settings.Default.main_camera_index)) // Main camera
                                 {
-                                    if (parameterOnOffSwitch)
+                                    if (parameterOnOffSwitch && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
                                     {
                                         MULTI_WINDOW.EventRecorderOn(cameraIndex);
                                     }
-                                    else
+                                    else if (!parameterOnOffSwitch)
                                     {
+                                        MULTI_WINDOW.formList[cameraIndex].HideIcon();
                                         MULTI_WINDOW.EventRecorderOff(cameraIndex);
                                     }
                                 }
-                                else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)  // Not main camera                              
+                                else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))  // Not main camera                              
                                 {
-                                    if (parameterOnOffSwitch)
+                                    if (parameterOnOffSwitch && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
                                     {
                                         MULTI_WINDOW.formList[cameraIndex].crossbar.recordFromParamNotMain = true;
                                         MULTI_WINDOW.formList[cameraIndex].SetRecordIcon(cameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                                         MULTI_WINDOW.formList[cameraIndex].crossbar.Start(cameraIndex, CAMERA_MODES.MANUAL);
                                     }
-                                    else
+                                    else if (!parameterOnOffSwitch)
                                     {
                                         MULTI_WINDOW.formList[cameraIndex].HideIcon();
                                         MULTI_WINDOW.formList[cameraIndex].SetToPreviewMode();
