@@ -170,10 +170,9 @@ namespace FaceDetection
                         //    Properties.Settings.Default.camera_count = 1;
                         //}
                         //else 
-                        if(CheckMethodsWhereCameraOmittionAllowed(MethodName))
+                        if(CheckMethodsWhereCameraOmittionAllowed(MethodName) || MethodName.Length==0)
                         {
-                            cameraIndex = Properties.Settings.Default.main_camera_index;
-                            
+                            cameraIndex = Properties.Settings.Default.main_camera_index;                            
                         }
                     }
 
@@ -181,7 +180,17 @@ namespace FaceDetection
                     switch (MethodName)
                     {
                         //No method
-                        case "": 
+                        case "":                            
+                            if (wakeUpCall && CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
+                            {
+                                //START the camera
+
+                            }
+                            else if(wakeUpCall && (cameraIndex == 8))
+                            {
+
+                            }
+                            CurrentTestResult = "No method " + cameraIndex;
                             break;
 
                         // Show Settings window
@@ -573,7 +582,7 @@ namespace FaceDetection
                             }
                             break;
                         default:
-                            throw new Exception("Wrong Method Name");
+                            throw new Exception("Wrong Method Name");                            
                             break;
                     }
                 }
