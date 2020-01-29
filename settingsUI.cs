@@ -377,7 +377,6 @@ namespace FaceDetection
         {
             ComboBox comboBox = (ComboBox)sender;
 
-
             //CBSetAsMainCam.Checked = (Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
             //CBSetAsMainCam.Enabled = !(Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
 
@@ -385,7 +384,7 @@ namespace FaceDetection
             {
                 currentCameraIndex = comboBox.SelectedIndex;
             }
-            labelCameraNumber.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
+            labelCameraNumber.Text = (currentCameraIndex + 1).ToString(); // (Properties.Settings.Default.main_camera_index + 1).ToString();
             SetCameraPropertiesFromMemory();
             MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);                 
         }
