@@ -99,7 +99,6 @@ namespace FaceDetection
                                     //fixing it:
                                     try
                                     {
-                                        
                                         int ci = Int32.Parse(elem.Substring(2));
                                         cameraIndex = ci-1;
                                         CurrentTestResult = cameraIndex + " camera index";
@@ -500,20 +499,20 @@ namespace FaceDetection
                         case "e":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == Properties.Settings.Default.main_camera_index) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false) // Main camera
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == Properties.Settings.Default.main_camera_index)) // Main camera
                                 {
                                     if (parameterOnOffSwitch && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
                                     {
                                         MULTI_WINDOW.EventRecorderOn(cameraIndex);
                                     }
-                                    else if (!parameterOnOffSwitch && MULTI_WINDOW.formList[cameraIndex].recordingInProgress)
+                                    else if (!parameterOnOffSwitch)
                                     {
+                                        MULTI_WINDOW.formList[cameraIndex].HideIcon();
                                         MULTI_WINDOW.EventRecorderOff(cameraIndex);
                                         MULTI_WINDOW.formList[cameraIndex].HideIcon();
                                     }
                                 }
-                                
-                                else if (CheckCameraIndex(cameraIndex))  // Not main camera                              
+                                else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))  // Not main camera                              
                                 {
                                     if (parameterOnOffSwitch && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
                                     {
@@ -521,7 +520,7 @@ namespace FaceDetection
                                         MULTI_WINDOW.formList[cameraIndex].SetRecordIcon(cameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                                         MULTI_WINDOW.formList[cameraIndex].crossbar.Start(cameraIndex, CAMERA_MODES.MANUAL);
                                     }
-                                    else if (!parameterOnOffSwitch && MULTI_WINDOW.formList[cameraIndex].recordingInProgress)
+                                    else if (!parameterOnOffSwitch)
                                     {
                                         MULTI_WINDOW.formList[cameraIndex].HideIcon();
                                         MULTI_WINDOW.formList[cameraIndex].SetToPreviewMode();
@@ -547,22 +546,22 @@ namespace FaceDetection
                                         MULTI_WINDOW.formList[cameraIndex].SetRecordIcon(cameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                                         MULTI_WINDOW.formList[cameraIndex].crossbar.Start(cameraIndex, CAMERA_MODES.MANUAL);
                                     }
+                                }
+                                else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && !parameterOnOffSwitch)
+                                {
+                                    MULTI_WINDOW.formList[cameraIndex].HideIcon();
+                                    if (PROPERTY_FUNCTIONS.CheckPreEventTimes(cameraIndex))
+                                    {
+                                        if (MULTI_WINDOW.displayedCameraCount > 0)
+                                        {
+                                            MULTI_WINDOW.formList[cameraIndex].SetToPreeventMode();
+                                        }
+                                    }
                                     else
                                     {
-                                        MULTI_WINDOW.formList[cameraIndex].HideIcon();
-                                        if (PROPERTY_FUNCTIONS.CheckPreEventTimes(cameraIndex))
+                                        if (MULTI_WINDOW.displayedCameraCount > 0)
                                         {
-                                            if (MULTI_WINDOW.displayedCameraCount > 0)
-                                            {
-                                                MULTI_WINDOW.formList[cameraIndex].SetToPreeventMode();
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (MULTI_WINDOW.displayedCameraCount > 0)
-                                            {
-                                                MULTI_WINDOW.formList[cameraIndex].SetToPreviewMode();
-                                            }
+                                            MULTI_WINDOW.formList[cameraIndex].SetToPreviewMode();
                                         }
                                     }
                                 }
