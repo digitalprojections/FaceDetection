@@ -21,10 +21,10 @@ namespace FaceDetection
         static string[] camera_names;
 
         private int MainCameraBeforeSettingsLoad;
-        //private bool operatorCaptureCbStateC1, operatorCaptureCbStateC2, operatorCaptureCbStateC3, operatorCaptureCbStateC4;
-        //private bool sensorEnabledCbStateC1, sensorEnabledCbStateC2, sensorEnabledCbStateC3, sensorEnabledCbStateC4;
-        //private bool faceDetectionCbStateC1, faceDetectionCbStateC2, faceDetectionCbStateC3, faceDetectionCbStateC4;
-        //private bool operatorActionCbStateC1, operatorActionCbStateC2, operatorActionCbStateC3, operatorActionCbStateC4;
+        private bool operatorCaptureCbStateC1, operatorCaptureCbStateC2, operatorCaptureCbStateC3, operatorCaptureCbStateC4;
+        private bool sensorEnabledCbStateC1, sensorEnabledCbStateC2, sensorEnabledCbStateC3, sensorEnabledCbStateC4;
+        private bool faceDetectionCbStateC1, faceDetectionCbStateC2, faceDetectionCbStateC3, faceDetectionCbStateC4;
+        private bool operatorActionCbStateC1, operatorActionCbStateC2, operatorActionCbStateC3, operatorActionCbStateC4;
         /// <summary>
         /// current camera, not the Main Camera
         /// </summary>
@@ -147,22 +147,22 @@ namespace FaceDetection
             //    CBSetAsMainCam.Checked = false;
             //CameraSetAsMain();
 
-            //Properties.Settings.Default.C1_enable_capture_operator = operatorCaptureCbStateC1;
-            //Properties.Settings.Default.C1_enable_Human_sensor = sensorEnabledCbStateC1;
-            //Properties.Settings.Default.C1_enable_face_recognition = faceDetectionCbStateC1;
-            //Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation = operatorActionCbStateC1;
-            //Properties.Settings.Default.C2_enable_capture_operator = operatorCaptureCbStateC2;
-            //Properties.Settings.Default.C2_enable_Human_sensor = sensorEnabledCbStateC2;
-            //Properties.Settings.Default.C2_enable_face_recognition = faceDetectionCbStateC2;
-            //Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation = operatorActionCbStateC2;
-            //Properties.Settings.Default.C3_enable_capture_operator = operatorCaptureCbStateC3;
-            //Properties.Settings.Default.C3_enable_Human_sensor = sensorEnabledCbStateC3;
-            //Properties.Settings.Default.C3_enable_face_recognition = faceDetectionCbStateC3;
-            //Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation = operatorActionCbStateC3;
-            //Properties.Settings.Default.C4_enable_capture_operator = operatorCaptureCbStateC4;
-            //Properties.Settings.Default.C4_enable_Human_sensor = sensorEnabledCbStateC4;
-            //Properties.Settings.Default.C4_enable_face_recognition = faceDetectionCbStateC4;
-            //Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation = operatorActionCbStateC4;
+            Properties.Settings.Default.C1_enable_capture_operator = operatorCaptureCbStateC1;
+            Properties.Settings.Default.C1_enable_Human_sensor = sensorEnabledCbStateC1;
+            Properties.Settings.Default.C1_enable_face_recognition = faceDetectionCbStateC1;
+            Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation = operatorActionCbStateC1;
+            Properties.Settings.Default.C2_enable_capture_operator = operatorCaptureCbStateC2;
+            Properties.Settings.Default.C2_enable_Human_sensor = sensorEnabledCbStateC2;
+            Properties.Settings.Default.C2_enable_face_recognition = faceDetectionCbStateC2;
+            Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation = operatorActionCbStateC2;
+            Properties.Settings.Default.C3_enable_capture_operator = operatorCaptureCbStateC3;
+            Properties.Settings.Default.C3_enable_Human_sensor = sensorEnabledCbStateC3;
+            Properties.Settings.Default.C3_enable_face_recognition = faceDetectionCbStateC3;
+            Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation = operatorActionCbStateC3;
+            Properties.Settings.Default.C4_enable_capture_operator = operatorCaptureCbStateC4;
+            Properties.Settings.Default.C4_enable_Human_sensor = sensorEnabledCbStateC4;
+            Properties.Settings.Default.C4_enable_face_recognition = faceDetectionCbStateC4;
+            Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation = operatorActionCbStateC4;
         }
 
         private void SaveAndClose(object sender, EventArgs e)
@@ -373,21 +373,7 @@ namespace FaceDetection
         //    labelCameraNumber.Text = (Camera_index + 1).ToString();
         //}
 
-        private void CameraSelected(object sender, EventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;
-
-            //CBSetAsMainCam.Checked = (Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
-            //CBSetAsMainCam.Enabled = !(Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
-
-            if (cameraSelectedManually)
-            {
-                currentCameraIndex = comboBox.SelectedIndex;
-            }
-            labelCameraNumber.Text = (currentCameraIndex + 1).ToString(); // (Properties.Settings.Default.main_camera_index + 1).ToString();
-            SetCameraPropertiesFromMemory();
-            MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);                 
-        }
+        
 
         private void SettingsUI_Load(object sender, EventArgs e)
         {
@@ -875,7 +861,22 @@ namespace FaceDetection
         //        Properties.Settings.Default.C4_interval_before_reinitiating_recording = Properties.Settings.Default.C4_seconds_before_event;
         //    }
         //}
+        private void CameraSelected(object sender, EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
 
+            //CBSetAsMainCam.Checked = (Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
+            //CBSetAsMainCam.Enabled = !(Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
+
+            if (cameraSelectedManually)
+            {
+                currentCameraIndex = comboBox.SelectedIndex;
+                cameraSelectedManually = false;
+            }
+            labelCameraNumber.Text = (currentCameraIndex + 1).ToString(); // (Properties.Settings.Default.main_camera_index + 1).ToString();
+            SetCameraPropertiesFromMemory();
+            MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);
+        }
         /// <summary>
         /// Visibility changed event handler
         /// </summary>
@@ -971,7 +972,7 @@ namespace FaceDetection
 
         private void cm_camera_number_MouseLeave(object sender, EventArgs e)
         {
-            cameraSelectedManually = false;
+            //cameraSelectedManually = false;
         }
 
         //private void tabControl1_Selected(object sender, TabControlEventArgs e)
