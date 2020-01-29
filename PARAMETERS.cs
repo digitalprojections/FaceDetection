@@ -518,7 +518,6 @@ namespace FaceDetection
                                     {
                                         MULTI_WINDOW.formList[cameraIndex].HideIcon();
                                         MULTI_WINDOW.EventRecorderOff(cameraIndex);
-                                        MULTI_WINDOW.formList[cameraIndex].HideIcon();
                                     }
                                 }
                                 else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))  // Not main camera                              
