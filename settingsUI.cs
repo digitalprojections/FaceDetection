@@ -325,9 +325,9 @@ namespace FaceDetection
                 }
             }
             if (!matching_fps_found)
+            {
                 PROPERTY_FUNCTIONS.SetFPS(cameraIndex, vs[0]);
-            
-                
+            }
         }
 
         /// <summary>
@@ -380,10 +380,10 @@ namespace FaceDetection
             //CBSetAsMainCam.Checked = (Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
             //CBSetAsMainCam.Enabled = !(Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
 
-            if (cameraSelectedManually)
-            {
+            //if (cameraSelectedManually)
+            //{
                 currentCameraIndex = comboBox.SelectedIndex;
-            }
+            //}
             labelCameraNumber.Text = (currentCameraIndex + 1).ToString(); // (Properties.Settings.Default.main_camera_index + 1).ToString();
             SetCameraPropertiesFromMemory();
             MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);                 
@@ -464,11 +464,11 @@ namespace FaceDetection
             cm_camera_number.Enabled = !rip;
             //CBSetAsMainCam.Enabled = !rip;
             button_settings_save.Enabled = !rip;
-            if (cb_operator_capture.CheckState == CheckState.Unchecked && cb_event_recorder.CheckState==CheckState.Unchecked)
-            {
-                //User wants to stop recordings and set the app to no buffer mode. Simply allow OK button
-                button_settings_save.Enabled = true;
-            }            
+            //if (cb_operator_capture.CheckState == CheckState.Unchecked && cb_event_recorder.CheckState==CheckState.Unchecked)
+            //{
+            //    //User wants to stop recordings and set the app to no buffer mode. Simply allow OK button
+            //    button_settings_save.Enabled = true;
+            //}            
         }
                  
         private void Cm_language_SelectedIndexChanged(object sender, EventArgs e)
@@ -893,12 +893,12 @@ namespace FaceDetection
 
         internal void ShowSettings(int cameraIndex)
         {
-            currentCameraIndex = cameraIndex;
+            //currentCameraIndex = cameraIndex;
             
 
             MainCameraBeforeSettingsLoad = Properties.Settings.Default.main_camera_index;
             //ShowDialog();
-            ShowDialog(MULTI_WINDOW.formList[currentCameraIndex]);
+            ShowDialog(MULTI_WINDOW.formList[cameraIndex]);
         }
         private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
         {
