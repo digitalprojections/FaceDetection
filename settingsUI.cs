@@ -25,6 +25,12 @@ namespace FaceDetection
         private bool sensorEnabledCbStateC1, sensorEnabledCbStateC2, sensorEnabledCbStateC3, sensorEnabledCbStateC4;
         private bool faceDetectionCbStateC1, faceDetectionCbStateC2, faceDetectionCbStateC3, faceDetectionCbStateC4;
         private bool operatorActionCbStateC1, operatorActionCbStateC2, operatorActionCbStateC3, operatorActionCbStateC4;
+        private bool fullScreenCbStateC1, fullScreenCbStateC2, fullScreenCbStateC3, fullScreenCbStateC4;
+        private bool alwaysOnTopCbStateC1, alwaysOnTopCbStateC2, alwaysOnTopCbStateC3, alwaysOnTopCbStateC4;
+        private bool showWindowPanelCbStateC1, showWindowPanelCbStateC2, showWindowPanelCbStateC3, showWindowPanelCbStateC4;
+        private bool showDateCbStateC1, showDateCbStateC2, showDateCbStateC3, showDateCbStateC4;
+        private bool showCamNumberCbStateC1, showCamNumberCbStateC2, showCamNumberCbStateC3, showCamNumberCbStateC4;
+        private bool showRecIconCbStateC1, showRecIconCbStateC2, showRecIconCbStateC3, showRecIconCbStateC4;
         /// <summary>
         /// current camera, not the Main Camera
         /// </summary>
@@ -164,6 +170,30 @@ namespace FaceDetection
             Properties.Settings.Default.C4_enable_Human_sensor = sensorEnabledCbStateC4;
             Properties.Settings.Default.C4_enable_face_recognition = faceDetectionCbStateC4;
             Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation = operatorActionCbStateC4;
+            Properties.Settings.Default.C1_full_screen = fullScreenCbStateC1;
+            Properties.Settings.Default.C2_full_screen = fullScreenCbStateC2;
+            Properties.Settings.Default.C3_full_screen = fullScreenCbStateC3;
+            Properties.Settings.Default.C4_full_screen = fullScreenCbStateC4;
+            Properties.Settings.Default.C1_window_on_top = alwaysOnTopCbStateC1;
+            Properties.Settings.Default.C2_window_on_top = alwaysOnTopCbStateC2;
+            Properties.Settings.Default.C3_window_on_top = alwaysOnTopCbStateC3;
+            Properties.Settings.Default.C4_window_on_top = alwaysOnTopCbStateC4;
+            Properties.Settings.Default.C1_show_window_pane = showWindowPanelCbStateC1;
+            Properties.Settings.Default.C2_show_window_pane = showWindowPanelCbStateC2;
+            Properties.Settings.Default.C3_show_window_pane = showWindowPanelCbStateC3;
+            Properties.Settings.Default.C4_show_window_pane = showWindowPanelCbStateC4;
+            Properties.Settings.Default.C1_show_date_time = showDateCbStateC1;
+            Properties.Settings.Default.C2_show_date_time = showDateCbStateC2;
+            Properties.Settings.Default.C3_show_date_time = showDateCbStateC3;
+            Properties.Settings.Default.C4_show_date_time = showDateCbStateC4;
+            Properties.Settings.Default.C1_show_camera_number = showCamNumberCbStateC1;
+            Properties.Settings.Default.C2_show_camera_number = showCamNumberCbStateC2;
+            Properties.Settings.Default.C3_show_camera_number = showCamNumberCbStateC3;
+            Properties.Settings.Default.C4_show_camera_number = showCamNumberCbStateC4;
+            Properties.Settings.Default.C1_show_record_icon = showRecIconCbStateC1;
+            Properties.Settings.Default.C2_show_record_icon = showRecIconCbStateC2;
+            Properties.Settings.Default.C3_show_record_icon = showRecIconCbStateC3;
+            Properties.Settings.Default.C4_show_record_icon = showRecIconCbStateC4;
         }
 
         private void SaveAndClose(object sender, EventArgs e)
@@ -396,6 +426,30 @@ namespace FaceDetection
             sensorEnabledCbStateC4 = Properties.Settings.Default.C4_enable_Human_sensor;
             faceDetectionCbStateC4 = Properties.Settings.Default.C4_enable_face_recognition;
             operatorActionCbStateC4 = Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation;
+            fullScreenCbStateC1 = Properties.Settings.Default.C1_full_screen;
+            fullScreenCbStateC2 = Properties.Settings.Default.C2_full_screen;
+            fullScreenCbStateC3 = Properties.Settings.Default.C3_full_screen;
+            fullScreenCbStateC4 = Properties.Settings.Default.C4_full_screen;
+            alwaysOnTopCbStateC1 = Properties.Settings.Default.C1_window_on_top;
+            alwaysOnTopCbStateC2 = Properties.Settings.Default.C2_window_on_top;
+            alwaysOnTopCbStateC3 = Properties.Settings.Default.C3_window_on_top;
+            alwaysOnTopCbStateC4 = Properties.Settings.Default.C4_window_on_top;
+            showWindowPanelCbStateC1 = Properties.Settings.Default.C1_show_window_pane;
+            showWindowPanelCbStateC2 = Properties.Settings.Default.C2_show_window_pane;
+            showWindowPanelCbStateC3 = Properties.Settings.Default.C3_show_window_pane;
+            showWindowPanelCbStateC4 = Properties.Settings.Default.C4_show_window_pane;
+            showDateCbStateC1 = Properties.Settings.Default.C1_show_date_time;
+            showDateCbStateC2 = Properties.Settings.Default.C2_show_date_time;
+            showDateCbStateC3 = Properties.Settings.Default.C3_show_date_time;
+            showDateCbStateC4 = Properties.Settings.Default.C4_show_date_time;
+            showCamNumberCbStateC1 = Properties.Settings.Default.C1_show_camera_number;
+            showCamNumberCbStateC2 = Properties.Settings.Default.C2_show_camera_number;
+            showCamNumberCbStateC3 = Properties.Settings.Default.C3_show_camera_number;
+            showCamNumberCbStateC4 = Properties.Settings.Default.C4_show_camera_number;
+            showRecIconCbStateC1 = Properties.Settings.Default.C1_show_record_icon;
+            showRecIconCbStateC2 = Properties.Settings.Default.C2_show_record_icon;
+            showRecIconCbStateC3 = Properties.Settings.Default.C3_show_record_icon;
+            showRecIconCbStateC4 = Properties.Settings.Default.C4_show_record_icon;
 
             if (cm_camera_number.Items.Count > 0)
             {
