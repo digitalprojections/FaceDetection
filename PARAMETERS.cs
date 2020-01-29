@@ -17,12 +17,12 @@ namespace FaceDetection
         /// <summary>
         /// currentl index, not MAIN
         /// </summary>
-        public static int CameraIndex = 0;
+        public static int CameraIndex = -1;
         public static bool wakeUpCall;
         /// <summary>
         /// Important for UNIT TEST Only variable. Ignore
         /// </summary>
-        public static string WhichCase = "";
+        public static string CurrentTestResult = "";
         /// <summary>
         /// Method name
         /// </summary>
@@ -70,24 +70,26 @@ namespace FaceDetection
                                         int sw = Int32.Parse(elem.Substring(2));
                                         parameterOnOffSwitch = (sw!=0);
                                         SwitchParameterPresent = true;
-                                        WhichCase = elem.Substring(2) + " switch value";
+                                        CurrentTestResult = elem.Substring(2) + " switch value";
+                                        //cameraIndex = -2;
+
                                     }
                                     catch (ArgumentNullException anx)
                                     {
                                         MethodName = "";
-                                        WhichCase = anx.Message;
+                                        CurrentTestResult = anx.Message;
                                         i = parameters.Count;
                                     }
                                     catch (FormatException fx)
                                     {
                                         MethodName = "";
-                                        WhichCase = "S " + parameterOnOffSwitch + " " + fx.Message;
+                                        CurrentTestResult = "S " + parameterOnOffSwitch + " " + fx.Message;
                                         i = parameters.Count;
                                     }
                                     catch (OverflowException ofx)
                                     {
                                         MethodName = "";
-                                        WhichCase = ofx.Message;
+                                        CurrentTestResult = ofx.Message;
                                         i = parameters.Count;
                                     }
                                     break;
@@ -99,26 +101,26 @@ namespace FaceDetection
                                     {
                                         int ci = Int32.Parse(elem.Substring(2));
                                         cameraIndex = ci-1;
-                                        WhichCase = cameraIndex + " camera index";
+                                        CurrentTestResult = cameraIndex + " camera index";
                                         //cameraIndex = -2;                                        
                                         CameraIndex = cameraIndex;
                                     }
                                     catch (ArgumentNullException anx)
                                     {
                                         MethodName = "";
-                                        WhichCase = anx.Message;
+                                        CurrentTestResult = anx.Message;
                                         i = parameters.Count;
                                     }
                                     catch (FormatException fx)
                                     {
                                         MethodName = "";
-                                        WhichCase = "C " + fx.Message;
+                                        CurrentTestResult = "C " + fx.Message;
                                         i = parameters.Count;
                                     }
                                     catch(OverflowException ofx)
                                     {
                                         MethodName = "";
-                                        WhichCase = ofx.Message;
+                                        CurrentTestResult = ofx.Message;
                                         i = parameters.Count;
                                     }
                                     break;
@@ -126,25 +128,25 @@ namespace FaceDetection
                                     try
                                     {
                                         parameterTime = Int32.Parse(elem.Substring(2));
-                                        WhichCase = parameterTime + " time parameter";
-                                        CameraIndex = -1;
+                                        CurrentTestResult = parameterTime + " time parameter";
+                                        //CameraIndex = -1;
                                     }
                                     catch (ArgumentNullException anx)
                                     {
                                         MethodName = "";
-                                        WhichCase = anx.Message;
+                                        CurrentTestResult = anx.Message;
                                         i = parameters.Count;
                                     }
                                     catch (FormatException fx)
                                     {
                                         MethodName = "";
-                                        WhichCase = "C " + fx.Message;
+                                        CurrentTestResult = "T " + fx.Message;
                                         i = parameters.Count;
                                     }
                                     catch (OverflowException ofx)
                                     {
                                         MethodName = "";
-                                        WhichCase = ofx.Message;
+                                        CurrentTestResult = ofx.Message;
                                         i = parameters.Count;
                                     }
                                     break;
@@ -153,7 +155,7 @@ namespace FaceDetection
                         }
                         catch (Exception e) 
                         {
-                            WhichCase = "Exception";
+                            CurrentTestResult = "Exception";
                             Debug.WriteLine(e.Message + " parameters in the command were sent with unexpected values");
                         }
                         //WhichCase = elem;
@@ -161,19 +163,17 @@ namespace FaceDetection
 
                     if(cameraIndex == -1)//カメラ番号が未入力の場合
                     {
-                        if(MainForm.GetMainForm == null)
-                        {
-                            cameraIndex = 0;
-                            Properties.Settings.Default.main_camera_index = 0;
-                            Properties.Settings.Default.camera_count = 1;
-                        }
-                        //else if(method == "n")
+                        //if(MainForm.GetMainForm == null)
                         //{
-                        //    cameraIndex = GetNextCameraIndex(MainForm.SELECTED_CAMERA);
+                        //    cameraIndex = 0;
+                        //    Properties.Settings.Default.main_camera_index = 0;
+                        //    Properties.Settings.Default.camera_count = 1;
                         //}
-                        else
+                        //else 
+                        if(CheckMethodsWhereCameraOmittionAllowed(MethodName))
                         {
                             cameraIndex = Properties.Settings.Default.main_camera_index;
+                            
                         }
                     }
 
@@ -192,7 +192,7 @@ namespace FaceDetection
                                 {
                                     if (parameterOnOffSwitch)
                                     {
-                                        WhichCase = "Showing Settings window";
+                                        CurrentTestResult = "Showing Settings window";
                                         if (MainForm.Settingui != null && MainForm.Settingui.Visible == false)
                                         {
                                             //MainForm.GetMainForm.TopMost = false;
@@ -202,18 +202,18 @@ namespace FaceDetection
                                     }
                                     else
                                     {
-                                        WhichCase = "Hiding Settings window " + cameraIndex;                                        
+                                        CurrentTestResult = "Hiding Settings window " + cameraIndex;                                        
                                         MainForm.Settingui?.Hide();
                                     }
                                 }
                                 else
                                 {
-                                    WhichCase = "missing switch parameter or wrong index";
+                                    CurrentTestResult = "missing switch parameter or wrong index";
                                 }
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
-                                WhichCase = "FAILURE";
+                                CurrentTestResult = "FAILURE";
                                 Trace.WriteLine(e.ToString() + " in method c");
                             }
                             break;
@@ -242,12 +242,12 @@ namespace FaceDetection
                                 {
                                     Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + cameraIndex);
                                 }
-                                WhichCase = "N case, camera index conditions passed";
+                                CurrentTestResult = "N case, camera index conditions passed";
                                 PARAM.Clear();
                             }
                             else
                             {
-                                WhichCase = "N case, conditions faled " + cameraIndex + " " + CheckCameraIndex(cameraIndex) + " " + (cameraIndex >= 0 && cameraIndex < 4);
+                                CurrentTestResult = "N case, conditions faled " + cameraIndex + " " + CheckCameraIndex(cameraIndex) + " " + (cameraIndex >= 0 && cameraIndex < 4);
                             }                            
                             break;
 
@@ -337,7 +337,7 @@ namespace FaceDetection
                         case "h":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex]?.recordingInProgress == false)
+                                if (CheckCameraIndex(cameraIndex) && MULTI_WINDOW.formList[cameraIndex]?.recordingInProgress == false)
                                 {
                                     if (parameterOnOffSwitch)
                                     {
@@ -353,10 +353,10 @@ namespace FaceDetection
 
                                         PROPERTY_FUNCTIONS.Set_Human_Sensor(cameraIndex, false);
                                     }
-                                    MainForm.AllChangesApply();
+                                    MainForm.AllChangesApply();                                    
                                     PROPERTY_FUNCTIONS.SetCycleTime(cameraIndex, parameterTime);
                                 }
-                                WhichCase = "Human Sensor " + parameterOnOffSwitch;
+                                CurrentTestResult = "Human Sensor " + cameraIndex + " " + parameterTime;
                             }
                             catch (ArgumentOutOfRangeException e)
                             {
@@ -372,7 +372,7 @@ namespace FaceDetection
                                     {
                                         if (parameterOnOffSwitch)
                                         {
-                                            WhichCase = "Show all windows";
+                                            CurrentTestResult = "Show all windows";
                                             isMinimized = false;
                                             try
                                             {
@@ -387,18 +387,18 @@ namespace FaceDetection
                                         }
                                         else
                                         {
-                                            WhichCase = "Hiding all windows";
+                                            CurrentTestResult = "Hiding all windows";
                                             isMinimized = true;
                                             MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
                                         }
                                     }
-                                WhichCase = "Show all windows";
+                                CurrentTestResult = "Show all windows";
                                 }
                                 else if (CheckCameraIndex(cameraIndex))
                                 {
                                     if (parameterOnOffSwitch)
                                     {
-                                        WhichCase = "Show 1 window";
+                                        CurrentTestResult = "Show 1 window";
                                         isMinimized = false;
                                         try
                                         {
@@ -413,7 +413,7 @@ namespace FaceDetection
                                     }
                                     else
                                     {
-                                        WhichCase = "Hiding 1 window";
+                                        CurrentTestResult = "Hiding 1 window";
                                         isMinimized = true;
                                         try
                                         {
@@ -499,7 +499,7 @@ namespace FaceDetection
                         case "e":
                             try
                             {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex == Properties.Settings.Default.main_camera_index)) // Main camera
+                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && (cameraIndex == Properties.Settings.Default.main_camera_index)) // Main camera
                                 {
                                     if (parameterOnOffSwitch && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
                                     {
@@ -509,6 +509,7 @@ namespace FaceDetection
                                     {
                                         MULTI_WINDOW.formList[cameraIndex].HideIcon();
                                         MULTI_WINDOW.EventRecorderOff(cameraIndex);
+                                        MULTI_WINDOW.formList[cameraIndex].HideIcon();
                                     }
                                 }
                                 else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))  // Not main camera                              
@@ -525,6 +526,7 @@ namespace FaceDetection
                                         MULTI_WINDOW.formList[cameraIndex].SetToPreviewMode();
                                     }
                                 }
+                                
                                 PARAMETERS.PARAM.Clear();
                             }
                             catch (ArgumentOutOfRangeException e)
@@ -577,15 +579,28 @@ namespace FaceDetection
                 }
                 else
                 {
-                    WhichCase = "parameters missing";
+                    CurrentTestResult = "parameters missing";
                 }
             }
             else
             {
-                WhichCase = "App Name missing";
+                CurrentTestResult = "App Name missing";
             }
         }
 
+        static bool CheckMethodsWhereCameraOmittionAllowed(string m)
+        {
+            bool retval = false;
+            string[] vs = new string[] {"h", "d", "v", "w", "s", "r", "e", "b", "q", "c", "l"};
+            foreach(string i in vs)
+            {
+                if (m==i)
+                {
+                    retval = true;
+                }
+            }
+            return retval;
+        }
         internal static void HandleWakeUpParameters()
         {
             if (PARAM != null && PARAM.Count > 0 && !PARAM.Contains("uvccameraviewer"))

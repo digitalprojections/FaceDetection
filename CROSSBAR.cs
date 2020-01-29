@@ -330,6 +330,7 @@ namespace FaceDetection
 
         internal void PreviewMode()
         {
+            
             //recording_permission = true;
             Recording_is_on = false;
             window.recordingInProgress = false;
