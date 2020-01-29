@@ -75,7 +75,7 @@ namespace FaceDetectionX
         {
             this.parentwindow = ptr;
             Size size = FaceDetection.PROPERTY_FUNCTIONS.Get_Stored_Resolution(cameraIndex);
-            int fps = FaceDetection.PROPERTY_FUNCTIONS.GetFPS(cameraIndex);
+            int fps = Int32.Parse(FaceDetection.PROPERTY_FUNCTIONS.GetFPS(cameraIndex));
             var camera_list = FindDevices();
             if (cameraIndex < camera_list.Length)
             {

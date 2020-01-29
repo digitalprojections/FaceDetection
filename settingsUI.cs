@@ -36,7 +36,7 @@ namespace FaceDetection
         /// <summary>
         /// Only set true when the camera number is selected manually
         /// </summary>
-        //private bool cameraSelectedManually;
+        private bool cameraSelectedManually;
         private delegate void dSettingFromProperties();
 
         public SettingsUI()
@@ -124,21 +124,6 @@ namespace FaceDetection
             }
         }
 
-        internal void ShowSettings(int cameraIndex)
-        {
-            this.currentCameraIndex = cameraIndex;
-            for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-            {
-                if (MULTI_WINDOW.formList[i].DISPLAYED == true)
-                {
-                    PROPERTY_FUNCTIONS.Set_Window_Location(i, MULTI_WINDOW.formList[i]);
-                }
-            }
-            this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(currentCameraIndex);
-            MainCameraBeforeSettingsLoad = Properties.Settings.Default.main_camera_index;
-            //ShowDialog();
-            Show(MULTI_WINDOW.formList[currentCameraIndex]);
-        }
 
         private void OpenStoreLocation(object sender, EventArgs e)
         {
@@ -334,12 +319,15 @@ namespace FaceDetection
                     if (vs[i] == PROPERTY_FUNCTIONS.GetFPS(cameraIndex).ToString())
                     {
                         matching_fps_found = true;
+                        frame_rates_combo.SelectedItem = PROPERTY_FUNCTIONS.GetFPS(cameraIndex);
                         break;
                     }
                 }
             }
-            if(!matching_fps_found)
+            if (!matching_fps_found)
                 PROPERTY_FUNCTIONS.SetFPS(cameraIndex, vs[0]);
+            
+                
         }
 
         /// <summary>
@@ -360,6 +348,10 @@ namespace FaceDetection
                         resolutions_combo.SelectedItem = PROPERTY_FUNCTIONS.GetResolution(cameraIndex);
                 }
             }
+        }
+        private void comboBoxFPS_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(comboBoxFPS.SelectedItem);
         }
 
         //void CameraSetAsMain(object sender, EventArgs e)
@@ -389,10 +381,10 @@ namespace FaceDetection
             //CBSetAsMainCam.Checked = (Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
             //CBSetAsMainCam.Enabled = !(Properties.Settings.Default.main_camera_index == comboBox.SelectedIndex);
 
-            //if (cameraSelectedManually)
-            //{
+            if (cameraSelectedManually)
+            {
                 currentCameraIndex = comboBox.SelectedIndex;
-            //}
+            }
             labelCameraNumber.Text = (Properties.Settings.Default.main_camera_index + 1).ToString();
             SetCameraPropertiesFromMemory();
             MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);                 
@@ -400,6 +392,7 @@ namespace FaceDetection
 
         private void SettingsUI_Load(object sender, EventArgs e)
         {
+            Camera.SetNumberOfCameras();
             // Memorise in case of Cancel button 
             MainCameraBeforeSettingsLoad = Properties.Settings.Default.main_camera_index;
             //operatorCaptureCbStateC1 = Properties.Settings.Default.C1_enable_capture_operator;
@@ -436,7 +429,7 @@ namespace FaceDetection
 
             //No need to call now, as there is a call from button press
             //SetCameraPropertiesFromMemory();
-            Camera.SetNumberOfCameras();
+            
 
             if (currentCameraIndex == 0)
             { 
@@ -890,7 +883,8 @@ namespace FaceDetection
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SettingsUI_Shown(object sender, EventArgs e)
-        {            
+        {
+            this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(currentCameraIndex);
             if (this.Visible)
             {
                 DisableOperatorCaptureCheckBox_ifNeeded();
@@ -898,6 +892,15 @@ namespace FaceDetection
             }            
         }
 
+        internal void ShowSettings(int cameraIndex)
+        {
+            currentCameraIndex = cameraIndex;
+            
+
+            MainCameraBeforeSettingsLoad = Properties.Settings.Default.main_camera_index;
+            //ShowDialog();
+            ShowDialog(MULTI_WINDOW.formList[currentCameraIndex]);
+        }
         private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
         {
             PROPERTY_FUNCTIONS.resolution_changed = true;
@@ -958,12 +961,12 @@ namespace FaceDetection
 
         private void cm_camera_number_MouseHover(object sender, EventArgs e)
         {
-            //cameraSelectedManually = true;
+            cameraSelectedManually = true;
         }
 
         private void cm_camera_number_MouseLeave(object sender, EventArgs e)
         {
-            //cameraSelectedManually = false;
+            cameraSelectedManually = false;
         }
 
         //private void tabControl1_Selected(object sender, TabControlEventArgs e)
@@ -1028,6 +1031,19 @@ namespace FaceDetection
                 storePath.SelectionStart = storePath.Text.Length;
             }
         }
+
+        private void SettingsUI_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+            {
+                if (MULTI_WINDOW.formList[i].DISPLAYED == true)
+                {
+                    PROPERTY_FUNCTIONS.Set_Window_Location(i, MULTI_WINDOW.formList[i]);
+                }
+            }
+        }
+
+
 
         /*
         

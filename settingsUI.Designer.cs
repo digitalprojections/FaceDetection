@@ -925,6 +925,7 @@
             resources.ApplyResources(this.comboBoxFPS, "comboBoxFPS");
             this.comboBoxFPS.FormattingEnabled = true;
             this.comboBoxFPS.Name = "comboBoxFPS";
+            this.comboBoxFPS.SelectedIndexChanged += new System.EventHandler(this.comboBoxFPS_SelectedIndexChanged);
             // 
             // button_cameraProperties
             // 
@@ -972,9 +973,9 @@
             this.Controls.Add(this.button_settings_cancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "SettingsUI";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsUI_FormClosing);
             this.Load += new System.EventHandler(this.SettingsUI_Load);
             this.Shown += new System.EventHandler(this.SettingsUI_Shown);
-            this.VisibleChanged += new System.EventHandler(this.SettingsUI_Shown);
             tab_view_settings.ResumeLayout(false);
             this.groupBox_viewSettings.ResumeLayout(false);
             this.groupBox_viewSettings.PerformLayout();

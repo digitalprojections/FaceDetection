@@ -140,7 +140,7 @@ namespace FaceDetection
         public void StartRecorderCamera(int index)
         {
             Size size = PROPERTY_FUNCTIONS.Get_Stored_Resolution(index);
-            int fps = PROPERTY_FUNCTIONS.GetFPS(index);
+            int fps = Int32.Parse(PROPERTY_FUNCTIONS.GetFPS(index));
             //IntPtr pbx = MainForm.GetMainForm.Handle;
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
             Logger.Add(ACTIVE_RECPATH);
@@ -557,7 +557,8 @@ namespace FaceDetection
 
             if (classEnum == null)
             {
-                throw new ApplicationException("No video capture device was detected.\\r\\n\\r\\n" + "This sample requires a video capture device, such as a USB WebCam,\\r\\nto be installed and working properly.  The sample will now close.");
+                //"No video capture device was detected.\\r\\n\\r\\n" + "This sample requires a video capture device, such as a USB WebCam,\\r\\nto be installed and working properly.  The sample will now close."
+                throw new ApplicationException(Resource.no_camera_found);
             }
 
             IntPtr none = IntPtr.Zero;
@@ -1102,6 +1103,7 @@ namespace FaceDetection
             if (mt.pUnk != IntPtr.Zero) Marshal.FreeCoTaskMem(mt.pUnk);
             mt = null;
         }
+
         static public class DsError
         {
             [DllImport("quartz.dll", CharSet = CharSet.Unicode, ExactSpelling = true, EntryPoint = "AMGetErrorTextW"),
