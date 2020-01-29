@@ -318,21 +318,24 @@ namespace FaceDetection
             // Check if the PREEVENT mode is needed
             //controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
             
-            // Full screen
-            if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(CameraIndex))
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Normal;
-            }
 
             // Minimized sub if "all display" is not checked
             if (!Properties.Settings.Default.show_all_cams_simulteneously &&                  
                 CameraIndex!=Properties.Settings.Default.main_camera_index)
             {
                 this.WindowState = FormWindowState.Minimized;
+            }
+            else
+            {
+                // Full screen
+                if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(CameraIndex))
+                {
+                    this.WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    this.WindowState = FormWindowState.Normal;
+                }
             }
 
             // Bring main to the front

@@ -325,9 +325,9 @@ namespace FaceDetection
                 }
             }
             if (!matching_fps_found)
+            {
                 PROPERTY_FUNCTIONS.SetFPS(cameraIndex, vs[0]);
-            
-                
+            }
         }
 
         /// <summary>
@@ -373,29 +373,28 @@ namespace FaceDetection
         //    labelCameraNumber.Text = (Camera_index + 1).ToString();
         //}
 
-        
 
         private void SettingsUI_Load(object sender, EventArgs e)
         {
             Camera.SetNumberOfCameras();
             // Memorise in case of Cancel button 
             MainCameraBeforeSettingsLoad = Properties.Settings.Default.main_camera_index;
-            //operatorCaptureCbStateC1 = Properties.Settings.Default.C1_enable_capture_operator;
-            //sensorEnabledCbStateC1 = Properties.Settings.Default.C1_enable_Human_sensor;
-            //faceDetectionCbStateC1 = Properties.Settings.Default.C1_enable_face_recognition;
-            //operatorActionCbStateC1 = Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
-            //operatorCaptureCbStateC2 = Properties.Settings.Default.C2_enable_capture_operator;
-            //sensorEnabledCbStateC2 = Properties.Settings.Default.C2_enable_Human_sensor;
-            //faceDetectionCbStateC2 = Properties.Settings.Default.C2_enable_face_recognition;
-            //operatorActionCbStateC2 = Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation;
-            //operatorCaptureCbStateC3 = Properties.Settings.Default.C3_enable_capture_operator;
-            //sensorEnabledCbStateC3 = Properties.Settings.Default.C3_enable_Human_sensor;
-            //faceDetectionCbStateC3 = Properties.Settings.Default.C3_enable_face_recognition;
-            //operatorActionCbStateC3 = Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation;
-            //operatorCaptureCbStateC4 = Properties.Settings.Default.C4_enable_capture_operator;
-            //sensorEnabledCbStateC4 = Properties.Settings.Default.C4_enable_Human_sensor;
-            //faceDetectionCbStateC4 = Properties.Settings.Default.C4_enable_face_recognition;
-            //operatorActionCbStateC4 = Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation;
+            operatorCaptureCbStateC1 = Properties.Settings.Default.C1_enable_capture_operator;
+            sensorEnabledCbStateC1 = Properties.Settings.Default.C1_enable_Human_sensor;
+            faceDetectionCbStateC1 = Properties.Settings.Default.C1_enable_face_recognition;
+            operatorActionCbStateC1 = Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation;
+            operatorCaptureCbStateC2 = Properties.Settings.Default.C2_enable_capture_operator;
+            sensorEnabledCbStateC2 = Properties.Settings.Default.C2_enable_Human_sensor;
+            faceDetectionCbStateC2 = Properties.Settings.Default.C2_enable_face_recognition;
+            operatorActionCbStateC2 = Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation;
+            operatorCaptureCbStateC3 = Properties.Settings.Default.C3_enable_capture_operator;
+            sensorEnabledCbStateC3 = Properties.Settings.Default.C3_enable_Human_sensor;
+            faceDetectionCbStateC3 = Properties.Settings.Default.C3_enable_face_recognition;
+            operatorActionCbStateC3 = Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation;
+            operatorCaptureCbStateC4 = Properties.Settings.Default.C4_enable_capture_operator;
+            sensorEnabledCbStateC4 = Properties.Settings.Default.C4_enable_Human_sensor;
+            faceDetectionCbStateC4 = Properties.Settings.Default.C4_enable_face_recognition;
+            operatorActionCbStateC4 = Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation;
 
             if (cm_camera_number.Items.Count > 0)
             {
@@ -450,11 +449,11 @@ namespace FaceDetection
             cm_camera_number.Enabled = !rip;
             //CBSetAsMainCam.Enabled = !rip;
             button_settings_save.Enabled = !rip;
-            if (cb_operator_capture.CheckState == CheckState.Unchecked && cb_event_recorder.CheckState==CheckState.Unchecked)
-            {
-                //User wants to stop recordings and set the app to no buffer mode. Simply allow OK button
-                button_settings_save.Enabled = true;
-            }            
+            //if (cb_operator_capture.CheckState == CheckState.Unchecked && cb_event_recorder.CheckState==CheckState.Unchecked)
+            //{
+            //    //User wants to stop recordings and set the app to no buffer mode. Simply allow OK button
+            //    button_settings_save.Enabled = true;
+            //}            
         }
                  
         private void Cm_language_SelectedIndexChanged(object sender, EventArgs e)
@@ -660,23 +659,23 @@ namespace FaceDetection
             CheckBox check = (CheckBox)sender;
             if(check.Checked)
             {
-                cb_face_recognition.Checked = !check.Checked;
-                //if (Properties.Settings.Default.C1_enable_Human_sensor == true)
-                //{
-                //    Properties.Settings.Default.C1_enable_face_recognition = false;
-                //}
-                //if (Properties.Settings.Default.C2_enable_Human_sensor == true)
-                //{
-                //    Properties.Settings.Default.C2_enable_face_recognition = false;
-                //}
-                //if (Properties.Settings.Default.C3_enable_Human_sensor == true)
-                //{
-                //    Properties.Settings.Default.C3_enable_face_recognition = false;
-                //}
-                //if (Properties.Settings.Default.C4_enable_Human_sensor == true)
-                //{
-                //    Properties.Settings.Default.C4_enable_face_recognition = false;
-                //}
+                //cb_face_recognition.Checked = !check.Checked;
+                if (Properties.Settings.Default.C1_enable_Human_sensor == true)
+                {
+                    Properties.Settings.Default.C1_enable_face_recognition = false;
+                }
+                if (Properties.Settings.Default.C2_enable_Human_sensor == true)
+                {
+                    Properties.Settings.Default.C2_enable_face_recognition = false;
+                }
+                if (Properties.Settings.Default.C3_enable_Human_sensor == true)
+                {
+                    Properties.Settings.Default.C3_enable_face_recognition = false;
+                }
+                if (Properties.Settings.Default.C4_enable_Human_sensor == true)
+                {
+                    Properties.Settings.Default.C4_enable_face_recognition = false;
+                }
             }
             else
             {
@@ -700,23 +699,23 @@ namespace FaceDetection
             CheckBox check = (CheckBox)sender;
             if (check.Checked)
             {
-                cb_human_sensor.Checked = !check.Checked;
-                //if (Properties.Settings.Default.C1_enable_face_recognition == true)
-                //{
-                //    Properties.Settings.Default.C1_enable_Human_sensor = false;
-                //}
-                //if (Properties.Settings.Default.C2_enable_face_recognition == true)
-                //{
-                //    Properties.Settings.Default.C2_enable_Human_sensor = false;
-                //}
-                //if (Properties.Settings.Default.C3_enable_face_recognition == true)
-                //{
-                //    Properties.Settings.Default.C3_enable_Human_sensor = false;
-                //}
-                //if (Properties.Settings.Default.C4_enable_face_recognition == true)
-                //{
-                //    Properties.Settings.Default.C4_enable_Human_sensor = false;
-                //}
+                //cb_human_sensor.Checked = !check.Checked;
+                if (Properties.Settings.Default.C1_enable_face_recognition == true)
+                {
+                    Properties.Settings.Default.C1_enable_Human_sensor = false;
+                }
+                if (Properties.Settings.Default.C2_enable_face_recognition == true)
+                {
+                    Properties.Settings.Default.C2_enable_Human_sensor = false;
+                }
+                if (Properties.Settings.Default.C3_enable_face_recognition == true)
+                {
+                    Properties.Settings.Default.C3_enable_Human_sensor = false;
+                }
+                if (Properties.Settings.Default.C4_enable_face_recognition == true)
+                {
+                    Properties.Settings.Default.C4_enable_Human_sensor = false;
+                }
             }
             else
             {
@@ -905,8 +904,9 @@ namespace FaceDetection
 
             MainCameraBeforeSettingsLoad = Properties.Settings.Default.main_camera_index;
             //ShowDialog();
-            ShowDialog(MULTI_WINDOW.formList[currentCameraIndex]);
+            ShowDialog(MULTI_WINDOW.formList[cameraIndex]);
         }
+
         private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
         {
             PROPERTY_FUNCTIONS.resolution_changed = true;
@@ -914,7 +914,6 @@ namespace FaceDetection
             {                
                 PROPERTY_FUNCTIONS.SetResolution(currentCameraIndex, comboBoxResolutions.SelectedItem.ToString());                
             }
-
         }
 
         private void NumericUpDownX_ValueChanged(object sender, EventArgs e)
