@@ -219,6 +219,7 @@ namespace FaceDetection
                                 {
                                     CurrentTestResult = "C missing switch parameter or wrong index";
                                 }
+                            PARAM.Clear();
                             }
                             catch (ArgumentOutOfRangeException e)
                             {

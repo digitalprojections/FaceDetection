@@ -960,7 +960,14 @@ namespace FaceDetection
 
             MainCameraBeforeSettingsLoad = Properties.Settings.Default.main_camera_index;
             //ShowDialog();
-            ShowDialog(MULTI_WINDOW.formList[formWhereSettingsWasOpened]);
+            try
+            {
+                ShowDialog(MULTI_WINDOW.formList[formWhereSettingsWasOpened]);
+            }
+            catch (InvalidOperationException ioe)
+            {
+                // Settings openened by command then OK button
+            }
         }
 
         private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
