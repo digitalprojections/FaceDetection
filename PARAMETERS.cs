@@ -905,7 +905,7 @@ namespace FaceDetection
         {
             switch (MethodName)
             {
-                case "b":
+                case "b"://TTTF
                     try
                     {
                         if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
@@ -927,7 +927,7 @@ namespace FaceDetection
                         Debug.WriteLine(e.ToString() + " in method b");
                     }
                     break;
-                case "n":
+                case "n"://TTTF
                     if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                     {
                         if (MULTI_WINDOW.formList[CameraIndex]?.DISPLAYED == true && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false && MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].recordingInProgress == false)
@@ -958,7 +958,7 @@ namespace FaceDetection
                         CurrentTestResult = "N case, conditions faled " + CameraIndex + " " + CheckCameraIndex(CameraIndex) + " " + (CameraIndex >= 0 && CameraIndex < 4);
                     }
                     break;
-                case "v":
+                case "v"://TTTF
                     if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && SwitchIsPresent)
                     {
                         for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
@@ -1021,7 +1021,7 @@ namespace FaceDetection
 
                     PARAMETERS.PARAM.Clear();
                     break;
-                case "l":
+                case "l"://TTTF
                     try
                     {
                         if (parameterOnOffSwitch)
@@ -1038,7 +1038,7 @@ namespace FaceDetection
                         Debug.WriteLine(e.ToString() + " in method l");
                     }
                     break;
-                case "w":
+                case "w"://TTTF
                     try
                     {
                         if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
@@ -1069,7 +1069,7 @@ namespace FaceDetection
                         Debug.WriteLine(e.ToString() + " in method w");
                     }
                     break;
-                case "r":
+                case "r"://TTTF
                     try
                     {
                         if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
@@ -1105,7 +1105,7 @@ namespace FaceDetection
                         Debug.WriteLine(e.ToString() + " in method r");
                     }
                     break;
-                case "h":
+                case "h"://TTTF
                     if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                     {
                         PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CameraIndex, out bool IrSensorEnabled);
@@ -1134,18 +1134,29 @@ namespace FaceDetection
                                     }
                                     MainForm.AllChangesApply();
                                 }
-                            }                            
+                            }
                         }
-                        
-                        CurrentTestResult = "HUMAN SENSOR no time index 1-4" + " " + CameraIndex;
                     }
                     else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8)
-                    {
-                        PROPERTY_FUNCTIONS.Set_Human_Sensor(1, false);
-                        PROPERTY_FUNCTIONS.Set_Human_Sensor(2, false);
-                        PROPERTY_FUNCTIONS.Set_Human_Sensor(3, false);
-                        PROPERTY_FUNCTIONS.Set_Human_Sensor(4, false);
-                        CurrentTestResult = "HUMAN SENSOR parameterTime index 9 " + " " + CameraIndex;
+                    {                        
+                        if (parameterOnOffSwitch)
+                        {                     
+                            PROPERTY_FUNCTIONS.Set_Human_Sensor(0, true);
+                            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(0, true);
+                            PROPERTY_FUNCTIONS.Set_Human_Sensor(1, true);
+                            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(1, true);
+                            PROPERTY_FUNCTIONS.Set_Human_Sensor(2, true);
+                            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(2, true);
+                            PROPERTY_FUNCTIONS.Set_Human_Sensor(3, true);
+                            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(3, true);                     
+                        }
+                        else
+                        {
+                            PROPERTY_FUNCTIONS.Set_Human_Sensor(1, false);                            
+                            PROPERTY_FUNCTIONS.Set_Human_Sensor(2, false);
+                            PROPERTY_FUNCTIONS.Set_Human_Sensor(3, false);
+                            PROPERTY_FUNCTIONS.Set_Human_Sensor(4, false);
+                        }
                         Properties.Settings.Default.Save();
                         if (MainForm.GetMainForm != null)
                         {
@@ -1175,28 +1186,35 @@ namespace FaceDetection
         {
             switch (MethodName)
             {
-                case "h":
+                case "h"://TTTT
                     try
                     {
-                        
-                            
-                            if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && MULTI_WINDOW.RecordingIsOn()==false)
+                        if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && MULTI_WINDOW.RecordingIsOn() == false)
+                        {
+                            if (parameterOnOffSwitch)
                             {
-                                CurrentTestResult = "HUMAN SENSOR parameterTime index 9 " + parameterTime + " " + CameraIndex;
+                                PROPERTY_FUNCTIONS.Set_Human_Sensor(0, true);
+                                PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(0, true);
+                                PROPERTY_FUNCTIONS.Set_Human_Sensor(1, true);
+                                PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(1, true);
+                                PROPERTY_FUNCTIONS.Set_Human_Sensor(2, true);
+                                PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(2, true);
+                                PROPERTY_FUNCTIONS.Set_Human_Sensor(3, true);
+                                PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(3, true);
                             }
-                            else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
+                        }
+                        else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
+                        {
+                            if (parameterOnOffSwitch)
                             {
-                                if (parameterOnOffSwitch)
-                                {
-                                    PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
-                                    PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
-                                    if(MainForm.GetMainForm!=null)
-                                        MainForm.AllChangesApply();
-                                    PROPERTY_FUNCTIONS.SetCycleTime(CameraIndex, parameterTime);
-                                    CurrentTestResult = "HUMAN SENSOR no time index 1-4" + parameterTime + " " + CameraIndex;
-                                }                                
+                                PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
+                                PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
+                                if (MainForm.GetMainForm != null)
+                                    MainForm.AllChangesApply();
+                                PROPERTY_FUNCTIONS.SetCycleTime(CameraIndex, parameterTime);
+                                CurrentTestResult = "HUMAN SENSOR no time index 1-4" + parameterTime + " " + CameraIndex;
                             }
-                        
+                        }
                         //else//the app is running
                         //{
                         //    if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
