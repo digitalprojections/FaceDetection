@@ -147,23 +147,10 @@ namespace FaceDetection
             //if(currentCameraIndex!=MainCameraBeforeSettingsLoad)
             //    CBSetAsMainCam.Checked = false;
             //CameraSetAsMain();
-
-            Properties.Settings.Default.C1_enable_capture_operator = operatorCaptureCbStateC1;
-            Properties.Settings.Default.C1_enable_Human_sensor = sensorEnabledCbStateC1;
-            Properties.Settings.Default.C1_enable_face_recognition = faceDetectionCbStateC1;
-            Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation = operatorActionCbStateC1;
-            Properties.Settings.Default.C2_enable_capture_operator = operatorCaptureCbStateC2;
-            Properties.Settings.Default.C2_enable_Human_sensor = sensorEnabledCbStateC2;
-            Properties.Settings.Default.C2_enable_face_recognition = faceDetectionCbStateC2;
-            Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation = operatorActionCbStateC2;
-            Properties.Settings.Default.C3_enable_capture_operator = operatorCaptureCbStateC3;
-            Properties.Settings.Default.C3_enable_Human_sensor = sensorEnabledCbStateC3;
-            Properties.Settings.Default.C3_enable_face_recognition = faceDetectionCbStateC3;
-            Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation = operatorActionCbStateC3;
-            Properties.Settings.Default.C4_enable_capture_operator = operatorCaptureCbStateC4;
-            Properties.Settings.Default.C4_enable_Human_sensor = sensorEnabledCbStateC4;
-            Properties.Settings.Default.C4_enable_face_recognition = faceDetectionCbStateC4;
-            Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation = operatorActionCbStateC4;
+            if (backgroundWorkerCancelClose.IsBusy != true)
+            {
+                backgroundWorkerCancelClose.RunWorkerAsync();
+            }
         }
 
         private void SaveAndClose(object sender, EventArgs e)
@@ -843,6 +830,28 @@ namespace FaceDetection
         {
             return Math.Max(event_record_time_before_event.Value, nud_seconds_before_event.Value);
         }
+
+        private void backgroundWorkerCancelClose_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+            Properties.Settings.Default.C1_enable_capture_operator = operatorCaptureCbStateC1;
+            Properties.Settings.Default.C1_enable_Human_sensor = sensorEnabledCbStateC1;
+            Properties.Settings.Default.C1_enable_face_recognition = faceDetectionCbStateC1;
+            Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation = operatorActionCbStateC1;
+            Properties.Settings.Default.C2_enable_capture_operator = operatorCaptureCbStateC2;
+            Properties.Settings.Default.C2_enable_Human_sensor = sensorEnabledCbStateC2;
+            Properties.Settings.Default.C2_enable_face_recognition = faceDetectionCbStateC2;
+            Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation = operatorActionCbStateC2;
+            Properties.Settings.Default.C3_enable_capture_operator = operatorCaptureCbStateC3;
+            Properties.Settings.Default.C3_enable_Human_sensor = sensorEnabledCbStateC3;
+            Properties.Settings.Default.C3_enable_face_recognition = faceDetectionCbStateC3;
+            Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation = operatorActionCbStateC3;
+            Properties.Settings.Default.C4_enable_capture_operator = operatorCaptureCbStateC4;
+            Properties.Settings.Default.C4_enable_Human_sensor = sensorEnabledCbStateC4;
+            Properties.Settings.Default.C4_enable_face_recognition = faceDetectionCbStateC4;
+            Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation = operatorActionCbStateC4;
+        }
+
         //void SetIntervalProps()
         //{
         //    if (Properties.Settings.Default.C1_interval_before_reinitiating_recording < Properties.Settings.Default.C1_seconds_before_event)

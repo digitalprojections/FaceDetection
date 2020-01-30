@@ -53,7 +53,8 @@ namespace FaceDetection
         private bool applicationExit = false;
 
         public CameraForm(int camind)
-        {      
+        {
+            InitializeComponent();
             CameraIndex = camind;
                         
             hideIconTimer.AutoReset = false;
@@ -149,10 +150,6 @@ namespace FaceDetection
             mouse_down_timer.Elapsed += ShowButtonsDelayed;//制御ボタンの非/表示用クリックタイマー
             mouse_down_timer.Interval = 1000;
 
-            //datetimer.Interval = 1000;
-            //datetimer.Tick += Datetimer_Tick;
-            //datetimer.Start();
-            ///////////////////////////////////////////////////////////
 
             //// Full screen
             //if (Properties.Settings.Default.main_window_full_screen)
@@ -782,6 +779,18 @@ namespace FaceDetection
             this.closeButton.TabIndex = 3;
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(ShowButtons);
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // CameraForm
+            //             
+            this.MinimumSize = new System.Drawing.Size(345, 150);
+            this.Name = "CameraForm";
+            this.ResumeLayout(false);
+
         }
     }
 }
