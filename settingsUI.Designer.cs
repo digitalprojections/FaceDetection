@@ -213,7 +213,7 @@
             0,
             0});
             this.nud_manual_record_time.Minimum = new decimal(new int[] {
-            5,
+            60,
             0,
             0,
             0});
