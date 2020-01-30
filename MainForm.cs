@@ -55,7 +55,11 @@ namespace FaceDetection
 
                 backLight = new BackLightController();
 
-                stopwatch.Start();
+                if(Properties.Settings.Default.enable_delete_old_files)
+                {
+                    CheckDiskSpace.DeleteOldFiles();
+                    stopwatch.Start();
+                }
             }
         }
         
@@ -140,7 +144,7 @@ namespace FaceDetection
 
             GC.Collect();
 
-            if (stopwatch.ElapsedMilliseconds>=3600000)
+            if (Properties.Settings.Default.enable_delete_old_files && stopwatch.ElapsedMilliseconds>=3600000)
             {
                 stopwatch.Restart();
                 CheckDiskSpace.DeleteOldFiles();
