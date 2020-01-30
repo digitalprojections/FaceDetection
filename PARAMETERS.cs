@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -41,9 +42,12 @@ namespace FaceDetection
 
         public static string ParameterSet { get; private set; }
 
+        static CultureInfo culture = CultureInfo.CurrentCulture;
+
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
-            PARAM = parameters.ToList<string>();
+            
+            PARAM = CleanUpTheParams(parameters.ToList<string>());
             
             MethodNameIsPresent = false;
             SwitchIsPresent = false;
@@ -54,14 +58,14 @@ namespace FaceDetection
             parameterOnOffSwitch = false;
             parameterTime = 0;
 
-        Logger.Add(param);
-
-            param = String.Concat(parameters).ToLower();
+            Logger.Add(param);
+            
+            param = String.Concat(parameters).ToLower(culture);
             string elem;
             MethodName = " ";
             
-            SwitchIsPresent = false;
-            int cameraIndex = -1;
+            
+            
             /*
              Handle the initial start up CL parameters, if exist
             */
@@ -101,8 +105,7 @@ namespace FaceDetection
                                         {
                                             SwitchIsPresent = true;
                                             parameterOnOffSwitch = false;
-                                        }
-                                        CurrentTestResult = elem.Substring(2) + " switch value";
+                                        }                                        
                                     }
                                     catch (ArgumentNullException anx)
                                     {
@@ -127,11 +130,14 @@ namespace FaceDetection
                                     try
                                     {
                                         int ci = Int32.Parse(elem.Substring(2));
-                                        cameraIndex = ci-1;
-                                        CamIndexIsPresent = true;
-                                        CurrentTestResult = cameraIndex + " camera index";
-                                        //cameraIndex = -2;                                        
-                                        CameraIndex = cameraIndex;
+                                        if (CheckCameraIndex(ci - 1))
+                                        {                                            
+                                            CamIndexIsPresent = true;
+                                        }
+                                        else
+                                        {
+                                            WrongParameter = false;
+                                        }
                                     }
                                     catch (ArgumentNullException anx)
                                     {
@@ -244,494 +250,985 @@ namespace FaceDetection
                             WrongParameter = true;
                             break;
                     }
-
-
-
-
+                    #region OLD SWITCH LOGIC
                     // METHOD
-                    switch (MethodName)
-                    {
-                        //No method
-                        case "":                            
-                            if (wakeUpCall && CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
-                            {
-                                //START the camera
+                    //switch (MethodName)
+                    //{
+                    //No method
+                    //case "":                            
+                    //if (wakeUpCall && CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
+                    //{
+                    //    //START the camera
 
-                            }
-                            else if(wakeUpCall && (cameraIndex == 8))
-                            {
+                    //}
+                    //else if(wakeUpCall && (cameraIndex == 8))
+                    //{
 
-                            }
-                            CurrentTestResult = "No method " + cameraIndex;
-                            break;
+                    //}
+                    //CurrentTestResult = "No method " + cameraIndex;
+                    //break;
 
-                        // Show Settings window
-                        case "c":
-                            try
-                            {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && SwitchIsPresent)
-                                {
-                                    if (parameterOnOffSwitch)
-                                    {
-                                        CurrentTestResult = "Showing Settings window";
-                                        if (MainForm.Settingui != null && MainForm.Settingui.Visible == false)
-                                        {
-                                            //MainForm.GetMainForm.TopMost = false;
-                                            //WhichCase = "Showing Settings window";
-                                            MainForm.Settingui.ShowSettings(cameraIndex);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        CurrentTestResult = "Hiding Settings window " + cameraIndex;                                        
-                                        MainForm.Settingui?.Hide();
-                                    }
-                                }
-                                else
-                                {
-                                    CurrentTestResult = "C missing switch parameter or wrong index";
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                CurrentTestResult = "FAILURE";
-                                Trace.WriteLine(e.ToString() + " in method c");
-                            }
-                            break;
+                    // Show Settings window
+                    //case "c":
+                    //    try
+                    //    {
+                    //        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && SwitchIsPresent)
+                    //        {
+                    //            if (parameterOnOffSwitch)
+                    //            {
+                    //                CurrentTestResult = "Showing Settings window";
+                    //                if (MainForm.Settingui != null && MainForm.Settingui.Visible == false)
+                    //                {
+                    //                    //MainForm.GetMainForm.TopMost = false;
+                    //                    //WhichCase = "Showing Settings window";
+                    //                    MainForm.Settingui.ShowSettings(CameraIndex);
+                    //                }
+                    //            }
+                    //            else
+                    //            {
+                    //                CurrentTestResult = "Hiding Settings window " + CameraIndex;
+                    //                MainForm.Settingui?.Hide();
+                    //            }
+                    //        }
+                    //        else
+                    //        {
+                    //            CurrentTestResult = "C missing switch parameter or wrong index";
+                    //        }
+                    //    }
+                    //    catch (ArgumentOutOfRangeException e)
+                    //    {
+                    //        CurrentTestResult = "FAILURE";
+                    //        Trace.WriteLine(e.ToString() + " in method c");
+                    //    }
+                    //    break;
 
-                        // Change main camera
-                        case "n":
-                            if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
-                            {
-                                if (MULTI_WINDOW.formList[cameraIndex]?.DISPLAYED == true && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false && MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].recordingInProgress == false)
-                                {
-                                    //MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].Text = "UVC Camera Viewer -  camera " + (Properties.Settings.Default.main_camera_index + 1);
-                                    //MULTI_WINDOW.formList[cameraIndex].Text = $"UVC Camera Viewer - MAIN CAMERA {(cameraIndex + 1)}";
-                                    //Properties.Settings.Default.main_camera_index = cameraIndex;
+                    // Change main camera
+                    //case "n":
+                    //    if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                    //    {
+                    //        if (MULTI_WINDOW.formList[CameraIndex]?.DISPLAYED == true && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false && MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].recordingInProgress == false)
+                    //        {
+                    //            //MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].Text = "UVC Camera Viewer -  camera " + (Properties.Settings.Default.main_camera_index + 1);
+                    //            //MULTI_WINDOW.formList[cameraIndex].Text = $"UVC Camera Viewer - MAIN CAMERA {(cameraIndex + 1)}";
+                    //            //Properties.Settings.Default.main_camera_index = cameraIndex;
 
-                                    //MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Normal;
-                                    //MULTI_WINDOW.formList[cameraIndex].Activate();
-                                    //if (!Properties.Settings.Default.show_all_cams_simulteneously)
-                                    //{
-                                    //    MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
-                                    //}
-                                    Properties.Settings.Default.main_camera_index = cameraIndex;
-                                    Properties.Settings.Default.Save();
-                                    MULTI_WINDOW.FormSettingsChanged();
-                                }
-                                else
-                                {
-                                    Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + cameraIndex);
-                                }
-                                CurrentTestResult = "N case, camera index conditions passed";
-                                PARAM.Clear();
-                            }
-                            else
-                            {
-                                CurrentTestResult = "N case, conditions faled " + cameraIndex + " " + CheckCameraIndex(cameraIndex) + " " + (cameraIndex >= 0 && cameraIndex < 4);
-                            }                            
-                            break;
+                    //            //MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Normal;
+                    //            //MULTI_WINDOW.formList[cameraIndex].Activate();
+                    //            //if (!Properties.Settings.Default.show_all_cams_simulteneously)
+                    //            //{
+                    //            //    MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
+                    //            //}
+                    //            Properties.Settings.Default.main_camera_index = CameraIndex;
+                    //            Properties.Settings.Default.Save();
+                    //            MULTI_WINDOW.FormSettingsChanged();
+                    //        }
+                    //        else
+                    //        {
+                    //            Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
+                    //        }
+                    //        CurrentTestResult = "N case, camera index conditions passed";
+                    //        PARAM.Clear();
+                    //    }
+                    //    else
+                    //    {
+                    //        CurrentTestResult = "N case, conditions faled " + CameraIndex + " " + CheckCameraIndex(CameraIndex) + " " + (CameraIndex >= 0 && CameraIndex < 4);
+                    //    }
+                    //    break;
 
-                        // SNAPSHOT
-                        case "s":
-                            try
-                            {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
-                                {
-                                    if (wakeUpCall)
-                                    {
-                                        wakeUpCall = false;
-                                        //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
-                                        //{
-                                        //    SNAPSHOT_SAVER.TakeAsyncSnapShot(true, cameraIndex, "event");
-                                        //}
-                                        //else 
+                    // SNAPSHOT
+                    //case "s":
+                    //    try
+                    //    {
+                    //        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                    //        {
+                    //            if (wakeUpCall)
+                    //            {
+                    //                wakeUpCall = false;
+                    //                //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                    //                //{
+                    //                //    SNAPSHOT_SAVER.TakeAsyncSnapShot(true, cameraIndex, "event");
+                    //                //}
+                    //                //else 
 
-                                        SNAPSHOT_SAVER.TakeAsyncSnapShot(false, cameraIndex, "event");
+                    //                SNAPSHOT_SAVER.TakeAsyncSnapShot(false, CameraIndex, "event");
 
-                                    }
-                                }
-                                else
-                                {
-                                    //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
-                                    //{
-                                    //    SNAPSHOT_SAVER.TakeSnapShotAll();
-                                    //}
-                                    //else 
-                                    if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
-                                    {
-                                        //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
-                                        //{
-                                        //    SNAPSHOT_SAVER.TakeSnapShotAll();
-                                        //}
-                                        //else 
+                    //            }
+                    //        }
+                    //        else
+                    //        {
+                    //            //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                    //            //{
+                    //            //    SNAPSHOT_SAVER.TakeSnapShotAll();
+                    //            //}
+                    //            //else 
+                    //            if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
+                    //            {
+                    //                //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                    //                //{
+                    //                //    SNAPSHOT_SAVER.TakeSnapShotAll();
+                    //                //}
+                    //                //else 
 
-                                        SNAPSHOT_SAVER.TakeSnapShot(cameraIndex, "event");
-                                        //SNAPSHOT_SAVER.TakeAsyncSnapShot();
-                                    }
-                                }
-                            
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.Message + " in method s");
-                            }
-                            break;
+                    //                SNAPSHOT_SAVER.TakeSnapShot(CameraIndex, "event");
+                    //                //SNAPSHOT_SAVER.TakeAsyncSnapShot();
+                    //            }
+                    //        }
 
-                        // SHOW / HIDE CONTROL BUTTONS
-                        case "b":
-                            try
-                            {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
-                                {
-                                    if (parameterOnOffSwitch)
-                                    {
-                                        isControlButtonVisible = true;
-                                        MULTI_WINDOW.formList[cameraIndex].SettingChangesApply(cameraIndex);
-                                    }
-                                    else
-                                    {
-                                        isControlButtonVisible = false;
-                                        MULTI_WINDOW.formList[cameraIndex].SettingChangesApply(cameraIndex);
-                                    }                                                                       
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in method b");
-                            }
-                            break;
+                    //    }
+                    //    catch (ArgumentOutOfRangeException e)
+                    //    {
+                    //        Debug.WriteLine(e.Message + " in method s");
+                    //    }
+                    //    break;
 
-                        // Enable/Disable Face detection
-                        //case "d":
-                        //    try
-                        //    {
-                                
-                        //    }
-                        //    catch (ArgumentOutOfRangeException e)
-                        //    {
-                        //        Debug.WriteLine(e.ToString() + " in method d");
-                        //    }
-                        //    break;
+                    // SHOW / HIDE CONTROL BUTTONS
+                    //case "b":
+                    //    try
+                    //    {
+                    //        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                    //        {
+                    //            if (parameterOnOffSwitch)
+                    //            {
+                    //                isControlButtonVisible = true;
+                    //                MULTI_WINDOW.formList[CameraIndex].SettingChangesApply(CameraIndex);
+                    //            }
+                    //            else
+                    //            {
+                    //                isControlButtonVisible = false;
+                    //                MULTI_WINDOW.formList[CameraIndex].SettingChangesApply(CameraIndex);
+                    //            }                                                                       
+                    //        }
+                    //    }
+                    //    catch (ArgumentOutOfRangeException e)
+                    //    {
+                    //        Debug.WriteLine(e.ToString() + " in method b");
+                    //    }
+                    //    break;
 
-                        // IR Sensor
-                        case "h":
-                            try
-                            {
-                                if (wakeUpCall)
-                                {
-                                    if (parameterTime > 0 && CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
-                                    {
-                                        //when there is parameterTime, cameraindex is a must
-                                        CurrentTestResult = "HUMAN SENSOR parameterTime index 1-4" + parameterTime + " " + cameraIndex;
-                                    }
-                                    else if (parameterTime > 0 && CheckCameraIndex(cameraIndex) && cameraIndex == 8)
-                                    {
-                                        CurrentTestResult = "HUMAN SENSOR parameterTime index 9 " + parameterTime + " " + cameraIndex;
-                                    }
-                                    else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex]?.recordingInProgress == false)
-                                    {
-                                        if (parameterOnOffSwitch)
-                                        {
-                                            PROPERTY_FUNCTIONS.Set_Human_Sensor(cameraIndex, true);
-                                            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(cameraIndex, true);
-                                            MainForm.AllChangesApply();
-                                            PROPERTY_FUNCTIONS.SetCycleTime(cameraIndex, parameterTime);
-                                        }
-                                        CurrentTestResult = "HUMAN SENSOR no time index 1-4" + parameterTime + " " + cameraIndex;
-                                    }
-                                }
-                                else//the app is running
-                                {
-                                    if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex]?.recordingInProgress == false)
-                                    {
-                                        if (parameterOnOffSwitch)
-                                        {
-                                            PROPERTY_FUNCTIONS.Set_Human_Sensor(cameraIndex, true);
-                                            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(cameraIndex, true);
-                                        }
-                                        else
-                                        {
-                                            if (MainForm.RSensor != null)
-                                            {
-                                                MainForm.RSensor.Stop_IR_Timer();
-                                            }
+                    // Enable/Disable Face detection
+                    //case "d":
+                    //    try
+                    //    {
 
-                                            PROPERTY_FUNCTIONS.Set_Human_Sensor(cameraIndex, false);
-                                        }
-                                        MainForm.AllChangesApply();
-                                        PROPERTY_FUNCTIONS.SetCycleTime(cameraIndex, parameterTime);
-                                    }
-                                }
+                    //    }
+                    //    catch (ArgumentOutOfRangeException e)
+                    //    {
+                    //        Debug.WriteLine(e.ToString() + " in method d");
+                    //    }
+                    //    break;
 
-                                
-                                //CurrentTestResult = "Human Sensor " + cameraIndex + " " + parameterTime + " " + wakeUpCall;
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Logger.Add(e.Message + " in method h");
-                            }
-                            break;
+                    // IR Sensor
+                    //case "h":
+                    //    try
+                    //    {
+                    //        if (wakeUpCall)
+                    //        {
+                    //            if (parameterTime > 0 && CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                    //            {
+                    //                //when there is parameterTime, cameraindex is a must
+                    //                CurrentTestResult = "HUMAN SENSOR parameterTime index 1-4" + parameterTime + " " + CameraIndex;
+                    //            }
+                    //            else if (parameterTime > 0 && CheckCameraIndex(CameraIndex) && CameraIndex == 8)
+                    //            {
+                    //                CurrentTestResult = "HUMAN SENSOR parameterTime index 9 " + parameterTime + " " + CameraIndex;
+                    //            }
+                    //            else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
+                    //            {
+                    //                if (parameterOnOffSwitch)
+                    //                {
+                    //                    PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
+                    //                    PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
+                    //                    MainForm.AllChangesApply();
+                    //                    PROPERTY_FUNCTIONS.SetCycleTime(CameraIndex, parameterTime);
+                    //                }
+                    //                CurrentTestResult = "HUMAN SENSOR no time index 1-4" + parameterTime + " " + CameraIndex;
+                    //            }
+                    //        }
+                    //        else//the app is running
+                    //        {
+                    //            if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
+                    //            {
+                    //                if (parameterOnOffSwitch)
+                    //                {
+                    //                    PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
+                    //                    PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
+                    //                }
+                    //                else
+                    //                {
+                    //                    if (MainForm.RSensor != null)
+                    //                    {
+                    //                        MainForm.RSensor.Stop_IR_Timer();
+                    //                    }
 
-                        // Visible - Active
-                        case "v":
-                                if (CheckCameraIndex(cameraIndex) && cameraIndex == 8 && SwitchIsPresent)
-                                {
-                                    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                                    {
-                                        if (parameterOnOffSwitch)
-                                        {
-                                            CurrentTestResult = "Show all windows";
-                                            isMinimized = false;
-                                            try
-                                            {
-                                                MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
-                                                MULTI_WINDOW.formList[i].Show();
-                                                MULTI_WINDOW.formList[i].Activate();
-                                            }
-                                            catch (ArgumentOutOfRangeException)
-                                            {
+                    //                    PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, false);
+                    //                }
+                    //                MainForm.AllChangesApply();
+                    //                PROPERTY_FUNCTIONS.SetCycleTime(CameraIndex, parameterTime);
+                    //            }
+                    //        }
 
-                                            }                                            
-                                        }
-                                        else
-                                        {
-                                            CurrentTestResult = "Hiding all windows";
-                                            isMinimized = true;
-                                            MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
-                                        }
-                                    }
-                                CurrentTestResult = "Show all windows";
-                                }
-                                else if (CheckCameraIndex(cameraIndex))
-                                {
-                                    if (parameterOnOffSwitch)
-                                    {
-                                        CurrentTestResult = "Show 1 window";
-                                        isMinimized = false;
-                                        try
-                                        {
-                                            MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Normal;
-                                            MULTI_WINDOW.formList[cameraIndex]?.Show();
-                                            MULTI_WINDOW.formList[cameraIndex]?.Activate();
-                                        }
-                                        catch (NullReferenceException)
-                                        {
-                                            
-                                        }
-                                    }
-                                    else
-                                    {
-                                        CurrentTestResult = "Hiding 1 window";
-                                        isMinimized = true;
-                                        try
-                                        {
-                                            MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
-                                        }
-                                        catch (NullReferenceException)
-                                        {
 
-                                        }                                        
-                                    }                                
-                                }
-                                
-                                PARAMETERS.PARAM.Clear();  
-                            break;
+                    //        //CurrentTestResult = "Human Sensor " + cameraIndex + " " + parameterTime + " " + wakeUpCall;
+                    //    }
+                    //    catch (ArgumentOutOfRangeException e)
+                    //    {
+                    //        Logger.Add(e.Message + " in method h");
+                    //    }
+                    //    break;
 
-                        // Backlight
-                        case "l":
-                            try
-                            {
-                                if (parameterOnOffSwitch)
-                                {
-                                    MainForm.GetMainForm.BackLight.ON();
-                                }
-                                else
-                                {
-                                    MainForm.GetMainForm.BackLight.OFF();
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in method l");
-                            }
-                            break;
+                    // Visible - Active
+                    //case "v":
+                    //        if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && SwitchIsPresent)
+                    //        {
+                    //            for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                    //            {
+                    //                if (parameterOnOffSwitch)
+                    //                {
+                    //                    CurrentTestResult = "Show all windows";
+                    //                    isMinimized = false;
+                    //                    try
+                    //                    {
+                    //                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
+                    //                        MULTI_WINDOW.formList[i].Show();
+                    //                        MULTI_WINDOW.formList[i].Activate();
+                    //                    }
+                    //                    catch (ArgumentOutOfRangeException)
+                    //                    {
 
-                        // Window pane
-                        case "w":
-                            try
-                            {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))
-                                {
-                                    if (parameterOnOffSwitch)
-                                    {
-                                        PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(cameraIndex, true);
-                                        Properties.Settings.Default.Save();
-                                        if (MainForm.GetMainForm != null)
-                                            MainForm.AllChangesApply();
-                                    }
-                                    else
-                                    {
-                                        //There is no requirement to display with panels off
-                                        //PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(cameraIndex, false);
-                                    }                                    
-                                }else if (CheckCameraIndex(cameraIndex) && (cameraIndex == 8))
-                                {
-                                    //Support all
+                    //                    }                                            
+                    //                }
+                    //                else
+                    //                {
+                    //                    CurrentTestResult = "Hiding all windows";
+                    //                    isMinimized = true;
+                    //                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
+                    //                }
+                    //            }
+                    //        CurrentTestResult = "Show all windows";
+                    //        }
+                    //        else if (CheckCameraIndex(CameraIndex))
+                    //        {
+                    //            if (parameterOnOffSwitch)
+                    //            {
+                    //                CurrentTestResult = "Show 1 window";
+                    //                isMinimized = false;
+                    //                try
+                    //                {
+                    //                    MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Normal;
+                    //                    MULTI_WINDOW.formList[CameraIndex]?.Show();
+                    //                    MULTI_WINDOW.formList[CameraIndex]?.Activate();
+                    //                }
+                    //                catch (NullReferenceException)
+                    //                {
 
-                                }
-                                PARAMETERS.PARAM.Clear();
-                                CurrentTestResult = "W " + parameterOnOffSwitch + " " + cameraIndex;
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in method w");
-                            }
-                            break;
+                    //                }
+                    //            }
+                    //            else
+                    //            {
+                    //                CurrentTestResult = "Hiding 1 window";
+                    //                isMinimized = true;
+                    //                try
+                    //                {
+                    //                    MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Minimized;
+                    //                }
+                    //                catch (NullReferenceException)
+                    //                {
 
-                        // Close a window or all (exit app)
-                        case "q":
-                            try
-                            {
-                                if (CheckCameraIndex(cameraIndex))
-                                {
-                                    if (cameraIndex >= 0 && cameraIndex<4)
-                                    {
-                                        MULTI_WINDOW.formList[cameraIndex].Close();
-                                    }
-                                    else if (cameraIndex == 8)
-                                    {                                        
-                                        Application.Exit();
-                                    }
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in method q");
-                            }
-                            break;
+                    //                }                                        
+                    //            }                                
+                    //        }
 
-                        // Event recorder
-                        case "e":
-                            try
-                            {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && (cameraIndex == Properties.Settings.Default.main_camera_index)) // Main camera
-                                {
-                                    if (parameterOnOffSwitch && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
-                                    {
-                                        MULTI_WINDOW.EventRecorderOn(cameraIndex);
-                                    }
-                                    else if (!parameterOnOffSwitch)
-                                    {
-                                        MULTI_WINDOW.formList[cameraIndex].HideIcon();
-                                        MULTI_WINDOW.EventRecorderOff(cameraIndex);
-                                    }
-                                }
-                                else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4))  // Not main camera                              
-                                {
-                                    if (parameterOnOffSwitch && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
-                                    {
-                                        MULTI_WINDOW.formList[cameraIndex].crossbar.recordFromParamNotMain = true;
-                                        MULTI_WINDOW.formList[cameraIndex].SetRecordIcon(cameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                                        MULTI_WINDOW.formList[cameraIndex].crossbar.Start(cameraIndex, CAMERA_MODES.MANUAL);
-                                    }
-                                    else if (!parameterOnOffSwitch)
-                                    {
-                                        MULTI_WINDOW.formList[cameraIndex].HideIcon();
-                                        MULTI_WINDOW.formList[cameraIndex].SetToPreviewMode();
-                                    }
-                                }
-                                
-                                PARAMETERS.PARAM.Clear();
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in method e");
-                            }
-                            break;
+                    //        PARAMETERS.PARAM.Clear();  
+                    //    break;
 
-                        // Manual recording
-                        case "r":
-                            try
-                            {
-                                if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
-                                {
-                                    if (parameterOnOffSwitch)
-                                    {
-                                        MULTI_WINDOW.formList[cameraIndex].SetRecordIcon(cameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                                        MULTI_WINDOW.formList[cameraIndex].crossbar.Start(cameraIndex, CAMERA_MODES.MANUAL);
-                                    }
-                                }
-                                else if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && !parameterOnOffSwitch)
-                                {
-                                    MULTI_WINDOW.formList[cameraIndex].HideIcon();
-                                    if (PROPERTY_FUNCTIONS.CheckPreEventTimes(cameraIndex))
-                                    {
-                                        if (MULTI_WINDOW.displayedCameraCount > 0)
-                                        {
-                                            MULTI_WINDOW.formList[cameraIndex].SetToPreeventMode();
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (MULTI_WINDOW.displayedCameraCount > 0)
-                                        {
-                                            MULTI_WINDOW.formList[cameraIndex].SetToPreviewMode();
-                                        }
-                                    }
-                                }
-                                PARAMETERS.PARAM.Clear();
-                            }
-                            catch (ArgumentOutOfRangeException e)
-                            {
-                                Debug.WriteLine(e.ToString() + " in method r");
-                            }
-                            break;
-                        default:
-                            //throw new Exception("Wrong Method Name");                            
-                            CurrentTestResult = "Wrong Method Name";
-                            break;
-                    }
+                    // Backlight
+                    //case "l":
+                    //    try
+                    //    {
+                    //        if (parameterOnOffSwitch)
+                    //        {
+                    //            MainForm.GetMainForm.BackLight.ON();
+                    //        }
+                    //        else
+                    //        {
+                    //            MainForm.GetMainForm.BackLight.OFF();
+                    //        }
+                    //    }
+                    //    catch (ArgumentOutOfRangeException e)
+                    //    {
+                    //        Debug.WriteLine(e.ToString() + " in method l");
+                    //    }
+                    //    break;
+
+                    // Window pane
+                    //case "w":
+                    //    try
+                    //    {
+                    //        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                    //        {
+                    //            if (parameterOnOffSwitch)
+                    //            {
+                    //                PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(CameraIndex, true);
+                    //                Properties.Settings.Default.Save();
+                    //                if (MainForm.GetMainForm != null)
+                    //                    MainForm.AllChangesApply();
+                    //            }
+                    //            else
+                    //            {
+                    //                //There is no requirement to display with panels off
+                    //                //PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(cameraIndex, false);
+                    //            }                                    
+                    //        }else if (CheckCameraIndex(CameraIndex) && (CameraIndex == 8))
+                    //        {
+                    //            //Support all
+
+                    //        }
+                    //        PARAMETERS.PARAM.Clear();
+                    //        CurrentTestResult = "W " + parameterOnOffSwitch + " " + CameraIndex;
+                    //    }
+                    //    catch (ArgumentOutOfRangeException e)
+                    //    {
+                    //        Debug.WriteLine(e.ToString() + " in method w");
+                    //    }
+                    //    break;
+
+                    // Close a window or all (exit app)
+                    //case "q":
+                    //    try
+                    //    {
+                    //        if (CheckCameraIndex(CameraIndex))
+                    //        {
+                    //            if (CameraIndex >= 0 && CameraIndex<4)
+                    //            {
+                    //                MULTI_WINDOW.formList[CameraIndex].Close();
+                    //            }
+                    //            else if (CameraIndex == 8)
+                    //            {                                        
+                    //                Application.Exit();
+                    //            }
+                    //        }
+                    //    }
+                    //    catch (ArgumentOutOfRangeException e)
+                    //    {
+                    //        Debug.WriteLine(e.ToString() + " in method q");
+                    //    }
+                    //    break;
+
+                    // Event recorder
+                    //case "e":
+                    //    try
+                    //    {
+                    //        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && (CameraIndex == Properties.Settings.Default.main_camera_index)) // Main camera
+                    //        {
+                    //            if (parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
+                    //            {
+                    //                MULTI_WINDOW.EventRecorderOn(CameraIndex);
+                    //            }
+                    //            else if (!parameterOnOffSwitch)
+                    //            {
+                    //                MULTI_WINDOW.formList[CameraIndex].HideIcon();
+                    //                MULTI_WINDOW.EventRecorderOff(CameraIndex);
+                    //            }
+                    //        }
+                    //        else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))  // Not main camera                              
+                    //        {
+                    //            if (parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
+                    //            {
+                    //                MULTI_WINDOW.formList[CameraIndex].crossbar.recordFromParamNotMain = true;
+                    //                MULTI_WINDOW.formList[CameraIndex].SetRecordIcon(CameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                    //                MULTI_WINDOW.formList[CameraIndex].crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
+                    //            }
+                    //            else if (!parameterOnOffSwitch)
+                    //            {
+                    //                MULTI_WINDOW.formList[CameraIndex].HideIcon();
+                    //                MULTI_WINDOW.formList[CameraIndex].SetToPreviewMode();
+                    //            }
+                    //        }
+
+                    //        PARAMETERS.PARAM.Clear();
+                    //    }
+                    //    catch (ArgumentOutOfRangeException e)
+                    //    {
+                    //        Debug.WriteLine(e.ToString() + " in method e");
+                    //    }
+                    //    break;
+
+                    // Manual recording
+                    //case "r":
+                    //    try
+                    //    {
+                    //        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
+                    //        {
+                    //            if (parameterOnOffSwitch)
+                    //            {
+                    //                MULTI_WINDOW.formList[CameraIndex].SetRecordIcon(CameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                    //                MULTI_WINDOW.formList[CameraIndex].crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
+                    //            }
+                    //        }
+                    //        else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && !parameterOnOffSwitch)
+                    //        {
+                    //            MULTI_WINDOW.formList[CameraIndex].HideIcon();
+                    //            if (PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
+                    //            {
+                    //                if (MULTI_WINDOW.displayedCameraCount > 0)
+                    //                {
+                    //                    MULTI_WINDOW.formList[CameraIndex].SetToPreeventMode();
+                    //                }
+                    //            }
+                    //            else
+                    //            {
+                    //                if (MULTI_WINDOW.displayedCameraCount > 0)
+                    //                {
+                    //                    MULTI_WINDOW.formList[CameraIndex].SetToPreviewMode();
+                    //                }
+                    //            }
+                    //        }
+                    //        PARAMETERS.PARAM.Clear();
+                    //    }
+                    //    catch (ArgumentOutOfRangeException e)
+                    //    {
+                    //        Debug.WriteLine(e.ToString() + " in method r");
+                    //    }
+                    //    break;
+                    //default:
+                    //    //throw new Exception("Wrong Method Name");                            
+                    //    CurrentTestResult = "Wrong Method Name";
+                    //    break;
+                    #endregion OLD SWITCH LOGIC
                 }
                 else
                 {
-                    CurrentTestResult = "parameters missing";
+                    WrongParameter = true;
                 }
             }
             else
             {
-                CurrentTestResult = "App Name missing";
+                WrongParameter = true;
             }
+        }
+
+        private static List<string> CleanUpTheParams(List<string> list)
+        {
+            for(int item = list.Count-1; item>0; item--)
+            {
+                if(list[item].Length!=3)
+                {
+                    list.RemoveAt(item);
+                }
+            }
+            return list;
         }
 
         private static void DontTouchMyCamsCase()
         {
-            throw new NotImplementedException();
+            switch (MethodName)
+            {
+                case "":
+                    if (wakeUpCall && CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                    {
+                        //START the selected camera only
+                    }
+                    else if (wakeUpCall && (CameraIndex == 8))
+                    {
+                        //Start all cams
+                    }
+                    CurrentTestResult = "No method " + CameraIndex;
+                    break;
+                default:
+                    WrongParameter = true;
+                    break;
+            }            
         }
 
         private static void BossIsAlwaysRightCase()
         {
-            throw new NotImplementedException();
+            
         }
 
         private static void CheckMateCase()
         {
-            throw new NotImplementedException();
+            switch (MethodName)
+            {
+                case "s":
+                    try
+                    {
+                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                        {
+                            if (wakeUpCall)
+                            {
+                                wakeUpCall = false;
+                                //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                                //{
+                                //    SNAPSHOT_SAVER.TakeAsyncSnapShot(true, cameraIndex, "event");
+                                //}
+                                //else 
+
+                                SNAPSHOT_SAVER.TakeAsyncSnapShot(false, CameraIndex, "event");
+
+                            }
+                        }
+                        else
+                        {
+                            //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                            //{
+                            //    SNAPSHOT_SAVER.TakeSnapShotAll();
+                            //}
+                            //else 
+                            if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
+                            {
+                                //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                                //{
+                                //    SNAPSHOT_SAVER.TakeSnapShotAll();
+                                //}
+                                //else 
+
+                                SNAPSHOT_SAVER.TakeSnapShot(CameraIndex, "event");
+                                //SNAPSHOT_SAVER.TakeAsyncSnapShot();
+                            }
+                        }
+
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        Debug.WriteLine(e.Message + " in method s");
+                    }
+                    break;
+                case "e":
+                    try
+                    {
+                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && (CameraIndex == Properties.Settings.Default.main_camera_index)) // Main camera
+                        {
+                            if (parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
+                            {
+                                MULTI_WINDOW.EventRecorderOn(CameraIndex);
+                            }
+                            else if (!parameterOnOffSwitch)
+                            {
+                                MULTI_WINDOW.formList[CameraIndex].HideIcon();
+                                MULTI_WINDOW.EventRecorderOff(CameraIndex);
+                            }
+                        }
+                        else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))  // Not main camera                              
+                        {
+                            if (parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
+                            {
+                                MULTI_WINDOW.formList[CameraIndex].crossbar.recordFromParamNotMain = true;
+                                MULTI_WINDOW.formList[CameraIndex].SetRecordIcon(CameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                                MULTI_WINDOW.formList[CameraIndex].crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
+                            }
+                            else if (!parameterOnOffSwitch)
+                            {
+                                MULTI_WINDOW.formList[CameraIndex].HideIcon();
+                                MULTI_WINDOW.formList[CameraIndex].SetToPreviewMode();
+                            }
+                        }
+
+                        PARAMETERS.PARAM.Clear();
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        Debug.WriteLine(e.ToString() + " in method e");
+                    }
+                    break;
+                case "q":
+                    try
+                    {
+                        if (CheckCameraIndex(CameraIndex))
+                        {
+                            if (CameraIndex >= 0 && CameraIndex < 4)
+                            {
+                                MULTI_WINDOW.formList[CameraIndex].Close();
+                            }
+                            else if (CameraIndex == 8)
+                            {
+                                Application.Exit();
+                            }
+                        }
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        Debug.WriteLine(e.ToString() + " in method q");
+                        WrongParameter = true;
+                    }
+                    break;
+                default:
+                    WrongParameter = true;
+                    break;
+
+            }
         }
 
         private static void MethodSwitchCase()
         {
-            throw new NotImplementedException();
+            //Deal with wakeupcall
+            switch (MethodName)
+            {
+                case "c":
+                    try
+                    {
+                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && SwitchIsPresent)
+                        {
+                            if (parameterOnOffSwitch)
+                            {
+                                CurrentTestResult = "Showing Settings window";
+                                if (MainForm.Settingui != null && MainForm.Settingui.Visible == false)
+                                {
+                                    //MainForm.GetMainForm.TopMost = false;
+                                    //WhichCase = "Showing Settings window";
+                                    MainForm.Settingui.ShowSettings(CameraIndex);
+                                }
+                            }
+                            else
+                            {
+                                CurrentTestResult = "Hiding Settings window " + CameraIndex;
+                                MainForm.Settingui?.Hide();
+                            }
+                        }
+                        else
+                        {
+                            CurrentTestResult = "C missing switch parameter or wrong index";
+                        }
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        CurrentTestResult = "FAILURE";
+                        Trace.WriteLine(e.ToString() + " in method c");
+                    }
+                    break;
+            }
         }
 
+        /// <summary>
+        /// TTTF
+        /// </summary>
         private static void TimelessCase()
         {
-            throw new NotImplementedException();
+            switch (MethodName)
+            {
+                case "b":
+                    try
+                    {
+                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                        {
+                            if (parameterOnOffSwitch)
+                            {
+                                isControlButtonVisible = true;
+                                MULTI_WINDOW.formList[CameraIndex].SettingChangesApply(CameraIndex);
+                            }
+                            else
+                            {
+                                isControlButtonVisible = false;
+                                MULTI_WINDOW.formList[CameraIndex].SettingChangesApply(CameraIndex);
+                            }
+                        }
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        Debug.WriteLine(e.ToString() + " in method b");
+                    }
+                    break;
+                case "n":
+                    if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                    {
+                        if (MULTI_WINDOW.formList[CameraIndex]?.DISPLAYED == true && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false && MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].recordingInProgress == false)
+                        {
+                            //MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].Text = "UVC Camera Viewer -  camera " + (Properties.Settings.Default.main_camera_index + 1);
+                            //MULTI_WINDOW.formList[cameraIndex].Text = $"UVC Camera Viewer - MAIN CAMERA {(cameraIndex + 1)}";
+                            //Properties.Settings.Default.main_camera_index = cameraIndex;
+
+                            //MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Normal;
+                            //MULTI_WINDOW.formList[cameraIndex].Activate();
+                            //if (!Properties.Settings.Default.show_all_cams_simulteneously)
+                            //{
+                            //    MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Minimized;
+                            //}
+                            Properties.Settings.Default.main_camera_index = CameraIndex;
+                            Properties.Settings.Default.Save();
+                            MULTI_WINDOW.FormSettingsChanged();
+                        }
+                        else
+                        {
+                            Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
+                        }
+                        CurrentTestResult = "N case, camera index conditions passed";
+                        PARAM.Clear();
+                    }
+                    else
+                    {
+                        CurrentTestResult = "N case, conditions faled " + CameraIndex + " " + CheckCameraIndex(CameraIndex) + " " + (CameraIndex >= 0 && CameraIndex < 4);
+                    }
+                    break;
+                case "v":
+                    if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && SwitchIsPresent)
+                    {
+                        for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                        {
+                            if (parameterOnOffSwitch)
+                            {
+                                CurrentTestResult = "Show all windows";
+                                isMinimized = false;
+                                try
+                                {
+                                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
+                                    MULTI_WINDOW.formList[i].Show();
+                                    MULTI_WINDOW.formList[i].Activate();
+                                }
+                                catch (ArgumentOutOfRangeException)
+                                {
+
+                                }
+                            }
+                            else
+                            {
+                                CurrentTestResult = "Hiding all windows";
+                                isMinimized = true;
+                                MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
+                            }
+                        }
+                        CurrentTestResult = "Show all windows";
+                    }
+                    else if (CheckCameraIndex(CameraIndex))
+                    {
+                        if (parameterOnOffSwitch)
+                        {
+                            CurrentTestResult = "Show 1 window";
+                            isMinimized = false;
+                            try
+                            {
+                                MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Normal;
+                                MULTI_WINDOW.formList[CameraIndex]?.Show();
+                                MULTI_WINDOW.formList[CameraIndex]?.Activate();
+                            }
+                            catch (NullReferenceException)
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            CurrentTestResult = "Hiding 1 window";
+                            isMinimized = true;
+                            try
+                            {
+                                MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Minimized;
+                            }
+                            catch (NullReferenceException)
+                            {
+
+                            }
+                        }
+                    }
+
+                    PARAMETERS.PARAM.Clear();
+                    break;
+                case "l":
+                    try
+                    {
+                        if (parameterOnOffSwitch)
+                        {
+                            MainForm.GetMainForm.BackLight.ON();
+                        }
+                        else
+                        {
+                            MainForm.GetMainForm.BackLight.OFF();
+                        }
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        Debug.WriteLine(e.ToString() + " in method l");
+                    }
+                    break;
+                case "w":
+                    try
+                    {
+                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                        {
+                            if (parameterOnOffSwitch)
+                            {
+                                PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(CameraIndex, true);
+                                Properties.Settings.Default.Save();
+                                if (MainForm.GetMainForm != null)
+                                    MainForm.AllChangesApply();
+                            }
+                            else
+                            {
+                                //There is no requirement to display with panels off
+                                //PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(cameraIndex, false);
+                            }
+                        }
+                        else if (CheckCameraIndex(CameraIndex) && (CameraIndex == 8))
+                        {
+                            //Support all
+
+                        }
+                        PARAMETERS.PARAM.Clear();
+                        CurrentTestResult = "W " + parameterOnOffSwitch + " " + CameraIndex;
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        Debug.WriteLine(e.ToString() + " in method w");
+                    }
+                    break;
+                case "r":
+                    try
+                    {
+                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
+                        {
+                            if (parameterOnOffSwitch)
+                            {
+                                MULTI_WINDOW.formList[CameraIndex].SetRecordIcon(CameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                                MULTI_WINDOW.formList[CameraIndex].crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
+                            }
+                        }
+                        else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && !parameterOnOffSwitch)
+                        {
+                            MULTI_WINDOW.formList[CameraIndex].HideIcon();
+                            if (PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
+                            {
+                                if (MULTI_WINDOW.displayedCameraCount > 0)
+                                {
+                                    MULTI_WINDOW.formList[CameraIndex].SetToPreeventMode();
+                                }
+                            }
+                            else
+                            {
+                                if (MULTI_WINDOW.displayedCameraCount > 0)
+                                {
+                                    MULTI_WINDOW.formList[CameraIndex].SetToPreviewMode();
+                                }
+                            }
+                        }
+                        PARAMETERS.PARAM.Clear();
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        Debug.WriteLine(e.ToString() + " in method r");
+                    }
+                    break;
+                case "h":
+                    if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                    {
+                        PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CameraIndex, out bool IrSensorEnabled);
+                        if (parameterOnOffSwitch)
+                        {
+                            if (!IrSensorEnabled)
+                            {
+                                PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
+                                PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
+                                if (MainForm.GetMainForm != null)
+                                {
+                                    MainForm.AllChangesApply();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (IrSensorEnabled)
+                            {
+                                PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, false);
+                                if (MainForm.GetMainForm != null)
+                                {
+                                    if (MainForm.RSensor != null)
+                                    {
+                                        MainForm.RSensor.Stop_IR_Timer();
+                                    }
+                                    MainForm.AllChangesApply();
+                                }
+                            }                            
+                        }
+                        
+                        CurrentTestResult = "HUMAN SENSOR no time index 1-4" + " " + CameraIndex;
+                    }
+                    else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8)
+                    {
+                        PROPERTY_FUNCTIONS.Set_Human_Sensor(1, false);
+                        PROPERTY_FUNCTIONS.Set_Human_Sensor(2, false);
+                        PROPERTY_FUNCTIONS.Set_Human_Sensor(3, false);
+                        PROPERTY_FUNCTIONS.Set_Human_Sensor(4, false);
+                        CurrentTestResult = "HUMAN SENSOR parameterTime index 9 " + " " + CameraIndex;
+                        Properties.Settings.Default.Save();
+                        if (MainForm.GetMainForm != null)
+                        {
+                            if (MainForm.RSensor != null)
+                            {
+                                MainForm.RSensor.Stop_IR_Timer();
+                            }
+                            MainForm.AllChangesApply();
+                        }
+                    }
+                    break;
+                default:
+                    WrongParameter = true;
+                    break;
+                //case "c":
+                //    //C parameter does not require Time
+                //    WrongParameter = true;
+                //    break;
+            }
+                                    
         }
 
+        /// <summary>
+        /// TTTT
+        /// </summary>
         private static void AllParametersCase()
         {
-            throw new NotImplementedException();
+            switch (MethodName)
+            {
+                case "h":
+                    try
+                    {
+                        
+                            
+                            if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && MULTI_WINDOW.RecordingIsOn()==false)
+                            {
+                                CurrentTestResult = "HUMAN SENSOR parameterTime index 9 " + parameterTime + " " + CameraIndex;
+                            }
+                            else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
+                            {
+                                if (parameterOnOffSwitch)
+                                {
+                                    PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
+                                    PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
+                                    if(MainForm.GetMainForm!=null)
+                                        MainForm.AllChangesApply();
+                                    PROPERTY_FUNCTIONS.SetCycleTime(CameraIndex, parameterTime);
+                                    CurrentTestResult = "HUMAN SENSOR no time index 1-4" + parameterTime + " " + CameraIndex;
+                                }                                
+                            }
+                        
+                        //else//the app is running
+                        //{
+                        //    if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
+                        //    {
+                        //        if (parameterOnOffSwitch)
+                        //        {
+                        //            PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
+                        //            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
+                        //        }
+                        //        else
+                        //        {
+                        //            if (MainForm.RSensor != null)
+                        //            {
+                        //                MainForm.RSensor.Stop_IR_Timer();
+                        //            }
+
+                        //            PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, false);
+                        //        }
+                        //        MainForm.AllChangesApply();
+                        //        PROPERTY_FUNCTIONS.SetCycleTime(CameraIndex, parameterTime);
+                        //    }
+                        //}
+
+
+                        //CurrentTestResult = "Human Sensor " + cameraIndex + " " + parameterTime + " " + wakeUpCall;
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        Logger.Add(e.Message + " in method h");
+                    }
+                    break;
+            }
         }
 
         /// <summary>
@@ -804,12 +1301,16 @@ namespace FaceDetection
         /// <returns></returns>
         private static bool CheckCameraIndex(int cameraIndex)
         {
-            bool retval = false;
-
+            bool retval = false;            
             if ((cameraIndex == 8 || (cameraIndex >= 0 && cameraIndex < 4)))
-            {                
+            {
+                CameraIndex = cameraIndex;
                 retval = true;
-            }            
+            }else if (cameraIndex==4)
+            {
+                CameraIndex = 0;
+                retval = true;
+            }
             return retval;
         }
 
