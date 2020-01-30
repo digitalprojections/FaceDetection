@@ -50,7 +50,7 @@ namespace FaceDetection
         /// </summary>
         public int CameraIndex = 0;
         public CROSSBAR crossbar;
-        private bool applicationExit = false;
+        public bool applicationExit = false;
 
         public CameraForm(int camind)
         {
