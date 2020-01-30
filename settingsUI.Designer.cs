@@ -268,7 +268,7 @@
             0,
             0});
             this.nud_event_record_after.Minimum = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
             0});
@@ -484,7 +484,7 @@
             0,
             0});
             this.numericUpDown2.Minimum = new decimal(new int[] {
-            500,
+            1,
             0,
             0,
             0});

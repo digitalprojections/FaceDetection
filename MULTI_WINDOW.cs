@@ -94,6 +94,7 @@ namespace FaceDetection
             else
             {
                 formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.EVENT);
+                formList[cameraIndex].SetHideRecordIcon(timeAfterEvent);
                 Logger.Add(Resource.event_recording_starts);
             }
         }

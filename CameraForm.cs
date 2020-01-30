@@ -385,7 +385,7 @@ namespace FaceDetection
 
         public void SetRecordIcon (int cam_index, int timeAfterEvent)
         {
-            rec_icon.Visible = PROPERTY_FUNCTIONS.GetRecordingIconSwitch(CameraIndex);
+            rec_icon.Visible = PROPERTY_FUNCTIONS.GetRecordingIconSwitch(cam_index);
             crossbar.NoCapTimerON(timeAfterEvent);
             crossbar.icon_timer.Interval = decimal.ToInt32(timeAfterEvent) * 1000;
             crossbar.icon_timer.Enabled = true;
@@ -395,6 +395,12 @@ namespace FaceDetection
             recordingInProgress = true;
             this.cameraButton.Enabled = false;
             this.snapshotButton.Enabled = false;
+        }
+
+        public void SetHideRecordIcon(int timeAfterEvent)
+        {
+            hideIconTimer.Interval = timeAfterEvent * 1000;
+            hideIconTimer.Start();
         }
 
         private void HideIcon_tick (object sender, EventArgs e) 
