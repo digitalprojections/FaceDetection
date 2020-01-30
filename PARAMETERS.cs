@@ -279,24 +279,24 @@ namespace FaceDetection
                                         SNAPSHOT_SAVER.TakeAsyncSnapShot(false, cameraIndex, "event");
 
                                     }
-                                }
-                                else
-                                {
-                                    //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
-                                    //{
-                                    //    SNAPSHOT_SAVER.TakeSnapShotAll();
-                                    //}
-                                    //else 
-                                    if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
+                                    else
                                     {
                                         //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
                                         //{
                                         //    SNAPSHOT_SAVER.TakeSnapShotAll();
                                         //}
                                         //else 
+                                        if (CheckCameraIndex(cameraIndex) && (cameraIndex >= 0 && cameraIndex < 4) && MULTI_WINDOW.formList[cameraIndex].recordingInProgress == false)
+                                        {
+                                            //if (CheckCameraIndex(cameraIndex) && cameraIndex == 8)
+                                            //{
+                                            //    SNAPSHOT_SAVER.TakeSnapShotAll();
+                                            //}
+                                            //else 
 
-                                        SNAPSHOT_SAVER.TakeSnapShot(cameraIndex, "event");
-                                        //SNAPSHOT_SAVER.TakeAsyncSnapShot();
+                                            SNAPSHOT_SAVER.TakeSnapShot(cameraIndex, "event");
+                                            //SNAPSHOT_SAVER.TakeAsyncSnapShot();
+                                        }
                                     }
                                 }
                             
