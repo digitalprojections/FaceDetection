@@ -693,8 +693,39 @@ namespace FaceDetection
         {
             CheckBox chb = (CheckBox)sender;
             bool chk = chb.Checked;
-            
-            ChangeControlEnabled(this.groupBox_functionalitySettings, chk, currentCameraIndex);
+
+            //ChangeControlEnabled(this.groupBox_functionalitySettings, chk, currentCameraIndex);
+            if (!chk)
+            {
+                cb_human_sensor.Enabled = false;
+                cb_face_recognition.Enabled = false;
+                cb_recording_operation.Enabled = false;
+                nud_reinitiation_interval.Enabled = false;
+                numericUpDown2.Enabled = false;
+                cm_capture_mode.Enabled = false;
+                label17.Enabled = false;
+                label10.Enabled = false;
+                label12.Enabled = false;
+                label11.Enabled = false;
+
+                PROPERTY_FUNCTIONS.Set_Human_Sensor(currentCameraIndex, false);
+                PROPERTY_FUNCTIONS.Set_Face_Switch(currentCameraIndex, false);
+                PROPERTY_FUNCTIONS.SetOnOperationStartSwitch(currentCameraIndex, false);
+            }
+            else
+            {
+                cb_human_sensor.Enabled = true;
+                cb_face_recognition.Enabled = true;
+                cb_recording_operation.Enabled = true;
+                nud_reinitiation_interval.Enabled = true;
+                numericUpDown2.Enabled = true;
+                cm_capture_mode.Enabled = true;
+                label17.Enabled = true;
+                label10.Enabled = true;
+                label12.Enabled = true;
+                label11.Enabled = true;
+            }
+
             PROPERTY_FUNCTIONS.GetCaptureMethod(currentCameraIndex, out string capturemethod);
             if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked) && capturemethod=="Video")
             {
