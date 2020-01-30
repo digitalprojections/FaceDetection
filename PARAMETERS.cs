@@ -173,17 +173,17 @@ namespace FaceDetection
                                     catch (ArgumentNullException anx)
                                     {
                                         WrongParameter = true;
-                                        i = parameters.Count;
+                                        //i = parameters.Count;
                                     }
                                     catch (FormatException fx)
                                     {
                                         WrongParameter = true;
-                                        i = parameters.Count;
+                                        //i = parameters.Count;
                                     }
                                     catch (OverflowException ofx)
                                     {
                                         WrongParameter = true;
-                                        i = parameters.Count;
+                                        //i = parameters.Count;
                                     }
                                     break;
 
@@ -664,7 +664,7 @@ namespace FaceDetection
             }
             else
             {
-                MethodName = "";
+                WrongParameter = true;
             }
 
             /*
@@ -706,7 +706,8 @@ namespace FaceDetection
                     DontTouchMyCamsCase();
                     break;
                 case "FFFF":
-                    WhiteMamba();
+                    if(!WrongParameter)
+                        WhiteMamba();
                     break;
                 case "TTFT":
                     WrongParameter = true;
@@ -733,7 +734,7 @@ namespace FaceDetection
         private static void WhiteMamba()
         {
             //Only show the main camera
-
+            CurrentTestResult = "WhiteMamba";
         }
         /// <summary>
         /// FFTF
@@ -777,7 +778,17 @@ namespace FaceDetection
                     }
                     break;
                 case "e":// TFFF
-
+                    try
+                    {
+                        if (parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera].recordingInProgress == false)
+                        {
+                            MULTI_WINDOW.EventRecorderOn(MainCamera);
+                        }
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        Debug.WriteLine(e.ToString() + " in method e");
+                    }
                     break;
                 case "q":// TFFF
                     try
@@ -792,6 +803,7 @@ namespace FaceDetection
                     }
                     break;
             }
+            PARAMETERS.PARAM.Clear();
             CurrentTestResult = MethodName;
         }
 
@@ -822,34 +834,10 @@ namespace FaceDetection
                 case "e":// TFTF
                     try
                     {
-                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && (CameraIndex == Properties.Settings.Default.main_camera_index)) // Main camera
+                        if (parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
                         {
-                            if (parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
-                            {
-                                MULTI_WINDOW.EventRecorderOn(CameraIndex);
-                            }
-                            else if (!parameterOnOffSwitch)
-                            {
-                                MULTI_WINDOW.formList[CameraIndex].HideIcon();
-                                MULTI_WINDOW.EventRecorderOff(CameraIndex);
-                            }
+                            MULTI_WINDOW.EventRecorderOn(CameraIndex);
                         }
-                        else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))  // Not main camera                              
-                        {
-                            if (parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
-                            {
-                                MULTI_WINDOW.formList[CameraIndex].crossbar.recordFromParamNotMain = true;
-                                MULTI_WINDOW.formList[CameraIndex].SetRecordIcon(CameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                                MULTI_WINDOW.formList[CameraIndex].crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
-                            }
-                            else if (!parameterOnOffSwitch)
-                            {
-                                MULTI_WINDOW.formList[CameraIndex].HideIcon();
-                                MULTI_WINDOW.formList[CameraIndex].SetToPreviewMode();
-                            }
-                        }
-
-                        PARAMETERS.PARAM.Clear();
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
@@ -880,8 +868,8 @@ namespace FaceDetection
                 default:// TFTF
                     WrongParameter = true;
                     break;
-
             }
+            PARAMETERS.PARAM.Clear();
             CurrentTestResult = MethodName;
         }
 
@@ -932,7 +920,7 @@ namespace FaceDetection
                     }                    
                     break;
                 case "h":// TTFF
-                    if (MULTI_WINDOW.formList[MainCamera].recordingInProgress == false)
+                    if (MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                     {
                         PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(MainCamera, out bool IrSensorEnabled);
                         if (parameterOnOffSwitch)
@@ -1269,7 +1257,7 @@ namespace FaceDetection
                     }
                     break;
                 case "h"://TTTF
-                    if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
+                    if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
                     {
                         PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CameraIndex, out bool IrSensorEnabled);
                         if (parameterOnOffSwitch)
