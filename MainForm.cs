@@ -57,7 +57,7 @@ namespace FaceDetection
 
                 if(Properties.Settings.Default.enable_delete_old_files)
                 {
-                    CheckDiskSpace.DeleteOldFiles();
+                    CheckOldFiles.DeleteOldFiles();
                     stopwatch.Start();
                 }
             }
@@ -147,7 +147,7 @@ namespace FaceDetection
             if (Properties.Settings.Default.enable_delete_old_files && stopwatch.ElapsedMilliseconds>=3600000)
             {
                 stopwatch.Restart();
-                CheckDiskSpace.DeleteOldFiles();
+                CheckOldFiles.DeleteOldFiles();
             }
         }
 

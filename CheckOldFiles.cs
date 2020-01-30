@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace FaceDetection
 {
-    class CheckDiskSpace
+    class CheckOldFiles
     {
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         static extern bool GetDiskFreeSpace(string lpRootPathName,
@@ -33,7 +33,7 @@ namespace FaceDetection
         private static string[] listMovieFiles;
         private static string[] listSnapshotFiles;
 
-        public CheckDiskSpace() { }
+        public CheckOldFiles() { }
 
         /// Delete too old files (according to parameters)
         public static void DeleteOldFiles()
