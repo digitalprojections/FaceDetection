@@ -627,6 +627,11 @@ namespace FaceDetection
             Marshal.ReleaseComObject(dev);
         }
 
+        private void Cb_delete_old_CheckedChanged(object sender, EventArgs e)
+        {
+            MainForm.ManageDeleteOldFilesTimer(cb_delete_old.Checked);
+        }
+
         private void ChangeControlEnabled(Control control, bool enabled, int cam_index)
         {
             foreach (Control c in control.Controls)

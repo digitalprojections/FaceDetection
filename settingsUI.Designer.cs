@@ -659,6 +659,7 @@
             this.cb_delete_old.Name = "cb_delete_old";
             this.cb_delete_old.Tag = "1";
             this.cb_delete_old.UseVisualStyleBackColor = false;
+            this.cb_delete_old.CheckedChanged += new System.EventHandler(this.Cb_delete_old_CheckedChanged);
             // 
             // label1
             // 

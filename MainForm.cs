@@ -143,12 +143,6 @@ namespace FaceDetection
             PARAMETERS.HandleWakeUpParameters();            
 
             GC.Collect();
-
-            if (Properties.Settings.Default.enable_delete_old_files && stopwatch.ElapsedMilliseconds>=3600000)
-            {
-                stopwatch.Restart();
-                CheckOldFiles.DeleteOldFiles();
-            }
         }
 
         public void ShowSettings(object sender, EventArgs e)
@@ -384,6 +378,13 @@ namespace FaceDetection
                     }
                 }
             }
+
+            // Check for delete old files necessary
+            if (Properties.Settings.Default.enable_delete_old_files && stopwatch.ElapsedMilliseconds >= 3600000)
+            {
+                stopwatch.Restart();
+                CheckOldFiles.DeleteOldFiles();
+            }
         }
 
         private void BackgroundWorkerMain_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -401,6 +402,18 @@ namespace FaceDetection
         {
             datetime_timer.Dispose();
             backLight.Dispose();
+        }
+
+        public static void ManageDeleteOldFilesTimer(bool checkboxState)
+        {
+            if(checkboxState)
+            {
+                stopwatch.Start();
+            }
+            else
+            {
+                stopwatch.Stop();
+            }
         }
     }
 
