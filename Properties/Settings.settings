@@ -165,7 +165,7 @@
       <Value Profile="(Default)">D:\TEMP</Value>
     </Setting>
     <Setting Name="C1_check_interval" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">1000</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="C1_capture_type" Type="System.String" Scope="User">
       <Value Profile="(Default)">Video</Value>

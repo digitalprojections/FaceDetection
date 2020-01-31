@@ -118,7 +118,7 @@
     <Compile Include="BUFFER_DURATION.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="CAMERA_MODES.cs" />
-    <Compile Include="CheckDiskSpace.cs" />
+    <Compile Include="CheckOldFiles.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Labels\CameraNumberLabel.cs">
       <SubType>Component</SubType>

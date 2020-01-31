@@ -214,7 +214,7 @@
             0,
             0});
             this.nud_manual_record_time.Minimum = new decimal(new int[] {
-            5,
+            60,
             0,
             0,
             0});
@@ -269,7 +269,7 @@
             0,
             0});
             this.nud_event_record_after.Minimum = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
             0});
@@ -366,7 +366,7 @@
             this.cb_human_sensor.Name = "cb_human_sensor";
             this.cb_human_sensor.Tag = "14";
             this.cb_human_sensor.UseVisualStyleBackColor = true;
-            this.cb_human_sensor.CheckStateChanged += new System.EventHandler(this.Cb_human_sensor_CheckedChanged);
+            this.cb_human_sensor.CheckStateChanged += new System.EventHandler(this.Cb_human_sensor_CheckStateChanged);
             // 
             // nud_seconds_after_event
             // 
@@ -394,7 +394,7 @@
             this.cb_face_recognition.Name = "cb_face_recognition";
             this.cb_face_recognition.Tag = "14";
             this.cb_face_recognition.UseVisualStyleBackColor = true;
-            this.cb_face_recognition.CheckStateChanged += new System.EventHandler(this.Cb_face_recognition_CheckedChanged);
+            this.cb_face_recognition.CheckStateChanged += new System.EventHandler(this.Cb_face_recognition_CheckStateChanged);
             // 
             // nud_seconds_before_event
             // 
@@ -485,7 +485,7 @@
             0,
             0});
             this.numericUpDown2.Minimum = new decimal(new int[] {
-            500,
+            1,
             0,
             0,
             0});
@@ -503,7 +503,7 @@
             this.cb_operator_capture.Name = "cb_operator_capture";
             this.cb_operator_capture.Tag = "11";
             this.cb_operator_capture.UseVisualStyleBackColor = false;
-            this.cb_operator_capture.CheckStateChanged += new System.EventHandler(this.Cb_CheckStateChanged);
+            this.cb_operator_capture.CheckedChanged += new System.EventHandler(this.Cb_operator_capture_CheckedChanged);
             // 
             // label10
             // 
