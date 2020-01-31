@@ -141,10 +141,13 @@ namespace FaceDetection
             
 
             PARAMETERS.HandleWakeUpParameters();
-            
-            //CREATE CAMERA WINDOWS
-            MULTI_WINDOW.CreateCameraWindows();
-            MULTI_WINDOW.FormSettingsChanged();
+
+            if (!PARAMETERS.WrongParameter)
+            {
+                //CREATE CAMERA WINDOWS
+                MULTI_WINDOW.CreateCameraWindows();
+                MULTI_WINDOW.FormSettingsChanged();
+            }            
 
             GC.Collect();
 
