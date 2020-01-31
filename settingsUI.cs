@@ -744,7 +744,7 @@ namespace FaceDetection
             }
         }
 
-        private void Cb_human_sensor_CheckedChanged(object sender, EventArgs e)
+        private void Cb_human_sensor_CheckStateChanged(object sender, EventArgs e)
         {
             if (this.Visible == true)
             {
@@ -787,7 +787,7 @@ namespace FaceDetection
             }
         }
 
-        private void Cb_face_recognition_CheckedChanged(object sender, EventArgs e)
+        private void Cb_face_recognition_CheckStateChanged(object sender, EventArgs e)
         {
             if (this.Visible == true)
             {
@@ -830,16 +830,12 @@ namespace FaceDetection
             }
         }
 
-        private void Cb_recording_operation_CheckedChanged(object sender, EventArgs e)
+        private void Cb_recording_operation_CheckStateChanged(object sender, EventArgs e)
         {
             if (this.Visible == true)
             {
                 CheckBox check = (CheckBox)sender;
-                if (check.Checked)
-                {
-
-                }
-                else
+                if (!check.Checked)
                 {
                     DisableOperatorCaptureCheckBox_ifNeeded();
                 }
@@ -893,6 +889,7 @@ namespace FaceDetection
             }
             return retval;
         }
+
         private void numericUpDownCamCount_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown cameracount_nud = (NumericUpDown)sender;
@@ -902,15 +899,56 @@ namespace FaceDetection
                 Properties.Settings.Default.main_camera_index = 0;
             }
         }
+
         private void DisableOperatorCaptureCheckBox_ifNeeded()
         {
-            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchImplicitly(currentCameraIndex);            
-            
+            //PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchImplicitly(currentCameraIndex);
+            // CAMERA 1
+            if (Properties.Settings.Default.C1_enable_Human_sensor || Properties.Settings.Default.C1_enable_face_recognition || Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation)
+            {
+                Properties.Settings.Default.C1_enable_capture_operator = true;
+            }
+            else
+            {
+                Properties.Settings.Default.C1_enable_capture_operator = false; //All three are off. Disable
+            }
+
+            // CAMERA 2
+            if (Properties.Settings.Default.C2_enable_Human_sensor || Properties.Settings.Default.C2_enable_face_recognition || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation)
+            {
+                Properties.Settings.Default.C2_enable_capture_operator = true;
+            }
+            else
+            {
+                Properties.Settings.Default.C2_enable_capture_operator = false; //All three are off. Disable
+            }
+
+            // CAMERA 3
+            if (Properties.Settings.Default.C3_enable_Human_sensor || Properties.Settings.Default.C3_enable_face_recognition || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation)
+            {
+                Properties.Settings.Default.C3_enable_capture_operator = true;
+            }
+            else
+            {
+                Properties.Settings.Default.C3_enable_capture_operator = false; //All three are off. Disable
+            }
+
+            // CAMERA 4
+            if (Properties.Settings.Default.C4_enable_Human_sensor || Properties.Settings.Default.C4_enable_face_recognition || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation)
+            {
+                Properties.Settings.Default.C4_enable_capture_operator = true;
+            }
+            else
+            {
+                Properties.Settings.Default.C4_enable_capture_operator = false; //All three are off. Disable
+            }
         }
+
         private void Cb_backlight_off_idling_CheckStateChanged(object sender, EventArgs e)
         {
             numericUpDownBacklight.Enabled = cb_backlight_off_idling.Checked;
-        }        
+        }  
+        
         private void Nud_reinitiation_interval_ValueChanged(object sender, EventArgs e)
         {
             SetMaxValues();
@@ -925,21 +963,24 @@ namespace FaceDetection
         {            
             SetMinMaxValues();
         }
+
         /// <summary>
         /// Call to these function must not change the 
         /// </summary>
         void SetMaxValues()
         {
         }
+
         void SetMinMaxValues()
         {
             nud_reinitiation_interval.Minimum = nud_seconds_before_event.Value;
             
         }
-        decimal GetTheMaxValue()
-        {
-            return Math.Max(event_record_time_before_event.Value, nud_seconds_before_event.Value);
-        }
+
+        //decimal GetTheMaxValue()
+        //{
+        //    return Math.Max(event_record_time_before_event.Value, nud_seconds_before_event.Value);
+        //}
         //void SetIntervalProps()
         //{
         //    if (Properties.Settings.Default.C1_interval_before_reinitiating_recording < Properties.Settings.Default.C1_seconds_before_event)
@@ -959,6 +1000,7 @@ namespace FaceDetection
         //        Properties.Settings.Default.C4_interval_before_reinitiating_recording = Properties.Settings.Default.C4_seconds_before_event;
         //    }
         //}
+
         private void CameraSelected(object sender, EventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
@@ -975,6 +1017,7 @@ namespace FaceDetection
             SetCameraPropertiesFromMemory();
             MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);
         }
+
         /// <summary>
         /// Visibility changed event handler
         /// </summary>
