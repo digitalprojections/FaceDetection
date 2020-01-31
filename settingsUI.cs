@@ -327,7 +327,6 @@ namespace FaceDetection
                 cb_event_recorder.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_enable_event_recorder", true, DataSourceUpdateMode.OnPropertyChanged));
                 event_record_time_before_event.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_event_record_time_before_event", true, DataSourceUpdateMode.OnPropertyChanged));
                 nud_event_record_after.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_event_record_time_after_event", true, DataSourceUpdateMode.OnPropertyChanged));
-                cb_operator_capture.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_enable_capture_operator", true, DataSourceUpdateMode.OnPropertyChanged));
                 nud_seconds_before_event.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_seconds_before_event", true, DataSourceUpdateMode.OnPropertyChanged));
                 nud_seconds_after_event.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_seconds_after_event", true, DataSourceUpdateMode.OnPropertyChanged));
                 numericUpDown2.DataBindings.Add(new Binding("Value", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_check_interval", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -335,6 +334,7 @@ namespace FaceDetection
                 cb_face_recognition.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_enable_face_recognition", true, DataSourceUpdateMode.OnPropertyChanged));
                 cb_human_sensor.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_enable_Human_sensor", true, DataSourceUpdateMode.OnPropertyChanged));
                 cb_recording_operation.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_Recording_when_at_the_start_of_operation", true, DataSourceUpdateMode.OnPropertyChanged));
+                cb_operator_capture.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "C" + (currentCameraIndex + 1) + "_enable_capture_operator", true, DataSourceUpdateMode.OnPropertyChanged));
             }
         }
 
@@ -689,162 +689,174 @@ namespace FaceDetection
             gbWindowSize.Enabled = !cbx.Checked;
         }
 
-        private void Cb_CheckStateChanged(object sender, EventArgs e)
+        private void Cb_operator_capture_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox chb = (CheckBox)sender;
-            bool chk = chb.Checked;
-
-            //ChangeControlEnabled(this.groupBox_functionalitySettings, chk, currentCameraIndex);
-            if (!chk)
+            if (this.Visible == true)
             {
-                cb_human_sensor.Enabled = false;
-                cb_face_recognition.Enabled = false;
-                cb_recording_operation.Enabled = false;
-                nud_reinitiation_interval.Enabled = false;
-                numericUpDown2.Enabled = false;
-                cm_capture_mode.Enabled = false;
-                label17.Enabled = false;
-                label10.Enabled = false;
-                label12.Enabled = false;
-                label11.Enabled = false;
+                CheckBox chb = (CheckBox)sender;
+                bool chk = chb.Checked;
 
-                PROPERTY_FUNCTIONS.Set_Human_Sensor(currentCameraIndex, false);
-                PROPERTY_FUNCTIONS.Set_Face_Switch(currentCameraIndex, false);
-                PROPERTY_FUNCTIONS.SetOnOperationStartSwitch(currentCameraIndex, false);
-            }
-            else
-            {
-                cb_human_sensor.Enabled = true;
-                cb_face_recognition.Enabled = true;
-                cb_recording_operation.Enabled = true;
-                nud_reinitiation_interval.Enabled = true;
-                numericUpDown2.Enabled = true;
-                cm_capture_mode.Enabled = true;
-                label17.Enabled = true;
-                label10.Enabled = true;
-                label12.Enabled = true;
-                label11.Enabled = true;
-            }
+                //ChangeControlEnabled(this.groupBox_functionalitySettings, chk, currentCameraIndex);
+                if (!chk)
+                {
+                    cb_human_sensor.Enabled = false;
+                    cb_face_recognition.Enabled = false;
+                    cb_recording_operation.Enabled = false;
+                    nud_reinitiation_interval.Enabled = false;
+                    numericUpDown2.Enabled = false;
+                    cm_capture_mode.Enabled = false;
+                    label17.Enabled = false;
+                    label10.Enabled = false;
+                    label12.Enabled = false;
+                    label11.Enabled = false;
 
-            PROPERTY_FUNCTIONS.GetCaptureMethod(currentCameraIndex, out string capturemethod);
-            if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked) && capturemethod=="Video")
-            {
-                nud_seconds_before_event.Enabled = true;
-                nud_seconds_after_event.Enabled = true;
-            }
-            else
-            {
-                nud_seconds_before_event.Enabled = false;
-                nud_seconds_after_event.Enabled = false;
-            }
+                    PROPERTY_FUNCTIONS.Set_Human_Sensor(currentCameraIndex, false);
+                    PROPERTY_FUNCTIONS.Set_Face_Switch(currentCameraIndex, false);
+                    PROPERTY_FUNCTIONS.SetOnOperationStartSwitch(currentCameraIndex, false);
+                }
+                else
+                {
+                    cb_human_sensor.Enabled = true;
+                    cb_face_recognition.Enabled = true;
+                    cb_recording_operation.Enabled = true;
+                    nud_reinitiation_interval.Enabled = true;
+                    numericUpDown2.Enabled = true;
+                    cm_capture_mode.Enabled = true;
+                    label17.Enabled = true;
+                    label10.Enabled = true;
+                    label12.Enabled = true;
+                    label11.Enabled = true;
+                }
 
-            DisabledButtonWhenRecording();
+                PROPERTY_FUNCTIONS.GetCaptureMethod(currentCameraIndex, out string capturemethod);
+                if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked) && capturemethod == "Video")
+                {
+                    nud_seconds_before_event.Enabled = true;
+                    nud_seconds_after_event.Enabled = true;
+                }
+                else
+                {
+                    nud_seconds_before_event.Enabled = false;
+                    nud_seconds_after_event.Enabled = false;
+                }
+
+                DisabledButtonWhenRecording();
+            }
         }
-        
+
         private void Cb_human_sensor_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox check = (CheckBox)sender;
-            if(check.Checked)
+            if (this.Visible == true)
             {
-                //cb_face_recognition.Checked = !check.Checked;
-                if (Properties.Settings.Default.C1_enable_Human_sensor == true)
+                CheckBox check = (CheckBox)sender;
+                if (check.Checked)
                 {
-                    Properties.Settings.Default.C1_enable_face_recognition = false;
+                    //cb_face_recognition.Checked = !check.Checked;
+                    if (Properties.Settings.Default.C1_enable_Human_sensor == true)
+                    {
+                        Properties.Settings.Default.C1_enable_face_recognition = false;
+                    }
+                    if (Properties.Settings.Default.C2_enable_Human_sensor == true)
+                    {
+                        Properties.Settings.Default.C2_enable_face_recognition = false;
+                    }
+                    if (Properties.Settings.Default.C3_enable_Human_sensor == true)
+                    {
+                        Properties.Settings.Default.C3_enable_face_recognition = false;
+                    }
+                    if (Properties.Settings.Default.C4_enable_Human_sensor == true)
+                    {
+                        Properties.Settings.Default.C4_enable_face_recognition = false;
+                    }
                 }
-                if (Properties.Settings.Default.C2_enable_Human_sensor == true)
+                else
                 {
-                    Properties.Settings.Default.C2_enable_face_recognition = false;
+                    DisableOperatorCaptureCheckBox_ifNeeded();
                 }
-                if (Properties.Settings.Default.C3_enable_Human_sensor == true)
-                {
-                    Properties.Settings.Default.C3_enable_face_recognition = false;
-                }
-                if (Properties.Settings.Default.C4_enable_Human_sensor == true)
-                {
-                    Properties.Settings.Default.C4_enable_face_recognition = false;
-                }
-            }
-            else
-            {
-                DisableOperatorCaptureCheckBox_ifNeeded();
-            }
 
-            if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked))
-            {
-                nud_seconds_before_event.Enabled = true;
-                nud_seconds_after_event.Enabled = true;
-            }
-            else
-            {
-                nud_seconds_before_event.Enabled = false;
-                nud_seconds_after_event.Enabled = false;
+                if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked))
+                {
+                    nud_seconds_before_event.Enabled = true;
+                    nud_seconds_after_event.Enabled = true;
+                }
+                else
+                {
+                    nud_seconds_before_event.Enabled = false;
+                    nud_seconds_after_event.Enabled = false;
+                }
             }
         }
 
         private void Cb_face_recognition_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox check = (CheckBox)sender;
-            if (check.Checked)
+            if (this.Visible == true)
             {
-                //cb_human_sensor.Checked = !check.Checked;
-                if (Properties.Settings.Default.C1_enable_face_recognition == true)
+                CheckBox check = (CheckBox)sender;
+                if (check.Checked)
                 {
-                    Properties.Settings.Default.C1_enable_Human_sensor = false;
+                    //cb_human_sensor.Checked = !check.Checked;
+                    if (Properties.Settings.Default.C1_enable_face_recognition == true)
+                    {
+                        Properties.Settings.Default.C1_enable_Human_sensor = false;
+                    }
+                    if (Properties.Settings.Default.C2_enable_face_recognition == true)
+                    {
+                        Properties.Settings.Default.C2_enable_Human_sensor = false;
+                    }
+                    if (Properties.Settings.Default.C3_enable_face_recognition == true)
+                    {
+                        Properties.Settings.Default.C3_enable_Human_sensor = false;
+                    }
+                    if (Properties.Settings.Default.C4_enable_face_recognition == true)
+                    {
+                        Properties.Settings.Default.C4_enable_Human_sensor = false;
+                    }
                 }
-                if (Properties.Settings.Default.C2_enable_face_recognition == true)
+                else
                 {
-                    Properties.Settings.Default.C2_enable_Human_sensor = false;
+                    DisableOperatorCaptureCheckBox_ifNeeded();
                 }
-                if (Properties.Settings.Default.C3_enable_face_recognition == true)
-                {
-                    Properties.Settings.Default.C3_enable_Human_sensor = false;
-                }
-                if (Properties.Settings.Default.C4_enable_face_recognition == true)
-                {
-                    Properties.Settings.Default.C4_enable_Human_sensor = false;
-                }
-            }
-            else
-            {
-                DisableOperatorCaptureCheckBox_ifNeeded();
-            }
 
-            if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked))
-            {
-                nud_seconds_before_event.Enabled = true;
-                nud_seconds_after_event.Enabled = true;
-            }
-            else
-            {
-                nud_seconds_before_event.Enabled = false;
-                nud_seconds_after_event.Enabled = false;
-            }
-        }
-
-        private void Cb_recording_operation_CheckStateChanged(object sender, EventArgs e)
-        {
-            CheckBox check = (CheckBox)sender;
-            if (check.Checked)
-            {
-                
-            }
-            else
-            {
-                DisableOperatorCaptureCheckBox_ifNeeded();
-            }
-
-            if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked))
-            {
-                if (cm_capture_mode.Text != "Snapshot")
+                if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked))
                 {
                     nud_seconds_before_event.Enabled = true;
                     nud_seconds_after_event.Enabled = true;
                 }
+                else
+                {
+                    nud_seconds_before_event.Enabled = false;
+                    nud_seconds_after_event.Enabled = false;
+                }
             }
-            else
+        }
+
+        private void Cb_recording_operation_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == true)
             {
-                nud_seconds_before_event.Enabled = false;
-                nud_seconds_after_event.Enabled = false;
+                CheckBox check = (CheckBox)sender;
+                if (check.Checked)
+                {
+
+                }
+                else
+                {
+                    DisableOperatorCaptureCheckBox_ifNeeded();
+                }
+
+                if (cb_operator_capture.Checked && (cb_human_sensor.Checked || cb_face_recognition.Checked || cb_recording_operation.Checked))
+                {
+                    if (cm_capture_mode.Text != "Snapshot")
+                    {
+                        nud_seconds_before_event.Enabled = true;
+                        nud_seconds_after_event.Enabled = true;
+                    }
+                }
+                else
+                {
+                    nud_seconds_before_event.Enabled = false;
+                    nud_seconds_after_event.Enabled = false;
+                }
             }
         }
 

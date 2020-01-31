@@ -365,7 +365,7 @@
             this.cb_human_sensor.Name = "cb_human_sensor";
             this.cb_human_sensor.Tag = "14";
             this.cb_human_sensor.UseVisualStyleBackColor = true;
-            this.cb_human_sensor.CheckStateChanged += new System.EventHandler(this.Cb_human_sensor_CheckedChanged);
+            this.cb_human_sensor.CheckedChanged += new System.EventHandler(this.Cb_human_sensor_CheckedChanged);
             // 
             // nud_seconds_after_event
             // 
@@ -393,7 +393,7 @@
             this.cb_face_recognition.Name = "cb_face_recognition";
             this.cb_face_recognition.Tag = "14";
             this.cb_face_recognition.UseVisualStyleBackColor = true;
-            this.cb_face_recognition.CheckStateChanged += new System.EventHandler(this.Cb_face_recognition_CheckedChanged);
+            this.cb_face_recognition.CheckedChanged += new System.EventHandler(this.Cb_face_recognition_CheckedChanged);
             // 
             // nud_seconds_before_event
             // 
@@ -502,7 +502,7 @@
             this.cb_operator_capture.Name = "cb_operator_capture";
             this.cb_operator_capture.Tag = "11";
             this.cb_operator_capture.UseVisualStyleBackColor = false;
-            this.cb_operator_capture.CheckStateChanged += new System.EventHandler(this.Cb_CheckStateChanged);
+            this.cb_operator_capture.CheckedChanged += new System.EventHandler(this.Cb_operator_capture_CheckedChanged);
             // 
             // label10
             // 
@@ -523,7 +523,7 @@
             this.cb_recording_operation.Name = "cb_recording_operation";
             this.cb_recording_operation.Tag = "15";
             this.cb_recording_operation.UseVisualStyleBackColor = true;
-            this.cb_recording_operation.CheckStateChanged += new System.EventHandler(this.Cb_recording_operation_CheckStateChanged);
+            this.cb_recording_operation.CheckedChanged += new System.EventHandler(this.Cb_recording_operation_CheckedChanged);
             // 
             // button_settings_save
             // 
