@@ -941,10 +941,11 @@ namespace FaceDetection
             nud_reinitiation_interval.Minimum = nud_seconds_before_event.Value;
             
         }
-        decimal GetTheMaxValue()
-        {
-            return Math.Max(event_record_time_before_event.Value, nud_seconds_before_event.Value);
-        }
+
+        //decimal GetTheMaxValue()
+        //{
+        //    return Math.Max(event_record_time_before_event.Value, nud_seconds_before_event.Value);
+        //}
 
         private void backgroundWorkerCancelClose_DoWork(object sender, DoWorkEventArgs e)
         {
