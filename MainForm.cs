@@ -45,6 +45,8 @@ namespace FaceDetection
                 if (vs != null && vs.Count() > 0)
                 {
                     PARAMETERS.HandleParameters(vs);
+                    PARAMETERS.WAKEUPCALL = true;
+                    
                     Logger.Add(vs.Count + " HandleParameters");
                 }
 
@@ -136,11 +138,16 @@ namespace FaceDetection
                 Mklisteners.AddMouseAndKeyboardBack();
             }
             
-            //CREATE CAMERA WINDOWS
-            MULTI_WINDOW.CreateCameraWindows();
-            MULTI_WINDOW.FormSettingsChanged();
+            
 
-            PARAMETERS.HandleWakeUpParameters();            
+            PARAMETERS.HandleWakeUpParameters();
+
+            if (!PARAMETERS.WrongParameter)
+            {
+                //CREATE CAMERA WINDOWS
+                MULTI_WINDOW.CreateCameraWindows();
+                MULTI_WINDOW.FormSettingsChanged();
+            }            
 
             GC.Collect();
         }

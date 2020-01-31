@@ -44,7 +44,7 @@ namespace FaceDetection
         //public static bool WRONGPARAMETER { get; private set; }
 
         private static bool parameterOnOffSwitch = false;
-        private static int parameterTime = 0;
+        private static int parameterTime = -1;
 
         public static string ParameterSet { get; private set; }
 
@@ -107,15 +107,20 @@ namespace FaceDetection
                                     try
                                     {
                                         int sw = Int32.Parse(elem.Substring(2));
-                                        if (sw != 0)
+                                        if (sw == 1)
                                         {
                                             SwitchIsPresent = true;
                                             parameterOnOffSwitch = true;
                                         }
-                                        else
+                                        else if(sw == 0)
                                         {
                                             SwitchIsPresent = true;
                                             parameterOnOffSwitch = false;
+                                        }
+                                        else
+                                        {
+                                            WrongParameter = true;
+                                            i = parameters.Count;
                                         }
                                     }
                                     catch (ArgumentNullException anx)
@@ -137,9 +142,17 @@ namespace FaceDetection
                                 case "t":
                                     try
                                     {
-                                        parameterTime = Int32.Parse(elem.Substring(2));
-                                        TimerIsPresent = true;
-                                        CurrentTestResult = parameterTime + " time parameter";
+                                        int v = CheckIntervalValue(Int32.Parse(elem.Substring(2)));
+                                        if (v >= 0)
+                                        {
+                                            parameterTime = v;
+                                            TimerIsPresent = true;
+                                        }
+                                        else
+                                        {
+                                            WrongParameter = true;
+                                        }
+                                        //CurrentTestResult = parameterTime + " time parameter";
                                         //CameraIndex = -1;
                                     }
                                     catch (ArgumentNullException anx)
@@ -725,6 +738,19 @@ namespace FaceDetection
                     break;
             }
         }
+
+        private static int CheckIntervalValue(int v)
+        {
+            if (v>=0 && v<=1000)
+            {
+                return v;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
         private static List<string> CleanUpTheParams(List<string> list)
         {
             for (int item = list.Count - 1; item > 0; item--)
@@ -1106,7 +1132,11 @@ namespace FaceDetection
                             {
                                 WrongParameter = true;
                             }
-                        }                        
+                        }
+                        else
+                        {
+                            WrongParameter = true;
+                        }
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
@@ -1473,6 +1503,11 @@ namespace FaceDetection
                                         MainForm.AllChangesApply();
                                     }
                                 }
+                                else
+                                {
+                                    WrongParameter = true;
+                                }
+
                             }
                             else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                             {
@@ -1485,6 +1520,10 @@ namespace FaceDetection
                                     {
                                         MainForm.AllChangesApply();
                                     }
+                                }
+                                else
+                                {
+                                    WrongParameter = true;
                                 }
                             }
                         }
@@ -1580,6 +1619,8 @@ namespace FaceDetection
                 PARAM.Reverse();
                 WAKEUPCALL = true;
                 HandleParameters(PARAM);
+                if (PARAMETERS.WrongParameter)
+                    Application.Exit();
 
                 if (isMinimized)
                 {
