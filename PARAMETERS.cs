@@ -967,16 +967,32 @@ namespace FaceDetection
                 case "c":// TTFF
                     try
                     {
-                        if (parameterOnOffSwitch)
+                        if(!WAKEUPCALL)
                         {
-                            if (MainForm.Settingui != null && MainForm.Settingui.Visible == false)
+                            if (parameterOnOffSwitch)
                             {
-                                MainForm.Settingui.ShowSettings(MainCamera);
+                                if (MainForm.Settingui != null && MainForm.Settingui.Visible == false)
+                                {
+                                    MainForm.Settingui.ShowSettings(MainCamera);
+                                }
                             }
-                        }
-                        else if(!parameterOnOffSwitch && !WAKEUPCALL)
+                            else
+                            {                                
+                                MainForm.Settingui?.ForgetAndClose();
+                            }
+                        }else
                         {
-                            MainForm.Settingui?.Hide();
+                            if (parameterOnOffSwitch)
+                            {
+                                if (MainForm.Settingui != null && MainForm.Settingui.Visible == false)
+                                {
+                                    MainForm.Settingui.ShowSettings(MainCamera);
+                                }
+                            }
+                            else
+                            {
+                                WrongParameter = true;
+                            }
                         }                        
                     }
                     catch (ArgumentOutOfRangeException e)
@@ -998,11 +1014,13 @@ namespace FaceDetection
                                 PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(MainCamera, true);
                                 if (MainForm.GetMainForm != null)
                                 {
-                                    MainForm.RSensor.Start_IR_Timer();
+                                    MainForm.RSensor?.Stop_IR_Timer();
+                                    MainForm.RSensor?.SetInterval();
+                                    MainForm.RSensor?.Start_IR_Timer();
                                 }
                             }
                         }
-                        else if(!WAKEUPCALL)
+                        else if(!parameterOnOffSwitch && !WAKEUPCALL)
                         {
                             if (IrSensorEnabled)
                             {
@@ -1056,7 +1074,11 @@ namespace FaceDetection
                                     }
                                 }
                             }
-                        }                        
+                        }
+                        else if(WAKEUPCALL)
+                        {
+                            WrongParameter = true;
+                        }
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
@@ -1176,49 +1198,65 @@ namespace FaceDetection
             {
                 // Show / Hide buttons
                 case "b"://TTTF
-                    try
+                    if (!WAKEUPCALL)
                     {
-                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                        try
                         {
-                            if (parameterOnOffSwitch)
+                            if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                             {
-                                isControlButtonVisible = true;
-                                MULTI_WINDOW.formList[CameraIndex]?.SettingChangesApply(CameraIndex);
-                            }
-                            else
-                            {
-                                isControlButtonVisible = false;
-                                MULTI_WINDOW.formList[CameraIndex]?.SettingChangesApply(CameraIndex);
+                                if (parameterOnOffSwitch)
+                                {
+                                    isControlButtonVisible = true;
+                                    MULTI_WINDOW.formList[CameraIndex]?.SettingChangesApply(CameraIndex);
+                                }
+                                else
+                                {
+                                    isControlButtonVisible = false;
+                                    MULTI_WINDOW.formList[CameraIndex]?.SettingChangesApply(CameraIndex);
+                                }
                             }
                         }
+                        catch (ArgumentOutOfRangeException e)
+                        {
+                            Logger.Add(e);
+                        }
                     }
-                    catch (ArgumentOutOfRangeException e)
+                    else
                     {
-                        Logger.Add(e);
+                        WrongParameter = true;
                     }
+                    
                     break;
 
                 // Change main camera
                 case "n"://TTTF
-                    if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                    if(!WAKEUPCALL)
                     {
-                        if (MULTI_WINDOW.formList[CameraIndex]?.DISPLAYED == true && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false && MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].recordingInProgress == false)
+                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                         {
-                            Properties.Settings.Default.main_camera_index = CameraIndex;
-                            Properties.Settings.Default.Save();
-                            MULTI_WINDOW.FormSettingsChanged();
+                            if (MULTI_WINDOW.formList[CameraIndex]?.DISPLAYED == true && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false && MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].recordingInProgress == false)
+                            {
+                                Properties.Settings.Default.main_camera_index = CameraIndex;
+                                Properties.Settings.Default.Save();
+                                MULTI_WINDOW.FormSettingsChanged();
+                            }
+                            else
+                            {
+                                Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
+                            }
+                            PARAM.Clear();
                         }
                         else
                         {
-                            Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
-                        }                        
-                        PARAM.Clear();
+
+                        }
+                        CurrentTestResult = MethodName + " case, camera index conditions passed";
                     }
                     else
                     {
-                        
+                        WrongParameter = true;
                     }
-                    CurrentTestResult = MethodName + " case, camera index conditions passed";
+                    
                     break;
 
                 // Visible
@@ -1237,21 +1275,29 @@ namespace FaceDetection
 
                 // Backlight
                 case "l"://TTTF
-                    try
+                    if (!WAKEUPCALL)
                     {
-                        if (parameterOnOffSwitch)
+                        try
                         {
-                            MainForm.GetMainForm?.BackLight.ON();
+                            if (parameterOnOffSwitch)
+                            {
+                                MainForm.GetMainForm?.BackLight.ON();
+                            }
+                            else
+                            {
+                                MainForm.GetMainForm?.BackLight.OFF();
+                            }
                         }
-                        else
+                        catch (ArgumentOutOfRangeException e)
                         {
-                            MainForm.GetMainForm?.BackLight.OFF();
+                            Logger.Add(e);
                         }
                     }
-                    catch (ArgumentOutOfRangeException e)
+                    else
                     {
-                        Logger.Add(e);
+                        WrongParameter = true;
                     }
+                    
                     break;
 
                 // Window pane
@@ -1330,6 +1376,10 @@ namespace FaceDetection
                                     }
                                 }
                             }
+                        }
+                        else
+                        {
+                            WrongParameter = true;
                         }                        
                         PARAMETERS.PARAM.Clear();
                     }
@@ -1352,7 +1402,10 @@ namespace FaceDetection
                                 PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
                                 if (MainForm.GetMainForm != null)
                                 {
-                                    MainForm.AllChangesApply();
+                                    MainForm.RSensor?.Stop_IR_Timer();
+                                    MainForm.RSensor?.SetInterval();
+                                    MainForm.RSensor?.Start_IR_Timer();
+                                    //MainForm.AllChangesApply();
                                 }
                             }
                         }
@@ -1367,7 +1420,7 @@ namespace FaceDetection
                                     {
                                         MainForm.RSensor.Stop_IR_Timer();
                                     }
-                                    MainForm.AllChangesApply();
+                                    //MainForm.AllChangesApply();
                                 }
                             }
                         }
@@ -1380,12 +1433,14 @@ namespace FaceDetection
                             if (parameterOnOffSwitch)
                                 PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, parameterOnOffSwitch);
                         }
-                        Properties.Settings.Default.Save();
-                        if (MainForm.GetMainForm != null)
-                        {
-                            MainForm.AllChangesApply();
-                        }
+                        
+                        //if (MainForm.GetMainForm != null)
+                        //{
+                        //    //MainForm.AllChangesApply();
+                        //}
                     }
+                    //No need to remember the state
+                    //Properties.Settings.Default.Save();
                     break;
 
                 // Face recognition
@@ -1399,7 +1454,8 @@ namespace FaceDetection
                 //    //C parameter does not require Time
                 //    WrongParameter = true;
                 //    break;
-            }            
+            }
+            CurrentTestResult = MethodName;
         }
 
         private static void ShowOrHideWindows()

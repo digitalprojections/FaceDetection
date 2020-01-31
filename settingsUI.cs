@@ -145,7 +145,7 @@ namespace FaceDetection
             }
         }
 
-        private void CloseSettings(object sender, EventArgs e)
+        public void ForgetAndClose()
         {
             Properties.Settings.Default.Reload();
             Hide();
@@ -157,8 +157,10 @@ namespace FaceDetection
             {
                 backgroundWorkerCancelClose.RunWorkerAsync();
             }
-
-            
+        }
+        private void CloseSettings(object sender, EventArgs e)
+        {
+            ForgetAndClose();
         }
 
         private void SaveAndClose(object sender, EventArgs e)
