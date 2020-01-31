@@ -165,6 +165,8 @@ namespace FaceDetection
 
         private void SaveAndClose(object sender, EventArgs e)
         {
+            Properties.Settings.Default.Save();
+
             if (String.IsNullOrEmpty(storePath.Text))
             {
                 if (Directory.Exists(@"D:\TEMP"))
@@ -627,6 +629,11 @@ namespace FaceDetection
             Marshal.ReleaseComObject(pProp);
             //Marshal.ReleaseComObject(filterInfo);
             Marshal.ReleaseComObject(dev);
+        }
+
+        private void Cb_delete_old_CheckedChanged(object sender, EventArgs e)
+        {
+            MainForm.ManageDeleteOldFilesTimer(cb_delete_old.Checked);
         }
 
         private void ChangeControlEnabled(Control control, bool enabled, int cam_index)

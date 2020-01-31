@@ -9,13 +9,6 @@ namespace FaceDetection
 {
     class CheckOldFiles
     {
-        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        static extern bool GetDiskFreeSpace(string lpRootPathName,
-            out uint lpSectorsPerCluster,
-            out uint lpBytesPerSector,
-            out uint lpNumberOfFreeClusters,
-            out uint lpTotalNumberOfClusters);
-
         private static TimeSpan maxSavedDate;
         private static List<string> listRecordingEventFiles1 = new List<string>();
         private static List<string> listRecordingMovieFiles1 = new List<string>();
@@ -268,42 +261,78 @@ namespace FaceDetection
             {
                 if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\1"))
                 {
-                listEventFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\1\\event\\");
-                    listRecordingEventFiles1 = listEventFiles.ToList();
-                listMovieFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\1\\movie\\");
-                    listRecordingMovieFiles1 = listMovieFiles.ToList();
-                listSnapshotFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\1\\snapshot\\");
-                    listRecordingSnapshotFiles1 = listSnapshotFiles.ToList();
+                    if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\1\\event"))
+                    {
+                        listEventFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\1\\event\\");
+                        listRecordingEventFiles1 = listEventFiles.ToList();
+                    }
+                    if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\1\\movie"))
+                    {
+                        listMovieFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\1\\movie\\");
+                        listRecordingMovieFiles1 = listMovieFiles.ToList();
+                    }
+                    if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\1\\snapshot"))
+                    {
+                        listSnapshotFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\1\\snapshot\\");
+                        listRecordingSnapshotFiles1 = listSnapshotFiles.ToList();
+                    }
                 }
 
                 if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\2"))
                 {
-                    listEventFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\2\\event\\");
-                    listRecordingEventFiles2 = listEventFiles.ToList();
-                    listMovieFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\2\\movie\\");
-                    listRecordingMovieFiles2 = listMovieFiles.ToList();
-                    listSnapshotFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\2\\snapshot\\");
-                    listRecordingSnapshotFiles2 = listSnapshotFiles.ToList();
+                    if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\2\\event"))
+                    {
+                        listEventFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\2\\event\\");
+                        listRecordingEventFiles2 = listEventFiles.ToList();
+                    }
+                    if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\2\\movie"))
+                    {
+                        listMovieFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\2\\movie\\");
+                        listRecordingMovieFiles2 = listMovieFiles.ToList();
+                    }
+                    if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\2\\snapshot"))
+                    {
+                        listSnapshotFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\2\\snapshot\\");
+                        listRecordingSnapshotFiles2 = listSnapshotFiles.ToList();
+                    }
                 }
 
                 if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\3"))
                 {
-                    listEventFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\3\\event\\");
-                    listRecordingEventFiles3 = listEventFiles.ToList();
-                    listMovieFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\3\\movie\\");
-                    listRecordingMovieFiles3 = listMovieFiles.ToList();
-                    listSnapshotFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\3\\snapshot\\");
-                    listRecordingSnapshotFiles3 = listSnapshotFiles.ToList();
+                    if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\3\\event"))
+                    {
+                        listEventFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\3\\event\\");
+                        listRecordingEventFiles3 = listEventFiles.ToList();
+                    }
+                    if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\3\\movie"))
+                    {
+                        listMovieFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\3\\movie\\");
+                        listRecordingMovieFiles3 = listMovieFiles.ToList();
+                    }
+                    if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\3\\snapshot"))
+                    {
+                        listSnapshotFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\3\\snapshot\\");
+                        listRecordingSnapshotFiles3 = listSnapshotFiles.ToList();
+                    }
                 }
 
                 if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\4"))
                 {
-                    listEventFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\4\\event\\");
-                    listRecordingEventFiles4 = listEventFiles.ToList();
-                    listMovieFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\4\\movie\\");
-                    listRecordingMovieFiles4 = listMovieFiles.ToList();
-                    listSnapshotFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\4\\snapshot\\");
-                    listRecordingSnapshotFiles4 = listSnapshotFiles.ToList();
+                    if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\4\\event"))
+                    {
+                        listEventFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\4\\event\\");
+                        listRecordingEventFiles4 = listEventFiles.ToList();
+                    }
+                    if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\4\\movie"))
+                    {
+                        listMovieFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\4\\movie\\");
+                        listRecordingMovieFiles4 = listMovieFiles.ToList();
+                    }
+                    if (Directory.Exists(Properties.Settings.Default.video_file_location + "\\Camera\\4\\snapshot"))
+                    {
+                        listSnapshotFiles = Directory.GetFiles(Properties.Settings.Default.video_file_location + "\\Camera\\4\\snapshot\\");
+                        listRecordingSnapshotFiles4 = listSnapshotFiles.ToList();
+                    }
                 }
             }
             catch (IOException iox)
