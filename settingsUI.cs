@@ -157,12 +157,12 @@ namespace FaceDetection
             {
                 backgroundWorkerCancelClose.RunWorkerAsync();
             }
-
-            
         }
 
         private void SaveAndClose(object sender, EventArgs e)
         {
+            Properties.Settings.Default.Save();
+
             if (String.IsNullOrEmpty(storePath.Text))
             {
                 if (Directory.Exists(@"D:\TEMP"))
