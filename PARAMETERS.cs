@@ -810,6 +810,9 @@ namespace FaceDetection
                         WrongParameter = true;
                     }
                     break;
+                default:
+                    WrongParameter = true;
+                    break;
             }
             PARAMETERS.PARAM.Clear();
             CurrentTestResult = "MAIN CAMERA SET";
@@ -1149,6 +1152,7 @@ namespace FaceDetection
                     {
                         ShowOrHideWindows();
                     }
+                    CurrentTestResult = "Show All Windows";
                     PARAMETERS.PARAM.Clear();
                     break;
                 case "l"://TTTF
@@ -1303,8 +1307,7 @@ namespace FaceDetection
                 //    //C parameter does not require Time
                 //    WrongParameter = true;
                 //    break;
-            }
-            CurrentTestResult = MethodName;
+            }            
         }
 
         private static void ShowOrHideWindows()
