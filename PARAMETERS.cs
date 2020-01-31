@@ -775,6 +775,7 @@ namespace FaceDetection
         {
             switch (MethodName)
             {
+                // Snapshot
                 case "s":// TFFF
                     try
                     {
@@ -785,10 +786,12 @@ namespace FaceDetection
                         Logger.Add(e);
                     }
                     break;
+
+                // Event recorder
                 case "e":// TFFF
                     try
                     {
-                        if (parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
+                        if (MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             MULTI_WINDOW.EventRecorderOn(MainCamera);
                         }
@@ -798,6 +801,8 @@ namespace FaceDetection
                         Logger.Add(e);
                     }
                     break;
+
+                // Close form / Quit application
                 case "q":// TFFF
                     try
                     {
@@ -848,7 +853,7 @@ namespace FaceDetection
                 case "e":// TFTF
                     try
                     {
-                        if (parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
+                        if (MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) 
                         {
                             MULTI_WINDOW.EventRecorderOn(CameraIndex);
                         }
