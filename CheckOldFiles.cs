@@ -9,13 +9,6 @@ namespace FaceDetection
 {
     class CheckOldFiles
     {
-        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        static extern bool GetDiskFreeSpace(string lpRootPathName,
-            out uint lpSectorsPerCluster,
-            out uint lpBytesPerSector,
-            out uint lpNumberOfFreeClusters,
-            out uint lpTotalNumberOfClusters);
-
         private static TimeSpan maxSavedDate;
         private static List<string> listRecordingEventFiles1 = new List<string>();
         private static List<string> listRecordingMovieFiles1 = new List<string>();
