@@ -11,37 +11,40 @@ namespace FaceDetection
 {
     public static class PARAMETERS
     {
-        public static List<string> PARAM;
+        public static List<string> PARAM { get; private set; }
 
         public static int MainCamera { get; private set; }
 
         static string param;
-        public static bool isMinimized = false;
-        public static bool isControlButtonVisible = true;
+
+        
+        public static bool isMinimized { get; private set; }
+        public static bool isControlButtonVisible { get; private set; }
         /// <summary>
         /// currentl index, not MAIN
         /// </summary>
-        public static int CameraIndex = -1;
-        public static bool wakeUpCall;
+        private static int CameraIndex = -1;
+        private static bool wakeUpCall;
         /// <summary>
         /// Important for UNIT TEST Only variable. Ignore
         /// </summary>
-        public static string CurrentTestResult = "";
+        public static string CurrentTestResult { get; private set; }
         /// <summary>
         /// Method name
         /// </summary>
-        public static string MethodName = "";
+        private static string MethodName = "";
         /// <summary>
         /// Methodname is present
         /// </summary>
-        public static bool MethodNameIsPresent = false;
-        public static bool SwitchIsPresent = false;
-        public static bool CamIndexIsPresent = false;
-        public static bool TimerIsPresent = false;
-        public static bool WrongParameter = false;
+        public static bool MethodNameIsPresent { get; private set; }
+        public static bool SwitchIsPresent { get; private set; }
+        public static bool CamIndexIsPresent { get; private set; }
+        public static bool TimerIsPresent { get; private set; }
+        public static bool WrongParameter { get; private set; }
+        //public static bool WRONGPARAMETER { get; private set; }
 
-        public static bool parameterOnOffSwitch = false;
-        public static int parameterTime = 0;
+        private static bool parameterOnOffSwitch = false;
+        private static int parameterTime = 0;
 
         public static string ParameterSet { get; private set; }
 
@@ -192,10 +195,14 @@ namespace FaceDetection
                         catch (Exception e)
                         {
                             WrongParameter = true;
-                            Debug.WriteLine(e.Message + " parameters in the command were sent with unexpected values");
+                            Logger.Add(e);
                         }
                         //WhichCase = elem;
                     }
+
+
+
+                    #region OLD SWITCH LOGIC
 
                     //if(cameraIndex == -1)//カメラ番号が未入力の場合
                     //{
@@ -213,9 +220,6 @@ namespace FaceDetection
                     //    }
                     //}
 
-
-
-                    #region OLD SWITCH LOGIC
                     // METHOD
                     //switch (MethodName)
                     //{
@@ -263,7 +267,7 @@ namespace FaceDetection
                     //    catch (ArgumentOutOfRangeException e)
                     //    {
                     //        CurrentTestResult = "FAILURE";
-                    //        Trace.WriteLine(e.ToString() + " in method c");
+                    //        Trace.Add(e.ToString() + " in method c");
                     //    }
                     //    break;
 
@@ -342,7 +346,7 @@ namespace FaceDetection
                     //    }
                     //    catch (ArgumentOutOfRangeException e)
                     //    {
-                    //        Debug.WriteLine(e.Message + " in method s");
+                    //        Logger.Add(e.Message + " in method s");
                     //    }
                     //    break;
 
@@ -366,7 +370,7 @@ namespace FaceDetection
                     //    }
                     //    catch (ArgumentOutOfRangeException e)
                     //    {
-                    //        Debug.WriteLine(e.ToString() + " in method b");
+                    //        Logger.Add(e.ToString() + " in method b");
                     //    }
                     //    break;
 
@@ -378,7 +382,7 @@ namespace FaceDetection
                     //    }
                     //    catch (ArgumentOutOfRangeException e)
                     //    {
-                    //        Debug.WriteLine(e.ToString() + " in method d");
+                    //        Logger.Add(e.ToString() + " in method d");
                     //    }
                     //    break;
 
@@ -521,7 +525,7 @@ namespace FaceDetection
                     //    }
                     //    catch (ArgumentOutOfRangeException e)
                     //    {
-                    //        Debug.WriteLine(e.ToString() + " in method l");
+                    //        Logger.Add(e.ToString() + " in method l");
                     //    }
                     //    break;
 
@@ -553,7 +557,7 @@ namespace FaceDetection
                     //    }
                     //    catch (ArgumentOutOfRangeException e)
                     //    {
-                    //        Debug.WriteLine(e.ToString() + " in method w");
+                    //        Logger.Add(e.ToString() + " in method w");
                     //    }
                     //    break;
 
@@ -575,7 +579,7 @@ namespace FaceDetection
                     //    }
                     //    catch (ArgumentOutOfRangeException e)
                     //    {
-                    //        Debug.WriteLine(e.ToString() + " in method q");
+                    //        Logger.Add(e.ToString() + " in method q");
                     //    }
                     //    break;
 
@@ -614,7 +618,7 @@ namespace FaceDetection
                     //    }
                     //    catch (ArgumentOutOfRangeException e)
                     //    {
-                    //        Debug.WriteLine(e.ToString() + " in method e");
+                    //        Logger.Add(e.ToString() + " in method e");
                     //    }
                     //    break;
 
@@ -652,7 +656,7 @@ namespace FaceDetection
                     //    }
                     //    catch (ArgumentOutOfRangeException e)
                     //    {
-                    //        Debug.WriteLine(e.ToString() + " in method r");
+                    //        Logger.Add(e.ToString() + " in method r");
                     //    }
                     //    break;
                     //default:
@@ -774,20 +778,20 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Debug.WriteLine(e.Message + " in method s");
+                        Logger.Add(e);
                     }
                     break;
                 case "e":// TFFF
                     try
                     {
-                        if (parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera].recordingInProgress == false)
+                        if (parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             MULTI_WINDOW.EventRecorderOn(MainCamera);
                         }
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Debug.WriteLine(e.ToString() + " in method e");
+                        Logger.Add(e);
                     }
                     break;
                 case "q":// TFFF
@@ -798,7 +802,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Debug.WriteLine(e.ToString() + " in method q");
+                        Logger.Add(e);
                         WrongParameter = true;
                     }
                     break;
@@ -828,20 +832,20 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Debug.WriteLine(e.Message + " in method s");
+                        Logger.Add(e);
                     }
                     break;
                 case "e":// TFTF
                     try
                     {
-                        if (parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
+                        if (parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
                         {
                             MULTI_WINDOW.EventRecorderOn(CameraIndex);
                         }
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Debug.WriteLine(e.ToString() + " in method e");
+                        Logger.Add(e);
                     }
                     break;
                 case "q":// TFTF
@@ -851,7 +855,7 @@ namespace FaceDetection
                         {
                             if (CameraIndex >= 0 && CameraIndex < 4)
                             {
-                                MULTI_WINDOW.formList[CameraIndex].Close();
+                                MULTI_WINDOW.formList[CameraIndex]?.Close();
                             }
                             else if (CameraIndex == 8)
                             {
@@ -861,7 +865,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Debug.WriteLine(e.ToString() + " in method q");
+                        Logger.Add(e);
                         WrongParameter = true;
                     }
                     break;
@@ -892,11 +896,11 @@ namespace FaceDetection
                         {
                             isControlButtonVisible = false;
                         }
-                        MULTI_WINDOW.formList[MainCamera].SettingChangesApply(MainCamera);
+                        MULTI_WINDOW.formList[MainCamera]?.SettingChangesApply(MainCamera);
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Debug.WriteLine(e.ToString() + " in method b");
+                        Logger.Add(e);
                     }
                     break;
                 case "c":// TTFF
@@ -916,7 +920,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Trace.WriteLine(e.ToString() + " in method c");
+                        Logger.Add(e);
                     }                    
                     break;
                 case "h":// TTFF
@@ -957,28 +961,28 @@ namespace FaceDetection
                 case "r"://TTFF
                     try
                     {
-                        if (MULTI_WINDOW.formList[MainCamera].recordingInProgress == false)
+                        if (MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             if (parameterOnOffSwitch)
                             {
-                                MULTI_WINDOW.formList[MainCamera].SetRecordIcon(MainCamera, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                                MULTI_WINDOW.formList[MainCamera].crossbar.Start(MainCamera, CAMERA_MODES.MANUAL);
+                                MULTI_WINDOW.formList[MainCamera]?.SetRecordIcon(MainCamera, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                                MULTI_WINDOW.formList[MainCamera]?.crossbar.Start(MainCamera, CAMERA_MODES.MANUAL);
                             }
                             else
                             {
-                                MULTI_WINDOW.formList[MainCamera].HideIcon();
+                                MULTI_WINDOW.formList[MainCamera]?.HideIcon();
                                 if (PROPERTY_FUNCTIONS.CheckPreEventTimes(MainCamera))
                                 {
                                     if (MULTI_WINDOW.displayedCameraCount > 0)
                                     {
-                                        MULTI_WINDOW.formList[MainCamera].SetToPreeventMode();
+                                        MULTI_WINDOW.formList[MainCamera]?.SetToPreeventMode();
                                     }
                                 }
                                 else
                                 {
                                     if (MULTI_WINDOW.displayedCameraCount > 0)
                                     {
-                                        MULTI_WINDOW.formList[MainCamera].SetToPreviewMode();
+                                        MULTI_WINDOW.formList[MainCamera]?.SetToPreviewMode();
                                     }
                                 }
                             }
@@ -986,7 +990,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Debug.WriteLine(e.ToString() + " in method r");
+                        Logger.Add(e);
                     }
                     break;
                 case "v"://TTFF
@@ -1051,7 +1055,30 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Debug.WriteLine(e.ToString() + " in method l");
+                        Logger.Add(e);
+                    }
+                    break;
+                case "w"://TTFF
+                    try
+                    {
+                        if(wakeUpCall)
+                        {
+                            if (parameterOnOffSwitch)
+                            {
+                                PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(MainCamera, true);
+                                Properties.Settings.Default.Save();
+                                if (MainForm.GetMainForm != null)
+                                    MainForm.AllChangesApply();
+                            }
+                            else
+                            {
+                                WrongParameter = true;
+                            }
+                        }                        
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        Logger.Add(e);
                     }
                     break;
             }
@@ -1074,18 +1101,18 @@ namespace FaceDetection
                             if (parameterOnOffSwitch)
                             {
                                 isControlButtonVisible = true;
-                                MULTI_WINDOW.formList[CameraIndex].SettingChangesApply(CameraIndex);
+                                MULTI_WINDOW.formList[CameraIndex]?.SettingChangesApply(CameraIndex);
                             }
                             else
                             {
                                 isControlButtonVisible = false;
-                                MULTI_WINDOW.formList[CameraIndex].SettingChangesApply(CameraIndex);
+                                MULTI_WINDOW.formList[CameraIndex]?.SettingChangesApply(CameraIndex);
                             }
                         }
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Debug.WriteLine(e.ToString() + " in method b");
+                        Logger.Add(e);
                     }
                     break;
                 case "n"://TTTF
@@ -1121,8 +1148,8 @@ namespace FaceDetection
                                 try
                                 {
                                     MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
-                                    MULTI_WINDOW.formList[i].Show();
-                                    MULTI_WINDOW.formList[i].Activate();
+                                    MULTI_WINDOW.formList[i]?.Show();
+                                    MULTI_WINDOW.formList[i]?.Activate();
                                 }
                                 catch (ArgumentOutOfRangeException)
                                 {
@@ -1186,7 +1213,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Debug.WriteLine(e.ToString() + " in method l");
+                        Logger.Add(e);
                     }
                     break;
                 case "w"://TTTF
@@ -1203,49 +1230,60 @@ namespace FaceDetection
                             }
                             else
                             {
-                                //There is no requirement to display with panels off
-                                //PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(cameraIndex, false);
+                                WrongParameter = true;
                             }
                         }
                         else if (CheckCameraIndex(CameraIndex) && (CameraIndex == 8))
                         {
                             //Support all
-
+                            if (parameterOnOffSwitch)
+                            {
+                                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                                {
+                                    PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(i, true);                                    
+                                }
+                                Properties.Settings.Default.Save();
+                                if (MainForm.GetMainForm != null)
+                                    MainForm.AllChangesApply();
+                            }
+                            else
+                            {
+                                WrongParameter = true;
+                            }
                         }
                         PARAMETERS.PARAM.Clear();
-                        CurrentTestResult = "W " + parameterOnOffSwitch + " " + CameraIndex;
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Debug.WriteLine(e.ToString() + " in method w");
+                        Logger.Add(e);
                     }
                     break;
                 case "r"://TTTF
                     try
                     {
-                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false)
+                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
                         {
                             if (parameterOnOffSwitch)
                             {
-                                MULTI_WINDOW.formList[CameraIndex].SetRecordIcon(CameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                                MULTI_WINDOW.formList[CameraIndex].crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
+                                MULTI_WINDOW.formList[CameraIndex]?.SetRecordIcon(CameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                                MULTI_WINDOW.formList[CameraIndex]?.crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
                             }
                         }
                         else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && !parameterOnOffSwitch)
                         {
-                            MULTI_WINDOW.formList[CameraIndex].HideIcon();
+                            MULTI_WINDOW.formList[CameraIndex]?.HideIcon();
                             if (PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
                             {
                                 if (MULTI_WINDOW.displayedCameraCount > 0)
                                 {
-                                    MULTI_WINDOW.formList[CameraIndex].SetToPreeventMode();
+                                    MULTI_WINDOW.formList[CameraIndex]?.SetToPreeventMode();
                                 }
                             }
                             else
                             {
                                 if (MULTI_WINDOW.displayedCameraCount > 0)
                                 {
-                                    MULTI_WINDOW.formList[CameraIndex].SetToPreviewMode();
+                                    MULTI_WINDOW.formList[CameraIndex]?.SetToPreviewMode();
                                 }
                             }
                         }
@@ -1253,7 +1291,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Debug.WriteLine(e.ToString() + " in method r");
+                        Logger.Add(e);
                     }
                     break;
                 case "h"://TTTF
@@ -1388,7 +1426,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e.Message + " in method h");
+                        Logger.Add(e);
                     }
                     break;
                 case "d":
@@ -1499,32 +1537,34 @@ namespace FaceDetection
         //        return cameraIndex + 1;
         //    }
         //}
-        
-        #region DLL IMPORTS
-        [DllImport("user32.dll")]
-        public static extern bool GetCursorPos(out Point p);
-        [DllImport("user32.dll")]
-        private static extern int SendMessage(int hWnd, int hMsg, int wParam, int lParam);
-
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        private static extern IntPtr SendMessageTimeout(
-            IntPtr hWnd,
-            uint Msg,
-            UIntPtr wParam,
-            IntPtr lParam,
-            SendMessageTimeoutFlags fuFlags,
-            uint uTimeout,
-            out UIntPtr lpdwResult);
-
-        [Flags]
-        enum SendMessageTimeoutFlags : uint
+        class DLLIMPORT
         {
-            SMTO_NORMAL = 0x0,
-            SMTO_BLOCK = 0x1,
-            SMTO_ABORTIFHUNG = 0x2,
-            SMTO_NOTIMEOUTIFNOTHUNG = 0x8,
-            SMTO_ERRORONEXIT = 0x20
+            #region DLL IMPORTS
+            [DllImport("user32.dll")]
+            public static extern bool GetCursorPos(out Point p);
+            [DllImport("user32.dll")]
+            private static extern int SendMessage(int hWnd, int hMsg, int wParam, int lParam);
+
+            [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+            private static extern IntPtr SendMessageTimeout(
+                IntPtr hWnd,
+                uint Msg,
+                UIntPtr wParam,
+                IntPtr lParam,
+                SendMessageTimeoutFlags fuFlags,
+                uint uTimeout,
+                out UIntPtr lpdwResult);
+
+            [Flags]
+            enum SendMessageTimeoutFlags : uint
+            {
+                SMTO_NORMAL = 0x0,
+                SMTO_BLOCK = 0x1,
+                SMTO_ABORTIFHUNG = 0x2,
+                SMTO_NOTIMEOUTIFNOTHUNG = 0x8,
+                SMTO_ERRORONEXIT = 0x20
+            }
+            #endregion DLL IMPORTS
         }
-        #endregion DLL IMPORTS
     }
 }
