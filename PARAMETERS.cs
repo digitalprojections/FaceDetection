@@ -84,7 +84,7 @@ namespace FaceDetection
             */
             if (param.Contains("uvccameraviewer") && ConnectedCameraCount>0)
             {
-                if (parameters.Count > 1)
+                if (parameters?.Count > 1)
                 {
                     //WhichCase = param;
                     for (int i = 1; i < parameters.Count; i++)
@@ -1391,54 +1391,104 @@ namespace FaceDetection
 
                 // IR Sensor
                 case "h"://TTTF
-                    if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
+                    if(!WAKEUPCALL)
                     {
-                        PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CameraIndex, out bool IrSensorEnabled);
-                        if (parameterOnOffSwitch)
+                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
                         {
-                            if (!IrSensorEnabled)
-                            {
-                                PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
-                                PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
-                                if (MainForm.GetMainForm != null)
-                                {
-                                    MainForm.RSensor?.Stop_IR_Timer();
-                                    MainForm.RSensor?.SetInterval();
-                                    MainForm.RSensor?.Start_IR_Timer();
-                                    //MainForm.AllChangesApply();
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (IrSensorEnabled)
-                            {
-                                PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, false);
-                                if (MainForm.GetMainForm != null)
-                                {
-                                    if (MainForm.RSensor != null)
-                                    {
-                                        MainForm.RSensor.Stop_IR_Timer();
-                                    }
-                                    //MainForm.AllChangesApply();
-                                }
-                            }
-                        }
-                    }
-                    else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && MULTI_WINDOW.RecordingIsOn() == false)
-                    {
-                        for (int i = 0; i < 4; i++)
-                        {
-                            PROPERTY_FUNCTIONS.Set_Human_Sensor(i, parameterOnOffSwitch);
+                            PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CameraIndex, out bool IrSensorEnabled);
                             if (parameterOnOffSwitch)
-                                PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, parameterOnOffSwitch);
+                            {
+                                if (!IrSensorEnabled)
+                                {
+                                    PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
+                                    PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
+                                    if (MainForm.GetMainForm != null)
+                                    {
+                                        MainForm.RSensor?.Stop_IR_Timer();
+                                        MainForm.RSensor?.SetInterval();
+                                        MainForm.RSensor?.Start_IR_Timer();
+                                        //MainForm.AllChangesApply();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (IrSensorEnabled)
+                                {
+                                    PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, false);
+                                    if (MainForm.GetMainForm != null)
+                                    {
+                                        if (MainForm.RSensor != null)
+                                        {
+                                            MainForm.RSensor.Stop_IR_Timer();
+                                        }
+                                        //MainForm.AllChangesApply();
+                                    }
+                                }
+                            }
                         }
-                        
-                        //if (MainForm.GetMainForm != null)
-                        //{
-                        //    //MainForm.AllChangesApply();
-                        //}
+                        else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && MULTI_WINDOW.RecordingIsOn() == false)
+                        {
+                            for (int i = 0; i < 4; i++)
+                            {
+                                PROPERTY_FUNCTIONS.Set_Human_Sensor(i, parameterOnOffSwitch);
+                                if (parameterOnOffSwitch)
+                                    PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, parameterOnOffSwitch);
+                            }
+
+                            //if (MainForm.GetMainForm != null)
+                            //{
+                            //    //MainForm.AllChangesApply();
+                            //}
+                        }
                     }
+                    else
+                    {
+                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                        {
+                            PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CameraIndex, out bool IrSensorEnabled);
+                            if (parameterOnOffSwitch)
+                            {
+                                if (!IrSensorEnabled)
+                                {
+                                    PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
+                                    PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
+                                    if (MainForm.GetMainForm != null)
+                                    {
+                                        MainForm.RSensor?.Stop_IR_Timer();
+                                        MainForm.RSensor?.SetInterval();
+                                        MainForm.RSensor?.Start_IR_Timer();
+                                        //MainForm.AllChangesApply();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                WrongParameter = true;
+                            }
+                        }
+                        else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8)
+                        {
+                            if(parameterOnOffSwitch)
+                            {
+                                for (int i = 0; i < 4; i++)
+                                {
+                                    PROPERTY_FUNCTIONS.Set_Human_Sensor(i, parameterOnOffSwitch);
+                                    if (parameterOnOffSwitch)
+                                        PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, parameterOnOffSwitch);
+                                }
+                            }
+                            else
+                            {
+                                WrongParameter = true;
+                            }
+                            //if (MainForm.GetMainForm != null)
+                            //{
+                            //    //MainForm.AllChangesApply();
+                            //}
+                        }
+                    }
+                    
                     //No need to remember the state
                     //Properties.Settings.Default.Save();
                     break;
@@ -1727,16 +1777,24 @@ namespace FaceDetection
         private static bool CheckCameraIndex(int cameraIndex)
         {
             bool retval = false;
-            if ((cameraIndex == 8 || (cameraIndex>=0 && cameraIndex < 4)))
+            if (ConnectedCameraCount<=cameraIndex && cameraIndex != 8 && MethodName != "n")
             {
-                CameraIndex = cameraIndex;
-                retval = true;
+                WrongParameter = true;
             }
-            else if (cameraIndex == 4 && MethodName == "n")
+            else
             {
-                CameraIndex = 0;
-                retval = true;
+                if ((cameraIndex == 8 || (cameraIndex >= 0 && cameraIndex < 4)))
+                {
+                    CameraIndex = cameraIndex;
+                    retval = true;
+                }
+                else if (cameraIndex == 4 && MethodName == "n")
+                {
+                    CameraIndex = 0;
+                    retval = true;
+                }
             }
+            
             return retval;
         }
 
