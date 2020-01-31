@@ -23,8 +23,8 @@ namespace FaceDetection
         /// <summary>
         /// currentl index, not MAIN
         /// </summary>
-        private static int CameraIndex = -1;
-        private static bool wakeUpCall;
+        public static int CameraIndex = -1;
+        public static bool WAKEUPCALL { get; set; }
         /// <summary>
         /// Important for UNIT TEST Only variable. Ignore
         /// </summary>
@@ -66,6 +66,7 @@ namespace FaceDetection
 
             parameterOnOffSwitch = false;
             parameterTime = 0;
+            CameraIndex = -1;
 
             Logger.Add(param);
 
@@ -132,39 +133,7 @@ namespace FaceDetection
                                         WrongParameter = true;
                                         i = parameters.Count;
                                     }
-                                    break;
-                                case "c":
-                                    //in this case any non digit value for the c parameter will turn to 0                                    
-                                    //cameraIndex = Int32.Parse(elem.Substring(2)) - 1;
-                                    //fixing it:
-                                    try
-                                    {
-                                        int ci = Int32.Parse(elem.Substring(2));
-                                        if (CheckCameraIndex(ci - 1))
-                                        {
-                                            CamIndexIsPresent = true;
-                                        }
-                                        else
-                                        {
-                                            WrongParameter = false;
-                                        }
-                                    }
-                                    catch (ArgumentNullException anx)
-                                    {
-                                        WrongParameter = true;
-                                        i = parameters.Count;
-                                    }
-                                    catch (FormatException fx)
-                                    {
-                                        WrongParameter = true;
-                                        i = parameters.Count;
-                                    }
-                                    catch (OverflowException ofx)
-                                    {
-                                        WrongParameter = true;
-                                        i = parameters.Count;
-                                    }
-                                    break;
+                                    break;                                
                                 case "t":
                                     try
                                     {
@@ -200,7 +169,42 @@ namespace FaceDetection
                         //WhichCase = elem;
                     }
 
-
+                    for(int j = 1; j < parameters.Count; j++)
+                    {
+                        elem = parameters.ElementAt(j).ToLower();
+                            switch (elem.Substring(0, 1))
+                            {
+                            case "c":
+                                try
+                                {
+                                    int ci = Int32.Parse(elem.Substring(2));
+                                    if (CheckCameraIndex(ci - 1))
+                                    {
+                                        CamIndexIsPresent = true;
+                                    }
+                                    else
+                                    {
+                                        WrongParameter = true;
+                                    }
+                                }
+                                catch (ArgumentNullException anx)
+                                {
+                                    WrongParameter = true;
+                                    j = parameters.Count;
+                                }
+                                catch (FormatException fx)
+                                {
+                                    WrongParameter = true;
+                                    j = parameters.Count;
+                                }
+                                catch (OverflowException ofx)
+                                {
+                                    WrongParameter = true;
+                                    j = parameters.Count;
+                                }
+                                break;
+                        }
+                    }
 
                     #region OLD SWITCH LOGIC
 
@@ -748,11 +752,11 @@ namespace FaceDetection
             switch (MethodName)
             {
                 case "":// FFTF
-                    if (wakeUpCall && CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                    if (WAKEUPCALL && CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                     {
                         //START the selected camera only
                     }
-                    else if (wakeUpCall && (CameraIndex == 8))
+                    else if (WAKEUPCALL && (CameraIndex == 8))
                     {
                         //Start all cams
                     }
@@ -808,7 +812,7 @@ namespace FaceDetection
                     break;
             }
             PARAMETERS.PARAM.Clear();
-            CurrentTestResult = MethodName;
+            CurrentTestResult = "MAIN CAMERA SET";
         }
 
         /// <summary>
@@ -994,7 +998,7 @@ namespace FaceDetection
                     }
                     break;
                 case "v"://TTFF
-                    if (wakeUpCall)
+                    if (WAKEUPCALL)
                     {
                         if (!parameterOnOffSwitch)
                         {
@@ -1061,7 +1065,7 @@ namespace FaceDetection
                 case "w"://TTFF
                     try
                     {
-                        if(wakeUpCall)
+                        if(WAKEUPCALL)
                         {
                             if (parameterOnOffSwitch)
                             {
@@ -1137,66 +1141,14 @@ namespace FaceDetection
                     CurrentTestResult = MethodName + " case, camera index conditions passed";
                     break;
                 case "v"://TTTF
-                    if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && SwitchIsPresent)
+                    if(WAKEUPCALL)
                     {
-                        for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                        {
-                            if (parameterOnOffSwitch)
-                            {
-                                CurrentTestResult = "Show all windows";
-                                isMinimized = false;
-                                try
-                                {
-                                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
-                                    MULTI_WINDOW.formList[i]?.Show();
-                                    MULTI_WINDOW.formList[i]?.Activate();
-                                }
-                                catch (ArgumentOutOfRangeException)
-                                {
-
-                                }
-                            }
-                            else
-                            {
-                                CurrentTestResult = "Hiding all windows";
-                                isMinimized = true;
-                                MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
-                            }
-                        }
-                        CurrentTestResult = "Show all windows";
+                        StartAndHideWindows();
                     }
-                    else if (CheckCameraIndex(CameraIndex))
+                    else
                     {
-                        if (parameterOnOffSwitch)
-                        {
-                            CurrentTestResult = "Show 1 window";
-                            isMinimized = false;
-                            try
-                            {
-                                MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Normal;
-                                MULTI_WINDOW.formList[CameraIndex]?.Show();
-                                MULTI_WINDOW.formList[CameraIndex]?.Activate();
-                            }
-                            catch (NullReferenceException)
-                            {
-
-                            }
-                        }
-                        else
-                        {
-                            CurrentTestResult = "Hiding 1 window";
-                            isMinimized = true;
-                            try
-                            {
-                                MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Minimized;
-                            }
-                            catch (NullReferenceException)
-                            {
-
-                            }
-                        }
+                        ShowOrHideWindows();
                     }
-
                     PARAMETERS.PARAM.Clear();
                     break;
                 case "l"://TTTF
@@ -1355,6 +1307,101 @@ namespace FaceDetection
             CurrentTestResult = MethodName;
         }
 
+        private static void ShowOrHideWindows()
+        {
+            if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && SwitchIsPresent)
+            {
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                {
+                    if (parameterOnOffSwitch)
+                    {
+                        CurrentTestResult = "Show all windows";
+                        isMinimized = false;
+                        try
+                        {
+                            MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
+                            MULTI_WINDOW.formList[i]?.Show();
+                            MULTI_WINDOW.formList[i]?.Activate();
+                        }
+                        catch (ArgumentOutOfRangeException)
+                        {
+
+                        }
+                    }
+                    else
+                    {
+                        CurrentTestResult = "Hiding all windows";
+                        isMinimized = true;
+                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
+                    }
+                }
+                CurrentTestResult = "Show all windows";
+            }
+            else if (CheckCameraIndex(CameraIndex))
+            {
+                if (parameterOnOffSwitch)
+                {
+                    CurrentTestResult = "Show 1 window";
+                    isMinimized = false;
+                    try
+                    {
+                        MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Normal;
+                        MULTI_WINDOW.formList[CameraIndex]?.Show();
+                        MULTI_WINDOW.formList[CameraIndex]?.Activate();
+                    }
+                    catch (NullReferenceException)
+                    {
+
+                    }
+                }
+                else
+                {
+                    CurrentTestResult = "Hiding 1 window";
+                    isMinimized = true;
+                    try
+                    {
+                        MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Minimized;
+                    }
+                    catch (NullReferenceException)
+                    {
+
+                    }
+                }
+            }
+        }
+
+        private static void StartAndHideWindows()
+        {
+            if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && SwitchIsPresent)
+            {
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                {
+                    if (!parameterOnOffSwitch)
+                    {
+                        CurrentTestResult = "Hiding all windows";
+                        isMinimized = true;
+                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
+                    }
+                }
+            }
+            else if (CheckCameraIndex(CameraIndex))
+            {
+                if (!parameterOnOffSwitch)
+                {
+                    CurrentTestResult = "Hiding 1 window";
+                    isMinimized = true;
+                    try
+                    {
+                        MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Minimized;
+                    }
+                    catch (NullReferenceException)
+                    {
+
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// TTTT
         /// </summary>
@@ -1365,7 +1412,7 @@ namespace FaceDetection
                 case "h"://TTTT
                     try
                     {
-                        if(wakeUpCall)
+                        if(WAKEUPCALL)
                         {
                             if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && MULTI_WINDOW.RecordingIsOn() == false)
                             {
@@ -1477,7 +1524,7 @@ namespace FaceDetection
                 PARAM.Reverse();
                 PARAM.Add("uvccameraviewer");
                 PARAM.Reverse();
-                wakeUpCall = true;
+                WAKEUPCALL = true;
                 HandleParameters(PARAM);
 
                 if (isMinimized)
@@ -1511,7 +1558,7 @@ namespace FaceDetection
             {
                 CameraIndex = cameraIndex;
                 retval = true;
-            }else if (cameraIndex==4)
+            }else if (cameraIndex==4 && MethodName == "n")
             {
                 CameraIndex = 0;
                 retval = true;
@@ -1537,34 +1584,6 @@ namespace FaceDetection
         //        return cameraIndex + 1;
         //    }
         //}
-        class DLLIMPORT
-        {
-            #region DLL IMPORTS
-            [DllImport("user32.dll")]
-            public static extern bool GetCursorPos(out Point p);
-            [DllImport("user32.dll")]
-            private static extern int SendMessage(int hWnd, int hMsg, int wParam, int lParam);
-
-            [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-            private static extern IntPtr SendMessageTimeout(
-                IntPtr hWnd,
-                uint Msg,
-                UIntPtr wParam,
-                IntPtr lParam,
-                SendMessageTimeoutFlags fuFlags,
-                uint uTimeout,
-                out UIntPtr lpdwResult);
-
-            [Flags]
-            enum SendMessageTimeoutFlags : uint
-            {
-                SMTO_NORMAL = 0x0,
-                SMTO_BLOCK = 0x1,
-                SMTO_ABORTIFHUNG = 0x2,
-                SMTO_NOTIMEOUTIFNOTHUNG = 0x8,
-                SMTO_ERRORONEXIT = 0x20
-            }
-            #endregion DLL IMPORTS
-        }
+        
     }
 }
