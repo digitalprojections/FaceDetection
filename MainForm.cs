@@ -147,7 +147,24 @@ namespace FaceDetection
                 //CREATE CAMERA WINDOWS
                 MULTI_WINDOW.CreateCameraWindows();
                 MULTI_WINDOW.FormSettingsChanged();
-            }            
+            }
+            
+            if(PARAMETERS.callByParameters)
+            {
+                if (PARAMETERS.minimizedByParameters)
+                {
+                    for (int i = 0; i < Properties.Settings.Default.camera_count; i++)
+                    {
+                        if (PARAMETERS.minimizedByParameter[i])
+                        {
+                            MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
+                        }
+                    }
+                    PARAMETERS.minimizedByParameters = false;
+                }
+
+                PARAMETERS.callByParameters = false;
+            }
 
             GC.Collect();
         }
