@@ -882,6 +882,7 @@ namespace FaceDetection
                         WrongParameter = true;
                     }
                     break;
+
                 // Change main camera
                 case "n"://TFFF
                     if (!WAKEUPCALL)
@@ -991,6 +992,7 @@ namespace FaceDetection
                         WrongParameter = true;
                     }
                     break;
+
                 // Change main camera
                 case "n"://TFTF
                     if (!WAKEUPCALL)
@@ -1008,10 +1010,6 @@ namespace FaceDetection
                                 Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
                             }
                             PARAM.Clear();
-                        }
-                        else
-                        {
-
                         }
                         CurrentTestResult = MethodName + " case, camera index conditions passed";
                     }
@@ -1082,7 +1080,8 @@ namespace FaceDetection
                             {                                
                                 MainForm.Settingui?.ForgetAndClose();
                             }
-                        }else
+                        }
+                        else
                         {
                             if (parameterOnOffSwitch)
                             {
@@ -1454,41 +1453,42 @@ namespace FaceDetection
                 case "w"://TTTF
                     try
                     {
-                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                        if (WAKEUPCALL)
                         {
-                            if (parameterOnOffSwitch)
+                            if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                             {
-                                PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(CameraIndex, true);
-                                Properties.Settings.Default.Save();
-                                if (MainForm.GetMainForm != null)
+                                if (parameterOnOffSwitch)
                                 {
-                                    MainForm.AllChangesApply();
+                                    PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(CameraIndex, true);
+                                    Properties.Settings.Default.Save();
+                                }
+                                else
+                                {
+                                    WrongParameter = true;
                                 }
                             }
-                            else
+                            else if (CheckCameraIndex(CameraIndex) && (CameraIndex == 8))
                             {
-                                WrongParameter = true;
-                            }
-                        }
-                        else if (CheckCameraIndex(CameraIndex) && (CameraIndex == 8))
-                        {
-                            //Support all
-                            if (parameterOnOffSwitch)
-                            {
-                                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                                //Support all
+                                if (parameterOnOffSwitch)
                                 {
-                                    PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(i, true);                                    
+                                    for (int i = 0; i < Properties.Settings.Default.camera_count; i++)
+                                    {
+                                        PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(i, true);
+                                    }
+                                    Properties.Settings.Default.Save();
                                 }
-                                Properties.Settings.Default.Save();
-                                if (MainForm.GetMainForm != null)
-                                    MainForm.AllChangesApply();
+                                else
+                                {
+                                    WrongParameter = true;
+                                }
                             }
-                            else
-                            {
-                                WrongParameter = true;
-                            }
+                            PARAM.Clear();
                         }
-                        PARAM.Clear();
+                        else
+                        {
+                            WrongParameter = true;
+                        }
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
