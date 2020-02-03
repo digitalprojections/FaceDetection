@@ -35,6 +35,7 @@ namespace FaceDetection
         private static string MethodName = "";
 
         public static int ConnectedCameraCount { get; private set; }
+        public static decimal AllowedCameraCount { get; private set; }
 
         /// <summary>
         /// Methodname is present
@@ -78,6 +79,7 @@ namespace FaceDetection
             MethodName = " ";
 
             ConnectedCameraCount = Camera.GetCameraCount().Length;
+            AllowedCameraCount = Properties.Settings.Default.camera_count;
 
             /*
              Handle the initial start up CL parameters, if exist
