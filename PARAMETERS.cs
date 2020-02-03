@@ -793,7 +793,7 @@ namespace FaceDetection
                     {
                         for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                         {
-                            if (i = CameraIndex)
+                            if (i == CameraIndex)
                             {
                                 switch (CameraIndex)
                                 {

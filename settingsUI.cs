@@ -1150,13 +1150,17 @@ namespace FaceDetection
 
         private void StorePath_TextChanged(object sender, EventArgs e)
         {
+            //255??? long folder path UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UV
             //Console.WriteLine(Path.IsPathRooted(storePath.Text) + " - path rooted. " + Path.GetFullPath(storePath.Text) + " " + Path.GetPathRoot(storePath.Text));
+            
+
             bool pathChanged = false;
             char[] invalidPathChars = {'\"', '*', '?', '!', '<', '>', '|', ':', '.'};
 
             char[] characters = storePath.Text.ToCharArray();
             for(int i=0; i< characters.Length; i++)
             {
+                //WHY NOT JUST CHECK Path.isRooted(storePath.Text)??
                 if (i == 0) // First character must be a letter (disk name), so if not, back to D
                 {   
                     if (characters[i] != 'A' && characters[i] != 'B' && characters[i] != 'C' && characters[i] != 'D' && characters[i] != 'E' && characters[i] != 'F'
