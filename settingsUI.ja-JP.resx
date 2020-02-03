@@ -137,7 +137,7 @@
     <value>カメラ番号</value>
   </data>
   <data name="bl_idling_time_label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 74</value>
+    <value>261, 74</value>
   </data>
   <data name="bl_idling_time_label.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 12</value>
@@ -146,13 +146,13 @@
     <value>未操作時間</value>
   </data>
   <data name="numericUpDownBacklight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>322, 68</value>
+    <value>330, 68</value>
   </data>
   <data name="nud_manual_record_time.Location" type="System.Drawing.Point, System.Drawing">
-    <value>323, 13</value>
+    <value>331, 13</value>
   </data>
   <data name="lb_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>397, 19</value>
+    <value>398, 19</value>
   </data>
   <data name="lb_seconds.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 12</value>
@@ -161,7 +161,7 @@
     <value>秒</value>
   </data>
   <data name="lb_manual_recording_time.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 19</value>
+    <value>226, 19</value>
   </data>
   <data name="lb_manual_recording_time.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 12</value>
@@ -173,16 +173,16 @@
     <value>7, 308</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>419, 102</value>
+    <value>424, 102</value>
   </data>
   <data name="event_record_time_before_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 18</value>
+    <value>327, 18</value>
   </data>
   <data name="nud_event_record_after.Location" type="System.Drawing.Point, System.Drawing">
-    <value>317, 47</value>
+    <value>327, 47</value>
   </data>
   <data name="lb_post_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 53</value>
+    <value>190, 53</value>
   </data>
   <data name="lb_post_event.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 12</value>
@@ -191,7 +191,7 @@
     <value>録画時間(イベント発生後)</value>
   </data>
   <data name="lb_pre_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 24</value>
+    <value>190, 24</value>
   </data>
   <data name="lb_pre_event.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 12</value>
@@ -200,7 +200,7 @@
     <value>録画時間(イベント発生前)</value>
   </data>
   <data name="label23_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>388, 55</value>
+    <value>394, 55</value>
   </data>
   <data name="label23_seconds.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 12</value>
@@ -209,7 +209,7 @@
     <value>秒</value>
   </data>
   <data name="label22_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>388, 26</value>
+    <value>394, 26</value>
   </data>
   <data name="label22_seconds.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 12</value>
@@ -227,7 +227,7 @@
     <value>イベントレコーダー</value>
   </data>
   <data name="label20_minutes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>396, 74</value>
+    <value>398, 74</value>
   </data>
   <data name="label20_minutes.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 12</value>
@@ -257,10 +257,10 @@
     <value>8, 105</value>
   </data>
   <data name="groupBox_functionalitySettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 197</value>
+    <value>423, 197</value>
   </data>
   <data name="cb_human_sensor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 27</value>
+    <value>9, 28</value>
   </data>
   <data name="cb_human_sensor.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 16</value>
@@ -269,10 +269,7 @@
     <value>人感センサー</value>
   </data>
   <data name="nud_seconds_after_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 166</value>
-  </data>
-  <data name="cb_face_recognition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 47</value>
+    <value>324, 166</value>
   </data>
   <data name="cb_face_recognition.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 16</value>
@@ -281,10 +278,10 @@
     <value>顔認識をする</value>
   </data>
   <data name="nud_seconds_before_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 137</value>
+    <value>324, 137</value>
   </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 172</value>
+    <value>187, 172</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 12</value>
@@ -293,7 +290,7 @@
     <value>録画時間(イベント発生後)</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 143</value>
+    <value>187, 143</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 12</value>
@@ -302,7 +299,7 @@
     <value>録画時間(イベント発生前)</value>
   </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 23</value>
+    <value>194, 23</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 12</value>
@@ -311,7 +308,7 @@
     <value>再撮影までのインターバル</value>
   </data>
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>387, 172</value>
+    <value>391, 172</value>
   </data>
   <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 12</value>
@@ -320,7 +317,7 @@
     <value>秒</value>
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>386, 143</value>
+    <value>391, 143</value>
   </data>
   <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 12</value>
@@ -329,13 +326,13 @@
     <value>秒</value>
   </data>
   <data name="nud_reinitiation_interval.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 17</value>
+    <value>323, 17</value>
   </data>
   <data name="cm_capture_mode.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 109</value>
   </data>
   <data name="lb_seconds2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>386, 23</value>
+    <value>391, 23</value>
   </data>
   <data name="lb_seconds2.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 12</value>
@@ -353,7 +350,7 @@
     <value>撮影別</value>
   </data>
   <data name="numericUpDown2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 47</value>
+    <value>323, 47</value>
   </data>
   <data name="cb_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 16</value>
@@ -362,7 +359,7 @@
     <value>オペレーターを撮影する</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 53</value>
+    <value>267, 53</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 12</value>
@@ -371,7 +368,7 @@
     <value>実施周期</value>
   </data>
   <data name="lb_milliseconds1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>379, 53</value>
+    <value>391, 53</value>
   </data>
   <data name="lb_milliseconds1.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 12</value>
@@ -380,7 +377,7 @@
     <value>ミリ秒</value>
   </data>
   <data name="cb_recording_operation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 67</value>
+    <value>9, 70</value>
   </data>
   <data name="cb_recording_operation.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 16</value>
@@ -518,10 +515,10 @@
     <value>表示位置</value>
   </data>
   <data name="numericUpDownY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 43</value>
+    <value>76, 45</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 49</value>
+    <value>57, 51</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 22</value>
@@ -563,7 +560,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADQ
-        HQAAAk1TRnQBSQFMAgEBAwEAAcQBBAHEAQQBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
+        HQAAAk1TRnQBSQFMAgEBAwEAAcwBBAHMAQQBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
         AwABGAMAAQEBAAEgBgABJC4AAw8BFAFYAlsBywEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8
         An8B/gEAAbwB+gH/AUACqAH9A0ABcRwAAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
         AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMB
@@ -698,15 +695,12 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA0
-        AQAAAk1TRnQBSQFMAgEBAgEAAVwBAgFcAQIBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        AQAAAk1TRnQBSQFMAgEBAgEAAWQBAgFkAQIBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEYBgABDBUALf8DAC3/YwAt/wMALf9jAC3/AwAt/2MALf8DAC3/YwAt/wMAD/8DHgPy
         GP9jAC3/AwAM/wMeBgADzxX/YwAt/wMACf8DDAMAA/UDDwMAFf9jAC3/AwAG/wNJAwAD5wb/A0ADAAPP
         D/9jAC3/AwAY/wMPAwAD8gz/YwAt/wMAG/8DPAMAA9cJ/2MALf8DAB7/AycDAAPeBv9jAC3/AwAh/wMw
         A9MG/2MALf8DAC3/YwAt/wMALf9jAC3/AwAt//8AIQABQgFNAT4HAAE+AwABKAMAAUADAAEQAwABAQEA
         AQEFAAGAFwAD/4EACw==
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
 </root>

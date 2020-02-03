@@ -750,6 +750,8 @@ namespace FaceDetection
                     WrongParameter = true;
                     break;
             }
+
+            WAKEUPCALL = false;
         }
 
         private static int CheckIntervalValue(int v)
@@ -895,9 +897,10 @@ namespace FaceDetection
                         {
                             MULTI_WINDOW.EventRecorderOn(MainCamera);
                         }
-                        else
+                        else if(WAKEUPCALL)
                         {
                             WrongParameter = true;
+                            
                         }
                     }
                     catch (ArgumentOutOfRangeException e)
@@ -994,7 +997,7 @@ namespace FaceDetection
                         {
                             MULTI_WINDOW.EventRecorderOn(CameraIndex);
                         }
-                        else
+                        else if(WAKEUPCALL)
                         {
                             WrongParameter = true;
                         }
