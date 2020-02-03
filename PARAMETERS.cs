@@ -862,15 +862,16 @@ namespace FaceDetection
                 case "n"://TFFF
                     if (!WAKEUPCALL)
                     {                        
-                        if (MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.DISPLAYED == true && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)].recordingInProgress == false && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)].recordingInProgress == false)
+                        if (MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.DISPLAYED == true && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false)
                         {
                             Properties.Settings.Default.main_camera_index = GetNextCameraIndex(MainCamera);
                             Properties.Settings.Default.Save();
-                            MULTI_WINDOW.FormSettingsChanged();
+                            MULTI_WINDOW.FormSettingsChanged();                            
                         }
                         else
                         {
                             Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
+                            CurrentTestResult = "main camera change?";
                         }
                         PARAM.Clear();                     
                     }
@@ -885,7 +886,7 @@ namespace FaceDetection
                     break;
             }
             PARAMETERS.PARAM.Clear();
-            CurrentTestResult = "MAIN CAMERA SET";
+            //CurrentTestResult = "MAIN CAMERA SET";
         }
 
         /// <summary>
@@ -1104,6 +1105,14 @@ namespace FaceDetection
 
                 //Face recognition
                 case "d":
+                    if (WAKEUPCALL)
+                    {
+                        //only On switch is allowed
+                    }
+                    else
+                    {
+                        //both On and Off switch checked
+                    }
                     break;
 
                 // Manual record
