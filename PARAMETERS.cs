@@ -38,6 +38,7 @@ namespace FaceDetection
         private static string MethodName = "";
 
         public static int ConnectedCameraCount { get; private set; }
+        public static decimal AllowedCameraCount { get; private set; }
 
         /// <summary>
         /// Methodname is present
@@ -81,6 +82,7 @@ namespace FaceDetection
             MethodName = " ";
 
             ConnectedCameraCount = Camera.GetCameraCount().Length;
+            AllowedCameraCount = Properties.Settings.Default.camera_count;
 
             /*
              Handle the initial start up CL parameters, if exist
@@ -833,6 +835,10 @@ namespace FaceDetection
                         {
                             SNAPSHOT_SAVER.TakeSnapShot(MainCamera, "event");
                         }
+                        else
+                        {
+                            WrongParameter = true;
+                        }
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
@@ -847,6 +853,11 @@ namespace FaceDetection
                         if (!WAKEUPCALL && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             MULTI_WINDOW.EventRecorderOn(MainCamera);
+                        }
+                        else if(WAKEUPCALL)
+                        {
+                            WrongParameter = true;
+                            
                         }
                     }
                     catch (ArgumentOutOfRangeException e)
@@ -875,15 +886,16 @@ namespace FaceDetection
                 case "n"://TFFF
                     if (!WAKEUPCALL)
                     {                        
-                        if (MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.DISPLAYED == true && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)].recordingInProgress == false && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)].recordingInProgress == false)
+                        if (MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.DISPLAYED == true && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false)
                         {
                             Properties.Settings.Default.main_camera_index = GetNextCameraIndex(MainCamera);
                             Properties.Settings.Default.Save();
-                            MULTI_WINDOW.FormSettingsChanged();
+                            MULTI_WINDOW.FormSettingsChanged();                            
                         }
                         else
                         {
                             Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
+                            CurrentTestResult = "main camera change?";
                         }
                         PARAM.Clear();                     
                     }
@@ -898,7 +910,7 @@ namespace FaceDetection
                     break;
             }
             PARAM.Clear();
-            CurrentTestResult = "MAIN CAMERA SET";
+            //CurrentTestResult = "MAIN CAMERA SET";
         }
 
         /// <summary>
@@ -923,6 +935,10 @@ namespace FaceDetection
                                 SNAPSHOT_SAVER.TakeSnapShotAll();
                             }
                         }
+                        else
+                        {
+                            WrongParameter = true;
+                        }
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
@@ -937,6 +953,10 @@ namespace FaceDetection
                         if (!WAKEUPCALL && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) 
                         {
                             MULTI_WINDOW.EventRecorderOn(CameraIndex);
+                        }
+                        else if(WAKEUPCALL)
+                        {
+                            WrongParameter = true;
                         }
                     }
                     catch (ArgumentOutOfRangeException e)
@@ -959,6 +979,10 @@ namespace FaceDetection
                             {
                                 Application.Exit();
                             }
+                        }
+                        else
+                        {
+                            WrongParameter = true;
                         }
                     }
                     catch (ArgumentOutOfRangeException e)
@@ -1029,6 +1053,10 @@ namespace FaceDetection
                                 isControlButtonVisible = false;
                             }
                             MULTI_WINDOW.formList[MainCamera]?.SettingChangesApply(MainCamera);
+                        }
+                        else
+                        {
+                            WrongParameter = true;
                         }
                     }
                     catch (ArgumentOutOfRangeException e)
@@ -1117,6 +1145,14 @@ namespace FaceDetection
 
                 //Face recognition
                 case "d":
+                    if (WAKEUPCALL)
+                    {
+                        //only On switch is allowed
+                    }
+                    else
+                    {
+                        //both On and Off switch checked
+                    }
                     break;
 
                 // Manual record
@@ -1259,13 +1295,20 @@ namespace FaceDetection
                 case "l"://TTFF
                     try
                     {
-                        if (parameterOnOffSwitch)
+                        if(!WAKEUPCALL)
                         {
-                            MainForm.GetMainForm?.BackLight.ON();
+                            if (parameterOnOffSwitch)
+                            {
+                                MainForm.GetMainForm?.BackLight.ON();
+                            }
+                            else
+                            {
+                                MainForm.GetMainForm?.BackLight.OFF();
+                            }
                         }
                         else
                         {
-                            MainForm.GetMainForm?.BackLight.OFF();
+                            WrongParameter = true;
                         }
                     }
                     catch (ArgumentOutOfRangeException e)
@@ -1604,6 +1647,7 @@ namespace FaceDetection
 
                 // Face recognition
                 case "d":
+                    WrongParameter = true;
                     break;
 
                 default:
