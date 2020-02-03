@@ -36,6 +36,8 @@ namespace FaceDetectionX
         /// <summary>Release resource.</summary>
         public Action Release { get; private set; }
 
+        public static int RetryCount { get; set; }
+
         /// <summary>Get image.</summary>
         /// <remarks>Immediately after starting, images may not be acquired.</remarks>
         public Func<Bitmap> GetBitmap { get; private set; }
@@ -77,7 +79,7 @@ namespace FaceDetectionX
             Size size = FaceDetection.PROPERTY_FUNCTIONS.Get_Stored_Resolution(cameraIndex);
             int fps = Int32.Parse(FaceDetection.PROPERTY_FUNCTIONS.GetFPS(cameraIndex));
             var camera_list = FindDevices();
-            if (cameraIndex < camera_list.Length)
+            if (cameraIndex < camera_list.Length && parentwindow!=null)
             {
                 Init(cameraIndex, size, fps, parentwindow.Handle);
             }
@@ -244,6 +246,9 @@ namespace FaceDetectionX
             return result;
         }
 
+        /*
+        
+        */
         /// <summary>
         /// サンプルグラバを作成する
         /// </summary>
@@ -480,7 +485,22 @@ namespace FaceDetectionX
                         mediaControl.Stop();
                         break;
                     case FILTER_STATE.Running:
-                        mediaControl.Run();
+                        try
+                        {
+                            mediaControl.Run();
+                            
+                        }
+                        catch(COMException cx)
+                        {
+                            
+                            //GC.Collect();
+                            //if (UsbCamera.RetryCount<2)
+                            //{
+                            //    UsbCamera.RetryCount++;
+                            //    mediaControl.Stop();
+                            //    DirectShow.PlayGraph(graph, DirectShow.FILTER_STATE.Running);
+                            //}
+                        }
                         break;
                 }
             }

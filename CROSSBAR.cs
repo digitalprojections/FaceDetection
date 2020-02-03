@@ -44,7 +44,7 @@ namespace FaceDetection
         /// </summary>
         //static System.Timers.Timer the_timer = new System.Timers.Timer();
         System.Timers.Timer the_timer;
-
+        public System.Timers.Timer THETIMER { get => the_timer; }
         /// <summary>
         /// No operator capturing during this period.
         /// <see cref="OPER_BAN"/>
@@ -54,6 +54,7 @@ namespace FaceDetection
 
         //System.Timers.Timer icon_timer = new System.Timers.Timer();
         public System.Timers.Timer icon_timer;
+        public System.Timers.Timer ICONTIMER { get => icon_timer; }
         readonly CameraForm window;
 
         public bool Recording_is_on { get => recording_is_on; set => recording_is_on = value; }
@@ -425,7 +426,7 @@ namespace FaceDetection
                         }
                         duration = decimal.ToInt32(Properties.Settings.Default.manual_record_time) * 1000;
                         the_timer.Enabled = true;
-                        the_timer.Interval = duration + 2;
+                        the_timer.Interval = duration + 2000;
                         the_timer.Enabled = false;
                         
                         if (this != null)
@@ -447,7 +448,7 @@ namespace FaceDetection
                         Logger.Add(duration + " is the duration of " + recorder.CAMERA_MODE);
 
                         the_timer.Enabled = true;
-                        the_timer.Interval = duration + 3;
+                        the_timer.Interval = duration + 3000;
                         the_timer.Enabled = false;
                         if (this != null)
                         {
@@ -463,7 +464,7 @@ namespace FaceDetection
                         duration = secondsAfterEvent * 1000;
                         Logger.Add(duration + "  " + recorder.CAMERA_MODE);
                         the_timer.Enabled = true;
-                        the_timer.Interval = duration + 3;
+                        the_timer.Interval = duration + 3000;
                         the_timer.Enabled = false;
                         Logger.Add("No operator capture timer interval: " + no_opcap_timer.Interval.ToString());
                         if (this != null)
