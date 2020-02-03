@@ -133,9 +133,16 @@ namespace FaceDetection
             {
                 if (!String.IsNullOrEmpty(formList[i].Text)) // Form is closed
                 {
-                    if (formList[i].crossbar.GetRecordingState())
+                    try
                     {
-                        recmodeison = true;
+                        if (formList[i].crossbar.GetRecordingState())
+                        {
+                            recmodeison = true;
+                        }
+                    }
+                    catch (NullReferenceException nre)
+                    {
+
                     }
                 }
             }

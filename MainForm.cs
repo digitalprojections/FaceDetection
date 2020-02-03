@@ -424,8 +424,8 @@ namespace FaceDetection
 
         private new void Dispose()
         {
-            datetime_timer.Dispose();
-            backLight.Dispose();
+            datetime_timer?.Dispose();
+            backLight?.Dispose();
         }
 
         public static void ManageDeleteOldFilesTimer(bool checkboxState)

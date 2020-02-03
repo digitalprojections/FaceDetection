@@ -445,7 +445,7 @@
             0,
             0});
             this.nud_reinitiation_interval.Minimum = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
             0});
