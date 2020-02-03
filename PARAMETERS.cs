@@ -97,8 +97,16 @@ namespace FaceDetection
                                 case "m":
                                     if (elem.Substring(2).Length > 0)
                                     {
-                                        MethodName = elem.Substring(2, 1);
-                                        MethodNameIsPresent = true;
+                                        if (elem.Substring(2).Length < 2)
+                                        {
+                                            MethodName = elem.Substring(2, 1);
+                                            MethodNameIsPresent = true;
+                                        }
+                                        else
+                                        {
+                                            //wierd entry
+                                            WrongParameter = true;
+                                        }
                                     }
                                     else
                                     {
@@ -850,6 +858,28 @@ namespace FaceDetection
                         WrongParameter = true;
                     }
                     break;
+                // Change main camera
+                case "n"://TFFF
+                    if (!WAKEUPCALL)
+                    {                        
+                        if (MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.DISPLAYED == true && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)].recordingInProgress == false && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)].recordingInProgress == false)
+                        {
+                            Properties.Settings.Default.main_camera_index = GetNextCameraIndex(MainCamera);
+                            Properties.Settings.Default.Save();
+                            MULTI_WINDOW.FormSettingsChanged();
+                        }
+                        else
+                        {
+                            Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
+                        }
+                        PARAM.Clear();                     
+                    }
+                    else
+                    {
+                        WrongParameter = true;
+                    }
+
+                    break;
                 default:
                     WrongParameter = true;
                     break;
@@ -923,6 +953,37 @@ namespace FaceDetection
                         Logger.Add(e);
                         WrongParameter = true;
                     }
+                    break;
+                // Change main camera
+                case "n"://TFTF
+                    if (!WAKEUPCALL)
+                    {
+                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                        {
+                            if (MULTI_WINDOW.formList[CameraIndex]?.DISPLAYED == true && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false && MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].recordingInProgress == false)
+                            {
+                                Properties.Settings.Default.main_camera_index = CameraIndex;
+                                Properties.Settings.Default.Save();
+                                MULTI_WINDOW.FormSettingsChanged();
+                            }
+                            else
+                            {
+                                Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
+                            }
+                            PARAM.Clear();
+                        }
+                        else
+                        {
+
+                        }
+                        CurrentTestResult = MethodName + " case, camera index conditions passed";
+                    }
+                    else
+                    {
+                        //can not call from start
+                        WrongParameter = true;
+                    }
+
                     break;
                 default:// TFTF
                     WrongParameter = true;
@@ -1228,36 +1289,7 @@ namespace FaceDetection
                     
                     break;
 
-                // Change main camera
-                case "n"://TTTF
-                    if(!WAKEUPCALL)
-                    {
-                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
-                        {
-                            if (MULTI_WINDOW.formList[CameraIndex]?.DISPLAYED == true && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false && MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].recordingInProgress == false)
-                            {
-                                Properties.Settings.Default.main_camera_index = CameraIndex;
-                                Properties.Settings.Default.Save();
-                                MULTI_WINDOW.FormSettingsChanged();
-                            }
-                            else
-                            {
-                                Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
-                            }
-                            PARAM.Clear();
-                        }
-                        else
-                        {
-
-                        }
-                        CurrentTestResult = MethodName + " case, camera index conditions passed";
-                    }
-                    else
-                    {
-                        WrongParameter = true;
-                    }
-                    
-                    break;
+                
 
                 // Visible
                 case "v"://TTTF
@@ -1798,24 +1830,24 @@ namespace FaceDetection
             return retval;
         }
 
-        //private static int GetNextCameraIndex(int cameraIndex)
-        //{
-        //    //if(cameraIndex == 8)
-        //    //{
-        //    //    //すべてのカメラ指定時
-        //    //    //1から始まって9なので、0から始まると8になる
-        //    //    return cameraIndex;
-        //    //}
-        //    //else if(cameraIndex >= 3)
-        //    if (cameraIndex >= MULTI_WINDOW.displayedCameraCount)
-        //    {
-        //        return 0;
-        //    }
-        //    else
-        //    {
-        //        return cameraIndex + 1;
-        //    }
-        //}
-        
+        private static int GetNextCameraIndex(int cameraIndex)
+        {
+            if (cameraIndex >= 0)
+            {
+                if (cameraIndex >= MULTI_WINDOW.displayedCameraCount)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return cameraIndex + 1;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
     }
 }
