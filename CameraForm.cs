@@ -286,10 +286,10 @@ namespace FaceDetection
             {
                 Activate();
             }
-            else
-            {
+            //else
+            //{
                 //this.TopMost = false;
-            }
+            //}
 
             if (CameraIndex == Properties.Settings.Default.main_camera_index)
             {

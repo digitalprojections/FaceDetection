@@ -82,19 +82,19 @@ namespace FaceDetection
         /// <summary>
         /// Get from properties or set the MAIN CAMERA INDEX (Camera facing the user)
         /// </summary>
-        public int Camera_index
-        {
-            get
-            {
-                return Properties.Settings.Default.main_camera_index;
-            }
-            private set
-            {
-                Properties.Settings.Default.main_camera_index = value;
-                //Properties.Settings.Default.Save();
-                //cameraindex = value;
-            }
-        }
+        //public int Camera_index
+        //{
+        //    get
+        //    {
+        //        return Properties.Settings.Default.main_camera_index;
+        //    }
+        //    private set
+        //    {
+        //        Properties.Settings.Default.main_camera_index = value;
+        //        //Properties.Settings.Default.Save();
+        //        //cameraindex = value;
+        //    }
+        //}
 
         //public int getCameraIndexSelected()
         //{
