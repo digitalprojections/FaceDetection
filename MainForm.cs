@@ -111,14 +111,15 @@ namespace FaceDetection
                     datetime_timer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateDateTimeText);
                 }
             }
-            if (Settingui == null)
-            {
-                Settingui = new SettingsUI();
-            }
+            
         }
 
         public static void AllChangesApply()
         {
+            if (Settingui == null)
+            {
+                Settingui = new SettingsUI();
+            }
             System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Properties.Settings.Default.culture);
             
             CAMERA_INDEX = Properties.Settings.Default.main_camera_index;//MAIN CAMERA INDEX

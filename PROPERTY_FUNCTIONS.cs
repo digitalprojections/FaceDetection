@@ -196,6 +196,14 @@ namespace FaceDetection
                     break;
             }
         }
+        /// <summary>
+        /// Used by unit tests
+        /// </summary>
+        /// <returns></returns>
+        public static int GetMainCameraIndex()
+        {
+            return Properties.Settings.Default.main_camera_index;
+        }
 
         //public static void Set_Window_Size_From_Camera_Resolution(int cam_ind)
         //{

@@ -54,6 +54,7 @@ namespace FaceDetection
         private static int parameterTime = -1;
 
         public static string ParameterSet { get; private set; }
+        public static bool TESTING { get; set; }
 
         static CultureInfo culture = CultureInfo.CurrentCulture;
 
@@ -887,8 +888,9 @@ namespace FaceDetection
                 case "n"://TFFF
                     if (!WAKEUPCALL)
                     {                        
-                        if (MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.DISPLAYED == true && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false)
+                        if ((MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.DISPLAYED == true && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false) || TESTING)
                         {
+                            CurrentTestResult = "main camera change?";
                             Properties.Settings.Default.main_camera_index = GetNextCameraIndex(MainCamera);
                             Properties.Settings.Default.Save();
                             MULTI_WINDOW.FormSettingsChanged();                            
@@ -896,8 +898,9 @@ namespace FaceDetection
                         else
                         {
                             LOGGER.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
-                            CurrentTestResult = "main camera change?";
+                            
                         }
+                        
                         PARAM.Clear();                     
                     }
                     else
@@ -1862,7 +1865,7 @@ namespace FaceDetection
                             if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && MULTI_WINDOW.RecordingIsOn() == false)
                             {
                                 PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(MainCamera, out bool IrSensorEnabled);
-                                if (parameterOnOffSwitch)
+                                if (parameterOnOffSwitch && (parameterTime >0 && parameterTime<=1000))
                                 {
                                     if (!IrSensorEnabled)
                                     {
@@ -1911,7 +1914,7 @@ namespace FaceDetection
                             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(MainCamera, out bool IrSensorEnabled);
                             if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && MULTI_WINDOW.RecordingIsOn() == false)
                             {
-                                if (parameterOnOffSwitch)
+                                if (parameterOnOffSwitch && (parameterTime > 0 && parameterTime <= 1000))
                                 {
                                     if (!IrSensorEnabled)
                                     {
@@ -1927,10 +1930,14 @@ namespace FaceDetection
                                         }
                                     }
                                 }
+                                else
+                                {
+                                    WrongParameter = true;
+                                }
                             }
                             else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
                             {
-                                if (parameterOnOffSwitch)
+                                if (parameterOnOffSwitch && (parameterTime > 0 && parameterTime <= 1000))
                                 {
                                     if (!IrSensorEnabled)
                                     {
@@ -1942,6 +1949,10 @@ namespace FaceDetection
                                             MainForm.AllChangesApply();
                                         }
                                     }
+                                }
+                                else
+                                {
+                                    WrongParameter = true;
                                 }
                             }
                         }
