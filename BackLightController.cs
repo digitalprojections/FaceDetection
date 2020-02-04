@@ -92,7 +92,7 @@ namespace FaceDetection
             }
             catch (Exception x)
             {
-                Logger.Add(x);
+                LOGGER.Add(x);
             }
         }
 

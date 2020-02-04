@@ -143,7 +143,7 @@ namespace FaceDetection
             int fps = Int32.Parse(PROPERTY_FUNCTIONS.GetFPS(index));
             //IntPtr pbx = MainForm.GetMainForm.Handle;
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
-            Logger.Add(ACTIVE_RECPATH);
+            LOGGER.Add(ACTIVE_RECPATH);
             //REGULAR 0 PREEVENT
             if (CAMERA_MODE != CAMERA_MODES.PREEVENT)
             {
@@ -160,7 +160,7 @@ namespace FaceDetection
             {
                 //PREEVENT EXISTS. PERMANENT RECORDING MODE
                 targetPath = sourcePath + "/" + dstFileName;
-                Logger.Add(targetPath + " target path");
+                LOGGER.Add(targetPath + " target path");
                 try
                 {
                     Directory.CreateDirectory(sourcePath);
@@ -170,7 +170,7 @@ namespace FaceDetection
                     sourcePath = @"C:\TEMP\" + index;
                     targetPath = sourcePath + "/" + dstFileName;
                     Directory.CreateDirectory(sourcePath);
-                    Logger.Add(iox);
+                    LOGGER.Add(iox);
                 }                
             }
 
@@ -255,7 +255,7 @@ namespace FaceDetection
             {                
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, parentwindow.Width, parentwindow.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
-                Logger.Add("NOT HIDDEN MODE " + CAMERA_MODE + ", Active path: " + ACTIVE_RECPATH);
+                LOGGER.Add("NOT HIDDEN MODE " + CAMERA_MODE + ", Active path: " + ACTIVE_RECPATH);
             }
 
 
@@ -301,7 +301,7 @@ namespace FaceDetection
                         }
                         catch (System.NullReferenceException snrx)
                         {
-                            Logger.Add(snrx.Message + snrx.HResult);
+                            LOGGER.Add(snrx.Message + snrx.HResult);
                             r = 1;
                             continue;
                         }
@@ -309,7 +309,7 @@ namespace FaceDetection
                 }
                 catch (InvalidComObjectException icom)
                 {
-                    Logger.Add(icom.InnerException.ToString());
+                    LOGGER.Add(icom.InnerException.ToString());
                 }
                 GC.Collect();
                
@@ -320,7 +320,7 @@ namespace FaceDetection
                 mediaControl = (IMediaControl)graph;
                 hr = mediaControl.Run();
                 checkHR(hr, "Can't run the graph");
-                Logger.Add(" running the recorder graph ");
+                LOGGER.Add(" running the recorder graph ");
                 ON = true;
 
                 
@@ -329,7 +329,7 @@ namespace FaceDetection
             }
             catch (COMException comx)
             {
-                Logger.Add("Can not start the camera");
+                LOGGER.Add("Can not start the camera");
             }
         }
 
@@ -353,7 +353,7 @@ namespace FaceDetection
             }
             catch (Exception x)
             {
-                Logger.Add(x);
+                LOGGER.Add(x);
             }
             
             int hr = pFilewriter_sink.SetFileName(targetPath, null);
@@ -367,7 +367,7 @@ namespace FaceDetection
             //PREEVENT EXISTS. PERMANENT RECORDING MODE
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
             targetPath = sourcePath + "/" + dstFileName;
-            Logger.Add(targetPath + " target path");
+            LOGGER.Add(targetPath + " target path");
             try
             {
                 Directory.CreateDirectory(sourcePath);
@@ -377,7 +377,7 @@ namespace FaceDetection
                 sourcePath = @"C:\TEMP";
                 targetPath = sourcePath + "/" + dstFileName;
                 Directory.CreateDirectory(sourcePath);
-                Logger.Add(iox);
+                LOGGER.Add(iox);
 
             }
             mediaControl.StopWhenReady();
@@ -432,7 +432,7 @@ namespace FaceDetection
             }
             catch (ArgumentException ax)
             {
-                Logger.Add(ax.Message);
+                LOGGER.Add(ax.Message);
             }
             return result;
         }
@@ -483,7 +483,7 @@ namespace FaceDetection
         {
             if (hr < 0)
             {
-                Logger.Add(msg);
+                LOGGER.Add(msg);
                 ReleaseInterfaces();
                 DsError.ThrowExceptionForHR(hr);
             }
@@ -492,7 +492,7 @@ namespace FaceDetection
         public void ReleaseInterfaces()
         {
             ON = false;
-            Logger.Add("ReleaseInterfaces ");
+            LOGGER.Add("ReleaseInterfaces ");
             if (mediaControl != null)
                 mediaControl.StopWhenReady();
 
@@ -587,7 +587,7 @@ namespace FaceDetection
             int hr = filter.EnumPins(out epins);
             if (hr < 0)
             {
-                Logger.Add("Can't enumerate pins");
+                LOGGER.Add("Can't enumerate pins");
                 DsError.ThrowExceptionForHR(hr);
             }
 
@@ -598,13 +598,13 @@ namespace FaceDetection
                 PinInfo pinfo;
                 pins[0].QueryPinInfo(out pinfo);
                 bool found = (pinfo.name == pinname);
-                Logger.Add(pinfo.name + " is PIN for ");
+                LOGGER.Add(pinfo.name + " is PIN for ");
                 DsUtils.FreePinInfo(pinfo);
                 if (found)
                     return pins[0];
             }
 
-            Logger.Add("Pin not found");
+            LOGGER.Add("Pin not found");
             DsError.ThrowExceptionForHR(hr);
 
             return null;
@@ -617,7 +617,7 @@ namespace FaceDetection
             int hr = filter.EnumPins(out epins);
             if (hr < 0)
             {
-                Logger.Add("Can't enumerate pins");
+                LOGGER.Add("Can't enumerate pins");
                 DsError.ThrowExceptionForHR(hr);
             }
 
@@ -628,12 +628,12 @@ namespace FaceDetection
                 PinInfo pinfo;
                 pins[0].QueryPinInfo(out pinfo);
                 bool found = (pinfo.name == "Capture" || pinfo.name == "キャプチャ");
-                Logger.Add(pinfo.name + " is pinname on getCatName");
+                LOGGER.Add(pinfo.name + " is pinname on getCatName");
                 DsUtils.FreePinInfo(pinfo);
                 if (found)
                     retval = pinfo.name;
             }
-            Logger.Add("Pin found " + retval);
+            LOGGER.Add("Pin found " + retval);
             return retval;
         }
 
@@ -654,7 +654,7 @@ namespace FaceDetection
                 hr = mediaEventEx.FreeEventParams(evCode, evParam1, evParam2);
                 DsError.ThrowExceptionForHR(hr);
 
-                Logger.Add(evCode + " -evCode " + evParam1 + " " + evParam2);
+                LOGGER.Add(evCode + " -evCode " + evParam1 + " " + evParam2);
                 // Insert event processing code here, if desired (see http://msdn2.microsoft.com/en-us/library/ms783649.aspx)
             }
         }
@@ -683,7 +683,7 @@ namespace FaceDetection
 
             for (int i = 0; i < vformat.Length; i++)
             {
-                Logger.Add(vformat[i].Size.Width + " " + vformat[i].TimePerFrame);
+                LOGGER.Add(vformat[i].Size.Width + " " + vformat[i].TimePerFrame);
                 if (vformat[i].MajorType == DirectShow.DsGuid.GetNickname(DirectShow.DsGuid.MEDIATYPE_Video))
                 {
                     if (vformat[i].Caps.Guid == DirectShow.DsGuid.FORMAT_VideoInfo)
@@ -817,7 +817,7 @@ namespace FaceDetection
             // フォーマットを選択
             int hr = config.SetFormat(mt);
 
-            Logger.Add("SETTINGS OK ?" + hr);
+            LOGGER.Add("SETTINGS OK ?" + hr);
 
 
             // 解放

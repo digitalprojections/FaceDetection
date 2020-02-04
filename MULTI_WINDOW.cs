@@ -55,7 +55,7 @@ namespace FaceDetection
                 }
                 catch (NullReferenceException nrx)
                 {
-                    Logger.Add(Resource.form_closing_failure + " " + nrx.Message);
+                    LOGGER.Add(Resource.form_closing_failure + " " + nrx.Message);
                 }
             }            
         }
@@ -95,7 +95,7 @@ namespace FaceDetection
             {
                 formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.EVENT);
                 formList[cameraIndex].SetHideRecordIcon(timeAfterEvent);
-                Logger.Add(Resource.event_recording_starts);
+                LOGGER.Add(Resource.event_recording_starts);
             }
         }
 

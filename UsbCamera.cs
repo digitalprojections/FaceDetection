@@ -89,7 +89,7 @@ namespace FaceDetectionX
         {
             if (hr < 0)
             {
-                FaceDetection.Logger.Add(msg);
+                FaceDetection.LOGGER.Add(msg);
                 DirectShow.DsError.ThrowExceptionForHR(hr);
             }
         }
@@ -180,7 +180,7 @@ namespace FaceDetectionX
             }
             catch(NullReferenceException nrx)
             {
-                FaceDetection.Logger.Add(nrx);
+                FaceDetection.LOGGER.Add(nrx);
             }
             
         }
@@ -506,7 +506,7 @@ namespace FaceDetectionX
             }
             catch(COMException comx)
             {
-                FaceDetection.Logger.Add(comx);
+                FaceDetection.LOGGER.Add(comx);
             }
         }
 

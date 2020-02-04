@@ -29,8 +29,8 @@ namespace FaceDetection
         static Stopwatch stopwatch = new Stopwatch();
         public static MainForm GetMainForm => (MainForm) mainForm;
         
-        static SettingsUI settingUI;
-        public static SettingsUI Settingui { get => settingUI; set => settingUI = value; }        
+        //static SettingsUI settingUI;
+        public static SettingsUI Settingui { get; set; }        
         public BackLightController BackLight { get => backLight; set => backLight = value; }
         public static MOUSE_KEYBOARD Mklisteners { get => mklisteners; set => mklisteners = value; }
         public static bool AnyRecordingInProgress { get => MULTI_WINDOW.RecordingIsOn();}
@@ -40,6 +40,9 @@ namespace FaceDetection
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             InitializeComponent();
+            LOGGER.CreateLoggerPath();
+
+
             if (Camera.GetCameraCount().Length > 0)
             {
                 if (vs != null && vs.Count() > 0)
@@ -47,12 +50,12 @@ namespace FaceDetection
                     PARAMETERS.HandleParameters(vs);
                     PARAMETERS.WAKEUPCALL = true;
                     
-                    Logger.Add(vs.Count + " HandleParameters");
+                    LOGGER.Add(vs.Count + " HandleParameters");
                 }
 
                 if (PARAMETERS.PARAM != null)
                 {
-                    Logger.Add(String.Concat(PARAMETERS.PARAM));
+                    LOGGER.Add(String.Concat(PARAMETERS.PARAM));
                 }
 
                 backLight = new BackLightController();
@@ -66,10 +69,9 @@ namespace FaceDetection
         }
         
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //StopAll();             
+        {            
             RSensor?.Destroy();
-            //Application.Exit();
+            Dispose();
         }
         
         private void MainForm_Load(object sender, EventArgs e)
@@ -80,15 +82,16 @@ namespace FaceDetection
 
                 #region Instances
                 ///////////////////////////////////////
-                settingUI = new SettingsUI();
+                //settingUI = new SettingsUI();
                 RSensor = new IRSensor();
                 backLight = new BackLightController();
                 BackLight.Start();
                 Mklisteners = new MOUSE_KEYBOARD();
+                
                 ////////////////////////////////////////
                 if (PINVOKES.IsTouchEnabled())
                 {
-                    Logger.Add("********** You are using a device supports touch screen **********");
+                    LOGGER.Add("********** You are using a touch enabled device **********");
                 }
 
                 #endregion
@@ -108,6 +111,10 @@ namespace FaceDetection
                     datetime_timer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateDateTimeText);
                 }
             }
+            if (Settingui == null)
+            {
+                Settingui = new SettingsUI();
+            }
         }
 
         public static void AllChangesApply()
@@ -116,10 +123,7 @@ namespace FaceDetection
             
             CAMERA_INDEX = Properties.Settings.Default.main_camera_index;//MAIN CAMERA INDEX
             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CAMERA_INDEX, out bool irsensorOn);
-            if (Settingui == null)
-            {                
-                Settingui = new SettingsUI();
-            }
+            
 
             if (irsensorOn)
             {
@@ -192,7 +196,7 @@ namespace FaceDetection
                     try
                     {
                         Settingui.ShowSettings(cameraIndex);
-                        settingUI.DisabledButtonWhenRecording();
+                        Settingui.DisabledButtonWhenRecording();
                     }
                     catch (InvalidOperationException invx)
                     {
@@ -220,11 +224,24 @@ namespace FaceDetection
                 listFilesToClear = listFiles1.ToList();
                 for (int i = listFilesToClear.Count; i > 0; i--)
                 {
-                    File.SetAttributes(listFilesToClear.ElementAt(i - 1), FileAttributes.Normal); // Add in case of weird attribute on the file
+                    try { 
+                        File.SetAttributes(listFilesToClear.ElementAt(i - 1), FileAttributes.Normal); // Add in case of weird attribute on the file
+                    }
+                    catch (ArgumentException ax)
+                    {
+                        /*                         
+                        path is empty, contains only white spaces, contains invalid characters, or the file attribute is invalid.
+                         */
+                    }
+                    catch (FileNotFoundException fnfx)
+                    {
+
+                    }
+
                     File.Delete(listFilesToClear.ElementAt(i - 1));
                 }
             }
-            catch (Exception ex)
+            catch (IOException ex)
             {
                 //Console.WriteLine(@" TEMP\1\CutTemp does not exist");
             }
@@ -418,7 +435,7 @@ namespace FaceDetection
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Dispose();
+            
             Application.Exit();
         }
 

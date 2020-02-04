@@ -546,7 +546,7 @@ namespace FaceDetection
             }
             catch (InvalidOperationException iox)
             {
-                Logger.Add(iox);
+                LOGGER.Add(iox);
             }
         }
 

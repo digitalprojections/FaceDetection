@@ -87,7 +87,7 @@ namespace FaceDetection
                 this.no_opcap_timer.Enabled = false;
             }
 
-            Logger.Add("No operator capture interval : " + this.no_opcap_timer.Interval.ToString());
+            LOGGER.Add("No operator capture interval : " + this.no_opcap_timer.Interval.ToString());
 
             this.the_timer.Elapsed += The_timer_Tick;
             this.the_timer.AutoReset = false;
@@ -254,7 +254,7 @@ namespace FaceDetection
                     }
                     catch (IOException e)
                     {
-                        Logger.Add(e.Message + " TaskManager in DeleteOldFiles()");
+                        LOGGER.Add(e.Message + " TaskManager in DeleteOldFiles()");
                     }
                 }
                 if (wait_interval_enabled)
@@ -288,7 +288,7 @@ namespace FaceDetection
             PROPERTY_FUNCTIONS.GetOnOperationStartSwitch(INDEX, out bool recordingWhenOperation);            
 
             OPER_BAN = false;
-            Logger.Add("No_opcap_timer_Elapsed, OPER_BAN (operator capture ban) set " + OPER_BAN);
+            LOGGER.Add("No_opcap_timer_Elapsed, OPER_BAN (operator capture ban) set " + OPER_BAN);
             if (wait_interval_enabled)
             {
                 no_opcap_timer.Enabled = false;
@@ -323,7 +323,7 @@ namespace FaceDetection
                 }
                 catch (NullReferenceException nrx)
                 {
-                    Logger.Add(nrx);
+                    LOGGER.Add(nrx);
                 }
             }
             return bitmap;
@@ -338,7 +338,7 @@ namespace FaceDetection
             PREEVENT_RECORDING = false;
             if (MainForm.GetMainForm != null)
             {
-                Logger.Add(Resource.preview_mode);
+                LOGGER.Add(Resource.preview_mode);
                 if (recorder != null && recorder.ON)
                 {
                     recorder.ReleaseInterfaces();
@@ -390,13 +390,13 @@ namespace FaceDetection
             if (the_timer!=null)
             {
                 the_timer.Enabled = true;
-                Logger.Add("THE_TIMER started " + the_timer.Interval);
+                LOGGER.Add("THE_TIMER started " + the_timer.Interval);
             }            
         }
 
         public void Start(int index, CAMERA_MODES mode)
         {
-            Logger.Add("Start camera index " + index.ToString() + " " + mode.ToString());
+            LOGGER.Add("Start camera index " + index.ToString() + " " + mode.ToString());
             int duration = 0;
 
             PROPERTY_FUNCTIONS.GetEventRecorderSwitch(index, out bool eventRecorderEnabled);
@@ -445,7 +445,7 @@ namespace FaceDetection
                         recorder.ACTIVE_RECPATH = RECORD_PATH.EVENT;
                         recorder.CAMERA_MODE = CAMERA_MODES.EVENT;
                         duration = timeAfterEventForEventRecorder * 1000;
-                        Logger.Add(duration + " is the duration of " + recorder.CAMERA_MODE);
+                        LOGGER.Add(duration + " is the duration of " + recorder.CAMERA_MODE);
 
                         the_timer.Enabled = true;
                         the_timer.Interval = duration + 3000;
@@ -462,18 +462,18 @@ namespace FaceDetection
                     {
                         window.SET_REC_ICON();
                         duration = secondsAfterEvent * 1000;
-                        Logger.Add(duration + "  " + recorder.CAMERA_MODE);
+                        LOGGER.Add(duration + "  " + recorder.CAMERA_MODE);
                         the_timer.Enabled = true;
                         the_timer.Interval = duration + 3000;
                         the_timer.Enabled = false;
-                        Logger.Add("No operator capture timer interval: " + no_opcap_timer.Interval.ToString());
+                        LOGGER.Add("No operator capture timer interval: " + no_opcap_timer.Interval.ToString());
                         if (this != null)
                         {
                             recorder.ACTIVE_RECPATH = RECORD_PATH.EVENT;
                             recorder.CAMERA_MODE = CAMERA_MODES.OPERATOR;
                             wait_interval_enabled = true;
                             this.OPER_BAN = true;
-                            Logger.Add("OPERATOR BAN in CAMERA_MODE.OPERATOR : " + OPER_BAN);
+                            LOGGER.Add("OPERATOR BAN in CAMERA_MODE.OPERATOR : " + OPER_BAN);
                             this.RecordingMode(INDEX);
                         }
                     }
@@ -524,13 +524,13 @@ namespace FaceDetection
             }
             catch (NullReferenceException nrx)
             {
-                Logger.Add(nrx);
+                LOGGER.Add(nrx);
             }
         }
 
         internal void ReleaseCamera()
         {
-            Logger.Add(Resource.releaseCamera);
+            LOGGER.Add(Resource.releaseCamera);
             try
             {                
                 the_timer.Dispose();
@@ -541,7 +541,7 @@ namespace FaceDetection
             }
             catch (NullReferenceException nrx)
             {
-                Logger.Add(nrx);
+                LOGGER.Add(nrx);
             }
         }
 

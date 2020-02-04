@@ -46,7 +46,7 @@ namespace FaceDetection
                 }
                 catch(COMException comx)
                 {
-                    Logger.Add(comx);
+                    LOGGER.Add(comx);
                     retval = false;
                     Release();
                 }
@@ -64,7 +64,7 @@ namespace FaceDetection
                     {
                         if (ev == EventCode.Complete || ev == EventCode.UserAbort)
                         {
-                            Logger.Add("Done!");                            
+                            LOGGER.Add("Done!");                            
                             mediaControl.Stop();
                             SafeReleaseComObject(mediaControl);
                             Release();
@@ -73,7 +73,7 @@ namespace FaceDetection
                         else
                         if (ev == EventCode.ErrorAbort)
                         {
-                            Logger.Add("An error occured: HRESULT={0:X}"+ p1);
+                            LOGGER.Add("An error occured: HRESULT={0:X}"+ p1);
                             mediaControl.Stop();
                             SafeReleaseComObject(mediaControl);
                             stop = true;
@@ -84,7 +84,7 @@ namespace FaceDetection
                     }catch(Exception x)
                     {
                         retval = false;
-                        Logger.Add("An error occured:" + x.InnerException);                        
+                        LOGGER.Add("An error occured:" + x.InnerException);                        
                         SafeReleaseComObject(mediaControl);
                         stop = true;                        
                     }
@@ -92,11 +92,11 @@ namespace FaceDetection
             }
             catch (COMException ex)
             {
-                Logger.Add("COM error: " + ex.ToString());
+                LOGGER.Add("COM error: " + ex.ToString());
             }
             catch (Exception ex)
             {
-                Logger.Add("Error: " + ex.ToString());
+                LOGGER.Add("Error: " + ex.ToString());
             }
             Release();
             return retval;
@@ -215,7 +215,7 @@ namespace FaceDetection
         {
             if (hr < 0)
             {
-                Logger.Add(msg);
+                LOGGER.Add(msg);
                 DsError.ThrowExceptionForHR(hr);
             }
         }
