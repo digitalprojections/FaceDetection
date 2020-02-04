@@ -32,6 +32,9 @@ namespace FaceDetection
         private bool showDateCbStateC1, showDateCbStateC2, showDateCbStateC3, showDateCbStateC4;
         private bool showCamNumberCbStateC1, showCamNumberCbStateC2, showCamNumberCbStateC3, showCamNumberCbStateC4;
         private bool showRecIconCbStateC1, showRecIconCbStateC2, showRecIconCbStateC3, showRecIconCbStateC4;
+        private string resolutionC1, resolutionC2, resolutionC3, resolutionC4;
+        private string fpsC1, fpsC2, fpsC3, fpsC4;
+
         /// <summary>
         /// current camera, not the Main Camera
         /// </summary>
@@ -166,6 +169,7 @@ namespace FaceDetection
 
         private void SaveAndClose(object sender, EventArgs e)
         {
+            PROPERTY_FUNCTIONS.SetFPS(currentCameraIndex, comboBoxFPS.SelectedItem?.ToString());
             Properties.Settings.Default.Save();
 
             if (String.IsNullOrEmpty(storePath.Text))
@@ -308,47 +312,22 @@ namespace FaceDetection
             }
         }
 
-        public static void SetComboBoxFPSValues(FaceDetectionX.UsbCamera.VideoFormat[] vs, int cameraIndex)
+        private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            frame_rates_combo.Items.Clear();
-            bool matching_fps_found = false;
-            List<string> vsPicked = new List<string>(); 
-
-
-            if (frame_rates_combo != null)
+            //PROPERTY_FUNCTIONS.resolution_changed = true;
+            if (comboBoxResolutions.SelectedItem != null)
             {
-                //frame_rates_combo.Items.AddRange(vs);
-                Size size = PROPERTY_FUNCTIONS.Get_Stored_Resolution(cameraIndex);
-                for (int i = 0; i < vs.Length; i++)
-                {
-                    if (vs[i].Size.Width == size.Width && vs[i].Size.Height == size.Height)
-                    {
-                        matching_fps_found = true;
-                        string found_fps = Convert.ToString(10000000 / vs[i].TimePerFrame);
-                        vsPicked.Add(found_fps);
-                        if (found_fps == PROPERTY_FUNCTIONS.GetFPS(cameraIndex))
-                        {
-                            frame_rates_combo.SelectedItem = found_fps;
-                        }
-                        else
-                        {
-                            try
-                            {
-                                frame_rates_combo.SelectedIndex = 0;
-                            }
-                            catch (ArgumentOutOfRangeException ex)
-                            {
-                                Console.WriteLine("frame_rates_combo.SelectedIndex = 0 crash");
-                            }
-                        }
-                        break;
-                    }
-                }
-                frame_rates_combo.Items.AddRange(vsPicked.ToArray());
+                PROPERTY_FUNCTIONS.SetResolution(currentCameraIndex, comboBoxResolutions.SelectedItem.ToString());
+                SettingsUI.SetComboBoxFPSValues(MULTI_WINDOW.formList[currentCameraIndex].videoFormat, currentCameraIndex);
             }
-            if (!matching_fps_found)
+
+        }
+        private void comboBoxFPS_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //
+            if (comboBoxFPS.SelectedItem!=null)
             {
-                PROPERTY_FUNCTIONS.SetFPS(cameraIndex, vsPicked[0]);
+                //PROPERTY_FUNCTIONS.SetFPS(currentCameraIndex, comboBoxFPS.SelectedItem?.ToString());
             }
         }
 
@@ -364,8 +343,7 @@ namespace FaceDetection
             {
                 resolutions_combo.Items.AddRange(vs.ToArray());
                 if (resolutions_combo.Items.Count > 0)
-                {
-                    
+                {                    
                     if(PROPERTY_FUNCTIONS.GetResolution(cameraIndex)!=null)
                         resolutions_combo.SelectedItem = PROPERTY_FUNCTIONS.GetResolution(cameraIndex);
                 }
@@ -376,11 +354,40 @@ namespace FaceDetection
                 SettingsUI.SetComboBoxFPSValues(MULTI_WINDOW.formList[cameraIndex].videoFormat, cameraIndex);
             }
         }
-        private void comboBoxFPS_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            PROPERTY_FUNCTIONS.SetFPS(currentCameraIndex, comboBoxFPS.SelectedItem?.ToString());            
-        }
+        
 
+        public static void SetComboBoxFPSValues(FaceDetectionX.UsbCamera.VideoFormat[] vs, int cameraIndex)
+        {
+            frame_rates_combo.Items.Clear();
+            var matching_fps_found = false;
+            var vsPicked = new List<string>();
+            string found_fps = "";
+
+            if (frame_rates_combo != null)
+            {
+                //frame_rates_combo.Items.AddRange(vs);
+                Size size = PROPERTY_FUNCTIONS.Get_Stored_Resolution(cameraIndex);
+                for (int i = 0; i < vs.Length; i++)
+                {
+                    if (vs[i].Size.Width == size.Width && vs[i].Size.Height == size.Height)
+                    {
+                        matching_fps_found = true;
+                        found_fps = Convert.ToString(10000000 / vs[i].TimePerFrame);
+                        vsPicked.Add(found_fps);
+                        break;
+                    }
+                }
+                frame_rates_combo.Items.AddRange(vsPicked.ToArray());
+                if (found_fps == PROPERTY_FUNCTIONS.GetFPS(cameraIndex))
+                {
+                    frame_rates_combo.SelectedItem = found_fps;
+                }
+            }
+            if (!matching_fps_found)
+            {
+                //PROPERTY_FUNCTIONS.SetFPS(cameraIndex, vsPicked[0]);
+            }
+        }
         //void CameraSetAsMain(object sender, EventArgs e)
         //{
         //    CameraSetAsMain();
@@ -446,6 +453,16 @@ namespace FaceDetection
             showRecIconCbStateC2 = Properties.Settings.Default.C2_show_record_icon;
             showRecIconCbStateC3 = Properties.Settings.Default.C3_show_record_icon;
             showRecIconCbStateC4 = Properties.Settings.Default.C4_show_record_icon;
+            resolutionC1 = Properties.Settings.Default.C1res;
+            resolutionC2 = Properties.Settings.Default.C2res;
+            resolutionC3 = Properties.Settings.Default.C3res;
+            resolutionC4 = Properties.Settings.Default.C4res;
+            fpsC1 = Properties.Settings.Default.C1f;
+            fpsC2 = Properties.Settings.Default.C2f;
+            fpsC3 = Properties.Settings.Default.C3f;
+            fpsC4 = Properties.Settings.Default.C4f;
+
+
 
             if (cm_camera_number.Items.Count > 0)
             {
@@ -574,38 +591,7 @@ namespace FaceDetection
             }
         }
 
-        //private bool CheckOnKids(Control control, string type, PictureBox picbox)
-        //{
-        //    CheckBox checkBox;
-        //    bool ret = false;
-        //    foreach (Control c in control.Controls)
-        //    {
-        //        if (c.GetType().ToString() == type && c.Tag == picbox.Tag)
-        //        {
-        //            //we found the control and the tag we need
-        //            //set the values eg: CheckBox checked state                    
-        //            checkBox = c as CheckBox;
-        //            if (checkBox.Checked)
-        //            {
-        //                checkBox.Checked = false;
-        //                picbox.Image = check_state_images.Images[0];
-        //            }
-        //            else
-        //            {
-        //                checkBox.Checked = true;
-        //                picbox.Image = check_state_images.Images[1];
-        //            }
-        //            ret = checkBox.Checked;
-        //            //Console.WriteLine(checkBox.Checked + " is +++++ " + checkBox.Text);
-        //        }
-
-        //        if (c.GetType().ToString() == "System.Windows.Forms.GroupBox")
-        //        {
-        //            ret = CheckOnKids(c, type, picbox);
-        //        }
-        //    }
-        //    return ret;
-        //}
+        
 
         private void Button_cameraProperties_Click(object sender, EventArgs e)
         {
@@ -1098,6 +1084,14 @@ namespace FaceDetection
             Properties.Settings.Default.C2_show_record_icon = showRecIconCbStateC2;
             Properties.Settings.Default.C3_show_record_icon = showRecIconCbStateC3;
             Properties.Settings.Default.C4_show_record_icon = showRecIconCbStateC4;
+            Properties.Settings.Default.C1f = fpsC1;
+            Properties.Settings.Default.C2f = fpsC2;
+            Properties.Settings.Default.C3f = fpsC3;
+            Properties.Settings.Default.C4f = fpsC4;
+            Properties.Settings.Default.C1res = resolutionC1;
+            Properties.Settings.Default.C2res = resolutionC2;
+            Properties.Settings.Default.C3res = resolutionC3;
+            Properties.Settings.Default.C4res = resolutionC4;
         }
 
         //void SetIntervalProps()
@@ -1175,16 +1169,7 @@ namespace FaceDetection
             }
         }
 
-        private void ComboBoxResolutions_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            PROPERTY_FUNCTIONS.resolution_changed = true;
-            if (comboBoxResolutions.SelectedItem != null)
-            {                
-                PROPERTY_FUNCTIONS.SetResolution(currentCameraIndex, comboBoxResolutions.SelectedItem.ToString());
-                SettingsUI.SetComboBoxFPSValues(MULTI_WINDOW.formList[currentCameraIndex].videoFormat, currentCameraIndex);
-            }
-
-        }
+        
 
         private void NumericUpDownX_ValueChanged(object sender, EventArgs e)
         {
