@@ -378,7 +378,7 @@ namespace FaceDetection
         }
         private void comboBoxFPS_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PROPERTY_FUNCTIONS.SetFPS(currentCameraIndex, comboBoxFPS.SelectedItem.ToString());            
+            PROPERTY_FUNCTIONS.SetFPS(currentCameraIndex, comboBoxFPS.SelectedItem?.ToString());            
         }
 
         //void CameraSetAsMain(object sender, EventArgs e)
