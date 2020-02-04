@@ -99,20 +99,23 @@ namespace FaceDetection
                 mainForm = this;
                 this.WindowState = FormWindowState.Minimized;
 
-                if (Camera.GetCameraCount().Length > 0 && !PARAMETERS.WrongParameter)
+                if (Camera.GetCameraCount().Length > 0)
                 {
                     AllChangesApply();
                     ClearCutFileTempFolder();
                     ClearTempFolder();
-
-                    datetime_timer.Interval = 1000;
-                    datetime_timer.Start();
-                    datetime_timer.AutoReset = true;
-                    datetime_timer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateDateTimeText);
-                }else if (PARAMETERS.WrongParameter)
-                {
-                    Application.Exit();
+                    if (!PARAMETERS.WrongParameter)
+                    {
+                        datetime_timer.Interval = 1000;
+                        datetime_timer.Start();
+                        datetime_timer.AutoReset = true;
+                        datetime_timer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateDateTimeText);
+                    }                    
                 }
+                //else if (PARAMETERS.WrongParameter)
+                //{
+                //    Application.Exit();
+                //}
             }
             
         }
