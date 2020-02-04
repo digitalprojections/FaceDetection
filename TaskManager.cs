@@ -41,7 +41,7 @@ namespace FaceDetection
                 DateTime eventTime = triggerTime; // DateTime.Now;
 
                 Console.WriteLine("Event Appeared ! eventTime: " + eventTime);
-                Logger.Add("Event Appeared ! eventTime: " + eventTime);
+                LOGGER.Add("Event Appeared ! eventTime: " + eventTime);
 
                 timeSpanStart = new TimeSpan(0, 0, 0, timeBeforeEvent);
                 timeSpanEnd = new TimeSpan(0, 0, 0, timeAfterEvent);
@@ -101,7 +101,7 @@ namespace FaceDetection
                     catch (Exception ex) // Unexpected files in TEMP folder
                     {
                         Console.WriteLine(ex.Message + " TaskManager in EventAppeared()");
-                        Logger.Add(ex.Message + " TaskManager in EventAppeared()");
+                        LOGGER.Add(ex.Message + " TaskManager in EventAppeared()");
                     }
                 }
 
@@ -286,7 +286,7 @@ namespace FaceDetection
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message + " TaskManager in RecordEnd()");
-                Logger.Add(ex.Message + " TaskManager in RecordEnd()");
+                LOGGER.Add(ex.Message + " TaskManager in RecordEnd()");
             }
         }
 
@@ -330,7 +330,7 @@ namespace FaceDetection
             catch (Exception ex) // No video to cut. The application has probably just started
             {
                 Console.WriteLine(ex.Message + " TaskManager in CutVideoKeepEnd()");
-                Logger.Add(ex.Message + " TaskManager in CutVideoKeepEnd()");
+                LOGGER.Add(ex.Message + " TaskManager in CutVideoKeepEnd()");
                 videoCutName = "";
             }
             return videoCutName;
@@ -375,7 +375,7 @@ namespace FaceDetection
 
                 System.Threading.Thread.Sleep(BUFFERDURATION - (cutTimeAfterParameter * 1000)); // Wait for the last files is released by the system -> buffer file - time after event. we can't know better...
                 Console.WriteLine("CutVideoFromEvent() : " + startInfo.Arguments); // DEBUG
-                Logger.Add("CutVideoFromEvent() : " + startInfo.Arguments);
+                LOGGER.Add("CutVideoFromEvent() : " + startInfo.Arguments);
                 startInfo.CreateNoWindow = true;
                 startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 Process.Start(startInfo); // --/!\-- We send the file directly in the final destination
@@ -383,7 +383,7 @@ namespace FaceDetection
             catch (Exception ex) // No video to cut. The application has probably just started
             {
                 Console.WriteLine(ex.Message + " TaskManager in CutVideoFromEvent()");
-                Logger.Add(ex.Message + " TaskManager in CutVideoFromEvent()");
+                LOGGER.Add(ex.Message + " TaskManager in CutVideoFromEvent()");
                 videoCutName = "";
             }
             return videoCutName;
@@ -440,15 +440,15 @@ namespace FaceDetection
                     startInfo.Arguments = @"-loglevel quiet -y -i concat:" + postEventVideoFiles + " -c copy " + Properties.Settings.Default.video_file_location + "\\Camera\\" + listTask[TaskIndex].cameraNumber.ToString() + "\\" + listTask[TaskIndex].path + "\\" + startTime + ".avi";
                 }
                 Console.WriteLine("ConcatVideo() : " + startInfo.Arguments);
-                Logger.Add("ConcatVideo() : " + startInfo.Arguments);
+                LOGGER.Add("ConcatVideo() : " + startInfo.Arguments);
                 startInfo.CreateNoWindow = true;
                 startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 Process.Start(startInfo);
 
                 Console.WriteLine("preEventVideoFiles: " + preEventVideoFiles);
                 Console.WriteLine("postEventVideoFiles " + postEventVideoFiles);
-                Logger.Add("preEventVideoFiles: " + preEventVideoFiles);
-                Logger.Add("postEventVideoFiles " + postEventVideoFiles);
+                LOGGER.Add("preEventVideoFiles: " + preEventVideoFiles);
+                LOGGER.Add("postEventVideoFiles " + postEventVideoFiles);
                 if (preEventVideoFiles != "")
                 {
                     DeleteCutFileFromTemp(preEventVideoFiles, listTask[TaskIndex].cameraNumber); // Delete file cut for the first part of the full video to not taking it in the next event 
@@ -458,7 +458,7 @@ namespace FaceDetection
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message + " TaskManager in Concat()  pre: " + preEventVideoFiles + " post: " + postEventVideoFiles);
-                Logger.Add(ex.Message + " TaskManager in Concat()  pre: " + preEventVideoFiles + " post: " + postEventVideoFiles);
+                LOGGER.Add(ex.Message + " TaskManager in Concat()  pre: " + preEventVideoFiles + " post: " + postEventVideoFiles);
             }
         }
 
@@ -503,7 +503,7 @@ namespace FaceDetection
             catch (IOException ex)
             {
                 Console.WriteLine(ex.Message + " TaskManager in RefreshFilesInList()");
-                Logger.Add(ex.Message + " TaskManager in RefreshFilesInList()");
+                LOGGER.Add(ex.Message + " TaskManager in RefreshFilesInList()");
             }
         }
 
@@ -532,7 +532,7 @@ namespace FaceDetection
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message + " TaskManager in DeleteOldFiles()" + pathTempFolder);
-                Logger.Add(ex.Message + " TaskManager in DeleteOldFiles()" + pathTempFolder);
+                LOGGER.Add(ex.Message + " TaskManager in DeleteOldFiles()" + pathTempFolder);
             }
         }
 
@@ -580,7 +580,7 @@ namespace FaceDetection
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message + " TaskManager in DeleteCutFileFromTemp()" + videoFiles);
-                Logger.Add(ex.Message + " TaskManager in DeleteCutFileFromTemp()" + videoFiles);
+                LOGGER.Add(ex.Message + " TaskManager in DeleteCutFileFromTemp()" + videoFiles);
             }
         }
 

@@ -14,12 +14,12 @@ namespace FaceDetection
         private delegate void dShowControlButtons();
         private readonly System.Timers.Timer mouse_down_timer = new System.Timers.Timer();
         public bool recordingInProgress;
-        private UsbCamera.VideoFormat[] videoFormat;
+        public UsbCamera.VideoFormat[] videoFormat;
         /// <summary>
         /// SettingsUI resolutions data, generated each time. But set to the memory value
         /// </summary>
         private List<string> vf_resolutions = new List<string>();
-        private readonly List<string> vf_fps = new List<string>();
+        private List<string> vf_fps = new List<string>();
 
         private bool displayed = false;
         public bool DISPLAYED { get => displayed; set => displayed = value; }
@@ -28,6 +28,7 @@ namespace FaceDetection
         //public FlowLayoutPanel gbox_controlBut { get => controlBut; set => controlBut = value; }
         public PictureBox picbox_recording { get => rec_icon; }
         public List<string> Vf_resolutions { get => vf_resolutions; set => vf_resolutions = value; }
+        public List<string> Vf_fps { get => vf_fps; set => vf_fps = value; }
 
         private System.ComponentModel.IContainer components = null;
         private CameraNumberLabel camera_number;
@@ -227,7 +228,7 @@ namespace FaceDetection
         public void GetVideoFormat()
         {
             SettingsUI.SetComboBoxResolutionValues(Vf_resolutions, CameraIndex);
-            SettingsUI.SetComboBoxFPSValues(vf_fps, CameraIndex);
+            
         }
 
         private void CameraForm_MouseUp(object sender, MouseEventArgs e)
@@ -545,7 +546,7 @@ namespace FaceDetection
             }
             catch (InvalidOperationException iox)
             {
-                Logger.Add(iox);
+                LOGGER.Add(iox);
             }
         }
 

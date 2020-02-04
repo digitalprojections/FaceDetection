@@ -74,7 +74,7 @@ namespace FaceDetection
             }
             catch (NullReferenceException nrx)
             {
-                Logger.Add(nrx);
+                LOGGER.Add(nrx);
             }
         }
 

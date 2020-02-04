@@ -26,7 +26,7 @@ namespace FaceDetection
         
         private void Init_IR_Timer()
         {
-            int cameraIndex = MainForm.Settingui.Camera_index;
+            int cameraIndex = Properties.Settings.Default.main_camera_index;
             PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(cameraIndex, out bool operatorCaptureEnabled);
             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(cameraIndex, out bool IRSensorEnabled);
             PROPERTY_FUNCTIONS.GetSensorCheckInterval(cameraIndex, out int checkInterval);
@@ -107,7 +107,7 @@ namespace FaceDetection
                         MULTI_WINDOW.formList[INDEX].crossbar.NoCapTimerON(0);//Only the no-capture switch is enough
                     }
 
-                    Logger.Add("IR SENSOR: Motion detected");
+                    LOGGER.Add("IR SENSOR: Motion detected");
                     if (Properties.Settings.Default.backlight_on_upon_face_rec)
                     {
                         MainForm.GetMainForm.BackLight.ON();
@@ -173,7 +173,7 @@ namespace FaceDetection
                         data[4] = Convert.ToUInt32((stSensorValue.iValue[2] & 0x00FF) >> 0);     // TMP data (L)
                         data[5] = Convert.ToUInt32((stSensorValue.iValue[2] & 0xFF00) >> 8);        // TMP data (H)
 
-                        Logger.Add("IRSENSOR VALUE DETECTED: 0 -> " + data[0] + ";\n 1 -> " + data[1] + ";\n 2 -> " + data[2] + ";\n 3-> " + data[3] + ";\n 4-> " + data[4] + ";\n 5-> " + data[5] + ";");
+                        LOGGER.Add("IRSENSOR VALUE DETECTED: 0 -> " + data[0] + ";\n 1 -> " + data[1] + ";\n 2 -> " + data[2] + ";\n 3-> " + data[3] + ";\n 4-> " + data[4] + ";\n 5-> " + data[5] + ";");
                     }
                     else
                     {

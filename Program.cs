@@ -40,13 +40,13 @@ namespace FaceDetection
                     uvc_param.Reverse();
                     var uvc_param_final = (IReadOnlyCollection<string>) uvc_param;
                      */
-                    Logger.Add(vs1.Count + " PARAMETER COUNT at line 45");
+                    LOGGER.Add(vs1.Count + " PARAMETER COUNT at line 45");
                     SingleInstanceApplication.Run(new MainForm(vs1), NewInstanceHandler);
                     //PARAMETERS.HandleParameters(vs1);
                 }
                 catch (Exception e)
                 {
-                    Logger.Add(e.ToString());
+                    LOGGER.Add(e.ToString());
                 }
             }
         }                

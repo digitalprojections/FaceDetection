@@ -75,7 +75,7 @@ namespace FaceDetection
             parameterTime = 0;
             CameraIndex = -1;
 
-            Logger.Add(param);
+            LOGGER.Add(param);
 
             param = String.Concat(parameters).ToLower(culture);
             string elem;
@@ -193,7 +193,7 @@ namespace FaceDetection
                         catch (Exception e)
                         {
                             WrongParameter = true;
-                            Logger.Add(e);
+                            LOGGER.Add(e);
                         }
                         //WhichCase = elem;
                     }
@@ -842,7 +842,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                     }
                     break;
 
@@ -862,7 +862,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                     }
                     break;
 
@@ -878,7 +878,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                         WrongParameter = true;
                     }
                     break;
@@ -895,7 +895,7 @@ namespace FaceDetection
                         }
                         else
                         {
-                            Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
+                            LOGGER.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
                             CurrentTestResult = "main camera change?";
                         }
                         PARAM.Clear();                     
@@ -943,7 +943,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                     }
                     break;
 
@@ -962,7 +962,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                     }
                     break;
 
@@ -988,7 +988,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                         WrongParameter = true;
                     }
                     break;
@@ -1007,7 +1007,7 @@ namespace FaceDetection
                             }
                             else
                             {
-                                Logger.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
+                                LOGGER.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
                             }
                             PARAM.Clear();
                         }
@@ -1059,7 +1059,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                     }
                     break;
 
@@ -1098,7 +1098,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                     }                    
                     break;
 
@@ -1191,7 +1191,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                     }
                     break;
 
@@ -1211,6 +1211,10 @@ namespace FaceDetection
                             minimizedByParameter[MainCamera] = true;
                             callByParameters = true;
                             minimizedByParameters = true;
+                        }
+                        else
+                        {
+                            WrongParameter = true;
                         }
                     }
                     else
@@ -1312,7 +1316,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                     }
                     PARAM.Clear();
                     break;
@@ -1342,7 +1346,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                     }
                     break;
             }
@@ -1379,7 +1383,7 @@ namespace FaceDetection
                         }
                         catch (ArgumentOutOfRangeException e)
                         {
-                            Logger.Add(e);
+                            LOGGER.Add(e);
                         }
                     }
                     else
@@ -1395,13 +1399,14 @@ namespace FaceDetection
                         //StartAndHideWindows();
                         if (parameterOnOffSwitch)
                         {
-                            minimizedByParameter[0] = true;
-                            minimizedByParameter[1] = true;
-                            minimizedByParameter[2] = true;
-                            minimizedByParameter[3] = true;
-                            minimizedByParameter[CameraIndex] = false;
-                            callByParameters = true;
-                            minimizedByParameters = true;
+                            //minimizedByParameter[0] = true;
+                            //minimizedByParameter[1] = true;
+                            //minimizedByParameter[2] = true;
+                            //minimizedByParameter[3] = true;
+                            //minimizedByParameter[CameraIndex] = false;
+                            //callByParameters = true;
+                            //minimizedByParameters = true;
+                            WrongParameter = true;
                         }
                         else
                         { 
@@ -1439,7 +1444,7 @@ namespace FaceDetection
                         }
                         catch (ArgumentOutOfRangeException e)
                         {
-                            Logger.Add(e);
+                            LOGGER.Add(e);
                         }
                     }
                     else
@@ -1492,7 +1497,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                     }
                     break;
 
@@ -1537,7 +1542,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                     }
                     break;
 
@@ -1943,7 +1948,7 @@ namespace FaceDetection
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
-                        Logger.Add(e);
+                        LOGGER.Add(e);
                     }
                     break;
 

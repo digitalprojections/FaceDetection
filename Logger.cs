@@ -5,19 +5,24 @@ using System.Windows.Forms;
 
 namespace FaceDetection
 {
-    public class Logger
+    public static class LOGGER
     {
-        public Logger()
+        static string filepath = string.Empty;
+         public static void CreateLoggerPath()
         {
-
+            filepath = Path.Combine(Properties.Settings.Default.temp_folder, "log.txt");
         }
 
         public static void Add(Exception logMessage, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string caller = null)
         {
+            if (string.IsNullOrEmpty(filepath))
+            {
+                filepath = Path.Combine(Properties.Settings.Default.temp_folder, "log.txt");
+            }
 
             try
             {
-                using (StreamWriter w = File.AppendText("log.txt"))
+                using (StreamWriter w = File.AppendText(filepath))
                 {
 
                     w.Write("\r\nLog Entry : ");
@@ -36,11 +41,14 @@ namespace FaceDetection
         }
         public static void Add(Exception logMessage, string message, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string caller = null)
         {
-
+            if (string.IsNullOrEmpty(filepath))
+            {
+                filepath = Path.Combine(Properties.Settings.Default.temp_folder, "log.txt");
+            }
 
             try
             {
-                using (StreamWriter w = File.AppendText("log.txt"))
+                using (StreamWriter w = File.AppendText(filepath))
                 {
 
                     w.Write("\r\nLog Entry : ");
@@ -66,11 +74,14 @@ namespace FaceDetection
         /// <param name="caller"></param>
         public static void Add(string message, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string caller = null)
         {
-
+            if (string.IsNullOrEmpty(filepath))
+            {
+                filepath = Path.Combine(Properties.Settings.Default.temp_folder, "log.txt");
+            }
 
             try
             {
-                using (StreamWriter w = File.AppendText("log.txt"))
+                using (StreamWriter w = File.AppendText(filepath))
                 {
                     w.Write("\r\nLog Entry : ");
                     w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");

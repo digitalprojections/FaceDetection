@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -181,14 +182,14 @@ namespace FaceDetection
             }
 
             Properties.Settings.Default.main_camera_index = cm_camera_number.SelectedIndex;
-            for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-            {
-                if (MULTI_WINDOW.formList[i].DISPLAYED == true)
-                {
-                    PROPERTY_FUNCTIONS.Set_Window_Location_Set(i, MULTI_WINDOW.formList[i]);
-                    MULTI_WINDOW.formList[i].ClientSize = PROPERTY_FUNCTIONS.GetCameraSize(i);
-                }
-            }
+            //for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+            //{
+            //    if (MULTI_WINDOW.formList[i].DISPLAYED == true)
+            //    {
+            //        PROPERTY_FUNCTIONS.Set_Window_Location_Set(i, MULTI_WINDOW.formList[i]);
+            //        MULTI_WINDOW.formList[i].ClientSize = PROPERTY_FUNCTIONS.GetCameraSize(i);
+            //    }
+            //}
 
             //Properties.Settings.Default.Save();
             Camera.CountCamera();
@@ -307,26 +308,40 @@ namespace FaceDetection
             }
         }
 
-        public static void SetComboBoxFPSValues(List<string> vs, int cameraIndex)
+        public static void SetComboBoxFPSValues(FaceDetectionX.UsbCamera.VideoFormat[] vs, int cameraIndex)
         {
             frame_rates_combo.Items.Clear();
             bool matching_fps_found = false;
+            List<string> vsPicked = new List<string>(); 
+
+
             if (frame_rates_combo != null)
             {
-                frame_rates_combo.Items.AddRange(vs.ToArray());
-                for (int i=0; i<vs.Count; i++)
+                //frame_rates_combo.Items.AddRange(vs);
+                Size size = PROPERTY_FUNCTIONS.Get_Stored_Resolution(cameraIndex);
+                for (int i = 0; i < vs.Length; i++)
                 {
-                    if (vs[i] == PROPERTY_FUNCTIONS.GetFPS(cameraIndex).ToString())
+                    if (vs[i].Size.Width == size.Width && vs[i].Size.Height == size.Height)
                     {
                         matching_fps_found = true;
-                        frame_rates_combo.SelectedItem = PROPERTY_FUNCTIONS.GetFPS(cameraIndex);
+                        string found_fps = Convert.ToString(10000000 / vs[i].TimePerFrame);
+                        vsPicked.Add(found_fps);
+                        if (found_fps == PROPERTY_FUNCTIONS.GetFPS(cameraIndex))
+                        {
+                            frame_rates_combo.SelectedItem = found_fps;
+                        }
+                        else
+                        {
+                            frame_rates_combo.SelectedIndex = 0;
+                        }
                         break;
                     }
                 }
+                frame_rates_combo.Items.AddRange(vsPicked.ToArray());
             }
             if (!matching_fps_found)
             {
-                PROPERTY_FUNCTIONS.SetFPS(cameraIndex, vs[0]);
+                PROPERTY_FUNCTIONS.SetFPS(cameraIndex, vsPicked[0]);
             }
         }
 
@@ -348,10 +363,15 @@ namespace FaceDetection
                         resolutions_combo.SelectedItem = PROPERTY_FUNCTIONS.GetResolution(cameraIndex);
                 }
             }
+
+            if (resolutions_combo.SelectedItem!=null)
+            {
+                SettingsUI.SetComboBoxFPSValues(MULTI_WINDOW.formList[cameraIndex].videoFormat, cameraIndex);
+            }
         }
         private void comboBoxFPS_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(comboBoxFPS.SelectedItem);
+            PROPERTY_FUNCTIONS.SetFPS(currentCameraIndex, comboBoxFPS.SelectedItem.ToString());            
         }
 
         //void CameraSetAsMain(object sender, EventArgs e)
@@ -631,10 +651,82 @@ namespace FaceDetection
             Marshal.ReleaseComObject(dev);
         }
 
+        internal void _DisplayPropertyPage()
+        {
+            var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, currentCameraIndex);
+            var dev = DirectShow.FindPin(filter, currentCameraIndex, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
+
+            //var dev = (IBaseFilter)DirectShow.CreateFilter(DirectShow.DsGuid., currentCameraIndex);
+            if (dev == null)
+                return;
+
+            //Get the ISpecifyPropertyPages for the filter
+            ISpecifyPropertyPages pProp = dev as ISpecifyPropertyPages;
+            int hr = 0;
+
+            if (pProp == null)
+            {
+                //If the filter doesn't implement ISpecifyPropertyPages, try displaying IAMVfwCompressDialogs instead!
+                IAMVfwCompressDialogs compressDialog = dev as IAMVfwCompressDialogs;
+                if (compressDialog != null)
+                {
+
+                    hr = compressDialog.ShowDialog(VfwCompressDialogs.Config, IntPtr.Zero);
+                    DsError.ThrowExceptionForHR(hr);
+                }
+                return;
+            }
+
+            string caption = string.Empty;
+
+            if (dev is IBaseFilter)
+            {
+                //Get the name of the filter from the FilterInfo struct
+                IBaseFilter as_filter = dev as IBaseFilter;
+                FilterInfo filterInfo;
+                hr = as_filter.QueryFilterInfo(out filterInfo);
+                DsError.ThrowExceptionForHR(hr);
+
+                caption = filterInfo.achName;
+
+                if (filterInfo.pGraph != null)
+                {
+                    Marshal.ReleaseComObject(filterInfo.pGraph);
+                }
+            }
+            else
+            if (dev is IPin)
+            {
+                //Get the name of the filter from the FilterInfo struct
+                IPin as_pin = dev as IPin;
+                PinInfo pinInfo;
+                hr = as_pin.QueryPinInfo(out pinInfo);
+                DsError.ThrowExceptionForHR(hr);
+
+                caption = pinInfo.name;
+            }
+
+
+            // Get the propertypages from the property bag
+            DsCAUUID caGUID;
+            hr = pProp.GetPages(out caGUID);
+            DsError.ThrowExceptionForHR(hr);
+
+            // Create and display the OlePropertyFrame
+            object oDevice = (object)dev;
+            hr = DLLIMPORT.OleCreatePropertyFrame(this.Handle, 0, 0, caption, 1, ref oDevice, caGUID.cElems, caGUID.pElems, 0, 0, IntPtr.Zero);
+            DsError.ThrowExceptionForHR(hr);
+
+            // Release COM objects
+            Marshal.FreeCoTaskMem(caGUID.pElems);
+            Marshal.ReleaseComObject(pProp);
+        }
+
         private void Cb_delete_old_CheckedChanged(object sender, EventArgs e)
         {
             MainForm.ManageDeleteOldFilesTimer(cb_delete_old.Checked);
         }
+
 
         private void ChangeControlEnabled(Control control, bool enabled, int cam_index)
         {
@@ -1081,8 +1173,10 @@ namespace FaceDetection
             PROPERTY_FUNCTIONS.resolution_changed = true;
             if (comboBoxResolutions.SelectedItem != null)
             {                
-                PROPERTY_FUNCTIONS.SetResolution(currentCameraIndex, comboBoxResolutions.SelectedItem.ToString());                
+                PROPERTY_FUNCTIONS.SetResolution(currentCameraIndex, comboBoxResolutions.SelectedItem.ToString());
+                SettingsUI.SetComboBoxFPSValues(MULTI_WINDOW.formList[currentCameraIndex].videoFormat, currentCameraIndex);
             }
+
         }
 
         private void NumericUpDownX_ValueChanged(object sender, EventArgs e)
