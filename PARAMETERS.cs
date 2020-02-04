@@ -2088,7 +2088,7 @@ namespace FaceDetection
         private static bool CheckCameraIndex(int cameraIndex)
         {
             bool retval = false;
-            if (ConnectedCameraCount<=cameraIndex && cameraIndex != 8 && MethodName != "n")
+            if (cameraIndex >= Properties.Settings.Default.camera_count && cameraIndex != 8 && MethodName != "n")
             {
                 WrongParameter = true;
             }
