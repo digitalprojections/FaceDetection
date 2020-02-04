@@ -332,7 +332,14 @@ namespace FaceDetection
                         }
                         else
                         {
-                            frame_rates_combo.SelectedIndex = 0;
+                            try
+                            {
+                                frame_rates_combo.SelectedIndex = 0;
+                            }
+                            catch (ArgumentOutOfRangeException ex)
+                            {
+                                Console.WriteLine("frame_rates_combo.SelectedIndex = 0 crash");
+                            }
                         }
                         break;
                     }

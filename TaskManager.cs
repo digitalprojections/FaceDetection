@@ -512,7 +512,7 @@ namespace FaceDetection
             DirectoryInfo dir;
             string fileName;
             DateTime fileDate;
-            TimeSpan tsTimeMaxToKeep = new TimeSpan(0, 0, 6, 0);
+            TimeSpan tsTimeMaxToKeep = new TimeSpan(0, 0, 15, 0);
 
             try
             {
