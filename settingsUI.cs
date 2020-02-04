@@ -324,9 +324,16 @@ namespace FaceDetection
                     if (vs[i].Size.Width == size.Width && vs[i].Size.Height == size.Height)
                     {
                         matching_fps_found = true;
-                        vsPicked.Add(Convert.ToString(10000000 / vs[i].TimePerFrame));
-                        //frame_rates_combo.SelectedItem = PROPERTY_FUNCTIONS.GetFPS(cameraIndex);
-                        //frame_rates_combo.SelectedIndex = 0;
+                        string found_fps = Convert.ToString(10000000 / vs[i].TimePerFrame);
+                        vsPicked.Add(found_fps);
+                        if (found_fps == PROPERTY_FUNCTIONS.GetFPS(cameraIndex))
+                        {
+                            frame_rates_combo.SelectedItem = found_fps;
+                        }
+                        else
+                        {
+                            frame_rates_combo.SelectedIndex = 0;
+                        }
                         break;
                     }
                 }
@@ -335,10 +342,6 @@ namespace FaceDetection
             if (!matching_fps_found)
             {
                 PROPERTY_FUNCTIONS.SetFPS(cameraIndex, vsPicked[0]);
-            }
-            else
-            {
-                frame_rates_combo.SelectedIndex = 0;
             }
         }
 
@@ -368,7 +371,7 @@ namespace FaceDetection
         }
         private void comboBoxFPS_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(comboBoxFPS.SelectedItem);
+            PROPERTY_FUNCTIONS.SetFPS(currentCameraIndex, comboBoxFPS.SelectedItem.ToString());            
         }
 
         //void CameraSetAsMain(object sender, EventArgs e)
