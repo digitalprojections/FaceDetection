@@ -186,14 +186,14 @@ namespace FaceDetection
             }
 
             Properties.Settings.Default.main_camera_index = cm_camera_number.SelectedIndex;
-            //for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-            //{
-            //    if (MULTI_WINDOW.formList[i].DISPLAYED == true)
-            //    {
-            //        PROPERTY_FUNCTIONS.Set_Window_Location_Set(i, MULTI_WINDOW.formList[i]);
-            //        MULTI_WINDOW.formList[i].ClientSize = PROPERTY_FUNCTIONS.GetCameraSize(i);
-            //    }
-            //}
+            for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+            {
+                if (MULTI_WINDOW.formList[i].DISPLAYED == true)
+                {
+                    PROPERTY_FUNCTIONS.Set_Window_Location_Set(i, MULTI_WINDOW.formList[i]);
+                    MULTI_WINDOW.formList[i].ClientSize = PROPERTY_FUNCTIONS.GetCameraSize(i);
+                }
+            }
 
             //Properties.Settings.Default.Save();
             Camera.CountCamera();
