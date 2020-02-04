@@ -441,7 +441,6 @@ namespace FaceDetection
 
         private new void Dispose()
         {
-            
             datetime_timer?.Dispose();
             backLight?.Dispose();
         }
