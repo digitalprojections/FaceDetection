@@ -1212,6 +1212,10 @@ namespace FaceDetection
                             callByParameters = true;
                             minimizedByParameters = true;
                         }
+                        else
+                        {
+                            WrongParameter = true;
+                        }
                     }
                     else
                     {
@@ -1395,13 +1399,14 @@ namespace FaceDetection
                         //StartAndHideWindows();
                         if (parameterOnOffSwitch)
                         {
-                            minimizedByParameter[0] = true;
-                            minimizedByParameter[1] = true;
-                            minimizedByParameter[2] = true;
-                            minimizedByParameter[3] = true;
-                            minimizedByParameter[CameraIndex] = false;
-                            callByParameters = true;
-                            minimizedByParameters = true;
+                            //minimizedByParameter[0] = true;
+                            //minimizedByParameter[1] = true;
+                            //minimizedByParameter[2] = true;
+                            //minimizedByParameter[3] = true;
+                            //minimizedByParameter[CameraIndex] = false;
+                            //callByParameters = true;
+                            //minimizedByParameters = true;
+                            WrongParameter = true;
                         }
                         else
                         { 

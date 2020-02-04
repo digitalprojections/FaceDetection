@@ -426,7 +426,7 @@ namespace FaceDetection
                         }
                         duration = decimal.ToInt32(Properties.Settings.Default.manual_record_time) * 1000;
                         the_timer.Enabled = true;
-                        the_timer.Interval = duration + 2000;
+                        the_timer.Interval = duration + 1000;
                         the_timer.Enabled = false;
                         
                         if (this != null)
@@ -448,7 +448,7 @@ namespace FaceDetection
                         LOGGER.Add(duration + " is the duration of " + recorder.CAMERA_MODE);
 
                         the_timer.Enabled = true;
-                        the_timer.Interval = duration + 3000;
+                        the_timer.Interval = duration + 1000;
                         the_timer.Enabled = false;
                         if (this != null)
                         {
@@ -464,7 +464,7 @@ namespace FaceDetection
                         duration = secondsAfterEvent * 1000;
                         LOGGER.Add(duration + "  " + recorder.CAMERA_MODE);
                         the_timer.Enabled = true;
-                        the_timer.Interval = duration + 3000;
+                        the_timer.Interval = duration + 1000;
                         the_timer.Enabled = false;
                         LOGGER.Add("No operator capture timer interval: " + no_opcap_timer.Interval.ToString());
                         if (this != null)
