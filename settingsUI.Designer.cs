@@ -927,7 +927,7 @@
             resources.ApplyResources(this.comboBoxFPS, "comboBoxFPS");
             this.comboBoxFPS.FormattingEnabled = true;
             this.comboBoxFPS.Name = "comboBoxFPS";
-            this.comboBoxFPS.SelectedIndexChanged += new System.EventHandler(this.comboBoxFPS_SelectedIndexChanged);
+            //this.comboBoxFPS.SelectedIndexChanged += new System.EventHandler(this.comboBoxFPS_SelectedIndexChanged);
             // 
             // button_cameraProperties
             // 

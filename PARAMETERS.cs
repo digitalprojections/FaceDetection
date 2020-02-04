@@ -2111,9 +2111,9 @@ namespace FaceDetection
 
         private static int GetNextCameraIndex(int cameraIndex)
         {
-            if (cameraIndex >= 0)
+            if (cameraIndex >= 0 && MULTI_WINDOW.displayedCameraCount > 0)
             {
-                if (cameraIndex >= MULTI_WINDOW.displayedCameraCount)
+                if (cameraIndex >= MULTI_WINDOW.displayedCameraCount-1)
                 {
                     return 0;
                 }
