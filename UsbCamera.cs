@@ -84,8 +84,15 @@ namespace FaceDetectionX
             }catch(FormatException fx)
             {
 
+            }catch(ArgumentNullException anx)
+            {
+
             }
-            
+            catch (OverflowException ofx)
+            {
+             
+            }
+
             var camera_list = FindDevices();
             if (cameraIndex < camera_list.Length && parentwindow!=null)
             {

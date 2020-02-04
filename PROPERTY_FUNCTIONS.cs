@@ -452,7 +452,7 @@ namespace FaceDetection
             }
         }
 
-        internal static void Set_Window_Location_Set(int cam_ind, CameraForm subCamWindow)
+        internal static void Set_Window_Location(int cam_ind, CameraForm subCamWindow)
         {
             switch (cam_ind)
             {
