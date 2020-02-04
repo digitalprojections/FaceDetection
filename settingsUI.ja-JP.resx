@@ -146,13 +146,13 @@
     <value>未操作時間</value>
   </data>
   <data name="numericUpDownBacklight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>330, 68</value>
+    <value>332, 68</value>
   </data>
   <data name="nud_manual_record_time.Location" type="System.Drawing.Point, System.Drawing">
-    <value>331, 13</value>
+    <value>332, 13</value>
   </data>
   <data name="lb_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 19</value>
+    <value>399, 19</value>
   </data>
   <data name="lb_seconds.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 12</value>
@@ -176,10 +176,10 @@
     <value>424, 102</value>
   </data>
   <data name="event_record_time_before_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>327, 18</value>
+    <value>324, 18</value>
   </data>
   <data name="nud_event_record_after.Location" type="System.Drawing.Point, System.Drawing">
-    <value>327, 47</value>
+    <value>324, 47</value>
   </data>
   <data name="lb_post_event.Location" type="System.Drawing.Point, System.Drawing">
     <value>190, 53</value>
@@ -227,7 +227,7 @@
     <value>イベントレコーダー</value>
   </data>
   <data name="label20_minutes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 74</value>
+    <value>400, 74</value>
   </data>
   <data name="label20_minutes.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 12</value>
@@ -326,7 +326,7 @@
     <value>秒</value>
   </data>
   <data name="nud_reinitiation_interval.Location" type="System.Drawing.Point, System.Drawing">
-    <value>323, 17</value>
+    <value>324, 17</value>
   </data>
   <data name="cm_capture_mode.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 109</value>
@@ -350,7 +350,7 @@
     <value>撮影別</value>
   </data>
   <data name="numericUpDown2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>323, 47</value>
+    <value>324, 47</value>
   </data>
   <data name="cb_operator_capture.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 16</value>
@@ -560,7 +560,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADQ
-        HQAAAk1TRnQBSQFMAgEBAwEAAcwBBAHMAQQBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
+        HQAAAk1TRnQBSQFMAgEBAwEAAdQBBAHUAQQBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
         AwABGAMAAQEBAAEgBgABJC4AAw8BFAFYAlsBywEAAbwB+gH/ATwCfwH+AQABvAH6Af8BAAG8AfoB/wE8
         An8B/gEAAbwB+gH/AUACqAH9A0ABcRwAAwEEAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMC
         AQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMCAQMDAgEDAwIBAwMB
@@ -695,7 +695,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA0
-        AQAAAk1TRnQBSQFMAgEBAgEAAWQBAgFkAQIBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        AQAAAk1TRnQBSQFMAgEBAgEAAWwBAgFsAQIBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEYBgABDBUALf8DAC3/YwAt/wMALf9jAC3/AwAt/2MALf8DAC3/YwAt/wMAD/8DHgPy
         GP9jAC3/AwAM/wMeBgADzxX/YwAt/wMACf8DDAMAA/UDDwMAFf9jAC3/AwAG/wNJAwAD5wb/A0ADAAPP
         D/9jAC3/AwAY/wMPAwAD8gz/YwAt/wMAG/8DPAMAA9cJ/2MALf8DAB7/AycDAAPeBv9jAC3/AwAh/wMw
