@@ -171,10 +171,10 @@
       <Value Profile="(Default)">Video</Value>
     </Setting>
     <Setting Name="C4w" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">1280</Value>
+      <Value Profile="(Default)">640</Value>
     </Setting>
     <Setting Name="C4h" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">720</Value>
+      <Value Profile="(Default)">480</Value>
     </Setting>
     <Setting Name="C1_enable_Human_sensor" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

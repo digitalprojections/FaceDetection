@@ -116,8 +116,10 @@ namespace FaceDetection
             this.MouseDown += FormClass_Down;
             this.MouseUp += CameraForm_MouseUp;
             this.DoubleClick += FullScreen;
+            
             crossbar = new CROSSBAR(CameraIndex, this);
-            var mci = Properties.Settings.Default.main_camera_index;
+            
+            //var mci = Properties.Settings.Default.main_camera_index;
             //if (CameraIndex == mci)// && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
             //{
             //    this.Text = $"UVC Camera Viewer - MAIN CAMERA {(CameraIndex + 1)}";                
@@ -134,8 +136,7 @@ namespace FaceDetection
             
             this.Controls.Add(this.controlButtons);
 
-            this.ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
-            this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
+            
 
             rec_icon = new RecIcon();
             this.Controls.Add(rec_icon);
@@ -165,6 +166,9 @@ namespace FaceDetection
             {
                 camera_number.ForeColor = Color.Red;
             }
+
+            this.ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
+            this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
         }
 
         /// <summary>
@@ -248,17 +252,7 @@ namespace FaceDetection
             }
         }
 
-        //private void ShowButtons(object sender, MouseEventArgs e)
-        //{
-        //    if (folderButton.Visible == false)
-        //    {
-        //        mouse_down_timer.Start();
-        //    }
-        //    else
-        //    {
-        //        controlButtons.Visible = false;
-        //    }
-        //}
+        
 
         /// <summary>
         /// Get the bitmap from the 
@@ -311,7 +305,7 @@ namespace FaceDetection
                 FormBorderStyle = FormBorderStyle.None;
             }
 
-            //ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
+            ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
             Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
             // Check if the PREEVENT mode is needed
             //controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
