@@ -355,7 +355,7 @@ namespace FaceDetection
             switch (MethodName)
             {
                 case " ":// FFTF
-                    if (CameraIndex + 1 >= Properties.Settings.Default.camera_count)
+                    if (!WrongParameter && CameraIndex + 1 >= Properties.Settings.Default.camera_count)
                     {
                         if (WAKEUPCALL && CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                         {
@@ -398,7 +398,7 @@ namespace FaceDetection
                 case "s":// TFFF
                     try
                     {
-                        if (!WAKEUPCALL)
+                        if (!WrongParameter && !WAKEUPCALL)
                         {
                             SNAPSHOT_SAVER.TakeSnapShot(MainCamera, "snapshot");
                         }
@@ -417,7 +417,7 @@ namespace FaceDetection
                 case "e":// TFFF
                     try
                     {
-                        if (!WAKEUPCALL && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
+                        if (!WrongParameter && !WAKEUPCALL && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             MULTI_WINDOW.EventRecorderOn(MainCamera);
                         }
@@ -437,7 +437,7 @@ namespace FaceDetection
                 case "q":// TFFF
                     try
                     {
-                        if (!WAKEUPCALL)
+                        if (!WrongParameter && !WAKEUPCALL)
                         {
                             MULTI_WINDOW.formList[MainCamera].applicationExit = true;
                             Application.Exit();
@@ -454,7 +454,7 @@ namespace FaceDetection
                 case "n"://TFFF
                     if (!WAKEUPCALL)
                     {                        
-                        if ((MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.DISPLAYED == true && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false) || TESTING)
+                        if (!WrongParameter && (MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.DISPLAYED == true && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false) || TESTING)
                         {
                             CurrentTestResult = "main camera change?";
                             Properties.Settings.Default.main_camera_index = GetNextCameraIndex(MainCamera);
@@ -494,7 +494,7 @@ namespace FaceDetection
                 case "s":// TFTF
                     try
                     {
-                        if (!WAKEUPCALL)
+                        if (!WrongParameter && !WAKEUPCALL)
                         {
                             if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                             {
@@ -520,7 +520,7 @@ namespace FaceDetection
                 case "e":// TFTF
                     try
                     {
-                        if (!WAKEUPCALL && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) 
+                        if (!WrongParameter && !WAKEUPCALL && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) 
                         {
                             MULTI_WINDOW.EventRecorderOn(CameraIndex);
                         }
@@ -539,7 +539,7 @@ namespace FaceDetection
                 case "q":// TFTF
                     try
                     {
-                        if (!WAKEUPCALL && CheckCameraIndex(CameraIndex))
+                        if (!WrongParameter && !WAKEUPCALL && CheckCameraIndex(CameraIndex))
                         {
                             if (CameraIndex >= 0 && CameraIndex < 4)
                             {
@@ -564,7 +564,7 @@ namespace FaceDetection
 
                 // Change main camera
                 case "n"://TFTF
-                    if (!WAKEUPCALL)
+                    if (!WrongParameter && !WAKEUPCALL)
                     {
                         if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                         {
@@ -609,7 +609,7 @@ namespace FaceDetection
                 case "b"://TTFF
                     try
                     {
-                        if (!WAKEUPCALL)
+                        if (!WrongParameter && !WAKEUPCALL)
                         {
                             if (parameterOnOffSwitch)
                             {
@@ -636,7 +636,7 @@ namespace FaceDetection
                 case "c":// TTFF
                     try
                     {
-                        if(!WAKEUPCALL)
+                        if(!WrongParameter && !WAKEUPCALL)
                         {
                             if (parameterOnOffSwitch)
                             {
@@ -673,7 +673,7 @@ namespace FaceDetection
 
                 // IR Sensor
                 case "h":// TTFF
-                    if (MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
+                    if (!WrongParameter && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                     {
                         PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(MainCamera, out bool IrSensorEnabled);
                         if (parameterOnOffSwitch)
@@ -727,7 +727,7 @@ namespace FaceDetection
                 case "r"://TTFF
                     try
                     {
-                        if (!WAKEUPCALL)
+                        if (!WrongParameter && !WAKEUPCALL)
                         {
                             if (parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                             {
@@ -866,7 +866,7 @@ namespace FaceDetection
                 case "l"://TTFF
                     try
                     {
-                        if(!WAKEUPCALL)
+                        if(!WrongParameter && !WAKEUPCALL)
                         {
                             if (parameterOnOffSwitch)
                             {
