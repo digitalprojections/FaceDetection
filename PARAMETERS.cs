@@ -770,14 +770,13 @@ namespace FaceDetection
                     {
                         if (!parameterOnOffSwitch)
                         {
-                            CurrentTestResult = "Hiding 1 window";
+                            CurrentTestResult = "Hiding all window";
                             //isMinimized = true;
                             //MULTI_WINDOW.formList[MainCamera].WindowState = FormWindowState.Minimized;
-                            minimizedByParameter[0] = false;
-                            minimizedByParameter[1] = false;
-                            minimizedByParameter[2] = false;
-                            minimizedByParameter[3] = false;
-                            minimizedByParameter[MainCamera] = true;
+                            minimizedByParameter[0] = true;
+                            minimizedByParameter[1] = true;
+                            minimizedByParameter[2] = true;
+                            minimizedByParameter[3] = true;
                             callByParameters = true;
                             minimizedByParameters = true;
                         }
@@ -962,39 +961,39 @@ namespace FaceDetection
                     break;
 
                 // Visible
-                case "v"://TTTF
-                    if(WAKEUPCALL)
-                    {
-                        //StartAndHideWindows();
-                        if (parameterOnOffSwitch)
-                        {
-                            //minimizedByParameter[0] = true;
-                            //minimizedByParameter[1] = true;
-                            //minimizedByParameter[2] = true;
-                            //minimizedByParameter[3] = true;
-                            //minimizedByParameter[CameraIndex] = false;
-                            //callByParameters = true;
-                            //minimizedByParameters = true;
-                            WrongParameter = true;
-                        }
-                        else
-                        { 
-                            minimizedByParameter[0] = false;
-                            minimizedByParameter[1] = false;
-                            minimizedByParameter[2] = false;
-                            minimizedByParameter[3] = false;
-                            minimizedByParameter[CameraIndex] = true;
-                            callByParameters = true;
-                            minimizedByParameters = true;
-                        }
-                    }
-                    else
-                    {
-                        ShowOrHideWindows();
-                    }
-                    CurrentTestResult = "Show All Windows";
-                    PARAM.Clear();
-                    break;
+                //case "v"://TTTF
+                //    if(WAKEUPCALL)
+                //    {
+                //        //StartAndHideWindows();
+                //        if (parameterOnOffSwitch)
+                //        {
+                //            //minimizedByParameter[0] = true;
+                //            //minimizedByParameter[1] = true;
+                //            //minimizedByParameter[2] = true;
+                //            //minimizedByParameter[3] = true;
+                //            //minimizedByParameter[CameraIndex] = false;
+                //            //callByParameters = true;
+                //            //minimizedByParameters = true;
+                //            WrongParameter = true;
+                //        }
+                //        else
+                //        { 
+                //            minimizedByParameter[0] = false;
+                //            minimizedByParameter[1] = false;
+                //            minimizedByParameter[2] = false;
+                //            minimizedByParameter[3] = false;
+                //            minimizedByParameter[CameraIndex] = true;
+                //            callByParameters = true;
+                //            minimizedByParameters = true;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        ShowOrHideWindows();
+                //    }
+                //    CurrentTestResult = "Show All Windows";
+                //    PARAM.Clear();
+                //    break;
 
                 // Backlight
                 case "l"://TTTF
