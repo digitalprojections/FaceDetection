@@ -78,24 +78,28 @@ namespace FaceDetection
 
         public static void EventRecorderOn(int cameraIndex)
         {
-            PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(cameraIndex, out int timeBeforeEvent, out int timeAfterEvent);
-            bool preeventRecording = PreeventRecordingState(cameraIndex);
-
-            if (preeventRecording)
+            PROPERTY_FUNCTIONS.GetEventRecorderSwitch(cameraIndex, out bool eventRecorderEnabled);
+            if(eventRecorderEnabled)
             {
-                if (Properties.Settings.Default.capture_method == 0)
+                PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(cameraIndex, out int timeBeforeEvent, out int timeAfterEvent);
+                bool preeventRecording = PreeventRecordingState(cameraIndex);
+
+                if (preeventRecording)
                 {
-                    TaskManager.EventAppeared(RECORD_PATH.EVENT, cameraIndex + 1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+                    if (Properties.Settings.Default.capture_method == 0)
+                    {
+                        TaskManager.EventAppeared(RECORD_PATH.EVENT, cameraIndex + 1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
 
-                    SET_REC_ICON(cameraIndex);
-                    formList[cameraIndex].SetRecordIcon(cameraIndex, timeAfterEvent);
+                        SET_REC_ICON(cameraIndex);
+                        formList[cameraIndex].SetRecordIcon(cameraIndex, timeAfterEvent);
+                    }
                 }
-            }
-            else
-            {
-                formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.EVENT);
-                formList[cameraIndex].SetHideRecordIcon(timeAfterEvent);
-                LOGGER.Add(Resource.event_recording_starts);
+                else
+                {
+                    formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.EVENT);
+                    formList[cameraIndex].SetHideRecordIcon(timeAfterEvent);
+                    LOGGER.Add(Resource.event_recording_starts);
+                }
             }
         }
 
