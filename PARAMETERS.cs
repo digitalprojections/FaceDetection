@@ -400,7 +400,7 @@ namespace FaceDetection
                     {
                         if (!WAKEUPCALL)
                         {
-                            SNAPSHOT_SAVER.TakeSnapShot(MainCamera, "event");
+                            SNAPSHOT_SAVER.TakeSnapShot(MainCamera, "snapshot");
                         }
                         else
                         {
@@ -498,7 +498,7 @@ namespace FaceDetection
                         {
                             if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                             {
-                                SNAPSHOT_SAVER.TakeAsyncSnapShot(false, CameraIndex, "event");
+                                SNAPSHOT_SAVER.TakeAsyncSnapShot(false, CameraIndex, "snapshot");
                             }
                             else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8)
                             {

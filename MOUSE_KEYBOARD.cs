@@ -41,7 +41,7 @@ namespace FaceDetection
 
         public void START_CLICK_LISTENER()
         {
-            CAMERA_INDEX = Properties.Settings.Default.main_camera_index;
+            //CAMERA_INDEX = Properties.Settings.Default.main_camera_index;
             Task.Run(() => {
                 Thread.Sleep(7000);
                 keyboardListener.KeyUpAll += KeyboardListener_KeyUpAll;
@@ -142,9 +142,11 @@ namespace FaceDetection
             {
                 if (disposing)
                 {
+                    keyboardListener.KeyUpAll -= KeyboardListener_KeyUpAll;
+                    mouseListener.MouseLeftDown -= MouseListener_MouseLeftDown;
+                    mouseListenerClick.MouseMove -= MouseListener_MouseMove;
                     // TODO: dispose managed state (managed objects).
                 }
-
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
                 // TODO: set large fields to null.
 
