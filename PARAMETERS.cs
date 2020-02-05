@@ -340,7 +340,7 @@ namespace FaceDetection
             switch (MethodName)
             {
                 case " ":// FFTF
-                    if (!WrongParameter && CameraIndex + 1 >= Properties.Settings.Default.camera_count)
+                    if (!WrongParameter && CameraIndex + 1 <= Properties.Settings.Default.camera_count)
                     {
                         if (WAKEUPCALL && CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                         {
@@ -483,7 +483,8 @@ namespace FaceDetection
                         {
                             if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                             {
-                                SNAPSHOT_SAVER.TakeAsyncSnapShot(false, CameraIndex, "snapshot");
+                                //SNAPSHOT_SAVER.TakeAsyncSnapShot(false, CameraIndex, "snapshot");
+                                SNAPSHOT_SAVER.TakeSnapShot(CameraIndex, "snapshot");
                             }
                             else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8)
                             {
@@ -1154,7 +1155,7 @@ namespace FaceDetection
                     }
                     else
                     {
-                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && (CameraIndex + 1 <= Properties.Settings.Default.camera_count))
                         {
                             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CameraIndex, out bool IrSensorEnabled);
                             if (parameterOnOffSwitch)
@@ -1196,6 +1197,10 @@ namespace FaceDetection
                             //{
                             //    //MainForm.AllChangesApply();
                             //}
+                        }
+                        else
+                        {
+                            WrongParameter = true;
                         }
                     }
                     
