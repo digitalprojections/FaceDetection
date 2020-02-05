@@ -35,8 +35,6 @@ namespace FaceDetection
             {                
                 Listen = true;
             }
-
-            
         }
 
         public void START_CLICK_LISTENER()
@@ -48,7 +46,7 @@ namespace FaceDetection
                 mouseListener.MouseLeftDown += MouseListener_MouseLeftDown;
                 mouseListenerClick.MouseMove += MouseListener_MouseMove;
             });
-            }
+        }
 
         private void KeyboardListener_KeyUpAll(object sender, KeyEventArgs e)
         {
