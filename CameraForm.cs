@@ -258,7 +258,7 @@ namespace FaceDetection
 
         /// <summary>
         /// Get the bitmap from the 
-        /// <see cref="crossbar/>
+        /// <see cref="crossbar"/>
         /// </summary>
         /// <returns></returns>
         internal Bitmap GetSnapShot()

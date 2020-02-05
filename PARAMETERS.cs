@@ -123,22 +123,42 @@ namespace FaceDetection
                                 case "s":
                                     try
                                     {
-                                        int sw = Int32.Parse(elem.Substring(2));
-                                        if (sw == 1)
+                                        int sw = -1;
+                                        try
                                         {
-                                            SwitchIsPresent = true;
-                                            parameterOnOffSwitch = true;
+                                            sw = Int32.Parse(elem.Substring(2));
+                                            if (sw == 1)
+                                            {
+                                                SwitchIsPresent = true;
+                                                parameterOnOffSwitch = true;
+                                            }
+                                            else if (sw == 0)
+                                            {
+                                                SwitchIsPresent = true;
+                                                parameterOnOffSwitch = false;
+                                            }
+                                            else
+                                            {
+                                                WrongParameter = true;
+                                                i = parameters.Count;
+                                            }
                                         }
-                                        else if(sw == 0)
-                                        {
-                                            SwitchIsPresent = true;
-                                            parameterOnOffSwitch = false;
-                                        }
-                                        else
+                                        catch (ArgumentNullException anx)
                                         {
                                             WrongParameter = true;
                                             i = parameters.Count;
                                         }
+                                        catch (FormatException fx)
+                                        {
+                                            WrongParameter = true;
+                                            i = parameters.Count;
+                                        }
+                                        catch (OverflowException ofx)
+                                        {
+                                            WrongParameter = true;
+                                            i = parameters.Count;
+                                        }
+                                        
                                     }
                                     catch (ArgumentNullException anx)
                                     {
