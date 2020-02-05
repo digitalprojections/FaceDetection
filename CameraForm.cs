@@ -333,6 +333,8 @@ namespace FaceDetection
                 }
             }
 
+            
+
             // Bring main to the front
             if (CameraIndex == Properties.Settings.Default.main_camera_index)
             {
@@ -350,6 +352,7 @@ namespace FaceDetection
                 }
                 this.Activate();
             }
+            
 
             SetCameraToDefaultMode();
         }

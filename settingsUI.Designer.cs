@@ -927,7 +927,6 @@
             this.comboBoxFPS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFPS.FormattingEnabled = true;
             this.comboBoxFPS.Name = "comboBoxFPS";
-            //this.comboBoxFPS.SelectedIndexChanged += new System.EventHandler(this.comboBoxFPS_SelectedIndexChanged);
             // 
             // button_cameraProperties
             // 

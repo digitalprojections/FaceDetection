@@ -818,24 +818,37 @@ namespace FaceDetection
             switch (cam_ind)
             {
                 case 0:
-                    res = Properties.Settings.Default.C1res.Split('x');
-                    retval = new System.Drawing.Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
+                    res = Properties.Settings.Default.C1res.Split('x');                    
                     break;
                 case 1:
                     res = Properties.Settings.Default.C2res.Split('x');
-                    retval = new System.Drawing.Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
                     break;
                 case 2:
                     res = Properties.Settings.Default.C3res.Split('x');
-                    retval = new System.Drawing.Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
                     break;
                 case 3:
                     res = Properties.Settings.Default.C4res.Split('x');
-                    retval = new System.Drawing.Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
                     break;
                 default:
-                    retval = new System.Drawing.Size(640, 480);
+                    res = Properties.Settings.Default.C1res.Split('x');
+                    //retval = new System.Drawing.Size(640, 480);
                     break;
+            }
+            try
+            {
+                retval = new System.Drawing.Size(Int32.Parse(res[0]), Int32.Parse(res[1]));
+            }
+            catch (ArgumentNullException anx)
+            {
+                retval = new System.Drawing.Size(640, 480);
+            }
+            catch (FormatException fx)
+            {
+                retval = new System.Drawing.Size(640, 480);
+            }
+            catch (OverflowException ofx)
+            {
+                retval = new System.Drawing.Size(640, 480);
             }
             return retval;
         }
