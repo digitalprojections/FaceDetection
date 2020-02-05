@@ -258,7 +258,7 @@ namespace FaceDetection
 
         /// <summary>
         /// Get the bitmap from the 
-        /// <see cref="crossbar/>
+        /// <see cref="crossbar"/>
         /// </summary>
         /// <returns></returns>
         internal Bitmap GetSnapShot()
@@ -296,6 +296,16 @@ namespace FaceDetection
             else
             {
                 FormBorderStyle = FormBorderStyle.None;
+                // Full screen
+                if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(CameraIndex))
+                {
+                    this.WindowState = FormWindowState.Normal;
+                    this.WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    this.WindowState = FormWindowState.Normal;
+                }
             }
 
             ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
