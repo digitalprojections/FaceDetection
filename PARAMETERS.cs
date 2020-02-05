@@ -355,21 +355,28 @@ namespace FaceDetection
             switch (MethodName)
             {
                 case " ":// FFTF
-                    if (WAKEUPCALL && CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                    if (CameraIndex + 1 >= Properties.Settings.Default.camera_count)
                     {
-                        for (int i = 0; i < Properties.Settings.Default.camera_count; i++)
+                        if (WAKEUPCALL && CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                         {
-                            if (i != CameraIndex)
+                            for (int i = 0; i < Properties.Settings.Default.camera_count; i++)
                             {
-                                minimizedByParameter[i] = true;
-                                callByParameters = true;
-                                minimizedByParameters = true;
+                                if (i != CameraIndex)
+                                {
+                                    minimizedByParameter[i] = true;
+                                    callByParameters = true;
+                                    minimizedByParameters = true;
+                                }
                             }
                         }
+                        else if (WAKEUPCALL && (CameraIndex == 8))
+                        {
+                            //Start all cams
+                        }
                     }
-                    else if (WAKEUPCALL && (CameraIndex == 8))
+                    else
                     {
-                        //Start all cams
+                        WrongParameter = true;
                     }
                     CurrentTestResult = "No method " + CameraIndex;
                     break;
