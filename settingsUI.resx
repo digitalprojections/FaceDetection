@@ -124,12 +124,15 @@
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="cb_operator_capture.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <value>groupBox_functionalitySettings</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="numericUpDownH.Location" type="System.Drawing.Point, System.Drawing">
     <value>76, 46</value>
+  </data>
+  <data name="groupBox_Environment.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="cb_backlight_on_recognition.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 51</value>
@@ -158,6 +161,9 @@
   </data>
   <data name="cm_camera_number.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 15</value>
+  </data>
+  <data name="&gt;&gt;cb_always_on_top.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="cm_language.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -195,17 +201,11 @@
   <data name="label11.Text" xml:space="preserve">
     <value>Record (after trigger)</value>
   </data>
-  <data name="&gt;&gt;numericUpDownH.Name" xml:space="preserve">
-    <value>numericUpDownH</value>
-  </data>
-  <data name="cm_language.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 102</value>
+  <data name="&gt;&gt;cb_dateandtime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="numericUpDown2.Location" type="System.Drawing.Point, System.Drawing">
     <value>339, 44</value>
-  </data>
-  <data name="label22_seconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
   </data>
   <data name="&gt;&gt;storePath.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -213,8 +213,11 @@
   <data name="numericUpDownY.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Height</value>
+  <data name="tab_environment.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="numericUpDownX.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
@@ -222,16 +225,10 @@
   <data name="cb_dateandtime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
-  <data name="lb_post_event.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 12</value>
-  </data>
   <data name="cb_recording_operation.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 69</value>
   </data>
   <data name="nud_seconds_before_event.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="label12.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
@@ -252,11 +249,8 @@
   <data name="&gt;&gt;nud_seconds_after_event.Name" xml:space="preserve">
     <value>nud_seconds_after_event</value>
   </data>
-  <data name="cb_always_on_top.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
+  <data name="&gt;&gt;lb_seconds.Name" xml:space="preserve">
+    <value>lb_seconds</value>
   </data>
   <data name="&gt;&gt;nud_erase_old.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -264,14 +258,14 @@
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="cb_show_camera_number.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Y</value>
   </data>
   <data name="label22_seconds.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="tab_camera_and_window.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
   </data>
   <data name="&gt;&gt;cm_camera_number.Name" xml:space="preserve">
     <value>cm_camera_number</value>
@@ -327,8 +321,8 @@
   <data name="label17.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+  <data name="&gt;&gt;cb_show_camera_number.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="numericUpDownCamCount.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
@@ -354,11 +348,11 @@
   <data name="button_settings_cancel.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 13.8pt</value>
   </data>
-  <data name="cb_always_on_top.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;event_record_time_before_event.Name" xml:space="preserve">
+    <value>event_record_time_before_event</value>
   </data>
-  <data name="&gt;&gt;lb_capture_mode.ZOrder" xml:space="preserve">
-    <value>12</value>
+  <data name="&gt;&gt;cb_show_rec_icon.Parent" xml:space="preserve">
+    <value>groupBox3</value>
   </data>
   <data name="tab_camera_and_window.Text" xml:space="preserve">
     <value>Camera and Window</value>
@@ -381,6 +375,9 @@
   <data name="$this.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 16</value>
   </data>
+  <data name="&gt;&gt;cb_show_camera_number.Name" xml:space="preserve">
+    <value>cb_show_camera_number</value>
+  </data>
   <data name="&gt;&gt;cb_face_recognition.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -393,14 +390,11 @@
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>59, 50</value>
   </data>
-  <data name="&gt;&gt;cb_backlight_on_recognition.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
-  </data>
   <data name="&gt;&gt;numericUpDownH.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="label3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="button_settings_cancel.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
   </data>
   <data name="bl_idling_time_label.Text" xml:space="preserve">
     <value>Idling time</value>
@@ -408,7 +402,7 @@
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 48</value>
   </data>
-  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lb_seconds2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
@@ -423,8 +417,11 @@
   <data name="&gt;&gt;lb_milliseconds1.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="numericUpDownH.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="groupBox12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;label9_fps.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;nud_reinitiation_interval.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -438,11 +435,14 @@
   <data name="&gt;&gt;folderBrowserDialogStoreFolder.Type" xml:space="preserve">
     <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cm_language.Name" xml:space="preserve">
-    <value>cm_language</value>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;imageList1.Name" xml:space="preserve">
-    <value>imageList1</value>
+  <data name="&gt;&gt;lb_seconds.Parent" xml:space="preserve">
+    <value>groupBox_viewSettings</value>
+  </data>
+  <data name="cb_always_on_top.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
   <data name="&gt;&gt;cb_event_recorder.Name" xml:space="preserve">
     <value>cb_event_recorder</value>
@@ -471,14 +471,20 @@
   <data name="&gt;&gt;cb_event_recorder.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;groupBox_Environment.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cb_backlight_on_recognition.Name" xml:space="preserve">
-    <value>cb_backlight_on_recognition</value>
+  <data name="label22_seconds.Text" xml:space="preserve">
+    <value>sec</value>
   </data>
   <data name="cb_dateandtime.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 16</value>
+  </data>
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lb_milliseconds1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -630,8 +636,8 @@
   <data name="&gt;&gt;backgroundWorkerCancelClose.Type" xml:space="preserve">
     <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button_settings_cancel.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="cm_capture_mode.Items" xml:space="preserve">
+    <value>Video</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>453, 452</value>
@@ -645,8 +651,8 @@
   <data name="&gt;&gt;cb_backlight_off_idling.Name" xml:space="preserve">
     <value>cb_backlight_off_idling</value>
   </data>
-  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="cb_all_cameras.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cm_capture_mode.Items1" xml:space="preserve">
     <value>Snapshot</value>
@@ -702,8 +708,17 @@
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;cm_language.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="nud_reinitiation_interval.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cb_backlight_on_recognition.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cb_operator_capture.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;cb_operator_capture.Name" xml:space="preserve">
     <value>cb_operator_capture</value>
@@ -741,11 +756,14 @@
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label22_seconds.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>groupBox12</value>
   </data>
-  <data name="label9_fps.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;numericUpDownBacklight.Parent" xml:space="preserve">
+    <value>groupBox_viewSettings</value>
+  </data>
+  <data name="&gt;&gt;groupBox_Environment.Parent" xml:space="preserve">
+    <value>tab_environment</value>
   </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -762,23 +780,20 @@
   <data name="labelcnum.Text" xml:space="preserve">
     <value>Camera number</value>
   </data>
-  <data name="cb_backlight_off_idling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 16</value>
-  </data>
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="numericUpDownW.Location" type="System.Drawing.Point, System.Drawing">
     <value>76, 16</value>
   </data>
-  <data name="cb_face_recognition.Text" xml:space="preserve">
-    <value>Enable face recognition</value>
+  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="cb_recording_operation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 16</value>
   </data>
-  <data name="storePath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Disable</value>
+  <data name="cb_all_cameras.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="label13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -786,23 +801,26 @@
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;checkBox_full_screen.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="numericUpDown2.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="&gt;&gt;cm_capture_mode.Name" xml:space="preserve">
+    <value>cm_capture_mode</value>
   </data>
   <data name="label20_minutes.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 12</value>
   </data>
   <data name="&gt;&gt;numericUpDownY.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbWindowSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
@@ -816,11 +834,14 @@
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="button_cameraProperties.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="label20_minutes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>411, 72</value>
+  </data>
   <data name="&gt;&gt;storePath.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="button_Browse.Text" xml:space="preserve">
-    <value>Browse</value>
   </data>
   <data name="&gt;&gt;button_cameraProperties.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -861,6 +882,9 @@
   <data name="nud_seconds_before_event.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
+  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
   <data name="&gt;&gt;label9_fps.Name" xml:space="preserve">
     <value>label9_fps</value>
   </data>
@@ -888,8 +912,8 @@
   <data name="button_settings_cancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>356, 457</value>
   </data>
-  <data name="button_settings_cancel.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+  <data name="cb_always_on_top.Text" xml:space="preserve">
+    <value>Always on top</value>
   </data>
   <data name="label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -900,8 +924,14 @@
   <data name="&gt;&gt;cm_camera_number.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="cb_dateandtime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 261</value>
+  </data>
   <data name="&gt;&gt;comboBoxResolutions.Name" xml:space="preserve">
     <value>comboBoxResolutions</value>
+  </data>
+  <data name="&gt;&gt;cb_backlight_on_recognition.Name" xml:space="preserve">
+    <value>cb_backlight_on_recognition</value>
   </data>
   <data name="&gt;&gt;lb_manual_recording_time.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -969,11 +999,8 @@
   <data name="&gt;&gt;label20_minutes.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;nud_event_record_after.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;numericUpDown2.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 12</value>
@@ -1020,12 +1047,6 @@
   <data name="&gt;&gt;label13.Name" xml:space="preserve">
     <value>label13</value>
   </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;nud_erase_old.Name" xml:space="preserve">
-    <value>nud_erase_old</value>
-  </data>
   <data name="&gt;&gt;numericUpDownX.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1038,8 +1059,8 @@
   <data name="nud_seconds_after_event.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="tab_camera_and_window.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="cb_backlight_on_recognition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="&gt;&gt;lb_milliseconds1.Parent" xml:space="preserve">
     <value>groupBox_functionalitySettings</value>
@@ -1062,8 +1083,11 @@
   <data name="lb_milliseconds1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="label7.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="lb_post_event.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;cb_event_recorder.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1095,17 +1119,17 @@
   <data name="&gt;&gt;lb_seconds2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="nud_reinitiation_interval.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="&gt;&gt;cb_always_on_top.Name" xml:space="preserve">
+    <value>cb_always_on_top</value>
   </data>
-  <data name="cb_recording_operation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="nud_reinitiation_interval.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="label14.Text" xml:space="preserve">
     <value>sec</value>
   </data>
-  <data name="button_settings_save.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 13.8pt</value>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 12</value>
   </data>
   <data name="&gt;&gt;groupBox_functionalitySettings.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1125,9 +1149,6 @@
   <data name="numericUpDownW.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;cb_dateandtime.Name" xml:space="preserve">
-    <value>cb_dateandtime</value>
-  </data>
   <data name="cb_show_rec_icon.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1136,6 +1157,9 @@
   </data>
   <data name="checkBox_full_screen.Text" xml:space="preserve">
     <value>Full screen</value>
+  </data>
+  <data name="groupBox3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="check_state_images.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -1162,17 +1186,20 @@
   <data name="numericUpDownY.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 23</value>
   </data>
+  <data name="checkBox_full_screen.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;cb_face_recognition.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownH.Name" xml:space="preserve">
+    <value>numericUpDownH</value>
   </data>
   <data name="gbWindowPosition.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="cb_backlight_on_recognition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownX.Parent" xml:space="preserve">
-    <value>gbWindowPosition</value>
+  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>405, 118</value>
   </data>
   <data name="&gt;&gt;cb_backlight_on_recognition.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1210,6 +1237,12 @@
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="storePath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="&gt;&gt;cb_dateandtime.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
   <data name="&gt;&gt;cb_backlight_off_idling.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1219,11 +1252,11 @@
   <data name="cb_all_cameras.Size" type="System.Drawing.Size, System.Drawing">
     <value>205, 16</value>
   </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>453, 527</value>
+  </data>
   <data name="comboBoxResolutions.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
-  </data>
-  <data name="cb_all_cameras.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1255,6 +1288,9 @@
   <data name="cm_camera_number.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
+  <data name="bl_idling_time_label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 12</value>
+  </data>
   <data name="&gt;&gt;cm_language.Parent" xml:space="preserve">
     <value>groupBox_Environment</value>
   </data>
@@ -1264,14 +1300,14 @@
   <data name="&gt;&gt;lb_seconds.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>453, 527</value>
+  <data name="&gt;&gt;nud_reinitiation_interval.Name" xml:space="preserve">
+    <value>nud_reinitiation_interval</value>
   </data>
   <data name="labelcnum.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;nud_seconds_after_event.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="nud_seconds_after_event.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 23</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 12</value>
@@ -1285,11 +1321,23 @@
   <data name="&gt;&gt;label13.Parent" xml:space="preserve">
     <value>groupBox_functionalitySettings</value>
   </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="numericUpDownY.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="cb_show_rec_icon.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 16</value>
+  </data>
+  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;cb_human_sensor.Parent" xml:space="preserve">
     <value>groupBox_functionalitySettings</value>
+  </data>
+  <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;cb_show_rec_icon.Name" xml:space="preserve">
     <value>cb_show_rec_icon</value>
@@ -1303,11 +1351,14 @@
   <data name="checkBox_full_screen.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 174</value>
   </data>
+  <data name="tab_camera_and_window.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
   <data name="groupBox2.Text" xml:space="preserve">
     <value>Select save path</value>
   </data>
-  <data name="&gt;&gt;cm_camera_number.ZOrder" xml:space="preserve">
-    <value>14</value>
+  <data name="&gt;&gt;tab_environment.Name" xml:space="preserve">
+    <value>tab_environment</value>
   </data>
   <data name="lb_manual_recording_time.Location" type="System.Drawing.Point, System.Drawing">
     <value>222, 20</value>
@@ -1333,10 +1384,13 @@
   <data name="lb_seconds2.Text" xml:space="preserve">
     <value>sec</value>
   </data>
+  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
   <data name="&gt;&gt;lb_pre_event.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;numericUpDownBacklight.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cb_backlight_on_recognition.Parent" xml:space="preserve">
     <value>groupBox_viewSettings</value>
   </data>
   <data name="numericUpDownX.Location" type="System.Drawing.Point, System.Drawing">
@@ -1363,20 +1417,14 @@
   <data name="&gt;&gt;lb_pre_event.Name" xml:space="preserve">
     <value>lb_pre_event</value>
   </data>
-  <data name="&gt;&gt;tab_environment.Name" xml:space="preserve">
-    <value>tab_environment</value>
-  </data>
   <data name="button_settings_save.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
-  </data>
-  <data name="label20_minutes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;cb_delete_old.Name" xml:space="preserve">
     <value>cb_delete_old</value>
   </data>
-  <data name="&gt;&gt;cb_dateandtime.Parent" xml:space="preserve">
-    <value>groupBox3</value>
+  <data name="label22_seconds.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lb_capture_mode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1392,6 +1440,9 @@
   </data>
   <data name="cm_capture_mode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1411,12 +1462,6 @@
   <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="cb_backlight_on_recognition.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
@@ -1429,14 +1474,14 @@
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>12, 12</value>
   </data>
-  <data name="gbWindowSize.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;cb_show_camera_number.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cb_always_on_top.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="lb_seconds.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="&gt;&gt;label20_minutes.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
   </data>
   <data name="&gt;&gt;lb_post_event.Name" xml:space="preserve">
     <value>lb_post_event</value>
@@ -1453,6 +1498,9 @@
   <data name="cb_delete_old.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 16</value>
   </data>
+  <data name="lb_pre_event.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
   <data name="label23_seconds.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
@@ -1465,8 +1513,8 @@
   <data name="nud_manual_record_time.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;groupBox_Environment.Name" xml:space="preserve">
+    <value>groupBox_Environment</value>
   </data>
   <data name="groupBox12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1507,17 +1555,17 @@
   <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="cb_show_rec_icon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 16</value>
+  <data name="lb_capture_mode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="&gt;&gt;numericUpDownCamCount.Parent" xml:space="preserve">
     <value>groupBox_Environment</value>
   </data>
-  <data name="cb_show_camera_number.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 16</value>
+  <data name="numericUpDown2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lb_post_event.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 12</value>
   </data>
   <data name="nud_erase_old.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
@@ -1525,8 +1573,8 @@
   <data name="label11.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;label9_fps.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="lb_pre_event.Location" type="System.Drawing.Point, System.Drawing">
+    <value>218, 24</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -1567,6 +1615,9 @@
   <data name="gbWindowSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>275, 98</value>
   </data>
+  <data name="&gt;&gt;cb_show_camera_number.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
   <data name="label10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
@@ -1603,17 +1654,20 @@
   <data name="label23_seconds.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="button_cameraProperties.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="&gt;&gt;cm_camera_number.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
   <data name="event_record_time_before_event.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
+  <data name="&gt;&gt;checkBox_full_screen.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="button_settings_cancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;label20_minutes.Name" xml:space="preserve">
+    <value>label20_minutes</value>
   </data>
   <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1621,14 +1675,14 @@
   <data name="&gt;&gt;cb_human_sensor.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cb_recording_operation.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
   <data name="&gt;&gt;cb_dateandtime.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
     <value>groupBox_Environment</value>
+  </data>
+  <data name="numericUpDownH.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="&gt;&gt;labelcnum.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1660,8 +1714,11 @@
   <data name="&gt;&gt;cb_backlight_off_idling.Parent" xml:space="preserve">
     <value>groupBox_viewSettings</value>
   </data>
-  <data name="gbWindowPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cb_show_camera_number.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 16</value>
   </data>
   <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1672,17 +1729,17 @@
   <data name="&gt;&gt;lb_manual_recording_time.Name" xml:space="preserve">
     <value>lb_manual_recording_time</value>
   </data>
-  <data name="cb_dateandtime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 261</value>
+  <data name="&gt;&gt;numericUpDown2.Parent" xml:space="preserve">
+    <value>groupBox_functionalitySettings</value>
+  </data>
+  <data name="tab_camera_and_window.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="cb_window_pane.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="cb_delete_old.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
   </data>
   <data name="cm_camera_number.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 27</value>
@@ -1696,14 +1753,14 @@
   <data name="groupBox_viewSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;cb_always_on_top.Name" xml:space="preserve">
-    <value>cb_always_on_top</value>
+  <data name="&gt;&gt;cb_backlight_on_recognition.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="&gt;&gt;button_settings_save.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lb_post_event.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="groupBox_functionalitySettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1717,12 +1774,6 @@
   <data name="&gt;&gt;label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cb_human_sensor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.Parent" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
-  </data>
   <data name="&gt;&gt;label22_seconds.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
@@ -1732,14 +1783,11 @@
   <data name="&gt;&gt;groupBox_functionalitySettings.Name" xml:space="preserve">
     <value>groupBox_functionalitySettings</value>
   </data>
-  <data name="&gt;&gt;lb_seconds.Name" xml:space="preserve">
-    <value>lb_seconds</value>
-  </data>
   <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cb_always_on_top.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+  <data name="lb_capture_mode.Text" xml:space="preserve">
+    <value>Capture mode</value>
   </data>
   <data name="&gt;&gt;cm_capture_mode.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1750,11 +1798,14 @@
   <data name="gbWindowPosition.Location" type="System.Drawing.Point, System.Drawing">
     <value>275, 15</value>
   </data>
+  <data name="&gt;&gt;button_cameraProperties.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
   <data name="button_settings_save.Location" type="System.Drawing.Point, System.Drawing">
     <value>277, 457</value>
   </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>33, 12</value>
+  <data name="cb_human_sensor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="cb_event_recorder.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 4</value>
@@ -1762,11 +1813,11 @@
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;nud_manual_record_time.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="label22_seconds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 12</value>
   </data>
-  <data name="&gt;&gt;cb_show_camera_number.Name" xml:space="preserve">
-    <value>cb_show_camera_number</value>
+  <data name="cb_face_recognition.Text" xml:space="preserve">
+    <value>Enable face recognition</value>
   </data>
   <data name="button_Browse.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 46</value>
@@ -1777,8 +1828,8 @@
   <data name="&gt;&gt;nud_manual_record_time.Name" xml:space="preserve">
     <value>nud_manual_record_time</value>
   </data>
-  <data name="cb_human_sensor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 16</value>
+  <data name="&gt;&gt;nud_seconds_after_event.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="event_record_time_before_event.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 23</value>
@@ -1810,14 +1861,14 @@
   <data name="numericUpDownCamCount.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 31</value>
   </data>
-  <data name="&gt;&gt;gbWindowSize.Name" xml:space="preserve">
-    <value>gbWindowSize</value>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;nud_seconds_after_event.Parent" xml:space="preserve">
-    <value>groupBox_functionalitySettings</value>
+  <data name="lb_pre_event.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="numericUpDownX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 23</value>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -1825,14 +1876,14 @@
   <data name="cb_event_recorder.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label22_seconds.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;cm_language.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
-  <data name="gbWindowSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="gbWindowSize.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;label8.Name" xml:space="preserve">
     <value>label8</value>
@@ -1840,38 +1891,26 @@
   <data name="&gt;&gt;tab_camera_and_window.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="label22_seconds.Text" xml:space="preserve">
-    <value>sec</value>
-  </data>
   <data name="&gt;&gt;groupBox_functionalitySettings.Parent" xml:space="preserve">
     <value>groupBox_viewSettings</value>
   </data>
-  <data name="&gt;&gt;numericUpDown2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="cb_show_camera_number.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 73</value>
+  <data name="button_Browse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;cb_always_on_top.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>405, 118</value>
+  <data name="lb_pre_event.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="&gt;&gt;label22_seconds.Name" xml:space="preserve">
     <value>label22_seconds</value>
   </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label9.Name" xml:space="preserve">
-    <value>label9</value>
+  <data name="label9_fps.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 138</value>
   </data>
   <data name="cb_human_sensor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="&gt;&gt;groupBox12.Parent" xml:space="preserve">
-    <value>groupBox_Environment</value>
   </data>
   <data name="gbWindowSize.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1915,9 +1954,6 @@
   <data name="label23_seconds.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 12</value>
   </data>
-  <data name="cb_recording_operation.Text" xml:space="preserve">
-    <value>Record when someone starts using the PC</value>
-  </data>
   <data name="groupBox12.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
@@ -1927,11 +1963,11 @@
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 12</value>
   </data>
-  <data name="bl_idling_time_label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 12</value>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cm_capture_mode.ZOrder" xml:space="preserve">
-    <value>10</value>
+  <data name="groupBox_Environment.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="&gt;&gt;cm_capture_mode.Name" xml:space="preserve">
     <value>cm_capture_mode</value>
@@ -1945,8 +1981,8 @@
   <data name="button_Browse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cm_camera_number.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 14.25pt</value>
+  <data name="&gt;&gt;cm_language.Name" xml:space="preserve">
+    <value>cm_language</value>
   </data>
   <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 12</value>
@@ -1957,9 +1993,6 @@
   <data name="cb_show_camera_number.Text" xml:space="preserve">
     <value>Show camera number</value>
   </data>
-  <data name="label20_minutes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
   <data name="numericUpDownY.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
@@ -1968,6 +2001,15 @@
   </data>
   <data name="lb_seconds2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
+  </data>
+  <data name="cm_camera_number.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 14.25pt</value>
+  </data>
+  <data name="&gt;&gt;comboBoxResolutions.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="gbWindowPosition.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
   <data name="&gt;&gt;lb_capture_mode.Parent" xml:space="preserve">
     <value>groupBox_functionalitySettings</value>
@@ -1990,6 +2032,9 @@
   <data name="label23_seconds.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Height</value>
+  </data>
   <data name="cb_event_recorder.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 16</value>
   </data>
@@ -2008,17 +2053,26 @@
   <data name="numericUpDownBacklight.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 23</value>
   </data>
+  <data name="cm_language.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
   <data name="&gt;&gt;button_settings_save.Name" xml:space="preserve">
     <value>button_settings_save</value>
   </data>
   <data name="lb_post_event.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="&gt;&gt;numericUpDownX.Parent" xml:space="preserve">
+    <value>gbWindowPosition</value>
+  </data>
   <data name="&gt;&gt;bl_idling_time_label.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;nud_reinitiation_interval.Parent" xml:space="preserve">
     <value>groupBox_functionalitySettings</value>
+  </data>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="lb_seconds2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2074,17 +2128,17 @@
   <data name="cb_all_cameras.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="checkBox_full_screen.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label20_minutes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>411, 72</value>
+  <data name="lb_seconds2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="&gt;&gt;tab_camera_and_window.Name" xml:space="preserve">
     <value>tab_camera_and_window</value>
   </data>
-  <data name="&gt;&gt;checkBox_full_screen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tab_camera_and_window.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
   </data>
   <data name="&gt;&gt;event_record_time_before_event.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -2125,8 +2179,8 @@
   <data name="&gt;&gt;check_state_images.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="gbWindowSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>38, 22</value>
@@ -2137,14 +2191,11 @@
   <data name="&gt;&gt;label9_fps.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cb_human_sensor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
   <data name="nud_reinitiation_interval.Location" type="System.Drawing.Point, System.Drawing">
     <value>339, 17</value>
   </data>
-  <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="&gt;&gt;numericUpDown2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label23_seconds.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2173,8 +2224,8 @@
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="cb_human_sensor.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="&gt;&gt;nud_manual_record_time.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="button_Browse.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2182,17 +2233,14 @@
   <data name="&gt;&gt;label20_minutes.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="cb_all_cameras.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lb_capture_mode.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
-  <data name="button_settings_save.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Right</value>
+  <data name="groupBox_viewSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 2</value>
   </data>
   <data name="cb_show_camera_number.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2209,11 +2257,11 @@
   <data name="button_cameraProperties.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
-  <data name="groupBox_Environment.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
   </data>
   <data name="nud_manual_record_time.Location" type="System.Drawing.Point, System.Drawing">
     <value>344, 14</value>
@@ -2230,8 +2278,8 @@
   <data name="&gt;&gt;lb_post_event.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lb_capture_mode.Text" xml:space="preserve">
-    <value>Capture mode</value>
+  <data name="&gt;&gt;label9.Name" xml:space="preserve">
+    <value>label9</value>
   </data>
   <data name="label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2242,8 +2290,8 @@
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>groupBox12</value>
   </data>
-  <data name="&gt;&gt;cb_window_pane.Parent" xml:space="preserve">
-    <value>groupBox3</value>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="cb_always_on_top.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 16</value>
@@ -2262,6 +2310,9 @@
   </data>
   <data name="cb_all_cameras.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 9pt</value>
+  </data>
+  <data name="&gt;&gt;gbWindowSize.Name" xml:space="preserve">
+    <value>gbWindowSize</value>
   </data>
   <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2305,17 +2356,20 @@
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>430, 105</value>
   </data>
-  <data name="&gt;&gt;gbWindowSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label22_seconds.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
   </data>
-  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+  <data name="groupBox12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>430, 118</value>
   </data>
-  <data name="label22_seconds.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;cb_dateandtime.Name" xml:space="preserve">
+    <value>cb_dateandtime</value>
   </data>
-  <data name="cb_always_on_top.Text" xml:space="preserve">
-    <value>Always on top</value>
+  <data name="labelCameraNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 19</value>
+  </data>
+  <data name="button_Browse.Text" xml:space="preserve">
+    <value>Browse</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>59, 20</value>
@@ -2323,17 +2377,14 @@
   <data name="labelcnum.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
   </data>
-  <data name="label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="cb_recording_operation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 16</value>
+  <data name="cb_delete_old.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="button_settings_cancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
-  <data name="labelCameraNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 19</value>
+  <data name="&gt;&gt;cb_window_pane.Name" xml:space="preserve">
+    <value>cb_window_pane</value>
   </data>
   <data name="lb_seconds.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2353,11 +2404,14 @@
   <data name="&gt;&gt;groupBox_functionalitySettings.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="gbWindowSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 79</value>
+  </data>
   <data name="tab_environment.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="numericUpDownX.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
+    <value>groupBox_functionalitySettings</value>
   </data>
   <data name="cb_window_pane.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -2365,14 +2419,14 @@
   <data name="lb_post_event.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;button_cameraProperties.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cb_window_pane.Parent" xml:space="preserve">
     <value>groupBox3</value>
   </data>
-  <data name="numericUpDownW.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
+  <data name="&gt;&gt;label20_minutes.Parent" xml:space="preserve">
+    <value>groupBox_viewSettings</value>
   </data>
-  <data name="&gt;&gt;cb_window_pane.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;groupBox12.Parent" xml:space="preserve">
+    <value>groupBox_Environment</value>
   </data>
   <data name="label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2386,17 +2440,17 @@
   <data name="&gt;&gt;groupBox_Environment.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="cb_recording_operation.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="label20_minutes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cb_backlight_on_recognition.Text" xml:space="preserve">
     <value>Backlight on when recognition</value>
   </data>
   <data name="groupBox_viewSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
-  </data>
-  <data name="&gt;&gt;lb_seconds.Parent" xml:space="preserve">
-    <value>groupBox_viewSettings</value>
   </data>
   <data name="groupBox_functionalitySettings.Size" type="System.Drawing.Size, System.Drawing">
     <value>430, 206</value>
@@ -2419,8 +2473,8 @@
   <data name="&gt;&gt;checkBox_full_screen.Parent" xml:space="preserve">
     <value>groupBox3</value>
   </data>
-  <data name="tab_camera_and_window.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
   </data>
   <data name="&gt;&gt;groupBox12.Name" xml:space="preserve">
     <value>groupBox12</value>
@@ -2437,14 +2491,20 @@
   <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
-  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;lb_seconds2.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="cb_delete_old.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Frame rate</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="button_cameraProperties.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
@@ -2458,8 +2518,11 @@
   <data name="lb_seconds.Text" xml:space="preserve">
     <value>sec</value>
   </data>
-  <data name="label9_fps.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 138</value>
+  <data name="label9_fps.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBox_full_screen.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2473,14 +2536,14 @@
   <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
     <value>tab_camera_and_window</value>
   </data>
-  <data name="checkBox_full_screen.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="cb_human_sensor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="gbWindowPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 79</value>
   </data>
-  <data name="gbWindowSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 79</value>
+  <data name="cm_language.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 102</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 309</value>
@@ -2494,14 +2557,8 @@
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="label12.Text" xml:space="preserve">
-    <value>Record (before trigger)</value>
-  </data>
   <data name="&gt;&gt;nud_seconds_after_event.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lb_seconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>411, 21</value>
   </data>
   <data name="numericUpDown2.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 23</value>
@@ -2517,6 +2574,9 @@
   </data>
   <data name="&gt;&gt;label14.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="numericUpDownY.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="&gt;&gt;tab_view_settings.Parent" xml:space="preserve">
     <value>tabControl1</value>
@@ -2535,9 +2595,6 @@
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="lb_pre_event.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 24</value>
   </data>
   <data name="label23_seconds.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 53</value>
@@ -2562,6 +2619,9 @@
   </data>
   <data name="&gt;&gt;numericUpDown2.Name" xml:space="preserve">
     <value>numericUpDown2</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownY.Parent" xml:space="preserve">
+    <value>gbWindowPosition</value>
   </data>
   <data name="&gt;&gt;nud_reinitiation_interval.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -2620,11 +2680,8 @@
   <data name="tab_view_settings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
-  <data name="numericUpDown2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="comboBoxFPS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 131</value>
+  <data name="&gt;&gt;nud_erase_old.Name" xml:space="preserve">
+    <value>nud_erase_old</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Display language</value>
@@ -2644,8 +2701,8 @@
   <data name="cb_operator_capture.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="cm_language.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 12pt</value>
+  <data name="&gt;&gt;nud_event_record_after.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="lb_seconds.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -2668,17 +2725,17 @@
   <data name="numericUpDownCamCount.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 23</value>
   </data>
-  <data name="nud_reinitiation_interval.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="cb_recording_operation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="numericUpDown2.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="lb_pre_event.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="bl_idling_time_label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="lb_seconds2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+  <data name="cb_backlight_off_idling.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 71</value>
   </data>
   <data name="&gt;&gt;checkBox_full_screen.Name" xml:space="preserve">
     <value>checkBox_full_screen</value>
@@ -2710,17 +2767,14 @@
   <data name="lb_post_event.Text" xml:space="preserve">
     <value>Record (after event)</value>
   </data>
-  <data name="&gt;&gt;cb_dateandtime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="numericUpDownH.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 23</value>
   </data>
   <data name="&gt;&gt;cb_operator_capture.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cb_show_camera_number.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="label23_seconds.Text" xml:space="preserve">
+    <value>sec</value>
   </data>
   <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2752,8 +2806,8 @@
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
   </data>
-  <data name="&gt;&gt;folderBrowserDialogStoreFolder.Name" xml:space="preserve">
-    <value>folderBrowserDialogStoreFolder</value>
+  <data name="lb_manual_recording_time.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 12</value>
   </data>
   <data name="cb_backlight_off_idling.Text" xml:space="preserve">
     <value>Backlight off when idle</value>
@@ -2767,11 +2821,11 @@
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 145</value>
   </data>
-  <data name="cb_face_recognition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 16</value>
+  <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="cb_show_camera_number.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="cb_delete_old.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="nud_seconds_after_event.Location" type="System.Drawing.Point, System.Drawing">
     <value>339, 138</value>
@@ -2782,11 +2836,11 @@
   <data name="&gt;&gt;label15.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cb_delete_old.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="&gt;&gt;cm_language.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;groupBox_Environment.Parent" xml:space="preserve">
-    <value>tab_environment</value>
+  <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 16</value>
   </data>
   <data name="cb_backlight_on_recognition.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 16</value>
@@ -2800,8 +2854,8 @@
   <data name="lb_seconds.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;cb_show_camera_number.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="label20_minutes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="label26.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -2824,9 +2878,6 @@
   <data name="&gt;&gt;nud_seconds_before_event.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="cb_dateandtime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="&gt;&gt;groupBox_viewSettings.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -2836,26 +2887,20 @@
   <data name="&gt;&gt;label9_fps.Parent" xml:space="preserve">
     <value>groupBox3</value>
   </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>Frame rate</value>
+  <data name="cb_delete_old.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 0</value>
   </data>
-  <data name="numericUpDownY.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;labelCameraNumber.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox_Environment.Name" xml:space="preserve">
-    <value>groupBox_Environment</value>
+  <data name="label12.Text" xml:space="preserve">
+    <value>Record (before trigger)</value>
   </data>
-  <data name="&gt;&gt;numericUpDownY.Parent" xml:space="preserve">
-    <value>gbWindowPosition</value>
-  </data>
-  <data name="groupBox_viewSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 2</value>
-  </data>
-  <data name="label17.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+  <data name="lb_seconds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>411, 21</value>
   </data>
   <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -3034,8 +3079,8 @@
   <data name="&gt;&gt;cb_all_cameras.Name" xml:space="preserve">
     <value>cb_all_cameras</value>
   </data>
-  <data name="label23_seconds.Text" xml:space="preserve">
-    <value>sec</value>
+  <data name="&gt;&gt;label26.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;numericUpDownY.Name" xml:space="preserve">
     <value>numericUpDownY</value>
@@ -3049,8 +3094,8 @@
   <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>240, 17</value>
   </metadata>
-  <metadata name="folderBrowserDialogStoreFolder.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>350, 17</value>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ja-JP</value>
   </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>ja-JP</value>
@@ -3061,11 +3106,14 @@
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>52</value>
   </metadata>
+  <metadata name="check_state_images.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>576, 17</value>
+  </metadata>
   <metadata name="tab_view_settings.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <metadata name="check_state_images.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>576, 17</value>
+  <metadata name="folderBrowserDialogStoreFolder.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>350, 17</value>
   </metadata>
   <metadata name="backgroundWorkerCancelClose.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
