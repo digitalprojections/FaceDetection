@@ -727,9 +727,9 @@ namespace FaceDetection
                 case "r"://TTFF
                     try
                     {
-                        if (!WAKEUPCALL && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
+                        if (!WAKEUPCALL)
                         {
-                            if (parameterOnOffSwitch)
+                            if (parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                             {
                                 MULTI_WINDOW.formList[MainCamera]?.SetRecordIcon(MainCamera, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                                 MULTI_WINDOW.formList[MainCamera]?.crossbar.Start(MainCamera, CAMERA_MODES.MANUAL);
