@@ -141,8 +141,10 @@ namespace FaceDetection
             rec_icon = new RecIcon();
             this.Controls.Add(rec_icon);
             camera_number = new CameraNumberLabel(CameraIndex);
+            camera_number.Location = new Point(this.Width - 89, 12);
             this.Controls.Add(camera_number);
             dateTimeLabel = new DateTimeLabel(CameraIndex);
+            dateTimeLabel.Location = new Point(12, this.Height - 80);
             this.Controls.Add(dateTimeLabel);
 
             
@@ -275,11 +277,6 @@ namespace FaceDetection
             //Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
             dateTimeLabel.Visible = PROPERTY_FUNCTIONS.GetShowDateTimeSwitch(CameraIndex);
             
-            
-            //else
-            //{
-                //this.TopMost = false;
-            //}
 
             if (CameraIndex == Properties.Settings.Default.main_camera_index)
             {
@@ -587,9 +584,13 @@ namespace FaceDetection
                 {
                     mouse_down_timer.Stop();
                     if (controlButtons.Visible)
+                    {
                         controlButtons.Visible = false;
+                    }
                     else
+                    {
                         controlButtons.Visible = true;
+                    }
                 }
             }
         }
