@@ -498,7 +498,8 @@ namespace FaceDetection
                         {
                             if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                             {
-                                SNAPSHOT_SAVER.TakeAsyncSnapShot(false, CameraIndex, "snapshot");
+                                //SNAPSHOT_SAVER.TakeAsyncSnapShot(false, CameraIndex, "snapshot");
+                                SNAPSHOT_SAVER.TakeSnapShot(CameraIndex, "snapshot");
                             }
                             else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8)
                             {
