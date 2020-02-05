@@ -15,25 +15,33 @@ namespace FaceDetection
         private readonly KeyboardListener keyboardListener = new KeyboardListener();
         private readonly MouseListener mouseListener = new MouseListener();
         private static readonly MouseListener mouseListenerClick = new MouseListener();
-        private int CAMERA_INDEX = 0;
+        /// <summary>
+        /// MAIN CAMERA
+        /// </summary>
+        public int CAMERA_INDEX = 0;
         public bool Listen { get => listen; set => listen = value; }
 
         public MOUSE_KEYBOARD()
         {
+            CAMERA_INDEX = Properties.Settings.Default.main_camera_index;
+            PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(CAMERA_INDEX, out bool captureOperatorEnabled);
+            PROPERTY_FUNCTIONS.GetOnOperationStartSwitch(CAMERA_INDEX, out bool recordWhenOperation);
             START_CLICK_LISTENER();
-            if ((Properties.Settings.Default.C1_enable_capture_operator || Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation)
-                    || (Properties.Settings.Default.C2_enable_capture_operator || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation)
-                    || (Properties.Settings.Default.C3_enable_capture_operator || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation)
-                    || (Properties.Settings.Default.C4_enable_capture_operator || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation))
+            //if ((Properties.Settings.Default.C1_enable_capture_operator || Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation)
+            //        || (Properties.Settings.Default.C2_enable_capture_operator || Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation)
+            //        || (Properties.Settings.Default.C3_enable_capture_operator || Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation)
+            //        || (Properties.Settings.Default.C4_enable_capture_operator || Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation))
+            if(captureOperatorEnabled && recordWhenOperation)
             {                
                 Listen = true;
             }
 
-            CAMERA_INDEX = Properties.Settings.Default.main_camera_index;
+            
         }
 
         public void START_CLICK_LISTENER()
         {
+            CAMERA_INDEX = Properties.Settings.Default.main_camera_index;
             Task.Run(() => {
                 Thread.Sleep(7000);
                 keyboardListener.KeyUpAll += KeyboardListener_KeyUpAll;
@@ -71,6 +79,7 @@ namespace FaceDetection
 
         private void MouseKeyEventInit()
         {
+            CAMERA_INDEX = Properties.Settings.Default.main_camera_index;
             string captureMethod = "";
             int timeBeforeEvent = 0, timeAfterEvent = 0;
             bool captureOperatorEnabled = false, recordWhenOperation = false, preeventRecording = false;
