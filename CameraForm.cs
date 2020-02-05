@@ -275,15 +275,6 @@ namespace FaceDetection
             //Location = PROPERTY_FUNCTIONS.Get_Camera_Window_Location(CameraIndex);
             dateTimeLabel.Visible = PROPERTY_FUNCTIONS.GetShowDateTimeSwitch(CameraIndex);
             
-            // Window on top
-            if (Properties.Settings.Default.C1_window_on_top)
-            {
-                Activate();
-            }
-            //else
-            //{
-                //this.TopMost = false;
-            //}
 
             if (CameraIndex == Properties.Settings.Default.main_camera_index)
             {
