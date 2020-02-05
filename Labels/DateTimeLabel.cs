@@ -23,7 +23,7 @@ namespace FaceDetection
             dateTimeLabel.Padding = new Padding(3);
             dateTimeLabel.TabIndex = 13;
             dateTimeLabel.UseCompatibleTextRendering = true;
-            dateTimeLabel.Location = new Point(12, PROPERTY_FUNCTIONS.Get_Camera_Window_Size(camera_index).Height - 40);            
+            //dateTimeLabel.Location = new Point(12, this.Parent.Height - 80);            
         }
     }
 }
