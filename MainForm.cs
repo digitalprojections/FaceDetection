@@ -49,7 +49,7 @@ namespace FaceDetection
                 {
                     
                     PARAMETERS.HandleParameters(vs);
-                    PARAMETERS.WAKEUPCALL = true;
+                    //PARAMETERS.WAKEUPCALL = true;
 
                     LOGGER.Add(vs.Count + " HandleParameters");
                 }

@@ -317,7 +317,7 @@ namespace FaceDetection
         {
             for (int item = list.Count - 1; item > 0; item--)
             {
-                if (list[item].Length != 3)
+                if (list[item].Length != 3 && !list[item].ToString().StartsWith("t"))
                 {
                     list.RemoveAt(item);
                 }
