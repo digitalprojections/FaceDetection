@@ -38,21 +38,20 @@ namespace FaceDetection
         {
             if (time >= 500 && time <= 1000)
             {
-                if (cameraIndex == 0)
+                switch (cameraIndex)
                 {
-                    Properties.Settings.Default.C1_check_interval = time;
-                }
-                else if (cameraIndex == 1)
-                {
-                    Properties.Settings.Default.C2_check_interval = time;
-                }
-                else if (cameraIndex == 2)
-                {
-                    Properties.Settings.Default.C3_check_interval = time;
-                }
-                else if (cameraIndex == 3)
-                {
-                    Properties.Settings.Default.C4_check_interval = time;
+                    case 0:
+                    Properties.Settings.Default.C1_check_interval = Convert.ToDecimal(time);
+                        break;
+                    case 1:
+                    Properties.Settings.Default.C2_check_interval = Convert.ToDecimal(time);
+                        break;
+                    case 2:                
+                    Properties.Settings.Default.C3_check_interval = Convert.ToDecimal(time);
+                        break;
+                    case 3:
+                    Properties.Settings.Default.C4_check_interval = Convert.ToDecimal(time);
+                        break;
                 }
             }
         }
@@ -196,6 +195,31 @@ namespace FaceDetection
                     break;
             }
         }
+
+        public static int GetCheckTimerInterval(int v)
+        {
+            decimal retval;
+            switch (v)
+            {
+                case 0:
+                    retval = Properties.Settings.Default.C1_check_interval;
+                    break;
+                case 1:
+                    retval = Properties.Settings.Default.C2_check_interval;
+                    break;
+                case 2:
+                    retval = Properties.Settings.Default.C3_check_interval;
+                    break;
+                case 3:
+                    retval = Properties.Settings.Default.C4_check_interval;
+                    break;
+                default:
+                    retval = 500;
+                    break;
+            }
+            return decimal.ToInt32(retval);
+        }
+
         /// <summary>
         /// Used by unit tests
         /// </summary>

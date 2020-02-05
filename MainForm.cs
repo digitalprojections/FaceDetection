@@ -47,9 +47,10 @@ namespace FaceDetection
             {
                 if (vs != null && vs.Count() > 0)
                 {
+                    
                     PARAMETERS.HandleParameters(vs);
                     PARAMETERS.WAKEUPCALL = true;
-                    
+
                     LOGGER.Add(vs.Count + " HandleParameters");
                 }
 
