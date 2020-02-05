@@ -118,12 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="groupBox_viewSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>436, 415</value>
-  </data>
-  <data name="tab_view_settings.Text" xml:space="preserve">
-    <value>機能設定</value>
-  </data>
   <data name="labelCameraNumber.Location" type="System.Drawing.Point, System.Drawing">
     <value>86, 12</value>
   </data>
@@ -168,12 +162,6 @@
   </data>
   <data name="lb_manual_recording_time.Text" xml:space="preserve">
     <value>手動録画最大時間</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 308</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 102</value>
   </data>
   <data name="event_record_time_before_event.Location" type="System.Drawing.Point, System.Drawing">
     <value>324, 18</value>
@@ -226,6 +214,12 @@
   <data name="cb_event_recorder.Text" xml:space="preserve">
     <value>イベントレコーダー</value>
   </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 308</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>424, 102</value>
+  </data>
   <data name="label20_minutes.Location" type="System.Drawing.Point, System.Drawing">
     <value>400, 74</value>
   </data>
@@ -252,12 +246,6 @@
   </data>
   <data name="cb_backlight_on_recognition.Text" xml:space="preserve">
     <value>オペレーター感知時にバックライトをオンする</value>
-  </data>
-  <data name="groupBox_functionalitySettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 105</value>
-  </data>
-  <data name="groupBox_functionalitySettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>423, 197</value>
   </data>
   <data name="cb_human_sensor.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 28</value>
@@ -344,10 +332,10 @@
     <value>7, 95</value>
   </data>
   <data name="lb_capture_mode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
+    <value>41, 12</value>
   </data>
   <data name="lb_capture_mode.Text" xml:space="preserve">
-    <value>撮影形式</value>
+    <value>撮影別</value>
   </data>
   <data name="numericUpDown2.Location" type="System.Drawing.Point, System.Drawing">
     <value>324, 47</value>
@@ -385,6 +373,18 @@
   <data name="cb_recording_operation.Text" xml:space="preserve">
     <value>操作開始時に録画する</value>
   </data>
+  <data name="groupBox_functionalitySettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 105</value>
+  </data>
+  <data name="groupBox_functionalitySettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>423, 197</value>
+  </data>
+  <data name="groupBox_viewSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>436, 415</value>
+  </data>
+  <data name="tab_view_settings.Text" xml:space="preserve">
+    <value>機能設定</value>
+  </data>
   <data name="button_settings_save.Location" type="System.Drawing.Point, System.Drawing">
     <value>276, 456</value>
   </data>
@@ -399,12 +399,6 @@
   </data>
   <data name="button_settings_cancel.Text" xml:space="preserve">
     <value>キャンセル</value>
-  </data>
-  <data name="tab_environment.Text" xml:space="preserve">
-    <value>環境</value>
-  </data>
-  <data name="groupBox_Environment.Text" xml:space="preserve">
-    <value>環境設定</value>
   </data>
   <data name="cb_all_cameras.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 16</value>
@@ -459,9 +453,6 @@
   <data name="label1.Text" xml:space="preserve">
     <value>表示言語</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>保存先設定</value>
-  </data>
   <data name="button_Browse.Text" xml:space="preserve">
     <value>参照</value>
   </data>
@@ -471,11 +462,14 @@
   <data name="label9.Text" xml:space="preserve">
     <value>保存先ファイルパス</value>
   </data>
-  <data name="tab_camera_and_window.Text" xml:space="preserve">
-    <value>カメラとウィンドウ</value>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>保存先設定</value>
   </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>カメラ番号</value>
+  <data name="groupBox_Environment.Text" xml:space="preserve">
+    <value>環境設定</value>
+  </data>
+  <data name="tab_environment.Text" xml:space="preserve">
+    <value>環境</value>
   </data>
   <data name="cb_show_rec_icon.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 16</value>
@@ -513,9 +507,6 @@
   <data name="checkBox_full_screen.Text" xml:space="preserve">
     <value>フルスクリーン</value>
   </data>
-  <data name="gbWindowSize.Text" xml:space="preserve">
-    <value>表示サイズ</value>
-  </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>43, 49</value>
   </data>
@@ -534,8 +525,8 @@
   <data name="label7.Text" xml:space="preserve">
     <value>幅</value>
   </data>
-  <data name="gbWindowPosition.Text" xml:space="preserve">
-    <value>表示位置</value>
+  <data name="gbWindowSize.Text" xml:space="preserve">
+    <value>表示サイズ</value>
   </data>
   <data name="numericUpDownY.Location" type="System.Drawing.Point, System.Drawing">
     <value>76, 45</value>
@@ -545,6 +536,9 @@
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 22</value>
+  </data>
+  <data name="gbWindowPosition.Text" xml:space="preserve">
+    <value>表示位置</value>
   </data>
   <data name="label9_fps.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 12</value>
@@ -575,6 +569,12 @@
   </data>
   <data name="button_cameraProperties.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 30</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>カメラ番号</value>
+  </data>
+  <data name="tab_camera_and_window.Text" xml:space="preserve">
+    <value>カメラとウィンドウ</value>
   </data>
   <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>

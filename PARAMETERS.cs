@@ -1169,7 +1169,7 @@ namespace FaceDetection
                     }
                     else
                     {
-                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && (CameraIndex + 1 <= Properties.Settings.Default.camera_count))
+                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                         {
                             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CameraIndex, out bool IrSensorEnabled);
                             if (parameterOnOffSwitch)
@@ -1211,10 +1211,6 @@ namespace FaceDetection
                             //{
                             //    //MainForm.AllChangesApply();
                             //}
-                        }
-                        else
-                        {
-                            WrongParameter = true;
                         }
                     }
                     
