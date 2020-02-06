@@ -307,6 +307,7 @@ namespace FaceDetection
                 else
                 {
                     this.WindowState = FormWindowState.Normal;
+                    this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
                 }
             }
 
@@ -332,6 +333,8 @@ namespace FaceDetection
                 else
                 {
                     this.WindowState = FormWindowState.Normal;
+                    var p = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
+                    this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
                 }
             }
 
@@ -351,6 +354,7 @@ namespace FaceDetection
                 else
                 {
                     this.WindowState = FormWindowState.Normal;
+                    this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
                 }
                 this.Activate();
             }
@@ -465,6 +469,7 @@ namespace FaceDetection
             else
             {
                 this.WindowState = FormWindowState.Normal;
+                this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
             }
         }
 
