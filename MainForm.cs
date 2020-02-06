@@ -171,6 +171,17 @@ namespace FaceDetection
                         {
                             MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
                         }
+                        else
+                        {
+                            if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(i))
+                            {
+                                MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
+                            }
+                            else
+                            {
+                                MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
+                            }
+                        }
                     }
                     PARAMETERS.minimizedByParameters = false;
                 }
