@@ -296,6 +296,7 @@ namespace FaceDetection
             }
             else
             {
+                FormBorderStyle = FormBorderStyle.Sizable;
                 FormBorderStyle = FormBorderStyle.None;
                 // Full screen
                 if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(CameraIndex))
