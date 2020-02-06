@@ -47,7 +47,7 @@ namespace FaceDetection
         public static bool SwitchIsPresent { get; private set; }
         public static bool CamIndexIsPresent { get; private set; }
         public static bool TimerIsPresent { get; private set; }
-        public static bool WrongParameter { get; private set; }
+        public static bool WrongParameter { get; set; }
         //public static bool WRONGPARAMETER { get; private set; }
 
         private static bool parameterOnOffSwitch = false;
@@ -90,7 +90,7 @@ namespace FaceDetection
             /*
              Handle the initial start up CL parameters, if exist
             */
-            if (param.Contains("uvccameraviewer") && ConnectedCameraCount>0)
+            if (param.Contains("uvccameraviewer") && ConnectedCameraCount>0 && !WrongParameter)
             {
                 if (parameters?.Count > 1)
                 {
@@ -301,7 +301,7 @@ namespace FaceDetection
                         break;
                 }
             }
-            WAKEUPCALL = false;
+            
         }
 
         private static int CheckIntervalValue(int v)
@@ -322,7 +322,7 @@ namespace FaceDetection
             {
                 if (list[item].Length != 3 && !list[item].ToString().StartsWith("t"))
                 {
-                    list[item].Substring(0, 1);
+                    list.RemoveAt(item);
                     WrongParameter = true;
                 }
             }
