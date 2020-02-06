@@ -60,7 +60,7 @@ namespace FaceDetection
 
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
-            if(!WAKEUPCALL)
+            if(!WAKEUPCALL || TESTING)
                 WrongParameter = false;
             PARAM = CleanUpTheParams(parameters.ToList<string>());
 

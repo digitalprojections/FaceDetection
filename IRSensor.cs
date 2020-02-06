@@ -19,9 +19,13 @@ namespace FaceDetection
             //DispDeviceOpen();
             //SensorClose();
             //init
-            Init_IR_Timer();
-            SensorCheckTimer.Elapsed += IR_Timer_Tick;
-            SensorCheckTimer.AutoReset = true;
+            Init_IR_Timer(); 
+            if (SensorCheckTimer != null)
+            {
+                SensorCheckTimer.Elapsed += IR_Timer_Tick;
+                SensorCheckTimer.AutoReset = true;
+            }
+                
         }
         
         private void Init_IR_Timer()
@@ -33,7 +37,8 @@ namespace FaceDetection
             
             if (operatorCaptureEnabled && IRSensorEnabled && checkInterval > 0)
             {
-                SensorCheckTimer.Interval = checkInterval;
+                if (SensorCheckTimer != null)
+                    SensorCheckTimer.Interval = checkInterval;
             }
             else
             {
@@ -119,13 +124,26 @@ namespace FaceDetection
         public void Start_IR_Timer()
         {
             bIsIRCheckExec = true;
-            SensorCheckTimer.Start();
+            if (SensorCheckTimer != null)
+                SensorCheckTimer.Start();
+            else
+            {
+                bIsIRCheckExec = true;
+                Init_IR_Timer();
+                if (SensorCheckTimer != null)
+                {
+                    SensorCheckTimer.Elapsed += IR_Timer_Tick;
+                    SensorCheckTimer.AutoReset = true;
+                }
+            }
+                
         }
         
         public void Stop_IR_Timer()
         {
             bIsIRCheckExec = false;
-            SensorCheckTimer.Stop();
+            if(SensorCheckTimer!=null)
+                SensorCheckTimer.Stop();
         }
 
         public void Destroy()
@@ -139,10 +157,12 @@ namespace FaceDetection
             int camindex = Properties.Settings.Default.main_camera_index;
 
             PROPERTY_FUNCTIONS.GetSensorCheckInterval(camindex, out int checkInterval);
-
-            SensorCheckTimer.Enabled = true;
-            SensorCheckTimer.Interval = checkInterval;
-            SensorCheckTimer.Enabled = false;
+            if (SensorCheckTimer != null)
+            {
+                SensorCheckTimer.Enabled = true;
+                SensorCheckTimer.Interval = checkInterval;
+                SensorCheckTimer.Enabled = false;
+            }            
         }
 
         public uint CheckSensor()
