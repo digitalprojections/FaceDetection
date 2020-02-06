@@ -1129,6 +1129,7 @@ namespace FaceDetection
             labelCameraNumber.Text = (currentCameraIndex + 1).ToString(); // (Properties.Settings.Default.main_camera_index + 1).ToString();
             SetCameraPropertiesFromMemory();
             MULTI_WINDOW.GetVideoFormatByCamera(currentCameraIndex);
+            numericUpDownCamCount.Minimum = Properties.Settings.Default.main_camera_index + 1;
         }
 
         /// <summary>
