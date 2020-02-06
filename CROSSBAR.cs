@@ -58,7 +58,8 @@ namespace FaceDetection
         readonly CameraForm window;
 
         public bool Recording_is_on { get => recording_is_on; set => recording_is_on = value; }
-                        
+        public CAMERA_MODES CAMERAMODE { get; private set; }
+
         public CROSSBAR(int cameraindex, CameraForm window_ptr)
         {
             this.the_timer = new System.Timers.Timer();
@@ -398,7 +399,7 @@ namespace FaceDetection
         {
             LOGGER.Add("Start camera index " + index.ToString() + " " + mode.ToString());
             int duration = 0;
-
+            
             PROPERTY_FUNCTIONS.GetEventRecorderSwitch(index, out bool eventRecorderEnabled);
             PROPERTY_FUNCTIONS.GetPreAndPostEventTimes(index, out int beforeevent, out int timeAfterEventForEventRecorder);
             PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(index, out bool operatorCaptureEnabled);

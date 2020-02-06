@@ -159,6 +159,8 @@ namespace FaceDetection
                 //CREATE CAMERA WINDOWS
                 MULTI_WINDOW.CreateCameraWindows();
                 MULTI_WINDOW.FormSettingsChanged();
+                PARAMETERS.WAKEUPCALL = false;
+
             }
             
             if(PARAMETERS.callByParameters)

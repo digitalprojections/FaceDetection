@@ -615,13 +615,14 @@ namespace FaceDetection
         public void SetCameraToDefaultMode()
         {
             if (CameraIndex == Properties.Settings.Default.main_camera_index && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
-            {
-                crossbar?.Start(CameraIndex, CAMERA_MODES.PREEVENT);
+            {                
+                    crossbar?.Start(CameraIndex, CAMERA_MODES.PREEVENT);
             }
             else
             {
                 //if (MULTI_WINDOW.displayedCameraCount > 0)
                 //{
+                
                     crossbar?.Start(CameraIndex, CAMERA_MODES.PREVIEW);
                     //SetToPreviewMode();
                 //}
