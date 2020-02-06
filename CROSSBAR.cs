@@ -21,7 +21,7 @@ namespace FaceDetection
         Form parentwindow = null;
         
         public bool OPER_BAN = false;
-        public bool recordFromParamNotMain = false;
+        //public bool recordFromParamNotMain = false;
         private bool manualRecording;
         bool wait_interval_enabled = false;
         int duration = 0;
@@ -416,15 +416,15 @@ namespace FaceDetection
                         recorder.ReleaseInterfaces();
                         recorder = new RecorderCamera(this.INDEX, parentwindow, this);
                         recorder.CAMERA_MODE = CAMERA_MODES.MANUAL;
-                        if (recordFromParamNotMain == true)
-                        {
-                            recordFromParamNotMain = false;
-                            recorder.ACTIVE_RECPATH = RECORD_PATH.EVENT;
-                        }
-                        else
-                        {
+                        //if (recordFromParamNotMain == true)
+                        //{
+                        //    recordFromParamNotMain = false;
+                        //    recorder.ACTIVE_RECPATH = RECORD_PATH.EVENT;
+                        //}
+                        //else
+                        //{
                             recorder.ACTIVE_RECPATH = RECORD_PATH.MANUAL;
-                        }
+                        //}
                         duration = decimal.ToInt32(Properties.Settings.Default.manual_record_time) * 1000;
                         the_timer.Enabled = true;
                         the_timer.Interval = duration + 1000;

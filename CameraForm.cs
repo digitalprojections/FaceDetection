@@ -508,6 +508,11 @@ namespace FaceDetection
 
         private void ManualVideoRecording(object sender, EventArgs e)
         {
+            ManualVideoRecording();
+        }
+
+        public void ManualVideoRecording ()
+        {
             //string cameraSender;
             //Button snd = (Button)sender;
             //cameraSender = snd.TopLevelControl.ToString();

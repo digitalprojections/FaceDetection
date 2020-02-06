@@ -723,26 +723,28 @@ namespace FaceDetection
                         {
                             if ((parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false) || TESTING)
                             {
-                                MULTI_WINDOW.formList[MainCamera]?.SetRecordIcon(MainCamera, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                                MULTI_WINDOW.formList[MainCamera]?.crossbar.Start(MainCamera, CAMERA_MODES.MANUAL);
+                                //MULTI_WINDOW.formList[MainCamera]?.SetRecordIcon(MainCamera, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                                //MULTI_WINDOW.formList[MainCamera]?.crossbar.Start(MainCamera, CAMERA_MODES.MANUAL);
+                                MULTI_WINDOW.formList[MainCamera]?.ManualVideoRecording();
                             }
                             else
                             {
-                                MULTI_WINDOW.formList[MainCamera]?.HideIcon();
-                                if (PROPERTY_FUNCTIONS.CheckPreEventTimes(MainCamera))
-                                {
-                                    if (MULTI_WINDOW.displayedCameraCount > 0)
-                                    {
-                                        MULTI_WINDOW.formList[MainCamera]?.SetToPreeventMode();
-                                    }
-                                }
-                                else
-                                {
-                                    if (MULTI_WINDOW.displayedCameraCount > 0)
-                                    {
-                                        MULTI_WINDOW.formList[MainCamera]?.SetToPreviewMode();
-                                    }
-                                }
+                                //MULTI_WINDOW.formList[MainCamera]?.HideIcon();
+                                //if (PROPERTY_FUNCTIONS.CheckPreEventTimes(MainCamera))
+                                //{
+                                //    if (MULTI_WINDOW.displayedCameraCount > 0)
+                                //    {
+                                //        MULTI_WINDOW.formList[MainCamera]?.SetToPreeventMode();
+                                //    }
+                                //}
+                                //else
+                                //{
+                                //    if (MULTI_WINDOW.displayedCameraCount > 0)
+                                //    {
+                                //        MULTI_WINDOW.formList[MainCamera]?.SetToPreviewMode();
+                                //    }
+                                //}
+                                MULTI_WINDOW.formList[MainCamera]?.ManualVideoRecording();
                             }
                         }
                         else if(WAKEUPCALL)
@@ -1071,27 +1073,29 @@ namespace FaceDetection
                             {
                                 if (parameterOnOffSwitch)
                                 {
-                                    MULTI_WINDOW.formList[CameraIndex]?.SetRecordIcon(CameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                                    MULTI_WINDOW.formList[CameraIndex]?.crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
+                                    MULTI_WINDOW.formList[CameraIndex]?.ManualVideoRecording();
+                                    //MULTI_WINDOW.formList[CameraIndex]?.SetRecordIcon(CameraIndex, decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                                    //MULTI_WINDOW.formList[CameraIndex]?.crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
                                 }
                             }
                             else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && !parameterOnOffSwitch)
                             {
-                                MULTI_WINDOW.formList[CameraIndex]?.HideIcon();
-                                if (PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
-                                {
-                                    if (MULTI_WINDOW.displayedCameraCount - 1 >= CameraIndex)
-                                    {
-                                        MULTI_WINDOW.formList[CameraIndex]?.SetToPreeventMode();
-                                    }
-                                }
-                                else
-                                {
-                                    if (MULTI_WINDOW.displayedCameraCount - 1 >= CameraIndex)
-                                    {
-                                        MULTI_WINDOW.formList[CameraIndex]?.SetToPreviewMode();
-                                    }
-                                }
+                                //MULTI_WINDOW.formList[CameraIndex]?.HideIcon();
+                                //if (PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
+                                //{
+                                //    if (MULTI_WINDOW.displayedCameraCount - 1 >= CameraIndex)
+                                //    {
+                                //        MULTI_WINDOW.formList[CameraIndex]?.SetToPreeventMode();
+                                //    }
+                                //}
+                                //else
+                                //{
+                                //    if (MULTI_WINDOW.displayedCameraCount - 1 >= CameraIndex)
+                                //    {
+                                //        MULTI_WINDOW.formList[CameraIndex]?.SetToPreviewMode();
+                                //    }
+                                //}
+                                MULTI_WINDOW.formList[CameraIndex]?.ManualVideoRecording();
                             }
                         }
                         else
