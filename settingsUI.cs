@@ -1114,6 +1114,11 @@ namespace FaceDetection
         //    }
         //}
 
+            /// <summary>
+            /// Select a camera number
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
         private void CameraSelected(object sender, EventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
