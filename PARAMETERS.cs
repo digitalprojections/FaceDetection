@@ -60,7 +60,7 @@ namespace FaceDetection
 
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
-            if(!WrongParameter && WAKEUPCALL)
+            if(!WAKEUPCALL)
                 WrongParameter = false;
             PARAM = CleanUpTheParams(parameters.ToList<string>());
 
@@ -72,7 +72,7 @@ namespace FaceDetection
             CamIndexIsPresent = false;
             TimerIsPresent = false;
             
-            TESTING = false;
+            //TESTING = false;
 
             parameterOnOffSwitch = false;
             parameterTime = 0;
@@ -125,8 +125,7 @@ namespace FaceDetection
                                 case "s":
                                     int sw = -1;
                                     try
-                                    {
-                                        
+                                    {   
                                             sw = Int32.Parse(elem.Substring(2));
                                             if (sw == 1)
                                             {
@@ -194,7 +193,6 @@ namespace FaceDetection
                                         //i = parameters.Count;
                                     }
                                     break;
-
                             }
                         }
                         catch (Exception e)
@@ -301,7 +299,6 @@ namespace FaceDetection
                         break;
                 }
             }
-            
         }
 
         private static int CheckIntervalValue(int v)
@@ -533,6 +530,7 @@ namespace FaceDetection
                         {
                             if (CameraIndex >= 0 && CameraIndex < 4)
                             {
+                                MULTI_WINDOW.formList[CameraIndex].applicationExit = true;
                                 MULTI_WINDOW.formList[CameraIndex]?.Close();
                             }
                             else if (CameraIndex == 8)
