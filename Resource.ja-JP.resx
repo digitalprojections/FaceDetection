@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ask_exit_application" xml:space="preserve">
-    <value>アプリケーションを終了する？</value>
+    <value>アプリケーションを終了</value>
   </data>
   <data name="event_recording_starts" xml:space="preserve">
     <value>イベントレコーダーがパラメーターにて開始しました</value>
@@ -127,7 +127,7 @@
     <value>ウィンドーを閉じるに失敗した</value>
   </data>
   <data name="main_window_close_warning" xml:space="preserve">
-    <value>指定カメラのビューアーを閉じると、アプリケーションが終了します。
+    <value>メインカメラのビューアーを閉じると、アプリケーションが終了します。
 処理を続行しますか？</value>
   </data>
   <data name="no_camera_found" xml:space="preserve">
