@@ -267,36 +267,38 @@ namespace FaceDetection
 
             GenerateTheParameterSet();
 
-            switch (ParameterSet)
+            if (!WrongParameter)
             {
-                case "TTTT":
-                    AllParametersCase();
-                    break;
-                case "TTTF":
-                    TimelessCase();
-                    break;
-                case "TTFF":
-                    MethodSwitchCase();
-                    break;
-                case "TFTF":
-                    CheckMateCase();
-                    break;
-                case "TFFF":
-                    BossIsAlwaysRightCase();
-                    break;
-                case "FFTF":
-                    DontTouchMyCamsCase();
-                    break;
-                case "FFFF":
-                    if(!WrongParameter)
+                switch (ParameterSet)
+                {
+                    case "TTTT":
+                        AllParametersCase();
+                        break;
+                    case "TTTF":
+                        TimelessCase();
+                        break;
+                    case "TTFF":
+                        MethodSwitchCase();
+                        break;
+                    case "TFTF":
+                        CheckMateCase();
+                        break;
+                    case "TFFF":
+                        BossIsAlwaysRightCase();
+                        break;
+                    case "FFTF":
+                        DontTouchMyCamsCase();
+                        break;
+                    case "FFFF":
                         WhiteMamba();
-                    break;
-                case "TTFT":
-                    WrongParameter = true;
-                    break;
-                case "FTFF":
-                    WrongParameter = true;
-                    break;
+                        break;
+                    case "TTFT":
+                        WrongParameter = true;
+                        break;
+                    case "FTFF":
+                        WrongParameter = true;
+                        break;
+                }
             }
             WAKEUPCALL = false;
         }
