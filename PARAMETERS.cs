@@ -1352,8 +1352,10 @@ namespace FaceDetection
                                 }
                                 break;
                         }
-                        MULTI_WINDOW.formList[CameraIndex]?.Show();
-                        MULTI_WINDOW.formList[CameraIndex]?.Activate();
+                        //MULTI_WINDOW.formList[CameraIndex]?.Show();
+                        //MULTI_WINDOW.formList[CameraIndex]?.Activate();
+                        MULTI_WINDOW.formList[CameraIndex].TopMost = true;
+                        MULTI_WINDOW.formList[CameraIndex].TopMost = false;
                     }
                     catch (NullReferenceException)
                     {
