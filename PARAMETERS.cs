@@ -60,7 +60,8 @@ namespace FaceDetection
 
         public static void HandleParameters(IReadOnlyCollection<string> parameters)
         {
-
+            if(!WrongParameter && WAKEUPCALL)
+                WrongParameter = false;
             PARAM = CleanUpTheParams(parameters.ToList<string>());
 
             CurrentTestResult = "";
@@ -70,7 +71,7 @@ namespace FaceDetection
             SwitchIsPresent = false;
             CamIndexIsPresent = false;
             TimerIsPresent = false;
-            WrongParameter = false;
+            
             TESTING = false;
 
             parameterOnOffSwitch = false;
@@ -321,7 +322,8 @@ namespace FaceDetection
             {
                 if (list[item].Length != 3 && !list[item].ToString().StartsWith("t"))
                 {
-                    list.RemoveAt(item);
+                    list[item].Substring(0, 1);
+                    WrongParameter = true;
                 }
             }
             return list;
