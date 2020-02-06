@@ -82,6 +82,11 @@ namespace FaceDetection
                         break;
                 }
             }
+
+            if (WindowState != FormWindowState.Maximized)
+            {
+                WindowState = FormWindowState.Normal;
+            }
         }
 
         /// <summary>

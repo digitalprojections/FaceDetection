@@ -350,9 +350,13 @@ namespace FaceDetection
                                 if (i != CameraIndex)
                                 {
                                     minimizedByParameter[i] = true;
-                                    callByParameters = true;
-                                    minimizedByParameters = true;
                                 }
+                                else
+                                {
+                                    minimizedByParameter[i] = false;
+                                }
+                                callByParameters = true;
+                                minimizedByParameters = true;
                             }
                         }
                         else if (WAKEUPCALL && (CameraIndex == 8))
