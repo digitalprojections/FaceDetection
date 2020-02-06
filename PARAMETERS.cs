@@ -579,29 +579,6 @@ namespace FaceDetection
                         //can not call from start
                         WrongParameter = true;
                     }
-
-                    break;
-
-                case "x":
-                    Console.WriteLine(MULTI_WINDOW.formList[CameraIndex].WindowState +
-                        " " +
-                        MULTI_WINDOW.formList[CameraIndex].Location.X +
-                        " " +
-                        MULTI_WINDOW.formList[CameraIndex].Location.Y
-                        );
-                    if (MULTI_WINDOW.formList[CameraIndex].WindowState == FormWindowState.Minimized || MULTI_WINDOW.formList[CameraIndex].WindowState == FormWindowState.Normal)
-                    {
-                        MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Maximized;
-                        MULTI_WINDOW.formList[CameraIndex].Show();
-                    }
-                    else if(MULTI_WINDOW.formList[CameraIndex].WindowState == FormWindowState.Maximized)
-                    {
-                        
-                        MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Normal;
-                        MULTI_WINDOW.formList[CameraIndex].Show();
-                        MULTI_WINDOW.formList[CameraIndex].Location = new Point(0, 0);
-                    }
-                    
                     break;
 
                 default:// TFTF

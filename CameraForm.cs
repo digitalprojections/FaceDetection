@@ -82,11 +82,6 @@ namespace FaceDetection
                         break;
                 }
             }
-
-            if (WindowState != FormWindowState.Maximized)
-            {
-                WindowState = FormWindowState.Normal;
-            }
         }
 
         /// <summary>
@@ -338,7 +333,6 @@ namespace FaceDetection
                 else
                 {
                     this.WindowState = FormWindowState.Normal;
-                    var p = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
                     this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
                 }
             }
