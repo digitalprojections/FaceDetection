@@ -68,6 +68,7 @@ namespace FaceDetection
         {
             if (Properties.Settings.Default.main_camera_index == CameraIndex && applicationExit == false) // The form closed was the main camera selected
             {
+                MainForm.GetMainForm.Activate();
                 this.Activate();
                 DialogResult dr = MessageBox.Show(Resource.main_window_close_warning, Resource.ask_exit_application, MessageBoxButtons.OKCancel);
                 switch (dr)
