@@ -153,6 +153,31 @@ namespace FaceDetection
             return recmodeison;
         }
 
+        internal static void SETWINDOWSTATE(int cameraIndex)
+        {
+            try
+            {
+                
+                if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(cameraIndex))
+                {
+                    MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Normal;
+                    
+                }
+                    
+                //MULTI_WINDOW.formList[MainCamera].WindowState = FormWindowState.Normal;
+                MULTI_WINDOW.formList[cameraIndex]?.Show();
+                MULTI_WINDOW.formList[cameraIndex]?.Activate();
+            }
+            catch (NullReferenceException nrx)
+            {
+                LOGGER.Add(nrx);
+            }
+        }
+
         //internal static void EventRecorderOnOFFAll(bool status)
         //{
         //    for(int i = 0; i< formList.Length; i++)
