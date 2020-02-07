@@ -68,7 +68,6 @@ namespace FaceDetection
         {
             if (Properties.Settings.Default.main_camera_index == CameraIndex && applicationExit == false) // The form closed was the main camera selected
             {
-                MainForm.GetMainForm.Activate();
                 this.Activate();
                 DialogResult dr = MessageBox.Show(Resource.main_window_close_warning, Resource.ask_exit_application, MessageBoxButtons.OKCancel);
                 switch (dr)
@@ -136,8 +135,6 @@ namespace FaceDetection
             SettingsButtonsDesigner();
             
             this.Controls.Add(this.controlButtons);
-
-            
 
             rec_icon = new RecIcon();
             this.Controls.Add(rec_icon);
@@ -255,8 +252,6 @@ namespace FaceDetection
             }
         }
 
-        
-
         /// <summary>
         /// Get the bitmap from the 
         /// <see cref="crossbar"/>
@@ -337,8 +332,6 @@ namespace FaceDetection
                 }
             }
 
-            
-
             // Bring main to the front
             if (CameraIndex == Properties.Settings.Default.main_camera_index)
             {
@@ -357,7 +350,6 @@ namespace FaceDetection
                 }
                 this.Activate();
             }
-            
 
             SetCameraToDefaultMode();
         }
@@ -367,18 +359,18 @@ namespace FaceDetection
             cameraButton.Tag = state;
         }
         
-        public void SetToPreviewMode()
-        {
-            crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
-        }
+        //public void SetToPreviewMode()
+        //{
+        //    crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
+        //}
 
-        public void SetToPreeventMode()
-        {
-            if (crossbar.INDEX == CameraIndex)
-            {
-                crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
-            }
-        }
+        //public void SetToPreeventMode()
+        //{
+        //    if (crossbar.INDEX == CameraIndex)
+        //    {
+        //        crossbar.Start(CameraIndex, CAMERA_MODES.PREEVENT);
+        //    }
+        //}
 
         public void SET_REC_ICON()
         {

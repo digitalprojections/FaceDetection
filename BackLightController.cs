@@ -43,16 +43,15 @@ namespace FaceDetection
 
         public void Restart()
         { 
-            
             if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
             {
                 //backlight_timer.Stop();
                 backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60 * 1000;
-                backlight_timer.Start();
+                backlight_timer?.Start();
             }
             else
             {
-                backlight_timer.Stop();
+                backlight_timer?.Stop();
                 //MessageBox.Show("backlight_offset is 0");
             }
         }
@@ -169,7 +168,7 @@ namespace FaceDetection
                 {
                     // TODO: dispose managed state (managed objects).
                     backlight_timer.Stop();
-                    backlight_timer.Dispose();
+                    //backlight_timer.Dispose();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
