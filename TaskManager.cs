@@ -306,26 +306,33 @@ namespace FaceDetection
                 string path = videoToCut.Substring(0, videoToCut.Length - 18);
                 int videoDurationSec = Convert.ToInt32(videoDuration.Substring(5, 2)) + Convert.ToInt32(videoDuration.Substring(2, 2)) * 60;
                 int videoCutStartTime = videoDurationSec - cutTimeParameter;
-                if ((videoCutStartTime % 60) >= 10)
+                if (videoCutStartTime > 0)
                 {
-                    videoCutStartTimeFormated = "00:0" + videoCutStartTime / 60 + ":" + videoCutStartTime % 60;
+                    if ((videoCutStartTime % 60) >= 10)
+                    {
+                        videoCutStartTimeFormated = "00:0" + videoCutStartTime / 60 + ":" + videoCutStartTime % 60;
+                    }
+                    else
+                    {
+                        videoCutStartTimeFormated = "00:0" + videoCutStartTime / 60 + ":0" + videoCutStartTime % 60;
+                    }
+
+                    // Create name for the cut video
+                    videoDate = videoToCut.Substring(videoToCut.Length - 18, 14);
+                    videoStartTime = (new DateTime(Convert.ToInt32(videoDate.Substring(0, 4)), Convert.ToInt32(videoDate.Substring(4, 2)), Convert.ToInt32(videoDate.Substring(6, 2)), Convert.ToInt32(videoDate.Substring(8, 2)), Convert.ToInt32(videoDate.Substring(10, 2)), Convert.ToInt32(videoDate.Substring(12, 2))) + tsDuration - tsCut).ToString("yyyyMMddHHmmss");
+                    videoCutName = path + @"CutTemp\" + videoStartTime + ".avi";
+
+                    ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffmpeg.exe");
+                    startInfo.Arguments = @"-loglevel quiet -y -i " + videoToCut + " -ss " + videoCutStartTimeFormated + " -to 0" + videoDuration + " -c copy -avoid_negative_ts 1 " + videoCutName;
+                    Console.WriteLine("CutVideoKeepEnd() : " + startInfo.Arguments); // DEBUG
+                    startInfo.CreateNoWindow = true;
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    Process.Start(startInfo);
                 }
                 else
                 {
-                    videoCutStartTimeFormated = "00:0" + videoCutStartTime / 60 + ":0" + videoCutStartTime % 60;
+                    videoCutName = "";
                 }
-
-                // Create name for the cut video
-                videoDate = videoToCut.Substring(videoToCut.Length - 18, 14);
-                videoStartTime = (new DateTime(Convert.ToInt32(videoDate.Substring(0, 4)), Convert.ToInt32(videoDate.Substring(4, 2)), Convert.ToInt32(videoDate.Substring(6, 2)), Convert.ToInt32(videoDate.Substring(8, 2)), Convert.ToInt32(videoDate.Substring(10, 2)), Convert.ToInt32(videoDate.Substring(12, 2))) + tsDuration - tsCut).ToString("yyyyMMddHHmmss");
-                videoCutName = path + @"CutTemp\" + videoStartTime + ".avi";
-
-                ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffmpeg.exe");
-                startInfo.Arguments = @"-loglevel quiet -y -i " + videoToCut + " -ss " + videoCutStartTimeFormated + " -to 0" + videoDuration + " -c copy -avoid_negative_ts 1 " + videoCutName;
-                Console.WriteLine("CutVideoKeepEnd() : " + startInfo.Arguments); // DEBUG
-                startInfo.CreateNoWindow = true;
-                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                Process.Start(startInfo);
             }
             catch (Exception ex) // No video to cut. The application has probably just started
             {
