@@ -329,7 +329,7 @@ namespace FaceDetection
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     Process.Start(startInfo);
                 }
-                else
+                else // Buffer file is not long enough and we have more than 1 buffer in TEMP folder => just start with keeping the whole first buffer file
                 {
                     videoCutName = "";
                 }
