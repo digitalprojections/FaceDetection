@@ -352,6 +352,8 @@ namespace FaceDetection
                 this.Activate();
             }
 
+            crossbar.RESET_INTERVAL();
+
             SetCameraToDefaultMode();
         }
 

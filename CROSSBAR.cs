@@ -395,6 +395,16 @@ namespace FaceDetection
             }            
         }
 
+        internal void RESET_INTERVAL()
+        {            
+            if (no_opcap_timer != null)
+            {
+                PROPERTY_FUNCTIONS.GetReInitiationInterval(INDEX, out int intervalBeforeReinitiating);
+                no_opcap_timer.Stop();
+                no_opcap_timer.Interval = intervalBeforeReinitiating * 1000;
+            }
+        }
+
         public void Start(int index, CAMERA_MODES mode)
         {
             LOGGER.Add("Start camera index " + index.ToString() + " " + mode.ToString());
