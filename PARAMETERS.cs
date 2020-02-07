@@ -317,7 +317,8 @@ namespace FaceDetection
         {
             for (int item = list.Count - 1; item > 0; item--)
             {
-                if (list[item].Length != 3 && !list[item].ToString().StartsWith("t"))
+                list[item] = list[item].ToLower(culture);
+                if (list[item].Length != 3 && !list[item].ToString().StartsWith("t", StringComparison.CurrentCultureIgnoreCase))
                 {
                     list.RemoveAt(item);
                     WrongParameter = true;
@@ -1429,6 +1430,7 @@ namespace FaceDetection
                     {
                         if(WAKEUPCALL)
                         {
+                            //9 All cams
                             if ((CheckCameraIndex(CameraIndex) && CameraIndex == 8 && MULTI_WINDOW.RecordingIsOn() == false))
                             {
                                 
@@ -1452,6 +1454,7 @@ namespace FaceDetection
                                 }
 
                             }
+                            //1-4 camera
                             else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
                             {
                                 if (parameterOnOffSwitch && (parameterTime > 0 && parameterTime <= 1000))
@@ -1568,7 +1571,7 @@ namespace FaceDetection
 
         internal static void HandleWakeUpParameters()
         {
-            if (PARAM != null && PARAM.Count > 0 && !PARAM.Contains("uvccameraviewer"))
+            if (PARAM != null && PARAM.Count > 0 && !PARAM.Contains("uvccameraviewer", StringComparer.InvariantCultureIgnoreCase))
             {
                 PARAM.Reverse();
                 PARAM.Add("uvccameraviewer");

@@ -38,7 +38,7 @@ namespace FaceDetection
             if (operatorCaptureEnabled && IRSensorEnabled && checkInterval > 0)
             {
                 if (SensorCheckTimer != null)
-                    SensorCheckTimer.Interval = checkInterval;
+                    SensorCheckTimer.Interval = checkInterval < 500 ? 500 : checkInterval;
             }
             else
             {
@@ -160,13 +160,14 @@ namespace FaceDetection
             if (SensorCheckTimer != null)
             {
                 SensorCheckTimer.Enabled = true;
-                SensorCheckTimer.Interval = checkInterval;
+                SensorCheckTimer.Interval = checkInterval < 500 ? 500 : checkInterval;
                 SensorCheckTimer.Enabled = false;
             }            
         }
 
         public uint CheckSensor()
         {
+            //Console.WriteLine("Sensor check on tick");
             bool ret = false;
             int iError = 0;
             uint[] data = new uint[6];
@@ -205,7 +206,7 @@ namespace FaceDetection
                     data[1] = 0;
                     //Logger.Add(e.Message + " ******** IRSensor ERROR");
                 }
-                SensorClose();
+                SensorClose();                
             }
             else
             {             

@@ -47,11 +47,17 @@ namespace FaceDetection
             {
                 //backlight_timer.Stop();
                 backlight_timer.Interval = decimal.ToInt32(Properties.Settings.Default.backlight_offset_mins) * 60 * 1000;
-                backlight_timer?.Start();
+                if(backlight_timer!=null)
+                {
+                    backlight_timer.Start();
+                }
             }
             else
             {
-                backlight_timer?.Stop();
+                if (backlight_timer != null)
+                {
+                    backlight_timer.Stop();
+                }
                 //MessageBox.Show("backlight_offset is 0");
             }
         }
