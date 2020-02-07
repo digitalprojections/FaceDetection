@@ -36,8 +36,7 @@ namespace FaceDetection
 
         internal static void SetCycleTime(int cameraIndex, int time)
         {
-            if (time >= 500 && time <= 1000)
-            {
+            
                 switch (cameraIndex)
                 {
                     case 0:
@@ -53,7 +52,7 @@ namespace FaceDetection
                     Properties.Settings.Default.C4_check_interval = Convert.ToDecimal(time);
                         break;
                 }
-            }
+
         }
         
 
