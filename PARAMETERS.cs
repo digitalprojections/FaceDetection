@@ -728,7 +728,7 @@ namespace FaceDetection
                                 //MULTI_WINDOW.formList[MainCamera]?.crossbar.Start(MainCamera, CAMERA_MODES.MANUAL);
                                 MULTI_WINDOW.formList[MainCamera]?.ManualVideoRecording();
                             }
-                            else
+                            else if(!parameterOnOffSwitch)
                             {
                                 //MULTI_WINDOW.formList[MainCamera]?.HideIcon();
                                 //if (PROPERTY_FUNCTIONS.CheckPreEventTimes(MainCamera))
