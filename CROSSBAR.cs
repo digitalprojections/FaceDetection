@@ -400,12 +400,8 @@ namespace FaceDetection
             if (no_opcap_timer != null)
             {
                 PROPERTY_FUNCTIONS.GetReInitiationInterval(INDEX, out int intervalBeforeReinitiating);
-                no_opcap_timer.Stop();
-                no_opcap_timer.Interval = intervalBeforeReinitiating * 1000;
-                if(no_opcap_timer.Enabled)
-                    no_opcap_timer.Enabled = true;
-                else
-                    no_opcap_timer.Enabled = false;
+                
+                no_opcap_timer.Interval = intervalBeforeReinitiating * 1000;                
             }
         }
 
