@@ -70,7 +70,8 @@ namespace FaceDetection
         }
         
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {            
+        {
+            
             RSensor?.Destroy();
             Dispose();
         }
