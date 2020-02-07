@@ -391,6 +391,7 @@ namespace FaceDetection
             recordingInProgress = true;
             this.cameraButton.Enabled = false;
             //this.snapshotButton.Enabled = false;
+            MainForm.Settingui.SetOKButtonState();
         }
 
         public void SetHideRecordIcon(int timeAfterEvent)
@@ -419,6 +420,7 @@ namespace FaceDetection
                 this.cameraButton.Enabled = true;
                 //this.snapshotButton.Enabled = true;
             }
+            MainForm.Settingui.SetOKButtonState();
         }
 
         private void FormClass_ResizeEnd(object sender, EventArgs e)

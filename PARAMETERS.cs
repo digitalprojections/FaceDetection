@@ -97,7 +97,7 @@ namespace FaceDetection
                     //WhichCase = param;
                     for (int i = 1; i < parameters.Count; i++)
                     {
-                        elem = parameters.ElementAt(i).ToLower();
+                        elem = parameters.ElementAt(i).ToLower(culture);
                         try
                         {
                             switch (elem.Substring(0, 1))
@@ -205,7 +205,7 @@ namespace FaceDetection
 
                     for(int j = 1; j < parameters.Count; j++)
                     {
-                        elem = parameters.ElementAt(j).ToLower();
+                        elem = parameters.ElementAt(j).ToLower(culture);
                             switch (elem.Substring(0, 1))
                             {
                             case "c":

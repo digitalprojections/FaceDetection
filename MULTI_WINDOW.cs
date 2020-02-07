@@ -28,8 +28,8 @@ namespace FaceDetection
                     {
                         form = new CameraForm(i);
                         formList[i] = form;
-                        form.Show();                        
-                        displayedCameraCount++;                        
+                        form.Show();
+                        displayedCameraCount++;
                     }
                 }
 

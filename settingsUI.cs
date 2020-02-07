@@ -191,7 +191,8 @@ namespace FaceDetection
                 if (MULTI_WINDOW.formList[i].DISPLAYED == true)
                 {
                     PROPERTY_FUNCTIONS.Set_Window_Location_Set(i, MULTI_WINDOW.formList[i]);
-                    MULTI_WINDOW.formList[i].ClientSize = PROPERTY_FUNCTIONS.GetCameraSize(i);
+                    //MULTI_WINDOW.formList[i].ClientSize = PROPERTY_FUNCTIONS.GetCameraSize(i);
+                    MULTI_WINDOW.formList[i].ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);
                 }
             }
 
@@ -504,10 +505,15 @@ namespace FaceDetection
             this.MaximizeBox = false;
             //this.TopMost = true;
 
+            SetOKButtonState();
+            
+        }
+
+        public void SetOKButtonState()
+        {
             bool rip = MainForm.AnyRecordingInProgress;
             cm_camera_number.Enabled = !rip;
             button_settings_save.Enabled = !rip;
-            
         }
 
         public void DisabledButtonWhenRecording()
