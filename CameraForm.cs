@@ -337,7 +337,8 @@ namespace FaceDetection
             {
                 this.Activate();
             }
-            else if(PROPERTY_FUNCTIONS.CheckOnTopByIndex(CameraIndex) && this.WindowState != FormWindowState.Minimized) // Bring sub to the front if "on top" is selected
+            else if(PROPERTY_FUNCTIONS.CheckOnTopByIndex(CameraIndex) && this.WindowState != FormWindowState.Minimized) 
+                // Bring sub to the front if "on top" is selected
             {
                 if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(CameraIndex))
                 {

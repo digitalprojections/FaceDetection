@@ -344,7 +344,7 @@ namespace FaceDetection
                 case " ":// FFTF
                     if (!WrongParameter && CameraIndex + 1 <= Properties.Settings.Default.camera_count)
                     {
-                        if (WAKEUPCALL && CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                        if (WAKEUPCALL && SingleCamera)
                         {
                             for (int i = 0; i < Properties.Settings.Default.camera_count; i++)
                             {
@@ -487,7 +487,7 @@ namespace FaceDetection
                     {
                         if (!WrongParameter && !WAKEUPCALL)
                         {
-                            if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                            if (SingleCamera)
                             {
                                 //SNAPSHOT_SAVER.TakeAsyncSnapShot(false, CameraIndex, "snapshot");
                                 SNAPSHOT_SAVER.TakeSnapShot(CameraIndex, "snapshot");
@@ -559,7 +559,7 @@ namespace FaceDetection
                 case "n"://TFTF
                     if (!WrongParameter && !WAKEUPCALL)
                     {
-                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                        if (SingleCamera)
                         {
                             if ((MULTI_WINDOW.formList[CameraIndex]?.DISPLAYED == true && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false && MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].recordingInProgress == false) || TESTING)
                             {
@@ -930,7 +930,7 @@ namespace FaceDetection
                     {
                         try
                         {
-                            if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                            if (SingleCamera)
                             {
                                 if (parameterOnOffSwitch)
                                 {
@@ -973,11 +973,21 @@ namespace FaceDetection
                         }
                         else
                         {
-                            minimizedByParameter[0] = false;
-                            minimizedByParameter[1] = false;
-                            minimizedByParameter[2] = false;
-                            minimizedByParameter[3] = false;
-                            minimizedByParameter[CameraIndex] = true;
+                            if (SingleCamera)
+                            {
+                                minimizedByParameter[0] = false;
+                                minimizedByParameter[1] = false;
+                                minimizedByParameter[2] = false;
+                                minimizedByParameter[3] = false;
+                                minimizedByParameter[CameraIndex] = true;
+                            }else if (AllCameras)
+                            {
+                                minimizedByParameter[0] = true;
+                                minimizedByParameter[1] = true;
+                                minimizedByParameter[2] = true;
+                                minimizedByParameter[3] = true;
+                            }
+                            
                             callByParameters = true;
                             minimizedByParameters = true;
                         }
@@ -1023,7 +1033,7 @@ namespace FaceDetection
                     {
                         if (WAKEUPCALL)
                         {
-                            if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                            if (SingleCamera)
                             {
                                 if (parameterOnOffSwitch)
                                 {
@@ -1035,7 +1045,7 @@ namespace FaceDetection
                                     WrongParameter = true;
                                 }
                             }
-                            else if (CheckCameraIndex(CameraIndex) && (CameraIndex == 8))
+                            else if (AllCameras)
                             {
                                 //Support all
                                 if (parameterOnOffSwitch)
@@ -1070,7 +1080,7 @@ namespace FaceDetection
                     {
                         if (!WAKEUPCALL)
                         {
-                            if ((CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) || TESTING)
+                            if ((SingleCamera && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) || TESTING)
                             {
                                 if (parameterOnOffSwitch)
                                 {
@@ -1079,7 +1089,7 @@ namespace FaceDetection
                                     //MULTI_WINDOW.formList[CameraIndex]?.crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
                                 }
                             }
-                            else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && !parameterOnOffSwitch)
+                            else if (SingleCamera && !parameterOnOffSwitch)
                             {
                                 //MULTI_WINDOW.formList[CameraIndex]?.HideIcon();
                                 //if (PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
@@ -1115,7 +1125,7 @@ namespace FaceDetection
                 case "h"://TTTF
                     if(!WAKEUPCALL)
                     {
-                        if ((CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) || TESTING)
+                        if ((SingleCamera && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) || TESTING)
                         {
                             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CameraIndex, out bool IrSensorEnabled);
                             if (parameterOnOffSwitch)
@@ -1149,7 +1159,7 @@ namespace FaceDetection
                                 }
                             }
                         }
-                        else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && MULTI_WINDOW.RecordingIsOn() == false)
+                        else if (AllCameras && MULTI_WINDOW.RecordingIsOn() == false)
                         {
                             for (int i = 0; i < 4; i++)
                             {
@@ -1166,7 +1176,7 @@ namespace FaceDetection
                     }
                     else
                     {
-                        if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && (CameraIndex + 1 <= Properties.Settings.Default.camera_count))
+                        if (SingleCamera && (CameraIndex + 1 <= Properties.Settings.Default.camera_count))
                         {
                             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CameraIndex, out bool IrSensorEnabled);
                             if (parameterOnOffSwitch)
@@ -1189,7 +1199,7 @@ namespace FaceDetection
                                 WrongParameter = true;
                             }
                         }
-                        else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8)
+                        else if (AllCameras)
                         {
                             if(parameterOnOffSwitch)
                             {
@@ -1236,187 +1246,6 @@ namespace FaceDetection
             CurrentTestResult = MethodName;
         }
 
-        private static void ShowOrHideWindows()
-        {
-            if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && SwitchIsPresent)
-            {
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    if (parameterOnOffSwitch && MULTI_WINDOW.formList[i].DISPLAYED)
-                    {
-                        CurrentTestResult = "Show all windows";
-                        //isMinimized = false;
-                        try
-                        {
-                            switch (CameraIndex)
-                            {
-                                case 0:
-                                    if (Properties.Settings.Default.C1_full_screen)
-                                    {
-                                        MULTI_WINDOW.formList[0].WindowState = FormWindowState.Maximized;
-                                    }
-                                    else
-                                    {
-                                        MULTI_WINDOW.formList[0].WindowState = FormWindowState.Normal;
-                                    }
-                                    break;
-                                case 1:
-                                    if (Properties.Settings.Default.C2_full_screen)
-                                    {
-                                        MULTI_WINDOW.formList[1].WindowState = FormWindowState.Maximized;
-                                    }
-                                    else
-                                    {
-                                        MULTI_WINDOW.formList[1].WindowState = FormWindowState.Normal;
-                                    }
-                                    break;
-                                case 2:
-                                    if (Properties.Settings.Default.C3_full_screen)
-                                    {
-                                        MULTI_WINDOW.formList[2].WindowState = FormWindowState.Maximized;
-                                    }
-                                    else
-                                    {
-                                        MULTI_WINDOW.formList[2].WindowState = FormWindowState.Normal;
-                                    }
-                                    break;
-                                case 3:
-                                    if (Properties.Settings.Default.C4_full_screen)
-                                    {
-                                        MULTI_WINDOW.formList[3].WindowState = FormWindowState.Maximized;
-                                    }
-                                    else
-                                    {
-                                        MULTI_WINDOW.formList[3].WindowState = FormWindowState.Normal;
-                                    }
-                                    break;
-                            }
-                            MULTI_WINDOW.formList[i]?.Show();
-                            MULTI_WINDOW.formList[i]?.Activate();
-                        }
-                        catch (ArgumentOutOfRangeException)
-                        {
-
-                        }
-                    }
-                    else
-                    {
-                        CurrentTestResult = "Hiding all windows";
-                        //isMinimized = true;
-                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
-                    }
-                }
-                CurrentTestResult = "Show all windows";
-            }
-            else if (CheckCameraIndex(CameraIndex))
-            {
-                if (parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex].DISPLAYED)
-                {
-                    CurrentTestResult = "Show 1 window";
-                    //isMinimized = false;
-                    try
-                    {
-                        switch (CameraIndex)
-                        {
-                            case 0:
-                                if (Properties.Settings.Default.C1_full_screen)
-                                {
-                                    MULTI_WINDOW.formList[0].WindowState = FormWindowState.Maximized;
-                                }
-                                else
-                                {
-                                    MULTI_WINDOW.formList[0].WindowState = FormWindowState.Normal;
-                                }
-                                break;
-                            case 1:
-                                if (Properties.Settings.Default.C2_full_screen)
-                                {
-                                    MULTI_WINDOW.formList[1].WindowState = FormWindowState.Maximized;
-                                }
-                                else
-                                {
-                                    MULTI_WINDOW.formList[1].WindowState = FormWindowState.Normal;
-                                }
-                                break;
-                            case 2:
-                                if (Properties.Settings.Default.C3_full_screen)
-                                {
-                                    MULTI_WINDOW.formList[2].WindowState = FormWindowState.Maximized;
-                                }
-                                else
-                                {
-                                    MULTI_WINDOW.formList[2].WindowState = FormWindowState.Normal;
-                                }
-                                break;
-                            case 3:
-                                if (Properties.Settings.Default.C4_full_screen)
-                                {
-                                    MULTI_WINDOW.formList[3].WindowState = FormWindowState.Maximized;
-                                }
-                                else
-                                {
-                                    MULTI_WINDOW.formList[3].WindowState = FormWindowState.Normal;
-                                }
-                                break;
-                        }
-                        //MULTI_WINDOW.formList[CameraIndex]?.Show();
-                        //MULTI_WINDOW.formList[CameraIndex]?.Activate();
-                        MULTI_WINDOW.formList[CameraIndex].TopMost = true;
-                        MULTI_WINDOW.formList[CameraIndex].TopMost = false;
-                    }
-                    catch (NullReferenceException)
-                    {
-
-                    }
-                }
-                else
-                {
-                    CurrentTestResult = "Hiding 1 window";
-                    //isMinimized = true;
-                    try
-                    {
-                        MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Minimized;
-                    }
-                    catch (NullReferenceException)
-                    {
-                        // form isn't displayed
-                    }
-                }
-            }
-        }
-
-        //private static void StartAndHideWindows()
-        //{
-        //    if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && SwitchIsPresent)
-        //    {
-        //        for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-        //        {
-        //            if (!parameterOnOffSwitch)
-        //            {
-        //                CurrentTestResult = "Hiding all windows";
-        //                //isMinimized = true;
-        //                MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
-        //            }
-        //        }
-        //    }
-        //    else if (CheckCameraIndex(CameraIndex))
-        //    {
-        //        if (!parameterOnOffSwitch)
-        //        {
-        //            CurrentTestResult = "Hiding 1 window";
-        //            //isMinimized = true;
-        //            try
-        //            {
-        //                MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Minimized;
-        //            }
-        //            catch (NullReferenceException)
-        //            {
-        //
-        //            }
-        //        }
-        //    }
-        //}
-
         /// <summary>
         /// TTTT
         /// </summary>
@@ -1431,7 +1260,7 @@ namespace FaceDetection
                         if(WAKEUPCALL)
                         {
                             //9 All cams
-                            if ((CheckCameraIndex(CameraIndex) && CameraIndex == 8 && MULTI_WINDOW.RecordingIsOn() == false))
+                            if (AllCameras && MULTI_WINDOW.RecordingIsOn() == false)
                             {
                                 
                                 if (parameterOnOffSwitch && (parameterTime >0 && parameterTime<=1000))
@@ -1455,7 +1284,7 @@ namespace FaceDetection
 
                             }
                             //1-4 camera
-                            else if (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4))
+                            else if (SingleCamera)
                             {
                                 if (parameterOnOffSwitch && (parameterTime > 0 && parameterTime <= 1000))
                                 {
@@ -1476,7 +1305,7 @@ namespace FaceDetection
                         else
                         {
                             //PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(MainCamera, out bool IrSensorEnabled);
-                            if ((CheckCameraIndex(CameraIndex) && CameraIndex == 8 && MULTI_WINDOW.RecordingIsOn() == false))
+                            if ((AllCameras && MULTI_WINDOW.RecordingIsOn() == false))
                             {
                                 if (parameterOnOffSwitch && (parameterTime > 0 && parameterTime <= 1000))
                                 {
@@ -1499,7 +1328,7 @@ namespace FaceDetection
                                     WrongParameter = true;
                                 }
                             }
-                            else if ((CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) || TESTING)
+                            else if ((SingleCamera && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) || TESTING)
                             {
                                 if (parameterOnOffSwitch && (parameterTime > 0 && parameterTime <= 1000))
                                 {
@@ -1691,6 +1520,198 @@ namespace FaceDetection
                 return 0;
             }
         }
+
+        private static bool AllCameras
+        {
+            get => (CheckCameraIndex(CameraIndex) && (CameraIndex == 8));
+        }
+
+        private static bool SingleCamera
+        {
+            get => (CheckCameraIndex(CameraIndex) && (CameraIndex >= 0 && CameraIndex < 4));
+        }
+
+        private static void ShowOrHideWindows()
+        {
+            if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && SwitchIsPresent)
+            {
+                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+                {
+                    if (parameterOnOffSwitch && MULTI_WINDOW.formList[i].DISPLAYED)
+                    {
+                        CurrentTestResult = "Show all windows";
+                        //isMinimized = false;
+                        try
+                        {
+                            switch (CameraIndex)
+                            {
+                                case 0:
+                                    if (Properties.Settings.Default.C1_full_screen)
+                                    {
+                                        MULTI_WINDOW.formList[0].WindowState = FormWindowState.Maximized;
+                                    }
+                                    else
+                                    {
+                                        MULTI_WINDOW.formList[0].WindowState = FormWindowState.Normal;
+                                    }
+                                    break;
+                                case 1:
+                                    if (Properties.Settings.Default.C2_full_screen)
+                                    {
+                                        MULTI_WINDOW.formList[1].WindowState = FormWindowState.Maximized;
+                                    }
+                                    else
+                                    {
+                                        MULTI_WINDOW.formList[1].WindowState = FormWindowState.Normal;
+                                    }
+                                    break;
+                                case 2:
+                                    if (Properties.Settings.Default.C3_full_screen)
+                                    {
+                                        MULTI_WINDOW.formList[2].WindowState = FormWindowState.Maximized;
+                                    }
+                                    else
+                                    {
+                                        MULTI_WINDOW.formList[2].WindowState = FormWindowState.Normal;
+                                    }
+                                    break;
+                                case 3:
+                                    if (Properties.Settings.Default.C4_full_screen)
+                                    {
+                                        MULTI_WINDOW.formList[3].WindowState = FormWindowState.Maximized;
+                                    }
+                                    else
+                                    {
+                                        MULTI_WINDOW.formList[3].WindowState = FormWindowState.Normal;
+                                    }
+                                    break;
+                            }
+                            MULTI_WINDOW.formList[i]?.Show();
+                            MULTI_WINDOW.formList[i]?.Activate();
+                        }
+                        catch (ArgumentOutOfRangeException)
+                        {
+
+                        }
+                    }
+                    else
+                    {
+                        CurrentTestResult = "Hiding all windows";
+                        //isMinimized = true;
+                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
+                    }
+                }
+                CurrentTestResult = "Show all windows";
+            }
+            else if (CheckCameraIndex(CameraIndex))
+            {
+                if (parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex].DISPLAYED)
+                {
+                    CurrentTestResult = "Show 1 window";
+                    //isMinimized = false;
+                    try
+                    {
+                        switch (CameraIndex)
+                        {
+                            case 0:
+                                if (Properties.Settings.Default.C1_full_screen)
+                                {
+                                    MULTI_WINDOW.formList[0].WindowState = FormWindowState.Maximized;
+                                }
+                                else
+                                {
+                                    MULTI_WINDOW.formList[0].WindowState = FormWindowState.Normal;
+                                }
+                                break;
+                            case 1:
+                                if (Properties.Settings.Default.C2_full_screen)
+                                {
+                                    MULTI_WINDOW.formList[1].WindowState = FormWindowState.Maximized;
+                                }
+                                else
+                                {
+                                    MULTI_WINDOW.formList[1].WindowState = FormWindowState.Normal;
+                                }
+                                break;
+                            case 2:
+                                if (Properties.Settings.Default.C3_full_screen)
+                                {
+                                    MULTI_WINDOW.formList[2].WindowState = FormWindowState.Maximized;
+                                }
+                                else
+                                {
+                                    MULTI_WINDOW.formList[2].WindowState = FormWindowState.Normal;
+                                }
+                                break;
+                            case 3:
+                                if (Properties.Settings.Default.C4_full_screen)
+                                {
+                                    MULTI_WINDOW.formList[3].WindowState = FormWindowState.Maximized;
+                                }
+                                else
+                                {
+                                    MULTI_WINDOW.formList[3].WindowState = FormWindowState.Normal;
+                                }
+                                break;
+                        }
+                        //MULTI_WINDOW.formList[CameraIndex]?.Show();
+                        //MULTI_WINDOW.formList[CameraIndex]?.Activate();
+                        MULTI_WINDOW.formList[CameraIndex].TopMost = true;
+                        MULTI_WINDOW.formList[CameraIndex].TopMost = false;
+                    }
+                    catch (NullReferenceException)
+                    {
+
+                    }
+                }
+                else
+                {
+                    CurrentTestResult = "Hiding 1 window";
+                    //isMinimized = true;
+                    try
+                    {
+                        MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Minimized;
+                    }
+                    catch (NullReferenceException)
+                    {
+                        // form isn't displayed
+                    }
+                }
+            }
+        }
+
+        //private static void StartAndHideWindows()
+        //{
+        //    if (CheckCameraIndex(CameraIndex) && CameraIndex == 8 && SwitchIsPresent)
+        //    {
+        //        for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+        //        {
+        //            if (!parameterOnOffSwitch)
+        //            {
+        //                CurrentTestResult = "Hiding all windows";
+        //                //isMinimized = true;
+        //                MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
+        //            }
+        //        }
+        //    }
+        //    else if (CheckCameraIndex(CameraIndex))
+        //    {
+        //        if (!parameterOnOffSwitch)
+        //        {
+        //            CurrentTestResult = "Hiding 1 window";
+        //            //isMinimized = true;
+        //            try
+        //            {
+        //                MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Minimized;
+        //            }
+        //            catch (NullReferenceException)
+        //            {
+        //
+        //            }
+        //        }
+        //    }
+        //}
+
 
     }
 }
