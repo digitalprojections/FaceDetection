@@ -297,7 +297,6 @@ namespace FaceDetection
                         break;
                 }
             }
-            PARAM.Clear();
         }
 
         private static int CheckIntervalValue(int v)
@@ -314,14 +313,14 @@ namespace FaceDetection
 
         private static List<string> CleanUpTheParams(List<string> list)
         {
-            for (int item = list.Count - 1; item >=0; item--)
+            for (int item = list.Count - 1; item > 0; item--)
             {
                 list[item] = list[item].ToLower(culture);
-                //if (list[item].Length != 3 && !list[item].ToString().StartsWith("t", StringComparison.CurrentCultureIgnoreCase))
-                //{
-                //    list.RemoveAt(item);
-                //    WrongParameter = true;
-                //}
+                if (list[item].Length != 3 && !list[item].ToString().StartsWith("t", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    list.RemoveAt(item);
+                    WrongParameter = true;
+                }
             }
             return list;
         }
@@ -364,7 +363,6 @@ namespace FaceDetection
                         else if (WAKEUPCALL && (CameraIndex == 8))
                         {
                             //Start all cams
-                            WrongParameter = true;
                         }
                     }
                     else
@@ -492,10 +490,9 @@ namespace FaceDetection
                                 //SNAPSHOT_SAVER.TakeAsyncSnapShot(false, CameraIndex, "snapshot");
                                 SNAPSHOT_SAVER.TakeSnapShot(CameraIndex, "snapshot");
                             }
-                            else if (AllCameras)
+                            else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8)
                             {
                                 //SNAPSHOT_SAVER.TakeSnapShotAll();
-                                WrongParameter = true;
                             }
                         }
                         else
@@ -532,7 +529,7 @@ namespace FaceDetection
                                         //MULTI_WINDOW.EventRecorderOn(i);
                                     }
                                 }
-                                WrongParameter = true;
+
                             }
                         }
                         
@@ -556,7 +553,6 @@ namespace FaceDetection
                             else if (CameraIndex == 8)
                             {
                                 //Application.Exit();
-                                WrongParameter = true;
                             }
                         }
                         else
@@ -672,7 +668,6 @@ namespace FaceDetection
                             {
                                 WrongParameter = true;
                             }
-                            WrongParameter = true;
                         }                        
                     }
                     catch (ArgumentOutOfRangeException e)
@@ -970,7 +965,6 @@ namespace FaceDetection
                                 //minimizedByParameter[1] = true;
                                 //minimizedByParameter[2] = true;
                                 //minimizedByParameter[3] = true;
-                                WrongParameter = true;
                             }
                             
                             callByParameters = true;
@@ -1040,7 +1034,6 @@ namespace FaceDetection
                                         //PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(i, true);
                                     }
                                     //Properties.Settings.Default.Save();
-                                    WrongParameter = true;
                                 }
                                 else
                                 {
@@ -1158,7 +1151,6 @@ namespace FaceDetection
                             //{
                             //    //MainForm.AllChangesApply();
                             //}
-                            WrongParameter = true;
                         }
                     }
                     else
@@ -1207,7 +1199,6 @@ namespace FaceDetection
                             //{
                             //    //MainForm.AllChangesApply();
                             //}
-                            WrongParameter = true;
                         }
                         else
                         {
@@ -1269,7 +1260,6 @@ namespace FaceDetection
                                 {
                                     WrongParameter = true;
                                 }
-                                WrongParameter = true;
                             }
                             //1-4 camera
                             else if (SingleCamera)
@@ -1315,7 +1305,6 @@ namespace FaceDetection
                                 {
                                     WrongParameter = true;
                                 }
-                                WrongParameter = true;
                             }
                             else if ((SingleCamera && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) || TESTING)
                             {
