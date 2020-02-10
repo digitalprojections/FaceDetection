@@ -71,8 +71,6 @@ namespace FaceDetection
         
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
-            
             Dispose();
         }
         
@@ -150,11 +148,10 @@ namespace FaceDetection
             {
                 Mklisteners.AddMouseAndKeyboardBack();
             }
-            else {
+            else
+            {
                 Mklisteners.RemoveMouseAndKeyboard();
             }
-            
-            
 
             PARAMETERS.HandleWakeUpParameters();
 
@@ -164,7 +161,6 @@ namespace FaceDetection
                 MULTI_WINDOW.CreateCameraWindows();
                 MULTI_WINDOW.FormSettingsChanged();
                 PARAMETERS.WAKEUPCALL = false;
-
             }
             
             if(PARAMETERS.callByParameters)

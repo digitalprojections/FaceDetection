@@ -45,7 +45,7 @@ namespace FaceDetectionX
         
         private DirectShow.IBaseFilter renderer;
         private DirectShow.IBaseFilter vcap_source;
-        public const int DEVICE_NOTIFY_WINDOW_HANDLE = 0;
+        //public const int DEVICE_NOTIFY_WINDOW_HANDLE = 0;
         /// <summary>
         /// Get available USB camera list.
         /// </summary>
@@ -460,12 +460,8 @@ namespace FaceDetectionX
             }
         }
         
-        
-        
     }
         
-
-
 
     public static class DirectShow
     {
@@ -1486,6 +1482,5 @@ namespace FaceDetectionX
         #endregion
 
     }
-    
 }
 
