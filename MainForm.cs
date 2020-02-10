@@ -72,7 +72,7 @@ namespace FaceDetection
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             
-            RSensor?.Destroy();
+            
             Dispose();
         }
         
@@ -149,6 +149,9 @@ namespace FaceDetection
             if (spymode)
             {
                 Mklisteners.AddMouseAndKeyboardBack();
+            }
+            else {
+                Mklisteners.RemoveMouseAndKeyboard();
             }
             
             
@@ -463,6 +466,7 @@ namespace FaceDetection
 
         private new void Dispose()
         {
+            RSensor?.Destroy();
             datetime_timer?.Dispose();
             //backLight?.Dispose();
         }

@@ -70,6 +70,11 @@ namespace FaceDetection
             Listen = true;
         }
 
+        public void RemoveMouseAndKeyboard()
+        {
+            Listen = false;
+        }
+
         private void MouseListener_MouseMove(object sender, MouseEventArgs e)
         {
             MouseKeyEventInit();
