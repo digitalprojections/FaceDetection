@@ -71,8 +71,6 @@ namespace FaceDetection
         
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
-            
             Dispose();
         }
         
@@ -150,7 +148,8 @@ namespace FaceDetection
             {
                 Mklisteners.AddMouseAndKeyboardBack();
             }
-            else {
+            else
+            {
                 Mklisteners.RemoveMouseAndKeyboard();
             }
             
