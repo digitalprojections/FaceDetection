@@ -299,6 +299,8 @@ namespace FaceDetection
                         break;
                 }
             }
+
+            PARAM.Clear();
         }
 
         private static int CheckIntervalValue(int v)
@@ -315,14 +317,14 @@ namespace FaceDetection
 
         private static List<string> CleanUpTheParams(List<string> list)
         {
-            for (int item = list.Count - 1; item > 0; item--)
+            for (int item = list.Count - 1; item >= 0; item--)
             {
                 list[item] = list[item].ToLower(culture);
-                if (list[item].Length != 3 && !list[item].ToString().StartsWith("t", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    list.RemoveAt(item);
-                    WrongParameter = true;
-                }
+                //if (list[item].Length != 3 && !list[item].ToString().StartsWith("t", StringComparison.CurrentCultureIgnoreCase))
+                //{
+                //    list.RemoveAt(item);
+                //    WrongParameter = true;
+                //}
             }
             return list;
         }
@@ -391,7 +393,7 @@ namespace FaceDetection
                 case "s":// TFFF
                     try
                     {
-                        if (!WrongParameter && !WAKEUPCALL)
+                        if (!WrongParameter && !WAKEUPCALL && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             SNAPSHOT_SAVER.TakeSnapShot(MainCamera, "snapshot");
                         }
@@ -485,7 +487,7 @@ namespace FaceDetection
                 case "s":// TFTF
                     try
                     {
-                        if (!WrongParameter && !WAKEUPCALL)
+                        if (!WrongParameter && !WAKEUPCALL && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
                         {
                             if (SingleCamera)
                             {
@@ -815,13 +817,13 @@ namespace FaceDetection
                     }
                     else
                     {
-                        if (parameterOnOffSwitch)
+                        if (parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             CurrentTestResult = "Show 1 window";
                             //isMinimized = false;
                             MULTI_WINDOW.SETWINDOWSTATE(MainCamera);
                         }
-                        else
+                        else if (!parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             CurrentTestResult = "Hiding 1 window";
                             //isMinimized = true;
@@ -833,6 +835,10 @@ namespace FaceDetection
                             {
 
                             }
+                        }
+                        else
+                        {
+                            WrongParameter = true;
                         }
                     }
                     PARAM.Clear();
@@ -977,9 +983,13 @@ namespace FaceDetection
                             minimizedByParameters = true;
                         }
                     }
-                    else
+                    else if (MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
                     {
                         ShowOrHideWindows();
+                    }
+                    else
+                    {
+                        WrongParameter = true;
                     }
                     CurrentTestResult = "Show All Windows";
                     PARAM.Clear();
@@ -1212,7 +1222,8 @@ namespace FaceDetection
                             WrongParameter = true;
                         }
                     }
-                    
+
+                    PARAM.Clear();
                     //No need to remember the state
                     //Properties.Settings.Default.Save();
                     break;

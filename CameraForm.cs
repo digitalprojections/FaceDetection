@@ -392,7 +392,7 @@ namespace FaceDetection
             hideIconTimer.Start();
             recordingInProgress = true;
             this.cameraButton.Enabled = false;
-            //this.snapshotButton.Enabled = false;
+            this.snapshotButton.Enabled = false;
             MainForm.Settingui.SetOKButtonState();
         }
 
@@ -420,7 +420,7 @@ namespace FaceDetection
                 rec_icon.Visible = false;
                 recordingInProgress = false;
                 this.cameraButton.Enabled = true;
-                //this.snapshotButton.Enabled = true;
+                this.snapshotButton.Enabled = true;
             }
             MainForm.Settingui.SetOKButtonState();
         }
