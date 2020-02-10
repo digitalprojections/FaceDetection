@@ -242,8 +242,10 @@ namespace FaceDetection
             }
             else
             {
-                if(WAKEUPCALL)
+                if (WAKEUPCALL)
+                {
                     WrongParameter = true;
+                }
             }
 
             /*
@@ -360,10 +362,10 @@ namespace FaceDetection
                                 minimizedByParameters = true;
                             }
                         }
-                        else if (WAKEUPCALL && (CameraIndex == 8))
-                        {
-                            //Start all cams
-                        }
+                        //else if (WAKEUPCALL && (CameraIndex == 8))
+                        //{
+                        //    //Start all cams
+                        //}
                     }
                     else
                     {
@@ -520,17 +522,17 @@ namespace FaceDetection
                             {
                                 MULTI_WINDOW.EventRecorderOn(CameraIndex);
                             }
-                            else if (AllCameras)
-                            {
-                                for (int i = 0; i < 4; i++)
-                                {
-                                    if (MULTI_WINDOW.formList[i] != null && MULTI_WINDOW.formList[i].DISPLAYED && MULTI_WINDOW.formList[i]?.recordingInProgress == false)
-                                    {
-                                        MULTI_WINDOW.EventRecorderOn(i);
-                                    }
-                                }
+                            //else if (AllCameras)
+                            //{
+                            //    for (int i = 0; i < 4; i++)
+                            //    {
+                            //        if (MULTI_WINDOW.formList[i] != null && MULTI_WINDOW.formList[i].DISPLAYED && MULTI_WINDOW.formList[i]?.recordingInProgress == false)
+                            //        {
+                            //            MULTI_WINDOW.EventRecorderOn(i);
+                            //        }
+                            //    }
 
-                            }
+                            //}
                         }
                         
                     }
@@ -695,6 +697,7 @@ namespace FaceDetection
                             }
                             //  }
                         }
+                        ViewCalledCameraOnly(MainCamera);
                     }
                     else
                     {
@@ -873,7 +876,10 @@ namespace FaceDetection
                                 PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(MainCamera, true);
                                 Properties.Settings.Default.Save();
                                 if (MainForm.GetMainForm != null)
+                                {
                                     MainForm.AllChangesApply();
+                                }
+                                ViewCalledCameraOnly(MainCamera);
                             }
                             else
                             {
@@ -959,13 +965,13 @@ namespace FaceDetection
                                 minimizedByParameter[3] = false;
                                 minimizedByParameter[CameraIndex] = true;
                             }
-                            else if (AllCameras)
-                            {
-                                minimizedByParameter[0] = true;
-                                minimizedByParameter[1] = true;
-                                minimizedByParameter[2] = true;
-                                minimizedByParameter[3] = true;
-                            }
+                            //else if (AllCameras)
+                            //{
+                            //    minimizedByParameter[0] = true;
+                            //    minimizedByParameter[1] = true;
+                            //    minimizedByParameter[2] = true;
+                            //    minimizedByParameter[3] = true;
+                            //}
                             
                             callByParameters = true;
                             minimizedByParameters = true;
@@ -1018,28 +1024,29 @@ namespace FaceDetection
                                 {
                                     PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(CameraIndex, true);
                                     Properties.Settings.Default.Save();
+                                    ViewCalledCameraOnly(CameraIndex);
                                 }
                                 else
                                 {
                                     WrongParameter = true;
                                 }
                             }
-                            else if (AllCameras)
-                            {
-                                //Support all
-                                if (parameterOnOffSwitch)
-                                {
-                                    for (int i = 0; i < Properties.Settings.Default.camera_count; i++)
-                                    {
-                                        PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(i, true);
-                                    }
-                                    Properties.Settings.Default.Save();
-                                }
-                                else
-                                {
-                                    WrongParameter = true;
-                                }
-                            }
+                            //else if (AllCameras)
+                            //{
+                            //    //Support all
+                            //    if (parameterOnOffSwitch)
+                            //    {
+                            //        for (int i = 0; i < Properties.Settings.Default.camera_count; i++)
+                            //        {
+                            //            PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(i, true);
+                            //        }
+                            //        Properties.Settings.Default.Save();
+                            //    }
+                            //    else
+                            //    {
+                            //        WrongParameter = true;
+                            //    }
+                            //}
                             PARAM.Clear();
                         }
                         else
@@ -1138,20 +1145,20 @@ namespace FaceDetection
                                 }
                             }
                         }
-                        else if (AllCameras && MULTI_WINDOW.RecordingIsOn() == false)
-                        {
-                            for (int i = 0; i < 4; i++)
-                            {
-                                PROPERTY_FUNCTIONS.Set_Human_Sensor(i, parameterOnOffSwitch);
-                                if (parameterOnOffSwitch)
-                                    PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, parameterOnOffSwitch);
-                            }
+                        //else if (AllCameras && MULTI_WINDOW.RecordingIsOn() == false)
+                        //{
+                        //    for (int i = 0; i < 4; i++)
+                        //    {
+                        //        PROPERTY_FUNCTIONS.Set_Human_Sensor(i, parameterOnOffSwitch);
+                        //        if (parameterOnOffSwitch)
+                        //            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, parameterOnOffSwitch);
+                        //    }
 
-                            //if (MainForm.GetMainForm != null)
-                            //{
-                            //    //MainForm.AllChangesApply();
-                            //}
-                        }
+                        //    //if (MainForm.GetMainForm != null)
+                        //    //{
+                        //    //    //MainForm.AllChangesApply();
+                        //    //}
+                        //}
                     }
                     else
                     {
@@ -1178,28 +1185,28 @@ namespace FaceDetection
                                 WrongParameter = true;
                             }
                         }
-                        else if (AllCameras)
-                        {
-                            if(parameterOnOffSwitch)
-                            {
-                                for (int i = 0; i < 4; i++)
-                                {
-                                    PROPERTY_FUNCTIONS.Set_Human_Sensor(i, parameterOnOffSwitch);
-                                    if (parameterOnOffSwitch)
-                                    {
-                                        PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, parameterOnOffSwitch);
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                WrongParameter = true;
-                            }
-                            //if (MainForm.GetMainForm != null)
-                            //{
-                            //    //MainForm.AllChangesApply();
-                            //}
-                        }
+                        //else if (AllCameras)
+                        //{
+                        //    if(parameterOnOffSwitch)
+                        //    {
+                        //        for (int i = 0; i < 4; i++)
+                        //        {
+                        //            PROPERTY_FUNCTIONS.Set_Human_Sensor(i, parameterOnOffSwitch);
+                        //            if (parameterOnOffSwitch)
+                        //            {
+                        //                PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, parameterOnOffSwitch);
+                        //            }
+                        //        }
+                        //    }
+                        //    else
+                        //    {
+                        //        WrongParameter = true;
+                        //    }
+                        //    //if (MainForm.GetMainForm != null)
+                        //    //{
+                        //    //    //MainForm.AllChangesApply();
+                        //    //}
+                        //}
                         else
                         {
                             WrongParameter = true;
@@ -1241,29 +1248,29 @@ namespace FaceDetection
                         if(WAKEUPCALL)
                         {
                             //9 All cams
-                            if (AllCameras && MULTI_WINDOW.RecordingIsOn() == false)
-                            {
-                                if (parameterOnOffSwitch && (parameterTime >0 && parameterTime<=1000))
-                                {
-                                    for (int i = 0; i < 4; i++)
-                                    {
-                                        PROPERTY_FUNCTIONS.Set_Human_Sensor(i, true);
-                                        PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, true);
-                                        PROPERTY_FUNCTIONS.SetCycleTime(i, parameterTime);
-                                    }
-                                    if (MainForm.GetMainForm != null)
-                                    {
-                                        MainForm.AllChangesApply();
-                                    }
-                                }
-                                else
-                                {
-                                    WrongParameter = true;
-                                }
-                            }
-                            //1-4 camera
-                            else if (SingleCamera)
-                            {
+                            //if (AllCameras && MULTI_WINDOW.RecordingIsOn() == false)
+                            //{
+                            //    if (parameterOnOffSwitch && (parameterTime >0 && parameterTime<=1000))
+                            //    {
+                            //        for (int i = 0; i < 4; i++)
+                            //        {
+                            //            PROPERTY_FUNCTIONS.Set_Human_Sensor(i, true);
+                            //            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, true);
+                            //            PROPERTY_FUNCTIONS.SetCycleTime(i, parameterTime);
+                            //        }
+                            //        if (MainForm.GetMainForm != null)
+                            //        {
+                            //            MainForm.AllChangesApply();
+                            //        }
+                            //    }
+                            //    else
+                            //    {
+                            //        WrongParameter = true;
+                            //    }
+                            //}
+                            ////1-4 camera
+                            //else if (SingleCamera)
+                            //{
                                 if (parameterOnOffSwitch && (parameterTime > 0 && parameterTime <= 1000))
                                 {
                                     PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
@@ -1272,41 +1279,43 @@ namespace FaceDetection
                                     if (MainForm.GetMainForm != null)
                                     {
                                         MainForm.AllChangesApply();
-                                    }                                
+                                    }
+                                    ViewCalledCameraOnly(CameraIndex);
                                 }
                                 else
                                 {
                                     WrongParameter = true;
                                 }
-                            }
+                            //}
                         }
                         else
                         {
                             //PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(MainCamera, out bool IrSensorEnabled);
-                            if ((AllCameras && MULTI_WINDOW.RecordingIsOn() == false))
-                            {
-                                if (parameterOnOffSwitch && (parameterTime > 0 && parameterTime <= 1000))
-                                {
-                                    //if (!IrSensorEnabled)
-                                    //{
-                                        for (int i = 0; i < 4; i++)
-                                        {
-                                            PROPERTY_FUNCTIONS.Set_Human_Sensor(i, true);
-                                            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, true);
-                                            PROPERTY_FUNCTIONS.SetCycleTime(i, parameterTime);
-                                            if (MainForm.GetMainForm != null)
-                                            {
-                                                MainForm.AllChangesApply();
-                                            }
-                                        }
-                                    //}
-                                }
-                                else
-                                {
-                                    WrongParameter = true;
-                                }
-                            }
-                            else if ((SingleCamera && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) || TESTING)
+                            //if ((AllCameras && MULTI_WINDOW.RecordingIsOn() == false))
+                            //{
+                                //if (parameterOnOffSwitch && (parameterTime > 0 && parameterTime <= 1000))
+                                //{
+                                //    //if (!IrSensorEnabled)
+                                //    //{
+                                //        for (int i = 0; i < 4; i++)
+                                //        {
+                                //            PROPERTY_FUNCTIONS.Set_Human_Sensor(i, true);
+                                //            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, true);
+                                //            PROPERTY_FUNCTIONS.SetCycleTime(i, parameterTime);
+                                //            if (MainForm.GetMainForm != null)
+                                //            {
+                                //                MainForm.AllChangesApply();
+                                //            }
+                                //        }
+                                //    //}
+                                //}
+                                //else
+                                //{
+                                //    WrongParameter = true;
+                                //}
+                            //}
+                            //else 
+                            if ((SingleCamera && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) || TESTING)
                             {
                                 if (parameterOnOffSwitch && (parameterTime > 0 && parameterTime <= 1000))
                                 {
@@ -1459,7 +1468,7 @@ namespace FaceDetection
         public static bool CheckCameraIndex(int cameraIndex)
         {
             bool retval = false;
-            if (cameraIndex >= AllowedCameraCount && cameraIndex != 8 && MethodName != "n")
+            if (cameraIndex >= AllowedCameraCount && MethodName != "n") //&& cameraIndex != 8 
             {
                 WrongParameter = true;
             }
@@ -1511,42 +1520,43 @@ namespace FaceDetection
 
         private static void ShowOrHideWindows()
         {
-            if (AllCameras && SwitchIsPresent)
-            {
-                for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-                {
-                    if (parameterOnOffSwitch && MULTI_WINDOW.formList[i].DISPLAYED)
-                    {
-                        CurrentTestResult = "Show all windows";
-                        //isMinimized = false;
-                        try
-                        {
-                            if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(i))
-                            {
-                                MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
-                            }
-                            else
-                            {
-                                MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
-                            }
-                            MULTI_WINDOW.formList[i]?.Show();
-                            MULTI_WINDOW.formList[i]?.Activate();
-                        }
-                        catch (ArgumentOutOfRangeException aox)
-                        {
-                            LOGGER.Add(aox);
-                        }
-                    }
-                    else
-                    {
-                        CurrentTestResult = "Hiding all windows";
-                        //isMinimized = true;
-                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
-                    }
-                }
-                CurrentTestResult = "Show all windows";
-            }
-            else if (CheckCameraIndex(CameraIndex))
+            //if (AllCameras && SwitchIsPresent)
+            //{
+            //    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
+            //    {
+            //        if (parameterOnOffSwitch && MULTI_WINDOW.formList[i].DISPLAYED)
+            //        {
+            //            CurrentTestResult = "Show all windows";
+            //            //isMinimized = false;
+            //            try
+            //            {
+            //                if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(i))
+            //                {
+            //                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
+            //                }
+            //                else
+            //                {
+            //                    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
+            //                }
+            //                MULTI_WINDOW.formList[i]?.Show();
+            //                MULTI_WINDOW.formList[i]?.Activate();
+            //            }
+            //            catch (ArgumentOutOfRangeException aox)
+            //            {
+            //                LOGGER.Add(aox);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            CurrentTestResult = "Hiding all windows";
+            //            //isMinimized = true;
+            //            MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
+            //        }
+            //    }
+            //    CurrentTestResult = "Show all windows";
+            //}
+            //else 
+            if (CheckCameraIndex(CameraIndex))
             {
                 if (parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex].DISPLAYED)
                 {
@@ -1585,6 +1595,20 @@ namespace FaceDetection
                         // form isn't displayed
                     }
                 }
+            }
+        }
+
+        private static void ViewCalledCameraOnly (int camindex)
+        {
+            if (!Properties.Settings.Default.show_all_cams_simulteneously)
+            {
+                minimizedByParameter[0] = true;
+                minimizedByParameter[1] = true;
+                minimizedByParameter[2] = true;
+                minimizedByParameter[3] = true;
+                minimizedByParameter[camindex] = false;
+                callByParameters = true;
+                minimizedByParameters = true;
             }
         }
 
