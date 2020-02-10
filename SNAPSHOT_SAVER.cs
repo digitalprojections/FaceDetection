@@ -160,12 +160,12 @@ namespace FaceDetection
             }
         }
 
-        internal static void TakeSnapShotAll()
-        {
-            for (int i=0; i<MULTI_WINDOW.displayedCameraCount;i++)
-            {
-                TakeSnapShot(i, "snapshot");
-            }
-        }
+        //internal static void TakeSnapShotAll()
+        //{
+        //    for (int i=0; i<MULTI_WINDOW.displayedCameraCount;i++)
+        //    {
+        //        TakeSnapShot(i, "snapshot");
+        //    }
+        //}
     }
 }

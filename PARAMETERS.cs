@@ -492,10 +492,10 @@ namespace FaceDetection
                                 //SNAPSHOT_SAVER.TakeAsyncSnapShot(false, CameraIndex, "snapshot");
                                 SNAPSHOT_SAVER.TakeSnapShot(CameraIndex, "snapshot");
                             }
-                            else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8)
-                            {
-                                SNAPSHOT_SAVER.TakeSnapShotAll();
-                            }
+                            //else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8)
+                            //{
+                            //    SNAPSHOT_SAVER.TakeSnapShotAll();
+                            //}
                         }
                         else
                         {
@@ -1154,11 +1154,11 @@ namespace FaceDetection
                         //            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, parameterOnOffSwitch);
                         //    }
 
-                        //    //if (MainForm.GetMainForm != null)
-                        //    //{
-                        //    //    //MainForm.AllChangesApply();
-                        //    //}
-                        //}
+                            //    //if (MainForm.GetMainForm != null)
+                            //    //{
+                            //    //    //MainForm.AllChangesApply();
+                            //    //}
+                            //}
                     }
                     else
                     {
