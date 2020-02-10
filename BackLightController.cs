@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace FaceDetection
 {
-    public class BackLightController:IDisposable
+    public class BackLightController//:IDisposable
     {
                 
         //private FormSettings settingsBase = Properties.Camera1.Default;
@@ -16,8 +16,9 @@ namespace FaceDetection
             MonitorStateOff = 2,
             MonitorStateStandBy = 1
         }
+
         private readonly System.Timers.Timer backlight_timer = new System.Timers.Timer();
-        //Stopwatch stopwatch = new Stopwatch();
+        
         public BackLightController()
         {
             if (Properties.Settings.Default.backlight_offset_mins > 0 && Properties.Settings.Default.enable_backlight_off_when_idle)
@@ -61,18 +62,18 @@ namespace FaceDetection
                 //MessageBox.Show("backlight_offset is 0");
             }
         }
-
-        
        
         internal void OFF()
         {
             BacklightOff();
         }
+
         internal void ON()
         {
             BacklightOn();
             Restart();
         }
+
         /// <summary>
         /// Turns backlight off
         /// </summary>
@@ -163,42 +164,42 @@ namespace FaceDetection
             XUP = 0x00000100
         }
 
-        #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
+        //#region IDisposable Support
+        //private bool disposedValue = false; // To detect redundant calls
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    // TODO: dispose managed state (managed objects).
-                    backlight_timer.Stop();
-                    //backlight_timer.Dispose();
-                }
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (!disposedValue)
+        //    {
+        //        if (disposing)
+        //        {
+        //            // TODO: dispose managed state (managed objects).
+        //            backlight_timer.Stop();
+        //            //backlight_timer.Dispose();
+        //        }
 
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
+        //        // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+        //        // TODO: set large fields to null.
 
-                disposedValue = true;
-            }
-        }
+        //        disposedValue = true;
+        //    }
+        //}
 
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~BackLightController()
-        // {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
+        //// TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        //// ~BackLightController()
+        //// {
+        ////   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        ////   Dispose(false);
+        //// }
 
-        // This code added to correctly implement the disposable pattern.
-        public void Dispose()
-        {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-            Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            GC.SuppressFinalize(this);
-        }
-        #endregion
+        //// This code added to correctly implement the disposable pattern.
+        //public void Dispose()
+        //{
+        //    // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //    Dispose(true);
+        //    // TODO: uncomment the following line if the finalizer is overridden above.
+        //    GC.SuppressFinalize(this);
+        //}
+        //#endregion
     }    
 }
