@@ -153,7 +153,10 @@ namespace FaceDetection
                 Mklisteners.RemoveMouseAndKeyboard();
             }
 
-            PARAMETERS.HandleWakeUpParameters();
+            if (PARAMETERS.WAKEUPCALL) {
+                PARAMETERS.HandleWakeUpParameters();
+            }
+            
 
             if (!PARAMETERS.WrongParameter)
             {
