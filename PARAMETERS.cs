@@ -492,7 +492,7 @@ namespace FaceDetection
                             }
                             else if (CheckCameraIndex(CameraIndex) && CameraIndex == 8)
                             {
-                                SNAPSHOT_SAVER.TakeSnapShotAll();
+                                //SNAPSHOT_SAVER.TakeSnapShotAll();
                             }
                         }
                         else
@@ -526,7 +526,7 @@ namespace FaceDetection
                                 {
                                     if (MULTI_WINDOW.formList[i] != null && MULTI_WINDOW.formList[i].DISPLAYED && MULTI_WINDOW.formList[i]?.recordingInProgress == false)
                                     {
-                                        MULTI_WINDOW.EventRecorderOn(i);
+                                        //MULTI_WINDOW.EventRecorderOn(i);
                                     }
                                 }
 
@@ -552,7 +552,7 @@ namespace FaceDetection
                             }
                             else if (CameraIndex == 8)
                             {
-                                Application.Exit();
+                                //Application.Exit();
                             }
                         }
                         else
@@ -961,10 +961,10 @@ namespace FaceDetection
                             }
                             else if (AllCameras)
                             {
-                                minimizedByParameter[0] = true;
-                                minimizedByParameter[1] = true;
-                                minimizedByParameter[2] = true;
-                                minimizedByParameter[3] = true;
+                                //minimizedByParameter[0] = true;
+                                //minimizedByParameter[1] = true;
+                                //minimizedByParameter[2] = true;
+                                //minimizedByParameter[3] = true;
                             }
                             
                             callByParameters = true;
@@ -1031,9 +1031,9 @@ namespace FaceDetection
                                 {
                                     for (int i = 0; i < Properties.Settings.Default.camera_count; i++)
                                     {
-                                        PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(i, true);
+                                        //PROPERTY_FUNCTIONS.SetShowWindowPaneSwitch(i, true);
                                     }
-                                    Properties.Settings.Default.Save();
+                                    //Properties.Settings.Default.Save();
                                 }
                                 else
                                 {
@@ -1142,9 +1142,9 @@ namespace FaceDetection
                         {
                             for (int i = 0; i < 4; i++)
                             {
-                                PROPERTY_FUNCTIONS.Set_Human_Sensor(i, parameterOnOffSwitch);
-                                if (parameterOnOffSwitch)
-                                    PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, parameterOnOffSwitch);
+                                //PROPERTY_FUNCTIONS.Set_Human_Sensor(i, parameterOnOffSwitch);
+                                //if (parameterOnOffSwitch)
+                                    //PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, parameterOnOffSwitch);
                             }
 
                             //if (MainForm.GetMainForm != null)
@@ -1184,10 +1184,10 @@ namespace FaceDetection
                             {
                                 for (int i = 0; i < 4; i++)
                                 {
-                                    PROPERTY_FUNCTIONS.Set_Human_Sensor(i, parameterOnOffSwitch);
+                                    //PROPERTY_FUNCTIONS.Set_Human_Sensor(i, parameterOnOffSwitch);
                                     if (parameterOnOffSwitch)
                                     {
-                                        PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, parameterOnOffSwitch);
+                                        //PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, parameterOnOffSwitch);
                                     }
                                 }
                             }
@@ -1245,16 +1245,16 @@ namespace FaceDetection
                             {
                                 if (parameterOnOffSwitch && (parameterTime >0 && parameterTime<=1000))
                                 {
-                                    for (int i = 0; i < 4; i++)
-                                    {
-                                        PROPERTY_FUNCTIONS.Set_Human_Sensor(i, true);
-                                        PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, true);
-                                        PROPERTY_FUNCTIONS.SetCycleTime(i, parameterTime);
-                                    }
-                                    if (MainForm.GetMainForm != null)
-                                    {
-                                        MainForm.AllChangesApply();
-                                    }
+                                    //for (int i = 0; i < 4; i++)
+                                    //{
+                                    //    PROPERTY_FUNCTIONS.Set_Human_Sensor(i, true);
+                                    //    PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, true);
+                                    //    PROPERTY_FUNCTIONS.SetCycleTime(i, parameterTime);
+                                    //}
+                                    //if (MainForm.GetMainForm != null)
+                                    //{
+                                    //    MainForm.AllChangesApply();
+                                    //}
                                 }
                                 else
                                 {
@@ -1291,13 +1291,13 @@ namespace FaceDetection
                                     //{
                                         for (int i = 0; i < 4; i++)
                                         {
-                                            PROPERTY_FUNCTIONS.Set_Human_Sensor(i, true);
-                                            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, true);
-                                            PROPERTY_FUNCTIONS.SetCycleTime(i, parameterTime);
-                                            if (MainForm.GetMainForm != null)
-                                            {
-                                                MainForm.AllChangesApply();
-                                            }
+                                            //PROPERTY_FUNCTIONS.Set_Human_Sensor(i, true);
+                                            //PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(i, true);
+                                            //PROPERTY_FUNCTIONS.SetCycleTime(i, parameterTime);
+                                            //if (MainForm.GetMainForm != null)
+                                            //{
+                                            //    MainForm.AllChangesApply();
+                                            //}
                                         }
                                     //}
                                 }
@@ -1515,34 +1515,34 @@ namespace FaceDetection
             {
                 for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
                 {
-                    if (parameterOnOffSwitch && MULTI_WINDOW.formList[i].DISPLAYED)
-                    {
-                        CurrentTestResult = "Show all windows";
-                        //isMinimized = false;
-                        try
-                        {
-                            if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(i))
-                            {
-                                MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
-                            }
-                            else
-                            {
-                                MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
-                            }
-                            MULTI_WINDOW.formList[i]?.Show();
-                            MULTI_WINDOW.formList[i]?.Activate();
-                        }
-                        catch (ArgumentOutOfRangeException aox)
-                        {
-                            LOGGER.Add(aox);
-                        }
-                    }
-                    else
-                    {
-                        CurrentTestResult = "Hiding all windows";
-                        //isMinimized = true;
-                        MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
-                    }
+                    //if (parameterOnOffSwitch && MULTI_WINDOW.formList[i].DISPLAYED)
+                    //{
+                    //    CurrentTestResult = "Show all windows";
+                    //    //isMinimized = false;
+                    //    try
+                    //    {
+                    //        if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(i))
+                    //        {
+                    //            MULTI_WINDOW.formList[i].WindowState = FormWindowState.Maximized;
+                    //        }
+                    //        else
+                    //        {
+                    //            MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
+                    //        }
+                    //        MULTI_WINDOW.formList[i]?.Show();
+                    //        MULTI_WINDOW.formList[i]?.Activate();
+                    //    }
+                    //    catch (ArgumentOutOfRangeException aox)
+                    //    {
+                    //        LOGGER.Add(aox);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    CurrentTestResult = "Hiding all windows";
+                    //    //isMinimized = true;
+                    //    MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
+                    //}
                 }
                 CurrentTestResult = "Show all windows";
             }
