@@ -537,9 +537,9 @@ namespace FaceDetection
                             {
                                 MULTI_WINDOW.formList[CameraIndex].applicationExit = true;
                                 MULTI_WINDOW.formList[CameraIndex]?.Close();
-                                
+
                                 if(MULTI_WINDOW.displayedCameraCount==0)//No more viewers left, close the app
-                                {                                    
+                                {
                                     Application.Exit();
                                 }
                             }
