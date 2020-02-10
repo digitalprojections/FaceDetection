@@ -237,7 +237,6 @@ namespace FaceDetection
                                 break;
                         }
                     }
-
                 }
             }
             else
@@ -299,8 +298,6 @@ namespace FaceDetection
                         break;
                 }
             }
-
-            PARAM.Clear();
         }
 
         private static int CheckIntervalValue(int v)
@@ -944,6 +941,7 @@ namespace FaceDetection
                     {
                         WrongParameter = true;
                     }
+                    PARAM.Clear();
                     break;
 
                 // Visible
@@ -984,7 +982,7 @@ namespace FaceDetection
                             minimizedByParameters = true;
                         }
                     }
-                    else if (MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
+                    else if (!WAKEUPCALL && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
                     {
                         ShowOrHideWindows();
                     }
@@ -1015,6 +1013,7 @@ namespace FaceDetection
                         {
                             LOGGER.Add(e);
                         }
+                        PARAM.Clear();
                     }
                     else
                     {
