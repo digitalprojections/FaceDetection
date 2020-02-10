@@ -671,42 +671,60 @@ namespace FaceDetection
 
                 // IR Sensor
                 case "h":// TTFF
-                    if ((!WrongParameter && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false) || TESTING)
+                    if (WAKEUPCALL)
                     {
                         //PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(MainCamera, out bool IrSensorEnabled);
                         if (parameterOnOffSwitch)
                         {
-                          //  if (!IrSensorEnabled)
-                           // {
-                                PROPERTY_FUNCTIONS.Set_Human_Sensor(MainCamera, true);
-                                PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(MainCamera, true);
-                                if (MainForm.GetMainForm != null)
-                                {
-                                    MainForm.RSensor?.Stop_IR_Timer();
-                                    MainForm.RSensor?.SetInterval();
-                                    MainForm.RSensor?.Start_IR_Timer();
-                                }
-                          //  }
+                            //  if (!IrSensorEnabled)
+                            // {
+                            PROPERTY_FUNCTIONS.Set_Human_Sensor(MainCamera, true);
+                            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(MainCamera, true);
+                            if (MainForm.GetMainForm != null)
+                            {
+                                MainForm.RSensor?.Stop_IR_Timer();
+                                MainForm.RSensor?.SetInterval();
+                                MainForm.RSensor?.Start_IR_Timer();
+                            }
+                            //  }
                         }
-                        else if(!parameterOnOffSwitch && !WAKEUPCALL)
-                        {
-                          //  if (IrSensorEnabled)
-                          //  {
-                                PROPERTY_FUNCTIONS.Set_Human_Sensor(MainCamera, false);
-                                if (MainForm.GetMainForm != null)
-                                {
-                                    if (MainForm.RSensor != null)
-                                    {
-                                        MainForm.RSensor.Stop_IR_Timer();
-                                    }
-                                }
-                                //if (MainForm.GetMainForm != null)
-                                //{
-                                //    MainForm.AllChangesApply();
-                                //}
-                          //  }
-                        }                        
                     }
+                    else
+                    {
+                        //PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(MainCamera, out bool IrSensorEnabled);
+                        if (parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
+                        {
+                            //  if (!IrSensorEnabled)
+                            // {
+                            PROPERTY_FUNCTIONS.Set_Human_Sensor(MainCamera, true);
+                            PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(MainCamera, true);
+                            if (MainForm.GetMainForm != null)
+                            {
+                                MainForm.RSensor?.Stop_IR_Timer();
+                                MainForm.RSensor?.SetInterval();
+                                MainForm.RSensor?.Start_IR_Timer();
+                            }
+                            //  }
+                        }else if (!parameterOnOffSwitch)
+                        {
+                            //  if (IrSensorEnabled)
+                            //  {
+                            PROPERTY_FUNCTIONS.Set_Human_Sensor(MainCamera, false);
+                            if (MainForm.GetMainForm != null)
+                            {
+                                if (MainForm.RSensor != null)
+                                {
+                                    MainForm.RSensor.Stop_IR_Timer();
+                                }
+                            }
+                            //if (MainForm.GetMainForm != null)
+                            //{
+                            //    MainForm.AllChangesApply();
+                            //}
+                            //  }
+                        }
+                    }
+                    
                     break;
 
                 //Face recognition
