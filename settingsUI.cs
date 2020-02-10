@@ -539,7 +539,6 @@ namespace FaceDetection
                 {
                     Properties.Settings.Default.culture = "en-US";
                     Properties.Settings.Default.language = "English";
-                    label15.Text = "";
                 }
                 else
                 {
