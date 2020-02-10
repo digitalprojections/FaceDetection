@@ -116,7 +116,6 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.folderBrowserDialogStoreFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.check_state_images = new System.Windows.Forms.ImageList(this.components);
-            this.backgroundWorkerCancelClose = new System.ComponentModel.BackgroundWorker();
             tab_view_settings = new System.Windows.Forms.TabPage();
             tab_view_settings.SuspendLayout();
             this.groupBox_viewSettings.SuspendLayout();
@@ -967,10 +966,6 @@
             this.check_state_images.Images.SetKeyName(0, "unchecked");
             this.check_state_images.Images.SetKeyName(1, "checked");
             // 
-            // backgroundWorkerCancelClose
-            // 
-            this.backgroundWorkerCancelClose.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerCancelClose_DoWork);
-            // 
             // SettingsUI
             // 
             this.AcceptButton = this.button_settings_save;
@@ -1111,7 +1106,6 @@
         private System.Windows.Forms.Label bl_idling_time_label;
         private System.Windows.Forms.Label labelCameraNumber;
         private System.Windows.Forms.Label labelcnum;
-        private System.ComponentModel.BackgroundWorker backgroundWorkerCancelClose;
         private System.Windows.Forms.Label label15;
     }
 }

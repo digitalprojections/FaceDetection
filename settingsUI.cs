@@ -157,10 +157,58 @@ namespace FaceDetection
             //if(currentCameraIndex!=MainCameraBeforeSettingsLoad)
             //    CBSetAsMainCam.Checked = false;
             //CameraSetAsMain();
-            if (backgroundWorkerCancelClose.IsBusy != true)
-            {
-                backgroundWorkerCancelClose.RunWorkerAsync();
-            }
+            //if (backgroundWorkerCancelClose.IsBusy != true)
+            //{
+            //    backgroundWorkerCancelClose.RunWorkerAsync();
+            //}
+            Properties.Settings.Default.C1_enable_capture_operator = operatorCaptureCbStateC1;
+            Properties.Settings.Default.C1_enable_Human_sensor = sensorEnabledCbStateC1;
+            Properties.Settings.Default.C1_enable_face_recognition = faceDetectionCbStateC1;
+            Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation = operatorActionCbStateC1;
+            Properties.Settings.Default.C2_enable_capture_operator = operatorCaptureCbStateC2;
+            Properties.Settings.Default.C2_enable_Human_sensor = sensorEnabledCbStateC2;
+            Properties.Settings.Default.C2_enable_face_recognition = faceDetectionCbStateC2;
+            Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation = operatorActionCbStateC2;
+            Properties.Settings.Default.C3_enable_capture_operator = operatorCaptureCbStateC3;
+            Properties.Settings.Default.C3_enable_Human_sensor = sensorEnabledCbStateC3;
+            Properties.Settings.Default.C3_enable_face_recognition = faceDetectionCbStateC3;
+            Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation = operatorActionCbStateC3;
+            Properties.Settings.Default.C4_enable_capture_operator = operatorCaptureCbStateC4;
+            Properties.Settings.Default.C4_enable_Human_sensor = sensorEnabledCbStateC4;
+            Properties.Settings.Default.C4_enable_face_recognition = faceDetectionCbStateC4;
+            Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation = operatorActionCbStateC4;
+            Properties.Settings.Default.C1_full_screen = fullScreenCbStateC1;
+            Properties.Settings.Default.C2_full_screen = fullScreenCbStateC2;
+            Properties.Settings.Default.C3_full_screen = fullScreenCbStateC3;
+            Properties.Settings.Default.C4_full_screen = fullScreenCbStateC4;
+            Properties.Settings.Default.C1_window_on_top = alwaysOnTopCbStateC1;
+            Properties.Settings.Default.C2_window_on_top = alwaysOnTopCbStateC2;
+            Properties.Settings.Default.C3_window_on_top = alwaysOnTopCbStateC3;
+            Properties.Settings.Default.C4_window_on_top = alwaysOnTopCbStateC4;
+            Properties.Settings.Default.C1_show_window_pane = showWindowPanelCbStateC1;
+            Properties.Settings.Default.C2_show_window_pane = showWindowPanelCbStateC2;
+            Properties.Settings.Default.C3_show_window_pane = showWindowPanelCbStateC3;
+            Properties.Settings.Default.C4_show_window_pane = showWindowPanelCbStateC4;
+            Properties.Settings.Default.C1_show_date_time = showDateCbStateC1;
+            Properties.Settings.Default.C2_show_date_time = showDateCbStateC2;
+            Properties.Settings.Default.C3_show_date_time = showDateCbStateC3;
+            Properties.Settings.Default.C4_show_date_time = showDateCbStateC4;
+            Properties.Settings.Default.C1_show_camera_number = showCamNumberCbStateC1;
+            Properties.Settings.Default.C2_show_camera_number = showCamNumberCbStateC2;
+            Properties.Settings.Default.C3_show_camera_number = showCamNumberCbStateC3;
+            Properties.Settings.Default.C4_show_camera_number = showCamNumberCbStateC4;
+            Properties.Settings.Default.C1_show_record_icon = showRecIconCbStateC1;
+            Properties.Settings.Default.C2_show_record_icon = showRecIconCbStateC2;
+            Properties.Settings.Default.C3_show_record_icon = showRecIconCbStateC3;
+            Properties.Settings.Default.C4_show_record_icon = showRecIconCbStateC4;
+            Properties.Settings.Default.C1f = fpsC1;
+            Properties.Settings.Default.C2f = fpsC2;
+            Properties.Settings.Default.C3f = fpsC3;
+            Properties.Settings.Default.C4f = fpsC4;
+            Properties.Settings.Default.C1res = resolutionC1;
+            Properties.Settings.Default.C2res = resolutionC2;
+            Properties.Settings.Default.C3res = resolutionC3;
+            Properties.Settings.Default.C4res = resolutionC4;
         }
         private void CloseSettings(object sender, EventArgs e)
         {
@@ -1051,54 +1099,7 @@ namespace FaceDetection
         private void backgroundWorkerCancelClose_DoWork(object sender, DoWorkEventArgs e)
         {
 
-            Properties.Settings.Default.C1_enable_capture_operator = operatorCaptureCbStateC1;
-            Properties.Settings.Default.C1_enable_Human_sensor = sensorEnabledCbStateC1;
-            Properties.Settings.Default.C1_enable_face_recognition = faceDetectionCbStateC1;
-            Properties.Settings.Default.C1_Recording_when_at_the_start_of_operation = operatorActionCbStateC1;
-            Properties.Settings.Default.C2_enable_capture_operator = operatorCaptureCbStateC2;
-            Properties.Settings.Default.C2_enable_Human_sensor = sensorEnabledCbStateC2;
-            Properties.Settings.Default.C2_enable_face_recognition = faceDetectionCbStateC2;
-            Properties.Settings.Default.C2_Recording_when_at_the_start_of_operation = operatorActionCbStateC2;
-            Properties.Settings.Default.C3_enable_capture_operator = operatorCaptureCbStateC3;
-            Properties.Settings.Default.C3_enable_Human_sensor = sensorEnabledCbStateC3;
-            Properties.Settings.Default.C3_enable_face_recognition = faceDetectionCbStateC3;
-            Properties.Settings.Default.C3_Recording_when_at_the_start_of_operation = operatorActionCbStateC3;
-            Properties.Settings.Default.C4_enable_capture_operator = operatorCaptureCbStateC4;
-            Properties.Settings.Default.C4_enable_Human_sensor = sensorEnabledCbStateC4;
-            Properties.Settings.Default.C4_enable_face_recognition = faceDetectionCbStateC4;
-            Properties.Settings.Default.C4_Recording_when_at_the_start_of_operation = operatorActionCbStateC4;
-            Properties.Settings.Default.C1_full_screen = fullScreenCbStateC1;
-            Properties.Settings.Default.C2_full_screen = fullScreenCbStateC2;
-            Properties.Settings.Default.C3_full_screen = fullScreenCbStateC3;
-            Properties.Settings.Default.C4_full_screen = fullScreenCbStateC4;
-            Properties.Settings.Default.C1_window_on_top = alwaysOnTopCbStateC1;
-            Properties.Settings.Default.C2_window_on_top = alwaysOnTopCbStateC2;
-            Properties.Settings.Default.C3_window_on_top = alwaysOnTopCbStateC3;
-            Properties.Settings.Default.C4_window_on_top = alwaysOnTopCbStateC4;
-            Properties.Settings.Default.C1_show_window_pane = showWindowPanelCbStateC1;
-            Properties.Settings.Default.C2_show_window_pane = showWindowPanelCbStateC2;
-            Properties.Settings.Default.C3_show_window_pane = showWindowPanelCbStateC3;
-            Properties.Settings.Default.C4_show_window_pane = showWindowPanelCbStateC4;
-            Properties.Settings.Default.C1_show_date_time = showDateCbStateC1;
-            Properties.Settings.Default.C2_show_date_time = showDateCbStateC2;
-            Properties.Settings.Default.C3_show_date_time = showDateCbStateC3;
-            Properties.Settings.Default.C4_show_date_time = showDateCbStateC4;
-            Properties.Settings.Default.C1_show_camera_number = showCamNumberCbStateC1;
-            Properties.Settings.Default.C2_show_camera_number = showCamNumberCbStateC2;
-            Properties.Settings.Default.C3_show_camera_number = showCamNumberCbStateC3;
-            Properties.Settings.Default.C4_show_camera_number = showCamNumberCbStateC4;
-            Properties.Settings.Default.C1_show_record_icon = showRecIconCbStateC1;
-            Properties.Settings.Default.C2_show_record_icon = showRecIconCbStateC2;
-            Properties.Settings.Default.C3_show_record_icon = showRecIconCbStateC3;
-            Properties.Settings.Default.C4_show_record_icon = showRecIconCbStateC4;
-            Properties.Settings.Default.C1f = fpsC1;
-            Properties.Settings.Default.C2f = fpsC2;
-            Properties.Settings.Default.C3f = fpsC3;
-            Properties.Settings.Default.C4f = fpsC4;
-            Properties.Settings.Default.C1res = resolutionC1;
-            Properties.Settings.Default.C2res = resolutionC2;
-            Properties.Settings.Default.C3res = resolutionC3;
-            Properties.Settings.Default.C4res = resolutionC4;
+            
         }
 
         //void SetIntervalProps()
