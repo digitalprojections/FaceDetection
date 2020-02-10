@@ -174,7 +174,7 @@ namespace FaceDetection
                 {
                     // TODO: dispose managed state (managed objects).
                     backlight_timer.Stop();
-                    //backlight_timer.Dispose();
+                    backlight_timer.Dispose();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
