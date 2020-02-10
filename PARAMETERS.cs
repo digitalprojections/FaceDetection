@@ -1485,7 +1485,7 @@ namespace FaceDetection
             }
             else
             {
-                if ((cameraIndex == 8 || (cameraIndex >= 0 && cameraIndex < 4)))
+                if (cameraIndex >= 0 && cameraIndex < 4) // cameraIndex == 8 || 
                 {
                     CameraIndex = cameraIndex;
                     retval = true;
@@ -1519,10 +1519,10 @@ namespace FaceDetection
             }
         }
 
-        private static bool AllCameras
-        {
-            get => (CheckCameraIndex(CameraIndex) && (CameraIndex == 8));
-        }
+        //private static bool AllCameras
+        //{
+        //    get => (CheckCameraIndex(CameraIndex) && (CameraIndex == 8));
+        //}
 
         private static bool SingleCamera
         {
