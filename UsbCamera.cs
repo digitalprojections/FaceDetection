@@ -137,9 +137,7 @@ namespace FaceDetectionX
             var pinCategory = DirectShow.DsGuid.PIN_CATEGORY_PREVIEW;
             var mediaType = DirectShow.DsGuid.MEDIATYPE_Video;
 
-
-
-            //IntPtr deviceNotificationHandle = RegisterDeviceNotification(pbx, ipt, DEVICE_NOTIFY_WINDOW_HANDLE);
+            
 
             builder.RenderStream(ref pinCategory, ref mediaType, vcap_source, grabber, renderer);
             {
@@ -460,66 +458,10 @@ namespace FaceDetectionX
                 }
                 return sb.ToString();
             }
-
-            
-        /// <summary>
-        /// Message handler which must be called from client form.
-        /// Processes Windows messages and calls event handlers. 
-        /// </summary>
-        /// <param name="m"></param>
-        public void WndProc(ref Message m)
-        {
-            int devType;
-            char c;
-
-            if (m.Msg == 0x0219)
-            {
-                // WM_DEVICECHANGE can have several meanings depending on the WParam value...
-                switch (m.WParam.ToInt32())
-                {
-                        //
-                        // Device has been removed
-                        //
-                    case 0x8004:
-                            Console.WriteLine("device removed");
-                        break;
-                }
-
-            }
-
         }
-        }
-
-        //   HDEVNOTIFY RegisterDeviceNotification(HANDLE hRecipient,LPVOID NotificationFilter,DWORD Flags);
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern IntPtr RegisterDeviceNotification(IntPtr hRecipient, IntPtr NotificationFilter, uint Flags);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern uint UnregisterDeviceNotification(IntPtr hHandle);
-        // Struct for parameters of the WM_DEVICECHANGE message
-        [StructLayout(LayoutKind.Sequential)]
-        public struct DEV_BROADCAST_VOLUME
-        {
-            public int dbcv_size;
-            public int dbcv_devicetype;
-            public int dbcv_reserved;
-            public int dbcv_unitmask;
-        }
-        // Structure with information for RegisterDeviceNotification.
-        [StructLayout(LayoutKind.Sequential)]
-        public struct DEV_BROADCAST_HANDLE
-        {
-            public int dbch_size;
-            public int dbch_devicetype;
-            public int dbch_reserved;
-            public IntPtr dbch_handle;
-            public IntPtr dbch_hdevnotify;
-            public Guid dbch_eventguid;
-            public long dbch_nameoffset;
-            //public byte[] dbch_data[1]; // = new byte[1];
-            public byte dbch_data;
-            public byte dbch_data1;
-        }
+        
+        
+        
     }
         
 

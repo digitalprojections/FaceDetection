@@ -512,14 +512,29 @@ namespace FaceDetection
                 case "e":// TFTF
                     try
                     {
-                        if ((!WrongParameter && !WAKEUPCALL && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) || TESTING) 
-                        {
-                            MULTI_WINDOW.EventRecorderOn(CameraIndex);
-                        }
-                        else if(WAKEUPCALL)
+                        if(WAKEUPCALL)
                         {
                             WrongParameter = true;
                         }
+                        else
+                        {
+                            if ((SingleCamera && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false) || TESTING)
+                            {
+                                MULTI_WINDOW.EventRecorderOn(CameraIndex);
+                            }
+                            else if (AllCameras)
+                            {
+                                for (int i = 0; i < 4; i++)
+                                {
+                                    if (MULTI_WINDOW.formList[i] != null && MULTI_WINDOW.formList[i].DISPLAYED && MULTI_WINDOW.formList[i]?.recordingInProgress == false)
+                                    {
+                                        MULTI_WINDOW.EventRecorderOn(i);
+                                    }
+                                }
+
+                            }
+                        }
+                        
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
