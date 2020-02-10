@@ -468,7 +468,7 @@ namespace FaceDetection
         {
             RSensor?.Destroy();
             datetime_timer?.Dispose();
-            backLight?.Dispose();
+            //backLight?.Dispose();
         }
 
         public static void ManageDeleteOldFilesTimer(bool checkboxState)
