@@ -433,6 +433,10 @@ namespace FaceDetection
                             MULTI_WINDOW.formList[MainCamera].applicationExit = true;
                             Application.Exit();
                         }
+                        else
+                        {
+                            WrongParameter = true;
+                        }
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
@@ -1342,6 +1346,10 @@ namespace FaceDetection
                                 {
                                     WrongParameter = true;
                                 }
+                            }
+                            else
+                            {
+                                WrongParameter = true;
                             }
                         }
                     }
