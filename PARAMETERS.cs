@@ -957,11 +957,11 @@ namespace FaceDetection
                         {
                             //if (SingleCamera)
                             //{
-                                minimizedByParameter[0] = false;
-                                minimizedByParameter[1] = false;
-                                minimizedByParameter[2] = false;
-                                minimizedByParameter[3] = false;
-                                minimizedByParameter[CameraIndex] = true;
+                                minimizedByParameter[0] = true;
+                                minimizedByParameter[1] = true;
+                                minimizedByParameter[2] = true;
+                                minimizedByParameter[3] = true;
+                                //minimizedByParameter[CameraIndex] = true;
                             //}
                             //else if (AllCameras)
                             //{
