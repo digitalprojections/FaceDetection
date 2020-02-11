@@ -715,7 +715,7 @@ namespace FaceDetection
                             }
                             //  }
                         }
-                        else if (!parameterOnOffSwitch)
+                        else if (!parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             //  if (IrSensorEnabled)
                             //  {
