@@ -547,14 +547,14 @@ namespace FaceDetection
                     {
                         if (!WrongParameter && !WAKEUPCALL && CheckCameraIndex(CameraIndex))
                         {
-                            if (SingleCamera)
-                            {
+                            //if (SingleCamera)
+                            //{
                                 MULTI_WINDOW.formList[CameraIndex]?.Close();
-                            }
-                            else if (CameraIndex == 8)
-                            {
-                                Application.Exit();
-                            }
+                            //}
+                            //else if (CameraIndex == 8)
+                            //{
+                            //    Application.Exit();
+                            //}
                         }
                         else
                         {
@@ -951,25 +951,18 @@ namespace FaceDetection
                         //StartAndHideWindows();
                         if (parameterOnOffSwitch)
                         {
-                            //minimizedByParameter[0] = true;
-                            //minimizedByParameter[1] = true;
-                            //minimizedByParameter[2] = true;
-                            //minimizedByParameter[3] = true;
-                            //minimizedByParameter[CameraIndex] = false;
-                            //callByParameters = true;
-                            //minimizedByParameters = true;
                             WrongParameter = true;
                         }
                         else
                         {
-                            if (SingleCamera)
-                            {
+                            //if (SingleCamera)
+                            //{
                                 minimizedByParameter[0] = false;
                                 minimizedByParameter[1] = false;
                                 minimizedByParameter[2] = false;
                                 minimizedByParameter[3] = false;
                                 minimizedByParameter[CameraIndex] = true;
-                            }
+                            //}
                             //else if (AllCameras)
                             //{
                             //    minimizedByParameter[0] = true;
