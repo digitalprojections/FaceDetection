@@ -695,8 +695,12 @@ namespace FaceDetection
                                 MainForm.RSensor?.Start_IR_Timer();
                             }
                             //  }
+                            ViewCalledCameraOnly(MainCamera);
                         }
-                        ViewCalledCameraOnly(MainCamera);
+                        else
+                        {
+                            WrongParameter = true;
+                        }
                     }
                     else
                     {

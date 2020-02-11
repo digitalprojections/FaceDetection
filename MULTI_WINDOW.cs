@@ -157,7 +157,6 @@ namespace FaceDetection
         {
             try
             {
-                
                 if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(cameraIndex))
                 {
                     MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Maximized;
@@ -165,12 +164,11 @@ namespace FaceDetection
                 else
                 {
                     MULTI_WINDOW.formList[cameraIndex].WindowState = FormWindowState.Normal;
-                    
                 }
-                    
+
                 //MULTI_WINDOW.formList[MainCamera].WindowState = FormWindowState.Normal;
-                MULTI_WINDOW.formList[cameraIndex]?.Show();
-                MULTI_WINDOW.formList[cameraIndex]?.Activate();
+                MULTI_WINDOW.formList[cameraIndex].TopMost = true;
+                MULTI_WINDOW.formList[cameraIndex].TopMost = false;
             }
             catch (NullReferenceException nrx)
             {
