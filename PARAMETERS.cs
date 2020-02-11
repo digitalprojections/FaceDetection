@@ -428,7 +428,7 @@ namespace FaceDetection
                 case "q":// TFFF
                     try
                     {
-                        if (!WrongParameter && !WAKEUPCALL)
+                        if (!WrongParameter && !WAKEUPCALL && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             MULTI_WINDOW.formList[MainCamera].applicationExit = true;
                             Application.Exit();
@@ -549,7 +549,7 @@ namespace FaceDetection
                 case "q":// TFTF
                     try
                     {
-                        if (!WrongParameter && !WAKEUPCALL && CheckCameraIndex(CameraIndex))
+                        if (!WrongParameter && !WAKEUPCALL && CheckCameraIndex(CameraIndex) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
                         {
                             //if (SingleCamera)
                             //{
