@@ -71,6 +71,7 @@ namespace FaceDetection
 
             PROPERTY_FUNCTIONS.GetSecondsBeforeEvent(INDEX, out timeBeforeEvent);
             PROPERTY_FUNCTIONS.GetSecondsAfterEvent(INDEX, out timeAfterEvent);
+            PROPERTY_FUNCTIONS.GetCaptureMethod(INDEX, out captureMethod);
 
             preeventRecording = MULTI_WINDOW.formList[INDEX].crossbar.PREEVENT_RECORDING;
 

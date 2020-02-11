@@ -428,7 +428,7 @@ namespace FaceDetection
                 case "q":// TFFF
                     try
                     {
-                        if (!WrongParameter && !WAKEUPCALL)
+                        if (!WrongParameter && !WAKEUPCALL && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             MULTI_WINDOW.formList[MainCamera].applicationExit = true;
                             Application.Exit();
@@ -549,7 +549,7 @@ namespace FaceDetection
                 case "q":// TFTF
                     try
                     {
-                        if (!WrongParameter && !WAKEUPCALL && CheckCameraIndex(CameraIndex))
+                        if (!WrongParameter && !WAKEUPCALL && CheckCameraIndex(CameraIndex) && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
                         {
                             //if (SingleCamera)
                             //{
@@ -576,8 +576,8 @@ namespace FaceDetection
                 case "n"://TFTF
                     if (!WrongParameter && !WAKEUPCALL)
                     {
-                        if (SingleCamera)
-                        {
+                        //if (SingleCamera)
+                        //{
                             if ((MULTI_WINDOW.formList[CameraIndex]?.DISPLAYED == true && MULTI_WINDOW.formList[CameraIndex].recordingInProgress == false && MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].recordingInProgress == false) || TESTING)
                             {
                                 Properties.Settings.Default.main_camera_index = CameraIndex;
@@ -589,7 +589,7 @@ namespace FaceDetection
                                 LOGGER.Add(Resource.parameter_execution_failure + " m=" + MethodName + ", c=" + CameraIndex);
                             }
                             PARAM.Clear();
-                        }
+                        //}
                         CurrentTestResult = MethodName + " case, camera index conditions passed";
                     }
                     else
@@ -1484,24 +1484,26 @@ namespace FaceDetection
         public static bool CheckCameraIndex(int cameraIndex)
         {
             bool retval = false;
-            if (cameraIndex >= AllowedCameraCount && MethodName != "n") //&& cameraIndex != 8 
+            //if (cameraIndex >= AllowedCameraCount) // && MethodName != "n") //&& cameraIndex != 8 
+            //{
+            //    WrongParameter = true;
+            //}
+            if (cameraIndex >= 0 && cameraIndex < 4) // cameraIndex == 8 || 
+            {
+                CameraIndex = cameraIndex;
+                retval = true;
+            }
+                //else if (cameraIndex == 4 && MethodName == "n")
+                //{
+                //    CameraIndex = 0;
+                //    retval = true;
+                //}
+            //}
+            else
             {
                 WrongParameter = true;
             }
-            else
-            {
-                if (cameraIndex >= 0 && cameraIndex < 4) // cameraIndex == 8 || 
-                {
-                    CameraIndex = cameraIndex;
-                    retval = true;
-                }
-                else if (cameraIndex == 4 && MethodName == "n")
-                {
-                    CameraIndex = 0;
-                    retval = true;
-                }
-            }
-            
+
             return retval;
         }
 
