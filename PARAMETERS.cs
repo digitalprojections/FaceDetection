@@ -619,7 +619,7 @@ namespace FaceDetection
                 case "b"://TTFF
                     try
                     {
-                        if (!WrongParameter && !WAKEUPCALL)
+                        if (!WrongParameter && !WAKEUPCALL && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             if (parameterOnOffSwitch)
                             {
@@ -854,7 +854,7 @@ namespace FaceDetection
                 case "l"://TTFF
                     try
                     {
-                        if(!WrongParameter && !WAKEUPCALL)
+                        if(!WrongParameter && !WAKEUPCALL && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             if (parameterOnOffSwitch)
                             {
@@ -922,7 +922,7 @@ namespace FaceDetection
             {
                 // Show / Hide buttons
                 case "b"://TTTF
-                    if (!WAKEUPCALL)
+                    if (!WAKEUPCALL && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
                     {
                         try
                         {
@@ -997,7 +997,7 @@ namespace FaceDetection
 
                 // Backlight
                 case "l"://TTTF
-                    if (!WAKEUPCALL)
+                    if (!WAKEUPCALL && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == false)
                     {
                         try
                         {
