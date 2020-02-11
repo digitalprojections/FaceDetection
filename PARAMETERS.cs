@@ -738,16 +738,16 @@ namespace FaceDetection
                     break;
 
                 //Face recognition
-                case "d":
-                    if (WAKEUPCALL)
-                    {
-                        //only On switch is allowed
-                    }
-                    else
-                    {
-                        //both On and Off switch checked
-                    }
-                    break;
+                //case "d":
+                //    if (WAKEUPCALL)
+                //    {
+                //        //only On switch is allowed
+                //    }
+                //    else
+                //    {
+                //        //both On and Off switch checked
+                //    }
+                //    break;
 
                 // Manual record
                 case "r"://TTFF
