@@ -769,7 +769,7 @@ namespace FaceDetection
                                 //MULTI_WINDOW.formList[MainCamera]?.crossbar.Start(MainCamera, CAMERA_MODES.MANUAL);
                                 MULTI_WINDOW.formList[MainCamera]?.ManualVideoRecording();
                             }
-                            else if(!parameterOnOffSwitch)
+                            else if(!parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == true)
                             {
                                 //MULTI_WINDOW.formList[MainCamera]?.HideIcon();
                                 //if (PROPERTY_FUNCTIONS.CheckPreEventTimes(MainCamera))
@@ -1086,7 +1086,7 @@ namespace FaceDetection
                                     //MULTI_WINDOW.formList[CameraIndex]?.crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
                                 }
                             }
-                            else if (SingleCamera && !parameterOnOffSwitch)
+                            else if (SingleCamera && !parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == true)
                             {
                                 //MULTI_WINDOW.formList[CameraIndex]?.HideIcon();
                                 //if (PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
