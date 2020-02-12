@@ -646,7 +646,7 @@ namespace FaceDetection
                 case "c":// TTFF
                     try
                     {
-                        if(!WrongParameter && !WAKEUPCALL)
+                        if(!WrongParameter && !WAKEUPCALL && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
                         {
                             if (parameterOnOffSwitch)
                             {
