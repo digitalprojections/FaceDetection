@@ -1488,17 +1488,11 @@ namespace FaceDetection
             //{
             //    WrongParameter = true;
             //}
-            if (cameraIndex >= 0 && cameraIndex < 4) // cameraIndex == 8 || 
+            if (cameraIndex >= 0 && cameraIndex <= (AllowedCameraCount-1)) // cameraIndex == 8 || 
             {
                 CameraIndex = cameraIndex;
                 retval = true;
             }
-                //else if (cameraIndex == 4 && MethodName == "n")
-                //{
-                //    CameraIndex = 0;
-                //    retval = true;
-                //}
-            //}
             else
             {
                 WrongParameter = true;

@@ -1087,8 +1087,14 @@ namespace FaceDetection
 
         void SetMinMaxValues()
         {
-            nud_reinitiation_interval.Minimum = nud_seconds_before_event.Value;
-            
+            if (nud_seconds_before_event.Value > 0)
+            {
+                nud_reinitiation_interval.Minimum = nud_seconds_before_event.Value;
+            }
+            else
+            {
+                nud_reinitiation_interval.Minimum = 1;
+            }
         }
 
         //decimal GetTheMaxValue()
@@ -1096,11 +1102,10 @@ namespace FaceDetection
         //    return Math.Max(event_record_time_before_event.Value, nud_seconds_before_event.Value);
         //}
 
-        private void backgroundWorkerCancelClose_DoWork(object sender, DoWorkEventArgs e)
-        {
+        //private void backgroundWorkerCancelClose_DoWork(object sender, DoWorkEventArgs e)
+        //{
 
-            
-        }
+        //}
 
         //void SetIntervalProps()
         //{
