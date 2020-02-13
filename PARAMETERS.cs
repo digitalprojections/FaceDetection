@@ -660,7 +660,7 @@ namespace FaceDetection
                                 MainForm.Settingui?.ForgetAndClose();
                             }
                         }
-                        else
+                        else if (WAKEUPCALL)
                         {
                             if (parameterOnOffSwitch)
                             {
@@ -673,7 +673,11 @@ namespace FaceDetection
                             {
                                 WrongParameter = true;
                             }
-                        }                        
+                        }
+                        else
+                        {
+                            WrongParameter = true;
+                        }
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
@@ -1190,7 +1194,7 @@ namespace FaceDetection
                                         //MainForm.AllChangesApply();
                                     }
                                 }
-                                ViewCalledCameraOnly(MainCamera);
+                                ViewCalledCameraOnly(CameraIndex);
                             }
                             else
                             {
