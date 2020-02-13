@@ -1336,7 +1336,7 @@ namespace FaceDetection
                                     PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
                                     PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
                                     PROPERTY_FUNCTIONS.SetCycleTime(CameraIndex, parameterTime);
-                                    //LetTheMainCameraHidden(MainCamera);
+
                                     if (MainForm.GetMainForm != null)
                                     {
                                         MainForm.AllChangesApply();
@@ -1462,10 +1462,7 @@ namespace FaceDetection
         public static bool CheckCameraIndex(int cameraIndex)
         {
             bool retval = false;
-            //if (cameraIndex >= AllowedCameraCount) // && MethodName != "n") //&& cameraIndex != 8 
-            //{
-            //    WrongParameter = true;
-            //}
+
             if (cameraIndex >= 0 && cameraIndex <= (AllowedCameraCount-1)) // cameraIndex == 8 || 
             {
                 CameraIndex = cameraIndex;
@@ -1601,16 +1598,6 @@ namespace FaceDetection
                 minimizedByParameters = true;
             }
         }
-
-        //private static void LetTheMainCameraHidden (int mainCameraIndex)
-        //{
-        //    if (MULTI_WINDOW.formList[mainCameraIndex].WindowState == FormWindowState.Minimized)
-        //    {
-        //        minimizedByParameter[mainCameraIndex] = true;
-        //        callByParameters = true;
-        //        minimizedByParameters = true;
-        //    }
-        //}
 
         //private static void StartAndHideWindows()
         //{

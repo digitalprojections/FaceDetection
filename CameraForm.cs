@@ -182,18 +182,18 @@ namespace FaceDetection
             //////////////////////////////////////////////////////////////////
             //Showing video formats
             
-                for (int k = 0; k < videoFormat.Length; k++)
+            for (int k = 0; k < videoFormat.Length; k++)
+            {
+                if (UniqueVideoParameter(Vf_resolutions, videoFormat[k].Size) != true)
                 {
-                    if (UniqueVideoParameter(Vf_resolutions, videoFormat[k].Size) != true)
-                    {
-                        Vf_resolutions.Add(videoFormat[k].Size.Width + "x" + videoFormat[k].Size.Height);
-                    }
-                    FPS = 10000000 / videoFormat[k].TimePerFrame;
-                    if (UniqueFPS(FPS) != true)
-                    {
-                        vf_fps.Add(FPS.ToString());
-                    }
+                    Vf_resolutions.Add(videoFormat[k].Size.Width + "x" + videoFormat[k].Size.Height);
                 }
+                FPS = 10000000 / videoFormat[k].TimePerFrame;
+                if (UniqueFPS(FPS) != true)
+                {
+                    vf_fps.Add(FPS.ToString());
+                }
+            }
             
             //Logger.Add("UniqueVideoParameter " + vf_resolutions.Count);
             //////////////////////////////////////////////////////////////////
@@ -232,7 +232,6 @@ namespace FaceDetection
         public void GetVideoFormat()
         {
             SettingsUI.SetComboBoxResolutionValues(Vf_resolutions, CameraIndex);
-            
         }
 
         private void CameraForm_MouseUp(object sender, MouseEventArgs e)
@@ -617,14 +616,13 @@ namespace FaceDetection
         {
             if (CameraIndex == Properties.Settings.Default.main_camera_index && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
             {                
-                    crossbar?.Start(CameraIndex, CAMERA_MODES.PREEVENT);
+                crossbar?.Start(CameraIndex, CAMERA_MODES.PREEVENT);
             }
             else
             {
                 //if (MULTI_WINDOW.displayedCameraCount > 0)
                 //{
-                
-                    crossbar?.Start(CameraIndex, CAMERA_MODES.PREVIEW);
+                crossbar?.Start(CameraIndex, CAMERA_MODES.PREVIEW);
                     //SetToPreviewMode();
                 //}
             }
@@ -783,7 +781,6 @@ namespace FaceDetection
             this.cameraButton.Tag = "play";
             this.cameraButton.UseVisualStyleBackColor = false;
             this.cameraButton.Click += new System.EventHandler(ManualVideoRecording);
-            
             // 
             // closeButton
             // 
@@ -810,7 +807,6 @@ namespace FaceDetection
             this.MinimumSize = new System.Drawing.Size(345, 150);
             this.Name = "CameraForm";
             this.ResumeLayout(false);
-
         }
     }
 }

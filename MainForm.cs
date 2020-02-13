@@ -42,7 +42,6 @@ namespace FaceDetection
             InitializeComponent();
             LOGGER.CreateLoggerPath();
 
-
             if (Camera.GetCameraCount().Length > 0)
             {
                 if (vs != null && vs.Count() > 0)
@@ -117,7 +116,6 @@ namespace FaceDetection
                 //    Application.Exit();
                 //}
             }
-            
         }
 
         public static void AllChangesApply()
