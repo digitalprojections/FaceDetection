@@ -310,8 +310,7 @@ namespace FaceDetection
             Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
 
             // Minimized sub if "all display" is not checked
-            if (!Properties.Settings.Default.show_all_cams_simulteneously &&                  
-                CameraIndex!=Properties.Settings.Default.main_camera_index)
+            if (!Properties.Settings.Default.show_all_cams_simulteneously && CameraIndex != Properties.Settings.Default.main_camera_index)
             {
                 this.WindowState = FormWindowState.Minimized;
             }
@@ -324,7 +323,10 @@ namespace FaceDetection
                 }
                 else
                 {
-                    this.WindowState = FormWindowState.Normal;
+                    if (this.WindowState != FormWindowState.Minimized)
+                    {
+                        this.WindowState = FormWindowState.Normal;
+                    }
                     PROPERTY_FUNCTIONS.Set_Window_Location_Set(CameraIndex, this);
                     this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
                 }

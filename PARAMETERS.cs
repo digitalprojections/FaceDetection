@@ -449,7 +449,7 @@ namespace FaceDetection
                 case "n"://TFFF
                     if (!WAKEUPCALL)
                     {                        
-                        if (!WrongParameter && (MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.DISPLAYED == true && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false) || TESTING)
+                        if (!WrongParameter && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.DISPLAYED == true && MULTI_WINDOW.formList[GetNextCameraIndex(MainCamera)]?.recordingInProgress == false)// || TESTING)
                         {
                             CurrentTestResult = "main camera change?";
                             Properties.Settings.Default.main_camera_index = GetNextCameraIndex(MainCamera);
