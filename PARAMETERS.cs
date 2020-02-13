@@ -1358,6 +1358,7 @@ namespace FaceDetection
                     {
                         LOGGER.Add(e);
                     }
+                    PARAM.Clear();
                     break;
 
                 // Face recognition
