@@ -1389,64 +1389,6 @@ namespace FaceDetection
                 {
                     Application.Exit();
                 }
-
-                //if (isMinimized)
-                //{
-                //    if (CameraIndex >= 0 && CameraIndex < 4)
-                //    {
-                //        MULTI_WINDOW.formList[CameraIndex].WindowState = FormWindowState.Minimized;
-                //    }
-                //}
-                //else
-                //{
-                //    if (CameraIndex >= 0 && CameraIndex < 4)
-                //    {
-                //        switch (CameraIndex)
-                //        {
-                //            case 0:
-                //                if (Properties.Settings.Default.C1_full_screen)
-                //                {
-                //                    MULTI_WINDOW.formList[0].WindowState = FormWindowState.Maximized;
-                //                }
-                //                else
-                //                {
-                //                    MULTI_WINDOW.formList[0].WindowState = FormWindowState.Normal;
-                //                }
-                //                break;
-                //            case 1:
-                //                if (Properties.Settings.Default.C2_full_screen)
-                //                {
-                //                    MULTI_WINDOW.formList[1].WindowState = FormWindowState.Maximized;
-                //                }
-                //                else
-                //                {
-                //                    MULTI_WINDOW.formList[1].WindowState = FormWindowState.Normal;
-                //                }
-                //                break;
-                //            case 2:
-                //                if (Properties.Settings.Default.C3_full_screen)
-                //                {
-                //                    MULTI_WINDOW.formList[2].WindowState = FormWindowState.Maximized;
-                //                }
-                //                else
-                //                {
-                //                    MULTI_WINDOW.formList[2].WindowState = FormWindowState.Normal;
-                //                }
-                //                break;
-                //            case 3:
-                //                if (Properties.Settings.Default.C4_full_screen)
-                //                {
-                //                    MULTI_WINDOW.formList[3].WindowState = FormWindowState.Maximized;
-                //                }
-                //                else
-                //                {
-                //                    MULTI_WINDOW.formList[3].WindowState = FormWindowState.Normal;
-                //                }
-                //                break;
-                //        }
-                //    }
-                //}
-
                 PARAM.Clear();
             }
         }
@@ -1468,6 +1410,7 @@ namespace FaceDetection
             else
             {
                 WrongParameter = true;
+                PARAM.Clear();
             }
 
             return retval;
