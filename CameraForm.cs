@@ -533,6 +533,7 @@ namespace FaceDetection
                         recordingInProgress = true;
                         crossbar.NoCapTimerON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                         crossbar.SetIconTimer(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
+                        this.snapshotButton.Enabled = false;
                     }
                 }
                 else
@@ -540,6 +541,7 @@ namespace FaceDetection
                     rec_icon.Visible = false;
                     recordingInProgress = false;
                     cameraButton.Tag = "play";
+                    this.snapshotButton.Enabled = true;
                     if ((eventRecorderEnabled && eventRecordTimeBeforeEvent > 0)
                             || ((IRSensorEnabled || faceRecognitionEnabled || recordingWhenOperationEnabled) && secondBeforeOperationEvent > 0))
                     {

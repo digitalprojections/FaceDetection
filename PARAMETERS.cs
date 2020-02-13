@@ -1109,13 +1109,13 @@ namespace FaceDetection
                         else
                         {
                             WrongParameter = true;
-                        }                        
-                        PARAM.Clear();
+                        }
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
                         LOGGER.Add(e);
                     }
+                    PARAM.Clear();
                     break;
 
                 // IR Sensor
@@ -1225,8 +1225,6 @@ namespace FaceDetection
                     }
 
                     PARAM.Clear();
-                    //No need to remember the state
-                    //Properties.Settings.Default.Save();
                     break;
 
                 // Face recognition
@@ -1236,11 +1234,6 @@ namespace FaceDetection
                 default:
                     WrongParameter = true;
                     break;
-
-                //case "c":
-                //    //C parameter does not require Time
-                //    WrongParameter = true;
-                //    break;
             }
             CurrentTestResult = MethodName;
         }
