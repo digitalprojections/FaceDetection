@@ -1058,7 +1058,6 @@ namespace FaceDetection
                             //        WrongParameter = true;
                             //    }
                             //}
-                            PARAM.Clear();
                         }
                         else
                         {
@@ -1069,6 +1068,7 @@ namespace FaceDetection
                     {
                         LOGGER.Add(e);
                     }
+                    PARAM.Clear();
                     break;
 
                 // Manual record

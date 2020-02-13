@@ -322,10 +322,8 @@ namespace FaceDetection
                 }
                 else
                 {
-                    if (this.WindowState != FormWindowState.Minimized)
-                    {
-                        this.WindowState = FormWindowState.Normal;
-                    }
+                    this.WindowState = FormWindowState.Normal;
+                    
                     PROPERTY_FUNCTIONS.Set_Window_Location_Set(CameraIndex, this);
                     this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
                 }
@@ -337,7 +335,7 @@ namespace FaceDetection
                 this.Activate();
             }
             else if(PROPERTY_FUNCTIONS.CheckOnTopByIndex(CameraIndex) && this.WindowState != FormWindowState.Minimized) 
-                // Bring sub to the front if "on top" is selected
+            // Bring sub to the front if "on top" is selected
             {
                 if (PROPERTY_FUNCTIONS.CheckFullScreenByIndex(CameraIndex))
                 {
@@ -533,7 +531,7 @@ namespace FaceDetection
                         recordingInProgress = true;
                         crossbar.NoCapTimerON(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
                         crossbar.SetIconTimer(decimal.ToInt32(Properties.Settings.Default.manual_record_time));
-                        this.snapshotButton.Enabled = false;
+                        snapshotButton.Enabled = false;
                     }
                 }
                 else
@@ -541,7 +539,7 @@ namespace FaceDetection
                     rec_icon.Visible = false;
                     recordingInProgress = false;
                     cameraButton.Tag = "play";
-                    this.snapshotButton.Enabled = true;
+                    snapshotButton.Enabled = true;
                     if ((eventRecorderEnabled && eventRecordTimeBeforeEvent > 0)
                             || ((IRSensorEnabled || faceRecognitionEnabled || recordingWhenOperationEnabled) && secondBeforeOperationEvent > 0))
                     {
