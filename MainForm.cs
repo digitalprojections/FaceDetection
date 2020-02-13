@@ -37,8 +37,6 @@ namespace FaceDetection
 
         private readonly System.Timers.Timer datetime_timer = new System.Timers.Timer();
 
-        private static bool loadDone;
-
         public MainForm(IReadOnlyCollection<string> vs = null)
         {
             InitializeComponent();
@@ -118,7 +116,6 @@ namespace FaceDetection
                 //    Application.Exit();
                 //}
             }
-            loadDone = true;
         }
 
         public static void AllChangesApply()
@@ -155,15 +152,15 @@ namespace FaceDetection
 
             PARAMETERS.HandleWakeUpParameters();
 
-            if (!PARAMETERS.WrongParameter)
+            if (PARAMETERS.WrongParameter && PARAMETERS.WAKEUPCALL)
+            {
+                Application.Exit();
+            }
+            else
             {
                 MULTI_WINDOW.CreateCameraWindows();
                 MULTI_WINDOW.FormSettingsChanged();
                 PARAMETERS.WAKEUPCALL = false;
-            }
-            else if (loadDone)
-            {
-                PARAMETERS.WrongParameter = false;
             }
             
             if(PARAMETERS.callByParameters)

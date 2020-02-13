@@ -1190,6 +1190,7 @@ namespace FaceDetection
                                         //MainForm.AllChangesApply();
                                     }
                                 }
+                                ViewCalledCameraOnly(MainCamera);
                             }
                             else
                             {
