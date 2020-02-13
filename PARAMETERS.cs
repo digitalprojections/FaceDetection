@@ -1086,7 +1086,7 @@ namespace FaceDetection
                                     //MULTI_WINDOW.formList[CameraIndex]?.crossbar.Start(CameraIndex, CAMERA_MODES.MANUAL);
                                 }
                             }
-                            else if (SingleCamera && !parameterOnOffSwitch && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == true)
+                            else if (SingleCamera && !parameterOnOffSwitch && MULTI_WINDOW.formList[CameraIndex]?.recordingInProgress == true)
                             {
                                 //MULTI_WINDOW.formList[CameraIndex]?.HideIcon();
                                 //if (PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
