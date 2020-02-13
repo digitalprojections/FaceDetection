@@ -1230,9 +1230,8 @@ namespace FaceDetection
                     break;
 
                 // Face recognition
-                case "d":
-                    WrongParameter = true;
-                    break;
+                //case "d":
+                //    break;
 
                 default:
                     WrongParameter = true;
@@ -1362,7 +1361,11 @@ namespace FaceDetection
                     break;
 
                 // Face recognition
-                case "d":
+                //case "d":
+                //    break;
+
+                default:
+                    WrongParameter = true;
                     break;
             }
             CurrentTestResult = MethodName;
