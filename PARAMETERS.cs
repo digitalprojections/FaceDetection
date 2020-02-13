@@ -1333,13 +1333,14 @@ namespace FaceDetection
                                 {
                                     //if (!IrSensorEnabled)
                                     //{
-                                        PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
-                                        PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
-                                        PROPERTY_FUNCTIONS.SetCycleTime(CameraIndex, parameterTime);
-                                        if (MainForm.GetMainForm != null)
-                                        {
-                                            MainForm.AllChangesApply();
-                                        }
+                                    PROPERTY_FUNCTIONS.Set_Human_Sensor(CameraIndex, true);
+                                    PROPERTY_FUNCTIONS.SetCaptureOperatorSwitchDirectly(CameraIndex, true);
+                                    PROPERTY_FUNCTIONS.SetCycleTime(CameraIndex, parameterTime);
+                                    //LetTheMainCameraHidden(MainCamera);
+                                    if (MainForm.GetMainForm != null)
+                                    {
+                                        MainForm.AllChangesApply();
+                                    }
                                     //}
                                 }
                                 else
@@ -1377,29 +1378,6 @@ namespace FaceDetection
                 CamIndexIsPresent.ToString().Substring(0, 1)+
                 TimerIsPresent.ToString().Substring(0, 1);
         }
-
-        //static bool CheckMethodsWhereCameraOmittionAllowed(string m)
-        //{
-        //    bool retval = false;
-        //    string[] vs = new string[] {"h", "d", "v", "w", "s", "r", "e", "b", "q", "c", "l"};
-        //    foreach(string i in vs)
-        //    {
-        //        if (m==i)
-        //        {
-        //            retval = true;
-        //        }
-        //        switch (m)
-        //        {
-        //            case "h":
-        //                if (parameterTime > 0)
-        //                {
-        //                    retval = true;
-        //                }
-        //                break;
-        //        }
-        //    }
-        //    return retval;
-        //}
 
         internal static void HandleWakeUpParameters()
         {
@@ -1623,6 +1601,16 @@ namespace FaceDetection
                 minimizedByParameters = true;
             }
         }
+
+        //private static void LetTheMainCameraHidden (int mainCameraIndex)
+        //{
+        //    if (MULTI_WINDOW.formList[mainCameraIndex].WindowState == FormWindowState.Minimized)
+        //    {
+        //        minimizedByParameter[mainCameraIndex] = true;
+        //        callByParameters = true;
+        //        minimizedByParameters = true;
+        //    }
+        //}
 
         //private static void StartAndHideWindows()
         //{
