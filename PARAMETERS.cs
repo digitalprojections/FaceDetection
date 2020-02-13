@@ -553,7 +553,7 @@ namespace FaceDetection
                         {
                             //if (SingleCamera)
                             //{
-                                MULTI_WINDOW.formList[CameraIndex]?.Close();
+                            MULTI_WINDOW.formList[CameraIndex]?.Close();
                             //}
                             //else if (CameraIndex == 8)
                             //{
@@ -671,7 +671,14 @@ namespace FaceDetection
                             }
                             else
                             {
-                                WrongParameter = true;
+                                if (MainForm.Settingui != null && MainForm.Settingui.Visible == true)
+                                {
+                                    MainForm.Settingui?.ForgetAndClose();
+                                }
+                                else
+                                {
+                                    WrongParameter = true;
+                                }
                             }
                         }
                         else
