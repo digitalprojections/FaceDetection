@@ -130,7 +130,6 @@ namespace FaceDetection
             
             CAMERA_INDEX = Properties.Settings.Default.main_camera_index;//MAIN CAMERA INDEX
             PROPERTY_FUNCTIONS.Get_Human_Sensor_Enabled(CAMERA_INDEX, out bool irsensorOn);
-            
 
             if (irsensorOn)
             {
@@ -157,7 +156,6 @@ namespace FaceDetection
 
             if (!PARAMETERS.WrongParameter)
             {
-                //CREATE CAMERA WINDOWS
                 MULTI_WINDOW.CreateCameraWindows();
                 MULTI_WINDOW.FormSettingsChanged();
                 PARAMETERS.WAKEUPCALL = false;

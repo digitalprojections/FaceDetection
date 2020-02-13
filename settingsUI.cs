@@ -34,6 +34,7 @@ namespace FaceDetection
         private bool showRecIconCbStateC1, showRecIconCbStateC2, showRecIconCbStateC3, showRecIconCbStateC4;
         private string resolutionC1, resolutionC2, resolutionC3, resolutionC4;
         private string fpsC1, fpsC2, fpsC3, fpsC4;
+        private decimal c1w, c2w, c3w, c4w, c1h, c2h, c3h, c4h;
 
         /// <summary>
         /// current camera, not the Main Camera
@@ -135,7 +136,6 @@ namespace FaceDetection
             }
         }
 
-
         private void OpenStoreLocation(object sender, EventArgs e)
         {
             try
@@ -153,14 +153,7 @@ namespace FaceDetection
         {
             Properties.Settings.Default.Reload();
             Hide();
-            //No need for these lines. Reload does the job
-            //if(currentCameraIndex!=MainCameraBeforeSettingsLoad)
-            //    CBSetAsMainCam.Checked = false;
-            //CameraSetAsMain();
-            //if (backgroundWorkerCancelClose.IsBusy != true)
-            //{
-            //    backgroundWorkerCancelClose.RunWorkerAsync();
-            //}
+            
             Properties.Settings.Default.C1_enable_capture_operator = operatorCaptureCbStateC1;
             Properties.Settings.Default.C1_enable_Human_sensor = sensorEnabledCbStateC1;
             Properties.Settings.Default.C1_enable_face_recognition = faceDetectionCbStateC1;
@@ -209,7 +202,16 @@ namespace FaceDetection
             Properties.Settings.Default.C2res = resolutionC2;
             Properties.Settings.Default.C3res = resolutionC3;
             Properties.Settings.Default.C4res = resolutionC4;
+            Properties.Settings.Default.C1w = c1w;
+            Properties.Settings.Default.C2w = c2w;
+            Properties.Settings.Default.C3w = c3w;
+            Properties.Settings.Default.C4w = c4w;
+            Properties.Settings.Default.C1h = c1h;
+            Properties.Settings.Default.C2h = c2h;
+            Properties.Settings.Default.C3h = c3h;
+            Properties.Settings.Default.C4h = c4h;
         }
+
         private void CloseSettings(object sender, EventArgs e)
         {
             ForgetAndClose();
@@ -241,7 +243,6 @@ namespace FaceDetection
                     PROPERTY_FUNCTIONS.Set_Window_Location_Set(i, MULTI_WINDOW.formList[i]);
                     //MULTI_WINDOW.formList[i].ClientSize = PROPERTY_FUNCTIONS.GetCameraSize(i);
                     MULTI_WINDOW.formList[i].ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);
-
                 }
             }
 
@@ -280,7 +281,6 @@ namespace FaceDetection
             //        }
             //    MULTI_WINDOW.formList[i].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);                
             //}
-
         }
 
         private void SetCameraPropertiesFromMemory()
@@ -404,7 +404,6 @@ namespace FaceDetection
                 SettingsUI.SetComboBoxFPSValues(MULTI_WINDOW.formList[cameraIndex].videoFormat, cameraIndex);
             }
         }
-        
 
         public static void SetComboBoxFPSValues(FaceDetectionX.UsbCamera.VideoFormat[] vs, int cameraIndex)
         {
@@ -438,6 +437,7 @@ namespace FaceDetection
                 //PROPERTY_FUNCTIONS.SetFPS(cameraIndex, vsPicked[0]);
             }
         }
+
         //void CameraSetAsMain(object sender, EventArgs e)
         //{
         //    CameraSetAsMain();
@@ -511,8 +511,14 @@ namespace FaceDetection
             fpsC2 = Properties.Settings.Default.C2f;
             fpsC3 = Properties.Settings.Default.C3f;
             fpsC4 = Properties.Settings.Default.C4f;
-
-
+            c1w = Properties.Settings.Default.C1w;
+            c2w = Properties.Settings.Default.C2w;
+            c3w = Properties.Settings.Default.C3w;
+            c4w = Properties.Settings.Default.C4w;
+            c1h = Properties.Settings.Default.C1h;
+            c2h = Properties.Settings.Default.C2h;
+            c3h = Properties.Settings.Default.C3h;
+            c4h = Properties.Settings.Default.C4h;
 
             if (cm_camera_number.Items.Count > 0)
             {
@@ -529,9 +535,7 @@ namespace FaceDetection
 
             //numericUpDownCamCount.Maximum = Camera.GetCameraCount().Length;
 
-            //No need to call now, as there is a call from button press
             //SetCameraPropertiesFromMemory();
-            
 
             if (currentCameraIndex == 0)
             { 
@@ -555,7 +559,6 @@ namespace FaceDetection
             //this.TopMost = true;
 
             SetOKButtonState();
-            
         }
 
         public void SetOKButtonState()
@@ -645,8 +648,6 @@ namespace FaceDetection
                 }
             }
         }
-
-        
 
         private void Button_cameraProperties_Click(object sender, EventArgs e)
         {
@@ -774,7 +775,6 @@ namespace FaceDetection
         {
             MainForm.ManageDeleteOldFilesTimer(cb_delete_old.Checked);
         }
-
 
         private void ChangeControlEnabled(Control control, bool enabled, int cam_index)
         {
@@ -1065,9 +1065,10 @@ namespace FaceDetection
         
         private void Nud_reinitiation_interval_ValueChanged(object sender, EventArgs e)
         {
-            SetMaxValues();
+            //SetMaxValues();
             //SetMaxValues(GetTheMaxValue());
         }
+
         private void event_record_time_before_event_ValueChanged(object sender, EventArgs e)
         {
             //SetMinMaxValues();
@@ -1081,9 +1082,9 @@ namespace FaceDetection
         /// <summary>
         /// Call to these function must not change the 
         /// </summary>
-        void SetMaxValues()
-        {
-        }
+        //void SetMaxValues()
+        //{
+        //}
 
         void SetMinMaxValues()
         {
@@ -1104,7 +1105,6 @@ namespace FaceDetection
 
         //private void backgroundWorkerCancelClose_DoWork(object sender, DoWorkEventArgs e)
         //{
-
         //}
 
         //void SetIntervalProps()
@@ -1127,11 +1127,11 @@ namespace FaceDetection
         //    }
         //}
 
-            /// <summary>
-            /// Select a camera number
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
+        /// <summary>
+        /// Select a camera number
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CameraSelected(object sender, EventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
@@ -1187,8 +1187,6 @@ namespace FaceDetection
                 // Settings openened by command then OK button
             }
         }
-
-        
 
         private void NumericUpDownX_ValueChanged(object sender, EventArgs e)
         {
@@ -1258,7 +1256,6 @@ namespace FaceDetection
             //255??? long folder path UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UV
             //Console.WriteLine(Path.IsPathRooted(storePath.Text) + " - path rooted. " + Path.GetFullPath(storePath.Text) + " " + Path.GetPathRoot(storePath.Text));
             
-
             bool pathChanged = false;
             char[] invalidPathChars = {'\"', '*', '?', '!', '<', '>', '|', ':', '.'};
 
@@ -1369,12 +1366,9 @@ namespace FaceDetection
                 || '\uFF61' <= c && c <= '\uFFDC'
                 || '\uFFE8' <= c && c <= '\uFFEE';
         }
-
              */
-
-
-
     }
+
     class DLLIMPORT
     {
 

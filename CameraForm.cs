@@ -308,9 +308,6 @@ namespace FaceDetection
 
             ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(CameraIndex);
             Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
-            // Check if the PREEVENT mode is needed
-            //controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
-            
 
             // Minimized sub if "all display" is not checked
             if (!Properties.Settings.Default.show_all_cams_simulteneously &&                  
@@ -328,6 +325,7 @@ namespace FaceDetection
                 else
                 {
                     this.WindowState = FormWindowState.Normal;
+                    PROPERTY_FUNCTIONS.Set_Window_Location_Set(CameraIndex, this);
                     this.Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
                 }
             }
