@@ -417,7 +417,7 @@ namespace FaceDetection
                 rec_icon.Visible = false;
                 recordingInProgress = false;
                 this.cameraButton.Enabled = true;
-                this.snapshotButton.Enabled = true;
+                SnapshotEnable();
             }
             MainForm.Settingui.SetOKButtonState();
         }
@@ -539,7 +539,7 @@ namespace FaceDetection
                     rec_icon.Visible = false;
                     recordingInProgress = false;
                     cameraButton.Tag = "play";
-                    snapshotButton.Enabled = true;
+                    SnapshotEnable();
                     if ((eventRecorderEnabled && eventRecordTimeBeforeEvent > 0)
                             || ((IRSensorEnabled || faceRecognitionEnabled || recordingWhenOperationEnabled) && secondBeforeOperationEvent > 0))
                     {
@@ -665,6 +665,11 @@ namespace FaceDetection
             {
                 camera_number.ForeColor = Color.Black;
             }
+        }
+
+        public void SnapshotEnable()
+        {
+            snapshotButton.Enabled = true;
         }
 
         private void SettingsButtonsDesigner()

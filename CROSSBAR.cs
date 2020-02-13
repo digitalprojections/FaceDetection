@@ -116,6 +116,7 @@ namespace FaceDetection
             {
                 window.picbox_recording.Visible = false;
                 window.recordingInProgress = false;
+                window.SnapshotEnable();
                 icon_timer.Enabled = false;
                 if (captureOperatorEnabled && IRSensorEnabled)
                 {
