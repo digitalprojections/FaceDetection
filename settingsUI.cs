@@ -556,7 +556,6 @@ namespace FaceDetection
 
             this.ControlBox = false;
             this.MaximizeBox = false;
-            //this.TopMost = true;
 
             SetOKButtonState();
         }

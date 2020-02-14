@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ask_exit_application" xml:space="preserve">
-    <value>アプリケーションを終了</value>
+    <value>アプリケーション終了</value>
   </data>
   <data name="event_recording_starts" xml:space="preserve">
     <value>イベントレコーダーがパラメーターにて開始しました</value>

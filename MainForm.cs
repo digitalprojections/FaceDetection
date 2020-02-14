@@ -70,6 +70,7 @@ namespace FaceDetection
         
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].applicationExit = true;
             Dispose();
         }
         
