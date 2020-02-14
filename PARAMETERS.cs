@@ -428,7 +428,7 @@ namespace FaceDetection
                 case "q":// TFFF
                     try
                     {
-                        if (!WrongParameter && !WAKEUPCALL && MULTI_WINDOW.formList[MainCamera]?.recordingInProgress == false)
+                        if (!WrongParameter && !WAKEUPCALL)
                         {
                             MULTI_WINDOW.formList[MainCamera].applicationExit = true;
                             Application.Exit();
