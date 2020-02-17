@@ -46,7 +46,6 @@ namespace FaceDetection
             {
                 if (vs != null && vs.Count() > 0)
                 {
-                    
                     PARAMETERS.HandleParameters(vs);
                     //PARAMETERS.WAKEUPCALL = true;
 
@@ -70,7 +69,10 @@ namespace FaceDetection
         
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].applicationExit = true;
+            if (MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index] != null)
+            {
+                MULTI_WINDOW.formList[Properties.Settings.Default.main_camera_index].applicationExit = true;
+            }
             Dispose();
         }
         
@@ -457,7 +459,6 @@ namespace FaceDetection
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
             Application.Exit();
         }
 

@@ -195,38 +195,38 @@ namespace FaceDetection
             }
         }
 
-        public static int GetCheckTimerInterval(int v)
-        {
-            decimal retval;
-            switch (v)
-            {
-                case 0:
-                    retval = Properties.Settings.Default.C1_check_interval;
-                    break;
-                case 1:
-                    retval = Properties.Settings.Default.C2_check_interval;
-                    break;
-                case 2:
-                    retval = Properties.Settings.Default.C3_check_interval;
-                    break;
-                case 3:
-                    retval = Properties.Settings.Default.C4_check_interval;
-                    break;
-                default:
-                    retval = 500;
-                    break;
-            }
-            return decimal.ToInt32(retval);
-        }
+        //public static int GetCheckTimerInterval(int v)
+        //{
+        //    decimal retval;
+        //    switch (v)
+        //    {
+        //        case 0:
+        //            retval = Properties.Settings.Default.C1_check_interval;
+        //            break;
+        //        case 1:
+        //            retval = Properties.Settings.Default.C2_check_interval;
+        //            break;
+        //        case 2:
+        //            retval = Properties.Settings.Default.C3_check_interval;
+        //            break;
+        //        case 3:
+        //            retval = Properties.Settings.Default.C4_check_interval;
+        //            break;
+        //        default:
+        //            retval = 500;
+        //            break;
+        //    }
+        //    return decimal.ToInt32(retval);
+        //}
 
         /// <summary>
         /// Used by unit tests
         /// </summary>
         /// <returns></returns>
-        public static int GetMainCameraIndex()
-        {
-            return Properties.Settings.Default.main_camera_index;
-        }
+        //public static int GetMainCameraIndex()
+        //{
+        //    return Properties.Settings.Default.main_camera_index;
+        //}
 
         //public static void Set_Window_Size_From_Camera_Resolution(int cam_ind)
         //{
@@ -263,6 +263,7 @@ namespace FaceDetection
         //        resolution_changed = false;
         //    }
         //}
+
         //internal static bool Get_Rec_Icon(int cam_ind)
         //{
         //    bool retval = false;
@@ -666,10 +667,9 @@ namespace FaceDetection
             SetCaptureOperatorSwitchImplicitly(cameraIndex);
         }
 
-        internal static void GetSecondsBeforeEvent(int camsen, out int secondBeforeOperationEvent)
+        internal static void GetSecondsBeforeEvent(int cameraIndex, out int secondBeforeOperationEvent)
         {
-
-            switch (camsen)
+            switch (cameraIndex)
             {
                 case 0:
                     secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
@@ -689,9 +689,9 @@ namespace FaceDetection
             }
         }
 
-        internal static void GetSecondsAfterEvent(int index, out int secondsAfterEvent)
+        internal static void GetSecondsAfterEvent(int cameraIndex, out int secondsAfterEvent)
         {
-            switch (index)
+            switch (cameraIndex)
             {
                 case 0:                
                 secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
@@ -711,9 +711,9 @@ namespace FaceDetection
             }
         }
 
-        internal static void GetEventRecorderSwitch(int index, out bool eventRecorderEnabled)
+        internal static void GetEventRecorderSwitch(int cameraIndex, out bool eventRecorderEnabled)
         {
-            switch (index)
+            switch (cameraIndex)
             {
                 case 0:
                     eventRecorderEnabled = Properties.Settings.Default.C1_enable_event_recorder;
@@ -733,9 +733,9 @@ namespace FaceDetection
             }
         }
 
-        internal static void GetCaptureMethod(int camindex, out string captureMethod)
+        internal static void GetCaptureMethod(int cameraIndex, out string captureMethod)
         {
-            switch (camindex)
+            switch (cameraIndex)
             {
                 case 0:
                     captureMethod = Properties.Settings.Default.C1_capture_type;
@@ -755,9 +755,9 @@ namespace FaceDetection
             }
         }
 
-        internal static void GetReInitiationInterval(int cameraindex, out int intervalBeforeReinitiating)
+        internal static void GetReInitiationInterval(int cameraIndex, out int intervalBeforeReinitiating)
         {
-            switch (cameraindex)
+            switch (cameraIndex)
             {
                 case 0:
                     intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C1_interval_before_reinitiating_recording);
@@ -777,9 +777,9 @@ namespace FaceDetection
             }
         }
 
-        internal static void GetSensorCheckInterval(int camindex, out int checkInterval)
+        internal static void GetSensorCheckInterval(int cameraIndex, out int checkInterval)
         {
-            switch (camindex)
+            switch (cameraIndex)
             {
                 case 0:
                     checkInterval = decimal.ToInt32(Properties.Settings.Default.C1_check_interval);
@@ -799,10 +799,10 @@ namespace FaceDetection
             }
         }
         
-        public static string GetResolution(int cam_ind)
+        public static string GetResolution(int cameraIndex)
         {
             string res = "";
-            switch (cam_ind)
+            switch (cameraIndex)
             {
                 case 0:
                     res = Properties.Settings.Default.C1res;
@@ -820,9 +820,9 @@ namespace FaceDetection
             return res;
         }
         
-        public static void SetResolution(int cam_ind, string val)
+        public static void SetResolution(int cameraIndex, string val)
         {
-            switch (cam_ind)
+            switch (cameraIndex)
             {
                 case 0:
                     Properties.Settings.Default.C1res = val;
@@ -840,11 +840,11 @@ namespace FaceDetection
             Properties.Settings.Default.Save();
         }
 
-        public static System.Drawing.Size Get_Stored_Resolution(int cam_ind)
+        public static System.Drawing.Size Get_Stored_Resolution(int cameraIndex)
         {
             System.Drawing.Size retval;
             string[] res;
-            switch (cam_ind)
+            switch (cameraIndex)
             {
                 case 0:
                     res = Properties.Settings.Default.C1res.Split('x');                    
@@ -901,10 +901,10 @@ namespace FaceDetection
             }
         }
 
-        public static string GetFPS(int cam_ind)
+        public static string GetFPS(int cameraIndex)
         {
             string fps = "15";
-            switch (cam_ind)
+            switch (cameraIndex)
             {
                 case 0:
                     fps = Properties.Settings.Default.C1f;
@@ -920,16 +920,16 @@ namespace FaceDetection
                     break;
             }
             return fps;
-        }   
-        
+        }
+
         /// <summary>
         /// Is human sensor switch ON for the selected/MAIN camera?
         /// </summary>
-        /// <param name="cam_ind"></param>
+        /// <param name="cameraIndex"></param>
         /// <returns></returns>
-        public static void Get_Human_Sensor_Enabled(int cam_ind, out bool iRSensorEnabled)
+        public static void Get_Human_Sensor_Enabled(int cameraIndex, out bool iRSensorEnabled)
         {
-            switch (cam_ind)
+            switch (cameraIndex)
             {
                 case 0:
                     iRSensorEnabled = Properties.Settings.Default.C1_enable_Human_sensor;

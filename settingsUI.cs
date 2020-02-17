@@ -699,76 +699,76 @@ namespace FaceDetection
             Marshal.ReleaseComObject(dev);
         }
 
-        internal void _DisplayPropertyPage()
-        {
-            var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, currentCameraIndex);
-            var dev = DirectShow.FindPin(filter, currentCameraIndex, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
+        //internal void _DisplayPropertyPage()
+        //{
+        //    var filter = DirectShow.CreateFilter(DirectShow.DsGuid.CLSID_VideoInputDeviceCategory, currentCameraIndex);
+        //    var dev = DirectShow.FindPin(filter, currentCameraIndex, DirectShow.PIN_DIRECTION.PINDIR_OUTPUT);
 
-            //var dev = (IBaseFilter)DirectShow.CreateFilter(DirectShow.DsGuid., currentCameraIndex);
-            if (dev == null)
-                return;
+        //    //var dev = (IBaseFilter)DirectShow.CreateFilter(DirectShow.DsGuid., currentCameraIndex);
+        //    if (dev == null)
+        //        return;
 
-            //Get the ISpecifyPropertyPages for the filter
-            ISpecifyPropertyPages pProp = dev as ISpecifyPropertyPages;
-            int hr = 0;
+        //    //Get the ISpecifyPropertyPages for the filter
+        //    ISpecifyPropertyPages pProp = dev as ISpecifyPropertyPages;
+        //    int hr = 0;
 
-            if (pProp == null)
-            {
-                //If the filter doesn't implement ISpecifyPropertyPages, try displaying IAMVfwCompressDialogs instead!
-                IAMVfwCompressDialogs compressDialog = dev as IAMVfwCompressDialogs;
-                if (compressDialog != null)
-                {
+        //    if (pProp == null)
+        //    {
+        //        //If the filter doesn't implement ISpecifyPropertyPages, try displaying IAMVfwCompressDialogs instead!
+        //        IAMVfwCompressDialogs compressDialog = dev as IAMVfwCompressDialogs;
+        //        if (compressDialog != null)
+        //        {
 
-                    hr = compressDialog.ShowDialog(VfwCompressDialogs.Config, IntPtr.Zero);
-                    DsError.ThrowExceptionForHR(hr);
-                }
-                return;
-            }
+        //            hr = compressDialog.ShowDialog(VfwCompressDialogs.Config, IntPtr.Zero);
+        //            DsError.ThrowExceptionForHR(hr);
+        //        }
+        //        return;
+        //    }
 
-            string caption = string.Empty;
+        //    string caption = string.Empty;
 
-            if (dev is IBaseFilter)
-            {
-                //Get the name of the filter from the FilterInfo struct
-                IBaseFilter as_filter = dev as IBaseFilter;
-                FilterInfo filterInfo;
-                hr = as_filter.QueryFilterInfo(out filterInfo);
-                DsError.ThrowExceptionForHR(hr);
+        //    if (dev is IBaseFilter)
+        //    {
+        //        //Get the name of the filter from the FilterInfo struct
+        //        IBaseFilter as_filter = dev as IBaseFilter;
+        //        FilterInfo filterInfo;
+        //        hr = as_filter.QueryFilterInfo(out filterInfo);
+        //        DsError.ThrowExceptionForHR(hr);
 
-                caption = filterInfo.achName;
+        //        caption = filterInfo.achName;
 
-                if (filterInfo.pGraph != null)
-                {
-                    Marshal.ReleaseComObject(filterInfo.pGraph);
-                }
-            }
-            else
-            if (dev is IPin)
-            {
-                //Get the name of the filter from the FilterInfo struct
-                IPin as_pin = dev as IPin;
-                PinInfo pinInfo;
-                hr = as_pin.QueryPinInfo(out pinInfo);
-                DsError.ThrowExceptionForHR(hr);
+        //        if (filterInfo.pGraph != null)
+        //        {
+        //            Marshal.ReleaseComObject(filterInfo.pGraph);
+        //        }
+        //    }
+        //    else
+        //    if (dev is IPin)
+        //    {
+        //        //Get the name of the filter from the FilterInfo struct
+        //        IPin as_pin = dev as IPin;
+        //        PinInfo pinInfo;
+        //        hr = as_pin.QueryPinInfo(out pinInfo);
+        //        DsError.ThrowExceptionForHR(hr);
 
-                caption = pinInfo.name;
-            }
+        //        caption = pinInfo.name;
+        //    }
 
 
-            // Get the propertypages from the property bag
-            DsCAUUID caGUID;
-            hr = pProp.GetPages(out caGUID);
-            DsError.ThrowExceptionForHR(hr);
+        //    // Get the propertypages from the property bag
+        //    DsCAUUID caGUID;
+        //    hr = pProp.GetPages(out caGUID);
+        //    DsError.ThrowExceptionForHR(hr);
 
-            // Create and display the OlePropertyFrame
-            object oDevice = (object)dev;
-            hr = DLLIMPORT.OleCreatePropertyFrame(this.Handle, 0, 0, caption, 1, ref oDevice, caGUID.cElems, caGUID.pElems, 0, 0, IntPtr.Zero);
-            DsError.ThrowExceptionForHR(hr);
+        //    // Create and display the OlePropertyFrame
+        //    object oDevice = (object)dev;
+        //    hr = DLLIMPORT.OleCreatePropertyFrame(this.Handle, 0, 0, caption, 1, ref oDevice, caGUID.cElems, caGUID.pElems, 0, 0, IntPtr.Zero);
+        //    DsError.ThrowExceptionForHR(hr);
 
-            // Release COM objects
-            Marshal.FreeCoTaskMem(caGUID.pElems);
-            Marshal.ReleaseComObject(pProp);
-        }
+        //    // Release COM objects
+        //    Marshal.FreeCoTaskMem(caGUID.pElems);
+        //    Marshal.ReleaseComObject(pProp);
+        //}
 
         private void Cb_delete_old_CheckedChanged(object sender, EventArgs e)
         {
