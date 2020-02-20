@@ -189,7 +189,7 @@ namespace FaceDetection
                             fileToCutFromTheEndDate = fileToCutFromTheEnd.Substring(fileToCutFromTheEnd.Length - 18, 18);
                             dateFileToCutFromTheEnd = new DateTime(Convert.ToInt32(fileToCutFromTheEndDate.Substring(0, 4)), Convert.ToInt32(fileToCutFromTheEndDate.Substring(4, 2)), Convert.ToInt32(fileToCutFromTheEndDate.Substring(6, 2)), Convert.ToInt32(fileToCutFromTheEndDate.Substring(8, 2)), Convert.ToInt32(fileToCutFromTheEndDate.Substring(10, 2)), Convert.ToInt32(fileToCutFromTheEndDate.Substring(12, 2)));
                             timeWantedToCut = dateEventMinusWantedTime - dateFileToCutFromTheEnd;
-                            cutTime = (BUFFERDURATION/1000) - (timeWantedToCut.Minutes * 60 + timeWantedToCut.Seconds);
+                            cutTime = ((BUFFERDURATION / 1000) - 1) - (timeWantedToCut.Minutes * 60 + timeWantedToCut.Seconds);
 
                             startVideoForFullFile = CutVideoKeepEnd(fileToCutFromTheEnd, cutTime);
                         }
@@ -418,7 +418,7 @@ namespace FaceDetection
 
             ProcessStartInfo startInfo = new ProcessStartInfo(directory + @"\ffmpeg-20191101-53c21c2-win32-static\bin\ffmpeg.exe");
             startInfo.Arguments = @"-loglevel quiet -y -i " + videoToCut + " -ss 00:00:00 -to " + videoCutEndTimeFormated + " -c copy -avoid_negative_ts 1 " + videoCutName;
-            System.Threading.Thread.Sleep(BUFFERDURATION - (cutTimeParameter - 100)); // Wait for the last files is released by the system -> buffer file - time we keep, that is already passed since the file started (+100ms to be sur the fil is released). 
+            System.Threading.Thread.Sleep(BUFFERDURATION + 5000); // - (cutTimeParameter*1000 - 100)); // Wait for the last files is released by the system -> buffer file - time we keep, that is already passed since the file started (+100ms to be sur the fil is released). 
             Console.WriteLine("CutVideoKeepStart() : " + startInfo.Arguments); // DEBUG
             startInfo.CreateNoWindow = true;
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;

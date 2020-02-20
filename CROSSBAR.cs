@@ -259,19 +259,19 @@ namespace FaceDetection
                         LOGGER.Add(e.Message + " TaskManager in DeleteOldFiles()");
                     }
                 }
-                if (wait_interval_enabled)
-                {
-                    int intt = 0;
+                //if (wait_interval_enabled)
+                //{
+                //    int intt = 0;
 
-                    PROPERTY_FUNCTIONS.GetReInitiationInterval(INDEX, out intt);
+                //    PROPERTY_FUNCTIONS.GetReInitiationInterval(INDEX, out intt);
 
-                    //Run the timer
-                    if (intt >= 500)
-                    {
-                        no_opcap_timer.Interval = intt;
-                        no_opcap_timer.Enabled = true;
-                    }
-                }
+                //    //Run the timer
+                //    if (intt >= 500)
+                //    {
+                //        no_opcap_timer.Interval = intt;
+                //        no_opcap_timer.Enabled = true;
+                //    }
+                //}
             }
         }
 
