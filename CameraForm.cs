@@ -174,7 +174,7 @@ namespace FaceDetection
         /// <summary>
         /// Loop through the camera properties to select all available resolutions and FPS
         /// </summary>
-        private void FillResolutionList()
+        public void FillResolutionList()
         {
             long FPS;
             //////////////////////////////////////////////////////////////////
@@ -199,6 +199,55 @@ namespace FaceDetection
             //////////////////////////////////////////////////////////////////
             ///VIDEOFORMAT
             //////////////////////////////////////////////////////////////////            
+            SortVideoFormats();
+        }
+
+        public void SortVideoFormats()
+        {
+            if (Vf_resolutions.Count>1)
+            {
+                List<int[]> resolutions = GetIntegers();
+                int[][] vsres = new int[Vf_resolutions.Count][];
+
+                for (int i = 0; i < resolutions.Count; i++)
+                {
+                    vsres[i] = resolutions[i];
+                }
+                Array.Sort(vsres, (a, b) => CheckValues(a, b)); ;
+                for (int j = 0; j < resolutions.Count; j++)
+                {
+                    Vf_resolutions[j] = vsres[j][0] + "x" + vsres[j][1];
+                }
+                //Console.WriteLine(resolutions[0][0].ToString());
+            }
+        }
+
+        private int CheckValues(int[] a, int[] b)
+        {
+            if (a[1] >= b[1] && a[0] >= b[0])
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
+
+            
+        }
+
+        private List<int[]> GetIntegers()
+        {
+            List<int[]> resolutions = new List<int[]>();
+            string[] vs = new string[2];
+            int[][] vsInt = new int[2][];
+            for (int i = 0; i < Vf_resolutions.Count; i++)
+            {
+                vs = Vf_resolutions[i].Split('x');
+                
+                resolutions.Add(new int[2] { Int32.Parse(vs[0]), Int32.Parse(vs[1]) });
+            }
+            return resolutions;            
         }
 
         private bool UniqueFPS(long fps)
