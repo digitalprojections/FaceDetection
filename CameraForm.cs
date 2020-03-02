@@ -232,8 +232,6 @@ namespace FaceDetection
             {
                 return -1;
             }
-
-            
         }
 
         private List<int[]> GetIntegers()
