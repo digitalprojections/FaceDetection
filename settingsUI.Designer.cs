@@ -409,6 +409,8 @@
             this.nud_seconds_before_event.Value = global::FaceDetection.Properties.Settings.Default.C1_seconds_before_event;
             this.nud_seconds_before_event.ValueChanged += new System.EventHandler(this.Nud_seconds_before_event_ValueChanged);
             this.nud_seconds_before_event.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
+            this.nud_seconds_before_event.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Nud_seconds_before_event_KeyUp);
+            this.nud_seconds_before_event.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Nud_seconds_before_event_MouseUp);
             // 
             // label11
             // 
@@ -451,8 +453,9 @@
             0});
             this.nud_reinitiation_interval.Name = "nud_reinitiation_interval";
             this.nud_reinitiation_interval.Value = global::FaceDetection.Properties.Settings.Default.C1_interval_before_reinitiating_recording;
-            this.nud_reinitiation_interval.ValueChanged += new System.EventHandler(this.Nud_reinitiation_interval_ValueChanged);
             this.nud_reinitiation_interval.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDownW_KeyDown);
+            this.nud_reinitiation_interval.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Nud_reinitiation_interval_KeyUp);
+            this.nud_reinitiation_interval.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Nud_reinitiation_interval_MouseUp);
             // 
             // cm_capture_mode
             // 

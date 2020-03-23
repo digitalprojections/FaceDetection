@@ -51,6 +51,9 @@ namespace FaceDetection
         //private bool cameraSelectedManually;
         private delegate void dSettingFromProperties();
 
+        private BackLightController backLight;
+        private BackLightController BackLight { get => backLight; set => backLight = value; }
+
         public SettingsUI()
         {
             InitializeComponent();
@@ -78,6 +81,7 @@ namespace FaceDetection
             this.AutoSizeMode = AutoSizeMode.GrowOnly;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             SetMinMaxValues();
+            backLight = new BackLightController();
         }
 
         /// <summary>
@@ -245,6 +249,8 @@ namespace FaceDetection
                     MULTI_WINDOW.formList[i].ClientSize = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);
                 }
             }
+
+            BackLight.Start();
 
             //Properties.Settings.Default.Save();
             Camera.CountCamera();
@@ -1063,11 +1069,11 @@ namespace FaceDetection
             numericUpDownBacklight.Enabled = cb_backlight_off_idling.Checked;
         }  
         
-        private void Nud_reinitiation_interval_ValueChanged(object sender, EventArgs e)
-        {
-            //SetMaxValues();
-            //SetMaxValues(GetTheMaxValue());
-        }
+        //private void Nud_reinitiation_interval_ValueChanged(object sender, EventArgs e)
+        //{
+        //    //SetMaxValues();
+        //    //SetMaxValues(GetTheMaxValue());
+        //}
 
         private void event_record_time_before_event_ValueChanged(object sender, EventArgs e)
         {
@@ -1085,11 +1091,13 @@ namespace FaceDetection
 
         void SetMinMaxValues()
         {
-            if (nud_seconds_before_event.Value > 0)
-            {
-                nud_reinitiation_interval.Minimum = nud_seconds_before_event.Value;
-            }
-            else
+            //if (nud_seconds_before_event.Value > 0)
+            //{
+            //   nud_reinitiation_interval.Minimum = nud_seconds_before_event.Value;
+            //}
+            //else
+            //{
+            if (nud_seconds_before_event.Value == 0)
             {
                 nud_reinitiation_interval.Minimum = 1;
             }
@@ -1100,25 +1108,63 @@ namespace FaceDetection
         //    return Math.Max(event_record_time_before_event.Value, nud_seconds_before_event.Value);
         //}
 
-        //void SetIntervalProps()
-        //{
-        //    if (Properties.Settings.Default.C1_interval_before_reinitiating_recording < Properties.Settings.Default.C1_seconds_before_event)
-        //    {
-        //        Properties.Settings.Default.C1_interval_before_reinitiating_recording = Properties.Settings.Default.C1_seconds_before_event;
-        //    }
-        //    if (Properties.Settings.Default.C2_interval_before_reinitiating_recording < Properties.Settings.Default.C2_seconds_before_event)
-        //    {
-        //        Properties.Settings.Default.C2_interval_before_reinitiating_recording = Properties.Settings.Default.C2_seconds_before_event;
-        //    }
-        //    if (Properties.Settings.Default.C3_interval_before_reinitiating_recording < Properties.Settings.Default.C3_seconds_before_event)
-        //    {
-        //        Properties.Settings.Default.C3_interval_before_reinitiating_recording = Properties.Settings.Default.C3_seconds_before_event;
-        //    }
-        //    if (Properties.Settings.Default.C4_interval_before_reinitiating_recording < Properties.Settings.Default.C4_seconds_before_event)
-        //    {
-        //        Properties.Settings.Default.C4_interval_before_reinitiating_recording = Properties.Settings.Default.C4_seconds_before_event;
-        //    }
-        //}
+        private void Nud_reinitiation_interval_MouseUp(object sender, MouseEventArgs e)
+        {
+           SetIntervalProps();
+        }
+
+        private void Nud_seconds_before_event_MouseUp(object sender, MouseEventArgs e)
+        {
+            SetIntervalProps();
+        }
+
+        void SetIntervalProps()
+        {
+            if (Properties.Settings.Default.C1_interval_before_reinitiating_recording < Properties.Settings.Default.C1_seconds_before_event)
+            {
+                Properties.Settings.Default.C1_interval_before_reinitiating_recording = Properties.Settings.Default.C1_seconds_before_event;
+            }
+            if (Properties.Settings.Default.C2_interval_before_reinitiating_recording < Properties.Settings.Default.C2_seconds_before_event)
+            {
+                Properties.Settings.Default.C2_interval_before_reinitiating_recording = Properties.Settings.Default.C2_seconds_before_event;
+            }
+            if (Properties.Settings.Default.C3_interval_before_reinitiating_recording < Properties.Settings.Default.C3_seconds_before_event)
+            {
+                Properties.Settings.Default.C3_interval_before_reinitiating_recording = Properties.Settings.Default.C3_seconds_before_event;
+            }
+            if (Properties.Settings.Default.C4_interval_before_reinitiating_recording < Properties.Settings.Default.C4_seconds_before_event)
+            {
+                Properties.Settings.Default.C4_interval_before_reinitiating_recording = Properties.Settings.Default.C4_seconds_before_event;
+            }
+        }
+
+        private void Nud_seconds_before_event_KeyUp(object sender, KeyEventArgs e)
+        {
+            decimal event_value_Keyup = (decimal)nud_seconds_before_event.Value;
+            decimal interval_value_Keyup = (decimal)nud_reinitiation_interval.Value;
+
+            if (event_value_Keyup > interval_value_Keyup)
+            {
+                Properties.Settings.Default.C1_interval_before_reinitiating_recording = event_value_Keyup;
+                Properties.Settings.Default.C2_interval_before_reinitiating_recording = event_value_Keyup;
+                Properties.Settings.Default.C3_interval_before_reinitiating_recording = event_value_Keyup;
+                Properties.Settings.Default.C4_interval_before_reinitiating_recording = event_value_Keyup;
+            }
+        }
+
+        private void Nud_reinitiation_interval_KeyUp(object sender, KeyEventArgs e)
+        {
+            decimal event_value_Keyup = (decimal)nud_seconds_before_event.Value;
+            decimal interval_value_Keyup = (decimal)nud_reinitiation_interval.Value;
+
+            if (event_value_Keyup > interval_value_Keyup)
+            {
+                Properties.Settings.Default.C1_interval_before_reinitiating_recording = event_value_Keyup;
+                Properties.Settings.Default.C2_interval_before_reinitiating_recording = event_value_Keyup;
+                Properties.Settings.Default.C3_interval_before_reinitiating_recording = event_value_Keyup;
+                Properties.Settings.Default.C4_interval_before_reinitiating_recording = event_value_Keyup;
+            }
+        }
 
         /// <summary>
         /// Select a camera number
