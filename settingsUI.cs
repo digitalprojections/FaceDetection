@@ -115,10 +115,10 @@ namespace FaceDetection
             {                  
                 selected_camera_combo.SelectedIndex = Properties.Settings.Default.main_camera_index <=0 ? 0 : currentCameraIndex;
             }
-            else
-            {
-                //Properties.Settings.Default.main_camera_index = 0;
-            }
+            //else
+            //{
+            //    Properties.Settings.Default.main_camera_index = 0;
+            //}
         }
 
         private void ChangeStoreLocation(object sender, EventArgs e)
@@ -370,15 +370,14 @@ namespace FaceDetection
                 PROPERTY_FUNCTIONS.SetResolution(currentCameraIndex, comboBoxResolutions.SelectedItem.ToString());
                 SettingsUI.SetComboBoxFPSValues(MULTI_WINDOW.formList[currentCameraIndex].videoFormat, currentCameraIndex);
             }
-
         }
+
         private void comboBoxFPS_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //
-            if (comboBoxFPS.SelectedItem!=null)
-            {
-                //PROPERTY_FUNCTIONS.SetFPS(currentCameraIndex, comboBoxFPS.SelectedItem?.ToString());
-            }
+            //if (comboBoxFPS.SelectedItem!=null)
+            //{
+            //    PROPERTY_FUNCTIONS.SetFPS(currentCameraIndex, comboBoxFPS.SelectedItem?.ToString());
+            //}
         }
 
         /// <summary>
@@ -393,9 +392,11 @@ namespace FaceDetection
             {
                 resolutions_combo.Items.AddRange(vs.ToArray());
                 if (resolutions_combo.Items.Count > 0)
-                {                    
-                    if(PROPERTY_FUNCTIONS.GetResolution(cameraIndex)!=null)
+                {
+                    if (PROPERTY_FUNCTIONS.GetResolution(cameraIndex) != null)
+                    {
                         resolutions_combo.SelectedItem = PROPERTY_FUNCTIONS.GetResolution(cameraIndex);
+                    }
                 }
             }
 

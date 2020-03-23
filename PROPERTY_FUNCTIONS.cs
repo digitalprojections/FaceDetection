@@ -36,23 +36,21 @@ namespace FaceDetection
 
         internal static void SetCycleTime(int cameraIndex, int time)
         {
-            
-                switch (cameraIndex)
-                {
-                    case 0:
-                    Properties.Settings.Default.C1_check_interval = Convert.ToDecimal(time);
-                        break;
-                    case 1:
-                    Properties.Settings.Default.C2_check_interval = Convert.ToDecimal(time);
-                        break;
-                    case 2:                
-                    Properties.Settings.Default.C3_check_interval = Convert.ToDecimal(time);
-                        break;
-                    case 3:
-                    Properties.Settings.Default.C4_check_interval = Convert.ToDecimal(time);
-                        break;
-                }
-
+            switch (cameraIndex)
+            {
+                case 0:
+                Properties.Settings.Default.C1_check_interval = Convert.ToDecimal(time);
+                    break;
+                case 1:
+                Properties.Settings.Default.C2_check_interval = Convert.ToDecimal(time);
+                    break;
+                case 2:                
+                Properties.Settings.Default.C3_check_interval = Convert.ToDecimal(time);
+                    break;
+                case 3:
+                Properties.Settings.Default.C4_check_interval = Convert.ToDecimal(time);
+                    break;
+            }
         }
         
 
@@ -87,22 +85,21 @@ namespace FaceDetection
             GetOnOperationStartSwitch(camindex, out bool OPERSTART);
             GetFaceRecognitionSwitch(camindex, out bool FACECHECK);
             
-                switch (camindex)
-                {
-                    case 0:
-                        Properties.Settings.Default.C1_enable_capture_operator = (IRSENSOR || OPERSTART || FACECHECK);
-                        break;
-                    case 1:
-                        Properties.Settings.Default.C2_enable_capture_operator = (IRSENSOR || OPERSTART || FACECHECK);
-                        break;
-                    case 2:
-                        Properties.Settings.Default.C3_enable_capture_operator = (IRSENSOR || OPERSTART || FACECHECK);
-                        break;
-                    case 3:
-                        Properties.Settings.Default.C4_enable_capture_operator = (IRSENSOR || OPERSTART || FACECHECK);
-                        break;
-                }
-            //Properties.Settings.Default.Save();
+            switch (camindex)
+            {
+                case 0:
+                    Properties.Settings.Default.C1_enable_capture_operator = (IRSENSOR || OPERSTART || FACECHECK);
+                    break;
+                case 1:
+                    Properties.Settings.Default.C2_enable_capture_operator = (IRSENSOR || OPERSTART || FACECHECK);
+                    break;
+                case 2:
+                    Properties.Settings.Default.C3_enable_capture_operator = (IRSENSOR || OPERSTART || FACECHECK);
+                    break;
+                case 3:
+                    Properties.Settings.Default.C4_enable_capture_operator = (IRSENSOR || OPERSTART || FACECHECK);
+                    break;
+            }
         }
 
         /// <summary>
@@ -126,7 +123,6 @@ namespace FaceDetection
                     Properties.Settings.Default.C4_enable_capture_operator = value;
                     break;
             }
-            //Properties.Settings.Default.Save();
         }
 
         internal static void GetFaceRecognitionSwitch(int camindex, out bool faceRecognitionEnabled)
