@@ -1078,9 +1078,6 @@ namespace FaceDetection
             SetMinMaxValues();
         }
 
-        /// <summary>
-        /// Call to these function must not change the 
-        /// </summary>
         //void SetMaxValues()
         //{
         //}
@@ -1100,10 +1097,6 @@ namespace FaceDetection
         //decimal GetTheMaxValue()
         //{
         //    return Math.Max(event_record_time_before_event.Value, nud_seconds_before_event.Value);
-        //}
-
-        //private void backgroundWorkerCancelClose_DoWork(object sender, DoWorkEventArgs e)
-        //{
         //}
 
         //void SetIntervalProps()
@@ -1252,16 +1245,15 @@ namespace FaceDetection
 
         private void StorePath_TextChanged(object sender, EventArgs e)
         {
-            //255??? long folder path UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UVCCAMERA1UV
-            //Console.WriteLine(Path.IsPathRooted(storePath.Text) + " - path rooted. " + Path.GetFullPath(storePath.Text) + " " + Path.GetPathRoot(storePath.Text));
-            
-            bool pathChanged = false;
+            bool pathChanged;
             char[] invalidPathChars = {'\"', '*', '?', '!', '<', '>', '|', ':', '.'};
 
             char[] characters = storePath.Text.ToCharArray();
-            for(int i=0; i< characters.Length; i++)
+
+            pathChanged = false;
+
+            for (int i=0; i< characters.Length; i++)
             {
-                //WHY NOT JUST CHECK Path.isRooted(storePath.Text)??
                 if (i == 0) // First character must be a letter (disk name), so if not, back to D
                 {   
                     if (characters[i] != 'A' && characters[i] != 'B' && characters[i] != 'C' && characters[i] != 'D' && characters[i] != 'E' && characters[i] != 'F'
@@ -1281,17 +1273,17 @@ namespace FaceDetection
                         pathChanged = true;
                     }
                 }
-                else if (i == 1) // This character must be ":"
+                else if (i == 1 && characters[i] != ':') // This character must be ":"
                 {
                     characters[i] = ':';
                     pathChanged = true;
                 }
-                else if (i == 2) // This character must be "\"
+                else if (i == 2 && characters[i] != '\\') // This character must be "\"
                 {
                     characters[i] = '\\';
                     pathChanged = true;
                 }
-                else
+                else if (i > 2)
                 { 
                     for (int j = 0; j < invalidPathChars.Length; j++)
                     {

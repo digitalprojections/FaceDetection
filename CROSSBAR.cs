@@ -333,7 +333,6 @@ namespace FaceDetection
 
         internal void PreviewMode()
         {
-            
             //recording_permission = true;
             Recording_is_on = false;
             window.recordingInProgress = false;
@@ -365,7 +364,6 @@ namespace FaceDetection
 
         internal void RecordingMode(int index)
         {
-            
             if (camera != null && camera.ON)
             {
                 camera.Release();                    
