@@ -24,7 +24,7 @@ namespace FaceDetection
         //public static bool isMinimized { get; private set; }
         public static bool isControlButtonVisible { get; private set; }
         /// <summary>
-        /// currentl index, not MAIN
+        /// current index, not MAIN
         /// </summary>
         public static int CameraIndex = -1;
         public static bool WAKEUPCALL { get; set; }
@@ -230,6 +230,11 @@ namespace FaceDetection
                                     j = parameters.Count;
                                 }
                                 catch (OverflowException ofx)
+                                {
+                                    WrongParameter = true;
+                                    j = parameters.Count;
+                                }
+                                catch (ArgumentOutOfRangeException aoore)
                                 {
                                     WrongParameter = true;
                                     j = parameters.Count;
@@ -537,7 +542,6 @@ namespace FaceDetection
 
                             //}
                         }
-                        
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
@@ -612,7 +616,6 @@ namespace FaceDetection
         /// </summary>
         private static void MethodSwitchCase()
         {
-            //Deal with wakeupcall
             switch (MethodName)
             {
                 // Show / Hide buttons
@@ -918,6 +921,11 @@ namespace FaceDetection
                     {
                         LOGGER.Add(e);
                     }
+                    break;
+
+
+                default: //TTFF
+                    WrongParameter = true;
                     break;
             }
             PARAM.Clear();
