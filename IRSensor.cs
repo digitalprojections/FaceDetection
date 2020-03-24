@@ -38,7 +38,9 @@ namespace FaceDetection
             if (operatorCaptureEnabled && IRSensorEnabled && checkInterval > 0)
             {
                 if (SensorCheckTimer != null)
+                {
                     SensorCheckTimer.Interval = checkInterval < 500 ? 500 : checkInterval;
+                }
             }
             else
             {
@@ -126,7 +128,9 @@ namespace FaceDetection
         {
             bIsIRCheckExec = true;
             if (SensorCheckTimer != null)
+            {
                 SensorCheckTimer.Start();
+            }
             else
             {
                 bIsIRCheckExec = true;
@@ -143,8 +147,10 @@ namespace FaceDetection
         public void Stop_IR_Timer()
         {
             bIsIRCheckExec = false;
-            if(SensorCheckTimer!=null)
+            if (SensorCheckTimer != null)
+            {
                 SensorCheckTimer.Stop();
+            }
         }
 
         public void Destroy()

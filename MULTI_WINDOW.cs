@@ -103,16 +103,16 @@ namespace FaceDetection
             }
         }
 
-        internal static void EventRecorderOff(int cameraIndex)
-        {   
-            var preeventRecording = MULTI_WINDOW.PreeventRecordingState(cameraIndex);
+        //internal static void EventRecorderOff(int cameraIndex)
+        //{   
+        //    var preeventRecording = MULTI_WINDOW.PreeventRecordingState(cameraIndex);
             
-            //SET it within each crossbar?
-            if (!preeventRecording)
-            {
-                formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.PREVIEW);
-            }
-        }
+        //    //SET it within each crossbar?
+        //    if (!preeventRecording)
+        //    {
+        //        formList[cameraIndex].crossbar?.Start(cameraIndex, CAMERA_MODES.PREVIEW);
+        //    }
+        //}
 
         public static bool PreeventRecordingState(int cameraIndex)
         {   

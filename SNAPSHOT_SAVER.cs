@@ -14,7 +14,6 @@ namespace FaceDetection
         static Encoder myEncoder;
         static EncoderParameter myEncoderParameter;
         static EncoderParameters myEncoderParameters;
-        
 
         //internal static void TakeSnapShot(int cameraIndex)
         //{
@@ -86,7 +85,9 @@ namespace FaceDetection
             for (j = 0; j < encoders.Length; ++j)
             {
                 if (encoders[j].MimeType == mimeType)
+                {
                     return encoders[j];
+                }
             }
             return null;
         }
@@ -111,11 +112,15 @@ namespace FaceDetection
             if (MainForm.GetMainForm.InvokeRequired)
             {                
                 var d = new dTakeAsyncSnapShot(() => ThreadProc(allcam, cameraIndex, v));
-                if(MainForm.GetMainForm!=null)
+                if (MainForm.GetMainForm != null)
+                {
                     MainForm.GetMainForm.Invoke(d);
+                }
             }
-            else {
+            else
+            {
                 bool snap = false;
+
                 while (snap == false)
                 {
                     if (MainForm.GetMainForm != null && (cameraIndex >= 0 && cameraIndex < 4))
@@ -134,10 +139,10 @@ namespace FaceDetection
                             bitmap.Save(picloc + "/" + imgdate + ".jpg", myImageCodecInfo, myEncoderParameters);
                             
                             //TakeSnapShot(cameraIndex);
-                            
                         }
 
-                    }else if(cameraIndex==8)
+                    }
+                    else if (cameraIndex == 8)
                     {
                         Thread.Sleep(1000);
                         for(int i = 0; i<MULTI_WINDOW.displayedCameraCount;i++)

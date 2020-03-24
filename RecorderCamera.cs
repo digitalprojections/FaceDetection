@@ -307,7 +307,6 @@ namespace FaceDetection
                     int r = 0;
                     while (r == 0)
                     {
-
                         try
                         {
                             r = enumFilters.Next(baseFilters.Length, baseFilters, fetched);
@@ -338,10 +337,8 @@ namespace FaceDetection
                 checkHR(hr, "Can't run the graph");
                 LOGGER.Add(" running the recorder graph ");
                 ON = true;
-
                 
                 crossbar.StartTimer();
-                
             }
             catch (COMException comx)
             {
@@ -360,7 +357,6 @@ namespace FaceDetection
                 str = Path.Combine(str, ACTIVE_RECPATH);
             }
             targetPath = str + "/" + dstFileName;
-            
             
             try
             {
@@ -394,7 +390,6 @@ namespace FaceDetection
                 targetPath = sourcePath + "/" + dstFileName;
                 Directory.CreateDirectory(sourcePath);
                 LOGGER.Add(iox);
-
             }
             mediaControl.StopWhenReady();
             int hr = pFilewriter_sink.SetFileName(targetPath, null);
@@ -462,7 +457,6 @@ namespace FaceDetection
                 hr = control9.SetVideoPosition(null, new DsRect(0, 0, parentwindow.Width, parentwindow.Height));
                 checkHR(hr, "Can't set rectangles of the video position");
             }
-
         }
 
         //private volatile ManualResetEvent m_PictureReady = null;
@@ -480,15 +474,11 @@ namespace FaceDetection
 
             m_ipBuffer = Marshal.AllocCoTaskMem(Math.Abs(m_videoBitCount / 8 * m_videoWidth) * m_videoHeight);
 
-
             int dwStartTime = System.Environment.TickCount;
 
             while (true)
-
             {
-
                 if (System.Environment.TickCount - dwStartTime > 1000) break; //1000 milliseconds
-
             }
 
             // Got one
@@ -550,6 +540,7 @@ namespace FaceDetection
             }
             GC.Collect();
         }
+
         private static void SafeReleaseComObject(object obj)
         {
             if (obj != null)
@@ -653,7 +644,6 @@ namespace FaceDetection
             return retval;
         }
 
-
         //デバッグ用イベント情報
         private void HandleGraphEvent()
         {
@@ -704,7 +694,6 @@ namespace FaceDetection
                 {
                     if (vformat[i].Caps.Guid == DirectShow.DsGuid.FORMAT_VideoInfo)
                     {
-
                         if (vformat[i].Size.Width == size.Width && vformat[i].Size.Height == size.Height)
                         {
                             SetVideoOutputFormat(pin, i, size, fps);
@@ -834,7 +823,6 @@ namespace FaceDetection
             int hr = config.SetFormat(mt);
 
             LOGGER.Add("SETTINGS OK ?" + hr);
-
 
             // 解放
             if (cap_data != System.IntPtr.Zero) Marshal.FreeHGlobal(cap_data);
@@ -1176,7 +1164,6 @@ namespace FaceDetection
             }
         }
         #endregion
-
 
 
         #region Interface
