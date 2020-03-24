@@ -130,9 +130,9 @@ namespace FaceDetection
             folderBrowserDialogStoreFolder.ShowNewFolderButton = true;
             folderBrowserDialogStoreFolder.Description = Resource.store_location_description;
             folderBrowserDialogStoreFolder.SelectedPath = Properties.Settings.Default.video_file_location;
-            // Show the FolderBrowserDialog.  
+            
             DialogResult result = folderBrowserDialogStoreFolder.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result == DialogResult.OK && this.CanFocus)
             {
                 storePath.Text = folderBrowserDialogStoreFolder.SelectedPath;
                 Environment.SpecialFolder root = folderBrowserDialogStoreFolder.RootFolder;
