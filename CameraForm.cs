@@ -785,6 +785,7 @@ namespace FaceDetection
             this.imageList.Images.SetKeyName(18, "584abf212912007028bd9334.png");
             this.imageList.Images.SetKeyName(19, "5879208-video-camera-png-vector-psd-and-clipart-with-transparent-video-camera-log" + "o-png-360_360_preview.png");
             this.imageList.Images.SetKeyName(20, "player_record.png");
+            //this.imageList.Images.SetKeyName(21, "Capture.png");
             // 
             // settingsButton
             // 
@@ -822,8 +823,9 @@ namespace FaceDetection
             this.cameraButton.BackColor = System.Drawing.SystemColors.Control;
             this.cameraButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.cameraButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cameraButton.ImageIndex = 14;
-            this.cameraButton.ImageList = this.imageList;
+            //this.cameraButton.ImageIndex = 14;
+            this.cameraButton.Image = Properties.Resources.video_camera_icon;
+            //this.cameraButton.ImageList = this.imageList;
             this.cameraButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cameraButton.Location = new System.Drawing.Point(177, 3);
             this.cameraButton.Name = "cameraButton";
