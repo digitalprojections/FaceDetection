@@ -689,7 +689,7 @@ namespace FaceDetection
 
             for (int i = 0; i < vformat.Length; i++)
             {
-                LOGGER.Add(vformat[i].Size.Width + " " + vformat[i].TimePerFrame);
+                LOGGER.Add("Size width: " + vformat[i].Size.Width + " Time per frame: " + vformat[i].TimePerFrame);
                 if (vformat[i].MajorType == DirectShow.DsGuid.GetNickname(DirectShow.DsGuid.MEDIATYPE_Video))
                 {
                     if (vformat[i].Caps.Guid == DirectShow.DsGuid.FORMAT_VideoInfo)
