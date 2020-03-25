@@ -1218,7 +1218,7 @@ namespace FaceDetection
             formWhereSettingsWasOpened = cameraIndex;
             for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
             {
-                if (MULTI_WINDOW.formList[i].DISPLAYED == true)
+                if (MULTI_WINDOW.formList[i].DISPLAYED == true && MULTI_WINDOW.formList[i].WindowState != FormWindowState.Maximized)
                 {
                     PROPERTY_FUNCTIONS.Set_Window_Location(i, MULTI_WINDOW.formList[i]);
                 }
