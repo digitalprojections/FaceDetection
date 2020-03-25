@@ -238,6 +238,14 @@ namespace FaceDetection
                 }
                 storePath.SelectionStart = storePath.Text.Length;
             }
+            else // Delete last character if it is a space
+            {
+                char[] characters = storePath.Text.ToCharArray();
+                if(char.IsWhiteSpace(characters[characters.Length-1]))
+                {
+                    storePath.Text = storePath.Text.Substring(0, storePath.Text.Length-1);
+                }
+            }
 
             Properties.Settings.Default.main_camera_index = cm_camera_number.SelectedIndex;
             for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
@@ -1308,7 +1316,7 @@ namespace FaceDetection
 
             pathChanged = false;
 
-            for (int i=0; i< characters.Length; i++)
+            for (int i = 0; i < characters.Length; i++)
             {
                 if (i == 0) // First character must be a letter (disk name), so if not, back to D
                 {   
