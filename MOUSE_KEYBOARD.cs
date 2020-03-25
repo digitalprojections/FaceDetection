@@ -93,41 +93,45 @@ namespace FaceDetection
             PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(CAMERA_INDEX, out captureOperatorEnabled);
             PROPERTY_FUNCTIONS.GetOnOperationStartSwitch(CAMERA_INDEX, out recordWhenOperation);
             try
-            {                
-                preeventRecording = MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.PREEVENT_RECORDING;
-                if (captureOperatorEnabled && recordWhenOperation && Listen && !MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.OPER_BAN)
+            {
+                if(MULTI_WINDOW.formList[CAMERA_INDEX].crossbar!=null)
                 {
-                    Listen = false;
-                    if (captureMethod != "Snapshot") // Video
+                    preeventRecording = MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.PREEVENT_RECORDING;
+                    if (captureOperatorEnabled && recordWhenOperation && Listen && !MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.OPER_BAN)
                     {
-                        if (preeventRecording && timeAfterEvent > 0)
+                        Listen = false;
+                        if (captureMethod != "Snapshot") // Video
                         {
-                            TaskManager.EventAppeared(RECORD_PATH.EVENT, CAMERA_INDEX + 1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+                            if (preeventRecording && timeAfterEvent > 0)
+                            {
+                                TaskManager.EventAppeared(RECORD_PATH.EVENT, CAMERA_INDEX + 1, timeBeforeEvent, timeAfterEvent, DateTime.Now);
+                            }
+                            else
+                            {
+                                MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.Start(CAMERA_INDEX, CAMERA_MODES.OPERATOR);
+                            }
+                            MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.NoCapTimerON(timeAfterEvent);
+                            MULTI_WINDOW.formList[CAMERA_INDEX].SetRecordIcon(CAMERA_INDEX, timeAfterEvent);
                         }
-                        else
+                        else // Snapshot
                         {
-                            MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.Start(CAMERA_INDEX, CAMERA_MODES.OPERATOR);
+                            SNAPSHOT_SAVER.TakeSnapShot(CAMERA_INDEX, "event");
+
+                            MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.NoCapTimerON(0);
                         }
-                        MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.NoCapTimerON(timeAfterEvent);
-                        MULTI_WINDOW.formList[CAMERA_INDEX].SetRecordIcon(CAMERA_INDEX, timeAfterEvent);
+
+                        MainForm.GetMainForm.BackLight.Restart();
                     }
-                    else // Snapshot
+                    else
                     {
-                        SNAPSHOT_SAVER.TakeSnapShot(CAMERA_INDEX, "event");
-
-                        MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.NoCapTimerON(0);
+                        Listen = false;
                     }
-
-                    MainForm.GetMainForm.BackLight.Restart();
+                    if (MainForm.GetMainForm != null)
+                    {
+                        MainForm.GetMainForm.BackLight.Restart();
+                    }
                 }
-                else
-                {
-                    Listen = false;
-                }
-                if (MainForm.GetMainForm != null)
-                {
-                    MainForm.GetMainForm.BackLight.Restart();
-                }
+                
             }
             catch (Exception ex)
             {

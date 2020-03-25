@@ -434,10 +434,19 @@ namespace FaceDetection
                     }
                 }
                 frame_rates_combo.Items.AddRange(vsPicked.ToArray());
-                if (found_fps == PROPERTY_FUNCTIONS.GetFPS(cameraIndex))
+                if (vsPicked.Count > 0)
                 {
-                    frame_rates_combo.SelectedItem = found_fps;
+                    if (found_fps == PROPERTY_FUNCTIONS.GetFPS(cameraIndex))
+                    {
+                        frame_rates_combo.SelectedItem = found_fps;
+                    }
+                    else
+                    {
+                        //value not found, set whatever applicable: 0 index
+                        frame_rates_combo.SelectedItem = vsPicked[0];
+                    }
                 }
+                
             }
             if (!matching_fps_found)
             {
