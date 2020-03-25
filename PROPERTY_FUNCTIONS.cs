@@ -569,23 +569,25 @@ namespace FaceDetection
         /// <returns></returns>
         public static void Set_Camera_Window_Size(int cam_ind, Form form)
         {
+            Console.WriteLine(form.Width + " " + form.Height);
+            Console.WriteLine(form.Size.Width + " " + form.Size.Height);
             switch (cam_ind)
             {
                 case 0:
-                    Properties.Settings.Default.C1w = Convert.ToDecimal(form.Width);
-                    Properties.Settings.Default.C1h = Convert.ToDecimal(form.Height);
+                    Properties.Settings.Default.C1w = Convert.ToDecimal(form.Width-16);
+                    Properties.Settings.Default.C1h = Convert.ToDecimal(form.Height-39);
                     break;
                 case 1:
-                    Properties.Settings.Default.C2w = Convert.ToDecimal(form.Width);
-                    Properties.Settings.Default.C2h = Convert.ToDecimal(form.Height);
+                    Properties.Settings.Default.C2w = Convert.ToDecimal(form.Width-16);
+                    Properties.Settings.Default.C2h = Convert.ToDecimal(form.Height-39);
                     break;
                 case 2:
-                    Properties.Settings.Default.C3w = Convert.ToDecimal(form.Width);
-                    Properties.Settings.Default.C3h = Convert.ToDecimal(form.Height);
+                    Properties.Settings.Default.C3w = Convert.ToDecimal(form.Width-16);
+                    Properties.Settings.Default.C3h = Convert.ToDecimal(form.Height-39);
                     break;
                 case 3:
-                    Properties.Settings.Default.C4w = Convert.ToDecimal(form.Width);
-                    Properties.Settings.Default.C4h = Convert.ToDecimal(form.Height);
+                    Properties.Settings.Default.C4w = Convert.ToDecimal(form.Width-16);
+                    Properties.Settings.Default.C4h = Convert.ToDecimal(form.Height-39);
                     break;
             }
         }

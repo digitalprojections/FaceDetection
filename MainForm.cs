@@ -100,6 +100,10 @@ namespace FaceDetection
                 //Object references                    
                 mainForm = this;
                 this.WindowState = FormWindowState.Minimized;
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.Width = 0;
+                this.Height = 0;
+
 
                 if (Camera.GetCameraCount().Length > 0)
                 {
@@ -119,6 +123,7 @@ namespace FaceDetection
                 //    Application.Exit();
                 //}
             }
+            
         }
 
         public static void AllChangesApply()
