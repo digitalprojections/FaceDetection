@@ -201,6 +201,7 @@ namespace FaceDetection
                 }
                 catch (Exception e) // no file to cut
                 {
+                    Console.WriteLine("No file to cut");
                     startVideoForFullFile = "";
                 }
 

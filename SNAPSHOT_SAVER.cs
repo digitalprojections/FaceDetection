@@ -75,6 +75,10 @@ namespace FaceDetection
             {
                 LOGGER.Add(nrx);
             }
+            catch (Exception ex)
+            {
+                LOGGER.Add(ex);
+            }
         }
 
         private static ImageCodecInfo GetEncoderInfo(String mimeType)

@@ -123,6 +123,7 @@ namespace FaceDetection
                     MainForm.RSensor.bIsIRCheckExec = true;
                 }
             }
+            MainForm.Settingui.SetOKButtonState();
         }
         
         public void SetIconTimer(decimal recordingLength)
