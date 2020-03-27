@@ -175,19 +175,33 @@ namespace FaceDetection
             else
             {
                 //PREEVENT EXISTS. PERMANENT RECORDING MODE
+                if (Directory.Exists(@"D:\"))
+                {
+                    Properties.Settings.Default.temp_folder = @"D:\TEMP";
+                    Directory.CreateDirectory(Properties.Settings.Default.temp_folder + @"\" + +(Properties.Settings.Default.main_camera_index + 1));
+                    sourcePath = Properties.Settings.Default.temp_folder + @"\" + +(Properties.Settings.Default.main_camera_index + 1);
+                }
+                else
+                {
+                    // There is no disk D, resetting the default folders to C
+                    Properties.Settings.Default.temp_folder = @"C:\TEMP";
+                    Directory.CreateDirectory(Properties.Settings.Default.temp_folder + @"\" + +(Properties.Settings.Default.main_camera_index + 1));
+                    sourcePath = Properties.Settings.Default.temp_folder + @"\" + +(Properties.Settings.Default.main_camera_index + 1);
+                }
+
                 targetPath = sourcePath + "/" + dstFileName;
                 LOGGER.Add(targetPath + " target path");
-                try
-                {
-                    Directory.CreateDirectory(sourcePath);
-                }
-                catch (IOException iox)
-                {
-                    sourcePath = @"C:\TEMP\" + index;
-                    targetPath = sourcePath + "/" + dstFileName;
-                    Directory.CreateDirectory(sourcePath);
-                    LOGGER.Add(iox);
-                }                
+                //try
+                //{
+                //    Directory.CreateDirectory(sourcePath);
+                //}
+                //catch (IOException iox)
+                //{
+                //    sourcePath = @"C:\TEMP\" + index;
+                //    targetPath = sourcePath + "/" + dstFileName;
+                //    Directory.CreateDirectory(sourcePath);
+                //    LOGGER.Add(iox);
+                //}
             }
 
             GetInterfaces();
@@ -378,19 +392,34 @@ namespace FaceDetection
         {
             //PREEVENT EXISTS. PERMANENT RECORDING MODE
             string dstFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".avi";
+
+            if (Directory.Exists(@"D:\"))
+            {
+                Properties.Settings.Default.temp_folder = @"D:\TEMP";
+                Directory.CreateDirectory(Properties.Settings.Default.temp_folder + @"\" + + (Properties.Settings.Default.main_camera_index + 1));
+                sourcePath = Properties.Settings.Default.temp_folder + @"\" + +(Properties.Settings.Default.main_camera_index + 1);
+            }
+            else
+            {
+                // There is no disk D, resetting the default folders to C
+                Properties.Settings.Default.temp_folder = @"C:\TEMP";
+                Directory.CreateDirectory(Properties.Settings.Default.temp_folder + @"\" + +(Properties.Settings.Default.main_camera_index + 1));
+                sourcePath = Properties.Settings.Default.temp_folder + @"\" + +(Properties.Settings.Default.main_camera_index + 1);
+            }
+
             targetPath = sourcePath + "/" + dstFileName;
             LOGGER.Add(targetPath + " target path");
-            try
-            {
-                Directory.CreateDirectory(sourcePath);
-            }
-            catch (IOException iox)
-            {
-                sourcePath = @"C:\TEMP";
-                targetPath = sourcePath + "/" + dstFileName;
-                Directory.CreateDirectory(sourcePath);
-                LOGGER.Add(iox);
-            }
+            //try
+            //{
+            //    Directory.CreateDirectory(sourcePath);
+            //}
+            //catch (IOException iox)
+            //{
+            //    sourcePath = @"C:\TEMP";
+            //    targetPath = sourcePath + "/" + dstFileName;
+            //    Directory.CreateDirectory(sourcePath);
+            //    LOGGER.Add(iox);
+            //}
             mediaControl.StopWhenReady();
             int hr = pFilewriter_sink.SetFileName(targetPath, null);
             checkHR(hr, "Can't set filename");

@@ -57,8 +57,9 @@ namespace FaceDetection
             Properties.Settings.Default.Reload();
             try
             {
-                Directory.CreateDirectory(Properties.Settings.Default.temp_folder);
                 Directory.CreateDirectory(Properties.Settings.Default.video_file_location + "/Camera");
+                Properties.Settings.Default.temp_folder = @"D:\TEMP";
+                Directory.CreateDirectory(Properties.Settings.Default.temp_folder);
             }
             catch (IOException iox)
             {
