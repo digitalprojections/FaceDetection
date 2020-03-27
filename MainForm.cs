@@ -57,7 +57,7 @@ namespace FaceDetection
                     LOGGER.Add(String.Concat(PARAMETERS.PARAM));
                 }
 
-                backLight = new BackLightController();
+                //backLight = new BackLightController();
 
                 if(Properties.Settings.Default.enable_delete_old_files)
                 {

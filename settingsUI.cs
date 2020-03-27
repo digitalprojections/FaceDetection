@@ -51,9 +51,6 @@ namespace FaceDetection
         //private bool cameraSelectedManually;
         private delegate void dSettingFromProperties();
 
-        private BackLightController backLight;
-        private BackLightController BackLight { get => backLight; set => backLight = value; }
-
         public SettingsUI()
         {
             InitializeComponent();
@@ -81,7 +78,6 @@ namespace FaceDetection
             this.AutoSizeMode = AutoSizeMode.GrowOnly;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             SetMinMaxValues();
-            backLight = new BackLightController();
         }
 
         /// <summary>
@@ -258,7 +254,7 @@ namespace FaceDetection
                 }
             }
 
-            BackLight.Start();
+            MainForm.GetMainForm.BackLight.Start();
 
             //Properties.Settings.Default.Save();
             Camera.CountCamera();
