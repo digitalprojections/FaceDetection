@@ -28,6 +28,10 @@ namespace FaceDetection
                     {
                         form = new CameraForm(i);
                         formList[i] = form;
+                        if (PARAMETERS.minimizedByParameters)
+                        {
+                            formList[i].WindowState = FormWindowState.Minimized;
+                        }
                         form.Show();
                         displayedCameraCount++;
                     }
@@ -36,7 +40,11 @@ namespace FaceDetection
                 for (int i = displayedCameraCount; i < numberOfCamerasToDisplay; i++)
                 {
                     form = new CameraForm(i);
-                    formList[i] = form;                    
+                    formList[i] = form;
+                    if (PARAMETERS.minimizedByParameters)
+                    {
+                        formList[i].WindowState = FormWindowState.Minimized;
+                    }
                     form.Show();
                     displayedCameraCount ++;                    
                 }

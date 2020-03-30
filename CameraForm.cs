@@ -356,7 +356,7 @@ namespace FaceDetection
             Location = PROPERTY_FUNCTIONS.Get_Window_Location(CameraIndex);
 
             // Minimized sub if "all display" is not checked
-            if (!Properties.Settings.Default.show_all_cams_simulteneously && CameraIndex != Properties.Settings.Default.main_camera_index)
+            if ((!Properties.Settings.Default.show_all_cams_simulteneously && CameraIndex != Properties.Settings.Default.main_camera_index) || PARAMETERS.minimizedByParameters)
             {
                 this.WindowState = FormWindowState.Minimized;
             }
