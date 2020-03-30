@@ -152,6 +152,15 @@ namespace FaceDetection {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The save path doesn&apos;t exist. Please change the path or restart the application.
+        /// </summary>
+        internal static string save_path_not_exist {
+            get {
+                return ResourceManager.GetString("save_path_not_exist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set as the MAIN CAMERA.
         /// </summary>
         internal static string setAsMainCam {

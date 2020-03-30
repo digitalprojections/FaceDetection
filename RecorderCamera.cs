@@ -170,7 +170,16 @@ namespace FaceDetection
                     str = Path.Combine(str, ACTIVE_RECPATH);
                 }
                 targetPath = str + "/" + dstFileName;
-                Directory.CreateDirectory(str);
+                try
+                {
+                    Directory.CreateDirectory(str);
+                }
+                catch (DirectoryNotFoundException dnfe)
+                {
+                    LOGGER.Add("The path " + str + " doesn't exist");
+                    MessageBox.Show(Resource.save_path_not_exist);
+                    Application.Exit();
+                }
             }
             else
             {

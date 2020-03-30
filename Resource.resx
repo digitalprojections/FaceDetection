@@ -148,6 +148,9 @@ Do you want to continue?</value>
   <data name="releaseCamera" xml:space="preserve">
     <value>Release camera</value>
   </data>
+  <data name="save_path_not_exist" xml:space="preserve">
+    <value>The save path doesn't exist. Please change the path or restart the application</value>
+  </data>
   <data name="setAsMainCam" xml:space="preserve">
     <value>Set as the MAIN CAMERA</value>
   </data>

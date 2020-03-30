@@ -58,7 +58,15 @@ namespace FaceDetection
             string picloc = Path.Combine(Properties.Settings.Default.video_file_location, "Camera");
             picloc = Path.Combine(picloc, (cameraIndex + 1).ToString());
             picloc = Path.Combine(picloc, ev);
-            Directory.CreateDirectory(picloc);
+            try
+            {
+                Directory.CreateDirectory(picloc);
+            }
+            catch (DirectoryNotFoundException dnfe)
+            {
+                LOGGER.Add("The path " + picloc + " doesn't exist");
+                System.Windows.Forms.MessageBox.Show(Resource.save_path_not_exist);
+            }
             var imgdate = DateTime.Now.ToString("yyyyMMddHHmmss");
 
             Bitmap bitmap = new Bitmap(1, 1);

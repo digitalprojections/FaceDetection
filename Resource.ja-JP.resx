@@ -142,6 +142,9 @@
   <data name="releaseCamera" xml:space="preserve">
     <value>カメラの削除</value>
   </data>
+  <data name="save_path_not_exist" xml:space="preserve">
+    <value>保存パスが存在しません。パスを変更してください、又はアプリケーションを再起動してください。</value>
+  </data>
   <data name="setAsMainCam" xml:space="preserve">
     <value>メインカメラとして使用する</value>
   </data>

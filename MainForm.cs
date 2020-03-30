@@ -65,6 +65,8 @@ namespace FaceDetection
                     stopwatch.Start();
                 }
             }
+
+            USBManager usbManager = new USBManager();
         }
         
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
