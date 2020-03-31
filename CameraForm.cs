@@ -541,11 +541,18 @@ namespace FaceDetection
 
         private void FormClass_SizeChanged(object sender, EventArgs e)
         {
-            if(windowState != this.WindowState)
+            if(windowState != this.WindowState && PROPERTY_FUNCTIONS.GetShowWindowPaneSwitch(CameraIndex))
             {
                 camera_number.Location = new Point(this.Width - 89, 12);
                 controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
                 dateTimeLabel.Location = new Point(12, this.Height - 80);
+                windowState = this.WindowState;
+            }
+            else if (windowState != this.WindowState && !PROPERTY_FUNCTIONS.GetShowWindowPaneSwitch(CameraIndex))
+            {
+                camera_number.Location = new Point(this.Width - 89, 12);
+                controlButtons.Location = new Point(this.Width - 335, this.Height - 80);
+                dateTimeLabel.Location = new Point(12, this.Height - 50);
                 windowState = this.WindowState;
             }
         }

@@ -692,16 +692,16 @@ namespace FaceDetection
             switch (cameraIndex)
             {
                 case 0:                
-                secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
+                    secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
                     break;
                 case 1:
-                secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
+                    secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
                     break;
                 case 2:
-                secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
+                    secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
                     break;
                 case 3:
-                secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
+                    secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
                     break;
                 default:
                     secondsAfterEvent = 300;

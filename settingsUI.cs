@@ -256,42 +256,9 @@ namespace FaceDetection
             }
 
             MainForm.GetMainForm.BackLight.Start();
-
-            //Properties.Settings.Default.Save();
             Camera.CountCamera();
-            //Camera.SetNumberOfCameras();
             Hide();
-
-            //if (Properties.Settings.Default.show_all_cams_simulteneously == false)
-            //{
-            //    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-            //    {
-            //        if (i != Properties.Settings.Default.main_camera_index)
-            //        {
-            //            MULTI_WINDOW.formList[i].WindowState = FormWindowState.Minimized;
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-            //    {
-            //         MULTI_WINDOW.formList[i].WindowState = FormWindowState.Normal;
-            //    }
-            //}
-
             MainForm.AllChangesApply();
-
-            // 4 Cameras: the selected camera became preevent mode (or preview), others became preview mode
-            //MULTI_WINDOW.formList[currentCameraIndex].crossbar.Start(currentCameraIndex, CAMERA_MODES.PREVIEW);
-            //    for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
-            //    {
-            //        if (i != Camera_index)
-            //        { 
-            //            MULTI_WINDOW.SetToPreviewMode(i);
-            //        }
-            //    MULTI_WINDOW.formList[i].Size = PROPERTY_FUNCTIONS.Get_Camera_Window_Size(i);                
-            //}
         }
 
         private void SetCameraPropertiesFromMemory()
