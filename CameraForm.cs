@@ -45,6 +45,7 @@ namespace FaceDetection
         private System.Timers.Timer hideIconTimer = new System.Timers.Timer();
         private delegate void dHideRecIcon();
         private delegate void dDateTimerUpdater();
+        private FormWindowState windowState = FormWindowState.Maximized;
 
         /// <summary>
         /// Current camera index, not MAIN
@@ -116,6 +117,7 @@ namespace FaceDetection
             this.MouseDown += FormClass_Down;
             this.MouseUp += CameraForm_MouseUp;
             this.DoubleClick += FullScreen;
+            this.SizeChanged += FormClass_SizeChanged;
 
             crossbar = new CROSSBAR(CameraIndex, this);
             
@@ -537,6 +539,17 @@ namespace FaceDetection
             mouse_down_timer.Start();
         }
 
+        private void FormClass_SizeChanged(object sender, EventArgs e)
+        {
+            if(windowState != this.WindowState)
+            {
+                camera_number.Location = new Point(this.Width - 89, 12);
+                controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
+                dateTimeLabel.Location = new Point(12, this.Height - 80);
+                windowState = this.WindowState;
+            }
+        }
+
         private void SnapShot (object sender, EventArgs e)
         {
             string cameraSender;
@@ -653,8 +666,8 @@ namespace FaceDetection
                     }
                     else
                     {
-                        camera_number.Location = new Point(this.Width - 89, 12);
-                        controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
+                        //camera_number.Location = new Point(this.Width - 89, 12);
+                        //controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
                         controlButtons.Visible = true;
                     }
                 }
