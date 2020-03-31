@@ -14,7 +14,7 @@ namespace FaceDetection
         //public static bool[] formArray = new bool[4];
 
         /// <summary>
-        /// by passing two important parameters.
+        /// Show or close window form
         /// </summary>
         public static void CreateCameraWindows()
         {

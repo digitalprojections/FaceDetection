@@ -116,7 +116,7 @@ namespace FaceDetection
             this.MouseDown += FormClass_Down;
             this.MouseUp += CameraForm_MouseUp;
             this.DoubleClick += FullScreen;
-            
+
             crossbar = new CROSSBAR(CameraIndex, this);
             
             //var mci = Properties.Settings.Default.main_camera_index;
@@ -265,7 +265,7 @@ namespace FaceDetection
         {
             bool retval = false;
             string temp = s.Width + "x" + s.Height;
-            //
+            
             for (int i = 0; i < vf.Count; i++)
             {
                 if (vf[i] == temp)
@@ -653,6 +653,8 @@ namespace FaceDetection
                     }
                     else
                     {
+                        camera_number.Location = new Point(this.Width - 89, 12);
+                        controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
                         controlButtons.Visible = true;
                     }
                 }

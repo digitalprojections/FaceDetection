@@ -87,8 +87,6 @@ namespace FaceDetection
             EventCode eventCode = (EventCode) WM.PAINT;
             mediaEventEx.GetEvent(out eventCode, out p1, out p2, 1000);
             DsUtils.FreeAMMediaType(mt);
-
-            
         }
 
         public RecorderCamera(int cameraIndex, Form pbx, CROSSBAR cb)
@@ -141,7 +139,8 @@ namespace FaceDetection
         {
             Size size = PROPERTY_FUNCTIONS.Get_Stored_Resolution(index);
             int fps=15;
-            try{
+            try
+            {
                 fps = Int32.Parse(PROPERTY_FUNCTIONS.GetFPS(index));
             }
             catch (FormatException fx)
