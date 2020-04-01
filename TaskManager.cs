@@ -454,9 +454,9 @@ namespace FaceDetection
                 Process.Start(startInfo);
 
                 Console.WriteLine("preEventVideoFiles: " + preEventVideoFiles);
-                Console.WriteLine("postEventVideoFiles " + postEventVideoFiles);
+                Console.WriteLine("postEventVideoFiles: " + postEventVideoFiles);
                 LOGGER.Add("preEventVideoFiles: " + preEventVideoFiles);
-                LOGGER.Add("postEventVideoFiles " + postEventVideoFiles);
+                LOGGER.Add("postEventVideoFiles: " + postEventVideoFiles);
                 if (preEventVideoFiles != "")
                 {
                     DeleteCutFileFromTemp(preEventVideoFiles, listTask[TaskIndex].cameraNumber); // Delete file cut for the first part of the full video to not taking it in the next event 
