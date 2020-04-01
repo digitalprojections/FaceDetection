@@ -6,7 +6,7 @@ namespace FaceDetection
 {
     public static class PROPERTY_FUNCTIONS
     {
-        public static bool resolution_changed { get; set; }
+        //public static bool resolution_changed { get; set; }
 
         public static Size GetCameraSize(int cam_ind)
         {
@@ -670,16 +670,16 @@ namespace FaceDetection
             switch (cameraIndex)
             {
                 case 0:
-                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
+                    secondBeforeOperationEvent = MULTI_WINDOW.formList[0].secondsBeforeTriggerEvent[0]; //decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
                     break;
                 case 1:
-                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
+                    secondBeforeOperationEvent = MULTI_WINDOW.formList[1].secondsBeforeTriggerEvent[1]; //decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
                     break;
                 case 2:
-                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
+                    secondBeforeOperationEvent = MULTI_WINDOW.formList[2].secondsBeforeTriggerEvent[2]; //decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
                     break;
                 case 3:
-                    secondBeforeOperationEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
+                    secondBeforeOperationEvent = MULTI_WINDOW.formList[3].secondsBeforeTriggerEvent[3]; //decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
                     break;
                 default:
                     secondBeforeOperationEvent = 300;
@@ -691,17 +691,17 @@ namespace FaceDetection
         {
             switch (cameraIndex)
             {
-                case 0:                
-                    secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
+                case 0:
+                    secondsAfterEvent = MULTI_WINDOW.formList[0].secondsAfterTriggerEvent[0]; //decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
                     break;
                 case 1:
-                    secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
+                    secondsAfterEvent = MULTI_WINDOW.formList[1].secondsAfterTriggerEvent[1]; //decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
                     break;
                 case 2:
-                    secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
+                    secondsAfterEvent = MULTI_WINDOW.formList[2].secondsAfterTriggerEvent[2]; //decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
                     break;
                 case 3:
-                    secondsAfterEvent = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
+                    secondsAfterEvent = MULTI_WINDOW.formList[3].secondsAfterTriggerEvent[3]; //decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
                     break;
                 default:
                     secondsAfterEvent = 300;
@@ -758,16 +758,16 @@ namespace FaceDetection
             switch (cameraIndex)
             {
                 case 0:
-                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C1_interval_before_reinitiating_recording);
+                    intervalBeforeReinitiating = MULTI_WINDOW.formList[0].intervalAfterEvent[0]; //decimal.ToInt32(Properties.Settings.Default.C1_interval_before_reinitiating_recording);
                     break;
                 case 1:
-                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C2_interval_before_reinitiating_recording);
+                    intervalBeforeReinitiating = MULTI_WINDOW.formList[1].intervalAfterEvent[1]; //decimal.ToInt32(Properties.Settings.Default.C2_interval_before_reinitiating_recording);
                     break;
                 case 2:
-                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C3_interval_before_reinitiating_recording);
+                    intervalBeforeReinitiating = MULTI_WINDOW.formList[2].intervalAfterEvent[2]; //decimal.ToInt32(Properties.Settings.Default.C3_interval_before_reinitiating_recording);
                     break;
                 case 3:
-                    intervalBeforeReinitiating = decimal.ToInt32(Properties.Settings.Default.C4_interval_before_reinitiating_recording);
+                    intervalBeforeReinitiating = MULTI_WINDOW.formList[3].intervalAfterEvent[3]; //decimal.ToInt32(Properties.Settings.Default.C4_interval_before_reinitiating_recording);
                     break;
                 default:
                     intervalBeforeReinitiating = 60;

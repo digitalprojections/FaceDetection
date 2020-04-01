@@ -87,16 +87,18 @@ namespace FaceDetection
             int timeBeforeEvent = 0, timeAfterEvent = 0;
             bool captureOperatorEnabled = false, recordWhenOperation = false, preeventRecording = false;
 
-            PROPERTY_FUNCTIONS.GetSecondsBeforeEvent(CAMERA_INDEX, out timeBeforeEvent);
-            PROPERTY_FUNCTIONS.GetSecondsAfterEvent(CAMERA_INDEX, out timeAfterEvent);
             PROPERTY_FUNCTIONS.GetCaptureMethod(CAMERA_INDEX, out captureMethod);
             PROPERTY_FUNCTIONS.GetCaptureOperatorSwitch(CAMERA_INDEX, out captureOperatorEnabled);
             PROPERTY_FUNCTIONS.GetOnOperationStartSwitch(CAMERA_INDEX, out recordWhenOperation);
+
             try
             {
                 if(MULTI_WINDOW.formList[CAMERA_INDEX].crossbar!=null)
                 {
+                    PROPERTY_FUNCTIONS.GetSecondsBeforeEvent(CAMERA_INDEX, out timeBeforeEvent);
+                    PROPERTY_FUNCTIONS.GetSecondsAfterEvent(CAMERA_INDEX, out timeAfterEvent);
                     preeventRecording = MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.PREEVENT_RECORDING;
+
                     if (captureOperatorEnabled && recordWhenOperation && Listen && !MULTI_WINDOW.formList[CAMERA_INDEX].crossbar.OPER_BAN)
                     {
                         Listen = false;

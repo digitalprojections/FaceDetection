@@ -247,6 +247,30 @@ namespace FaceDetection
             Properties.Settings.Default.main_camera_index = cm_camera_number.SelectedIndex;
             for (int i = 0; i < MULTI_WINDOW.displayedCameraCount; i++)
             {
+                switch (i)
+                {
+                    case 0:
+                        MULTI_WINDOW.formList[0].secondsBeforeTriggerEvent[0] = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
+                        MULTI_WINDOW.formList[0].secondsAfterTriggerEvent[0] = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
+                        MULTI_WINDOW.formList[0].intervalAfterEvent[0] = decimal.ToInt32(Properties.Settings.Default.C1_interval_before_reinitiating_recording);
+                        break;
+                    case 1:
+                        MULTI_WINDOW.formList[1].secondsBeforeTriggerEvent[1] = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
+                        MULTI_WINDOW.formList[1].secondsAfterTriggerEvent[1] = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
+                        MULTI_WINDOW.formList[1].intervalAfterEvent[1] = decimal.ToInt32(Properties.Settings.Default.C2_interval_before_reinitiating_recording);
+                        break;
+                    case 2:
+                        MULTI_WINDOW.formList[2].secondsBeforeTriggerEvent[2] = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
+                        MULTI_WINDOW.formList[2].secondsAfterTriggerEvent[2] = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
+                        MULTI_WINDOW.formList[2].intervalAfterEvent[2] = decimal.ToInt32(Properties.Settings.Default.C3_interval_before_reinitiating_recording);
+                        break;
+                    case 3:
+                        MULTI_WINDOW.formList[3].secondsBeforeTriggerEvent[3] = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
+                        MULTI_WINDOW.formList[3].secondsAfterTriggerEvent[3] = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
+                        MULTI_WINDOW.formList[3].intervalAfterEvent[3] = decimal.ToInt32(Properties.Settings.Default.C4_interval_before_reinitiating_recording);
+                        break;
+                }
+
                 if (MULTI_WINDOW.formList[i].DISPLAYED == true)
                 {
                     PROPERTY_FUNCTIONS.Set_Window_Location_Set(i, MULTI_WINDOW.formList[i]);

@@ -53,6 +53,9 @@ namespace FaceDetection
         public int CameraIndex = 0;
         public CROSSBAR crossbar;
         public bool applicationExit = false;
+        public int[] secondsBeforeTriggerEvent = new int[4];
+        public int[] secondsAfterTriggerEvent = new int[4];
+        public int[] intervalAfterEvent = new int[4] { 10, 10, 10, 10 };
 
         public CameraForm(int camind)
         {
@@ -120,7 +123,7 @@ namespace FaceDetection
             this.SizeChanged += FormClass_SizeChanged;
 
             crossbar = new CROSSBAR(CameraIndex, this);
-            
+
             //var mci = Properties.Settings.Default.main_camera_index;
             //if (CameraIndex == mci)// && PROPERTY_FUNCTIONS.CheckPreEventTimes(CameraIndex))
             //{
@@ -133,9 +136,9 @@ namespace FaceDetection
             //crossbar.Start(CameraIndex, CAMERA_MODES.PREVIEW);
 
             this.SizeChanged += WindowSizeUpdate;
-            
+
             SettingsButtonsDesigner();
-            
+
             this.Controls.Add(this.controlButtons);
 
             rec_icon = new RecIcon();
@@ -147,7 +150,30 @@ namespace FaceDetection
             dateTimeLabel.Location = new Point(12, this.Height - 80);
             this.Controls.Add(dateTimeLabel);
 
-            
+            switch (CameraIndex)
+            {
+                case 0:
+                    this.secondsBeforeTriggerEvent[0] = decimal.ToInt32(Properties.Settings.Default.C1_seconds_before_event);
+                    this.secondsAfterTriggerEvent[0] = decimal.ToInt32(Properties.Settings.Default.C1_seconds_after_event);
+                    this.intervalAfterEvent[0] = decimal.ToInt32(Properties.Settings.Default.C1_interval_before_reinitiating_recording);
+                    break;
+                case 1:
+                    this.secondsBeforeTriggerEvent[1] = decimal.ToInt32(Properties.Settings.Default.C2_seconds_before_event);
+                    this.secondsAfterTriggerEvent[1] = decimal.ToInt32(Properties.Settings.Default.C2_seconds_after_event);
+                    this.intervalAfterEvent[1] = decimal.ToInt32(Properties.Settings.Default.C2_interval_before_reinitiating_recording);
+                    break;
+                case 2:
+                    this.secondsBeforeTriggerEvent[2] = decimal.ToInt32(Properties.Settings.Default.C3_seconds_before_event);
+                    this.secondsAfterTriggerEvent[2] = decimal.ToInt32(Properties.Settings.Default.C3_seconds_after_event);
+                    this.intervalAfterEvent[2] = decimal.ToInt32(Properties.Settings.Default.C3_interval_before_reinitiating_recording);
+                    break;
+                case 3:
+                    this.secondsBeforeTriggerEvent[3] = decimal.ToInt32(Properties.Settings.Default.C4_seconds_before_event);
+                    this.secondsAfterTriggerEvent[3] = decimal.ToInt32(Properties.Settings.Default.C4_seconds_after_event);
+                    this.intervalAfterEvent[3] = decimal.ToInt32(Properties.Settings.Default.C4_interval_before_reinitiating_recording);
+                    break;
+            }
+
             ///SET THE MAIN WINDOW ICONS AND BUTTON POSITIONS MANUALLY
             controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
             
@@ -541,7 +567,7 @@ namespace FaceDetection
 
         private void FormClass_SizeChanged(object sender, EventArgs e)
         {
-            if(windowState != this.WindowState && PROPERTY_FUNCTIONS.GetShowWindowPaneSwitch(CameraIndex))
+            if (windowState != this.WindowState && PROPERTY_FUNCTIONS.GetShowWindowPaneSwitch(CameraIndex))
             {
                 camera_number.Location = new Point(this.Width - 89, 12);
                 controlButtons.Location = new Point(this.Width - 335, this.Height - 110);
