@@ -104,17 +104,24 @@ namespace FaceDetection
 
         public static void CountCamera ()
         {
-            var capDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
+            try
+            {
+                var capDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
 
-            if (Properties.Settings.Default.main_camera_index >= capDevices.Length)
+                if (Properties.Settings.Default.main_camera_index >= capDevices.Length)
+                {
+                    Properties.Settings.Default.main_camera_index = 0;
+                    Properties.Settings.Default.camera_count = capDevices.Length;
+                }
+                else if (Properties.Settings.Default.camera_count > capDevices.Length)
+                {
+                    Properties.Settings.Default.camera_count = capDevices.Length;
+                }
+            }catch(UnauthorizedAccessException uaax)
             {
-                Properties.Settings.Default.main_camera_index = 0;
-                Properties.Settings.Default.camera_count = capDevices.Length;
+                LOGGER.Add(uaax);
             }
-            else if (Properties.Settings.Default.camera_count > capDevices.Length)
-            {
-                Properties.Settings.Default.camera_count = capDevices.Length;
-            }
+            
         }
 
 
